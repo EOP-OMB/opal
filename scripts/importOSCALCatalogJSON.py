@@ -16,10 +16,6 @@ def saveControlParam(p):
                                                                          param_class=p['parameter_class'],
                                                                          param_depends_on=p['parameter_depends_on'])
     logging.debug("Save complete...")
-    if created:
-        print('Created new param')
-    else:
-        print('param already exists')
     return newParameter.id
 
 
@@ -100,7 +96,7 @@ def addControlPart(part, indent=0):
         logging.debug("Found properties, extracting...")
         for p in part['properties']:
             if p['name'] == 'label':
-                t += '<br>\n' + str(' ' * indent) + p['value'] + ' '
+                t += '<br>\n' + str('&nbsp;' * indent) + p['value'] + ' '
             logging.debug("Property added...")
     if 'prose' in part:
         logging.debug("Found prose, extracting...")
@@ -136,7 +132,6 @@ def addNewControl(group_id, group_title, control):
     if 'parameters' in control:
         logging.debug('Found parameters, extracting...')
         for parameter in control['parameters']:
-            print('adding param')
             newParameter = addControlParam(parameter)
             newControl.parameters.add(newParameter)
     if 'properties' in control:
@@ -174,13 +169,15 @@ def addNewControl(group_id, group_title, control):
     #     for l in control['links']:
     #         newControl.links.add(addLink(l['text'],l['href'],l['rel']))
     if 'parts' in control:
-        print("Found parts, extracting (better strap in, this could get messy)...")
         logging.debug("Found parts, extracting (better strap in, this could get messy)...")
         for part in control['parts']:
-            ncs += '<p><b>' + part['name'].capitalize() + '</b></p>'
             ncs += addControlPart(part)
-    print('ncs = ' + ncs)
-    newControl.statement = ncs
+            newStatement, created = nist_control_statement.objects.get_or_create(statement_type=part['name'],control_id=control['id'])
+            newStatement.statement_text = ncs
+            ncs = ''
+            newStatement.save()
+            newControl.control_statements.add(newStatement.id)
+
     # newControl.nist_control_guidance = newControl.statement_view('guidance')
     # newControl.nist_control_objectives = newControl.statement_view('objectives')
     # newControl.nist_control_objects = newControl.statement_view('objects')
@@ -203,7 +200,6 @@ def loadControls(f):
     import json
     startLogging()
     logging.debug("Clearing all NIST Control Tables...")
-    cleanNISTControls()
     logging.debug("Loading JSON...")
     catalogDict = json.loads(open(f, 'r').read())
     for group in catalogDict['catalog']['groups']:
@@ -216,3 +212,8 @@ def loadControls(f):
                 for enhancement in control['controls']:
                     logging.debug("Extracting " + control['title'] + " enhancement...")
                     addNewControl(group['id'], group['title'], enhancement)
+
+
+def run():
+    f='/Users/dan/PycharmProjects/opal/source/NIST_SP-800-53_rev4_catalog.json'
+    loadControls(f)
