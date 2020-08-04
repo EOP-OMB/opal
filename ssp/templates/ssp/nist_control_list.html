@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>NIST SP 800-53 rev. 4 Controls</h1>
+{% if nist_control_list %}
+    <ul>
+    {% for control in nist_control_list %}
+        <li><a href="{% url 'ssp:nist_control_detail_view' control.id %}">{{ control.control_id }} {{ control.control_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No controls are available.</p>
+{% endif %}
+{% endblock %}

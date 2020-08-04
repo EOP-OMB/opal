@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
+    <tr>
+        <td colspan="2">
+            <p>
+                <a href="/admin/SystemSecurityPlans/system_control/{{ object.id }}/change/"
+                   target="_blank"><b>{{ object.control_id }}&nbsp;
+                    {{ object.nist_control.control_title }}</b></a>
+                <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
+                <b>Control Origination:</b> {{ object.control_origination }}
+            </p>
+            <p><b><a href="/admin/SystemSecurityPlans/nist_control/{{ object.nist_control.id }}/change/"
+                     target="_blank">Control Statement:</a></b><br>{{ object.nist_control.statement | safe }}</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td valign="top"><b>Parameters:</b></td>
+                    <td>
+                        {% for p in object.control_parameters.all %}
+                            {{ p.control_parameter_id }}: <i>{{ p.value }}</i><br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" colspan="2">
+            <table>
+                <tr>
+                    <td valign="top"><b>Roles:</b></td>
+                    <td>
+                        {% for r in object.control_responsible_roles.all %}
+                            {{ r.title }}<br>
+                        {% endfor %}
+                    <td>
+                    </td>
+                </tr>
+            </table>
+    </tr>
+</table>
+
+<table style="alignment: center; border-style: solid; width: 90% ">
+    <tr>
+        <td colspan="2"><b>How is the control implemented?</b></td>
+    </tr>
+    {% for s in object.control_statements.all %}
+        <tr>
+            <td valign="top" width="60"><a href="/admin/SystemSecurityPlans/control_statement/{{ s.id }}/change/"
+                                           target="_blank">{{ s.control_statement_id }}</a></td>
+            <td>{{ s.control_statement_text | safe }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<p></p>
+{% endblock %}

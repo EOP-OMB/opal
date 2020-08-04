@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<hr>
+<table>
+    <tr style="padding: 10px">
+        <td style="padding-right: 10px; border-right-style: solid; border-right-width: 1px"><b>System Status</b>: {{ object.system_characteristics.system_status }}</td>
+        <td style="padding: 10px"><b>Version</b>: {{ object.version }}</td>
+        <td style="padding-left: 10px; border-left-style: solid; border-left-width: 1px"><b>Last Modified</b>: {{ object.lastModified }}</td>
+    </tr>
+</table>
+
+
+<p>Table of Contents</p>
+<ol>
+    <li><a href="#system_description">System Description</a></li>
+    <li><a href="#system_diagrams">System Diagrams</a></li>
+    <li><a href="#system_components">System Components</a></li>
+        <ol>
+        {% for component in object.system_components.all %}
+            <li><a href="#system_component:{{ component.component_title }}">{{ component.component_title }} ({{ component.component_type }})</a></li>
+        {% endfor %}
+        </ol>
+    <li><a href="#system_controls">System Controls</a></li>
+</ol>
+
+<h2>{{ object.system_characteristics.system_name }} ({{ object.system_characteristics.system_short_name}})</h2>
+<h3><a id="system_description"><a href="admin/system_characteristics/{{ system_characteristics.id }}/change/" target="_blank">System Description</a></a></h3>
+    <div style="margin-left: 30px">{{ object.system_characteristics.system_description | safe }}</div>
+<h3><a id="system_diagrams">System Diagrams</a></h3>
+    <ul>
+        <li><b>Authorization Boundary Diagram: </b>{{ object.system_characteristics.authorization_boundary_diagram.attachment.url }}
+        <li><b>Network Architecture Diagram: </b>{{ object.system_characteristics.network_architecture_diagram.attachment.url }}
+        <li><b>Data Flow Diagram: </b>{{ object.system_characteristics.data_flow_diagram.attachment.url }}
+    </ul>
+<h3><a id="system_components">System Components</a></h3>
+    {% for component in object.system_components.all %}
+        <h4 style="margin-left: 15px"><a id="system_component:{{ component.component_title }}">
+            <a href="/admin/system_components/{{ component.id }}/change/" target="_blank">{{ component.component_title }} ({{ component.component_type }})</a></a></h4>
+            <div style="margin-left: 30px">{{ component.component_description | safe }}</div>
+    {% endfor %}
+<h3><a id="system_controls">System Controls</a></h3>
+    {% for object in object.controls.all %}
+        {% include "ssp/system_control_detail.html" %}
+        <p></p>
+    {% endfor %}
+{% endblock %}

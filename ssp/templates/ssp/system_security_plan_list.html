@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>System Security Plans (SSPs)</h1>
+{% if system_security_plan_list %}
+    {% for plan in system_security_plan_list %}
+        <a href="{% url 'ssp:system_security_plan_detail_view' plan.id %}">{{ plan.title }}</a><br>
+    {% endfor %}
+{% else %}
+    <p>No plans are available.</p>
+{% endif %}
+{% endblock %}

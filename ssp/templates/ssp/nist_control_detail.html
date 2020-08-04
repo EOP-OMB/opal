@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
+    <tr>
+        <td colspan="2">
+            <p>
+                <a href="/admin/ssp/nist_control/{{ object.id }}/change/"
+                   target="_blank"><b>{{ object.control_id }}&nbsp;
+                    {{ object.control_title }}</b></a>
+            </p>
+            <p>{{ object.statement | safe }}</p>
+        </td>
+    </tr>
+</table>
+<p></p>
+{% endblock %}

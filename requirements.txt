@@ -1,0 +1,12 @@
+asgiref==3.2.10
+Django==3.0.7
+django-extensions==3.0.3
+django-tinymce==3.0.2
+gunicorn==20.0.4
+lxml==4.5.1
+mysql-client==0.0.1
+python-docx==0.8.10
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
+uuid==1.30
