@@ -1,5 +1,3 @@
-{% extends "base.html" %}
-{% load static %}
 {% block content %}
 <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
     <tr>
@@ -11,8 +9,11 @@
                 <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
                 <b>Control Origination:</b> {{ object.control_origination }}
             </p>
-            <p><b><a href="/admin/SystemSecurityPlans/nist_control/{{ object.nist_control.id }}/change/"
-                     target="_blank">Control Statement:</a></b><br>{{ object.nist_control.statement | safe }}</p>
+            <p><b>Statement:</b><br>
+                {{ object.nist_control.get_statement | safe }}
+            <p><b>Guidance:</b><br>
+            {{ object.nist_control.get_guidance | safe }}</p>
+            </p>
         </td>
     </tr>
     <tr>

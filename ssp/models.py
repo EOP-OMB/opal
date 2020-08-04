@@ -421,6 +421,13 @@ class nist_control_parameter(models.Model):
     def __str__(self):
         return self.param_id
 
+class nist_control_statement(models.Model):
+    control_id = models.CharField(max_length=7)
+    statement_type = models.CharField(max_length=100)
+    statement_text = customTextField()
+
+    def __str__(self):
+        return self.control_id + ' - ' + self.statement_type.capitalize()
 
 
 class nist_control(models.Model):
@@ -434,11 +441,24 @@ class nist_control(models.Model):
     sort_id = models.CharField(max_length=10)
     status = models.CharField(max_length=30, blank=True)
     links = customMany2ManyField(link)
-    statement = customTextField()
-    guidance = customTextField()
-    objective = customTextField()
-    assessment = customTextField()
-    object = customTextField()
+    control_statements = customMany2ManyField(nist_control_statement)
+    # statement = customTextField()
+    # guidance = customTextField()
+    # objective = customTextField()
+    # assessment = customTextField()
+    # object = customTextField()
+
+    def getStatementText(self,statement_type):
+        t = nist_control_statement.objects.filter(control_id=self.control_id,statement_type=statement_type).get().statement_text
+        return t
+
+    @property
+    def get_guidance(self):
+        return self.getStatementText('guidance')
+
+    @property
+    def get_statement(self):
+        return self.getStatementText('statement')
 
     def __str__(self):
         long_title = self.group_title + ' | ' + self.label + ' | ' + self.control_title
