@@ -23,7 +23,7 @@ urlpatterns = [
     path('nist/', nist_control_list_view.as_view(), name='nist_control_list_view'),
     path('nist/<int:pk>', nist_control_detail_view.as_view(), name='nist_control_detail_view'),
     path('control/', system_control_list_view.as_view(), name='system_control_list_view'),
-    path('control/<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
+    path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
     path('', system_security_plan_list_view.as_view(), name='list_system_security_planView'),
-    path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_planDetailView'),
+    path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
 ]
