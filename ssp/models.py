@@ -1,6 +1,9 @@
 from django.db import models
 from tinymce.models import HTMLField
 
+# TODO create a json function for each class
+
+
 contactInfoType = [('work', 'Work'),
                    ('personal', 'Personal'),
                    ('shared', 'Shared'),
@@ -251,6 +254,23 @@ class leveraged_authorization(models.Model):
 
 
 # System Properties
+
+information_type_level_choices = [('high', 'High'), ('moderate', 'Moderate'), ('low', 'Low')]
+
+class system_information_type(models.Model):
+    information_type = models.ForeignKey(information_type, on_delete=models.PROTECT)
+    system_information_type_name = models.CharField(max_length=255, blank=True)
+    adjusted_confidentiality_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    adjusted_integrity_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    adjusted_availability_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    adjusted_confidentiality_impact_justification = customTextField()
+    adjusted_integrity_impact_justification = customTextField()
+    adjusted_availability_impact_justification = customTextField()
+
+    def __str__(self):
+        return self.system_information_type_name
+
+
 class system_characteristic(models.Model):
     """
     required elements of a System Security Plan
@@ -261,7 +281,13 @@ class system_characteristic(models.Model):
     properties = customMany2ManyField(element_property)
     annotations = customMany2ManyField(annotation)
     links = customMany2ManyField(link)
-    system_status = models.ForeignKey(status, on_delete=models.PROTECT)
+    date_authorized = models.DateTimeField(null=True)
+    security_sensitivity_level = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    system_information = customMany2ManyField(system_information_type)
+    security_objective_confidentiality = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    security_objective_integrity = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    security_objective_availability = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    system_status = models.ForeignKey(status, on_delete=models.PROTECT, null=True)
     remarks = customTextField()
     leveraged_authorizations = customMany2ManyField(leveraged_authorization)
     authorization_boundary_diagram = models.ForeignKey(attachment, on_delete=models.PROTECT,
@@ -273,21 +299,6 @@ class system_characteristic(models.Model):
 
     def __str__(self):
         return self.system_name
-
-
-class system_information_type(models.Model):
-    information_type = models.ForeignKey(information_type, on_delete=models.PROTECT)
-    system_information_type_name = models.CharField(max_length=255, blank=True)
-    adjusted_confidentiality_impact = models.CharField(max_length=50,
-                                                       choices=[(1, "High"), (2, "Moderate"), (3, "Low")], blank=True)
-    adjusted_integrity_impact = models.CharField(max_length=50, choices=[(1, "High"), (2, "Moderate"), (3, "Low")],
-                                                 blank=True)
-    adjusted_availability_impact = models.CharField(max_length=50, choices=[(1, "High"), (2, "Moderate"), (3, "Low")],
-                                                    blank=True)
-    adjustment_justification = customTextField()
-
-    def __str__(self):
-        return self.system_information_type_name
 
 
 class system_component(models.Model):
@@ -531,6 +542,11 @@ class system_control(models.Model):
         return self.control_id
 
 
+class system_user(models.Model):
+    user = models.ForeignKey(person,on_delete=models.PROTECT)
+    roles = customMany2ManyField(user_role)
+
+
 class system_security_plan(models.Model):
     sspID = models.CharField(max_length=25)
     title = models.CharField(max_length=100)
@@ -546,6 +562,7 @@ class system_security_plan(models.Model):
     controls = customMany2ManyField(system_control)
     properties = customMany2ManyField(element_property)
     links = customMany2ManyField(link)
+    system_users = customMany2ManyField(system_user)
     remarks = customTextField()
 
     def __str__(self):
