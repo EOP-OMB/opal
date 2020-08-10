@@ -539,12 +539,15 @@ class system_control(models.Model):
     roles_list = element_property(_get_roles_list)
 
     def __str__(self):
-        return self.control_id
+        return self.control_id + ' ' + self.nist_control.control_title
 
 
 class system_control_group(models.Model):
     name = models.CharField(max_length=100)
     controls = customMany2ManyField(system_control)
+
+    def __str__(self):
+        return self.name
 
 
 class system_user(models.Model):
