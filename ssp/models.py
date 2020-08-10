@@ -542,6 +542,11 @@ class system_control(models.Model):
         return self.control_id
 
 
+class system_control_group(models.Model):
+    name = models.CharField(max_length=100)
+    controls = customMany2ManyField(system_control)
+
+
 class system_user(models.Model):
     user = models.ForeignKey(person,on_delete=models.PROTECT)
     roles = customMany2ManyField(user_role)
