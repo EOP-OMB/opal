@@ -111,8 +111,6 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -196,9 +194,6 @@ cython_debug/
 .idea/modules.xml
 .idea/opal.iml
 .idea/vcs.xml
-db4 copy.sqlite3
-db.sqlite3
 opal/__pycache__/
 scripts/__pycache__/
 ssp/__pycache__/
-ssp/migrations/

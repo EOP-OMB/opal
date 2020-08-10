@@ -1,6 +1,7 @@
 import json
 from ssp.models import system_security_plan
 
+
 def objToDictionary(key_value_list, obj):
     if not obj.exists():
         return None
@@ -22,7 +23,7 @@ def getProperties(obj):
         ['ns', 'ns'],
         ['class', 'prop_class']
     ]
-    return objToDictionary(dk,obj)
+    return objToDictionary(dk, obj)
 
 
 def getLinks(obj):
@@ -37,7 +38,7 @@ def getLinks(obj):
 
 def getAnnotations(obj):
     dk = [
-        ['name','name'],
+        ['name', 'name'],
         ['uuid', 'annotationID'],
         ['ns', 'ns'],
         ['value', 'value'],
@@ -52,10 +53,6 @@ def getRoles(obj):
           ['short-name', 'shortName'],
           ['desc', 'desc']]
     dict = objToDictionary(dk, obj)
-    dict['properties'] = getProperties(obj.properties.all())
-    dict['annotations'] = getAnnotations(obj.annotations.all())
-    dict['links'] = getLinks(obj.links.all())
-    dict['remarks'] = obj.remarks
     return dict
 
 
@@ -88,6 +85,7 @@ def getInformationTypes(obj):
             info_types_list.append(info_type)
         return info_types_list
 
+
 def getLeveragedAuthorizations(obj):
     if not obj.exists():
         return None
@@ -97,8 +95,8 @@ def getLeveragedAuthorizations(obj):
             auth = {
                 'uuid': obj.id,
                 'title': obj.leveraged_system_name,
-                'party-uuid': '', #TODO add party uuid to leveraged_authorization model
-                'date_authorized': '', #TODO add date authorized to leveraged_authorization model
+                'party-uuid': '',  # TODO add party uuid to leveraged_authorization model
+                'date_authorized': '',  # TODO add date authorized to leveraged_authorization model
             }
             leveraged_authorizations_list.append(auth)
         return leveraged_authorizations_list
@@ -119,18 +117,36 @@ def getAuthorizedPrivileges(obj):
         return authorized_privleges_list
 
 
-
-def getSystemImplementation(authorizations,users,components):
+def getSystemImplementation(authorizations, users, components):
     dict_obj = {'leveraged-authorizations': getLeveragedAuthorizations(authorizations),
-            }
+                }
     for r in users:
         dict_obj[r.id] = {
             'title': r.user.name,
             'short-name': r.user.short_name,
             'role-ids': r.roles.all().values,
             'authorized-privileges': getAuthorizedPrivileges(r.roles.user_privileges.all())
-            }
+        }
     return dict_obj
+
+
+def getImplementedRequirements(obj):
+    for item in obj:
+        dict = {}
+        dict['uuid'] = item.id,
+        dict['control-id'] = item.control_id,
+        dict['properties'] = getProperties(item.properties.all()),
+        dict['annotations'] = getAnnotations(item.annotations.all()),
+        dict['links'] = getLinks(item.links.all()),
+        dict['role'] = getRoles(item.control_responsible_roles.all()),
+        for param in item.control_parameters.all():
+            dict['param-id'] = param.control_parameter_id,
+            dict['value'] = param.value
+        for statement in item.control_statements.all():
+            dict['statement-id'] = statement.control_statement_id,
+            dict['description'] = statement.control_statement_text
+        dict['remarks'] = item.remarks
+
 
 def main(ssp_id=1, output_file='default'):
     ssp = system_security_plan.objects.get(pk=ssp_id)
@@ -167,7 +183,8 @@ def main(ssp_id=1, output_file='default'):
                     'security-objective-availability': ssp.system_characteristics.security_objective_availability},
                 'status': {'state': ssp.system_characteristics.system_status.state},
                 'authorization-boundary': {
-                    'properties': getProperties(ssp.system_characteristics.authorization_boundary_diagram.properties.all()),
+                    'properties': getProperties(
+                        ssp.system_characteristics.authorization_boundary_diagram.properties.all()),
                     'annotations': getAnnotations(
                         ssp.system_characteristics.authorization_boundary_diagram.annotations.all()),
                     'links': getLinks(ssp.system_characteristics.authorization_boundary_diagram.links.all()),
@@ -178,7 +195,8 @@ def main(ssp_id=1, output_file='default'):
                     'remarks': ssp.system_characteristics.authorization_boundary_diagram.remarks
                 },
                 'network-architecture': {
-                    'properties': getProperties(ssp.system_characteristics.network_architecture_diagram.properties.all()),
+                    'properties': getProperties(
+                        ssp.system_characteristics.network_architecture_diagram.properties.all()),
                     'annotations': getAnnotations(
                         ssp.system_characteristics.network_architecture_diagram.annotations.all()),
                     'links': getLinks(ssp.system_characteristics.network_architecture_diagram.links.all()),
@@ -207,9 +225,12 @@ def main(ssp_id=1, output_file='default'):
             ssp.system_users.all(),
             ssp.system_components.all()
         ),
-        'control-implementation': ''
+        'control-implementation': {
+            'description': '',
+            'implemented-requirements': getImplementedRequirements(ssp.controls.all())
+        }
     }
 
     f = open(output_file, 'w')
-    f.write(json.dumps(system_security_plan_json,indent=2))
+    f.write(json.dumps(system_security_plan_json, indent=2))
     return 'ssp exported to ' + output_file
