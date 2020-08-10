@@ -565,6 +565,7 @@ class system_security_plan(models.Model):
     system_interconnections = customMany2ManyField(system_interconnection)
     system_inventory_items = customMany2ManyField(system_inventory_item)
     controls = customMany2ManyField(system_control)
+    control_groups = customMany2ManyField(system_control_group)
     properties = customMany2ManyField(element_property)
     links = customMany2ManyField(link)
     system_users = customMany2ManyField(system_user)

@@ -52,6 +52,11 @@ class system_controlAdmin(admin.ModelAdmin):
     sortable_by = ['sort_id']
 
 
+@admin.register(models.system_control_group)
+class system_control_groupAdmin(admin.ModelAdmin):
+    filter_horizontal = ['controls']
+
+
 @admin.register(models.control_statement)
 class control_statementAdmin(admin.ModelAdmin):
     filter_horizontal = ['control_statement_responsible_roles', 'properties', 'links', 'annotations']
