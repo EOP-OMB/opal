@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+import uuid
 
 # TODO create a json function for each class
 
@@ -35,16 +36,26 @@ class customTextField(HTMLField):
         return name, path, args, kwargs
 
 
+class BasicModel(models.Model):
+    uuid = models.UUIDField(editable=False, default=uuid.uuid4)
+    title = models.CharField(max_length=255,blank=True,help_text='A title for display and navigation')
+    short_name = models.CharField(max_length=255,blank=True,help_text='A common name, short name, or acronym')
+    desc = customTextField('description', help_text='A short textual description')
+    remarks = customTextField(help_text='general notes or comments')
+
+    class Meta:
+        abstract = True
+        ordering = ["title"]
+
+    def __str__(self):
+        return self.title + ' (' + self.short_name + ')'
+    
+
 # True lookup tables for storing select values
-class status(models.Model):
+class status(BasicModel):
     # system implementation status. Normally operational, under-development,
     # under-major-modification, disposition, and other but users can add custom options
     state = models.CharField(max_length=30)
-    description = models.CharField(max_length=80)
-    remarks = customTextField()
-
-    def __str__(self):
-        return self.state
 
 
 class information_type(models.Model):
@@ -90,12 +101,12 @@ class element_property(models.Model):
 
 
 class link(models.Model):
-    text = models.CharField(max_length=100)
-    href = models.CharField(max_length=100)
+    text = models.CharField(max_length=255)
+    href = models.CharField(max_length=255)
     requires_authentication = models.BooleanField(default=False)
-    rel = models.CharField(max_length=100, blank=True)
-    mediaType = models.CharField(max_length=100, blank=True)
-    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, blank=True, null=True)
+    rel = models.CharField(max_length=255, blank=True)
+    mediaType = models.CharField(max_length=255, blank=True)
+    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.text
@@ -111,7 +122,15 @@ class annotation(models.Model):
     def __str__(self):
         return self.name
 
+class sspBasicModel(models.Model):
+    properties = customMany2ManyField(element_property)
+    annotations = customMany2ManyField(annotation)
+    links = customMany2ManyField(link)
 
+    class Meta:
+        abstract = True
+    
+    
 # Other common objects used in many places
 class attachment(models.Model):
     attachment_type = models.CharField(max_length=50, choices=attachment_types)
@@ -257,10 +276,12 @@ class leveraged_authorization(models.Model):
 
 information_type_level_choices = [('high', 'High'), ('moderate', 'Moderate'), ('low', 'Low')]
 
+
 class system_information_type(models.Model):
     information_type = models.ForeignKey(information_type, on_delete=models.PROTECT)
     system_information_type_name = models.CharField(max_length=255, blank=True)
-    adjusted_confidentiality_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    adjusted_confidentiality_impact = models.CharField(max_length=10, choices=information_type_level_choices,
+                                                       blank=True)
     adjusted_integrity_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
     adjusted_availability_impact = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
     adjusted_confidentiality_impact_justification = customTextField()
@@ -284,9 +305,11 @@ class system_characteristic(models.Model):
     date_authorized = models.DateTimeField(null=True)
     security_sensitivity_level = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
     system_information = customMany2ManyField(system_information_type)
-    security_objective_confidentiality = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    security_objective_confidentiality = models.CharField(max_length=10, choices=information_type_level_choices,
+                                                          blank=True)
     security_objective_integrity = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
-    security_objective_availability = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
+    security_objective_availability = models.CharField(max_length=10, choices=information_type_level_choices,
+                                                       blank=True)
     system_status = models.ForeignKey(status, on_delete=models.PROTECT, null=True)
     remarks = customTextField()
     leveraged_authorizations = customMany2ManyField(leveraged_authorization)
@@ -424,19 +447,19 @@ parameter_type_choices = [('label', 'Label'),
 
 
 class nist_control_parameter(models.Model):
-    param_id = models.CharField(max_length=25)
-    param_type = models.CharField(max_length=100, choices=parameter_type_choices)
-    param_text = models.CharField(max_length=100, blank=True)
-    param_depends_on = models.CharField(max_length=100, blank=True)
-    param_class = models.CharField(max_length=100, blank=True)
+    param_id = models.CharField(max_length=255)
+    param_type = models.CharField(max_length=255, choices=parameter_type_choices)
+    param_text = models.CharField(max_length=255, blank=True)
+    param_depends_on = models.CharField(max_length=255, blank=True)
+    param_class = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.param_id
 
 
 class nist_control_statement(models.Model):
-    control_id = models.CharField(max_length=7)
-    statement_type = models.CharField(max_length=100)
+    control_id = models.CharField(max_length=50)
+    statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 
     def __str__(self):
@@ -444,15 +467,15 @@ class nist_control_statement(models.Model):
 
 
 class nist_control(models.Model):
-    group_id = models.CharField(max_length=2)
-    group_title = models.CharField(max_length=50)
-    control_id = models.CharField(max_length=7, unique=True)
-    source = models.CharField(max_length=30)
+    group_id = models.CharField(max_length=50)
+    group_title = models.CharField(max_length=255)
+    control_id = models.CharField(max_length=50, unique=True)
+    source = models.CharField(max_length=50)
     control_title = models.CharField(max_length=255)
     parameters = customMany2ManyField(nist_control_parameter)
-    label = models.CharField(max_length=10, unique=True)
-    sort_id = models.CharField(max_length=10)
-    status = models.CharField(max_length=30, blank=True)
+    label = models.CharField(max_length=50, unique=True)
+    sort_id = models.CharField(max_length=50)
+    status = models.CharField(max_length=255, blank=True)
     links = customMany2ManyField(link)
     control_statements = customMany2ManyField(nist_control_statement)
 
@@ -531,10 +554,10 @@ class system_control(models.Model):
 
     def _get_roles_list(self):
         # TODO: Figure out why this method always returns empty
-        roleList = []
+        role_list = []
         for item in self.control_responsible_roles.values_list('title'):
-            roleList.append(item[0])
-        return roleList
+            role_list.append(item[0])
+        return role_list
 
     roles_list = element_property(_get_roles_list)
 
@@ -551,7 +574,7 @@ class system_control_group(models.Model):
 
 
 class system_user(models.Model):
-    user = models.ForeignKey(person,on_delete=models.PROTECT)
+    user = models.ForeignKey(person, on_delete=models.PROTECT)
     roles = customMany2ManyField(user_role)
 
 
