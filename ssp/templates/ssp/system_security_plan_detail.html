@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load admin_urls %}
 <h1>{{ object.title }}</h1>
 <hr>
 <table>
@@ -25,7 +26,7 @@
 </ol>
 
 <h2>{{ object.system_characteristics.system_name }} ({{ object.system_characteristics.system_short_name}})</h2>
-<h3><a id="system_description"><a href="admin/system_characteristics/{{ system_characteristics.id }}/change/" target="_blank">System Description</a></a></h3>
+    <h3><a id="system_description"></a><a href="{% url 'admin:ssp_system_characteristic_change' object.system_characteristics.id %}" target="_blank">System Description</a></h3>
     <div style="margin-left: 30px">{{ object.system_characteristics.system_description | safe }}</div>
 <h3><a id="system_diagrams">System Diagrams</a></h3>
     <ul>
@@ -36,7 +37,7 @@
 <h3><a id="system_components">System Components</a></h3>
     {% for component in object.system_components.all %}
         <h4 style="margin-left: 15px"><a id="system_component:{{ component.component_title }}">
-            <a href="/admin/system_components/{{ component.id }}/change/" target="_blank">{{ component.component_title }} ({{ component.component_type }})</a></a></h4>
+            <a href="{% url 'admin:ssp_system_component_change' component.id%} %}" target="_blank">{{ component.component_title }} ({{ component.component_type }})</a></a></h4>
             <div style="margin-left: 30px">{{ component.component_description | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>

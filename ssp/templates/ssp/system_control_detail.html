@@ -23,7 +23,7 @@
                     <td valign="top"><b>Parameters:</b></td>
                     <td>
                         {% for p in object.control_parameters.all %}
-                            {{ p.control_parameter_id }}: <i>{{ p.value }}</i><br>
+                            <a href="{% url 'admin:ssp_control_parameter_change' p.id %}">{{ p.control_parameter_id }}</a>: <i>{{ p.value }}</i><br>
                         {% endfor %}
                     </td>
                 </tr>
@@ -52,7 +52,7 @@
     </tr>
     {% for s in object.control_statements.all %}
         <tr>
-            <td valign="top" width="60"><a href="/admin/SystemSecurityPlans/control_statement/{{ s.id }}/change/"
+            <td valign="top" width="60"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
                                            target="_blank">{{ s.control_statement_id }}</a></td>
             <td>{{ s.control_statement_text | safe }}</td>
         </tr>
