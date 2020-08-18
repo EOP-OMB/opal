@@ -45,9 +45,8 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
 
 @admin.register(models.system_control)
 class system_controlAdmin(admin.ModelAdmin):
-    filter_horizontal = ['control_responsible_roles', 'control_parameters', 'control_statements', 'properties',
-                         'annotations', 'links']
-    list_filter = ['control_responsible_roles', 'control_origination', 'nist_control__group_title']
+    filter_horizontal = ['properties', 'annotations', 'links']
+    list_filter = ['control_implementation__control_responsible_roles', 'control_origination', 'nist_control__group_title']
     list_display = ['nist_control']
     sortable_by = ['sort_id']
 
@@ -74,13 +73,13 @@ class nist_controlAdmin(admin.ModelAdmin):
 class system_inventory_itemAdmin(admin.ModelAdmin):
     filter_horizontal = ['properties', 'links', 'annotations']
     list_filter = ['inventory_item_type']
-    list_display = ['item_id', 'inventory_item_type', 'item_description']
+    list_display = ['title', 'short_name', 'inventory_item_type', 'desc']
 
 
 @admin.register(models.inventory_item_type)
 class inventory_item_typeAdmin(admin.ModelAdmin):
     filter_horizontal = ['responsibleRoles', 'properties', 'links', 'annotations']
-    list_display = ['inventory_item_type_name', 'use', 'description', 'baseline_configuration']
+    list_display = ['title', 'use', 'desc', 'baseline_configuration']
 
 
 @admin.register(models.system_interconnection)
@@ -97,7 +96,7 @@ class linkAdmin(admin.ModelAdmin):
 
 @admin.register(models.system_service)
 class system_serviceAdmin(admin.ModelAdmin):
-    list_display = ['service_title', 'service_description']
+    list_display = ['title', 'desc']
     filter_horizontal = ['protocols', 'service_information_types', 'properties', 'annotations', 'links']
     list_filter = ['protocols']
 

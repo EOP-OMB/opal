@@ -1,3 +1,4 @@
+from opal.settings import BASE_DIR
 from ssp.models import *
 import logging
 
@@ -13,8 +14,8 @@ def addControlsToGroup(group_name,controls):
     :param group_name: The name of a new group of controls. Cold be a new baseline or a common set of controls such as those addressed by a particular component
     :param controls: a list object contining one or more system_control objects
     """
-    from ssp.models import prop, system_control
-    p = prop.objects.get_or_create(ns='control_group', name=group_name, value='true')
+    from ssp.models import element_property, system_control
+    p = element_property.objects.get_or_create(ns='control_group', name=group_name, value='true')
     for item in controls:
         item.properties.add(p[0])
         item.save()
@@ -61,3 +62,18 @@ def linkSystemControltoNISTControl():
             logging.debug('Found nist control, link established')
         except nist_control.DoesNotExist:
             logging.debug("".join(item[0].lower().split()).replace('(', '.').replace(')', '') + ' not found')
+
+
+def createFixtures():
+    import os
+    from django.apps import apps
+
+    fixture_dir = os.path.join(BASE_DIR, 'ssp/fixtures/')
+
+    app_models = apps.get_app_config('ssp').get_models()
+    for model in app_models:
+        if len(model.objects.all()) > 0:
+            cmd = 'python manage.py dumpdata ssp.' + model.__name__ + ' --natural-foreign --natural-primary -o ' + fixture_dir + model.__name__ + '.json'
+            os.system(cmd)
+
+

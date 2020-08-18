@@ -19,7 +19,7 @@
     <li><a href="#system_components">System Components</a></li>
         <ol>
         {% for component in object.system_components.all %}
-            <li><a href="#system_component:{{ component.component_title }}">{{ component.component_title }} ({{ component.component_type }})</a></li>
+            <li><a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a></li>
         {% endfor %}
         </ol>
     <li><a href="#system_controls">System Controls</a></li>
@@ -36,9 +36,9 @@
     </ul>
 <h3><a id="system_components">System Components</a></h3>
     {% for component in object.system_components.all %}
-        <h4 style="margin-left: 15px"><a id="system_component:{{ component.component_title }}">
-            <a href="{% url 'admin:ssp_system_component_change' component.id%} %}" target="_blank">{{ component.component_title }} ({{ component.component_type }})</a></a></h4>
-            <div style="margin-left: 30px">{{ component.component_description | safe }}</div>
+        <h4 style="margin-left: 15px"><a id="system_component:{{ component.id }}">
+            <a href="{% url 'admin:ssp_system_component_change' component.id%} %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></a></h4>
+            <div style="margin-left: 30px">{{ component.desc | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>
     {% for object in object.controls.all %}
