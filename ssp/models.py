@@ -233,6 +233,7 @@ class system_information_type(BasicModel):
 
 class leveraged_authorization(ExtendedBasicModel):
     leveraged_system_name = models.CharField(max_length=255)
+    ssp = models.ForeignKey('system_security_plan', on_delete=models.PROTECT, null=True)
     link_to_SSP = models.ForeignKey(link, related_name='link_to_ssp', on_delete=models.PROTECT)
 
     def __str__(self):
@@ -439,6 +440,8 @@ class system_control(ExtendedBasicModel):
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
+    information_system = models.ForeignKey('system_security_plan',on_delete=models.PROTECT)
+    inheritable = models.BooleanField(default=False)
 
     def _get_roles_list(self):
         # TODO: Figure out why this method always returns empty
@@ -450,10 +453,10 @@ class system_control(ExtendedBasicModel):
     roles_list = element_property(_get_roles_list)
 
     def __str__(self):
-        return self.control_id + ' ' + self.nist_control.control_title
+        return self.information_system.short_name + ' | ' + self.control_id + ' ' + self.nist_control.control_title
 
 
-class system_control_group(BasicModel):
+class control_group(BasicModel):
     controls = customMany2ManyField(system_control)
 
 
@@ -472,5 +475,18 @@ class system_security_plan(ExtendedBasicModel):
     system_services = customMany2ManyField(system_service)
     system_interconnections = customMany2ManyField(system_interconnection)
     system_inventory_items = customMany2ManyField(system_inventory_item)
+    control_baseline = models.ForeignKey(control_group, on_delete=models.PROTECT)
+    additional_selected_controls = customMany2ManyField(nist_control)
     controls = customMany2ManyField(system_control)
     system_users = customMany2ManyField(system_user)
+
+    def _get_selected_controls(self):
+        selected_controls = self.control_baseline.controls
+        for item in self.additional_selected_controls.all():
+            selected_controls.add(item)
+        return selected_controls
+
+    @property
+    def selected_controls(self):
+        return self._get_selected_controls()
+

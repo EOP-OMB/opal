@@ -41,7 +41,7 @@
             <div style="margin-left: 30px">{{ component.desc | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>
-    {% for object in object.controls.all %}
+    {% for object in object.selected_controls.all %}
         {% include "ssp/system_control_detail.html" %}
         <p></p>
     {% endfor %}

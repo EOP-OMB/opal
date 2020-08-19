@@ -3,35 +3,6 @@ from django.apps import apps
 from ssp import models
 
 
-# These are some useful functions for cleaning up data after an import
-def changeRoll(old_role, new_role):
-    controls = models.system_control.objects.filter(
-        responsibleRoles=models.user_role.objects.filter(title=old_role)[0].pk)
-    for item in controls:
-        item.responsibleRoles.add(models.user_role.objects.filter(title=new_role)[0].pk)
-        item.responsibleRoles.remove(models.user_role.objects.filter(title=old_role)[0].pk)
-    models.user_role.objects.filter(title=old_role)[0].delete()
-
-
-def delUnusedRoles():
-    r = models.user_role.objects.all()
-    for item in r:
-        if item.system_control_set.count() == 0:
-            print('deleting ' + item.title)
-            item.delete()
-
-
-def listRolesWithControlCount():
-    r = models.user_role.objects.all()
-    role_dictionary = {}
-    for role in r:
-        role_dictionary[role.title] = role.control_statement_set.count()
-    sort_roles = sorted(role_dictionary.items(), key=lambda x: x[1], reverse=True)
-
-    for i in sort_roles:
-        print(i[0], i[1])
-
-
 # Register your models here.
 
 @admin.register(models.system_security_plan)
@@ -51,7 +22,7 @@ class system_controlAdmin(admin.ModelAdmin):
     sortable_by = ['sort_id']
 
 
-@admin.register(models.system_control_group)
+@admin.register(models.control_group)
 class system_control_groupAdmin(admin.ModelAdmin):
     filter_horizontal = ['controls']
 

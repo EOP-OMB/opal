@@ -1,6 +1,6 @@
 # Create your views here.
 from django.views import generic
-from .models import system_control, system_security_plan, nist_control
+from .models import system_control, system_security_plan, nist_control, leveraged_authorization
 
 
 class nist_control_list_view(generic.ListView):
@@ -25,3 +25,6 @@ class system_security_plan_list_view(generic.ListView):
 
 class system_security_plan_detail_view(generic.DetailView):
     model = system_security_plan
+
+class system_security_plan_inherited_controls_view(generic.DetailView):
+    model = leveraged_authorization
