@@ -1,0 +1,1 @@
+[{"model": "ssp.inventory_item_type", "pk": 1, "fields": {"inventory_item_type_name": "Firewall", "use": "<p>Controls data flow between nodes or subnets within an information system network.&nbsp;</p>", "description": "", "baseline_configuration": 201, "remarks": "", "responsibleRoles": [], "properties": [], "annotations": [], "links": []}}]

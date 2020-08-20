@@ -1,0 +1,14 @@
+[
+  {
+    "model": "ssp.link",
+    "pk": 1,
+    "fields": {
+      "text": "MAX.gov Portal",
+      "href": "https://max.gov",
+      "requires_authentication": false,
+      "rel": "",
+      "mediaType": "",
+      "hash": null
+    }
+  }
+]
