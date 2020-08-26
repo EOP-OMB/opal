@@ -25,9 +25,9 @@
     <li><a href="#system_controls">System Controls</a></li>
 </ol>
 
-<h2>{{ object.system_characteristics.system_name }} ({{ object.system_characteristics.system_short_name}})</h2>
+<h2>{{ object.system_characteristics.title }} ({{ object.system_characteristics.short_name}})</h2>
     <h3><a id="system_description"></a><a href="{% url 'admin:ssp_system_characteristic_change' object.system_characteristics.id %}" target="_blank">System Description</a></h3>
-    <div style="margin-left: 30px">{{ object.system_characteristics.system_description | safe }}</div>
+    <div style="margin-left: 30px">{{ object.system_characteristics.desc | safe }}</div>
 <h3><a id="system_diagrams">System Diagrams</a></h3>
     <ul>
         <li><b>Authorization Boundary Diagram: </b>{{ object.system_characteristics.authorization_boundary_diagram.attachment.url }}
@@ -41,7 +41,7 @@
             <div style="margin-left: 30px">{{ component.desc | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>
-    {% for object in object.selected_controls.all %}
+    {% for object in object.implemented_controls %}
         {% include "ssp/system_control_detail.html" %}
         <p></p>
     {% endfor %}

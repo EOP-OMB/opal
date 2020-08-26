@@ -3,17 +3,22 @@
     <tr>
         <td colspan="2">
             <p>
-                <a href="{% url 'admin:ssp_system_control_change' object.id %}"
-                   target="_blank"><b>{{ object.control_id }}&nbsp;
+                {% if not object.id.exists %}
+                    <a href="{% url 'admin:ssp_system_control_add' %}" target="_blank"><b>{{ object.nist_control.control_id }}&nbsp;
                     {{ object.nist_control.control_title }}</b></a>
+                {% else %}
+                    <a href="{% url 'admin:ssp_system_control_change' object.id %}" target="_blank"><b>{{ object.control_id }}&nbsp;
+                    {{ object.nist_control.control_title }}</b></a>
+                {% endif %}
+
+
                 <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
                 <b>Control Origination:</b> {{ object.control_origination }}
             </p>
             <p><b>Statement:</b><br>
-                {{ object.nist_control.get_statement | safe }}
+                {{ object.nist_control.get_statement | safe }}</p>
             <p><b>Guidance:</b><br>
                 {{ object.nist_control.get_guidance | safe }}</p>
-            </p>
         </td>
     </tr>
     <tr>

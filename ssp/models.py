@@ -43,7 +43,7 @@ class PrimitiveModel(models.Model):
         abstract = True
 
     def natural_key(self):
-        return (self.uuid)
+        return self.uuid
 
 
 class BasicModel(PrimitiveModel):
@@ -55,7 +55,6 @@ class BasicModel(PrimitiveModel):
     class Meta:
         abstract = True
         ordering = ["title"]
-
 
     def __str__(self):
         return self.title + ' (' + self.short_name + ')'
@@ -231,24 +230,11 @@ class system_information_type(BasicModel):
     adjusted_availability_impact_justification = customTextField()
 
 
-class leveraged_authorization(ExtendedBasicModel):
-    leveraged_system_name = models.CharField(max_length=255)
-    ssp = models.ForeignKey('system_security_plan', on_delete=models.PROTECT, null=True)
-    link_to_SSP = models.ForeignKey(link, related_name='link_to_ssp', on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.leveraged_system_name
-
-
 class system_characteristic(ExtendedBasicModel):
     """
     required elements of a System Security Plan
     """
-    system_name = models.CharField(max_length=100)
-    system_short_name = models.CharField(max_length=25)
-    system_description = customTextField()
     date_authorized = models.DateTimeField(null=True)
-    leveraged_authorizations = customMany2ManyField(leveraged_authorization)
     security_sensitivity_level = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
     system_information = customMany2ManyField(system_information_type)
     security_objective_confidentiality = models.CharField(max_length=10, choices=information_type_level_choices,
@@ -263,9 +249,6 @@ class system_characteristic(ExtendedBasicModel):
                                                      related_name='network_architecture_diagram', null=True)
     data_flow_diagram = models.ForeignKey(attachment, on_delete=models.PROTECT, related_name='data_flow_diagram',
                                           null=True)
-
-    def __str__(self):
-        return self.system_name
 
 
 class system_component(ExtendedBasicModel):
@@ -414,15 +397,16 @@ class control_implementation(ExtendedBasicModel):
     control_responsible_roles = customMany2ManyField(user_role)
     control_parameters = customMany2ManyField(control_parameter)
     control_statements = customMany2ManyField(control_statement)
-    nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
+    nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 control_implementation_status_choices = [
     ('Implemented', 'Implemented'),
-    ('Partially implemented ', 'Partially implemented'),
+    ('Partially Implemented ', 'Partially Implemented'),
     ('Planned ', 'Planned'),
     ('Alternative Implementation', 'Alternative Implementation'),
-    ('Not applicable', 'Not applicable')]
+    ('Not Applicable', 'Not Applicable'),
+    ('Other than Implemented','Other than Implemented')]
 
 control_origination_choices = [
     ('Service Provider Corporate ', 'Service Provider Corporate'),
@@ -431,7 +415,8 @@ control_origination_choices = [
     ('Configured by Customer (Customer System Specific) ', 'Configured by Customer'),
     ('Provided by Customer (Customer System Specific) ', 'Provided by Customer'),
     ('Shared (Service Provider and Customer Responsibility) ', 'Shared'),
-    ('Inherited ', 'Inherited')]
+    ('Inherited ', 'Inherited'),
+    ('N/A','N/A')]
 
 
 class system_control(ExtendedBasicModel):
@@ -440,7 +425,7 @@ class system_control(ExtendedBasicModel):
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
-    information_system = models.ForeignKey('system_security_plan',on_delete=models.PROTECT)
+    information_system = models.ForeignKey('system_security_plan', on_delete=models.PROTECT, null=True)
     inheritable = models.BooleanField(default=False)
 
     def _get_roles_list(self):
@@ -456,8 +441,8 @@ class system_control(ExtendedBasicModel):
         return self.information_system.short_name + ' | ' + self.control_id + ' ' + self.nist_control.control_title
 
 
-class control_group(BasicModel):
-    controls = customMany2ManyField(system_control)
+class control_baseline(BasicModel):
+    controls = customMany2ManyField(nist_control)
 
 
 class system_user(BasicModel):
@@ -475,8 +460,9 @@ class system_security_plan(ExtendedBasicModel):
     system_services = customMany2ManyField(system_service)
     system_interconnections = customMany2ManyField(system_interconnection)
     system_inventory_items = customMany2ManyField(system_inventory_item)
-    control_baseline = models.ForeignKey(control_group, on_delete=models.PROTECT)
+    control_baseline = models.ForeignKey(control_baseline, on_delete=models.PROTECT, null=True)
     additional_selected_controls = customMany2ManyField(nist_control)
+    leveraged_authorization = customMany2ManyField('system_security_plan')
     controls = customMany2ManyField(system_control)
     system_users = customMany2ManyField(system_user)
 
@@ -490,3 +476,33 @@ class system_security_plan(ExtendedBasicModel):
     def selected_controls(self):
         return self._get_selected_controls()
 
+    def _get_control_implementation(self,nist_control_id):
+        c = {}
+        # nist_control_id = nist_control.objects.get(control_id=nist_control_id)
+        if self.controls.filter(nist_control=nist_control_id).exists():
+            c[self.__str__] = self.controls.get(nist_control=nist_control_id)
+        if self.leveraged_authorization.exists():
+            for l in self.leveraged_authorization.all():
+                if l.controls.filter(nist_control=nist_control_id,inheritable=True).exists():
+                    c[self.__str__] = l.controls.get(nist_control=nist_control_id)
+        if c:
+            return c
+        else:
+            not_implemented_control = system_control(
+                control_id=nist_control_id.control_id,
+                nist_control=nist_control_id,
+                control_implementation=control_implementation.objects.get(short_name='CNI'),
+                control_status='Other than Implemented',
+                control_origination = 'N/A',
+                inheritable = False
+            )
+            c['Not Implemented'] = not_implemented_control
+        return c
+
+
+    @property
+    def implemented_controls(self):
+        i = []
+        for item in self.selected_controls.all():
+            i.append(self._get_control_implementation(item))
+        return i

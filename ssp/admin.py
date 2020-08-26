@@ -8,7 +8,7 @@ from ssp import models
 @admin.register(models.system_security_plan)
 class systemSecurityPlanAdmin(admin.ModelAdmin):
     filter_horizontal = ['system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
-                         'controls', 'properties', 'links']
+                         'controls', 'properties', 'links', 'leveraged_authorization']
 
     def __str__(self):
         return "System Security Plans (SSPs)"
@@ -22,7 +22,7 @@ class system_controlAdmin(admin.ModelAdmin):
     sortable_by = ['sort_id']
 
 
-@admin.register(models.control_group)
+@admin.register(models.control_baseline)
 class system_control_groupAdmin(admin.ModelAdmin):
     filter_horizontal = ['controls']
 
@@ -82,8 +82,8 @@ class system_componentAdmin(admin.ModelAdmin):
 
 @admin.register(models.system_characteristic)
 class system_characteristicAdmin(admin.ModelAdmin):
-    list_display = ['system_name', 'system_status']
-    filter_horizontal = ['properties', 'annotations', 'links', 'leveraged_authorizations']
+    list_display = ['title', 'system_status']
+    filter_horizontal = ['properties', 'annotations', 'links']
 
 
 @admin.register(models.person)
