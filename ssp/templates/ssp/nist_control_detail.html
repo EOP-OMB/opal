@@ -6,10 +6,11 @@
         <td colspan="2">
             <p>
                 <a href="/admin/ssp/nist_control/{{ object.id }}/change/"
-                   target="_blank"><b>{{ object.control_id }}&nbsp;
-                    {{ object.control_title }}</b></a>
+                   target="_blank"><h1>{{ object }}</h1></a>
             </p>
-            <p>{{ object.statement | safe }}</p>
+            <p>{{ object.get_statement | safe }}</p>
+            <h2>Guidance:</h2>
+            <p>{{ object.get_guidance | safe }}</p>
         </td>
     </tr>
 </table>

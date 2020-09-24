@@ -338,12 +338,13 @@ class nist_control_parameter(PrimitiveModel):
 
 
 class nist_control_statement(PrimitiveModel):
-    control_id = models.CharField(max_length=50)
+    # control_id = models.CharField(max_length=50)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.PROTECT, null=True)
     statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 
     def __str__(self):
-        return self.control_id + ' - ' + self.statement_type.capitalize()
+        return self.nist_control.label + ' - ' + self.statement_type.capitalize()
 
 
 class nist_control(PrimitiveModel):
@@ -357,10 +358,11 @@ class nist_control(PrimitiveModel):
     sort_id = models.CharField(max_length=50)
     status = models.CharField(max_length=255, blank=True)
     links = customMany2ManyField(link)
-    control_statements = customMany2ManyField(nist_control_statement)
+
+    # control_statements = customMany2ManyField(nist_control_statement,related_name='stmt')
 
     def getStatementText(self, statement_type):
-        t = nist_control_statement.objects.filter(control_id=self.control_id,
+        t = nist_control_statement.objects.filter(nist_control=self,
                                                   statement_type=statement_type).get().statement_text
         return t
 
@@ -371,6 +373,22 @@ class nist_control(PrimitiveModel):
     @property
     def get_statement(self):
         return self.getStatementText('statement')
+
+    # TODO: Add methods for objectives and whatever the other type is
+
+    def get_control_implementation(self, info_sys):
+        c = []
+        ssp = system_security_plan.objects.get(pk=info_sys)
+        nc = self
+        if ssp.controls.filter(nist_control=nc).exists():
+            print(nc.__str__() + ' exists for system')
+            c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
+        if ssp.leveraged_authorization.exists():
+            for leveraged_auth in ssp.leveraged_authorization.all():
+                if leveraged_auth.controls.filter(nist_control=nc, inheritable=True).exists():
+                    print(nc.__str__() + ' exists for leveraged system')
+                    c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
+        return c
 
     def __str__(self):
         long_title = self.group_title + ' | ' + self.label + ' | ' + self.control_title
@@ -393,7 +411,7 @@ class control_parameter(BasicModel):
 
 
 class control_implementation(ExtendedBasicModel):
-    control_id = models.CharField(max_length=25)
+    # control_id = models.CharField(max_length=25)
     control_responsible_roles = customMany2ManyField(user_role)
     control_parameters = customMany2ManyField(control_parameter)
     control_statements = customMany2ManyField(control_statement)
@@ -406,7 +424,7 @@ control_implementation_status_choices = [
     ('Planned ', 'Planned'),
     ('Alternative Implementation', 'Alternative Implementation'),
     ('Not Applicable', 'Not Applicable'),
-    ('Other than Implemented','Other than Implemented')]
+    ('Other than Implemented', 'Other than Implemented')]
 
 control_origination_choices = [
     ('Service Provider Corporate ', 'Service Provider Corporate'),
@@ -416,11 +434,11 @@ control_origination_choices = [
     ('Provided by Customer (Customer System Specific) ', 'Provided by Customer'),
     ('Shared (Service Provider and Customer Responsibility) ', 'Shared'),
     ('Inherited ', 'Inherited'),
-    ('N/A','N/A')]
+    ('N/A', 'N/A')]
 
 
 class system_control(ExtendedBasicModel):
-    control_id = models.CharField(max_length=25)
+    # control_id = models.CharField(max_length=25)
     control_implementation = models.ForeignKey(control_implementation, on_delete=models.PROTECT, null=True)
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
@@ -438,7 +456,7 @@ class system_control(ExtendedBasicModel):
     roles_list = element_property(_get_roles_list)
 
     def __str__(self):
-        return self.information_system.short_name + ' | ' + self.control_id + ' ' + self.nist_control.control_title
+        return self.information_system.short_name + ' | ' + self.nist_control.__str__()
 
 
 class control_baseline(BasicModel):
@@ -475,34 +493,3 @@ class system_security_plan(ExtendedBasicModel):
     @property
     def selected_controls(self):
         return self._get_selected_controls()
-
-    def _get_control_implementation(self,nist_control_id):
-        c = {}
-        # nist_control_id = nist_control.objects.get(control_id=nist_control_id)
-        if self.controls.filter(nist_control=nist_control_id).exists():
-            c[self.__str__] = self.controls.get(nist_control=nist_control_id)
-        if self.leveraged_authorization.exists():
-            for l in self.leveraged_authorization.all():
-                if l.controls.filter(nist_control=nist_control_id,inheritable=True).exists():
-                    c[self.__str__] = l.controls.get(nist_control=nist_control_id)
-        if c:
-            return c
-        else:
-            not_implemented_control = system_control(
-                control_id=nist_control_id.control_id,
-                nist_control=nist_control_id,
-                control_implementation=control_implementation.objects.get(short_name='CNI'),
-                control_status='Other than Implemented',
-                control_origination = 'N/A',
-                inheritable = False
-            )
-            c['Not Implemented'] = not_implemented_control
-        return c
-
-
-    @property
-    def implemented_controls(self):
-        i = []
-        for item in self.selected_controls.all():
-            i.append(self._get_control_implementation(item))
-        return i

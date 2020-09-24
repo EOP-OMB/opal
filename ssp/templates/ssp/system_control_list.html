@@ -5,7 +5,7 @@
 {% if system_control_list %}
     <ul>
     {% for control in system_control_list %}
-        <li><a href="{% url 'ssp:system_control_detail_view' control.id %}">{{ control.control_id }} {{ control.nist_control.control_title }}</a></li>
+        <li><a href="{% url 'ssp:system_control_detail_view' control.id %}">{{ control }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
