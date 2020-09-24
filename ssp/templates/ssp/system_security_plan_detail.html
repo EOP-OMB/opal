@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 {% load admin_urls %}
-{% load system_control_view %}
 <h1>{{ object.title }}</h1>
 <hr>
 <table>
@@ -42,69 +41,10 @@
             <div style="margin-left: 30px">{{ component.desc | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>
-    {% for c in object.selected_controls %}
-        {%  for i in c.get_control_implementation %}
-        <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
-            <tr>
-                <td colspan="2">
-                    <p style="background-color: #9fcdff; color: white">
-                        {% if not i.id.exists %}
-                            <a href="{% url 'admin:ssp_system_control_add' %}" target="_blank"><b>{{ i.nist_control }}</b></a>
-                        {% else %}
-                            <a href="{% url 'admin:ssp_system_control_change' i.id %}" target="_blank"><b>{{ i.nist_control }}</b></a>
-                        {% endif %}
-                        <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ i.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
-                        <b>Control Origination:</b> {{ i.control_origination }}
-                    </p>
-                    <p><b>Statement:</b><br>
-                        {{ i.nist_control.get_statement | safe }}</p>
-                    <p><b>Guidance:</b><br>
-                        {{ i.nist_control.get_guidance | safe }}</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <table>
-                        <tr>
-                            <td valign="top"><b>Parameters:</b></td>
-                            <td>
-                                {% for p in i.control_implementation.control_parameters.all %}
-                                    <a href="{% url 'admin:ssp_control_parameter_change' p.id %}">{{ p.control_parameter_id }}</a>: <i>{{ p.value }}</i><br>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" colspan="2">
-                    <table>
-                        <tr>
-                            <td valign="top"><b>Roles:</b></td>
-                            <td>
-                                {% for r in i.control_implementation.control_responsible_roles.all %}
-                                    {{ r.title }}<br>
-                                {% endfor %}
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
-            </tr>
-        </table>
-
-        <table style="alignment: center; border-style: solid; width: 90% ">
-            <tr>
-                <td colspan="2"><b>How is the control implemented?</b></td>
-            </tr>
-            {% for s in i.control_implementation.control_statements.all %}
-                <tr>
-                    <td valign="top" width="60"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
-                                                   target="_blank">{{ s.control_statement_id }}</a></td>
-                    <td>{{ s.control_statement_text | safe }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <p></p>
+    {% for c in object.controls.all %}
+        {% with c as object %}
+            {% include "ssp/system_control_detail.html" %}
+        {% endwith %}
         <p></p>
     {% endfor %}
 {% endblock %}
