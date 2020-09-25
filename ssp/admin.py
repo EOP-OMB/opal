@@ -8,7 +8,7 @@ from ssp import models
 @admin.register(models.system_security_plan)
 class systemSecurityPlanAdmin(admin.ModelAdmin):
     filter_horizontal = ['system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
-                         'controls', 'properties', 'links', 'leveraged_authorization']
+                         'controls', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
 
     def __str__(self):
         return "System Security Plans (SSPs)"
