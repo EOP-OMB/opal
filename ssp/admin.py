@@ -17,7 +17,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
 @admin.register(models.system_control)
 class system_controlAdmin(admin.ModelAdmin):
     filter_horizontal = ['properties', 'annotations', 'links']
-    list_filter = ['control_implementation__control_responsible_roles', 'control_origination', 'nist_control__group_title', 'information_system']
+    list_filter = ['control_responsible_roles', 'control_origination', 'nist_control__group_title', 'information_system']
     list_display = ['nist_control','information_system','inheritable']
     sortable_by = ['sort_id','nist_control','information_system']
 

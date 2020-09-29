@@ -376,19 +376,19 @@ class nist_control(PrimitiveModel):
 
     # TODO: Add methods for objectives and whatever the other type is
 
-    def get_control_implementation(self, info_sys):
-        c = []
-        ssp = system_security_plan.objects.get(pk=info_sys)
-        nc = self
-        if ssp.controls.filter(nist_control=nc).exists():
-            print(nc.__str__() + ' exists for system')
-            c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
-        if ssp.leveraged_authorization.exists():
-            for leveraged_auth in ssp.leveraged_authorization.all():
-                if leveraged_auth.controls.filter(nist_control=nc, inheritable=True).exists():
-                    print(nc.__str__() + ' exists for leveraged system')
-                    c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
-        return c
+    # def get_control_implementation(self, info_sys):
+    #     c = []
+    #     ssp = system_security_plan.objects.get(pk=info_sys)
+    #     nc = self
+    #     if ssp.controls.filter(nist_control=nc).exists():
+    #         print(nc.__str__() + ' exists for system')
+    #         c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
+    #     if ssp.leveraged_authorization.exists():
+    #         for leveraged_auth in ssp.leveraged_authorization.all():
+    #             if leveraged_auth.controls.filter(nist_control=nc, inheritable=True).exists():
+    #                 print(nc.__str__() + ' exists for leveraged system')
+    #                 c.append({ssp.__str__(): ssp.controls.get(nist_control=nc)})
+    #     return c
 
     def __str__(self):
         long_title = self.group_title + ' | ' + self.label + ' | ' + self.control_title
@@ -410,12 +410,12 @@ class control_parameter(BasicModel):
     value = customTextField()
 
 
-class control_implementation(ExtendedBasicModel):
+# class control_implementation(ExtendedBasicModel):
     # control_id = models.CharField(max_length=25)
-    control_responsible_roles = customMany2ManyField(user_role)
-    control_parameters = customMany2ManyField(control_parameter)
-    control_statements = customMany2ManyField(control_statement)
-    nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, blank=True)
+    # control_responsible_roles = customMany2ManyField(user_role)
+    # control_parameters = customMany2ManyField(control_parameter)
+    # control_statements = customMany2ManyField(control_statement)
+    # nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 control_implementation_status_choices = [
@@ -439,21 +439,19 @@ control_origination_choices = [
 
 class system_control(ExtendedBasicModel):
     # control_id = models.CharField(max_length=25)
-    control_implementation = models.ForeignKey(control_implementation, on_delete=models.PROTECT, null=True)
+    # control_implementation = models.ForeignKey(control_implementation, on_delete=models.PROTECT, null=True)
+    control_responsible_roles = customMany2ManyField(user_role)
+    control_parameters = customMany2ManyField(control_parameter)
+    control_statements = customMany2ManyField(control_statement)
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
     information_system = models.ForeignKey('system_security_plan', on_delete=models.PROTECT, null=True)
     inheritable = models.BooleanField(default=False)
 
-    def _get_roles_list(self):
-        # TODO: Figure out why this method always returns empty
-        role_list = []
-        for item in self.control_implementation.control_responsible_roles.values('title'):
-            role_list.append(item['title'])
-        return role_list
-
-    roles_list = element_property(_get_roles_list)
+    @property
+    def sorted_statement_set(self):
+        return self.control_statements.order_by('control_statement_id')
 
     def __str__(self):
         return self.information_system.short_name + ' | ' + self.nist_control.__str__()
