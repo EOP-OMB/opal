@@ -16,28 +16,48 @@
 <ol>
     <li><a href="#system_description">System Description</a></li>
     <li><a href="#system_diagrams">System Diagrams</a></li>
-    <li><a href="#system_components">System Components</a></li>
+    <li><a href="#information_types">System Information Types</a></li>
+    <li><a href="#system_components">System Components</a>
         <ol>
         {% for component in object.system_components.all %}
             <li><a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a></li>
         {% endfor %}
-        </ol>
+        </ol></li>
     <li><a href="#system_controls">System Controls</a></li>
 </ol>
 
-<h2>{{ object.system_characteristics.title }} ({{ object.system_characteristics.short_name}})</h2>
-    <h3><a id="system_description"></a><a href="{% url 'admin:ssp_system_characteristic_change' object.system_characteristics.id %}" target="_blank">System Description</a></h3>
-    <div style="margin-left: 30px">{{ object.system_characteristics.desc | safe }}</div>
+<h2><a href="{% url 'admin:ssp_system_security_plan_change' object.id %}" target="_blank">{{ object.title }} ({{ object.short_name}})</a></h2>
+    <h3><a id="system_description">System Description</a></h3>
+    <div style="margin-left: 30px">{{ object.desc | safe }}</div>
 <h3><a id="system_diagrams">System Diagrams</a></h3>
     <ul>
-        <li><b>Authorization Boundary Diagram: </b>{{ object.system_characteristics.authorization_boundary_diagram.attachment.url }}
-        <li><b>Network Architecture Diagram: </b>{{ object.system_characteristics.network_architecture_diagram.attachment.url }}
-        <li><b>Data Flow Diagram: </b>{{ object.system_characteristics.data_flow_diagram.attachment.url }}
+        <li><b>Authorization Boundary Diagram: </b>{{ object.authorization_boundary_diagram.attachment.url }}
+        <li><b>Network Architecture Diagram: </b>{{ object.network_architecture_diagram.attachment.url }}
+        <li><b>Data Flow Diagram: </b>{{ object.data_flow_diagram.attachment.url }}
     </ul>
+<h3><a id="information_types">System Information Types</a></h3>
+    <table border="2" cellpadding="3">
+        <tr>
+            <th>Information Type </th>
+            <th>NIST 800-60 identifier</th>
+            <th>Confidentiality</th>
+            <th>Integrity</th>
+            <th>Availability</th>
+        </tr>
+    {% for info_type in object.information_types.all %}
+        <tr>
+            <td><a href="{% url 'admin:ssp_information_type_change' info_type.id %}" target="_blank">{{ info_type.title }}</a></td>
+            <td>{{ info_type.short_name }}</td>
+            <td>{{ info_type.confidentialityImpact }}</td>
+            <td>{{ info_type.integrityImpact }}</td>
+            <td>{{ info_type.availabilityImpact }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 <h3><a id="system_components">System Components</a></h3>
     {% for component in object.system_components.all %}
         <h4 style="margin-left: 15px"><a id="system_component:{{ component.id }}">
-            <a href="{% url 'admin:ssp_system_component_change' component.id%} %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></a></h4>
+            <a href="{% url 'admin:ssp_system_component_change' component.id %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></a></h4>
             <div style="margin-left: 30px">{{ component.desc | safe }}</div>
     {% endfor %}
 <h3><a id="system_controls">System Controls</a></h3>

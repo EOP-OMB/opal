@@ -217,3 +217,52 @@ def loadControls(f):
 def run():
     f='/Users/dan/PycharmProjects/opal/source/NIST_SP-800-53_rev4_catalog.json'
     loadControls(f)
+
+def get_paramaters():
+    import json
+    f = '/Users/dan/PycharmProjects/opal/source/NIST_SP-800-53_rev4_catalog.json'
+    catalogDict = json.loads(open(f, 'r').read())
+    parameter_list = []
+    for g in catalogDict['catalog']['groups']:
+        for c in g['controls']:
+            if 'parameters' in c:
+                for p in c['parameters']:
+                    parameter_list.append(p)
+            if 'controls' in c:
+                for e in c['controls']:
+                    if 'parameters' in e:
+                        for p in e['parameters']:
+                            parameter_list.append(p)
+
+    for item in parameter_list:
+      if 'select' in item:
+          item['select'] = ','.join(item['select']['alternatives'])
+
+    for item in parameter_list:
+        if 'depends-on' in item:
+            list(filter(lambda param: param['id'] == item["id"], parameter_list))
+            id = next((i for i, dict in enumerate(parameter_list) if item["id"] == item['depends-on']))
+            parameter_list[id]['select'] = parameter_list[id]['select'].replace(item['depends-on'],item['label'])
+
+    for item in parameter_list:
+        p = False
+        if 'label' in item:
+            p = item['label']
+            str = p.translate(p.maketrans('', '', '\n\t\r')).split(' ')
+            while ('' in str):
+                str.remove('')
+            item['label'] = ' '.join(str)
+        if 'select' in item:
+            p = item['select']
+            str = p.translate(p.maketrans('', '', '\n\t\r')).split(' ')
+            while ('' in str):
+                str.remove('')
+            item['select'] = ' '.join(str)
+
+
+for obj in nist_control.objects.all():
+    l = len(obj.sort_id)
+    for p in nist_control_parameter.objects.filter(param_id__startswith=obj.sort_id).all():
+        print('Adding parameter ' + p.param_id + ' to ' + obj.label)
+        obj.parameters.add(p)
+        obj.save()
