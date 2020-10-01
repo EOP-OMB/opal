@@ -7,8 +7,28 @@ from ssp import models
 
 @admin.register(models.system_security_plan)
 class systemSecurityPlanAdmin(admin.ModelAdmin):
-    filter_horizontal = ['system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
+    filter_horizontal = ['information_types','system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
                          'controls', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
+    fieldsets = (
+        ('Title', {
+            'fields': (('title', 'short_name'), 'desc')
+        }),
+        ('System', {
+            'fields': (('published', 'lastModified','date_authorized','system_status'), ('version', 'oscalVersion'), 'control_baseline')
+        }),
+        ('FIPS Level', {
+            'fields' : ('information_types',('security_objective_confidentiality','security_objective_integrity','security_objective_availability'))
+        }),
+        ('System Diagrams', {
+            'fields' : (('authorization_boundary_diagram',
+                         'network_architecture_diagram',
+                         'data_flow_diagram'))
+        }),
+        ('Other', {
+            'classes': ('collapse',),
+            'fields': ('remarks','links','properties','annotations'),
+        }),
+    )
 
     def __str__(self):
         return "System Security Plans (SSPs)"
@@ -16,10 +36,31 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
 
 @admin.register(models.system_control)
 class system_controlAdmin(admin.ModelAdmin):
-    filter_horizontal = ['properties', 'annotations', 'links']
-    list_filter = ['control_implementation__control_responsible_roles', 'control_origination', 'nist_control__group_title', 'information_system']
-    list_display = ['nist_control','information_system','inheritable']
-    sortable_by = ['sort_id','nist_control','information_system']
+    filter_horizontal = ['properties', 'annotations', 'links', 'control_parameters', 'control_statements']
+    list_filter = ['control_origination', 'nist_control__group_title']
+    list_display = ['title','short_name','nist_control']
+    sortable_by = ['sort_id','nist_control']
+
+    fieldsets = (
+        ('Title', {
+            'fields': (('title', 'short_name'), 'desc')
+        }),
+        ('System', {
+            'fields': ('control_parameters', 'control_statements', 'control_status', 'control_origination','nist_control')
+        }),
+        ('Other', {
+            'classes': ('collapse',),
+            'fields': ('remarks', 'links', 'properties', 'annotations'),
+        }),
+    )
+
+@admin.register(models.information_type)
+class information_typeAdmin(admin.ModelAdmin):
+    fields = ['title','short_name',('confidentialityImpact','integrityImpact','availabilityImpact'),'desc']
+    list_display = ['short_name','title','confidentialityImpact','integrityImpact','availabilityImpact']
+    sortable_by = ['short_name','title','confidentialityImpact','integrityImpact','availabilityImpact']
+
+
 
 
 @admin.register(models.control_baseline)
@@ -78,12 +119,6 @@ class system_componentAdmin(admin.ModelAdmin):
                          'links']
     list_filter = ['component_information_types', 'component_status', 'component_responsible_roles', 'component_type']
     list_display = ['component_title', 'component_type', 'component_description']
-
-
-@admin.register(models.system_characteristic)
-class system_characteristicAdmin(admin.ModelAdmin):
-    list_display = ['title', 'system_status']
-    filter_horizontal = ['properties', 'annotations', 'links']
 
 
 @admin.register(models.person)
