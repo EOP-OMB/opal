@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.8-buster
 # set a directory for the app
 WORKDIR /usr/src/app
 
@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # install dependencies
+RUN apt update && apt install python3
 RUN pip install --no-cache-dir -r requirements.txt
 RUN touch db.sqlite3
 RUN python manage.py makemigrations

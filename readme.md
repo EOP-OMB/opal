@@ -34,3 +34,9 @@
  1. Assuming you have a Word document in the FedRAMP template with your controls in it, You cna import those using the importSecurityControlsFromWord script
  
  `python manage.py runscript importSecurityControlsFromWord(path\to\file.docx)`
+ 
+ 1. Start the Server
+
+`python manage.py collectstatic`
+
+`python manage.py runmodwsgi --reload-on-changes`

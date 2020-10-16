@@ -85,7 +85,7 @@ class link(PrimitiveModel):
     requires_authentication = models.BooleanField(default=False)
     rel = models.CharField(max_length=255, blank=True)
     mediaType = models.CharField(max_length=255, blank=True)
-    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True)
+    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.text

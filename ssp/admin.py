@@ -60,17 +60,19 @@ class information_typeAdmin(admin.ModelAdmin):
     list_display = ['short_name','title','confidentialityImpact','integrityImpact','availabilityImpact']
     sortable_by = ['short_name','title','confidentialityImpact','integrityImpact','availabilityImpact']
 
-
-
-
-@admin.register(models.control_baseline)
-class system_control_groupAdmin(admin.ModelAdmin):
-    filter_horizontal = ['controls']
-
-
 @admin.register(models.control_statement)
 class control_statementAdmin(admin.ModelAdmin):
     filter_horizontal = ['control_statement_responsible_roles', 'properties', 'links', 'annotations']
+    fields = ['title','short_name','control_statement_id','control_statement_responsible_roles','control_statement_text','links','desc']
+
+
+@admin.register(models.control_parameter)
+class control_parameterAdmin(admin.ModelAdmin):
+    fields = [('title','short_name'),('control_parameter_id','value'),'desc']
+
+@admin.register(models.control_baseline)
+class control_baselineAdmin(admin.ModelAdmin):
+    filter_horizontal = ['controls']
 
 
 @admin.register(models.nist_control)

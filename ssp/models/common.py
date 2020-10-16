@@ -27,5 +27,5 @@ class attachment(ExtendedBasicModel):
     attachment = models.FileField()
     filename = models.CharField(max_length=100, blank=True)
     mediaType = models.CharField(max_length=100, blank=True)
-    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True)
+    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True)
     caption = models.CharField(max_length=200, blank=True)

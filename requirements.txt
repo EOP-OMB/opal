@@ -1,15 +1,17 @@
-asgiref>=3.2.10
+asgiref==3.2.10
 Django==3.0.7
-django-extensions>=3.0.5
-# django-mssql-backend>=2.8.1
-django-tinymce>=3.0.2
-gunicorn>=20.0.4
-lxml>=4.5.2
-# mysql-client>=0.0.1
-# pyodbc required only if connecting to MS SQL Server
-# pyodbc>=4.0.30
-python-docx>=0.8.10
-pytz>=2020.1
-six>=1.15.0
-sqlparse>=0.3.1
-uuid>=1.30
+django-extensions==3.0.9
+django-mssql-backend==2.8.1
+django-tinymce==3.1.0
+lxml==4.5.2
+mod-wsgi==4.7.1
+mysql-client==0.0.1
+pathlib==1.0.1
+pkg-resources==0.0.0
+pyodbc==4.0.30
+python-dateutil==2.8.1
+python-docx==0.8.10
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
+uuid==1.30
