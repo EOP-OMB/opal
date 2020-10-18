@@ -56,10 +56,11 @@
             <td>{{ s.control_statement_text | safe }}</td>
         </tr>
         {% for l in s.links.all %}
-        <tr>
-            <td><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
-            <td>{{ l.requires_authentication }}</td>
-        </tr>
+            <tr>
+                <td><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
+                <td>{{ l.requires_authentication }}</td>
+            </tr>
+        {% endfor %}
     {% endfor %}
 </table>
 <p></p>

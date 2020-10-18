@@ -7,7 +7,6 @@ lxml==4.5.2
 mod-wsgi==4.7.1
 mysql-client==0.0.1
 pathlib==1.0.1
-pkg-resources==0.0.0
 pyodbc==4.0.30
 python-dateutil==2.8.1
 python-docx==0.8.10

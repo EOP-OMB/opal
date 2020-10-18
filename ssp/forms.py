@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from ssp import models as ssp
+from ssp.models import system_security_plan
 
 class SystemSecurityPlan(ModelForm):
     class Meta:
-        model = ssp.systemSecurityPlan
+        model = system_security_plan
         fields = '__all__'

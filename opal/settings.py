@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'tinymce',
     'ssp.apps.ssp',
     'django_extensions',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [

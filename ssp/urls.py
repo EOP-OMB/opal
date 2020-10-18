@@ -26,4 +26,6 @@ urlpatterns = [
     path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
     path('', system_security_plan_list_view.as_view(), name='list_system_security_planView'),
     path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
+    path('ssp/new/', ssp_new, name='ssp_new'),
+    path('<int:pk>/edit/', ssp_edit, name='ssp_edit'),
 ]
