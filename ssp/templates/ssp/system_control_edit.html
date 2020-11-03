@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {{ object.title }} | {{ object.short_name }} | Used By: {{ object.system_security_plan_set.first.title }}
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
+            <tr>
+                <td colspan="2">
+                    <p>
+                        <a href="{% url 'admin:ssp_system_control_change' object.id %}"
+                           target="_blank"><b>{{ object.nist_control.label }}&nbsp;
+                            {{ object.nist_control.control_title }}</b></a>
+                        <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
+                        <b>Control Origination:</b> {{ object.control_origination }}
+                    </p>
+                    <p><b>Statement:</b><br>
+                        {{ object.nist_control.get_statement | safe }}</p>
+                    <p><b>Guidance:</b><br>
+                        {{ object.nist_control.get_guidance | safe }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td valign="top" colspan="2"><b>Parameters:</b></td>
+                            {% for item in param_formset %}
+                                <tr><td valign="top">{{ item.control_parameter_id }}:</td><td valign="top">{{ item.value }}</td></tr>>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td valign="top" colspan=2><b>Statements:</b></td>
+                            {% for item in statement_formset %}
+                            <tr><td valign="top">{{ item.control_statement_id }}:</td><td valign="top">{{ item.control_statement_text }}</td></tr>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <p></p>
+{% endblock %}

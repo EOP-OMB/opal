@@ -1,4 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
 {% block content %}
+    <h1><a href="{% url 'ssp:system_control_edit' object.id %}">Edit</a></h1>
 <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
     <tr>
         <td colspan="2">
