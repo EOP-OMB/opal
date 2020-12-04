@@ -69,6 +69,8 @@ def system_control_edit(request, pk):
 
 class nist_control_list_view(generic.ListView):
     model = nist_control
+    queryset = nist_control.objects.order_by('sort_id')
+
 
 
 class nist_control_detail_view(generic.DetailView):

@@ -25,7 +25,7 @@ class nist_control_parameter(PrimitiveModel):
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
-    nist_control = models.ForeignKey('nist_control', on_delete=models.PROTECT, null=True)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE, null=True)
     statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 

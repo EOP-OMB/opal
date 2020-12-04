@@ -6,14 +6,15 @@ WORKDIR /usr/src/app
 COPY . .
 
 # install dependencies
-RUN apt update && apt install python3
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt update && apt install -y python3-venv apache2 apache2-dev libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev python3-pip
+RUN pip3 install -r requirements.txt
 RUN touch db.sqlite3
-RUN python manage.py makemigrations
-RUN python manage.py migrate
-RUN python manage.py runscript scripts.ssp_all_data_2020_10_01 -v2
+RUN python3 manage.py makemigrations
+RUN python3 manage.py migrate
+RUN python3 manage.py loaddata admin_user.json
+RUN python3 manage.py collectstatic --noinput
+RUN chown -R www-data:www-data *
 
+EXPOSE 80
 
-EXPOSE 8000
-
-CMD ["python", "python manage.py runserver 0.0.0.0:8000"]
+CMD python3 manage.py runmodwsgi --user www-data --group www-data
