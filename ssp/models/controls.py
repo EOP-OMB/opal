@@ -1,5 +1,9 @@
 from ssp.models.users import *
 
+#Samira:
+from django.core import serializers
+import json
+
 # objects related to security controls
 
 # Objects to hold control catalog data that should be displayed in the SSP
@@ -22,6 +26,46 @@ class nist_control_parameter(PrimitiveModel):
     def __str__(self):
         return self.param_id
 
+#Samira:
+    @property
+    def get_serializer_json(self):
+        if len(nist_control_parameter.objects.all()) == 0:
+            return None
+        else:
+            json_data = serializers.serialize("json", nist_control_parameter.objects.all())
+            # If you only want a subset of fields to be serialized, you can specify a fields argument to the serializer:
+            # e.g. json_data = serializers.serialize("json", nist_control_parameter.objects.all(), fields=('uuid', 'param_id', 'param_type', 'param_text'))
+
+            json_object = json.loads(json_data)
+            json_str = json.dumps(json_object, indent=2)
+            return json_str
+
+    #Samira
+    @property
+    def get_dictionary_json(self):
+        key_value_list = [
+            ['id', 'pk'],
+            ['uuid', 'uuid'],
+            ['param_id', 'param_id'],
+            ['param_type', 'param_type'],
+            ['param_text', 'param_text'],
+            ['param_depends_on', 'param_depends_on'],
+            ['param_class', 'param_class']
+        ]
+        if len(nist_control_parameter.objects.all()) == 0:
+            return None
+        else:
+            return_list = []
+            for obj in nist_control_parameter.objects.all():
+                dict = {}
+                for kv in key_value_list:
+                    if kv[0] == 'uuid':
+                        dict[kv[0]]= str(getattr(obj, kv[1])) #Had to add this line to fix the UUID error when converting the list to json
+                    else:
+                        dict[kv[0]] = getattr(obj, kv[1])
+                return_list.append(dict)
+            json_str = json.dumps(return_list, indent=2)
+            return json_str
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
