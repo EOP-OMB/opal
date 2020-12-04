@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'tinymce',
     'ssp.apps.ssp',
     'django_extensions',
-    # 'mod_wsgi.server',
+    'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
@@ -78,27 +78,26 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR + '/db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'sql_server.pyodbc',
-#         'NAME': 'OMB-OSCAL',
-#         'USER': 's-sql-oscal',
-#         'PASSWORD': '0LIssE|Ji?dGpqHVv@:4',
-#         'HOST': '172.24.192.67',
-#         'PORT': '',
-#
-#         'OPTIONS': {
-#             'driver': 'ODBC Driver 17 for SQL Server',
-#         },
-#     },
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR + '/db.sqlite3',
+#     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'OMB-OSCAL',
+        'USER': 's-sql-oscal',
+        'PASSWORD': '0LIssE|Ji?dGpqHVv@:4',
+        'HOST': '172.24.192.67',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 13 for SQL Server',
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
