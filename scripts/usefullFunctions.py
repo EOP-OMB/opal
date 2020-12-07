@@ -1,5 +1,5 @@
 from opal.settings import BASE_DIR
-from ssp.models import *
+import ssp.models as t
 import logging
 
 def startLogging():
