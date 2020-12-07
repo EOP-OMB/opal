@@ -36,14 +36,15 @@ class nist_control_statement(PrimitiveModel):
 class nist_control(PrimitiveModel):
     group_id = models.CharField(max_length=50)
     group_title = models.CharField(max_length=255)
-    control_id = models.CharField(max_length=50, unique=True)
+    control_id = models.CharField(max_length=50)
     source = models.CharField(max_length=50)
     control_title = models.CharField(max_length=255)
-    label = models.CharField(max_length=50, unique=True)
+    label = models.CharField(max_length=50)
     sort_id = models.CharField(max_length=50)
     status = models.CharField(max_length=255, blank=True)
     parameters = customMany2ManyField(nist_control_parameter)
     links = customMany2ManyField(link)
+    catalog = models.CharField(max_length=50)
 
 
     def getStatementText(self, statement_type):

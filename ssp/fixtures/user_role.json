@@ -1,0 +1,129 @@
+[
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "7046756f-d7a3-4db3-b280-716c2654c59b",
+    "title": "System Administrator",
+    "short_name": "SysAdmin",
+    "desc": "<p>Information System Administrator has root/admin access to all componenets in the information system. &nbsp;</p>\r\n<p>This is the highest level of user access and should be granted to only a few highly trusted users</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      "77fda6d8-d4eb-4fdd-854a-a838546c5125",
+      "41a902f0-fdcc-4401-9f8d-f70cb5aaf18b",
+      "9706d14d-8b5d-4b64-bea7-cd1b19753a98",
+      "4bc05386-926a-4a0a-925c-acf5dadd7750",
+      "f7c14503-ed1b-4b8e-998a-63b533345588",
+      "44c47c66-c645-43e9-bb45-e1a218b1171f",
+      "2b2a868c-ed7f-49f8-8953-255f944e306b"
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "6b135495-6cfd-4830-bc66-03ed676f1de1",
+    "title": "Account Manager",
+    "short_name": "AcctMngr",
+    "desc": "<p>An Account Manager is responsable for the creation of user accounts within the information system. &nbsp;They may create the accounts manually or oversee a process that allows automatice account creation. Account Managers are also responsable for ensuring that accounts are disabled and/or deleted as required by information system policies.</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      "e8e60d31-22aa-4f4f-bdd6-7012be38a4b4"
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "fa288157-b495-42fb-b436-303304d35b06",
+    "title": "Server Administrator",
+    "short_name": "ServerAdmin",
+    "desc": "<p>Server Administrators have administrative control (root/admin or equivilent) of one or more servers. This includes the ability to make changes to both the content and configuration of the server. Some configuration settings may be enforced by policies controlled at the information system level (i.e. group policies in Windows).</p>\r\n<p>Users should be granted this role only to those servers needed to perform job functions. All activities of these accounts should be logged.&nbsp;</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "3b808c09-1270-46a2-aae9-0ed1bf6c9dd7",
+    "title": "Network Administrator",
+    "short_name": "NetworkAdmin",
+    "desc": "<p>Network Administrators are responsable for all network devices within the information system. &nbsp;This includes devices used primarily for connectivity such as network switches and hubs as well as devices which control data flow such as firewalls, vpn endpoints, etc. Network Administrators are also responsable for coordinating with third party service providers that deliver connectivty or other network services to the information system.</p>\r\n<p>Access to these kinds of accounts should be strictly controlled and all activity should be logged. Accounts of this type are considered privileged accounts. Access to these accounts requires the approval of the Network Lead and the ISSO.</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      "ac42778a-df95-45b2-8536-0f25612f755a",
+      "44c47c66-c645-43e9-bb45-e1a218b1171f"
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "b05be195-a575-4865-b0b9-d6f1f29b2948",
+    "title": "Database Administrator",
+    "short_name": "DBA",
+    "desc": "<p>Database Administrator have administrative control of one or more databases. Administartive control means the user has the ability to make changes to both the content and configuration of the database. This includes configuration of the database instance itself such as managing resources and defining database defaults and behaviors as well as creation, modification and deletion of database objects and data.</p>\r\n<p>Some database configuration settings may be configured and enforced by policies controlled at the information system or server level (i.e. group policies in Windows or password complexity policies). Database Administrators &nbsp;should be granted access only to those databases needed to perform job functions. All activities of these accounts should be logged. Accounts of this type are considered privileged accounts. Access to these accounts requires the approval of the System Owner and the Database Team Lead.</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      "41a902f0-fdcc-4401-9f8d-f70cb5aaf18b"
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "bda61c65-77e9-4753-9fd0-46f533e5293e",
+    "title": "Backup Administrator",
+    "short_name": "BackupAdmin",
+    "desc": "<p>The Backup Administrator is responsable for configuring, monitoring, and executing information system backups. &nbsp;Since backups are by nature a copy of information system data which must then be protected, this role creates unique security concerns and should be assigned to a subset of information system users in other administrator roles.</p>",
+    "remarks": "",
+    "properties": [
+      "d872bc62-60ff-4823-b57a-300cdbf42f87"
+    ],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      "69de4e5b-d385-4e70-a899-89485652bcb5"
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "fields": {
+    "uuid": "f9598059-e0c6-4f9f-88ed-5e983ba09eff",
+    "title": "Limited Administrator",
+    "short_name": "LmtdAdmin",
+    "desc": "<p>Limited Administrators can modify some settings and files on a limited set of servers under controlled circumstances. &nbsp;For example, a user who has permisions to create and destroy database objects in a certain database schema but does not have the full privligaes of a DBA would be considered a Limited Administrator. &nbsp;Accounts of this type are not usually considered privileged accounts, but may be designated as privileged accounts depending on the specific permisions.&nbsp;</p>\r\n<p>Access to these accounts is determined by the System Owner.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+}
+]

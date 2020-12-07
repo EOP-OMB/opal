@@ -42,6 +42,9 @@ class PrimitiveModel(models.Model):
     def natural_key(self):
         return self.uuid
 
+    def get_by_natural_key(self, uuid):
+        return self.get(uuid=uuid)
+
 
 class BasicModel(PrimitiveModel):
     title = models.CharField(max_length=255, blank=True, help_text='A title for display and navigation')
