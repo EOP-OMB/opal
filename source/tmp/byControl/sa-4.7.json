@@ -1,0 +1,68 @@
+{
+    "id": "sa-4.7",
+    "class": "SP800-53-enhancement",
+    "title": "Niap-approved Protection Profiles",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-4(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-04(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-7",
+            "rel": "related",
+            "text": "IA-7"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-4.7_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sa-4.7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Limit the use of commercially provided information assurance and information assurance-enabled information technology products to those products that have been successfully evaluated against a National Information Assurance partnership (NIAP)-approved Protection Profile for a specific technology type, if such a profile exists; and"
+                },
+                {
+                    "id": "sa-4.7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Require, if no NIAP-approved Protection Profile exists for a specific technology type but a commercially provided information technology product relies on cryptographic functionality to enforce its security policy, that the cryptographic module is FIPS-validated or NSA-approved."
+                }
+            ]
+        },
+        {
+            "id": "sa-4.7_gdn",
+            "name": "guidance",
+            "prose": "See [NIAP CCEVS] for additional information on NIAP. See [NIST CMVP] for additional information on FIPS-validated cryptographic modules."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

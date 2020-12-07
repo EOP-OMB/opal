@@ -1,0 +1,1688 @@
+{
+    "id": "ps",
+    "class": "family",
+    "title": "Personnel Security",
+    "controls": [
+        {
+            "id": "ps-1",
+            "class": "SP800-53",
+            "title": "Policy and Procedures",
+            "parameters": [
+                {
+                    "id": "ps-1_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "ps-1_prm_2",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "organization-level",
+                            "mission/business process-level",
+                            "system-level"
+                        ]
+                    }
+                },
+                {
+                    "id": "ps-1_prm_3",
+                    "label": "organization-defined official"
+                },
+                {
+                    "id": "ps-1_prm_4",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "ps-1_prm_5",
+                    "label": "organization-defined events"
+                },
+                {
+                    "id": "ps-1_prm_6",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "ps-1_prm_7",
+                    "label": "organization-defined events"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-1"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-01"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#c7ac44e8-10db-4b64-b2b9-9e32ec1efed0",
+                    "rel": "reference",
+                    "text": "[SP 800-12]"
+                },
+                {
+                    "href": "#08b07465-dbdc-48d6-8a0b-37279602ac16",
+                    "rel": "reference",
+                    "text": "[SP 800-30]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#4c0ec2ee-a0d6-428a-9043-4504bc3ade6f",
+                    "rel": "reference",
+                    "text": "[SP 800-100]"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#ps-8",
+                    "rel": "related",
+                    "text": "PS-8"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-1_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-1_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop, document, and disseminate to {{ ps-1_prm_1 }}:",
+                            "parts": [
+                                {
+                                    "id": "ps-1_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "\n                     {{ ps-1_prm_2 }} personnel security policy that:",
+                                    "parts": [
+                                        {
+                                            "id": "ps-1_smt.a.1.a",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(a)"
+                                                }
+                                            ],
+                                            "prose": "Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and"
+                                        },
+                                        {
+                                            "id": "ps-1_smt.a.1.b",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(b)"
+                                                }
+                                            ],
+                                            "prose": "Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "ps-1_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures to facilitate the implementation of the personnel security policy and the associated personnel security controls;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ps-1_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Designate an {{ ps-1_prm_3 }} to manage the development, documentation, and dissemination of the personnel security policy and procedures; and"
+                        },
+                        {
+                            "id": "ps-1_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update the current personnel security:",
+                            "parts": [
+                                {
+                                    "id": "ps-1_smt.c.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Policy {{ ps-1_prm_4 }} and following {{ ps-1_prm_5 }}; and"
+                                },
+                                {
+                                    "id": "ps-1_smt.c.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures {{ ps-1_prm_6 }} and following {{ ps-1_prm_7 }}."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-1_gdn",
+                    "name": "guidance",
+                    "prose": "Personnel security policy and procedures for the controls in the PS family that are implemented within systems and organizations. The risk management strategy is an important factor in establishing such policies and procedures. Policies and procedures contribute to security and privacy assurance. Therefore, it is important that security and privacy programs collaborate on their development. Security and privacy program policies and procedures at the organization level are preferable, in general, and may obviate the need for mission level or system-specific policies and procedures. The policy can be included as part of the general security and privacy policy or be represented by multiple policies reflecting the complex nature of organizations. Procedures can be established for security and privacy programs, for mission/business processes, and for systems, if needed. Procedures describe how the policies or controls are implemented and can be directed at the individual or role that is the object of the procedure. Procedures can be documented in system security and privacy plans or in one or more separate documents. Events that may precipitate an update to personnel security policy and procedures include, but are not limited to, assessment or audit findings, security or privacy incidents, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Simply restating controls does not constitute an organizational policy or procedure."
+                }
+            ]
+        },
+        {
+            "id": "ps-2",
+            "class": "SP800-53",
+            "title": "Position Risk Designation",
+            "parameters": [
+                {
+                    "id": "ps-2_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-2"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-02"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#a5ef5e56-5c1a-4911-b419-37dddc1b3581",
+                    "rel": "reference",
+                    "text": "[5 CFR 731]"
+                },
+                {
+                    "href": "#276bd50a-7e58-48e5-a405-8c8cb91d7a5f",
+                    "rel": "reference",
+                    "text": "[SP 800-181]"
+                },
+                {
+                    "href": "#ac-5",
+                    "rel": "related",
+                    "text": "AC-5"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#ps-3",
+                    "rel": "related",
+                    "text": "PS-3"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#sa-5",
+                    "rel": "related",
+                    "text": "SA-5"
+                },
+                {
+                    "href": "#sa-21",
+                    "rel": "related",
+                    "text": "SA-21"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-2_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-2_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Assign a risk designation to all organizational positions;"
+                        },
+                        {
+                            "id": "ps-2_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Establish screening criteria for individuals filling those positions; and"
+                        },
+                        {
+                            "id": "ps-2_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update position risk designations {{ ps-2_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-2_gdn",
+                    "name": "guidance",
+                    "prose": "Position risk designations reflect Office of Personnel Management (OPM) policy and guidance. Proper position designation is the foundation of an effective and consistent suitability and personnel security program. The Position Designation System (PDS) assesses the duties and responsibilities of a position to determine the degree of potential damage to the efficiency or integrity of the service due to misconduct of an incumbent of a position and establishes the risk level of that position. The PDS assessment also determines if the duties and responsibilities of the position present the potential for position incumbents to bring about a material adverse effect on national security and the degree of that potential effect, which establishes the sensitivity level of a position. The results of the assessment determine what level of investigation is conducted for a position. Risk designations can guide and inform the types of authorizations that individuals receive when accessing organizational information and information systems. Position screening criteria include explicit information security role appointment requirements. Parts 1400 and 731 of Title 5, Code of Federal Regulations, establish the requirements for organizations to evaluate relevant covered positions for a position sensitivity and position risk designation commensurate with the duties and responsibilities of those positions."
+                }
+            ]
+        },
+        {
+            "id": "ps-3",
+            "class": "SP800-53",
+            "title": "Personnel Screening",
+            "parameters": [
+                {
+                    "id": "ps-3_prm_1",
+                    "label": "organization-defined conditions requiring rescreening and, where rescreening is so indicated, the frequency of rescreening"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-3"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-03"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#55b0c93a-5e48-457a-baa6-5ce81c239c49",
+                    "rel": "reference",
+                    "text": "[EO 13526]"
+                },
+                {
+                    "href": "#0af071a6-cf8e-48ee-8c82-fe91efa20f94",
+                    "rel": "reference",
+                    "text": "[EO 13587]"
+                },
+                {
+                    "href": "#628d22a1-6a11-4784-bc59-5cd9497b5445",
+                    "rel": "reference",
+                    "text": "[FIPS 199]"
+                },
+                {
+                    "href": "#7ba1d91c-3934-4d5a-8532-b32f864ad34c",
+                    "rel": "reference",
+                    "text": "[FIPS 201-2]"
+                },
+                {
+                    "href": "#e72fde0b-6fc2-497e-a9db-d8fce5a11b8a",
+                    "rel": "reference",
+                    "text": "[SP 800-60-1]"
+                },
+                {
+                    "href": "#9be5d661-421f-41ad-854e-86f98b811891",
+                    "rel": "reference",
+                    "text": "[SP 800-60-2]"
+                },
+                {
+                    "href": "#858705be-3c1f-48aa-a328-0ce398d95ef0",
+                    "rel": "reference",
+                    "text": "[SP 800-73-4]"
+                },
+                {
+                    "href": "#7af2e6ec-9f7e-4232-ad3f-09888eb0793a",
+                    "rel": "reference",
+                    "text": "[SP 800-76-2]"
+                },
+                {
+                    "href": "#828856bd-d7c4-427b-8b51-815517ec382d",
+                    "rel": "reference",
+                    "text": "[SP 800-78-4]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ia-4",
+                    "rel": "related",
+                    "text": "IA-4"
+                },
+                {
+                    "href": "#ma-5",
+                    "rel": "related",
+                    "text": "MA-5"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#ps-2",
+                    "rel": "related",
+                    "text": "PS-2"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                },
+                {
+                    "href": "#sa-21",
+                    "rel": "related",
+                    "text": "SA-21"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-3_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-3_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Screen individuals prior to authorizing access to the system; and"
+                        },
+                        {
+                            "id": "ps-3_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Rescreen individuals in accordance with {{ ps-3_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-3_gdn",
+                    "name": "guidance",
+                    "prose": "Personnel screening and rescreening activities reflect applicable laws, executive orders, directives, regulations, policies, standards, guidelines, and specific criteria established for the risk designations of assigned positions. Examples of personnel screening include background investigations and agency checks. Organizations may define different rescreening conditions and frequencies for personnel accessing systems based on types of information processed, stored, or transmitted by the systems."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "ps-3.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Classified Information",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-3(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-03(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        },
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-3.1_smt",
+                            "name": "statement",
+                            "prose": "Verify that individuals accessing a system processing, storing, or transmitting classified information are cleared and indoctrinated to the highest classification level of the information to which they have access on the system."
+                        },
+                        {
+                            "id": "ps-3.1_gdn",
+                            "name": "guidance",
+                            "prose": "Classified information is the most sensitive information that the Federal Government processes, stores, or transmits. It is imperative that individuals have the requisite security clearances and system access authorizations prior to gaining access to such information. Access authorizations are enforced by system access controls (see AC-3) and flow controls (see AC-4)."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-3.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Formal Indoctrination",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-3(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-03(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        },
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-3.2_smt",
+                            "name": "statement",
+                            "prose": "Verify that individuals accessing a system processing, storing, or transmitting types of classified information that require formal indoctrination, are formally indoctrinated for all the relevant types of information to which they have access on the system."
+                        },
+                        {
+                            "id": "ps-3.2_gdn",
+                            "name": "guidance",
+                            "prose": "Types of classified information that require formal indoctrination include Special Access Program (SAP), Restricted Data (RD), and Sensitive Compartmented Information (SCI)."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-3.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Information with Special Protective Measures",
+                    "parameters": [
+                        {
+                            "id": "ps-3.3_prm_1",
+                            "label": "organization-defined additional personnel screening criteria"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-3(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-03(03)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-3.3_smt",
+                            "name": "statement",
+                            "prose": "Verify that individuals accessing a system processing, storing, or transmitting information requiring special protection:",
+                            "parts": [
+                                {
+                                    "id": "ps-3.3_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Have valid access authorizations that are demonstrated by assigned official government duties; and"
+                                },
+                                {
+                                    "id": "ps-3.3_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Satisfy {{ ps-3.3_prm_1 }}."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ps-3.3_gdn",
+                            "name": "guidance",
+                            "prose": "Organizational information that requires special protection includes controlled unclassified information. Personnel security criteria include position sensitivity background screening requirements."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-3.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Citizenship Requirements",
+                    "parameters": [
+                        {
+                            "id": "ps-3.4_prm_1",
+                            "label": "organization-defined information types"
+                        },
+                        {
+                            "id": "ps-3.4_prm_2",
+                            "label": "organization-defined citizenship requirements"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-3(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-03(04)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-3.4_smt",
+                            "name": "statement",
+                            "prose": "Verify that individuals accessing a system processing, storing, or transmitting {{ ps-3.4_prm_1 }} meet {{ ps-3.4_prm_2 }}."
+                        },
+                        {
+                            "id": "ps-3.4_gdn",
+                            "name": "guidance",
+                            "prose": "None."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ps-4",
+            "class": "SP800-53",
+            "title": "Personnel Termination",
+            "parameters": [
+                {
+                    "id": "ps-4_prm_1",
+                    "label": "organization-defined time period"
+                },
+                {
+                    "id": "ps-4_prm_2",
+                    "label": "organization-defined information security topics"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-4"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-04"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ia-4",
+                    "rel": "related",
+                    "text": "IA-4"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-4_smt",
+                    "name": "statement",
+                    "prose": "Upon termination of individual employment:",
+                    "parts": [
+                        {
+                            "id": "ps-4_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Disable system access within {{ ps-4_prm_1 }};"
+                        },
+                        {
+                            "id": "ps-4_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Terminate or revoke any authenticators and credentials associated with the individual;"
+                        },
+                        {
+                            "id": "ps-4_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Conduct exit interviews that include a discussion of {{ ps-4_prm_2 }};"
+                        },
+                        {
+                            "id": "ps-4_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Retrieve all security-related organizational system-related property; and"
+                        },
+                        {
+                            "id": "ps-4_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Retain access to organizational information and systems formerly controlled by terminated individual."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-4_gdn",
+                    "name": "guidance",
+                    "prose": "System property includes hardware authentication tokens, system administration technical manuals, keys, identification cards, and building passes. Exit interviews ensure that terminated individuals understand the security constraints imposed by being former employees and that proper accountability is achieved for system-related property. Security topics at exit interviews include reminding individuals of nondisclosure agreements and potential limitations on future employment. Exit interviews may not always be possible for some individuals, including in cases related to the unavailability of supervisors, illnesses, or job abandonment. Exit interviews are important for individuals with security clearances. The timely execution of termination actions is essential for individuals who have been terminated for cause. In certain situations, organizations consider disabling the system accounts of individuals who are being terminated prior to the individuals being notified."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "ps-4.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Post-employment Requirements",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-4(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-04(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-4.1_smt",
+                            "name": "statement",
+                            "parts": [
+                                {
+                                    "id": "ps-4.1_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Notify terminated individuals of applicable, legally binding post-employment requirements for the protection of organizational information; and"
+                                },
+                                {
+                                    "id": "ps-4.1_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Require terminated individuals to sign an acknowledgment of post-employment requirements as part of the organizational termination process."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ps-4.1_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations consult with the Office of the General Counsel regarding matters of post-employment requirements on terminated individuals."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-4.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automated Actions",
+                    "parameters": [
+                        {
+                            "id": "ps-4.2_prm_1",
+                            "label": "organization-defined automated mechanisms"
+                        },
+                        {
+                            "id": "ps-4.2_prm_2",
+                            "select": {
+                                "how-many": "one or more",
+                                "alternatives": [
+                                    "notify {{ ps-4.2_prm_3 }} of individual termination actions",
+                                    "disable access to system resources"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ps-4.2_prm_3",
+                            "depends-on": "ps-4.2_prm_2",
+                            "label": "organization-defined personnel or roles"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-4(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-04(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-4.2_smt",
+                            "name": "statement",
+                            "prose": "Use {{ ps-4.2_prm_1 }} to {{ ps-4.2_prm_2 }}."
+                        },
+                        {
+                            "id": "ps-4.2_gdn",
+                            "name": "guidance",
+                            "prose": "In organizations with many employees, not all personnel who need to know about termination actions receive the appropriate notifications, or if such notifications are received, they may not occur in a timely manner. Automated mechanisms can be used to send automatic alerts or notifications to organizational personnel or roles when individuals are terminated. Such automatic alerts or notifications can be conveyed in a variety of ways, including via telephone, electronic mail, text message, or websites. Automated mechanisms can also be employed to quickly and thoroughly disable access to system resources after an employee is terminated."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ps-5",
+            "class": "SP800-53",
+            "title": "Personnel Transfer",
+            "parameters": [
+                {
+                    "id": "ps-5_prm_1",
+                    "label": "organization-defined transfer or reassignment actions"
+                },
+                {
+                    "id": "ps-5_prm_2",
+                    "label": "organization-defined time period following the formal transfer action"
+                },
+                {
+                    "id": "ps-5_prm_3",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "ps-5_prm_4",
+                    "label": "organization-defined time period"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-5"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-05"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ia-4",
+                    "rel": "related",
+                    "text": "IA-4"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#ps-4",
+                    "rel": "related",
+                    "text": "PS-4"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-5_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-5_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Review and confirm ongoing operational need for current logical and physical access authorizations to systems and facilities when individuals are reassigned or transferred to other positions within the organization;"
+                        },
+                        {
+                            "id": "ps-5_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Initiate {{ ps-5_prm_1 }} within {{ ps-5_prm_2 }};"
+                        },
+                        {
+                            "id": "ps-5_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Modify access authorization as needed to correspond with any changes in operational need due to reassignment or transfer; and"
+                        },
+                        {
+                            "id": "ps-5_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Notify {{ ps-5_prm_3 }} within {{ ps-5_prm_4 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-5_gdn",
+                    "name": "guidance",
+                    "prose": "Personnel transfer applies when reassignments or transfers of individuals are permanent or of such extended duration as to make the actions warranted. Organizations define actions appropriate for the types of reassignments or transfers, whether permanent or extended. Actions that may be required for personnel transfers or reassignments to other positions within organizations include returning old and issuing new keys, identification cards, and building passes; closing system accounts and establishing new accounts; changing system access authorizations (i.e., privileges); and providing for access to official records to which individuals had access at previous work locations and in previous system accounts."
+                }
+            ]
+        },
+        {
+            "id": "ps-6",
+            "class": "SP800-53",
+            "title": "Access Agreements",
+            "parameters": [
+                {
+                    "id": "ps-6_prm_1",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "ps-6_prm_2",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-6"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-06"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-17",
+                    "rel": "related",
+                    "text": "AC-17"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pl-4",
+                    "rel": "related",
+                    "text": "PL-4"
+                },
+                {
+                    "href": "#ps-2",
+                    "rel": "related",
+                    "text": "PS-2"
+                },
+                {
+                    "href": "#ps-3",
+                    "rel": "related",
+                    "text": "PS-3"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                },
+                {
+                    "href": "#ps-8",
+                    "rel": "related",
+                    "text": "PS-8"
+                },
+                {
+                    "href": "#sa-21",
+                    "rel": "related",
+                    "text": "SA-21"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-6_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-6_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop and document access agreements for organizational systems;"
+                        },
+                        {
+                            "id": "ps-6_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review and update the access agreements {{ ps-6_prm_1 }}; and"
+                        },
+                        {
+                            "id": "ps-6_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Verify that individuals requiring access to organizational information and systems:",
+                            "parts": [
+                                {
+                                    "id": "ps-6_smt.c.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Sign appropriate access agreements prior to being granted access; and"
+                                },
+                                {
+                                    "id": "ps-6_smt.c.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Re-sign access agreements to maintain access to organizational systems when access agreements have been updated or {{ ps-6_prm_2 }}."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-6_gdn",
+                    "name": "guidance",
+                    "prose": "Access agreements include nondisclosure agreements, acceptable use agreements, rules of behavior, and conflict-of-interest agreements. Signed access agreements include an acknowledgement that individuals have read, understand, and agree to abide by the constraints associated with organizational systems to which access is authorized. Organizations can use electronic signatures to acknowledge access agreements unless specifically prohibited by organizational policy."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "ps-6.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Information Requiring Special Protection",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-6(1)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-06(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ps-3",
+                            "rel": "incorporated-into",
+                            "text": "PS-3"
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-6.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Classified Information Requiring Special Protection",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-6(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-06(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-6.2_smt",
+                            "name": "statement",
+                            "prose": "Verify that access to classified information requiring special protection is granted only to individuals who:",
+                            "parts": [
+                                {
+                                    "id": "ps-6.2_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Have a valid access authorization that is demonstrated by assigned official government duties;"
+                                },
+                                {
+                                    "id": "ps-6.2_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Satisfy associated personnel security criteria; and"
+                                },
+                                {
+                                    "id": "ps-6.2_smt.c",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(c)"
+                                        }
+                                    ],
+                                    "prose": "Have read, understood, and signed a nondisclosure agreement."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ps-6.2_gdn",
+                            "name": "guidance",
+                            "prose": "Classified information that requires special protection includes collateral information, Special Access Program (SAP) information, and Sensitive Compartmented Information (SCI). Personnel security criteria reflect applicable laws, executive orders, directives, regulations, policies, standards, and guidelines."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-6.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Post-employment Requirements",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PS-6(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PS-06(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ps-4",
+                            "rel": "related",
+                            "text": "PS-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "ps-6.3_smt",
+                            "name": "statement",
+                            "parts": [
+                                {
+                                    "id": "ps-6.3_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Notify individuals of applicable, legally binding post-employment requirements for protection of organizational information; and"
+                                },
+                                {
+                                    "id": "ps-6.3_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Require individuals to sign an acknowledgment of these requirements, if applicable, as part of granting initial access to covered information."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ps-6.3_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations consult with the Office of the General Counsel regarding matters of post-employment requirements on terminated individuals."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ps-7",
+            "class": "SP800-53",
+            "title": "External Personnel Security",
+            "parameters": [
+                {
+                    "id": "ps-7_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "ps-7_prm_2",
+                    "label": "organization-defined time period"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-7"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-07"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#77faf0bc-c394-44ad-9154-bbac3b79c8ad",
+                    "rel": "reference",
+                    "text": "[SP 800-35]"
+                },
+                {
+                    "href": "#737513fa-6758-403f-831d-5ddab5e23cb3",
+                    "rel": "reference",
+                    "text": "[SP 800-63-3]"
+                },
+                {
+                    "href": "#at-2",
+                    "rel": "related",
+                    "text": "AT-2"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                },
+                {
+                    "href": "#ma-5",
+                    "rel": "related",
+                    "text": "MA-5"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#ps-2",
+                    "rel": "related",
+                    "text": "PS-2"
+                },
+                {
+                    "href": "#ps-3",
+                    "rel": "related",
+                    "text": "PS-3"
+                },
+                {
+                    "href": "#ps-4",
+                    "rel": "related",
+                    "text": "PS-4"
+                },
+                {
+                    "href": "#ps-5",
+                    "rel": "related",
+                    "text": "PS-5"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#sa-5",
+                    "rel": "related",
+                    "text": "SA-5"
+                },
+                {
+                    "href": "#sa-9",
+                    "rel": "related",
+                    "text": "SA-9"
+                },
+                {
+                    "href": "#sa-21",
+                    "rel": "related",
+                    "text": "SA-21"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-7_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-7_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Establish personnel security requirements, including security roles and responsibilities for external providers;"
+                        },
+                        {
+                            "id": "ps-7_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Require external providers to comply with personnel security policies and procedures established by the organization;"
+                        },
+                        {
+                            "id": "ps-7_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Document personnel security requirements;"
+                        },
+                        {
+                            "id": "ps-7_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Require external providers to notify {{ ps-7_prm_1 }} of any personnel transfers or terminations of external personnel who possess organizational credentials and/or badges, or who have system privileges within {{ ps-7_prm_2 }}; and"
+                        },
+                        {
+                            "id": "ps-7_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Monitor provider compliance with personnel security requirements."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-7_gdn",
+                    "name": "guidance",
+                    "prose": "External provider refers to organizations other than the organization operating or acquiring the system. External providers include service bureaus, contractors, and other organizations that provide system development, information technology services, testing or assessment services, outsourced applications, and network/security management. Organizations explicitly include personnel security requirements in acquisition-related documents. External providers may have personnel working at organizational facilities with credentials, badges, or system privileges issued by organizations. Notifications of external personnel changes ensure the appropriate termination of privileges and credentials. Organizations define the transfers and terminations deemed reportable by security-related characteristics that include functions, roles, and the nature of credentials or privileges associated with transferred or terminated individuals."
+                }
+            ]
+        },
+        {
+            "id": "ps-8",
+            "class": "SP800-53",
+            "title": "Personnel Sanctions",
+            "parameters": [
+                {
+                    "id": "ps-8_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "ps-8_prm_2",
+                    "label": "organization-defined time period"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-8"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-08"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-1",
+                    "rel": "related",
+                    "text": "AC-1"
+                },
+                {
+                    "href": "#at-1",
+                    "rel": "related",
+                    "text": "AT-1"
+                },
+                {
+                    "href": "#au-1",
+                    "rel": "related",
+                    "text": "AU-1"
+                },
+                {
+                    "href": "#ca-1",
+                    "rel": "related",
+                    "text": "CA-1"
+                },
+                {
+                    "href": "#cm-1",
+                    "rel": "related",
+                    "text": "CM-1"
+                },
+                {
+                    "href": "#cp-1",
+                    "rel": "related",
+                    "text": "CP-1"
+                },
+                {
+                    "href": "#ia-1",
+                    "rel": "related",
+                    "text": "IA-1"
+                },
+                {
+                    "href": "#ir-1",
+                    "rel": "related",
+                    "text": "IR-1"
+                },
+                {
+                    "href": "#ma-1",
+                    "rel": "related",
+                    "text": "MA-1"
+                },
+                {
+                    "href": "#mp-1",
+                    "rel": "related",
+                    "text": "MP-1"
+                },
+                {
+                    "href": "#pe-1",
+                    "rel": "related",
+                    "text": "PE-1"
+                },
+                {
+                    "href": "#pl-1",
+                    "rel": "related",
+                    "text": "PL-1"
+                },
+                {
+                    "href": "#pm-1",
+                    "rel": "related",
+                    "text": "PM-1"
+                },
+                {
+                    "href": "#ps-1",
+                    "rel": "related",
+                    "text": "PS-1"
+                },
+                {
+                    "href": "#pt-1",
+                    "rel": "related",
+                    "text": "PT-1"
+                },
+                {
+                    "href": "#ra-1",
+                    "rel": "related",
+                    "text": "RA-1"
+                },
+                {
+                    "href": "#sa-1",
+                    "rel": "related",
+                    "text": "SA-1"
+                },
+                {
+                    "href": "#sc-1",
+                    "rel": "related",
+                    "text": "SC-1"
+                },
+                {
+                    "href": "#si-1",
+                    "rel": "related",
+                    "text": "SI-1"
+                },
+                {
+                    "href": "#sr-1",
+                    "rel": "related",
+                    "text": "SR-1"
+                },
+                {
+                    "href": "#pl-4",
+                    "rel": "related",
+                    "text": "PL-4"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                },
+                {
+                    "href": "#pt-1",
+                    "rel": "related",
+                    "text": "PT-1"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-8_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "ps-8_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Employ a formal sanctions process for individuals failing to comply with established information security and privacy policies and procedures; and"
+                        },
+                        {
+                            "id": "ps-8_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Notify {{ ps-8_prm_1 }} within {{ ps-8_prm_2 }} when a formal employee sanctions process is initiated, identifying the individual sanctioned and the reason for the sanction."
+                        }
+                    ]
+                },
+                {
+                    "id": "ps-8_gdn",
+                    "name": "guidance",
+                    "prose": "Organizational sanctions reflect applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Sanctions processes are described in access agreements and can be included as part of general personnel policies for organizations and/or specified in security and privacy policies. Organizations consult with the Office of the General Counsel regarding matters of employee sanctions."
+                }
+            ]
+        },
+        {
+            "id": "ps-9",
+            "class": "SP800-53",
+            "title": "Position Descriptions",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PS-9"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PS-09"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#276bd50a-7e58-48e5-a405-8c8cb91d7a5f",
+                    "rel": "reference",
+                    "text": "[SP 800-181]"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "ps-9_smt",
+                    "name": "statement",
+                    "prose": "Incorporate security and privacy roles and responsibilities into organizational position descriptions."
+                },
+                {
+                    "id": "ps-9_gdn",
+                    "name": "guidance",
+                    "prose": "Specification of security and privacy roles in individual organizational position descriptions facilitates clarity in understanding the security or privacy responsibilities associated with the roles and the role-based security and privacy training requirements for the roles."
+                }
+            ]
+        }
+    ]
+}

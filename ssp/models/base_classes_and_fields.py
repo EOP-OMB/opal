@@ -42,9 +42,6 @@ class PrimitiveModel(models.Model):
     def natural_key(self):
         return self.uuid
 
-    def get_by_natural_key(self, uuid):
-        return self.get(uuid=uuid)
-
 
 class BasicModel(PrimitiveModel):
     title = models.CharField(max_length=255, blank=True, help_text='A title for display and navigation')
@@ -88,8 +85,7 @@ class link(PrimitiveModel):
     requires_authentication = models.BooleanField(default=False)
     rel = models.CharField(max_length=255, blank=True)
     mediaType = models.CharField(max_length=255, blank=True)
-    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True, related_name='link_set')
-    #Samira: Added related_name='links' to be used in creating the serializers.
+    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.text

@@ -1,0 +1,38 @@
+{
+    "id": "cp-4.5",
+    "class": "SP800-53-enhancement",
+    "title": "Self-challenge",
+    "parameters": [
+        {
+            "id": "cp-4.5_prm_1",
+            "label": "organization-defined mechanisms"
+        },
+        {
+            "id": "cp-4.5_prm_2",
+            "label": "organization-defined system or system component"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-4(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-04(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-4.5_smt",
+            "name": "statement",
+            "prose": "Employ {{ cp-4.5_prm_1 }} to {{ cp-4.5_prm_2 }} to disrupt and adversely affect the system or system component."
+        },
+        {
+            "id": "cp-4.5_gdn",
+            "name": "guidance",
+            "prose": "Often, the best method of assessing system resilience is to disrupt the system in some manner. The mechanisms used by the organization could disrupt system functions or system services in many ways, including terminating or disabling critical system components, changing the configuration of system components, degrading critical functionality (e.g., restricting network bandwidth), or altering privileges. Automated, on-going, and simulated cyber-attacks and service disruptions can reveal unexpected functional dependencies and help the organization determine its ability to ensure resilience in the face of an actual cyber-attack."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

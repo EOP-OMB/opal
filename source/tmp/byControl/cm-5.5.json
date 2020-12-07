@@ -1,0 +1,64 @@
+{
+    "id": "cm-5.5",
+    "class": "SP800-53-enhancement",
+    "title": "Privilege Limitation for Production and Operation",
+    "parameters": [
+        {
+            "id": "cm-5.5_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-5(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-05(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-2",
+            "rel": "related",
+            "text": "AC-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-5.5_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cm-5.5_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Limit privileges to change system components and system-related information within a production or operational environment; and"
+                },
+                {
+                    "id": "cm-5.5_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Review and reevaluate privileges {{ cm-5.5_prm_1 }}."
+                }
+            ]
+        },
+        {
+            "id": "cm-5.5_gdn",
+            "name": "guidance",
+            "prose": "In many organizations, systems support multiple mission and business functions. Limiting privileges to change system components with respect to operational systems is necessary because changes to a system component may have far-reaching effects on mission and business processes supported by the system. The relationships between systems and mission/business processes are, in some cases, unknown to developers. System-related information includes operational procedures."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

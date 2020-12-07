@@ -1,0 +1,59 @@
+{
+    "id": "ac-7.2",
+    "class": "SP800-53-enhancement",
+    "title": "Purge or Wipe Mobile Device",
+    "parameters": [
+        {
+            "id": "ac-7.2_prm_1",
+            "label": "organization-defined mobile devices"
+        },
+        {
+            "id": "ac-7.2_prm_2",
+            "label": "organization-defined purging or wiping requirements and techniques"
+        },
+        {
+            "id": "ac-7.2_prm_3",
+            "label": "organization-defined number"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-7(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-07(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-19",
+            "rel": "related",
+            "text": "AC-19"
+        },
+        {
+            "href": "#mp-5",
+            "rel": "related",
+            "text": "MP-5"
+        },
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-7.2_smt",
+            "name": "statement",
+            "prose": "Purge or wipe information from {{ ac-7.2_prm_1 }} based on {{ ac-7.2_prm_2 }} after {{ ac-7.2_prm_3 }} consecutive, unsuccessful device logon attempts."
+        },
+        {
+            "id": "ac-7.2_gdn",
+            "name": "guidance",
+            "prose": "A mobile device is a computing device that has a small form factor such that it can be carried by a single individual; is designed to operate without a physical connection; possesses local, non-removable or removable data storage; and includes a self-contained power source. Purging or wiping the device applies only to mobile devices for which the organization-defined number of unsuccessful logons occurs. The logon is to the mobile device, not to any one account on the device. Successful logons to accounts on mobile devices reset the unsuccessful logon count to zero. Purging or wiping may be unnecessary if the information on the device is protected with sufficiently strong encryption mechanisms."
+        }
+    ],
+    "group_title": "Access Control"
+}

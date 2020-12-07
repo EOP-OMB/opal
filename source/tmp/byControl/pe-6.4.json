@@ -1,0 +1,34 @@
+{
+    "id": "pe-6.4",
+    "class": "SP800-53-enhancement",
+    "title": "Monitoring Physical Access to Systems",
+    "parameters": [
+        {
+            "id": "pe-6.4_prm_1",
+            "label": "organization-defined physical spaces containing one or more components of the system"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-6(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-06(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-6.4_smt",
+            "name": "statement",
+            "prose": "Monitor physical access to the system in addition to the physical access monitoring of the facility at {{ pe-6.4_prm_1 }}."
+        },
+        {
+            "id": "pe-6.4_gdn",
+            "name": "guidance",
+            "prose": "Monitoring physical access to systems provides additional monitoring for those areas within facilities where there is a concentration of system components, including server rooms, media storage areas, and communications centers. Physical access monitoring can be coordinated with intrusion detection systems and system monitoring capabilities to provide comprehensive and integrated threat coverage for the organization."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

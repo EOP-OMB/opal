@@ -1,0 +1,35 @@
+{
+    "id": "ma-3.1",
+    "class": "SP800-53-enhancement",
+    "title": "Inspect Tools",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-3(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-03(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-3.1_smt",
+            "name": "statement",
+            "prose": "Inspect the maintenance tools used by maintenance personnel for improper or unauthorized modifications."
+        },
+        {
+            "id": "ma-3.1_gdn",
+            "name": "guidance",
+            "prose": "Maintenance tools can be directly brought into a facility by maintenance personnel or downloaded from a vendor\u2019s website. If, upon inspection of the maintenance tools, organizations determine that the tools have been modified in an improper manner or the tools contain malicious code, the incident is handled consistent with organizational policies and procedures for incident handling."
+        }
+    ],
+    "group_title": "Maintenance"
+}

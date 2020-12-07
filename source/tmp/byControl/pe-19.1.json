@@ -1,0 +1,28 @@
+{
+    "id": "pe-19.1",
+    "class": "SP800-53-enhancement",
+    "title": "National Emissions and Tempest Policies and Procedures",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-19(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-19(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-19.1_smt",
+            "name": "statement",
+            "prose": "Protect system components, associated data communications, and networks in accordance with national Emissions Security policies and procedures based on the security category or classification of the information."
+        },
+        {
+            "id": "pe-19.1_gdn",
+            "name": "guidance",
+            "prose": "Emissions Security (EMSEC) policies include the former TEMPEST policies."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

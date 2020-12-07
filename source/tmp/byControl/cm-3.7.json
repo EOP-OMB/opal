@@ -1,0 +1,55 @@
+{
+    "id": "cm-3.7",
+    "class": "SP800-53-enhancement",
+    "title": "Review System Changes",
+    "parameters": [
+        {
+            "id": "cm-3.7_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "cm-3.7_prm_2",
+            "label": "organization-defined circumstances"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-3(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-03(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-7",
+            "rel": "related",
+            "text": "AU-7"
+        },
+        {
+            "href": "#cm-3",
+            "rel": "related",
+            "text": "CM-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-3.7_smt",
+            "name": "statement",
+            "prose": "Review changes to the system {{ cm-3.7_prm_1 }} or when {{ cm-3.7_prm_2 }} to determine whether unauthorized changes have occurred."
+        },
+        {
+            "id": "cm-3.7_gdn",
+            "name": "guidance",
+            "prose": "Indications that warrant a review of changes to the system and the specific circumstances justifying such reviews may be obtained from activities carried out by organizations during the configuration change process or continuous monitoring process."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

@@ -1,0 +1,40 @@
+{
+    "id": "si-19.6",
+    "class": "SP800-53-enhancement",
+    "title": "Differential Privacy",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-19(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-19(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-19.6_smt",
+            "name": "statement",
+            "prose": "Prevent disclosure of personally identifiable information by adding non-deterministic noise to the results of mathematical operations before the results are reported."
+        },
+        {
+            "id": "si-19.6_gdn",
+            "name": "guidance",
+            "prose": "The mathematical definition for differential privacy holds that the result of a dataset analysis should be approximately the same before and after the addition or removal of a single data record (which is assumed to be the data from a single individual). In its most basic form, differential privacy applies only to online query systems. However, it can also be used to produce machine-learning statistical classifiers and synthetic data. Differential privacy comes at the cost of decreased accuracy of results, forcing organizations to quantify the trade-off between privacy protection and the overall accuracy, usefulness, and utility of the de-identified dataset. Non-deterministic noise can include adding small, random values to the results of mathematical operations in dataset analysis."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

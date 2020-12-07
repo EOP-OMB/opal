@@ -1,0 +1,87 @@
+{
+    "id": "ma-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Prevent Unauthorized Removal",
+    "parameters": [
+        {
+            "id": "ma-3.3_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-03(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-3.3_smt",
+            "name": "statement",
+            "prose": "Prevent the removal of maintenance equipment containing organizational information by:",
+            "parts": [
+                {
+                    "id": "ma-3.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Verifying that there is no organizational information contained on the equipment;"
+                },
+                {
+                    "id": "ma-3.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Sanitizing or destroying the equipment;"
+                },
+                {
+                    "id": "ma-3.3_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Retaining the equipment within the facility; or"
+                },
+                {
+                    "id": "ma-3.3_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(d)"
+                        }
+                    ],
+                    "prose": "Obtaining an exemption from {{ ma-3.3_prm_1 }} explicitly authorizing removal of the equipment from the facility."
+                }
+            ]
+        },
+        {
+            "id": "ma-3.3_gdn",
+            "name": "guidance",
+            "prose": "Organizational information includes all information owned by organizations and any information provided to organizations for which the organizations serve as information stewards."
+        }
+    ],
+    "group_title": "Maintenance"
+}

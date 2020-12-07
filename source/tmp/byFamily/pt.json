@@ -1,0 +1,1727 @@
+{
+    "id": "pt",
+    "class": "family",
+    "title": "Personally Identifiable Information Processing and Transparency",
+    "controls": [
+        {
+            "id": "pt-1",
+            "class": "SP800-53",
+            "title": "Policy and Procedures",
+            "parameters": [
+                {
+                    "id": "pt-1_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "pt-1_prm_2",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "organization-level",
+                            "mission/business process-level",
+                            "system-level"
+                        ]
+                    }
+                },
+                {
+                    "id": "pt-1_prm_3",
+                    "label": "organization-defined official"
+                },
+                {
+                    "id": "pt-1_prm_4",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "pt-1_prm_5",
+                    "label": "organization-defined events"
+                },
+                {
+                    "id": "pt-1_prm_6",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "pt-1_prm_7",
+                    "label": "organization-defined events"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-1"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-01"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-1_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pt-1_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop, document, and disseminate to {{ pt-1_prm_1 }}:",
+                            "parts": [
+                                {
+                                    "id": "pt-1_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "\n                     {{ pt-1_prm_2 }} personally identifiable information processing and transparency policy that:",
+                                    "parts": [
+                                        {
+                                            "id": "pt-1_smt.a.1.a",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(a)"
+                                                }
+                                            ],
+                                            "prose": "Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and"
+                                        },
+                                        {
+                                            "id": "pt-1_smt.a.1.b",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(b)"
+                                                }
+                                            ],
+                                            "prose": "Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "pt-1_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures to facilitate the implementation of the personally identifiable information processing and transparency policy and the associated personally identifiable information processing and transparency controls;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pt-1_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Designate an {{ pt-1_prm_3 }} to manage the development, documentation, and dissemination of the personally identifiable information processing and transparency policy and procedures; and"
+                        },
+                        {
+                            "id": "pt-1_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update the current personally identifiable information processing and transparency:",
+                            "parts": [
+                                {
+                                    "id": "pt-1_smt.c.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Policy {{ pt-1_prm_4 }} and following {{ pt-1_prm_5 }}; and"
+                                },
+                                {
+                                    "id": "pt-1_smt.c.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures {{ pt-1_prm_6 }} and following {{ pt-1_prm_7 }}."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-1_gdn",
+                    "name": "guidance",
+                    "prose": "Personally identifiable information processing and transparency policy and procedures address the controls in the PT family that are implemented within systems and organizations. The risk management strategy is an important factor in establishing such policies and procedures. Policies and procedures contribute to security and privacy assurance. Therefore, it is important that security and privacy programs collaborate on the development of personally identifiable information processing and transparency policy and procedures. Security and privacy program policies and procedures at the organization level are preferable, in general, and may obviate the need for mission- or system-specific policies and procedures. The policy can be included as part of the general security and privacy policy or be represented by multiple policies that reflect the complex nature of organizations. Procedures can be established for security and privacy programs, for mission or business processes, and for systems, if needed. Procedures describe how the policies or controls are implemented and can be directed at the individual or role that is the object of the procedure. Procedures can be documented in system security and privacy plans or in one or more separate documents. Events that may precipitate an update to personally identifiable information processing and transparency policy and procedures include assessment or audit findings, privacy breaches, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Simply restating controls does not constitute an organizational policy or procedure."
+                }
+            ]
+        },
+        {
+            "id": "pt-2",
+            "class": "SP800-53",
+            "title": "Authority to Process Personally Identifiable Information",
+            "parameters": [
+                {
+                    "id": "pt-2_prm_1",
+                    "label": "organization-defined authority"
+                },
+                {
+                    "id": "pt-2_prm_2",
+                    "label": "organization-defined processing"
+                },
+                {
+                    "id": "pt-2_prm_3",
+                    "label": "organization-defined processing"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-2"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-02"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130, Appendix II]"
+                },
+                {
+                    "href": "#a2590922-82f3-4277-83c0-ca5bee06dba4",
+                    "rel": "reference",
+                    "text": "[IR 8112]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#cm-13",
+                    "rel": "related",
+                    "text": "CM-13"
+                },
+                {
+                    "href": "#ir-9",
+                    "rel": "related",
+                    "text": "IR-9"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#pm-24",
+                    "rel": "related",
+                    "text": "PM-24"
+                },
+                {
+                    "href": "#pt-1",
+                    "rel": "related",
+                    "text": "PT-1"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#pt-5",
+                    "rel": "related",
+                    "text": "PT-5"
+                },
+                {
+                    "href": "#pt-6",
+                    "rel": "related",
+                    "text": "PT-6"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#ra-8",
+                    "rel": "related",
+                    "text": "RA-8"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                },
+                {
+                    "href": "#si-18",
+                    "rel": "related",
+                    "text": "SI-18"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-2_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pt-2_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Determine and document the {{ pt-2_prm_1 }} that permits the {{ pt-2_prm_2 }} of personally identifiable information; and"
+                        },
+                        {
+                            "id": "pt-2_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Restrict the {{ pt-2_prm_3 }} of personally identifiable information to only that which is authorized."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-2_gdn",
+                    "name": "guidance",
+                    "prose": "The processing of personally identifiable information is an operation or set of operations that the information system or organization performs with respect to personally identifiable information across the information life cycle. Processing includes but is not limited to creation, collection, use, processing, storage, maintenance, dissemination, disclosure, and disposal. Processing operations also include logging, generation, and transformation, as well as analysis techniques, such as data mining.\nOrganizations may be subject to laws, executive orders, directives, regulations, or policies that establish the organization\u2019s authority and thereby limit certain types of processing of personally identifiable information or establish other requirements related to the processing. Organizational personnel consult with the senior agency official for privacy and legal counsel regarding such authority, particularly if the organization is subject to multiple jurisdictions or sources of authority. For organizations whose processing is not determined according to legal authorities, the organization\u2019s policies and determinations govern how they process personally identifiable information. While processing of personally identifiable information may be legally permissible, privacy risks may still arise. Privacy risk assessments can identify the privacy risks associated with the authorized processing of personally identifiable information and support solutions to manage such risks.\nOrganizations consider applicable requirements and organizational policies to determine how to document this authority. For federal agencies, the authority to process personally identifiable information is documented in privacy policies and notices, system of records notices, privacy impact assessments, [PRIVACT] statements, computer matching agreements and notices, contracts, information sharing agreements, memoranda of understanding, and other documentation.\nOrganizations take steps to ensure that personally identifiable information is only processed for authorized purposes, including training organizational personnel on the authorized processing of personally identifiable information and monitoring and auditing organizational use of personally identifiable information."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-2.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Data Tagging",
+                    "parameters": [
+                        {
+                            "id": "pt-2.1_prm_1",
+                            "label": "organization-defined permissible processing"
+                        },
+                        {
+                            "id": "pt-2.1_prm_2",
+                            "label": "organization-defined elements of personally identifiable information"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-2(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-02(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-16",
+                            "rel": "related",
+                            "text": "AC-16"
+                        },
+                        {
+                            "href": "#ca-6",
+                            "rel": "related",
+                            "text": "CA-6"
+                        },
+                        {
+                            "href": "#cm-12",
+                            "rel": "related",
+                            "text": "CM-12"
+                        },
+                        {
+                            "href": "#pm-5",
+                            "rel": "related",
+                            "text": "PM-5"
+                        },
+                        {
+                            "href": "#pm-22",
+                            "rel": "related",
+                            "text": "PM-22"
+                        },
+                        {
+                            "href": "#pt-4",
+                            "rel": "related",
+                            "text": "PT-4"
+                        },
+                        {
+                            "href": "#sc-16",
+                            "rel": "related",
+                            "text": "SC-16"
+                        },
+                        {
+                            "href": "#sc-43",
+                            "rel": "related",
+                            "text": "SC-43"
+                        },
+                        {
+                            "href": "#si-10",
+                            "rel": "related",
+                            "text": "SI-10"
+                        },
+                        {
+                            "href": "#si-15",
+                            "rel": "related",
+                            "text": "SI-15"
+                        },
+                        {
+                            "href": "#si-19",
+                            "rel": "related",
+                            "text": "SI-19"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-2.1_smt",
+                            "name": "statement",
+                            "prose": "Attach data tags containing {{ pt-2.1_prm_1 }} to {{ pt-2.1_prm_2 }}."
+                        },
+                        {
+                            "id": "pt-2.1_gdn",
+                            "name": "guidance",
+                            "prose": "Data tags support the tracking and enforcement of authorized processing by conveying the types of processing that are authorized along with the relevant elements of personally identifiable information throughout the system. Data tags may also support the use of automated tools."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-2.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automation",
+                    "parameters": [
+                        {
+                            "id": "pt-2.2_prm_1",
+                            "label": "organization-defined automated mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-2(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-02(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ca-6",
+                            "rel": "related",
+                            "text": "CA-6"
+                        },
+                        {
+                            "href": "#cm-12",
+                            "rel": "related",
+                            "text": "CM-12"
+                        },
+                        {
+                            "href": "#pm-5",
+                            "rel": "related",
+                            "text": "PM-5"
+                        },
+                        {
+                            "href": "#pm-22",
+                            "rel": "related",
+                            "text": "PM-22"
+                        },
+                        {
+                            "href": "#pt-4",
+                            "rel": "related",
+                            "text": "PT-4"
+                        },
+                        {
+                            "href": "#sc-16",
+                            "rel": "related",
+                            "text": "SC-16"
+                        },
+                        {
+                            "href": "#sc-43",
+                            "rel": "related",
+                            "text": "SC-43"
+                        },
+                        {
+                            "href": "#si-10",
+                            "rel": "related",
+                            "text": "SI-10"
+                        },
+                        {
+                            "href": "#si-15",
+                            "rel": "related",
+                            "text": "SI-15"
+                        },
+                        {
+                            "href": "#si-19",
+                            "rel": "related",
+                            "text": "SI-19"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-2.2_smt",
+                            "name": "statement",
+                            "prose": "Manage enforcement of the authorized processing of personally identifiable information using {{ pt-2.2_prm_1 }}."
+                        },
+                        {
+                            "id": "pt-2.2_gdn",
+                            "name": "guidance",
+                            "prose": "Automated mechanisms augment verification that only authorized processing is occurring."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-3",
+            "class": "SP800-53",
+            "title": "Personally Identifiable Information Processing Purposes",
+            "parameters": [
+                {
+                    "id": "pt-3_prm_1",
+                    "label": "Assignment organization-defined purpose(s)"
+                },
+                {
+                    "id": "pt-3_prm_2",
+                    "label": "organization-defined processing"
+                },
+                {
+                    "id": "pt-3_prm_3",
+                    "label": "organization-defined mechanisms"
+                },
+                {
+                    "id": "pt-3_prm_4",
+                    "label": "organization-defined requirements"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-3"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-03"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130, Appendix II]"
+                },
+                {
+                    "href": "#a2590922-82f3-4277-83c0-ca5bee06dba4",
+                    "rel": "reference",
+                    "text": "[IR 8112]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                },
+                {
+                    "href": "#cm-13",
+                    "rel": "related",
+                    "text": "CM-13"
+                },
+                {
+                    "href": "#ir-9",
+                    "rel": "related",
+                    "text": "IR-9"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#pm-25",
+                    "rel": "related",
+                    "text": "PM-25"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-5",
+                    "rel": "related",
+                    "text": "PT-5"
+                },
+                {
+                    "href": "#pt-6",
+                    "rel": "related",
+                    "text": "PT-6"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#ra-8",
+                    "rel": "related",
+                    "text": "RA-8"
+                },
+                {
+                    "href": "#sc-43",
+                    "rel": "related",
+                    "text": "SC-43"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                },
+                {
+                    "href": "#si-18",
+                    "rel": "related",
+                    "text": "SI-18"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-3_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pt-3_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Identify and document the {{ pt-3_prm_1 }} for processing personally identifiable information;"
+                        },
+                        {
+                            "id": "pt-3_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Describe the purpose(s) in the public privacy notices and policies of the organization;"
+                        },
+                        {
+                            "id": "pt-3_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Restrict the {{ pt-3_prm_2 }} of personally identifiable information to only that which is compatible with the identified purpose(s); and"
+                        },
+                        {
+                            "id": "pt-3_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Monitor changes in processing personally identifiable information and implement {{ pt-3_prm_3 }} to ensure that any changes are made in accordance with {{ pt-3_prm_4 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-3_gdn",
+                    "name": "guidance",
+                    "prose": "Identifying and documenting the purpose for processing provides organizations with a basis for understanding why personally identifiable information may be processed. The term \u201cprocess\u201d includes every step of the information life cycle, including creation, collection, use, processing, storage, maintenance, dissemination, disclosure, and disposal. Identifying and documenting the purpose of processing is a prerequisite to enabling owners and operators of the system and individuals whose information is processed by the system to understand how the information will be processed. This enables individuals to make informed decisions about their engagement with information systems and organizations and to manage their privacy interests. Once the specific processing purpose has been identified, the purpose is described in the organization\u2019s privacy notices, policies, and any related privacy compliance documentation, including privacy impact assessments, system of records notices, [PRIVACT] statements, computer matching notices, and other applicable Federal Register notices.\nOrganizations take steps to help ensure that personally identifiable information is processed only for identified purposes, including training organizational personnel and monitoring and auditing organizational processing of personally identifiable information.\nOrganizations monitor for changes in personally identifiable information processing. Organizational personnel consult with the senior agency official for privacy and legal counsel to ensure that any new purposes that arise from changes in processing are compatible with the purpose for which the information was collected, or if the new purpose is not compatible, implement mechanisms in accordance with defined requirements to allow for the new processing, if appropriate. Mechanisms may include obtaining consent from individuals, revising privacy policies, or other measures to manage privacy risks that arise from changes in personally identifiable information processing purposes."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-3.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Data Tagging",
+                    "parameters": [
+                        {
+                            "id": "pt-3.1_prm_1",
+                            "label": "organization-defined elements of personally identifiable information"
+                        },
+                        {
+                            "id": "pt-3.1_prm_2",
+                            "label": "organization-defined processing purposes"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-3(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-03(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ca-6",
+                            "rel": "related",
+                            "text": "CA-6"
+                        },
+                        {
+                            "href": "#cm-12",
+                            "rel": "related",
+                            "text": "CM-12"
+                        },
+                        {
+                            "href": "#pm-5",
+                            "rel": "related",
+                            "text": "PM-5"
+                        },
+                        {
+                            "href": "#pm-22",
+                            "rel": "related",
+                            "text": "PM-22"
+                        },
+                        {
+                            "href": "#sc-16",
+                            "rel": "related",
+                            "text": "SC-16"
+                        },
+                        {
+                            "href": "#sc-43",
+                            "rel": "related",
+                            "text": "SC-43"
+                        },
+                        {
+                            "href": "#si-10",
+                            "rel": "related",
+                            "text": "SI-10"
+                        },
+                        {
+                            "href": "#si-15",
+                            "rel": "related",
+                            "text": "SI-15"
+                        },
+                        {
+                            "href": "#si-19",
+                            "rel": "related",
+                            "text": "SI-19"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-3.1_smt",
+                            "name": "statement",
+                            "prose": "Attach data tags containing the following purposes to {{ pt-3.1_prm_1 }}: {{ pt-3.1_prm_2 }}."
+                        },
+                        {
+                            "id": "pt-3.1_gdn",
+                            "name": "guidance",
+                            "prose": "Data tags support the tracking of processing purposes by conveying the purposes along with the relevant elements of personally identifiable information throughout the system. By conveying the processing purposes in a data tag along with the personally identifiable information as the information transits a system, a system owner or operator can identify whether a change in processing would be compatible with the identified and documented purposes. Data tags may also support the use of automated tools."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-3.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automation",
+                    "parameters": [
+                        {
+                            "id": "pt-3.2_prm_1",
+                            "label": "organization-defined automated mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-3(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-03(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ca-6",
+                            "rel": "related",
+                            "text": "CA-6"
+                        },
+                        {
+                            "href": "#cm-12",
+                            "rel": "related",
+                            "text": "CM-12"
+                        },
+                        {
+                            "href": "#pm-5",
+                            "rel": "related",
+                            "text": "PM-5"
+                        },
+                        {
+                            "href": "#pm-22",
+                            "rel": "related",
+                            "text": "PM-22"
+                        },
+                        {
+                            "href": "#sc-16",
+                            "rel": "related",
+                            "text": "SC-16"
+                        },
+                        {
+                            "href": "#sc-43",
+                            "rel": "related",
+                            "text": "SC-43"
+                        },
+                        {
+                            "href": "#si-10",
+                            "rel": "related",
+                            "text": "SI-10"
+                        },
+                        {
+                            "href": "#si-15",
+                            "rel": "related",
+                            "text": "SI-15"
+                        },
+                        {
+                            "href": "#si-19",
+                            "rel": "related",
+                            "text": "SI-19"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-3.2_smt",
+                            "name": "statement",
+                            "prose": "Track processing purposes of personally identifiable information using {{ pt-3.2_prm_1 }}."
+                        },
+                        {
+                            "id": "pt-3.2_gdn",
+                            "name": "guidance",
+                            "prose": "Automated mechanisms augment tracking of the processing purposes."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-4",
+            "class": "SP800-53",
+            "title": "Consent",
+            "parameters": [
+                {
+                    "id": "pt-4_prm_1",
+                    "label": "organization-defined tools or mechanisms"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-4"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-04"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#737513fa-6758-403f-831d-5ddab5e23cb3",
+                    "rel": "reference",
+                    "text": "[SP 800-63-3]"
+                },
+                {
+                    "href": "#ac-16",
+                    "rel": "related",
+                    "text": "AC-16"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-5",
+                    "rel": "related",
+                    "text": "PT-5"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-4_smt",
+                    "name": "statement",
+                    "prose": "Implement {{ pt-4_prm_1 }} for individuals to consent to the processing of their personally identifiable information prior to its collection that facilitate individuals\u2019 informed decision-making."
+                },
+                {
+                    "id": "pt-4_gdn",
+                    "name": "guidance",
+                    "prose": "Consent allows individuals to participate in making decisions about the processing of their information and transfers some of the risk that arises from the processing of personally identifiable information from the organization to an individual. Consent may be required by applicable laws, executive orders, directives, regulations, policies, standards, or guidelines. Otherwise, when selecting consent as a control, organizations consider whether individuals can be reasonably expected to understand and accept the privacy risks that arise from their authorization. Organizations consider whether other controls may more effectively mitigate privacy risk either alone or in conjunction with consent. Organizations also consider any demographic or contextual factors that may influence the understanding or behavior of individuals with respect to the processing carried out by the system or organization. When soliciting consent from individuals, organizations consider the appropriate mechanism for obtaining consent, including the type of consent (e.g., opt-in, opt-out), how to properly authenticate and identity proof individuals and how to obtain consent through electronic means. In addition, organizations consider providing a mechanism for individuals to revoke consent once it has been provided, as appropriate. Finally, organizations consider usability factors to help individuals understand the risks being accepted when providing consent, including the use of plain language and avoiding technical jargon."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-4.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Tailored Consent",
+                    "parameters": [
+                        {
+                            "id": "pt-4.1_prm_1",
+                            "label": "organization-defined mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-4(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-04(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pt-2",
+                            "rel": "related",
+                            "text": "PT-2"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-4.1_smt",
+                            "name": "statement",
+                            "prose": "Provide {{ pt-4.1_prm_1 }} to allow individuals to tailor processing permissions to selected elements of personally identifiable information."
+                        },
+                        {
+                            "id": "pt-4.1_gdn",
+                            "name": "guidance",
+                            "prose": "While some processing may be necessary for the basic functionality of the product or service, other processing may not. In these circumstances, organizations allow individuals to select how specific personally identifiable information elements may be processed. More tailored consent may help reduce privacy risk, increase individual satisfaction, and avoid adverse behaviors, such as abandonment of the product or service."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-4.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Just-in-time Consent",
+                    "parameters": [
+                        {
+                            "id": "pt-4.2_prm_1",
+                            "label": "organization-defined consent mechanisms"
+                        },
+                        {
+                            "id": "pt-4.2_prm_2",
+                            "label": "organization-defined frequency"
+                        },
+                        {
+                            "id": "pt-4.2_prm_3",
+                            "label": "organization-defined personally identifiable information processing"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-4(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-04(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pt-2",
+                            "rel": "related",
+                            "text": "PT-2"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-4.2_smt",
+                            "name": "statement",
+                            "prose": "Present {{ pt-4.2_prm_1 }} to individuals at {{ pt-4.2_prm_2 }} and in conjunction with {{ pt-4.2_prm_3 }}."
+                        },
+                        {
+                            "id": "pt-4.2_gdn",
+                            "name": "guidance",
+                            "prose": "Just-in-time consent enables individuals to participate in how their personally identifiable information is being processed at the time or in conjunction with specific types of data processing when such participation may be most useful to the individual. Individual assumptions about how personally identifiable information is being processed might not be accurate or reliable if time has passed since the individual last gave consent or the type of processing creates significant privacy risk. Organizations use discretion to determine when to use just-in-time consent and may use supporting information on demographics, focus groups, or surveys to learn more about individuals\u2019 privacy interests and concerns."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-4.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Revocation",
+                    "parameters": [
+                        {
+                            "id": "pt-4.3_prm_1",
+                            "label": "organization-defined tools or mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-4(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-04(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pt-2",
+                            "rel": "related",
+                            "text": "PT-2"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-4.3_smt",
+                            "name": "statement",
+                            "prose": "Implement {{ pt-4.3_prm_1 }} for individuals to revoke consent to the processing of their personally identifiable information."
+                        },
+                        {
+                            "id": "pt-4.3_gdn",
+                            "name": "guidance",
+                            "prose": "Revocation of consent enables individuals to exercise control over their initial consent decision when circumstances change. Organizations consider usability factors in enabling easy-to-use revocation capabilities."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-5",
+            "class": "SP800-53",
+            "title": "Privacy Notice",
+            "parameters": [
+                {
+                    "id": "pt-5_prm_1",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "pt-5_prm_2",
+                    "label": "organization-defined information"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-5"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-05"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#pm-20",
+                    "rel": "related",
+                    "text": "PM-20"
+                },
+                {
+                    "href": "#pm-22",
+                    "rel": "related",
+                    "text": "PM-22"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#pt-4",
+                    "rel": "related",
+                    "text": "PT-4"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#si-18",
+                    "rel": "related",
+                    "text": "SI-18"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-5_smt",
+                    "name": "statement",
+                    "prose": "Provide notice to individuals about the processing of personally identifiable information that:",
+                    "parts": [
+                        {
+                            "id": "pt-5_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Is available to individuals upon first interacting with an organization, and subsequently at {{ pt-5_prm_1 }};"
+                        },
+                        {
+                            "id": "pt-5_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Is clear and easy-to-understand, expressing information about personally identifiable information processing in plain language;"
+                        },
+                        {
+                            "id": "pt-5_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Identifies the authority that authorizes the processing of personally identifiable information;"
+                        },
+                        {
+                            "id": "pt-5_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Identifies the purposes for which personally identifiable information is to be processed; and"
+                        },
+                        {
+                            "id": "pt-5_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Includes {{ pt-5_prm_2 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-5_gdn",
+                    "name": "guidance",
+                    "prose": "Privacy notices help inform individuals about how their personally identifiable information is being processed by the system or organization. Organizations use privacy notices to inform individuals about how, under what authority, and for what purpose their personally identifiable information is processed, as well as other information such as choices individuals might have with respect to that processing and other parties with whom information is shared. Laws, executive orders, directives, regulations, or policies may require that privacy notices include specific elements or be provided in specific formats. Federal agency personnel consult with the senior agency official for privacy and legal counsel regarding when and where to provide privacy notices, as well as elements to include in privacy notices and required formats. In circumstances where laws or government-wide policies do not require privacy notices, organizational policies and determinations may require privacy notices and may serve as a source of the elements to include in privacy notices.\nPrivacy risk assessments identify the privacy risks associated with the processing of personally identifiable information and may help organizations determine appropriate elements to include in a privacy notice to manage such risks. To help individuals understand how their information is being processed, organizations write materials in plain language and avoid technical jargon."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-5.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Just-in-time Notice",
+                    "parameters": [
+                        {
+                            "id": "pt-5.1_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-5(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-05(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pm-21",
+                            "rel": "related",
+                            "text": "PM-21"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-5.1_smt",
+                            "name": "statement",
+                            "prose": "Present notice of personally identifiable information processing to individuals at a time and location where the individual provides personally identifiable information or in conjunction with a data action, or {{ pt-5.1_prm_1 }}."
+                        },
+                        {
+                            "id": "pt-5.1_gdn",
+                            "name": "guidance",
+                            "prose": "Just-in-time notices inform individuals of how organizations process their personally identifiable information at a time when such notices may be most useful to the individuals. Individual assumptions about how personally identifiable information will be processed might not be accurate or reliable if time has passed since the organization last presented notice or the circumstances under which the individual was last provided notice have changed. A just-in-time notice can explain data actions that organizations have identified as potentially giving rise to greater privacy risk for individuals. Organizations can use a just-in-time notice to update or remind individuals about specific data actions as they occur or highlight specific changes that occurred since last presenting notice. A just-in-time notice can be used in conjunction with just-in-time consent to explain what will occur if consent is declined. Organizations use discretion to determine when to use a just-in-time notice and may use supporting information on user demographics, focus groups, or surveys to learn about users\u2019 privacy interests and concerns."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-5.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Privacy Act Statements",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-5(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-05(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pt-6",
+                            "rel": "related",
+                            "text": "PT-6"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-5.2_smt",
+                            "name": "statement",
+                            "prose": "Include Privacy Act statements on forms that collect information that will be maintained in a Privacy Act system of records, or provide Privacy Act statements on separate forms that can be retained by individuals."
+                        },
+                        {
+                            "id": "pt-5.2_gdn",
+                            "name": "guidance",
+                            "prose": "If a federal agency asks individuals to supply information that will become part of a system of records, the agency is required to provide a [PRIVACT] statement on the form used to collect the information or on a separate form that can be retained by the individual. The agency provides a [PRIVACT] statement in such circumstances regardless of whether the information will be collected on a paper or electronic form, on a website, on a mobile application, over the telephone, or through some other medium. This requirement ensures that the individual is provided with sufficient information about the request for information to make an informed decision on whether or not to respond.\n[PRIVACT] statements provide formal notice to individuals of the authority that authorizes the solicitation of the information; whether providing the information is mandatory or voluntary; the principal purpose(s) for which the information is to be used; the published routine uses to which the information is subject; the effects on the individual, if any, of not providing all or any part of the information requested; and an appropriate citation and link to the relevant system of records notice. Federal agency personnel consult with the senior agency official for privacy and legal counsel regarding the notice provisions of the [PRIVACT]."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-6",
+            "class": "SP800-53",
+            "title": "System of Records Notice",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-6"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-06"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#pm-20",
+                    "rel": "related",
+                    "text": "PM-20"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#pt-5",
+                    "rel": "related",
+                    "text": "PT-5"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-6_smt",
+                    "name": "statement",
+                    "prose": "For systems that process information that will be maintained in a Privacy Act system of records:",
+                    "parts": [
+                        {
+                            "id": "pt-6_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Draft system of records notices in accordance with OMB guidance and submit new and significantly modified system of records notices to the OMB and appropriate congressional committees for advance review;"
+                        },
+                        {
+                            "id": "pt-6_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Publish system of records notices in the Federal Register; and"
+                        },
+                        {
+                            "id": "pt-6_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Keep system of records notices accurate, up-to-date, and scoped in accordance with policy."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-6_gdn",
+                    "name": "guidance",
+                    "prose": "The [PRIVACT] requires that federal agencies publish a system of records notice in the Federal Register upon the establishment and/or modification of a [PRIVACT] system of records. As a general matter, a system of records notice is required when an agency maintains a group of any records under the control of the agency from which information is retrieved by the name of an individual or by some identifying number, symbol, or other identifier. The notice describes the existence and character of the system and identifies the system of records, the purpose(s) of the system, the authority for maintenance of the records, the categories of records maintained in the system, the categories of individuals about whom records are maintained, the routine uses to which the records are subject, and additional details about the system as described in [OMB A-108]."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-6.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Routine Uses",
+                    "parameters": [
+                        {
+                            "id": "pt-6.1_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-6(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-06(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-6.1_smt",
+                            "name": "statement",
+                            "prose": "Review all routine uses published in the system of records notice at {{ pt-6.1_prm_1 }} to ensure continued accuracy, and to ensure that routine uses continue to be compatible with the purpose for which the information was collected."
+                        },
+                        {
+                            "id": "pt-6.1_gdn",
+                            "name": "guidance",
+                            "prose": "A [PRIVACT] routine use is a particular kind of disclosure of a record outside of the federal agency maintaining the system of records. A routine use is an exception to the [PRIVACT] prohibition on the disclosure of a record in a system of records without the prior written consent of the individual to whom the record pertains. To qualify as a routine use, the disclosure must be for a purpose that is compatible with the purpose for which the information was originally collected. The [PRIVACT] requires agencies to describe each routine use of the records maintained in the system of records, including the categories of users of the records and the purpose of the use. Agencies may only establish routine uses by explicitly publishing them in the relevant system of records notice."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-6.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Exemption Rules",
+                    "parameters": [
+                        {
+                            "id": "pt-6.2_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-6(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-06(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-6.2_smt",
+                            "name": "statement",
+                            "prose": "Review all Privacy Act exemptions claimed for the system of records at {{ pt-6.2_prm_1 }} to ensure they remain appropriate and necessary in accordance with law, that they have been promulgated as regulations, and that they are accurately described in the system of records notice."
+                        },
+                        {
+                            "id": "pt-6.2_gdn",
+                            "name": "guidance",
+                            "prose": "The [PRIVACT] includes two sets of provisions that allow federal agencies to claim exemptions from certain requirements in the statute. In certain circumstances, these provisions allow agencies to promulgate regulations to exempt a system of records from select provisions of the [PRIVACT]. At a minimum, organizations\u2019 [PRIVACT] exemption regulations include the specific name(s) of any system(s) of records that will be exempt, the specific provisions of the [PRIVACT] from which the system(s) of records is to be exempted, the reasons for the exemption, and an explanation for why the exemption is both necessary and appropriate."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-7",
+            "class": "SP800-53",
+            "title": "Specific Categories of Personally Identifiable Information",
+            "parameters": [
+                {
+                    "id": "pt-7_prm_1",
+                    "label": "organization-defined processing conditions"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-7"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-07"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#ir-9",
+                    "rel": "related",
+                    "text": "IR-9"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-7_smt",
+                    "name": "statement",
+                    "prose": "Apply {{ pt-7_prm_1 }} for specific categories of personally identifiable information."
+                },
+                {
+                    "id": "pt-7_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations apply any conditions or protections that may be necessary for specific categories of personally identifiable information. These conditions may be required by laws, executive orders, directives, regulations, policies, standards, or guidelines. The requirements may also come from the results of privacy risk assessments that factor in contextual changes that may result in an organizational determination that a particular category of personally identifiable information is particularly sensitive or raises particular privacy risks. Organizations consult with the senior agency official for privacy and legal counsel regarding any protections that may be necessary."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pt-7.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Social Security Numbers",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-7(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-07(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ia-4",
+                            "rel": "related",
+                            "text": "IA-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-7.1_smt",
+                            "name": "statement",
+                            "prose": "When a system processes Social Security numbers:",
+                            "parts": [
+                                {
+                                    "id": "pt-7.1_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Eliminate unnecessary collection, maintenance, and use of Social Security numbers, and explore alternatives to their use as a personal identifier;"
+                                },
+                                {
+                                    "id": "pt-7.1_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Do not deny any individual any right, benefit, or privilege provided by law because of such individual\u2019s refusal to disclose his or her Social Security number; and"
+                                },
+                                {
+                                    "id": "pt-7.1_smt.c",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(c)"
+                                        }
+                                    ],
+                                    "prose": "Inform any individual who is asked to disclose his or her Social Security number whether that disclosure is mandatory or voluntary, by what statutory or other authority such number is solicited, and what uses will be made of it."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pt-7.1_gdn",
+                            "name": "guidance",
+                            "prose": "Federal law and policy establish specific requirements for organizations\u2019 processing of Social Security numbers. Organizations take steps to eliminate unnecessary uses of Social Security numbers and other sensitive information and observe any particular requirements that apply."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-7.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "First Amendment Information",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PT-7(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PT-07(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pt-7.2_smt",
+                            "name": "statement",
+                            "prose": "Prohibit the processing of information describing how any individual exercises rights guaranteed by the First Amendment unless expressly authorized by statute or by the individual or unless pertinent to and within the scope of an authorized law enforcement activity."
+                        },
+                        {
+                            "id": "pt-7.2_gdn",
+                            "name": "guidance",
+                            "prose": "The [PRIVACT] limits agencies\u2019 ability to process information that describes how individuals exercise rights guaranteed by the First Amendment. Organizations consult with the senior agency official for privacy and legal counsel regarding these requirements."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pt-8",
+            "class": "SP800-53",
+            "title": "Computer Matching Requirements",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PT-8"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PT-08"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#pm-24",
+                    "rel": "related",
+                    "text": "PM-24"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pt-8_smt",
+                    "name": "statement",
+                    "prose": "When a system or organization processes information for the purpose of conducting a matching program:",
+                    "parts": [
+                        {
+                            "id": "pt-8_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Obtain approval from the Data Integrity Board to conduct the matching program;"
+                        },
+                        {
+                            "id": "pt-8_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Develop and enter into a computer matching agreement;"
+                        },
+                        {
+                            "id": "pt-8_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Publish a matching notice in the Federal Register;"
+                        },
+                        {
+                            "id": "pt-8_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Independently verify the information produced by the matching program before taking adverse action against an individual, if required; and"
+                        },
+                        {
+                            "id": "pt-8_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Provide individuals with notice and an opportunity to contest the findings before taking adverse action against an individual."
+                        }
+                    ]
+                },
+                {
+                    "id": "pt-8_gdn",
+                    "name": "guidance",
+                    "prose": "The [PRIVACT] establishes requirements for federal and non-federal agencies if they engage in a matching program. In general, a matching program is a computerized comparison of records from two or more automated [PRIVACT] systems of records or an automated system of records and automated records maintained by a non-federal agency (or agent thereof). A matching program either pertains to federal benefit programs or federal personnel or payroll records. A federal benefit match is performed to determine or verify eligibility for payments under federal benefit programs or to recoup payments or delinquent debts under federal benefit programs. A matching program involves not just the matching activity itself but also the investigative follow-up and ultimate action, if any."
+                }
+            ]
+        }
+    ]
+}

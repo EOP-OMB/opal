@@ -1,0 +1,28 @@
+{
+    "id": "sc-7.3",
+    "class": "SP800-53-enhancement",
+    "title": "Access Points",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.3_smt",
+            "name": "statement",
+            "prose": "Limit the number of external network connections to the system."
+        },
+        {
+            "id": "sc-7.3_gdn",
+            "name": "guidance",
+            "prose": "Limiting the number of external network connections facilitates monitoring of inbound and outbound communications traffic. The Trusted Internet Connection [DHS TIC] initiative is an example of a federal guideline that requires limits on the number of external network connections. Limiting the number of external network connections to the system is  important during transition periods from older to newer technologies (e.g., transitioning from IPv4 to IPv6 network protocols). Such transitions may require implementing the older and newer technologies simultaneously during the transition period and thus increase the number of access points to the system."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

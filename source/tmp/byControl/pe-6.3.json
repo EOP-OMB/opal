@@ -1,0 +1,76 @@
+{
+    "id": "pe-6.3",
+    "class": "SP800-53-enhancement",
+    "title": "Video Surveillance",
+    "parameters": [
+        {
+            "id": "pe-6.3_prm_1",
+            "label": "organization-defined operational areas"
+        },
+        {
+            "id": "pe-6.3_prm_2",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "pe-6.3_prm_3",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-6(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-06(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-6.3_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "pe-6.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Employ video surveillance of {{ pe-6.3_prm_1 }};"
+                },
+                {
+                    "id": "pe-6.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Review video recordings {{ pe-6.3_prm_2 }}; and"
+                },
+                {
+                    "id": "pe-6.3_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Retain video recordings for {{ pe-6.3_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "pe-6.3_gdn",
+            "name": "guidance",
+            "prose": "Video surveillance focuses on recording activity in specified areas for the purposes of subsequent review, if circumstances so warrant. Video recordings are typically reviewed to detect anomalous events or incidents. Monitoring the surveillance video is not required, although organizations may choose to do so. There may be legal considerations when performing and retaining video surveillance, especially if such surveillance is in a public location."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

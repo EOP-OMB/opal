@@ -1,0 +1,27 @@
+{
+    "id": "ma-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Logically separated communications paths.",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-04(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-4.2_smt",
+            "name": "statement",
+            "prose": "Discussion:  Communications paths can be logically separated using encryption."
+        },
+        {
+            "id": "ma-4.2_gdn",
+            "name": "guidance"
+        }
+    ],
+    "group_title": "Maintenance"
+}

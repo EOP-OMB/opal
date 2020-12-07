@@ -1,0 +1,40 @@
+{
+    "id": "ps-3.1",
+    "class": "SP800-53-enhancement",
+    "title": "Classified Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PS-3(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PS-03(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ps-3.1_smt",
+            "name": "statement",
+            "prose": "Verify that individuals accessing a system processing, storing, or transmitting classified information are cleared and indoctrinated to the highest classification level of the information to which they have access on the system."
+        },
+        {
+            "id": "ps-3.1_gdn",
+            "name": "guidance",
+            "prose": "Classified information is the most sensitive information that the Federal Government processes, stores, or transmits. It is imperative that individuals have the requisite security clearances and system access authorizations prior to gaining access to such information. Access authorizations are enforced by system access controls (see AC-3) and flow controls (see AC-4)."
+        }
+    ],
+    "group_title": "Personnel Security"
+}

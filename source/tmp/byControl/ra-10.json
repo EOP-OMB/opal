@@ -1,0 +1,123 @@
+{
+    "id": "ra-10",
+    "class": "SP800-53",
+    "title": "Threat Hunting",
+    "parameters": [
+        {
+            "id": "ra-10_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "RA-10"
+        },
+        {
+            "name": "sort-id",
+            "value": "RA-10"
+        }
+    ],
+    "links": [
+        {
+            "href": "#08b07465-dbdc-48d6-8a0b-37279602ac16",
+            "rel": "reference",
+            "text": "[SP 800-30]"
+        },
+        {
+            "href": "#ca-2",
+            "rel": "related",
+            "text": "CA-2"
+        },
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#ca-8",
+            "rel": "related",
+            "text": "CA-8"
+        },
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        },
+        {
+            "href": "#ra-5",
+            "rel": "related",
+            "text": "RA-5"
+        },
+        {
+            "href": "#ra-6",
+            "rel": "related",
+            "text": "RA-6"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ra-10_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ra-10_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Establish and maintain a cyber threat hunting capability to:",
+                    "parts": [
+                        {
+                            "id": "ra-10_smt.a.1",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "1."
+                                }
+                            ],
+                            "prose": "Search for indicators of compromise in organizational systems; and"
+                        },
+                        {
+                            "id": "ra-10_smt.a.2",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "2."
+                                }
+                            ],
+                            "prose": "Detect, track, and disrupt threats that evade existing controls; and"
+                        }
+                    ]
+                },
+                {
+                    "id": "ra-10_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Employ the threat hunting capability {{ ra-10_prm_1 }}."
+                }
+            ]
+        },
+        {
+            "id": "ra-10_gdn",
+            "name": "guidance",
+            "prose": "Threat hunting is an active means of cyber defense in contrast to traditional protection measures, such as firewalls, intrusion detection and prevention systems, quarantining malicious code in sandboxes, and Security Information and Event Management technologies and systems. Cyber threat hunting involves proactively searching organizational systems, networks, and infrastructure for advanced threats. The objective is to track and disrupt cyber adversaries as early as possible in the attack sequence and to measurably improve the speed and accuracy of organizational responses. Indications of compromise include unusual network traffic, unusual file changes, and the presence of malicious code. Threat hunting teams leverage existing threat intelligence and may create new threat intelligence, which is shared with peer organizations, Information Sharing and Analysis Organizations (ISAO), Information Sharing and Analysis Centers (ISAC), and relevant government departments and agencies."
+        }
+    ],
+    "group_title": "Risk Assessment"
+}

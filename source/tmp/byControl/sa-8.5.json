@@ -1,0 +1,41 @@
+{
+    "id": "sa-8.5",
+    "class": "SP800-53-enhancement",
+    "title": "Efficiently Mediated Access",
+    "parameters": [
+        {
+            "id": "sa-8.5_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-25",
+            "rel": "related",
+            "text": "AC-25"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.5_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of efficiently mediated access in {{ sa-8.5_prm_1 }}."
+        },
+        {
+            "id": "sa-8.5_gdn",
+            "name": "guidance",
+            "prose": "The principle of efficiently mediated access states that policy enforcement mechanisms utilize the least common mechanism available while satisfying stakeholder requirements within expressed constraints. The mediation of access to system resources (i.e., CPU, memory, devices, communication ports, services, infrastructure, data, and information) is often the predominant security function of secure systems. It also enables the realization of protections for the capability provided to stakeholders by the system. Mediation of resource access can result in performance bottlenecks if the system is not designed correctly. For example, by using hardware mechanisms, efficiently mediated access can be achieved. Once access to a low-level resource such as memory has been obtained, hardware protection mechanisms can ensure that out-of-bounds access does not occur."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

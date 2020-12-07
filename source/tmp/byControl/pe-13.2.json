@@ -1,0 +1,61 @@
+{
+    "id": "pe-13.2",
+    "class": "SP800-53-enhancement",
+    "title": "Suppression Systems \u2013 Automatic Activation and Notification",
+    "parameters": [
+        {
+            "id": "pe-13.2_prm_1",
+            "label": "organization-defined personnel or roles"
+        },
+        {
+            "id": "pe-13.2_prm_2",
+            "label": "organization-defined emergency responders"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-13(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-13(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-13.2_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "pe-13.2_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Employ fire suppression systems that activate automatically and notify {{ pe-13.2_prm_1 }} and {{ pe-13.2_prm_2 }}; and"
+                },
+                {
+                    "id": "pe-13.2_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Employ an automatic fire suppression capability when the facility is not staffed on a continuous basis."
+                }
+            ]
+        },
+        {
+            "id": "pe-13.2_gdn",
+            "name": "guidance",
+            "prose": "Organizations can identify specific personnel, roles, and emergency responders if individuals on the notification list need to have appropriate access authorizations and/or clearances (e.g., to enter to facilities where access is restricted due to the impact level or classification of information within the facility). Notification mechanisms may require independent energy sources to ensure that the notification capability is not adversely affected by the fire."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

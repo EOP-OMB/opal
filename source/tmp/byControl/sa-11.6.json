@@ -1,0 +1,35 @@
+{
+    "id": "sa-11.6",
+    "class": "SP800-53-enhancement",
+    "title": "Attack Surface Reviews",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-11(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-11(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-15",
+            "rel": "related",
+            "text": "SA-15"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-11.6_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to perform attack surface reviews."
+        },
+        {
+            "id": "sa-11.6_gdn",
+            "name": "guidance",
+            "prose": "Attack surfaces of systems and system components are exposed areas that make those systems more vulnerable to attacks. Attack surfaces include any accessible areas where weaknesses or deficiencies in the hardware, software, and firmware components provide opportunities for adversaries to exploit vulnerabilities. Attack surface reviews ensure that developers analyze the design and implementation changes to systems and mitigate attack vectors generated as a result of the changes. The correction of identified flaws includes deprecation of unsafe functions."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

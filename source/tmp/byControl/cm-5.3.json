@@ -1,0 +1,27 @@
+{
+    "id": "cm-5.3",
+    "class": "SP800-53-enhancement",
+    "title": "Signed Components",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-5(3)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-05(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-14",
+            "rel": "moved-to",
+            "text": "CM-14"
+        }
+    ],
+    "group_title": "Configuration Management"
+}

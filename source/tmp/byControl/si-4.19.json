@@ -1,0 +1,38 @@
+{
+    "id": "si-4.19",
+    "class": "SP800-53-enhancement",
+    "title": "Risk for Individuals",
+    "parameters": [
+        {
+            "id": "si-4.19_prm_1",
+            "label": "organization-defined additional monitoring"
+        },
+        {
+            "id": "si-4.19_prm_2",
+            "label": "organization-defined sources"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(19)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(19)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.19_smt",
+            "name": "statement",
+            "prose": "Implement {{ si-4.19_prm_1 }} of individuals who have been identified by {{ si-4.19_prm_2 }} as posing an increased level of risk."
+        },
+        {
+            "id": "si-4.19_gdn",
+            "name": "guidance",
+            "prose": "Indications of increased risk from individuals can be obtained from different sources, including personnel records, intelligence agencies, law enforcement organizations, and other sources. The monitoring of individuals is coordinated with the management, legal, security, privacy, and human resource officials who conduct such monitoring. Monitoring is conducted in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

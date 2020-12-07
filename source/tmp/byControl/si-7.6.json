@@ -1,0 +1,40 @@
+{
+    "id": "si-7.6",
+    "class": "SP800-53-enhancement",
+    "title": "Cryptographic Protection",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.6_smt",
+            "name": "statement",
+            "prose": "Implement cryptographic mechanisms to detect unauthorized changes to software, firmware, and information."
+        },
+        {
+            "id": "si-7.6_gdn",
+            "name": "guidance",
+            "prose": "Cryptographic mechanisms used to protect integrity include digital signatures and the computation and application of signed hashes using asymmetric cryptography, protecting the confidentiality of the key used to generate the hash, and using the public key to verify the hash information. Organizations that employ cryptographic mechanisms also consider cryptographic key management solutions."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

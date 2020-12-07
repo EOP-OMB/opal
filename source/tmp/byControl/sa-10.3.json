@@ -1,0 +1,35 @@
+{
+    "id": "sa-10.3",
+    "class": "SP800-53-enhancement",
+    "title": "Hardware Integrity Verification",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-10(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-10(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-10.3_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to enable integrity verification of hardware components."
+        },
+        {
+            "id": "sa-10.3_gdn",
+            "name": "guidance",
+            "prose": "Hardware integrity verification allows organizations to detect unauthorized changes to hardware components using developer-provided tools, techniques, methods, and mechanisms. Organizations may verify the integrity of hardware components with hard-to-copy labels, verifiable serial numbers provided by developers, and by requiring the use of anti-tamper technologies. Delivered hardware components also include hardware and firmware updates to such components."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

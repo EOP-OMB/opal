@@ -1,0 +1,55 @@
+{
+    "id": "sc-42.4",
+    "class": "SP800-53-enhancement",
+    "title": "Notice of Collection",
+    "parameters": [
+        {
+            "id": "sc-42.4_prm_1",
+            "label": "organization-defined sensors"
+        },
+        {
+            "id": "sc-42.4_prm_2",
+            "label": "organization-defined measures"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-42(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-42(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pt-1",
+            "rel": "related",
+            "text": "PT-1"
+        },
+        {
+            "href": "#pt-4",
+            "rel": "related",
+            "text": "PT-4"
+        },
+        {
+            "href": "#pt-5",
+            "rel": "related",
+            "text": "PT-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-42.4_smt",
+            "name": "statement",
+            "prose": "Employ the following measures to facilitate an individual\u2019s awareness that personally identifiable information is being collected by {{ sc-42.4_prm_1 }}: {{ sc-42.4_prm_2 }}."
+        },
+        {
+            "id": "sc-42.4_gdn",
+            "name": "guidance",
+            "prose": "Awareness that organizational sensors are collecting data enables individuals to more effectively engage in managing their privacy. Measures can include conventional written notices and sensor configurations that make individuals directly or indirectly aware through other devices that the sensor is collecting information. The usability and efficacy of the notice are important considerations."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

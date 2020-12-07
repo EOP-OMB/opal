@@ -1,0 +1,38 @@
+{
+    "id": "ac-4.10",
+    "class": "SP800-53-enhancement",
+    "title": "Enable and Disable Security or Privacy Policy Filters",
+    "parameters": [
+        {
+            "id": "ac-4.10_prm_1",
+            "label": "organization-defined security or privacy policy filters"
+        },
+        {
+            "id": "ac-4.10_prm_2",
+            "label": "organization-defined conditions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(10)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(10)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.10_smt",
+            "name": "statement",
+            "prose": "Provide the capability for privileged administrators to enable and disable {{ ac-4.10_prm_1 }} under the following conditions: {{ ac-4.10_prm_2 }}."
+        },
+        {
+            "id": "ac-4.10_gdn",
+            "name": "guidance",
+            "prose": "For example, as allowed by the system authorization, administrators can enable security or privacy policy filters to accommodate approved data types. Administrators also have the capability to select the filters that are executed on a specific data flow based on the type of data that is being transferred, the source and destination security domains, and other security or privacy relevant features, as needed."
+        }
+    ],
+    "group_title": "Access Control"
+}

@@ -1,0 +1,34 @@
+{
+    "id": "ac-2.9",
+    "class": "SP800-53-enhancement",
+    "title": "Restrictions on Use of Shared and Group Accounts",
+    "parameters": [
+        {
+            "id": "ac-2.9_prm_1",
+            "label": "organization-defined conditions for establishing shared and group accounts"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(09)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.9_smt",
+            "name": "statement",
+            "prose": "Only permit the use of shared and group accounts that meet {{ ac-2.9_prm_1 }}."
+        },
+        {
+            "id": "ac-2.9_gdn",
+            "name": "guidance",
+            "prose": "Before permitting the use of shared or group accounts, organizations consider the increased risk due to the lack of accountability with such accounts."
+        }
+    ],
+    "group_title": "Access Control"
+}

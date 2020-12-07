@@ -1,0 +1,28 @@
+{
+    "id": "mp-8.4",
+    "class": "SP800-53-enhancement",
+    "title": "Classified Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-8(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-08(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-8.4_smt",
+            "name": "statement",
+            "prose": "Downgrade system media containing classified information prior to release to individuals without required access authorizations."
+        },
+        {
+            "id": "mp-8.4_gdn",
+            "name": "guidance",
+            "prose": "Downgrading of classified information uses approved sanitization tools, techniques, and procedures to transfer information confirmed to be unclassified from classified systems to unclassified media."
+        }
+    ],
+    "group_title": "Media Protection"
+}

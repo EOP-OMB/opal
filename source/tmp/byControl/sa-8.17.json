@@ -1,0 +1,34 @@
+{
+    "id": "sa-8.17",
+    "class": "SP800-53-enhancement",
+    "title": "Secure Distributed Composition",
+    "parameters": [
+        {
+            "id": "sa-8.17_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(17)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(17)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.17_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of secure distributed composition in {{ sa-8.17_prm_1 }}."
+        },
+        {
+            "id": "sa-8.17_gdn",
+            "name": "guidance",
+            "prose": "The principle of secure distributed composition states that the composition of distributed components that enforce the same system security policy result in a system that enforces that policy at least as well as the individual components do. Many of the design principles for secure systems deal with how components can or should interact. The need to create or enable a capability from the composition of distributed components can magnify the relevancy of these principles. In particular, the translation of security policy from a stand-alone to a distributed system or a system-of-systems can have unexpected or emergent results. Communication protocols and distributed data consistency mechanisms help to ensure consistent policy enforcement across a distributed system. To ensure a system-wide level of assurance of correct policy enforcement, the security architecture of a distributed composite system is thoroughly analyzed."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

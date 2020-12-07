@@ -1,0 +1,34 @@
+{
+    "id": "pe-14.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automatic Controls",
+    "parameters": [
+        {
+            "id": "pe-14.1_prm_1",
+            "label": "organization-defined automatic environmental controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-14(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-14(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-14.1_smt",
+            "name": "statement",
+            "prose": "Employ the following automatic environmental controls in the facility to prevent fluctuations potentially harmful to the system: {{ pe-14.1_prm_1 }}."
+        },
+        {
+            "id": "pe-14.1_gdn",
+            "name": "guidance",
+            "prose": "The implementation of automatic environmental controls provides an immediate response to environmental conditions that can damage, degrade, or destroy organizational systems or systems components."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

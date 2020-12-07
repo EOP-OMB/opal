@@ -1,0 +1,28 @@
+{
+    "id": "sa-10.5",
+    "class": "SP800-53-enhancement",
+    "title": "Mapping Integrity for Version Control",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-10(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-10(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-10.5_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to maintain the integrity of the mapping between the master build data describing the current version of security-relevant hardware, software, and firmware and the on-site master copy of the data for the current version."
+        },
+        {
+            "id": "sa-10.5_gdn",
+            "name": "guidance",
+            "prose": "Mapping integrity for version control addresses changes to hardware, software, and firmware components during both initial development and system development life cycle updates. Maintaining the integrity between the master copies of security-relevant hardware, software, and firmware (including designs, hardware drawings, source code) and the equivalent data in master copies in operational environments is essential to ensuring the availability of organizational systems that support critical mission and business functions."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,45 @@
+{
+    "id": "sc-7.21",
+    "class": "SP800-53-enhancement",
+    "title": "Isolation of System Components",
+    "parameters": [
+        {
+            "id": "sc-7.21_prm_1",
+            "label": "organization-defined system components"
+        },
+        {
+            "id": "sc-7.21_prm_2",
+            "label": "organization-defined missions and/or business functions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(21)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(21)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-9",
+            "rel": "related",
+            "text": "CA-9"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.21_smt",
+            "name": "statement",
+            "prose": "Employ boundary protection mechanisms to isolate {{ sc-7.21_prm_1 }} supporting {{ sc-7.21_prm_2 }}."
+        },
+        {
+            "id": "sc-7.21_gdn",
+            "name": "guidance",
+            "prose": "Organizations can isolate system components that perform different mission or business functions. Such isolation limits unauthorized information flows among system components and provides the opportunity to deploy greater levels of protection for selected system components. Isolating system components with boundary protection mechanisms provides the capability for increased protection of individual system components and to more effectively control information flows between those components. Isolating system components provides enhanced protection that limits the potential harm from hostile cyber-attacks and errors. The degree of isolation varies depending upon the mechanisms chosen. Boundary protection mechanisms include routers, gateways, and firewalls that separate system components into physically separate networks or subnetworks; cross-domain devices that separate subnetworks; virtualization techniques; and the encryption of information flows among system components using distinct encryption keys."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

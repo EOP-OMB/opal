@@ -1,0 +1,38 @@
+{
+    "id": "ac-16.4",
+    "class": "SP800-53-enhancement",
+    "title": "Association of Attributes by Authorized Individuals",
+    "parameters": [
+        {
+            "id": "ac-16.4_prm_1",
+            "label": "organization-defined security and privacy attributes"
+        },
+        {
+            "id": "ac-16.4_prm_2",
+            "label": "organization-defined subjects and objects"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-16(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-16(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-16.4_smt",
+            "name": "statement",
+            "prose": "Provide the capability to associate {{ ac-16.4_prm_1 }} with {{ ac-16.4_prm_2 }} by authorized individuals (or processes acting on behalf of individuals)."
+        },
+        {
+            "id": "ac-16.4_gdn",
+            "name": "guidance",
+            "prose": "Systems, in general, provide the capability for privileged users to assign security and privacy attributes to system-defined subjects (e.g., users) and objects (e.g., directories, files, and ports). Some systems provide additional capability for general users to assign security and privacy attributes to additional objects (e.g., files, emails). The association of attributes by authorized individuals is described in the design documentation. The support provided by systems can include prompting users to select security and privacy attributes to be associated with information objects, employing automated mechanisms to categorize information with attributes based on defined policies, or ensuring that the combination of the security or privacy attributes selected is valid. Organizations consider the creation, deletion, or modification of attributes when defining auditable events."
+        }
+    ],
+    "group_title": "Access Control"
+}

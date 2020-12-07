@@ -1,0 +1,34 @@
+{
+    "id": "sc-30.2",
+    "class": "SP800-53-enhancement",
+    "title": "Randomness",
+    "parameters": [
+        {
+            "id": "sc-30.2_prm_1",
+            "label": "organization-defined techniques"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-30(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-30(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-30.2_smt",
+            "name": "statement",
+            "prose": "Employ {{ sc-30.2_prm_1 }} to introduce randomness into organizational operations and assets."
+        },
+        {
+            "id": "sc-30.2_gdn",
+            "name": "guidance",
+            "prose": "Randomness introduces increased levels of uncertainty for adversaries regarding the actions that organizations take to defend their systems against attacks. Such actions may impede the ability of adversaries to correctly target information resources of organizations that support critical missions or business functions. Uncertainty may also cause adversaries to hesitate before initiating or continuing attacks. Misdirection techniques that involve randomness include performing certain routine actions at different times of day, employing different information technologies, using different suppliers, and rotating roles and responsibilities of organizational personnel."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

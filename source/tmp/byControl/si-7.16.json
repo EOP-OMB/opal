@@ -1,0 +1,34 @@
+{
+    "id": "si-7.16",
+    "class": "SP800-53-enhancement",
+    "title": "Time Limit on Process Execution Without Supervision",
+    "parameters": [
+        {
+            "id": "si-7.16_prm_1",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(16)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(16)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.16_smt",
+            "name": "statement",
+            "prose": "Prohibit processes from executing without supervision for more than {{ si-7.16_prm_1 }}."
+        },
+        {
+            "id": "si-7.16_gdn",
+            "name": "guidance",
+            "prose": "Placing a time limit on process execution without supervision is intended to apply to processes for which typical or normal execution periods can be determined and situations in which organizations exceed such periods. Supervision includes timers on operating systems, automated responses, and manual oversight and response when system process anomalies occur."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

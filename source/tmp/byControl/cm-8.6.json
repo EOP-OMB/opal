@@ -1,0 +1,28 @@
+{
+    "id": "cm-8.6",
+    "class": "SP800-53-enhancement",
+    "title": "Assessed Configurations and Approved Deviations",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-8(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-08(06)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-8.6_smt",
+            "name": "statement",
+            "prose": "Include assessed component configurations and any approved deviations to current deployed configurations in the system component inventory."
+        },
+        {
+            "id": "cm-8.6_gdn",
+            "name": "guidance",
+            "prose": "Assessed configurations and approved deviations focus on configuration settings established by organizations for system components, the specific components that have been assessed to determine compliance with the required configuration settings, and any approved deviations from established configuration settings."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

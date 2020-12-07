@@ -1,0 +1,27 @@
+{
+    "id": "sc-7.6",
+    "class": "SP800-53-enhancement",
+    "title": "Response to Recognized Failures",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(6)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-7.18",
+            "rel": "incorporated-into",
+            "text": "SC-7(18)"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

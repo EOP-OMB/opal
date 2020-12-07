@@ -1,0 +1,34 @@
+{
+    "id": "cm-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Maintenance",
+    "parameters": [
+        {
+            "id": "cm-8.2_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-8.2_smt",
+            "name": "statement",
+            "prose": "Maintain the currency, completeness, accuracy, and availability of the inventory of system components using {{ cm-8.2_prm_1 }}."
+        },
+        {
+            "id": "cm-8.2_gdn",
+            "name": "guidance",
+            "prose": "Organizations maintain system inventories to the extent feasible. For example, virtual machines can be difficult to monitor because such machines are not visible to the network when not in use. In such cases, organizations maintain as up-to-date, complete, and accurate an inventory as is deemed reasonable. Automated maintenance can be achieved by the implementation of CM-2(2) for organizations that combine system component inventory and baseline configuration activities."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

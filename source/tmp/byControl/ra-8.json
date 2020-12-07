@@ -1,0 +1,143 @@
+{
+    "id": "ra-8",
+    "class": "SP800-53",
+    "title": "Privacy Impact Assessments",
+    "properties": [
+        {
+            "name": "label",
+            "value": "RA-8"
+        },
+        {
+            "name": "sort-id",
+            "value": "RA-08"
+        }
+    ],
+    "links": [
+        {
+            "href": "#7b0b9634-741a-4335-b6fa-161228c3a76e",
+            "rel": "reference",
+            "text": "[EGOV]"
+        },
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130, Appendix II]"
+        },
+        {
+            "href": "#d229ae60-51dd-4d7b-a8bf-1f7195cc7561",
+            "rel": "reference",
+            "text": "[OMB M-03-22]"
+        },
+        {
+            "href": "#cm-4",
+            "rel": "related",
+            "text": "CM-4"
+        },
+        {
+            "href": "#cm-9",
+            "rel": "related",
+            "text": "CM-9"
+        },
+        {
+            "href": "#cm-13",
+            "rel": "related",
+            "text": "CM-13"
+        },
+        {
+            "href": "#pt-2",
+            "rel": "related",
+            "text": "PT-2"
+        },
+        {
+            "href": "#pt-3",
+            "rel": "related",
+            "text": "PT-3"
+        },
+        {
+            "href": "#pt-5",
+            "rel": "related",
+            "text": "PT-5"
+        },
+        {
+            "href": "#ra-1",
+            "rel": "related",
+            "text": "RA-1"
+        },
+        {
+            "href": "#ra-2",
+            "rel": "related",
+            "text": "RA-2"
+        },
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        },
+        {
+            "href": "#ra-7",
+            "rel": "related",
+            "text": "RA-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ra-8_smt",
+            "name": "statement",
+            "prose": "Conduct privacy impact assessments for systems, programs, or other activities before:",
+            "parts": [
+                {
+                    "id": "ra-8_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Developing or procuring information technology that processes personally identifiable information; and"
+                },
+                {
+                    "id": "ra-8_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Initiating a new collection of personally identifiable information that:",
+                    "parts": [
+                        {
+                            "id": "ra-8_smt.b.1",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "1."
+                                }
+                            ],
+                            "prose": "Will be processed using information technology; and"
+                        },
+                        {
+                            "id": "ra-8_smt.b.2",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "2."
+                                }
+                            ],
+                            "prose": "Includes personally identifiable information permitting the physical or virtual (online) contacting of a specific individual, if identical questions have been posed to, or identical reporting requirements imposed on, ten or more individuals, other than agencies, instrumentalities, or employees of the federal government."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ra-8_gdn",
+            "name": "guidance",
+            "prose": "A privacy impact assessment is an analysis of how personally identifiable information is handled to ensure that handling conforms to applicable privacy requirements, determine the privacy risks associated with an information system or activity, and evaluate ways to mitigate privacy risks. A privacy impact assessment is both an analysis and a formal document that details the process and the outcome of the analysis.\nOrganizations conduct and develop a privacy impact assessment with sufficient clarity and specificity to demonstrate that the organization fully considered privacy and incorporated appropriate privacy protections from the earliest stages of the organization\u2019s activity and throughout the information life cycle. In order to conduct a meaningful privacy impact assessment, the organization\u2019s senior agency official for privacy works closely with program managers, system owners, information technology experts, security officials, counsel, and other relevant organization personnel. Moreover, a privacy impact assessment is not a time-restricted activity that is limited to a particular milestone or stage of the information system or personally identifiable information life cycles. Rather, the privacy analysis continues throughout the system and personally identifiable information life cycles. Accordingly, a privacy impact assessment is a living document that organizations update whenever changes to the information technology, changes to the organization\u2019s practices, or other factors alter the privacy risks associated with the use of such information technology.\nTo conduct the privacy impact assessment, organizations can use security and privacy risk assessments. Organizations may also use other related processes that may have different names, including privacy threshold analyses. A privacy impact assessment can also serve as notice to the public regarding the organization\u2019s practices with respect to privacy. Although conducting and publishing privacy impact assessments may be required by law, organizations may develop such policies in the absence of applicable laws. For federal agencies, privacy impact assessments may be required by [EGOV]; agencies should consult with their senior agency official for privacy and legal counsel on this requirement and be aware of the statutory exceptions and OMB guidance relating to the provision."
+        }
+    ],
+    "group_title": "Risk Assessment"
+}

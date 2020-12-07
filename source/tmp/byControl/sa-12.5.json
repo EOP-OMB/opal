@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.5",
+    "class": "SP800-53-enhancement",
+    "title": "Limitation of Harm",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(5)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-3.2",
+            "rel": "moved-to",
+            "text": "SR-3(2)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

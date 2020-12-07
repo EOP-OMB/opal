@@ -1,0 +1,27 @@
+{
+    "id": "sa-22.1",
+    "class": "SP800-53-enhancement",
+    "title": "Alternative Sources for Continued Support",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-22(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-22(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-22",
+            "rel": "incorporated-into",
+            "text": "SA-22"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,42 @@
+{
+    "id": "si-9",
+    "class": "SP800-53",
+    "title": "Information Input Restrictions",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-9"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-09"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-2",
+            "rel": "incorporated-into",
+            "text": "AC-2"
+        },
+        {
+            "href": "#ac-3",
+            "rel": "incorporated-into",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-5",
+            "rel": "incorporated-into",
+            "text": "AC-5"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "incorporated-into",
+            "text": "AC-6"
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

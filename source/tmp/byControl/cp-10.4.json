@@ -1,0 +1,46 @@
+{
+    "id": "cp-10.4",
+    "class": "SP800-53-enhancement",
+    "title": "Restore Within Time Period",
+    "parameters": [
+        {
+            "id": "cp-10.4_prm_1",
+            "label": "organization-defined restoration time periods"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-10(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-10(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-2",
+            "rel": "related",
+            "text": "CM-2"
+        },
+        {
+            "href": "#cm-6",
+            "rel": "related",
+            "text": "CM-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-10.4_smt",
+            "name": "statement",
+            "prose": "Provide the capability to restore system components within {{ cp-10.4_prm_1 }} from configuration-controlled and integrity-protected information representing a known, operational state for the components."
+        },
+        {
+            "id": "cp-10.4_gdn",
+            "name": "guidance",
+            "prose": "Restoration of system components includes reimaging, which restores the components to known, operational states."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

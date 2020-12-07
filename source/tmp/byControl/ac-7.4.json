@@ -1,0 +1,72 @@
+{
+    "id": "ac-7.4",
+    "class": "SP800-53-enhancement",
+    "title": "Use of Alternate Authentication Factor",
+    "parameters": [
+        {
+            "id": "ac-7.4_prm_1",
+            "label": "organization-defined authentication factors"
+        },
+        {
+            "id": "ac-7.4_prm_2",
+            "label": "organization-defined number"
+        },
+        {
+            "id": "ac-7.4_prm_3",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-7(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-07(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-3",
+            "rel": "related",
+            "text": "IA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-7.4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ac-7.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Allow the use of {{ ac-7.4_prm_1 }} that are different from the primary authentication factors after the number of organization-defined consecutive invalid logon attempts have been exceeded; and"
+                },
+                {
+                    "id": "ac-7.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Enforce a limit of {{ ac-7.4_prm_2 }} consecutive invalid logon attempts through use of the alternative factors by a user during a {{ ac-7.4_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "ac-7.4_gdn",
+            "name": "guidance",
+            "prose": "The use of alternate authentication factors supports the objective of availability and allows a user who has inadvertently been locked out to use additional authentication factors to bypass the lockout."
+        }
+    ],
+    "group_title": "Access Control"
+}

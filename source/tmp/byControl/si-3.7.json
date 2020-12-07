@@ -1,0 +1,27 @@
+{
+    "id": "si-3.7",
+    "class": "SP800-53-enhancement",
+    "title": "Nonsignature-based Detection",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-3(7)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-03(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-3",
+            "rel": "incorporated-into",
+            "text": "SI-3"
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

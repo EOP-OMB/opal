@@ -1,0 +1,56 @@
+{
+    "id": "ia-12.6",
+    "class": "SP800-53-enhancement",
+    "title": "Accept Externally-proofed Identities",
+    "parameters": [
+        {
+            "id": "ia-12.6_prm_1",
+            "label": "organization-defined identity assurance level"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-12(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-12(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-3",
+            "rel": "related",
+            "text": "IA-3"
+        },
+        {
+            "href": "#ia-4",
+            "rel": "related",
+            "text": "IA-4"
+        },
+        {
+            "href": "#ia-5",
+            "rel": "related",
+            "text": "IA-5"
+        },
+        {
+            "href": "#ia-8",
+            "rel": "related",
+            "text": "IA-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-12.6_smt",
+            "name": "statement",
+            "prose": "Accept externally-proofed identities at {{ ia-12.6_prm_1 }}."
+        },
+        {
+            "id": "ia-12.6_gdn",
+            "name": "guidance",
+            "prose": "To limit unnecessary re-proofing of identities, particularly of non-PIV users, organizations accept proofing conducted at a commensurate level of assurance by other agencies or organizations. Proofing is consistent with organizational security policy and the identity assurance level appropriate for the system, application, or information accessed. Accepting externally-proofed identities is a fundamental component of managing federated identities across agencies and organizations."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

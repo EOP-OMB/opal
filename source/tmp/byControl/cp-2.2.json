@@ -1,0 +1,60 @@
+{
+    "id": "cp-2.2",
+    "class": "SP800-53-enhancement",
+    "title": "Capacity Planning",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-2(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-02(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pe-11",
+            "rel": "related",
+            "text": "PE-11"
+        },
+        {
+            "href": "#pe-12",
+            "rel": "related",
+            "text": "PE-12"
+        },
+        {
+            "href": "#pe-13",
+            "rel": "related",
+            "text": "PE-13"
+        },
+        {
+            "href": "#pe-14",
+            "rel": "related",
+            "text": "PE-14"
+        },
+        {
+            "href": "#pe-18",
+            "rel": "related",
+            "text": "PE-18"
+        },
+        {
+            "href": "#sc-5",
+            "rel": "related",
+            "text": "SC-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-2.2_smt",
+            "name": "statement",
+            "prose": "Conduct capacity planning so that necessary capacity for information processing, telecommunications, and environmental support exists during contingency operations."
+        },
+        {
+            "id": "cp-2.2_gdn",
+            "name": "guidance",
+            "prose": "Capacity planning is needed because different threats can result in a reduction of the available processing, telecommunications, and support services intended to support essential mission and business functions. Organizations anticipate degraded operations during contingency operations and factor the degradation into capacity planning. For capacity planning, environmental support refers to any environmental factor for which the organization determines that it needs to provide support in a contingency situation, even if in a degraded state. Such determinations are based on an organizational assessment of risk, system categorization (impact level), and organizational risk tolerance."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

@@ -1,0 +1,41 @@
+{
+    "id": "ir-6.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Reporting",
+    "parameters": [
+        {
+            "id": "ir-6.1_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-6(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-06(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ir-7",
+            "rel": "related",
+            "text": "IR-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-6.1_smt",
+            "name": "statement",
+            "prose": "Report incidents using {{ ir-6.1_prm_1 }}."
+        },
+        {
+            "id": "ir-6.1_gdn",
+            "name": "guidance",
+            "prose": "The recipients of incident reports are specified in IR-6b. Automated reporting mechanisms include email, posting on websites (with automatic updates), and automated incident response tools and programs."
+        }
+    ],
+    "group_title": "Incident Response"
+}

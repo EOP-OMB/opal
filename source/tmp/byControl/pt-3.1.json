@@ -1,0 +1,85 @@
+{
+    "id": "pt-3.1",
+    "class": "SP800-53-enhancement",
+    "title": "Data Tagging",
+    "parameters": [
+        {
+            "id": "pt-3.1_prm_1",
+            "label": "organization-defined elements of personally identifiable information"
+        },
+        {
+            "id": "pt-3.1_prm_2",
+            "label": "organization-defined processing purposes"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PT-3(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PT-03(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-6",
+            "rel": "related",
+            "text": "CA-6"
+        },
+        {
+            "href": "#cm-12",
+            "rel": "related",
+            "text": "CM-12"
+        },
+        {
+            "href": "#pm-5",
+            "rel": "related",
+            "text": "PM-5"
+        },
+        {
+            "href": "#pm-22",
+            "rel": "related",
+            "text": "PM-22"
+        },
+        {
+            "href": "#sc-16",
+            "rel": "related",
+            "text": "SC-16"
+        },
+        {
+            "href": "#sc-43",
+            "rel": "related",
+            "text": "SC-43"
+        },
+        {
+            "href": "#si-10",
+            "rel": "related",
+            "text": "SI-10"
+        },
+        {
+            "href": "#si-15",
+            "rel": "related",
+            "text": "SI-15"
+        },
+        {
+            "href": "#si-19",
+            "rel": "related",
+            "text": "SI-19"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pt-3.1_smt",
+            "name": "statement",
+            "prose": "Attach data tags containing the following purposes to {{ pt-3.1_prm_1 }}: {{ pt-3.1_prm_2 }}."
+        },
+        {
+            "id": "pt-3.1_gdn",
+            "name": "guidance",
+            "prose": "Data tags support the tracking of processing purposes by conveying the purposes along with the relevant elements of personally identifiable information throughout the system. By conveying the processing purposes in a data tag along with the personally identifiable information as the information transits a system, a system owner or operator can identify whether a change in processing would be compatible with the identified and documented purposes. Data tags may also support the use of automated tools."
+        }
+    ],
+    "group_title": "Personally Identifiable Information Processing and Transparency"
+}

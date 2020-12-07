@@ -1,0 +1,27 @@
+{
+    "id": "sc-30.1",
+    "class": "SP800-53-enhancement",
+    "title": "Virtualization Techniques",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-30(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-30(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-29.1",
+            "rel": "incorporated-into",
+            "text": "SC-29(1)"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

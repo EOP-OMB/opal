@@ -1,0 +1,51 @@
+{
+    "id": "sc-40.1",
+    "class": "SP800-53-enhancement",
+    "title": "Electromagnetic Interference",
+    "parameters": [
+        {
+            "id": "sc-40.1_prm_1",
+            "label": "organization-defined level of protection"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-40(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-40(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pe-21",
+            "rel": "related",
+            "text": "PE-21"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-40.1_smt",
+            "name": "statement",
+            "prose": "Implement cryptographic mechanisms that achieve {{ sc-40.1_prm_1 }} against the effects of intentional electromagnetic interference."
+        },
+        {
+            "id": "sc-40.1_gdn",
+            "name": "guidance",
+            "prose": "The implementation of cryptographic mechanisms for electromagnetic interference protects systems against intentional jamming that might deny or impair communications by ensuring that wireless spread spectrum waveforms used to provide anti-jam protection are not predictable by unauthorized individuals. The implementation of cryptographic mechanisms may also coincidentally mitigate the effects of unintentional jamming due to interference from legitimate transmitters that share the same spectrum. Mission requirements, projected threats, concept of operations, and laws, executive orders, directives, regulations, policies, and standards determine levels of wireless link availability, cryptography needed, and performance."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

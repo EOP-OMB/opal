@@ -1,0 +1,44 @@
+{
+    "id": "ac-9.2",
+    "class": "SP800-53-enhancement",
+    "title": "Successful and Unsuccessful Logons",
+    "parameters": [
+        {
+            "id": "ac-9.2_prm_1",
+            "select": {
+                "alternatives": [
+                    "successful logons",
+                    "unsuccessful logon attempts",
+                    "both"
+                ]
+            }
+        },
+        {
+            "id": "ac-9.2_prm_2",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-9(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-09(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-9.2_smt",
+            "name": "statement",
+            "prose": "Notify the user, upon successful logon, of the number of {{ ac-9.2_prm_1 }} during {{ ac-9.2_prm_2 }}."
+        },
+        {
+            "id": "ac-9.2_gdn",
+            "name": "guidance",
+            "prose": "Information about the number of successful and unsuccessful logon attempts within a specified time period allows the user to recognize if the number and type of logon attempts are consistent with the user\u2019s actual logon attempts."
+        }
+    ],
+    "group_title": "Access Control"
+}

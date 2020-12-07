@@ -1,0 +1,41 @@
+{
+    "id": "ac-2.6",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Privilege Management",
+    "parameters": [
+        {
+            "id": "ac-2.6_prm_1",
+            "label": "organization-defined dynamic privilege management capabilities"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-16",
+            "rel": "related",
+            "text": "AC-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.6_smt",
+            "name": "statement",
+            "prose": "Implement {{ ac-2.6_prm_1 }}."
+        },
+        {
+            "id": "ac-2.6_gdn",
+            "name": "guidance",
+            "prose": "In contrast to access control approaches that employ static accounts and predefined user privileges, dynamic access control approaches rely on runtime access control decisions facilitated by dynamic privilege management, such as attribute-based access control. While user identities remain relatively constant over time, user privileges typically change more frequently based on ongoing mission or business requirements and the operational needs of organizations. An example of dynamic privilege management is the immediate revocation of privileges from users as opposed to requiring that users terminate and restart their sessions to reflect changes in privileges. Dynamic privilege management can also include mechanisms that change user privileges based on dynamic rules as opposed to editing specific user profiles. Examples include automatic adjustments of user privileges if they are operating out of their normal work times, if their job function or assignment changes, or if systems are under duress or in emergency situations. Dynamic privilege management includes the effects of privilege changes, for example, when there are changes to encryption keys used for communications."
+        }
+    ],
+    "group_title": "Access Control"
+}

@@ -1,0 +1,34 @@
+{
+    "id": "ac-21.2",
+    "class": "SP800-53-enhancement",
+    "title": "Information Search and Retrieval",
+    "parameters": [
+        {
+            "id": "ac-21.2_prm_1",
+            "label": "organization-defined information sharing restrictions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-21(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-21(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-21.2_smt",
+            "name": "statement",
+            "prose": "Implement information search and retrieval services that enforce {{ ac-21.2_prm_1 }}."
+        },
+        {
+            "id": "ac-21.2_gdn",
+            "name": "guidance",
+            "prose": "Information search and retrieval services identify information system resources relevant to an information need."
+        }
+    ],
+    "group_title": "Access Control"
+}

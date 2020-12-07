@@ -1,0 +1,45 @@
+{
+    "id": "ca-3.6",
+    "class": "SP800-53-enhancement",
+    "title": "Transfer Authorizations",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-3(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-03(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-2",
+            "rel": "related",
+            "text": "AC-2"
+        },
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-3.6_smt",
+            "name": "statement",
+            "prose": "Verify that individuals or systems transferring data between interconnecting systems have the requisite authorizations (i.e., write permissions or privileges) prior to accepting such data."
+        },
+        {
+            "id": "ca-3.6_gdn",
+            "name": "guidance",
+            "prose": "To prevent unauthorized individuals and systems from making information transfers to protected systems, the protected system verifies\u2014via independent means\u2014 whether the individual or system attempting to transfer information is authorized to do so. Verification of the authorization to transfer information also applies to control plane traffic (e.g., routing and DNS) and services (e.g., authenticated SMTP relays)."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

@@ -1,0 +1,45 @@
+{
+    "id": "au-9.3",
+    "class": "SP800-53-enhancement",
+    "title": "Cryptographic Protection",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-9(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-09(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-10",
+            "rel": "related",
+            "text": "AU-10"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-9.3_smt",
+            "name": "statement",
+            "prose": "Implement cryptographic mechanisms to protect the integrity of audit information and audit tools."
+        },
+        {
+            "id": "au-9.3_gdn",
+            "name": "guidance",
+            "prose": "Cryptographic mechanisms used for protecting the integrity of audit information include signed hash functions using asymmetric cryptography. This enables the distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

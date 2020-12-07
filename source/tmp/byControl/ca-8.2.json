@@ -1,0 +1,34 @@
+{
+    "id": "ca-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Red Team Exercises",
+    "parameters": [
+        {
+            "id": "ca-8.2_prm_1",
+            "label": "organization-defined red team exercises"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-8.2_smt",
+            "name": "statement",
+            "prose": "Employ the following red-team exercises to simulate attempts by adversaries to compromise organizational systems in accordance with applicable rules of engagement: {{ ca-8.2_prm_1 }}."
+        },
+        {
+            "id": "ca-8.2_gdn",
+            "name": "guidance",
+            "prose": "Red team exercises extend the objectives of penetration testing by examining the security and privacy posture of organizations and the capability to implement effective cyber defenses. Red team exercises simulate attempts by adversaries to compromise mission and business functions and provide a comprehensive assessment of the security and privacy posture of systems and organizations. Such attempts may include technology-based attacks and social engineering-based attacks. Technology-based attacks include interactions with hardware, software, or firmware components and/or mission and business processes. Social engineering-based attacks include interactions via email, telephone, shoulder surfing, or personal conversations. Red team exercises are most effective when conducted by penetration testing agents and teams with knowledge of and experience with current adversarial tactics, techniques, procedures, and tools. While penetration testing may be primarily laboratory-based testing, organizations can use red team exercises to provide more comprehensive assessments that reflect real-world conditions. The results from red team exercises can be used by organizations to improve security and privacy awareness and training and to assess control effectiveness."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

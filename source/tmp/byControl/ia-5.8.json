@@ -1,0 +1,41 @@
+{
+    "id": "ia-5.8",
+    "class": "SP800-53-enhancement",
+    "title": "Multiple System Accounts",
+    "parameters": [
+        {
+            "id": "ia-5.8_prm_1",
+            "label": "organization-defined security controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-5(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-05(08)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ps-6",
+            "rel": "related",
+            "text": "PS-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-5.8_smt",
+            "name": "statement",
+            "prose": "Implement {{ ia-5.8_prm_1 }} to manage the risk of compromise due to individuals having accounts on multiple systems."
+        },
+        {
+            "id": "ia-5.8_gdn",
+            "name": "guidance",
+            "prose": "When individuals have accounts on multiple systems and use the same authenticators such as passwords, there is the risk that a compromise of one account may lead to the compromise of other accounts. Alternative approaches include having different authenticators (passwords) on all systems, employing a single sign-on or federation mechanism, or using some form of one-time passwords on all systems. Organizations can also use rules of behavior (see PL-4) and access agreements (see PS-6) to mitigate the risk of multiple system accounts."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

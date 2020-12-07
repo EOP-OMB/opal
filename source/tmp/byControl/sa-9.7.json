@@ -1,0 +1,35 @@
+{
+    "id": "sa-9.7",
+    "class": "SP800-53-enhancement",
+    "title": "Organization-controlled Integrity Checking",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-9(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-09(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-9.7_smt",
+            "name": "statement",
+            "prose": "Provide the capability to check the integrity of information while it resides in the external system."
+        },
+        {
+            "id": "sa-9.7_gdn",
+            "name": "guidance",
+            "prose": "Storage of organizational information in an external system could limit visibility into the security status of its data. The ability of the organization to verify and validate the integrity of its stored data without transferring it out of the external system provides such visibility."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,45 @@
+{
+    "id": "sc-40.3",
+    "class": "SP800-53-enhancement",
+    "title": "Imitative or Manipulative Communications Deception",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-40(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-40(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-40.3_smt",
+            "name": "statement",
+            "prose": "Implement cryptographic mechanisms to identify and reject wireless transmissions that are deliberate attempts to achieve imitative or manipulative communications deception based on signal parameters."
+        },
+        {
+            "id": "sc-40.3_gdn",
+            "name": "guidance",
+            "prose": "The implementation of cryptographic mechanisms to identify and reject imitative or manipulative communications ensures that the signal parameters of wireless transmissions are not predictable by unauthorized individuals. Such unpredictability reduces the probability of imitative or manipulative communications deception based on signal parameters alone."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

@@ -1,0 +1,35 @@
+{
+    "id": "cp-9.2",
+    "class": "SP800-53-enhancement",
+    "title": "Test Restoration Using Sampling",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-9(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-09(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-4",
+            "rel": "related",
+            "text": "CP-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-9.2_smt",
+            "name": "statement",
+            "prose": "Use a sample of backup information in the restoration of selected system functions as part of contingency plan testing."
+        },
+        {
+            "id": "cp-9.2_gdn",
+            "name": "guidance",
+            "prose": "Organizations need assurance that system functions can be restored correctly and can support established organizational missions. To ensure that the selected system functions are thoroughly exercised during contingency plan testing, a sample of backup information is retrieved to determine whether the functions are operating as intended. Organizations can determine the sample size for the functions and backup information based on the level of assurance needed."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

@@ -1,0 +1,51 @@
+{
+    "id": "pe-2.2",
+    "class": "SP800-53-enhancement",
+    "title": "Two Forms of Identification",
+    "parameters": [
+        {
+            "id": "pe-2.2_prm_1",
+            "label": "organization-defined list of acceptable forms of identification"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-2(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-02(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2",
+            "rel": "related",
+            "text": "IA-2"
+        },
+        {
+            "href": "#ia-4",
+            "rel": "related",
+            "text": "IA-4"
+        },
+        {
+            "href": "#ia-5",
+            "rel": "related",
+            "text": "IA-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-2.2_smt",
+            "name": "statement",
+            "prose": "Require two forms of identification from the following forms of identification for visitor access to the facility where the system resides: {{ pe-2.2_prm_1 }}."
+        },
+        {
+            "id": "pe-2.2_gdn",
+            "name": "guidance",
+            "prose": "Acceptable forms of identification include passports, REAL ID-compliant drivers\u2019 licenses, and Personal Identity Verification (PIV) cards. For gaining access to facilities using automated mechanisms, organizations may use PIV cards, key cards, PINs, and biometrics."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

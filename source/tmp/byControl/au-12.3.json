@@ -1,0 +1,53 @@
+{
+    "id": "au-12.3",
+    "class": "SP800-53-enhancement",
+    "title": "Changes by Authorized Individuals",
+    "parameters": [
+        {
+            "id": "au-12.3_prm_1",
+            "label": "organization-defined individuals or roles"
+        },
+        {
+            "id": "au-12.3_prm_2",
+            "label": "organization-defined system components"
+        },
+        {
+            "id": "au-12.3_prm_3",
+            "label": "organization-defined selectable event criteria"
+        },
+        {
+            "id": "au-12.3_prm_4",
+            "label": "organization-defined time thresholds"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-12(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-12(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-12.3_smt",
+            "name": "statement",
+            "prose": "Provide and implement the capability for {{ au-12.3_prm_1 }} to change the logging to be performed on {{ au-12.3_prm_2 }} based on {{ au-12.3_prm_3 }} within {{ au-12.3_prm_4 }}."
+        },
+        {
+            "id": "au-12.3_gdn",
+            "name": "guidance",
+            "prose": "Permitting authorized individuals to make changes to system logging enables organizations to extend or limit logging as necessary to meet organizational requirements. Logging that is limited to conserve system resources may be extended (either temporarily or permanently) to address certain threat situations. In addition, logging may be limited to a specific set of event types to facilitate audit reduction, analysis, and reporting. Organizations can establish time thresholds in which logging actions are changed (e.g., near real-time, within minutes, or within hours)."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

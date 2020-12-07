@@ -1,0 +1,34 @@
+{
+    "id": "ir-4.5",
+    "class": "SP800-53-enhancement",
+    "title": "Automatic Disabling of System",
+    "parameters": [
+        {
+            "id": "ir-4.5_prm_1",
+            "label": "organization-defined security violations"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.5_smt",
+            "name": "statement",
+            "prose": "Implement a configurable capability to automatically disable the system if {{ ir-4.5_prm_1 }} are detected."
+        },
+        {
+            "id": "ir-4.5_gdn",
+            "name": "guidance",
+            "prose": "Organizations consider whether the capability to automatically disable the system conflicts with continuity of operations requirements specified as part of CP-2 or IR-4(3). Security violations include cyber-attacks that have compromised the integrity of the system or exfiltrated organizational information and serious errors in software programs that could adversely impact organizational missions or functions or jeopardize the safety of individuals."
+        }
+    ],
+    "group_title": "Incident Response"
+}

@@ -1,0 +1,41 @@
+{
+    "id": "pt-5.1",
+    "class": "SP800-53-enhancement",
+    "title": "Just-in-time Notice",
+    "parameters": [
+        {
+            "id": "pt-5.1_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PT-5(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PT-05(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pm-21",
+            "rel": "related",
+            "text": "PM-21"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pt-5.1_smt",
+            "name": "statement",
+            "prose": "Present notice of personally identifiable information processing to individuals at a time and location where the individual provides personally identifiable information or in conjunction with a data action, or {{ pt-5.1_prm_1 }}."
+        },
+        {
+            "id": "pt-5.1_gdn",
+            "name": "guidance",
+            "prose": "Just-in-time notices inform individuals of how organizations process their personally identifiable information at a time when such notices may be most useful to the individuals. Individual assumptions about how personally identifiable information will be processed might not be accurate or reliable if time has passed since the organization last presented notice or the circumstances under which the individual was last provided notice have changed. A just-in-time notice can explain data actions that organizations have identified as potentially giving rise to greater privacy risk for individuals. Organizations can use a just-in-time notice to update or remind individuals about specific data actions as they occur or highlight specific changes that occurred since last presenting notice. A just-in-time notice can be used in conjunction with just-in-time consent to explain what will occur if consent is declined. Organizations use discretion to determine when to use a just-in-time notice and may use supporting information on user demographics, focus groups, or surveys to learn about users\u2019 privacy interests and concerns."
+        }
+    ],
+    "group_title": "Personally Identifiable Information Processing and Transparency"
+}

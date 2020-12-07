@@ -1,0 +1,34 @@
+{
+    "id": "at-2.4",
+    "class": "SP800-53-enhancement",
+    "title": "Suspicious Communications and Anomalous System Behavior",
+    "parameters": [
+        {
+            "id": "at-2.4_prm_1",
+            "label": "organization-defined indicators of malicious code"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AT-2(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AT-02(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "at-2.4_smt",
+            "name": "statement",
+            "prose": "Provide literacy training on recognizing suspicious communications and anomalous behavior in organizational systems using {{ at-2.4_prm_1 }}."
+        },
+        {
+            "id": "at-2.4_gdn",
+            "name": "guidance",
+            "prose": "A well-trained workforce provides another organizational control that can be employed as part of a defense-in-depth strategy to protect against malicious code coming into organizations via email or the web applications. Personnel are trained to look for indications of potentially suspicious email (e.g., receiving an unexpected email, receiving an email containing strange or poor grammar, or receiving an email from an unfamiliar sender that appears to be from a known sponsor or contractor). Personnel are also trained on how to respond to suspicious email or web communications. For this process to work effectively, personnel are trained and made aware of what constitutes suspicious communications. Training personnel on how to recognize anomalous behaviors in systems can provide organizations with early warning for the presence of malicious code. Recognition of anomalous behavior by organizational personnel can supplement malicious code detection and protection tools and systems employed by organizations."
+        }
+    ],
+    "group_title": "Awareness and Training"
+}

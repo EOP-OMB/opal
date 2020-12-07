@@ -1,0 +1,77 @@
+{
+    "id": "si-14.2",
+    "class": "SP800-53-enhancement",
+    "title": "Non-persistent Information",
+    "parameters": [
+        {
+            "id": "si-14.2_prm_1",
+            "select": {
+                "alternatives": [
+                    "Refresh {{ si-14.2_prm_2 }}\n                     {{ si-14.2_prm_3 }}\n                  ",
+                    "Generate {{ si-14.2_prm_4 }} on demand"
+                ]
+            }
+        },
+        {
+            "id": "si-14.2_prm_2",
+            "depends-on": "si-14.2_prm_1",
+            "label": "organization-defined information"
+        },
+        {
+            "id": "si-14.2_prm_3",
+            "depends-on": "si-14.2_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "si-14.2_prm_4",
+            "depends-on": "si-14.2_prm_1",
+            "label": "organization-defined information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-14(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-14(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-14.2_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-14.2_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "\n                     {{ si-14.2_prm_1 }}; and"
+                },
+                {
+                    "id": "si-14.2_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Delete information when no longer needed."
+                }
+            ]
+        },
+        {
+            "id": "si-14.2_gdn",
+            "name": "guidance",
+            "prose": "Retaining information longer than is needed makes the information a potential target for advanced adversaries searching for high value assets to compromise through unauthorized disclosure, unauthorized modification, or exfiltration. For system-related information, unnecessary retention provides advanced adversaries information that can assist in their reconnaissance and lateral movement through the system."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

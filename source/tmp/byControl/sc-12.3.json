@@ -1,0 +1,42 @@
+{
+    "id": "sc-12.3",
+    "class": "SP800-53-enhancement",
+    "title": "Asymmetric Keys",
+    "parameters": [
+        {
+            "id": "sc-12.3_prm_1",
+            "select": {
+                "alternatives": [
+                    "NSA-approved key management technology and processes",
+                    "prepositioned keying material",
+                    "DoD-approved or DoD-issued Medium Assurance PKI certificates",
+                    "DoD-approved or DoD-issued Medium Hardware Assurance PKI certificates and hardware security tokens that protect the user\u2019s private key",
+                    "certificates issued in accordance with organization-defined requirements"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-12(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-12(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-12.3_smt",
+            "name": "statement",
+            "prose": "Produce, control, and distribute asymmetric cryptographic keys using {{ sc-12.3_prm_1 }}."
+        },
+        {
+            "id": "sc-12.3_gdn",
+            "name": "guidance",
+            "prose": "[SP 800-56A], [SP 800-56B], and [SP 800-56C] provide guidance on cryptographic key establishment schemes and key derivation methods. [SP 800-57-1], [SP 800-57-2], and [SP 800-57-3] provide guidance on cryptographic key management."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

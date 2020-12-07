@@ -1,0 +1,56 @@
+{
+    "id": "sc-49",
+    "class": "SP800-53",
+    "title": "Hardware-enforced Separation and Policy Enforcement",
+    "parameters": [
+        {
+            "id": "sc-49_prm_1",
+            "label": "organization-defined security domains"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-49"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-49"
+        }
+    ],
+    "links": [
+        {
+            "href": "#e3cc0520-a366-4fc9-abc2-5272db7e3564",
+            "rel": "reference",
+            "text": "[SP 800-160-1]"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        },
+        {
+            "href": "#sc-50",
+            "rel": "related",
+            "text": "SC-50"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-49_smt",
+            "name": "statement",
+            "prose": "Implement hardware-enforced separation and policy enforcement mechanisms between {{ sc-49_prm_1 }}."
+        },
+        {
+            "id": "sc-49_gdn",
+            "name": "guidance",
+            "prose": "System owners may require additional strength of mechanism and robustness to ensure domain separation and policy enforcement for specific types of threats and environments of operation. Hardware-enforced separation and policy enforcement provide greater strength of mechanism than software-enforced separation and policy enforcement."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

@@ -1,0 +1,27 @@
+{
+    "id": "ca-4",
+    "class": "SP800-53",
+    "title": "Security Certification",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-4"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-04"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-2",
+            "rel": "incorporated-into",
+            "text": "CA-2"
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

@@ -1,0 +1,58 @@
+{
+    "id": "ia-5.16",
+    "class": "SP800-53-enhancement",
+    "title": "In-person or Trusted External Party Authenticator Issuance",
+    "parameters": [
+        {
+            "id": "ia-5.16_prm_1",
+            "label": "organization-defined types of and/or specific authenticators"
+        },
+        {
+            "id": "ia-5.16_prm_2",
+            "select": {
+                "alternatives": [
+                    "in person",
+                    "by a trusted external party"
+                ]
+            }
+        },
+        {
+            "id": "ia-5.16_prm_3",
+            "label": "organization-defined registration authority"
+        },
+        {
+            "id": "ia-5.16_prm_4",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-5(16)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-05(16)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-12",
+            "rel": "related",
+            "text": "IA-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-5.16_smt",
+            "name": "statement",
+            "prose": "Require that the issuance of {{ ia-5.16_prm_1 }} be conducted {{ ia-5.16_prm_2 }} before {{ ia-5.16_prm_3 }} with authorization by {{ ia-5.16_prm_4 }}."
+        },
+        {
+            "id": "ia-5.16_gdn",
+            "name": "guidance",
+            "prose": "Issuing authenticators in person or by a trusted external party enhances and reinforces the trustworthiness of the identity proofing process."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

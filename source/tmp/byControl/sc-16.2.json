@@ -1,0 +1,45 @@
+{
+    "id": "sc-16.2",
+    "class": "SP800-53-enhancement",
+    "title": "Anti-spoofing Mechanisms",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-16(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-16(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-3",
+            "rel": "related",
+            "text": "SI-3"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-16.2_smt",
+            "name": "statement",
+            "prose": "Implement anti-spoofing mechanisms to prevent adversaries from falsifying the security attributes indicating the successful application of the security process."
+        },
+        {
+            "id": "sc-16.2_gdn",
+            "name": "guidance",
+            "prose": "Some attack vectors operate by altering the security attributes of an information system to intentionally and maliciously implement an insufficient level of security within the system. The alteration of attributes leads organizations to believe that a greater number of security functions are in place and operational than have actually been implemented."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

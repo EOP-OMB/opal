@@ -1,0 +1,51 @@
+{
+    "id": "ps-4.1",
+    "class": "SP800-53-enhancement",
+    "title": "Post-employment Requirements",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PS-4(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PS-04(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ps-4.1_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ps-4.1_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Notify terminated individuals of applicable, legally binding post-employment requirements for the protection of organizational information; and"
+                },
+                {
+                    "id": "ps-4.1_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Require terminated individuals to sign an acknowledgment of post-employment requirements as part of the organizational termination process."
+                }
+            ]
+        },
+        {
+            "id": "ps-4.1_gdn",
+            "name": "guidance",
+            "prose": "Organizations consult with the Office of the General Counsel regarding matters of post-employment requirements on terminated individuals."
+        }
+    ],
+    "group_title": "Personnel Security"
+}

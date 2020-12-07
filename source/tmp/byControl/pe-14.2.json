@@ -1,0 +1,34 @@
+{
+    "id": "pe-14.2",
+    "class": "SP800-53-enhancement",
+    "title": "Monitoring with Alarms and Notifications",
+    "parameters": [
+        {
+            "id": "pe-14.2_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-14(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-14(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-14.2_smt",
+            "name": "statement",
+            "prose": "Employ environmental control monitoring that provides an alarm or notification of changes potentially harmful to personnel or equipment to {{ pe-14.2_prm_1 }}."
+        },
+        {
+            "id": "pe-14.2_gdn",
+            "name": "guidance",
+            "prose": "The alarm or notification may be an audible alarm or a visual message in real time to personnel or roles defined by the organization. Such alarms and notifications can help minimize harm to individuals and damage to organizational assets by facilitating a timely incident response."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

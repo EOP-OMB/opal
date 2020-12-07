@@ -1,0 +1,27 @@
+{
+    "id": "au-14.2",
+    "class": "SP800-53-enhancement",
+    "title": "Capture and Record Content",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-14(2)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-14(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-14",
+            "rel": "incorporated-into",
+            "text": "AU-14"
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

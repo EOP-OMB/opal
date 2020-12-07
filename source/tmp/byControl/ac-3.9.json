@@ -1,0 +1,93 @@
+{
+    "id": "ac-3.9",
+    "class": "SP800-53-enhancement",
+    "title": "Controlled Release",
+    "parameters": [
+        {
+            "id": "ac-3.9_prm_1",
+            "label": "organization-defined system or system component"
+        },
+        {
+            "id": "ac-3.9_prm_2",
+            "label": "organization-defined controls"
+        },
+        {
+            "id": "ac-3.9_prm_3",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(09)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-3",
+            "rel": "related",
+            "text": "CA-3"
+        },
+        {
+            "href": "#pt-7",
+            "rel": "related",
+            "text": "PT-7"
+        },
+        {
+            "href": "#pt-8",
+            "rel": "related",
+            "text": "PT-8"
+        },
+        {
+            "href": "#sa-9",
+            "rel": "related",
+            "text": "SA-9"
+        },
+        {
+            "href": "#sc-16",
+            "rel": "related",
+            "text": "SC-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-3.9_smt",
+            "name": "statement",
+            "prose": "Release information outside of the system only if:",
+            "parts": [
+                {
+                    "id": "ac-3.9_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "The receiving {{ ac-3.9_prm_1 }} provides {{ ac-3.9_prm_2 }}; and"
+                },
+                {
+                    "id": "ac-3.9_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "\n                     {{ ac-3.9_prm_3 }} are used to validate the appropriateness of the information designated for release."
+                }
+            ]
+        },
+        {
+            "id": "ac-3.9_gdn",
+            "name": "guidance",
+            "prose": "Organizations can only directly protect information when it resides within the system. Additional controls may be needed to ensure that organizational information is adequately protected once it is transmitted outside of the system. In situations where the system is unable to determine the adequacy of the protections provided by external entities, as a mitigating control, organizations procedurally determine whether the external systems are providing adequate controls. The means used to determine the adequacy of controls provided by external systems include conducting periodic assessments (inspections/tests), establishing agreements between the organization and its counterpart organizations, or some other process. The means used by external entities to protect the information received need not be the same as those used by the organization, but the means employed are sufficient to provide consistent adjudication of the security and privacy policy to protect the information and individuals\u2019 privacy.\nControlled release of information requires systems to implement technical or procedural means to validate the information prior to releasing it to external systems. For example, if the system passes information to a system controlled by another organization, technical means are employed to validate that the security and privacy attributes associated with the exported information are appropriate for the receiving system. Alternatively, if the system passes information to a printer in organization-controlled space, procedural means can be employed to ensure that only authorized individuals gain access to the printer."
+        }
+    ],
+    "group_title": "Access Control"
+}

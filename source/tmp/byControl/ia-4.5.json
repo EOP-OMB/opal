@@ -1,0 +1,41 @@
+{
+    "id": "ia-4.5",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Management",
+    "parameters": [
+        {
+            "id": "ia-4.5_prm_1",
+            "label": "organization-defined dynamic identifier policy"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-4(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-04(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-16",
+            "rel": "related",
+            "text": "AC-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-4.5_smt",
+            "name": "statement",
+            "prose": "Manage individual identifiers dynamically in accordance with {{ ia-4.5_prm_1 }}."
+        },
+        {
+            "id": "ia-4.5_gdn",
+            "name": "guidance",
+            "prose": "In contrast to conventional approaches to identification that presume static accounts for preregistered users, many distributed systems establish identifiers at runtime for entities that were previously unknown. When identifiers are established at runtime for previously unknown entities, organizations can anticipate and provision for the dynamic establishment of identifiers. Pre-established trust relationships and mechanisms with appropriate authorities to validate credentials and related identifiers are essential."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

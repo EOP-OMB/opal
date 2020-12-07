@@ -1,0 +1,34 @@
+{
+    "id": "mp-6.2",
+    "class": "SP800-53-enhancement",
+    "title": "Equipment Testing",
+    "parameters": [
+        {
+            "id": "mp-6.2_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-6(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-06(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-6.2_smt",
+            "name": "statement",
+            "prose": "Test sanitization equipment and procedures {{ mp-6.2_prm_1 }} to ensure that the intended sanitization is being achieved."
+        },
+        {
+            "id": "mp-6.2_gdn",
+            "name": "guidance",
+            "prose": "Testing of sanitization equipment and procedures may be conducted by qualified and authorized external entities, including federal agencies or external service providers."
+        }
+    ],
+    "group_title": "Media Protection"
+}

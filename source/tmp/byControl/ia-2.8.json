@@ -1,0 +1,40 @@
+{
+    "id": "ia-2.8",
+    "class": "SP800-53-enhancement",
+    "title": "Access to Accounts \u2014 Replay Resistant",
+    "parameters": [
+        {
+            "id": "ia-2.8_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "privileged accounts",
+                    "non-privileged accounts"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(08)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-2.8_smt",
+            "name": "statement",
+            "prose": "Implement replay-resistant authentication mechanisms for access to {{ ia-2.8_prm_1 }}."
+        },
+        {
+            "id": "ia-2.8_gdn",
+            "name": "guidance",
+            "prose": "Authentication processes resist replay attacks if it is impractical to achieve successful authentications by replaying previous authentication messages. Replay-resistant techniques include protocols that use nonces or challenges such as time synchronous or cryptographic authenticators."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

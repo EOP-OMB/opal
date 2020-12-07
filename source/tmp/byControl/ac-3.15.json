@@ -1,0 +1,78 @@
+{
+    "id": "ac-3.15",
+    "class": "SP800-53-enhancement",
+    "title": "Discretionary and Mandatory Access Control",
+    "parameters": [
+        {
+            "id": "ac-3.15_prm_1",
+            "label": "organization-defined mandatory access control policy"
+        },
+        {
+            "id": "ac-3.15_prm_2",
+            "label": "organization-defined discretionary access control policy"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(15)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(15)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-2",
+            "rel": "related",
+            "text": "SC-2"
+        },
+        {
+            "href": "#sc-3",
+            "rel": "related",
+            "text": "SC-3"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-3.15_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ac-3.15_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Enforce {{ ac-3.15_prm_1 }} over the set of covered subjects and objects specified in the policy; and"
+                },
+                {
+                    "id": "ac-3.15_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Enforce {{ ac-3.15_prm_2 }} over the set of covered subjects and objects specified in the policy."
+                }
+            ]
+        },
+        {
+            "id": "ac-3.15_gdn",
+            "name": "guidance",
+            "prose": "Simultaneously implementing a mandatory access control policy and a discretionary access control policy can provide additional protection against the unauthorized execution of code by users or processes acting on behalf of users. This helps prevent a single compromised user or process from compromising the entire system."
+        }
+    ],
+    "group_title": "Access Control"
+}

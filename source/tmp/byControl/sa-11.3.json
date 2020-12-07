@@ -1,0 +1,69 @@
+{
+    "id": "sa-11.3",
+    "class": "SP800-53-enhancement",
+    "title": "Independent Verification of Assessment Plans and Evidence",
+    "parameters": [
+        {
+            "id": "sa-11.3_prm_1",
+            "label": "organization-defined independence criteria"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-11(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-11(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#at-3",
+            "rel": "related",
+            "text": "AT-3"
+        },
+        {
+            "href": "#ra-5",
+            "rel": "related",
+            "text": "RA-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-11.3_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sa-11.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Require an independent agent satisfying {{ sa-11.3_prm_1 }} to verify the correct implementation of the developer security and privacy assessment plans and the evidence produced during testing and evaluation; and"
+                },
+                {
+                    "id": "sa-11.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Verify that the independent agent is provided with sufficient information to complete the verification process or granted the authority to obtain such information."
+                }
+            ]
+        },
+        {
+            "id": "sa-11.3_gdn",
+            "name": "guidance",
+            "prose": "Independent agents have the qualifications\u2014including the expertise, skills, training, certifications, and experience\u2014to verify the correct implementation of developer security and privacy assessment plans."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

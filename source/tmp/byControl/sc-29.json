@@ -1,0 +1,96 @@
+{
+    "id": "sc-29",
+    "class": "SP800-53",
+    "title": "Heterogeneity",
+    "parameters": [
+        {
+            "id": "sc-29_prm_1",
+            "label": "organization-defined system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-29"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-29"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-9",
+            "rel": "related",
+            "text": "AU-9"
+        },
+        {
+            "href": "#pl-8",
+            "rel": "related",
+            "text": "PL-8"
+        },
+        {
+            "href": "#sc-27",
+            "rel": "related",
+            "text": "SC-27"
+        },
+        {
+            "href": "#sc-30",
+            "rel": "related",
+            "text": "SC-30"
+        },
+        {
+            "href": "#sr-3",
+            "rel": "related",
+            "text": "SR-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-29_smt",
+            "name": "statement",
+            "prose": "Employ a diverse set of information technologies for the following system components in the implementation of the system: {{ sc-29_prm_1 }}."
+        },
+        {
+            "id": "sc-29_gdn",
+            "name": "guidance",
+            "prose": "Increasing the diversity of information technologies within organizational systems reduces the impact of potential exploitations or compromises of specific technologies. Such diversity protects against common mode failures, including those failures induced by supply chain attacks. Diversity in information technologies also reduces the likelihood that the means adversaries use to compromise one system component will be effective against other system components, thus further increasing the adversary work factor to successfully complete planned attacks. An increase in diversity may add complexity and management overhead that could ultimately lead to mistakes and unauthorized configurations."
+        }
+    ],
+    "controls": [
+        {
+            "id": "sc-29.1",
+            "class": "SP800-53-enhancement",
+            "title": "Virtualization Techniques",
+            "parameters": [
+                {
+                    "id": "sc-29.1_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-29(1)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-29(01)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-29.1_smt",
+                    "name": "statement",
+                    "prose": "Employ virtualization techniques to support the deployment of a diversity of operating systems and applications that are changed {{ sc-29.1_prm_1 }}."
+                },
+                {
+                    "id": "sc-29.1_gdn",
+                    "name": "guidance",
+                    "prose": "While frequent changes to operating systems and applications can pose significant configuration management challenges, the changes can result in an increased work factor for adversaries to conduct successful attacks. Changing virtual operating systems or applications, as opposed to changing actual operating systems or applications, provides virtual changes that impede attacker success while reducing configuration management efforts. Virtualization techniques can assist in isolating untrustworthy software or software of dubious provenance into confined execution environments."
+                }
+            ]
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

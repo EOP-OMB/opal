@@ -1,0 +1,67 @@
+{
+    "id": "sc-14",
+    "class": "SP800-53",
+    "title": "Public Access Protections",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-14"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-14"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-2",
+            "rel": "incorporated-into",
+            "text": "AC-2"
+        },
+        {
+            "href": "#ac-3",
+            "rel": "incorporated-into",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-5",
+            "rel": "incorporated-into",
+            "text": "AC-5"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "incorporated-into",
+            "text": "AC-6"
+        },
+        {
+            "href": "#si-3",
+            "rel": "incorporated-into",
+            "text": "SI-3"
+        },
+        {
+            "href": "#si-4",
+            "rel": "incorporated-into",
+            "text": "SI-4"
+        },
+        {
+            "href": "#si-5",
+            "rel": "incorporated-into",
+            "text": "SI-5"
+        },
+        {
+            "href": "#si-7",
+            "rel": "incorporated-into",
+            "text": "SI-7"
+        },
+        {
+            "href": "#si-10",
+            "rel": "incorporated-into",
+            "text": "SI-10"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

@@ -1,0 +1,99 @@
+{
+    "id": "cm-7.4",
+    "class": "SP800-53-enhancement",
+    "title": "Unauthorized Software",
+    "parameters": [
+        {
+            "id": "cm-7.4_prm_1",
+            "label": "organization-defined software programs not authorized to execute on the system"
+        },
+        {
+            "id": "cm-7.4_prm_2",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-7(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-07(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-6",
+            "rel": "related",
+            "text": "CM-6"
+        },
+        {
+            "href": "#cm-8",
+            "rel": "related",
+            "text": "CM-8"
+        },
+        {
+            "href": "#cm-10",
+            "rel": "related",
+            "text": "CM-10"
+        },
+        {
+            "href": "#pl-9",
+            "rel": "related",
+            "text": "PL-9"
+        },
+        {
+            "href": "#pm-5",
+            "rel": "related",
+            "text": "PM-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-7.4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cm-7.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Identify {{ cm-7.4_prm_1 }};"
+                },
+                {
+                    "id": "cm-7.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Employ an allow-all, deny-by-exception policy to prohibit the execution of unauthorized software programs on the system; and"
+                },
+                {
+                    "id": "cm-7.4_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Review and update the list of unauthorized software programs {{ cm-7.4_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "cm-7.4_gdn",
+            "name": "guidance",
+            "prose": "Unauthorized software programs can be limited to specific versions or from a specific source. The concept of prohibiting the execution of unauthorized software may also be applied to user actions, system ports and protocols, IP addresses/ranges, websites, and MAC addresses."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

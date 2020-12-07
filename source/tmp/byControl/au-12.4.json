@@ -1,0 +1,28 @@
+{
+    "id": "au-12.4",
+    "class": "SP800-53-enhancement",
+    "title": "Query Parameter Audits of Personally Identifiable Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-12(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-12(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-12.4_smt",
+            "name": "statement",
+            "prose": "Provide and implement the capability for auditing the parameters of user query events for data sets containing personally identifiable information."
+        },
+        {
+            "id": "au-12.4_gdn",
+            "name": "guidance",
+            "prose": "Query parameters are explicit criteria that an individual or automated system submits to a system to retrieve data. Auditing of query parameters for datasets that contain personally identifiable information augments the capability of an organization to track and understand the access, usage, or sharing of personally identifiable information by authorized personnel."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

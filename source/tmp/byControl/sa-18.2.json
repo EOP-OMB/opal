@@ -1,0 +1,27 @@
+{
+    "id": "sa-18.2",
+    "class": "SP800-53-enhancement",
+    "title": "Inspection of Systems or Components",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-18(2)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-18(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-10",
+            "rel": "moved-to",
+            "text": "SR-10"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

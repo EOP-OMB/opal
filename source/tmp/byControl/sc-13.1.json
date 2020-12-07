@@ -1,0 +1,27 @@
+{
+    "id": "sc-13.1",
+    "class": "SP800-53-enhancement",
+    "title": "Fips-validated Cryptography",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-13(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-13(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-13",
+            "rel": "incorporated-into",
+            "text": "SC-13"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

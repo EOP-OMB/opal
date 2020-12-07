@@ -1,0 +1,3941 @@
+{
+    "id": "pm",
+    "class": "family",
+    "title": "Program Management",
+    "controls": [
+        {
+            "id": "pm-1",
+            "class": "SP800-53",
+            "title": "Information Security Program Plan",
+            "parameters": [
+                {
+                    "id": "pm-1_prm_1",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "pm-1_prm_2",
+                    "label": "organization-defined events"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-1"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-01"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#0c67b2a9-bede-43d2-b86d-5f35b8be36e9",
+                    "rel": "reference",
+                    "text": "[FISMA]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pm-18",
+                    "rel": "related",
+                    "text": "PM-18"
+                },
+                {
+                    "href": "#pm-30",
+                    "rel": "related",
+                    "text": "PM-30"
+                },
+                {
+                    "href": "#ra-9",
+                    "rel": "related",
+                    "text": "RA-9"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                },
+                {
+                    "href": "#sr-2",
+                    "rel": "related",
+                    "text": "SR-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-1_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-1_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop and disseminate an organization-wide information security program plan that:",
+                            "parts": [
+                                {
+                                    "id": "pm-1_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Provides an overview of the requirements for the security program and a description of the security program management controls and common controls in place or planned for meeting those requirements;"
+                                },
+                                {
+                                    "id": "pm-1_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Includes the identification and assignment of roles, responsibilities, management commitment, coordination among organizational entities, and compliance;"
+                                },
+                                {
+                                    "id": "pm-1_smt.a.3",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "3."
+                                        }
+                                    ],
+                                    "prose": "Reflects the coordination among organizational entities responsible for information security; and"
+                                },
+                                {
+                                    "id": "pm-1_smt.a.4",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "4."
+                                        }
+                                    ],
+                                    "prose": "Is approved by a senior official with responsibility and accountability for the risk being incurred to organizational operations (including mission, functions, image, and reputation), organizational assets, individuals, other organizations, and the Nation;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-1_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review and update the organization-wide information security program plan {{ pm-1_prm_1 }} and following {{ pm-1_prm_2 }}; and"
+                        },
+                        {
+                            "id": "pm-1_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Protect the information security program plan from unauthorized disclosure and modification."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-1_gdn",
+                    "name": "guidance",
+                    "prose": "An information security program plan is a formal document that provides an overview of the security requirements for an organization-wide information security program and describes the program management controls and common controls in place or planned for meeting those requirements. An information security program plan can be represented in a single document or compilations of documents. Privacy program plans and supply chain risk management plans are addressed separately in PM-18 and SR-2, respectively.\nAn information security program plan documents implementation details about program management and common controls. The plan provides sufficient information about the controls (including specification of parameters for assignment and selection operations, explicitly or by reference) to enable implementations that are unambiguously compliant with the intent of the plan and a determination of the risk to be incurred if the plan is implemented as intended. Updates to information security program plans include organizational changes and problems identified during plan implementation or control assessments.\nProgram management controls may be implemented at the organization level or the mission or business process level, and are essential for managing the organization\u2019s information security program. Program management controls are distinct from common, system-specific, and hybrid controls because program management controls are independent of any particular system. Together, the individual system security plans and the organization-wide information security program plan provide complete coverage for the security controls employed within the organization.\nCommon controls available for inheritance by organizational systems are documented in an appendix to the organization\u2019s information security program plan unless the controls are included in a separate security plan for a system. The organization-wide information security program plan indicates which separate security plans contain descriptions of common controls.\nEvents that may precipitate an update to the information security program plan include, but are not limited to, organization-wide assessment or audit findings, security or privacy incidents, or changes in laws, executive orders, directives, regulations, policies, standards, and guidelines."
+                }
+            ]
+        },
+        {
+            "id": "pm-2",
+            "class": "SP800-53",
+            "title": "Information Security Program Leadership Role",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-2"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-02"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#81c44706-0227-4258-a920-620a4d259990",
+                    "rel": "reference",
+                    "text": "[OMB M-17-25]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-2_smt",
+                    "name": "statement",
+                    "prose": "Appoint a senior agency information security officer with the mission and resources to coordinate, develop, implement, and maintain an organization-wide information security program."
+                },
+                {
+                    "id": "pm-2_gdn",
+                    "name": "guidance",
+                    "prose": "The senior agency information security officer is an organizational official. For federal agencies (as defined by applicable laws, executive orders, regulations, directives, policies, and standards), this official is the senior agency information security officer. Organizations may also refer to this official as the senior information security officer or chief information security officer."
+                }
+            ]
+        },
+        {
+            "id": "pm-3",
+            "class": "SP800-53",
+            "title": "Information Security and Privacy Resources",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-3"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-03"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#pm-4",
+                    "rel": "related",
+                    "text": "PM-4"
+                },
+                {
+                    "href": "#sa-2",
+                    "rel": "related",
+                    "text": "SA-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-3_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-3_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Include the resources needed to implement the information security and privacy programs in capital planning and investment requests and document all exceptions to this requirement;"
+                        },
+                        {
+                            "id": "pm-3_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Prepare documentation required for addressing information security and privacy programs in capital planning and investment requests in accordance with applicable laws, executive orders, directives, policies, regulations, standards; and"
+                        },
+                        {
+                            "id": "pm-3_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Make available for expenditure, the planned information security and privacy resources."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-3_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations consider establishing champions for information security and privacy and, as part of including the necessary resources, assign specialized expertise and resources as needed. Organizations may designate and empower an Investment Review Board or similar group to manage and provide oversight for the information security and privacy aspects of the capital planning and investment control process."
+                }
+            ]
+        },
+        {
+            "id": "pm-4",
+            "class": "SP800-53",
+            "title": "Plan of Action and Milestones Process",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-4"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-04"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#ca-5",
+                    "rel": "related",
+                    "text": "CA-5"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#pm-3",
+                    "rel": "related",
+                    "text": "PM-3"
+                },
+                {
+                    "href": "#ra-7",
+                    "rel": "related",
+                    "text": "RA-7"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-4_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-4_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Implement a process to ensure that plans of action and milestones for the information security, privacy, and supply chain risk management programs and associated organizational systems:",
+                            "parts": [
+                                {
+                                    "id": "pm-4_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Are developed and maintained;"
+                                },
+                                {
+                                    "id": "pm-4_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Document the remedial information security, privacy, and supply chain risk management actions to adequately respond to risk to organizational operations and assets, individuals, other organizations, and the Nation; and"
+                                },
+                                {
+                                    "id": "pm-4_smt.a.3",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "3."
+                                        }
+                                    ],
+                                    "prose": "Are reported in accordance with established reporting requirements."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-4_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review plans of action and milestones for consistency with the organizational risk management strategy and organization-wide priorities for risk response actions."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-4_gdn",
+                    "name": "guidance",
+                    "prose": "The plan of action and milestones is a key organizational document and is subject to reporting requirements established by the Office of Management and Budget. Organizations develop plans of action and milestones with an organization-wide perspective, prioritizing risk response actions and ensuring consistency with the goals and objectives of the organization. Plan of action and milestones updates are based on findings from control assessments and continuous monitoring activities. There can be multiple plans of action and milestones corresponding to the information system level, mission/business process level, and organizational/governance level. While plans of action and milestones are required for federal organizations, other types of organizations can help reduce risk by documenting and tracking planned remediations. Specific guidance on plans of action and milestones at the system level is provided in CA-5."
+                }
+            ]
+        },
+        {
+            "id": "pm-5",
+            "class": "SP800-53",
+            "title": "System Inventory",
+            "parameters": [
+                {
+                    "id": "pm-5_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-5"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-05"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#98d415ca-7281-4064-9931-0c366637e324",
+                    "rel": "reference",
+                    "text": "[IR 8062]"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-5_smt",
+                    "name": "statement",
+                    "prose": "Develop and update {{ pm-5_prm_1 }} an inventory of organizational systems."
+                },
+                {
+                    "id": "pm-5_gdn",
+                    "name": "guidance",
+                    "prose": "[OMB A-130] provides guidance on developing systems inventories and associated reporting requirements. System inventory refers to an organization-wide inventory of systems, not system components as described in CM-8."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pm-5.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Inventory of Personally Identifiable Information",
+                    "parameters": [
+                        {
+                            "id": "pm-5.1_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PM-5(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PM-05(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        },
+                        {
+                            "href": "#cm-8",
+                            "rel": "related",
+                            "text": "CM-8"
+                        },
+                        {
+                            "href": "#cm-12",
+                            "rel": "related",
+                            "text": "CM-12"
+                        },
+                        {
+                            "href": "#cm-13",
+                            "rel": "related",
+                            "text": "CM-13"
+                        },
+                        {
+                            "href": "#pl-8",
+                            "rel": "related",
+                            "text": "PL-8"
+                        },
+                        {
+                            "href": "#pm-22",
+                            "rel": "related",
+                            "text": "PM-22"
+                        },
+                        {
+                            "href": "#pt-3",
+                            "rel": "related",
+                            "text": "PT-3"
+                        },
+                        {
+                            "href": "#pt-5",
+                            "rel": "related",
+                            "text": "PT-5"
+                        },
+                        {
+                            "href": "#si-12",
+                            "rel": "related",
+                            "text": "SI-12"
+                        },
+                        {
+                            "href": "#si-18",
+                            "rel": "related",
+                            "text": "SI-18"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pm-5.1_smt",
+                            "name": "statement",
+                            "prose": "Establish, maintain, and update {{ pm-5.1_prm_1 }} an inventory of all systems, applications, and projects that process personally identifiable information."
+                        },
+                        {
+                            "id": "pm-5.1_gdn",
+                            "name": "guidance",
+                            "prose": "An inventory of systems, applications, and projects that process personally identifiable information supports the mapping of data actions, providing individuals with privacy notices, maintaining accurate personally identifiable information, and limiting the processing of personally identifiable information when such information is not needed for operational purposes. Organizations may use this inventory to ensure that systems only process the personally identifiable information for authorized purposes and that this processing is still relevant and necessary for the purpose specified therein."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pm-6",
+            "class": "SP800-53",
+            "title": "Measures of Performance",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-6"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-06"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#7798067b-4ed0-4adc-a505-79dad4741693",
+                    "rel": "reference",
+                    "text": "[SP 800-55]"
+                },
+                {
+                    "href": "#067223d8-1ec7-45c5-b21b-c848da6de8fb",
+                    "rel": "reference",
+                    "text": "[SP 800-137]"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-6_smt",
+                    "name": "statement",
+                    "prose": "Develop, monitor, and report on the results of information security and privacy measures of performance."
+                },
+                {
+                    "id": "pm-6_gdn",
+                    "name": "guidance",
+                    "prose": "Measures of performance are outcome-based metrics used by an organization to measure the effectiveness or efficiency of the information security and privacy programs and the controls employed in support of the program. To facilitate security and privacy risk management, organizations consider aligning measures of performance with the organizational risk tolerance as defined in the risk management strategy."
+                }
+            ]
+        },
+        {
+            "id": "pm-7",
+            "class": "SP800-53",
+            "title": "Enterprise Architecture",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-7"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-07"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#e3cc0520-a366-4fc9-abc2-5272db7e3564",
+                    "rel": "reference",
+                    "text": "[SP 800-160-1]"
+                },
+                {
+                    "href": "#61ccf0f4-d3e7-42db-9796-ce6cb1c85989",
+                    "rel": "reference",
+                    "text": "[SP 800-160-2]"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pl-8",
+                    "rel": "related",
+                    "text": "PL-8"
+                },
+                {
+                    "href": "#pm-11",
+                    "rel": "related",
+                    "text": "PM-11"
+                },
+                {
+                    "href": "#ra-2",
+                    "rel": "related",
+                    "text": "RA-2"
+                },
+                {
+                    "href": "#sa-3",
+                    "rel": "related",
+                    "text": "SA-3"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sa-17",
+                    "rel": "related",
+                    "text": "SA-17"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-7_smt",
+                    "name": "statement",
+                    "prose": "Develop and maintain an enterprise architecture with consideration for information security, privacy, and the resulting risk to organizational operations and assets, individuals, other organizations, and the Nation."
+                },
+                {
+                    "id": "pm-7_gdn",
+                    "name": "guidance",
+                    "prose": "The integration of security and privacy requirements and controls into the enterprise architecture helps to ensure that security and privacy considerations are addressed throughout the system development life cycle and are explicitly related to the organization\u2019s mission and business processes. The process of security and privacy requirements integration also embeds into the enterprise architecture and the organization\u2019s security and privacy architectures consistent with the organizational risk management strategy. For PM-7, security and privacy architectures are developed at a system-of-systems level, representing all organizational systems. For PL-8, the security and privacy architectures are developed at a level that represents an individual system. The system-level architectures are consistent with the security and privacy architectures defined for the organization. Security and privacy requirements and control integration are most effectively accomplished through the rigorous application of the Risk Management Framework [SP 800-37] and supporting security standards and guidelines."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pm-7.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Offloading",
+                    "parameters": [
+                        {
+                            "id": "pm-7.1_prm_1",
+                            "label": "organization-defined non-essential functions or services"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PM-7(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PM-07(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#sa-8",
+                            "rel": "related",
+                            "text": "SA-8"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pm-7.1_smt",
+                            "name": "statement",
+                            "prose": "Offload {{ pm-7.1_prm_1 }} to other systems, system components, or an external provider."
+                        },
+                        {
+                            "id": "pm-7.1_gdn",
+                            "name": "guidance",
+                            "prose": "Not every function or service that a system provides is essential to organizational mission or business functions. Printing or copying is an example of a non-essential but supporting service for an organization. Whenever feasible, such supportive but non-essential functions or services are not co-located with the functions or services that support essential mission or business functions. Maintaining such functions on the same system or system component increases the attack surface of the organization\u2019s mission-essential functions or services. Moving supportive but non-essential functions to a non-critical system, system component, or external provider can also increase efficiency by putting those functions or services under the control of individuals or providers who are subject matter experts in the functions or services."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pm-8",
+            "class": "SP800-53",
+            "title": "Critical Infrastructure Plan",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-8"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-08"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#488d6934-00b2-4252-bf23-1b3c2d71eb13",
+                    "rel": "reference",
+                    "text": "[HSPD 7]"
+                },
+                {
+                    "href": "#b9951d04-6385-478c-b1a3-ab68c19d9041",
+                    "rel": "reference",
+                    "text": "[DHS NIPP]"
+                },
+                {
+                    "href": "#cp-2",
+                    "rel": "related",
+                    "text": "CP-2"
+                },
+                {
+                    "href": "#cp-4",
+                    "rel": "related",
+                    "text": "CP-4"
+                },
+                {
+                    "href": "#pe-18",
+                    "rel": "related",
+                    "text": "PE-18"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#pm-11",
+                    "rel": "related",
+                    "text": "PM-11"
+                },
+                {
+                    "href": "#pm-18",
+                    "rel": "related",
+                    "text": "PM-18"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-8_smt",
+                    "name": "statement",
+                    "prose": "Address information security and privacy issues in the development, documentation, and updating of a critical infrastructure and key resources protection plan."
+                },
+                {
+                    "id": "pm-8_gdn",
+                    "name": "guidance",
+                    "prose": "Protection strategies are based on the prioritization of critical assets and resources. The requirement and guidance for defining critical infrastructure and key resources and for preparing an associated critical infrastructure protection plan are found in applicable laws, executive orders, directives, policies, regulations, standards, and guidelines."
+                }
+            ]
+        },
+        {
+            "id": "pm-9",
+            "class": "SP800-53",
+            "title": "Risk Management Strategy",
+            "parameters": [
+                {
+                    "id": "pm-9_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-9"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-09"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#08b07465-dbdc-48d6-8a0b-37279602ac16",
+                    "rel": "reference",
+                    "text": "[SP 800-30]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#e8e84963-14fc-4c3a-be05-b412a5d37cd2",
+                    "rel": "reference",
+                    "text": "[SP 800-161]"
+                },
+                {
+                    "href": "#4c501da5-9d79-4cb6-ba80-97260e1ce327",
+                    "rel": "reference",
+                    "text": "[IR 8023]"
+                },
+                {
+                    "href": "#ac-1",
+                    "rel": "related",
+                    "text": "AC-1"
+                },
+                {
+                    "href": "#au-1",
+                    "rel": "related",
+                    "text": "AU-1"
+                },
+                {
+                    "href": "#at-1",
+                    "rel": "related",
+                    "text": "AT-1"
+                },
+                {
+                    "href": "#ca-1",
+                    "rel": "related",
+                    "text": "CA-1"
+                },
+                {
+                    "href": "#ca-2",
+                    "rel": "related",
+                    "text": "CA-2"
+                },
+                {
+                    "href": "#ca-5",
+                    "rel": "related",
+                    "text": "CA-5"
+                },
+                {
+                    "href": "#ca-6",
+                    "rel": "related",
+                    "text": "CA-6"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#cm-1",
+                    "rel": "related",
+                    "text": "CM-1"
+                },
+                {
+                    "href": "#cp-1",
+                    "rel": "related",
+                    "text": "CP-1"
+                },
+                {
+                    "href": "#ia-1",
+                    "rel": "related",
+                    "text": "IA-1"
+                },
+                {
+                    "href": "#ir-1",
+                    "rel": "related",
+                    "text": "IR-1"
+                },
+                {
+                    "href": "#ma-1",
+                    "rel": "related",
+                    "text": "MA-1"
+                },
+                {
+                    "href": "#mp-1",
+                    "rel": "related",
+                    "text": "MP-1"
+                },
+                {
+                    "href": "#pe-1",
+                    "rel": "related",
+                    "text": "PE-1"
+                },
+                {
+                    "href": "#pl-1",
+                    "rel": "related",
+                    "text": "PL-1"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pm-2",
+                    "rel": "related",
+                    "text": "PM-2"
+                },
+                {
+                    "href": "#pm-8",
+                    "rel": "related",
+                    "text": "PM-8"
+                },
+                {
+                    "href": "#pm-18",
+                    "rel": "related",
+                    "text": "PM-18"
+                },
+                {
+                    "href": "#pm-28",
+                    "rel": "related",
+                    "text": "PM-28"
+                },
+                {
+                    "href": "#pm-30",
+                    "rel": "related",
+                    "text": "PM-30"
+                },
+                {
+                    "href": "#ps-1",
+                    "rel": "related",
+                    "text": "PS-1"
+                },
+                {
+                    "href": "#pt-1",
+                    "rel": "related",
+                    "text": "PT-1"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#ra-1",
+                    "rel": "related",
+                    "text": "RA-1"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#ra-9",
+                    "rel": "related",
+                    "text": "RA-9"
+                },
+                {
+                    "href": "#sa-1",
+                    "rel": "related",
+                    "text": "SA-1"
+                },
+                {
+                    "href": "#sa-4",
+                    "rel": "related",
+                    "text": "SA-4"
+                },
+                {
+                    "href": "#sc-1",
+                    "rel": "related",
+                    "text": "SC-1"
+                },
+                {
+                    "href": "#sc-38",
+                    "rel": "related",
+                    "text": "SC-38"
+                },
+                {
+                    "href": "#si-1",
+                    "rel": "related",
+                    "text": "SI-1"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                },
+                {
+                    "href": "#sr-1",
+                    "rel": "related",
+                    "text": "SR-1"
+                },
+                {
+                    "href": "#sr-2",
+                    "rel": "related",
+                    "text": "SR-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-9_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-9_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develops a comprehensive strategy to manage:",
+                            "parts": [
+                                {
+                                    "id": "pm-9_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Security risk to organizational operations and assets, individuals, other organizations, and the Nation associated with the operation and use of organizational systems; and"
+                                },
+                                {
+                                    "id": "pm-9_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Privacy risk to individuals resulting from the authorized processing of personally identifiable information;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-9_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Implement the risk management strategy consistently across the organization; and"
+                        },
+                        {
+                            "id": "pm-9_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update the risk management strategy {{ pm-9_prm_1 }} or as required, to address organizational changes."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-9_gdn",
+                    "name": "guidance",
+                    "prose": "An organization-wide risk management strategy includes an expression of the security and privacy risk tolerance for the organization, security and privacy risk mitigation strategies, acceptable risk assessment methodologies, a process for evaluating security and privacy risk across the organization with respect to the organization\u2019s risk tolerance, and approaches for monitoring risk over time. The senior accountable official for risk management (agency head or designated official) aligns information security management processes with strategic, operational, and budgetary planning processes. The risk executive function, led by the senior accountable official for risk management, can facilitate consistent application of the risk management strategy organization-wide. The risk management strategy can be informed by security and privacy risk-related inputs from other sources, both internal and external to the organization, to ensure that the strategy is broad-based and comprehensive. The supply chain risk management strategy described in PM-30 can also provide useful inputs to the organization-wide risk management strategy."
+                }
+            ]
+        },
+        {
+            "id": "pm-10",
+            "class": "SP800-53",
+            "title": "Authorization Process",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-10"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-10"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#ca-6",
+                    "rel": "related",
+                    "text": "CA-6"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-10_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-10_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Manage the security and privacy state of organizational systems and the environments in which those systems operate through authorization processes;"
+                        },
+                        {
+                            "id": "pm-10_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Designate individuals to fulfill specific roles and responsibilities within the organizational risk management process; and"
+                        },
+                        {
+                            "id": "pm-10_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Integrate the authorization processes into an organization-wide risk management program."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-10_gdn",
+                    "name": "guidance",
+                    "prose": "Authorization processes for organizational systems and environments of operation require the implementation of an organization-wide risk management process and associated security and privacy standards and guidelines. Specific roles for risk management processes include a risk executive (function) and designated authorizing officials for each organizational system and common control provider. The authorization processes for the organization are integrated with continuous monitoring processes to facilitate ongoing understanding and acceptance of security and privacy risks to organizational operations, organizational assets, individuals, other organizations, and the Nation."
+                }
+            ]
+        },
+        {
+            "id": "pm-11",
+            "class": "SP800-53",
+            "title": "Mission and Business Process Definition",
+            "parameters": [
+                {
+                    "id": "pm-11_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-11"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-11"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#628d22a1-6a11-4784-bc59-5cd9497b5445",
+                    "rel": "reference",
+                    "text": "[FIPS 199]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#e72fde0b-6fc2-497e-a9db-d8fce5a11b8a",
+                    "rel": "reference",
+                    "text": "[SP 800-60-1]"
+                },
+                {
+                    "href": "#9be5d661-421f-41ad-854e-86f98b811891",
+                    "rel": "reference",
+                    "text": "[SP 800-60-2]"
+                },
+                {
+                    "href": "#e3cc0520-a366-4fc9-abc2-5272db7e3564",
+                    "rel": "reference",
+                    "text": "[SP 800-160-1]"
+                },
+                {
+                    "href": "#cp-2",
+                    "rel": "related",
+                    "text": "CP-2"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pm-7",
+                    "rel": "related",
+                    "text": "PM-7"
+                },
+                {
+                    "href": "#pm-8",
+                    "rel": "related",
+                    "text": "PM-8"
+                },
+                {
+                    "href": "#ra-2",
+                    "rel": "related",
+                    "text": "RA-2"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#sa-2",
+                    "rel": "related",
+                    "text": "SA-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-11_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-11_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Define organizational mission and business processes with consideration for information security and privacy and the resulting risk to organizational operations, organizational assets, individuals, other organizations, and the Nation; and"
+                        },
+                        {
+                            "id": "pm-11_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Determine information protection and personally identifiable information processing needs arising from the defined mission and business processes; and"
+                        },
+                        {
+                            "id": "pm-11_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and revise the mission and business processes {{ pm-11_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-11_gdn",
+                    "name": "guidance",
+                    "prose": "Protection needs are technology-independent capabilities that are required to counter threats to organizations, individuals, systems, and the Nation through the compromise of information (i.e., loss of confidentiality, integrity, availability, or privacy). Information protection and personally identifiable information processing needs are derived from the mission and business needs defined by organizational stakeholders, the mission and business processes designed to meet those needs, and the organizational risk management strategy. Information protection and personally identifiable information processing needs determine the required controls for the organization and the systems. Inherent to defining protection and personally identifiable information processing needs is an understanding of the adverse impact that could result if a compromise or breach of information occurs. The categorization process is used to make such potential impact determinations. Privacy risks to individuals can arise from the compromise of personally identifiable information, but they can also arise as unintended consequences or a byproduct of the processing of personally identifiable information at any stage of the information life cycle. Privacy risk assessments are used to prioritize the risks that are created for individuals from system processing of personally identifiable information. These risk assessments enable the selection of the required privacy controls for the organization and systems. Mission and business process definitions and the associated protection requirements are documented in accordance with organizational policies and procedures."
+                }
+            ]
+        },
+        {
+            "id": "pm-12",
+            "class": "SP800-53",
+            "title": "Insider Threat Program",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-12"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-12"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#0af071a6-cf8e-48ee-8c82-fe91efa20f94",
+                    "rel": "reference",
+                    "text": "[EO 13587]"
+                },
+                {
+                    "href": "#06d74ea9-2178-449c-a9c5-b2980f804ac8",
+                    "rel": "reference",
+                    "text": "[ODNI NITP]"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#at-2",
+                    "rel": "related",
+                    "text": "AT-2"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-10",
+                    "rel": "related",
+                    "text": "AU-10"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-13",
+                    "rel": "related",
+                    "text": "AU-13"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#ia-4",
+                    "rel": "related",
+                    "text": "IA-4"
+                },
+                {
+                    "href": "#ir-4",
+                    "rel": "related",
+                    "text": "IR-4"
+                },
+                {
+                    "href": "#mp-7",
+                    "rel": "related",
+                    "text": "MP-7"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pm-16",
+                    "rel": "related",
+                    "text": "PM-16"
+                },
+                {
+                    "href": "#ps-3",
+                    "rel": "related",
+                    "text": "PS-3"
+                },
+                {
+                    "href": "#ps-4",
+                    "rel": "related",
+                    "text": "PS-4"
+                },
+                {
+                    "href": "#ps-5",
+                    "rel": "related",
+                    "text": "PS-5"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                },
+                {
+                    "href": "#ps-8",
+                    "rel": "related",
+                    "text": "PS-8"
+                },
+                {
+                    "href": "#sc-7",
+                    "rel": "related",
+                    "text": "SC-7"
+                },
+                {
+                    "href": "#sc-38",
+                    "rel": "related",
+                    "text": "SC-38"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#pm-14",
+                    "rel": "related",
+                    "text": "PM-14"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-12_smt",
+                    "name": "statement",
+                    "prose": "Implement an insider threat program that includes a cross-discipline insider threat incident handling team."
+                },
+                {
+                    "id": "pm-12_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations that handle classified information are required, under Executive Order 13587 [EO 13587] and the National Insider Threat Policy [ODNI NITP], to establish insider threat programs. The same standards and guidelines that apply to insider threat programs in classified environments can also be employed effectively to improve the security of controlled unclassified and other information in non-national security systems. Insider threat programs include controls to detect and prevent malicious insider activity through the centralized integration and analysis of both technical and nontechnical information to identify potential insider threat concerns. A senior official is designated by the department or agency head as the responsible individual to implement and provide oversight for the program. In addition to the centralized integration and analysis capability, insider threat programs require organizations to prepare department or agency insider threat policies and implementation plans, conduct host-based user monitoring of individual employee activities on government-owned classified computers, provide insider threat awareness training to employees, receive access to information from offices in the department or agency for insider threat analysis, and conduct self-assessments of department or agency insider threat posture.\nInsider threat programs can leverage the existence of incident handling teams that organizations may already have in place, such as computer security incident response teams. Human resources records are especially important in this effort, as there is compelling evidence to show that some types of insider crimes are often preceded by nontechnical behaviors in the workplace, including ongoing patterns of disgruntled behavior and conflicts with coworkers and other colleagues. These precursors can guide organizational officials in more focused, targeted monitoring efforts. However, the use of human resource records could raise significant concerns for privacy. The participation of a legal team, including consultation with the senior agency official for privacy, ensures that monitoring activities are performed in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines."
+                }
+            ]
+        },
+        {
+            "id": "pm-13",
+            "class": "SP800-53",
+            "title": "Security and Privacy Workforce",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-13"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-13"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#276bd50a-7e58-48e5-a405-8c8cb91d7a5f",
+                    "rel": "reference",
+                    "text": "[SP 800-181]"
+                },
+                {
+                    "href": "#at-2",
+                    "rel": "related",
+                    "text": "AT-2"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-13_smt",
+                    "name": "statement",
+                    "prose": "Establish a security and privacy workforce development and improvement program."
+                },
+                {
+                    "id": "pm-13_gdn",
+                    "name": "guidance",
+                    "prose": "Security and privacy workforce development and improvement programs include defining the knowledge, skills, and abilities needed to perform security and privacy duties and tasks; developing role-based training programs for individuals assigned security and privacy roles and responsibilities; and providing standards and guidelines for measuring and building individual qualifications for incumbents and applicants for security- and privacy-related positions. Such workforce development and improvement programs can also include security and privacy career paths to encourage security and privacy professionals to advance in the field and fill positions with greater responsibility. The programs encourage organizations to fill security- and privacy-related positions with qualified personnel. Security and privacy workforce development and improvement programs are complementary to organizational security awareness and training programs and focus on developing and institutionalizing the core security and privacy capabilities of personnel needed to protect organizational operations, assets, and individuals."
+                }
+            ]
+        },
+        {
+            "id": "pm-14",
+            "class": "SP800-53",
+            "title": "Testing, Training, and Monitoring",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-14"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-14"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#a21aef46-7330-48a0-b2e1-c5bb8b2dd11d",
+                    "rel": "reference",
+                    "text": "[SP 800-53A]"
+                },
+                {
+                    "href": "#122177fa-c4ed-485d-8345-3082c0fb9a06",
+                    "rel": "reference",
+                    "text": "[SP 800-115]"
+                },
+                {
+                    "href": "#067223d8-1ec7-45c5-b21b-c848da6de8fb",
+                    "rel": "reference",
+                    "text": "[SP 800-137]"
+                },
+                {
+                    "href": "#at-2",
+                    "rel": "related",
+                    "text": "AT-2"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#cp-4",
+                    "rel": "related",
+                    "text": "CP-4"
+                },
+                {
+                    "href": "#ir-3",
+                    "rel": "related",
+                    "text": "IR-3"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-14_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-14_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Implement a process for ensuring that organizational plans for conducting security and privacy testing, training, and monitoring activities associated with organizational systems:",
+                            "parts": [
+                                {
+                                    "id": "pm-14_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Are developed and maintained; and"
+                                },
+                                {
+                                    "id": "pm-14_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Continue to be executed; and"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-14_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review testing, training, and monitoring plans for consistency with the organizational risk management strategy and organization-wide priorities for risk response actions."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-14_gdn",
+                    "name": "guidance",
+                    "prose": "A process for organization-wide security and privacy testing, training, and monitoring helps ensure that organizations provide oversight for testing, training, and monitoring activities and that those activities are coordinated. With the growing importance of continuous monitoring programs, the implementation of information security and privacy across the three levels of the risk management hierarchy and the widespread use of common controls, organizations coordinate and consolidate the testing and monitoring activities that are routinely conducted as part of ongoing assessments supporting a variety of controls. Security and privacy training activities, while focused on individual systems and specific roles, require coordination across all organizational elements. Testing, training, and monitoring plans and activities are informed by current threat and vulnerability assessments."
+                }
+            ]
+        },
+        {
+            "id": "pm-15",
+            "class": "SP800-53",
+            "title": "Security and Privacy Groups and Associations",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-15"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-15"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#sa-11",
+                    "rel": "related",
+                    "text": "SA-11"
+                },
+                {
+                    "href": "#si-5",
+                    "rel": "related",
+                    "text": "SI-5"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-15_smt",
+                    "name": "statement",
+                    "prose": "Establish and institutionalize contact with selected groups and associations within the security and privacy communities:",
+                    "parts": [
+                        {
+                            "id": "pm-15_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "To facilitate ongoing security and privacy education and training for organizational personnel;"
+                        },
+                        {
+                            "id": "pm-15_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "To maintain currency with recommended security and privacy practices, techniques, and technologies; and"
+                        },
+                        {
+                            "id": "pm-15_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "To share current security and privacy information, including threats, vulnerabilities, and incidents."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-15_gdn",
+                    "name": "guidance",
+                    "prose": "Ongoing contact with security and privacy groups and associations is important in an environment of rapidly changing technologies and threats. Groups and associations include special interest groups, professional associations, forums, news groups, users\u2019 groups, and peer groups of security and privacy professionals in similar organizations. Organizations select security and privacy groups and associations based on mission and business functions. Organizations share threat, vulnerability, and incident information as well as contextual insights, compliance techniques, and privacy problems consistent with applicable laws, executive orders, directives, policies, regulations, standards, and guidelines."
+                }
+            ]
+        },
+        {
+            "id": "pm-16",
+            "class": "SP800-53",
+            "title": "Threat Awareness Program",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-16"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-16"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ir-4",
+                    "rel": "related",
+                    "text": "IR-4"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-16_smt",
+                    "name": "statement",
+                    "prose": "Implement a threat awareness program that includes a cross-organization information-sharing capability for threat intelligence."
+                },
+                {
+                    "id": "pm-16_gdn",
+                    "name": "guidance",
+                    "prose": "Because of the constantly changing and increasing sophistication of adversaries, especially the advanced persistent threat (APT), it may be more likely that adversaries can successfully breach or compromise organizational systems. One of the best techniques to address this concern is for organizations to share threat information, including threat events (i.e., tactics, techniques, and procedures) that organizations have experienced, mitigations that organizations have found are effective against certain types of threats, and threat intelligence (i.e., indications and warnings about threats). Threat information sharing may be bilateral or multilateral. Bilateral threat sharing includes government-to-commercial and government-to-government cooperatives. Multilateral threat sharing includes organizations taking part in threat-sharing consortia. Threat information may require special agreements and protection, or it may be freely shared."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pm-16.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automated Means for Sharing Threat Intelligence",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PM-16(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PM-16(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pm-16.1_smt",
+                            "name": "statement",
+                            "prose": "Employ automated mechanisms to maximize the effectiveness of sharing threat intelligence information."
+                        },
+                        {
+                            "id": "pm-16.1_gdn",
+                            "name": "guidance",
+                            "prose": "To maximize the effectiveness of monitoring, it is important to know what threat observables and indicators the sensors need to be searching for. By using well-established frameworks, services, and automated tools, organizations improve their ability to rapidly share and feed the relevant threat detection signatures into monitoring tools."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pm-17",
+            "class": "SP800-53",
+            "title": "Protecting Controlled Unclassified Information on External Systems",
+            "parameters": [
+                {
+                    "id": "pm-17_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-17"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-17"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#91f992fb-f668-4c91-a50f-0f05b95ccee3",
+                    "rel": "reference",
+                    "text": "[32 CFR 2002]"
+                },
+                {
+                    "href": "#7dbd6d9f-29d6-4d1d-9766-f2d77ff3c849",
+                    "rel": "reference",
+                    "text": "[SP 800-171]"
+                },
+                {
+                    "href": "#c28ae9a8-1121-42a9-a85e-00cfcc9b9a94",
+                    "rel": "reference",
+                    "text": "[NARA CUI]"
+                },
+                {
+                    "href": "#ca-6",
+                    "rel": "related",
+                    "text": "CA-6"
+                },
+                {
+                    "href": "#pm-10",
+                    "rel": "related",
+                    "text": "PM-10"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-17_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-17_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Establish policy and procedures to ensure that requirements for the protection of controlled unclassified information that is processed, stored or transmitted on external systems, are implemented in accordance with applicable laws, executive orders, directives, policies, regulations, and standards; and"
+                        },
+                        {
+                            "id": "pm-17_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review and update the policy and procedures {{ pm-17_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-17_gdn",
+                    "name": "guidance",
+                    "prose": "Controlled unclassified information is defined by the National Archives and Records Administration along with the safeguarding and dissemination requirements for such information and is codified in [32 CFR 2002] and, specifically for systems external to the federal organization, 32 CFR 2002.14h. The policy prescribes the specific use and conditions to be implemented in accordance with organizational procedures, including via its contracting processes."
+                }
+            ]
+        },
+        {
+            "id": "pm-18",
+            "class": "SP800-53",
+            "title": "Privacy Program Plan",
+            "parameters": [
+                {
+                    "id": "pm-18_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-18"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-18"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#pm-8",
+                    "rel": "related",
+                    "text": "PM-8"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-18_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-18_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop and disseminate an organization-wide privacy program plan that provides an overview of the agency\u2019s privacy program, and:",
+                            "parts": [
+                                {
+                                    "id": "pm-18_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Includes a description of the structure of the privacy program and the resources dedicated to the privacy program;"
+                                },
+                                {
+                                    "id": "pm-18_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Provides an overview of the requirements for the privacy program and a description of the privacy program management controls and common controls in place or planned for meeting those requirements;"
+                                },
+                                {
+                                    "id": "pm-18_smt.a.3",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "3."
+                                        }
+                                    ],
+                                    "prose": "Includes the role of the senior agency official for privacy and the identification and assignment of roles of other privacy officials and staff and their responsibilities;"
+                                },
+                                {
+                                    "id": "pm-18_smt.a.4",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "4."
+                                        }
+                                    ],
+                                    "prose": "Describes management commitment, compliance, and the strategic goals and objectives of the privacy program;"
+                                },
+                                {
+                                    "id": "pm-18_smt.a.5",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "5."
+                                        }
+                                    ],
+                                    "prose": "Reflects coordination among organizational entities responsible for the different aspects of privacy; and"
+                                },
+                                {
+                                    "id": "pm-18_smt.a.6",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "6."
+                                        }
+                                    ],
+                                    "prose": "Is approved by a senior official with responsibility and accountability for the privacy risk being incurred to organizational operations (including mission, functions, image, and reputation), organizational assets, individuals, other organizations, and the Nation; and"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-18_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Update the plan {{ pm-18_prm_1 }} and to address changes in federal privacy laws and policy and organizational changes and problems identified during plan implementation or privacy control assessments."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-18_gdn",
+                    "name": "guidance",
+                    "prose": "A privacy program plan is a formal document that provides an overview of an organization\u2019s privacy program, including a description of the structure of the privacy program, the resources dedicated to the privacy program, the role of the senior agency official for privacy and other privacy officials and staff, the strategic goals and objectives of the privacy program, and the program management controls and common controls in place or planned for meeting applicable privacy requirements and managing privacy risks. Privacy program plans can be represented in single documents or compilations of documents.\nThe senior agency official for privacy is responsible for designating which privacy controls the organization will treat as program management, common, system-specific, and hybrid controls. Privacy program plans provide sufficient information about the privacy program management and common controls (including the specification of parameters and assignment and selection operations explicitly or by reference) to enable control implementations that are unambiguously compliant with the intent of the plans and a determination of the risk incurred if the plans are implemented as intended.\nProgram management controls are generally implemented at the organization level and are essential for managing the organization\u2019s privacy program. Program management controls are distinct from common, system-specific, and hybrid controls because program management controls are independent of any particular information system. Together, the privacy plans for individual systems and the organization-wide privacy program plan provide complete coverage for the privacy controls employed within the organization.\nCommon controls are documented in an appendix to the organization\u2019s privacy program plan unless the controls are included in a separate privacy plan for a system. The organization-wide privacy program plan indicates which separate privacy plans contain descriptions of privacy controls."
+                }
+            ]
+        },
+        {
+            "id": "pm-19",
+            "class": "SP800-53",
+            "title": "Privacy Program Leadership Role",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-19"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-19"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#pm-18",
+                    "rel": "related",
+                    "text": "PM-18"
+                },
+                {
+                    "href": "#pm-20",
+                    "rel": "related",
+                    "text": "PM-20"
+                },
+                {
+                    "href": "#pm-23",
+                    "rel": "related",
+                    "text": "PM-23"
+                },
+                {
+                    "href": "#pm-24",
+                    "rel": "related",
+                    "text": "PM-24"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-19_smt",
+                    "name": "statement",
+                    "prose": "Appoint a senior agency official for privacy with the authority, mission, accountability, and resources to coordinate, develop, and implement, applicable privacy requirements and manage privacy risks through the organization-wide privacy program."
+                },
+                {
+                    "id": "pm-19_gdn",
+                    "name": "guidance",
+                    "prose": "The privacy officer is an organizational official. For federal agencies\u2014as defined by applicable laws, executive orders, directives, regulations, policies, standards, and guidelines\u2014this official is designated as the senior agency official for privacy. Organizations may also refer to this official as the chief privacy officer. The senior agency official for privacy also has roles on the data management board (see PM-23) and the data integrity board (see PM-24)."
+                }
+            ]
+        },
+        {
+            "id": "pm-20",
+            "class": "SP800-53",
+            "title": "Dissemination of Privacy Program Information",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-20"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-20"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#206a3284-6a7e-423c-8ea9-25b22542541d",
+                    "rel": "reference",
+                    "text": "[OMB M-17-06]"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                },
+                {
+                    "href": "#pt-5",
+                    "rel": "related",
+                    "text": "PT-5"
+                },
+                {
+                    "href": "#pt-6",
+                    "rel": "related",
+                    "text": "PT-6"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#ra-8",
+                    "rel": "related",
+                    "text": "RA-8"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-20_smt",
+                    "name": "statement",
+                    "prose": "Maintain a central resource webpage on the organization\u2019s principal public website that serves as a central source of information about the organization\u2019s privacy program and that:",
+                    "parts": [
+                        {
+                            "id": "pm-20_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Ensures that the public has access to information about organizational privacy activities and can communicate with its senior agency official for privacy;"
+                        },
+                        {
+                            "id": "pm-20_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Ensures that organizational privacy practices and reports are publicly available; and"
+                        },
+                        {
+                            "id": "pm-20_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Employs publicly facing email addresses and/or phone lines to enable the public to provide feedback and/or direct questions to privacy offices regarding privacy practices."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-20_gdn",
+                    "name": "guidance",
+                    "prose": "For federal agencies, the webpage is located at www.[agency].gov/privacy. Federal agencies include public privacy impact assessments, system of records notices, computer matching notices and agreements, [PRIVACT] exemption and implementation rules, privacy reports, privacy policies, instructions for individuals making an access or amendment request, email addresses for questions/complaints, blogs, and periodic publications."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pm-20.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Privacy Policies on Websites, Applications, and Digital Services",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PM-20(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PM-20(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pm-20.1_smt",
+                            "name": "statement",
+                            "prose": "Develop and post privacy policies on all external-facing websites, mobile applications, and other digital services, that:",
+                            "parts": [
+                                {
+                                    "id": "pm-20.1_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Are written in plain language and organized in a way that is easy to understand and navigate;"
+                                },
+                                {
+                                    "id": "pm-20.1_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Provide information needed by the public to make an informed decision about whether and how to interact with the organization; and"
+                                },
+                                {
+                                    "id": "pm-20.1_smt.c",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(c)"
+                                        }
+                                    ],
+                                    "prose": "Are updated whenever the organization makes a substantive change to the practices it describes and includes a time/date stamp to inform the public of the date of the most recent changes."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-20.1_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations post privacy policies on all external-facing websites, mobile applications, and other digital services. Organizations post a link to the relevant privacy policy on any known, major entry points to the website, application, or digital service. In addition, organizations provide a link to the privacy policy on any webpage that collects personally identifiable information. Organizations may be subject to applicable laws, executive orders, directives, regulations, or policies that require the provision of specific information to the public. Organizational personnel consult with the senior agency official for privacy and legal counsel regarding such requirements."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pm-21",
+            "class": "SP800-53",
+            "title": "Accounting of Disclosures",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-21"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-21"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-21_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-21_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop and maintain an accurate accounting of disclosures of personally identifiable information, including:",
+                            "parts": [
+                                {
+                                    "id": "pm-21_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Date, nature, and purpose of each disclosure; and"
+                                },
+                                {
+                                    "id": "pm-21_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Name and address, or other contact information of the individual or organization to which the disclosure was made;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-21_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Retain the accounting of disclosures for the length of the time the personally identifiable information is maintained or five years after the disclosure is made, whichever is longer; and"
+                        },
+                        {
+                            "id": "pm-21_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Make the accounting of disclosures available to the individual to whom the personally identifiable information relates upon request."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-21_gdn",
+                    "name": "guidance",
+                    "prose": "The purpose of accounting of disclosures is to allow individuals to learn to whom their personally identifiable information has been disclosed, to provide a basis for subsequently advising recipients of any corrected or disputed personally identifiable information, and to provide an audit trail for subsequent reviews of organizational compliance with conditions for disclosures. For federal agencies, keeping an accounting of disclosures is required by the [PRIVACT]; agencies should consult with their senior agency official for privacy and legal counsel on this requirement and be aware of the statutory exceptions and OMB guidance relating to the provision.\nOrganizations can use any system for keeping notations of disclosures, if it can construct from such a system, a document listing of all disclosures along with the required information. Automated mechanisms can be used by organizations to determine when personally identifiable information is disclosed, including commercial services that provide notifications and alerts. Accounting of disclosures may also be used to help organizations verify compliance with applicable privacy statutes and policies governing the disclosure or dissemination of information and dissemination restrictions."
+                }
+            ]
+        },
+        {
+            "id": "pm-22",
+            "class": "SP800-53",
+            "title": "Personally Identifiable Information Quality Management",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-22"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-22"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#c15bfc12-a61e-4ca5-bf35-fa9ce3ccb5d2",
+                    "rel": "reference",
+                    "text": "[SP 800-188]"
+                },
+                {
+                    "href": "#pm-23",
+                    "rel": "related",
+                    "text": "PM-23"
+                },
+                {
+                    "href": "#si-18",
+                    "rel": "related",
+                    "text": "SI-18"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-22_smt",
+                    "name": "statement",
+                    "prose": "Develop and document organization-wide policies and procedures for:",
+                    "parts": [
+                        {
+                            "id": "pm-22_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Reviewing for the accuracy, relevance, timeliness, and completeness of personally identifiable information across the information life cycle;"
+                        },
+                        {
+                            "id": "pm-22_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Correcting or deleting inaccurate or outdated personally identifiable information;"
+                        },
+                        {
+                            "id": "pm-22_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Disseminating notice of corrected or deleted personally identifiable information to individuals or other appropriate entities; and"
+                        },
+                        {
+                            "id": "pm-22_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Appeals of adverse decisions on correction or deletion requests."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-22_gdn",
+                    "name": "guidance",
+                    "prose": "Personally identifiable information quality management includes steps that organizations take to confirm the accuracy and relevance of personally identifiable information throughout the information life cycle. The information life cycle includes the creation, collection, use, processing, storage, maintenance, dissemination, disclosure, and disposition of personally identifiable information. Organizational policies and procedures for personally identifiable information quality management are important because inaccurate or outdated personally identifiable information maintained by organizations may cause problems for individuals. Organizations consider the quality of personally identifiable information involved in business functions where inaccurate information may result in adverse decisions or the denial of benefits and services, or the disclosure of the information may cause stigmatization. Correct information, in certain circumstances, can cause problems for individuals that outweigh the benefits of organizations maintaining the information. Organizations consider creating policies and procedures for the removal of such information.\nThe senior agency official for privacy ensures that practical means and mechanisms exist and are accessible for individuals or their authorized representatives to seek the correction or deletion of personally identifiable information. Processes for correcting or deleting data are clearly defined and publicly available. Organizations use discretion in determining whether data is to be deleted or corrected based on the scope of requests, the changes sought, and the impact of the changes. Additionally, processes include the provision of responses to individuals of decisions to deny requests for correction or deletion. The responses include the reasons for the decisions, a means to record individual objections to the decisions, and a means of requesting reviews of the initial determinations.\nOrganizations notify individuals or their designated representatives when their personally identifiable information is corrected or deleted to provide transparency and confirm the completed action. Due to the complexity of data flows and storage, other entities may need to be informed of the correction or deletion. Notice supports the consistent correction and deletion of personally identifiable information across the data ecosystem."
+                }
+            ]
+        },
+        {
+            "id": "pm-23",
+            "class": "SP800-53",
+            "title": "Data Governance Body",
+            "parameters": [
+                {
+                    "id": "pm-23_prm_1",
+                    "label": "organization-defined roles"
+                },
+                {
+                    "id": "pm-23_prm_2",
+                    "label": "organization-defined responsibilities"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-23"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-23"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#511da9ca-604d-43f7-be41-b862085420a9",
+                    "rel": "reference",
+                    "text": "[EVIDACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#d886c141-c832-4ad7-ac6d-4b94f4b550d3",
+                    "rel": "reference",
+                    "text": "[OMB M-19-23]"
+                },
+                {
+                    "href": "#c15bfc12-a61e-4ca5-bf35-fa9ce3ccb5d2",
+                    "rel": "reference",
+                    "text": "[SP 800-188]"
+                },
+                {
+                    "href": "#at-2",
+                    "rel": "related",
+                    "text": "AT-2"
+                },
+                {
+                    "href": "#at-3",
+                    "rel": "related",
+                    "text": "AT-3"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                },
+                {
+                    "href": "#pm-22",
+                    "rel": "related",
+                    "text": "PM-22"
+                },
+                {
+                    "href": "#pm-24",
+                    "rel": "related",
+                    "text": "PM-24"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-19",
+                    "rel": "related",
+                    "text": "SI-19"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-23_smt",
+                    "name": "statement",
+                    "prose": "Establish a Data Governance Body consisting of {{ pm-23_prm_1 }} with {{ pm-23_prm_2 }}."
+                },
+                {
+                    "id": "pm-23_gdn",
+                    "name": "guidance",
+                    "prose": "A Data Governance Body can help ensure that the organization has coherent policies and the ability to balance the utility of data with security and privacy requirements. The Data Governance Body establishes policies, procedures, and standards that facilitate data governance so that data, including personally identifiable information, is effectively managed and maintained in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidance. Responsibilities can include developing and implementing guidelines that support data modeling, quality, integrity, and the de-identification needs of personally identifiable information across the information life cycle as well as reviewing and approving applications to release data outside of the organization, archiving the applications and the released data, and performing post-release monitoring to ensure that the assumptions made as part of the data release continue to be valid. Members include the chief information officer, senior agency information security officer, and senior agency official for privacy. Federal agencies are required to establish a Data Governance Body with specific roles and responsibilities in accordance with the [EVIDACT] and policies set forth under [OMB M-19-23]."
+                }
+            ]
+        },
+        {
+            "id": "pm-24",
+            "class": "SP800-53",
+            "title": "Data Integrity Board",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-24"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-24"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130, Appendix II]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#ac-4",
+                    "rel": "related",
+                    "text": "AC-4"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                },
+                {
+                    "href": "#pm-23",
+                    "rel": "related",
+                    "text": "PM-23"
+                },
+                {
+                    "href": "#pt-8",
+                    "rel": "related",
+                    "text": "PT-8"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-24_smt",
+                    "name": "statement",
+                    "prose": "Establish a Data Integrity Board to:",
+                    "parts": [
+                        {
+                            "id": "pm-24_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Review proposals to conduct or participate in a matching program; and"
+                        },
+                        {
+                            "id": "pm-24_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Conduct an annual review of all matching programs in which the agency has participated."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-24_gdn",
+                    "name": "guidance",
+                    "prose": "A Data Integrity Board is the board of senior officials designated by the head of a federal agency and is responsible for, among other things, reviewing the agency\u2019s proposals to conduct or participate in a matching program and conducting an annual review of all matching programs in which the agency has participated. As a general matter, a matching program is a computerized comparison of records from two or more automated [PRIVACT] systems of records or an automated system of records and automated records maintained by a non-federal agency (or agent thereof). A matching program either pertains to Federal benefit programs or Federal personnel or payroll records. At a minimum, the Data Integrity Board includes the Inspector General of the agency, if any, and the senior agency official for privacy."
+                }
+            ]
+        },
+        {
+            "id": "pm-25",
+            "class": "SP800-53",
+            "title": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research",
+            "parameters": [
+                {
+                    "id": "pm-25_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-25"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-25"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130, Appendix II]"
+                },
+                {
+                    "href": "#pm-23",
+                    "rel": "related",
+                    "text": "PM-23"
+                },
+                {
+                    "href": "#pt-3",
+                    "rel": "related",
+                    "text": "PT-3"
+                },
+                {
+                    "href": "#sa-3",
+                    "rel": "related",
+                    "text": "SA-3"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-25_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-25_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop, document, and implement policies and procedures that address the use of personally identifiable information for internal testing, training, and research;"
+                        },
+                        {
+                            "id": "pm-25_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Limit or minimize the amount of personally identifiable information used for internal testing, training, and research purposes;"
+                        },
+                        {
+                            "id": "pm-25_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Authorize the use of personally identifiable information when such information is required for internal testing, training, and research; and"
+                        },
+                        {
+                            "id": "pm-25_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Review and update policies and procedures {{ pm-25_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-25_gdn",
+                    "name": "guidance",
+                    "prose": "The use of personally identifiable information in testing, research, and training increases the risk of unauthorized disclosure or misuse of such information. Organizations consult with the senior agency official for privacy and/or legal counsel to ensure that the use of personally identifiable information in testing, training, and research is compatible with the original purpose for which it was collected. When possible, organizations use placeholder data to avoid exposure of personally identifiable information when conducting testing, training, and research."
+                }
+            ]
+        },
+        {
+            "id": "pm-26",
+            "class": "SP800-53",
+            "title": "Complaint Management",
+            "parameters": [
+                {
+                    "id": "pm-26_prm_1",
+                    "label": "organization-defined time period"
+                },
+                {
+                    "id": "pm-26_prm_2",
+                    "label": "organization-defined time period"
+                },
+                {
+                    "id": "pm-26_prm_3",
+                    "label": "organization-defined time period"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-26"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-26"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#ir-7",
+                    "rel": "related",
+                    "text": "IR-7"
+                },
+                {
+                    "href": "#ir-9",
+                    "rel": "related",
+                    "text": "IR-9"
+                },
+                {
+                    "href": "#pm-22",
+                    "rel": "related",
+                    "text": "PM-22"
+                },
+                {
+                    "href": "#si-18",
+                    "rel": "related",
+                    "text": "SI-18"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-26_smt",
+                    "name": "statement",
+                    "prose": "Implement a process for receiving and responding to complaints, concerns, or questions from individuals about the organizational security and privacy practices that includes:",
+                    "parts": [
+                        {
+                            "id": "pm-26_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Mechanisms that are easy to use and readily accessible by the public;"
+                        },
+                        {
+                            "id": "pm-26_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "All information necessary for successfully filing complaints;"
+                        },
+                        {
+                            "id": "pm-26_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Tracking mechanisms to ensure all complaints received are reviewed and addressed within {{ pm-26_prm_1 }};"
+                        },
+                        {
+                            "id": "pm-26_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Acknowledgement of receipt of complaints, concerns, or questions from individuals within {{ pm-26_prm_2 }}; and"
+                        },
+                        {
+                            "id": "pm-26_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Response to complaints, concerns, or questions from individuals within {{ pm-26_prm_3 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-26_gdn",
+                    "name": "guidance",
+                    "prose": "Complaints, concerns, and questions from individuals can serve as valuable sources of input to organizations and ultimately improve operational models, uses of technology, data collection practices, and controls. Mechanisms that can be used by the public include telephone hotline, email, or web-based forms. The information necessary for successfully filing complaints includes contact information for the senior agency official for privacy or other official designated to receive complaints. Privacy complaints may also include personally identifiable information which is handled in accordance with relevant policies and processes."
+                }
+            ]
+        },
+        {
+            "id": "pm-27",
+            "class": "SP800-53",
+            "title": "Privacy Reporting",
+            "parameters": [
+                {
+                    "id": "pm-27_prm_1",
+                    "label": "organization-defined privacy reports"
+                },
+                {
+                    "id": "pm-27_prm_2",
+                    "label": "organization-defined oversight bodies"
+                },
+                {
+                    "id": "pm-27_prm_3",
+                    "label": "organization-defined officials"
+                },
+                {
+                    "id": "pm-27_prm_4",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-27"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-27"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#0c67b2a9-bede-43d2-b86d-5f35b8be36e9",
+                    "rel": "reference",
+                    "text": "[FISMA]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#3671ff20-c17c-44d6-8a88-7de203fa74aa",
+                    "rel": "reference",
+                    "text": "[OMB A-108]"
+                },
+                {
+                    "href": "#ir-9",
+                    "rel": "related",
+                    "text": "IR-9"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-27_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-27_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop {{ pm-27_prm_1 }} and disseminate to:",
+                            "parts": [
+                                {
+                                    "id": "pm-27_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "\n                     {{ pm-27_prm_2 }} to demonstrate accountability with statutory, regulatory, and policy privacy mandates; and"
+                                },
+                                {
+                                    "id": "pm-27_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "\n                     {{ pm-27_prm_3 }} and other personnel with responsibility for monitoring privacy program compliance; and"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-27_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Review and update privacy reports {{ pm-27_prm_4 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-27_gdn",
+                    "name": "guidance",
+                    "prose": "Through internal and external reporting, organizations promote accountability and transparency in organizational privacy operations. Reporting can also help organizations to determine progress in meeting privacy compliance requirements and privacy controls, compare performance across the federal government, discover vulnerabilities, identify gaps in policy and implementation, and identify models for success. For federal agencies, privacy reports include annual senior agency official for privacy reports to OMB, reports to Congress required by Implementing Regulations of the 9/11 Commission Act, and other public reports required by law, regulation, or policy, including internal policies of organizations. The senior agency official for privacy consults with legal counsel, where appropriate, to ensure that organizations meet all applicable privacy reporting requirements."
+                }
+            ]
+        },
+        {
+            "id": "pm-28",
+            "class": "SP800-53",
+            "title": "Risk Framing",
+            "parameters": [
+                {
+                    "id": "pm-28_prm_1",
+                    "label": "organization-defined personnel"
+                },
+                {
+                    "id": "pm-28_prm_2",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-28"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-28"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#ra-7",
+                    "rel": "related",
+                    "text": "RA-7"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-28_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-28_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Identify and document:",
+                            "parts": [
+                                {
+                                    "id": "pm-28_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Assumptions affecting risk assessments, risk responses, and risk monitoring;"
+                                },
+                                {
+                                    "id": "pm-28_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Constraints affecting risk assessments, risk responses, and risk monitoring;"
+                                },
+                                {
+                                    "id": "pm-28_smt.a.3",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "3."
+                                        }
+                                    ],
+                                    "prose": "Priorities and trade-offs considered by the organization for managing risk; and"
+                                },
+                                {
+                                    "id": "pm-28_smt.a.4",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "4."
+                                        }
+                                    ],
+                                    "prose": "Organizational risk tolerance;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "pm-28_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Distribute the results of risk framing activities to {{ pm-28_prm_1 }}; and"
+                        },
+                        {
+                            "id": "pm-28_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update risk framing considerations {{ pm-28_prm_2 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-28_gdn",
+                    "name": "guidance",
+                    "prose": "Risk framing is most effective when conducted at the organization level and in consultation with stakeholders throughout the organization including mission, business, and system owners. The assumptions, constraints, risk tolerance, priorities, and trade-offs identified as part of the risk framing process inform the risk management strategy, which in turn informs the conduct of risk assessment, risk response, and risk monitoring activities. Risk framing results are shared with organizational personnel, including mission and business owners, information owners or stewards, system owners, authorizing officials, senior agency information security officer, senior agency official for privacy, and senior accountable official for risk management."
+                }
+            ]
+        },
+        {
+            "id": "pm-29",
+            "class": "SP800-53",
+            "title": "Risk Management Program Leadership Roles",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-29"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-29"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#pm-2",
+                    "rel": "related",
+                    "text": "PM-2"
+                },
+                {
+                    "href": "#pm-19",
+                    "rel": "related",
+                    "text": "PM-19"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-29_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-29_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Appoint a Senior Accountable Official for Risk Management to align organizational information security and privacy management processes with strategic, operational, and budgetary planning processes; and"
+                        },
+                        {
+                            "id": "pm-29_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Establish a Risk Executive (function) to view and analyze risk from an organization-wide perspective and ensure management of risk is consistent across the organization."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-29_gdn",
+                    "name": "guidance",
+                    "prose": "The senior accountable official for risk management leads the risk executive (function) in organization-wide risk management activities."
+                }
+            ]
+        },
+        {
+            "id": "pm-30",
+            "class": "SP800-53",
+            "title": "Supply Chain Risk Management Strategy",
+            "parameters": [
+                {
+                    "id": "pm-30_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-30"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-30"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#18e71fec-c6fd-475a-925a-5d8495cf8455",
+                    "rel": "reference",
+                    "text": "[PRIVACT]"
+                },
+                {
+                    "href": "#4ff10ed3-d8fe-4246-99e3-443045e27482",
+                    "rel": "reference",
+                    "text": "[FASC18]"
+                },
+                {
+                    "href": "#0f963c17-ab5a-432a-a867-91eac550309b",
+                    "rel": "reference",
+                    "text": "[41 CFR 201]"
+                },
+                {
+                    "href": "#21caa535-1154-4369-ba7b-32c309fee0f7",
+                    "rel": "reference",
+                    "text": "[EO 13873]"
+                },
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#206a3284-6a7e-423c-8ea9-25b22542541d",
+                    "rel": "reference",
+                    "text": "[OMB M-17-06]"
+                },
+                {
+                    "href": "#863caf2a-978a-4260-9e8d-4a8929bce40c",
+                    "rel": "reference",
+                    "text": "[ISO 27036]"
+                },
+                {
+                    "href": "#15a95e24-65b6-4686-bc18-90855a10457d",
+                    "rel": "reference",
+                    "text": "[ISO 20243]"
+                },
+                {
+                    "href": "#e8e84963-14fc-4c3a-be05-b412a5d37cd2",
+                    "rel": "reference",
+                    "text": "[SP 800-161]"
+                },
+                {
+                    "href": "#38ff38f0-1366-4f50-a4c9-26a39aacee16",
+                    "rel": "reference",
+                    "text": "[IR 8272]"
+                },
+                {
+                    "href": "#cm-10",
+                    "rel": "related",
+                    "text": "CM-10"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#sr-1",
+                    "rel": "related",
+                    "text": "SR-1"
+                },
+                {
+                    "href": "#sr-2",
+                    "rel": "related",
+                    "text": "SR-2"
+                },
+                {
+                    "href": "#sr-3",
+                    "rel": "related",
+                    "text": "SR-3"
+                },
+                {
+                    "href": "#sr-4",
+                    "rel": "related",
+                    "text": "SR-4"
+                },
+                {
+                    "href": "#sr-5",
+                    "rel": "related",
+                    "text": "SR-5"
+                },
+                {
+                    "href": "#sr-6",
+                    "rel": "related",
+                    "text": "SR-6"
+                },
+                {
+                    "href": "#sr-7",
+                    "rel": "related",
+                    "text": "SR-7"
+                },
+                {
+                    "href": "#sr-8",
+                    "rel": "related",
+                    "text": "SR-8"
+                },
+                {
+                    "href": "#sr-9",
+                    "rel": "related",
+                    "text": "SR-9"
+                },
+                {
+                    "href": "#sr-11",
+                    "rel": "related",
+                    "text": "SR-11"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-30_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "pm-30_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop an organization-wide strategy for managing supply chain risks associated with the development, acquisition, maintenance, and disposal of systems, system components, and system services;"
+                        },
+                        {
+                            "id": "pm-30_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Implement the supply chain risk management strategy consistently across the organization; and"
+                        },
+                        {
+                            "id": "pm-30_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update the supply chain risk management strategy on {{ pm-30_prm_1 }} or as required, to address organizational changes."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-30_gdn",
+                    "name": "guidance",
+                    "prose": "An organization-wide supply chain risk management strategy includes an unambiguous expression of the supply chain risk appetite and tolerance for the organization, acceptable supply chain risk mitigation strategies or controls, a process for consistently evaluating and monitoring supply chain risk, approaches for implementing and communicating the supply chain risk management strategy, and the associated roles and responsibilities. Supply chain risk management includes considerations of the security and privacy risks associated with the development, acquisition, maintenance, and disposal of systems, system components, and system services. The supply chain risk management strategy can be incorporated into the organization\u2019s overarching risk management strategy and can guide and inform supply chain policies and system-level supply chain risk management plans. In addition, the use of a risk executive function can facilitate a consistent, organization-wide application of the supply chain risk management strategy. The supply chain risk management strategy is implemented at the organization and mission/business levels, whereas the supply chain risk management plan (see [SR-2](#sr-2)) is implemented at the system level."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "pm-30.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Suppliers of Critical or Mission-essential Items",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "PM-30(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "PM-30(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ra-3",
+                            "rel": "related",
+                            "text": "RA-3"
+                        },
+                        {
+                            "href": "#sr-6",
+                            "rel": "related",
+                            "text": "SR-6"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "pm-30.1_smt",
+                            "name": "statement",
+                            "prose": "Identify, prioritize, and assess suppliers of critical or mission-essential technologies, products, and services."
+                        },
+                        {
+                            "id": "pm-30.1_gdn",
+                            "name": "guidance",
+                            "prose": "The identification and prioritization of suppliers of critical or mission-essential technologies, products, and services is paramount to the mission/business success of organizations. The assessment of suppliers is conducted using supplier reviews (see SR-6) and supply chain risk assessment processes (see RA-3(1)). An analysis of supply chain risk can help an organization identify systems or components for which additional supply chain risk mitigations are required."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "pm-31",
+            "class": "SP800-53",
+            "title": "Continuous Monitoring Strategy",
+            "parameters": [
+                {
+                    "id": "pm-31_prm_1",
+                    "label": "organization-defined metrics"
+                },
+                {
+                    "id": "pm-31_prm_2",
+                    "label": "organization-defined frequencies"
+                },
+                {
+                    "id": "pm-31_prm_3",
+                    "label": "organization-defined frequencies"
+                },
+                {
+                    "id": "pm-31_prm_4",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "pm-31_prm_5",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-31"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-31"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+                    "rel": "reference",
+                    "text": "[SP 800-37]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#067223d8-1ec7-45c5-b21b-c848da6de8fb",
+                    "rel": "reference",
+                    "text": "[SP 800-137]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#ac-17",
+                    "rel": "related",
+                    "text": "AC-17"
+                },
+                {
+                    "href": "#at-4",
+                    "rel": "related",
+                    "text": "AT-4"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-13",
+                    "rel": "related",
+                    "text": "AU-13"
+                },
+                {
+                    "href": "#ca-2",
+                    "rel": "related",
+                    "text": "CA-2"
+                },
+                {
+                    "href": "#ca-5",
+                    "rel": "related",
+                    "text": "CA-5"
+                },
+                {
+                    "href": "#ca-6",
+                    "rel": "related",
+                    "text": "CA-6"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#cm-3",
+                    "rel": "related",
+                    "text": "CM-3"
+                },
+                {
+                    "href": "#cm-4",
+                    "rel": "related",
+                    "text": "CM-4"
+                },
+                {
+                    "href": "#cm-6",
+                    "rel": "related",
+                    "text": "CM-6"
+                },
+                {
+                    "href": "#cm-11",
+                    "rel": "related",
+                    "text": "CM-11"
+                },
+                {
+                    "href": "#ia-5",
+                    "rel": "related",
+                    "text": "IA-5"
+                },
+                {
+                    "href": "#ir-5",
+                    "rel": "related",
+                    "text": "IR-5"
+                },
+                {
+                    "href": "#ma-2",
+                    "rel": "related",
+                    "text": "MA-2"
+                },
+                {
+                    "href": "#ma-3",
+                    "rel": "related",
+                    "text": "MA-3"
+                },
+                {
+                    "href": "#ma-4",
+                    "rel": "related",
+                    "text": "MA-4"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pe-6",
+                    "rel": "related",
+                    "text": "PE-6"
+                },
+                {
+                    "href": "#pe-14",
+                    "rel": "related",
+                    "text": "PE-14"
+                },
+                {
+                    "href": "#pe-16",
+                    "rel": "related",
+                    "text": "PE-16"
+                },
+                {
+                    "href": "#pe-20",
+                    "rel": "related",
+                    "text": "PE-20"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#pm-4",
+                    "rel": "related",
+                    "text": "PM-4"
+                },
+                {
+                    "href": "#pm-6",
+                    "rel": "related",
+                    "text": "PM-6"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#pm-10",
+                    "rel": "related",
+                    "text": "PM-10"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#pm-14",
+                    "rel": "related",
+                    "text": "PM-14"
+                },
+                {
+                    "href": "#pm-23",
+                    "rel": "related",
+                    "text": "PM-23"
+                },
+                {
+                    "href": "#pm-28",
+                    "rel": "related",
+                    "text": "PM-28"
+                },
+                {
+                    "href": "#ps-7",
+                    "rel": "related",
+                    "text": "PS-7"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#ra-5",
+                    "rel": "related",
+                    "text": "RA-5"
+                },
+                {
+                    "href": "#ra-7",
+                    "rel": "related",
+                    "text": "RA-7"
+                },
+                {
+                    "href": "#sa-9",
+                    "rel": "related",
+                    "text": "SA-9"
+                },
+                {
+                    "href": "#sa-11",
+                    "rel": "related",
+                    "text": "SA-11"
+                },
+                {
+                    "href": "#sc-5",
+                    "rel": "related",
+                    "text": "SC-5"
+                },
+                {
+                    "href": "#sc-7",
+                    "rel": "related",
+                    "text": "SC-7"
+                },
+                {
+                    "href": "#sc-18",
+                    "rel": "related",
+                    "text": "SC-18"
+                },
+                {
+                    "href": "#sc-38",
+                    "rel": "related",
+                    "text": "SC-38"
+                },
+                {
+                    "href": "#sc-43",
+                    "rel": "related",
+                    "text": "SC-43"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                },
+                {
+                    "href": "#sr-2",
+                    "rel": "related",
+                    "text": "SR-2"
+                },
+                {
+                    "href": "#sr-4",
+                    "rel": "related",
+                    "text": "SR-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-31_smt",
+                    "name": "statement",
+                    "prose": "Develop an organization-wide continuous monitoring strategy and implement continuous monitoring programs that include:",
+                    "parts": [
+                        {
+                            "id": "pm-31_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Establishing the following organization-wide metrics to be monitored: {{ pm-31_prm_1 }};"
+                        },
+                        {
+                            "id": "pm-31_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Establishing {{ pm-31_prm_2 }} for monitoring and {{ pm-31_prm_3 }} for assessment of control effectiveness;"
+                        },
+                        {
+                            "id": "pm-31_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Ongoing monitoring of organizationally-defined metrics in accordance with the continuous monitoring strategy;"
+                        },
+                        {
+                            "id": "pm-31_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Correlation and analysis of information generated by control assessments and monitoring;"
+                        },
+                        {
+                            "id": "pm-31_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Response actions to address results of the analysis of control assessment and monitoring information; and"
+                        },
+                        {
+                            "id": "pm-31_smt.f",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "f."
+                                }
+                            ],
+                            "prose": "Reporting the security and privacy status of organizational systems to {{ pm-31_prm_4 }}\n                  {{ pm-31_prm_5 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "pm-31_gdn",
+                    "name": "guidance",
+                    "prose": "Continuous monitoring at the organization level facilitates ongoing awareness of the security and privacy posture across the organization to support organizational risk management decisions. The terms \u201ccontinuous\u201d and \u201congoing\u201d imply that organizations assess and monitor their controls and risks at a frequency sufficient to support risk-based decisions. Different types of controls may require different monitoring frequencies. The results of continuous monitoring guide and inform risk response actions by organizations. Continuous monitoring programs allow organizations to maintain the authorizations of systems and common controls in highly dynamic environments of operation with changing mission and business needs, threats, vulnerabilities, and technologies. Having access to security- and privacy-related information on a continuing basis through reports and dashboards gives organizational officials the capability to make effective, timely, and informed risk management decisions, including ongoing authorization decisions. To further facilitate security and privacy risk management, organizations consider aligning organization-defined monitoring metrics with organizational risk tolerance as defined in the risk management strategy. Monitoring requirements, including the need for monitoring, may be referenced in other controls and control enhancements such as, AC-2g, AC-2(7), AC-2(12)(a), AC-2(7)(b), AC-2(7)(c), AC-17(1), AT-4a, AU-13, AU-13(1), AU-13(2), CA-7, CM-3f, CM-6d, CM-11c, IR-5, MA-2b, MA-3a, MA-4a, PE-3d, PE-6, PE-14b, PE-16, PE-20, PM-6, PM-23, PS-7e, SA-9c, SC-5(3)(b), SC-7a, SC-7(24)(b), SC-18c, SC-43b, SI-4."
+                }
+            ]
+        },
+        {
+            "id": "pm-32",
+            "class": "SP800-53",
+            "title": "Purposing",
+            "parameters": [
+                {
+                    "id": "pm-32_prm_1",
+                    "label": "organization-defined systems or systems components"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PM-32"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PM-32"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#067223d8-1ec7-45c5-b21b-c848da6de8fb",
+                    "rel": "reference",
+                    "text": "[SP 800-137]"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#pl-2",
+                    "rel": "related",
+                    "text": "PL-2"
+                },
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                },
+                {
+                    "href": "#ra-9",
+                    "rel": "related",
+                    "text": "RA-9"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pm-32_smt",
+                    "name": "statement",
+                    "prose": "Analyze {{ pm-32_prm_1 }} supporting mission essential services or functions to ensure that the information resources are being used consistent with their intended purpose."
+                },
+                {
+                    "id": "pm-32_gdn",
+                    "name": "guidance",
+                    "prose": "Systems are designed to support a specific mission or business function. However, over time, systems and system components may be used to support services and functions that are outside of the scope of the intended mission or business functions. This can result in exposing information resources to unintended environments and uses that can significantly increase threat exposure. In doing so, the systems are more vulnerable to compromise, which can ultimately impact the services and functions for which they were intended. This is especially impactful for mission-essential services and functions. By analyzing resource use, organizations can identify such potential exposures."
+                }
+            ]
+        }
+    ]
+}

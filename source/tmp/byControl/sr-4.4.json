@@ -1,0 +1,45 @@
+{
+    "id": "sr-4.4",
+    "class": "SP800-53-enhancement",
+    "title": "Supply Chain Integrity \u2014 Pedigree",
+    "parameters": [
+        {
+            "id": "sr-4.4_prm_1",
+            "label": "organization-defined controls"
+        },
+        {
+            "id": "sr-4.4_prm_2",
+            "label": "organization-defined analysis"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-4(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-04(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-4.4_smt",
+            "name": "statement",
+            "prose": "Employ {{ sr-4.4_prm_1 }} and conduct {{ sr-4.4_prm_2 }} to ensure the integrity of the system and system components by validating the internal composition and provenance of critical or mission-essential technologies, products, and services."
+        },
+        {
+            "id": "sr-4.4_gdn",
+            "name": "guidance",
+            "prose": "Authoritative information regarding the internal composition of system components and the provenance of technology, products, and services provides a strong basis for trust. The validation of the internal composition and provenance of technologies, products, and services is referred to as the pedigree. For microelectronics, this includes material composition of components. For software this includes the composition of open-source and proprietary code, including the version of the component at a given point in time. Pedigrees increase the assurance that the claims suppliers assert about the internal composition and provenance of the products, services, and technologies they provide are valid. The validation of the internal composition and provenance can be achieved by various evidentiary artifacts or records that manufacturers and suppliers produce during the research and development, design, manufacturing, acquisition, delivery, integration, operations and maintenance, and disposal of technology, products, and services. Evidentiary artifacts include, but are not limited to, software identification (SWID) tags, software component inventory, the manufacturers\u2019 declarations of platform attributes (e.g., serial numbers, hardware component inventory), and measurements (e.g., firmware hashes) that are tightly bound to the hardware itself."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

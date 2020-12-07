@@ -1,0 +1,38 @@
+{
+    "id": "sa-10.7",
+    "class": "SP800-53-enhancement",
+    "title": "Security and Privacy Representatives",
+    "parameters": [
+        {
+            "id": "sa-10.7_prm_1",
+            "label": "organization-defined security and privacy representatives"
+        },
+        {
+            "id": "sa-10.7_prm_2",
+            "label": "organization-defined configuration change management and control process"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-10(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-10(07)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-10.7_smt",
+            "name": "statement",
+            "prose": "Require {{ sa-10.7_prm_1 }} to be included in the {{ sa-10.7_prm_2 }}."
+        },
+        {
+            "id": "sa-10.7_gdn",
+            "name": "guidance",
+            "prose": "Information security and privacy representatives can include system security officers, senior agency information security officers, senior agency officials for privacy, and system privacy officers. Representation by personnel with information security and privacy expertise is important because changes to system configurations can have unintended side effects, some of which may be security- or privacy-relevant. Detecting such changes early in the process can help avoid unintended, negative consequences that could ultimately affect the security and privacy posture of systems. The configuration change management and control process in this control enhancement refers to the change management and control process defined by organizations in SA-10b."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,28 @@
+{
+    "id": "sc-3.4",
+    "class": "SP800-53-enhancement",
+    "title": "Module Coupling and Cohesiveness",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-3(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-03(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-3.4_smt",
+            "name": "statement",
+            "prose": "Implement security functions as largely independent modules that maximize internal cohesiveness within modules and minimize coupling between modules."
+        },
+        {
+            "id": "sc-3.4_gdn",
+            "name": "guidance",
+            "prose": "The reduction of inter-module interactions helps to constrain security functions and manage complexity. The concepts of coupling and cohesion are important with respect to modularity in software design. Coupling refers to the dependencies that one module has on other modules. Cohesion refers to the relationship between functions within a module. Best practices in software engineering and systems security engineering rely on layering, minimization, and modular decomposition to reduce and manage complexity. This produces software modules that are highly cohesive and loosely coupled."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

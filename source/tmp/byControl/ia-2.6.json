@@ -1,0 +1,86 @@
+{
+    "id": "ia-2.6",
+    "class": "SP800-53-enhancement",
+    "title": "Access to Accounts \u2014 Separate Device",
+    "parameters": [
+        {
+            "id": "ia-2.6_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "local",
+                    "network",
+                    "remote"
+                ]
+            }
+        },
+        {
+            "id": "ia-2.6_prm_2",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "privileged accounts",
+                    "non-privileged accounts"
+                ]
+            }
+        },
+        {
+            "id": "ia-2.6_prm_3",
+            "label": "organization-defined strength of mechanism requirements"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-2.6_smt",
+            "name": "statement",
+            "prose": "Implement multi-factor authentication for {{ ia-2.6_prm_1 }} access to {{ ia-2.6_prm_2 }} such that:",
+            "parts": [
+                {
+                    "id": "ia-2.6_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "One of the factors is provided by a device separate from the system gaining access; and"
+                },
+                {
+                    "id": "ia-2.6_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "The device meets {{ ia-2.6_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "ia-2.6_gdn",
+            "name": "guidance",
+            "prose": "The purpose of requiring a device that is separate from the system to which the user is attempting to gain access for one of the factors during multi-factor authentication is to reduce the likelihood of compromising authenticators or credentials stored on the system. Adversaries may be able to compromise such authenticators or credentials and subsequently impersonate authorized users. Implementing one of the factors on a separate device (e.g., a hardware token), provides a greater strength of mechanism and an increased level of assurance in the authentication process."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

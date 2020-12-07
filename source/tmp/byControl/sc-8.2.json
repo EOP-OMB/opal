@@ -1,0 +1,40 @@
+{
+    "id": "sc-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Pre- and Post-transmission Handling",
+    "parameters": [
+        {
+            "id": "sc-8.2_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "confidentiality",
+                    "integrity"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-8.2_smt",
+            "name": "statement",
+            "prose": "Maintain the {{ sc-8.2_prm_1 }} of information during preparation for transmission and during reception."
+        },
+        {
+            "id": "sc-8.2_gdn",
+            "name": "guidance",
+            "prose": "Information can be unintentionally or maliciously disclosed or modified during preparation for transmission or during reception, including during aggregation, at protocol transformation points, and during packing and unpacking. Such unauthorized disclosures or modifications compromise the confidentiality or integrity of the information."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

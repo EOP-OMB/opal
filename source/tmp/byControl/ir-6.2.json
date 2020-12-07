@@ -1,0 +1,34 @@
+{
+    "id": "ir-6.2",
+    "class": "SP800-53-enhancement",
+    "title": "Vulnerabilities Related to Incidents",
+    "parameters": [
+        {
+            "id": "ir-6.2_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-6(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-06(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-6.2_smt",
+            "name": "statement",
+            "prose": "Report system vulnerabilities associated with reported incidents to {{ ir-6.2_prm_1 }}."
+        },
+        {
+            "id": "ir-6.2_gdn",
+            "name": "guidance",
+            "prose": "Reported incidents that uncover system vulnerabilities are analyzed by organizational personnel including system owners, mission and business owners, senior agency information security officers, senior agency officials for privacy, authorizing officials, and the risk executive (function). The analysis can serve to prioritize and initiate mitigation actions to address the discovered system vulnerability."
+        }
+    ],
+    "group_title": "Incident Response"
+}

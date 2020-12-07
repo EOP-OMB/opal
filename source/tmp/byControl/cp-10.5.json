@@ -1,0 +1,27 @@
+{
+    "id": "cp-10.5",
+    "class": "SP800-53-enhancement",
+    "title": "Failover Capability",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-10(5)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-10(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-13",
+            "rel": "incorporated-into",
+            "text": "SI-13"
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

@@ -1,0 +1,38 @@
+{
+    "id": "sa-9.4",
+    "class": "SP800-53-enhancement",
+    "title": "Consistent Interests of Consumers and Providers",
+    "parameters": [
+        {
+            "id": "sa-9.4_prm_1",
+            "label": "organization-defined external service providers"
+        },
+        {
+            "id": "sa-9.4_prm_2",
+            "label": "organization-defined actions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-9(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-09(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-9.4_smt",
+            "name": "statement",
+            "prose": "Take the following actions to verify that the interests of {{ sa-9.4_prm_1 }} are consistent with and reflect organizational interests: {{ sa-9.4_prm_2 }}."
+        },
+        {
+            "id": "sa-9.4_gdn",
+            "name": "guidance",
+            "prose": "As organizations increasingly use external service providers, it is possible that the interests of the service providers may diverge from organizational interests. In such situations, simply having the required technical, management, or operational controls in place may not be sufficient if the providers that implement and manage those controls are not operating in a manner consistent with the interests of the consuming organizations. Actions that organizations take to address such concerns include requiring background checks for selected service provider personnel; examining ownership records; employing only trustworthy service providers, such as providers with which organizations have had successful trust relationships; and conducting routine, periodic, unscheduled visits to service provider facilities."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

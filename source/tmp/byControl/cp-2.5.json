@@ -1,0 +1,39 @@
+{
+    "id": "cp-2.5",
+    "class": "SP800-53-enhancement",
+    "title": "Continue Mission and Business Functions",
+    "parameters": [
+        {
+            "id": "cp-2.5_prm_1",
+            "select": {
+                "alternatives": [
+                    "all",
+                    "essential"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-2(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-02(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-2.5_smt",
+            "name": "statement",
+            "prose": "Plan for the continuance of {{ cp-2.5_prm_1 }} mission and business functions with minimal or no loss of operational continuity and sustains that continuity until full system restoration at primary processing and/or storage sites."
+        },
+        {
+            "id": "cp-2.5_gdn",
+            "name": "guidance",
+            "prose": "Organizations may choose to conduct the contingency planning activities to continue mission and business functions as part of business continuity planning or business impact analyses. Primary processing and/or storage sites defined by organizations as part of contingency planning may change depending on the circumstances associated with the contingency."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

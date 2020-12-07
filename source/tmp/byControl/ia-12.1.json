@@ -1,0 +1,28 @@
+{
+    "id": "ia-12.1",
+    "class": "SP800-53-enhancement",
+    "title": "Supervisor Authorization",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-12(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-12(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-12.1_smt",
+            "name": "statement",
+            "prose": "Require that the registration process to receive an account for logical access includes supervisor or sponsor authorization."
+        },
+        {
+            "id": "ia-12.1_gdn",
+            "name": "guidance",
+            "prose": "Including supervisor or sponsor authorization as part of the registration process provides an additional level of scrutiny to ensure that the user\u2019s management chain is aware of the account, the account is essential to carry out organizational missions and functions, and the user\u2019s privileges are appropriate for the anticipated responsibilities and authorities within the organization."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

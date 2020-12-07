@@ -1,0 +1,38 @@
+{
+    "id": "ac-4.20",
+    "class": "SP800-53-enhancement",
+    "title": "Approved Solutions",
+    "parameters": [
+        {
+            "id": "ac-4.20_prm_1",
+            "label": "organization-defined solutions in approved configurations"
+        },
+        {
+            "id": "ac-4.20_prm_2",
+            "label": "organization-defined information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(20)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(20)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.20_smt",
+            "name": "statement",
+            "prose": "Employ {{ ac-4.20_prm_1 }} to control the flow of {{ ac-4.20_prm_2 }} across security domains."
+        },
+        {
+            "id": "ac-4.20_gdn",
+            "name": "guidance",
+            "prose": "Organizations define approved solutions and configurations in cross-domain policies and guidance in accordance with the types of information flows across classification boundaries. The National Security Agency (NSA) National Cross Domain Strategy and Management Office provides a listing of approved cross-domain solutions. Contact ncdsmo@nsa.gov for more information."
+        }
+    ],
+    "group_title": "Access Control"
+}

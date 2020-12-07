@@ -1,0 +1,34 @@
+{
+    "id": "ir-9.3",
+    "class": "SP800-53-enhancement",
+    "title": "Post-spill Operations",
+    "parameters": [
+        {
+            "id": "ir-9.3_prm_1",
+            "label": "organization-defined procedures"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-9(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-09(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-9.3_smt",
+            "name": "statement",
+            "prose": "Implement the following procedures to ensure that organizational personnel impacted by information spills can continue to carry out assigned tasks while contaminated systems are undergoing corrective actions: {{ ir-9.3_prm_1 }}."
+        },
+        {
+            "id": "ir-9.3_gdn",
+            "name": "guidance",
+            "prose": "Corrective actions for systems contaminated due to information spillages may be time-consuming. Personnel may not have access to the contaminated systems while corrective actions are being taken, which may potentially affect their ability to conduct organizational business."
+        }
+    ],
+    "group_title": "Incident Response"
+}

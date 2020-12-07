@@ -1,0 +1,27 @@
+{
+    "id": "ia-2.9",
+    "class": "SP800-53-enhancement",
+    "title": "Network Access to Non-privileged Accounts \u2014 Replay Resistant",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(9)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(09)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2.8",
+            "rel": "incorporated-into",
+            "text": "IA-2(8)"
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

@@ -1,0 +1,50 @@
+{
+    "id": "au-9.7",
+    "class": "SP800-53-enhancement",
+    "title": "Store on Component with Different Operating System",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-9(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-09(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-4",
+            "rel": "related",
+            "text": "AU-4"
+        },
+        {
+            "href": "#au-5",
+            "rel": "related",
+            "text": "AU-5"
+        },
+        {
+            "href": "#au-11",
+            "rel": "related",
+            "text": "AU-11"
+        },
+        {
+            "href": "#sc-29",
+            "rel": "related",
+            "text": "SC-29"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-9.7_smt",
+            "name": "statement",
+            "prose": "Store audit information on a component running a different operating system than the system or component being audited."
+        },
+        {
+            "id": "au-9.7_gdn",
+            "name": "guidance",
+            "prose": "Storing auditing information on a system component running a different operating system reduces the risk of a vulnerability specific to the system, resulting in a compromise of the audit records."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

@@ -1,0 +1,51 @@
+{
+    "id": "ac-4.25",
+    "class": "SP800-53-enhancement",
+    "title": "Data Sanitization",
+    "parameters": [
+        {
+            "id": "ac-4.25_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "delivery of malicious content, command and control of malicious code, malicious code augmentation, and steganography encoded data",
+                    "spillage of sensitive information"
+                ]
+            }
+        },
+        {
+            "id": "ac-4.25_prm_2",
+            "label": "organization-defined policy"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(25)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(25)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.25_smt",
+            "name": "statement",
+            "prose": "When transferring information between different security domains, sanitize data to minimize {{ ac-4.25_prm_1 }} in accordance with {{ ac-4.25_prm_2 }}]."
+        },
+        {
+            "id": "ac-4.25_gdn",
+            "name": "guidance",
+            "prose": "Data sanitization is the process of irreversibly removing or destroying data stored on a memory device (e.g., hard drives, flash memory/solid state drives, mobile devices, CDs, and DVDs) or in hard copy form."
+        }
+    ],
+    "group_title": "Access Control"
+}

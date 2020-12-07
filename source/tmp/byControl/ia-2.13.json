@@ -1,0 +1,55 @@
+{
+    "id": "ia-2.13",
+    "class": "SP800-53-enhancement",
+    "title": "Out-of-band Authentication",
+    "parameters": [
+        {
+            "id": "ia-2.13_prm_1",
+            "label": "organization-defined conditions"
+        },
+        {
+            "id": "ia-2.13_prm_2",
+            "label": "organization-defined out-of-band authentication"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(13)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(13)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-10",
+            "rel": "related",
+            "text": "IA-10"
+        },
+        {
+            "href": "#ia-11",
+            "rel": "related",
+            "text": "IA-11"
+        },
+        {
+            "href": "#sc-37",
+            "rel": "related",
+            "text": "SC-37"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-2.13_smt",
+            "name": "statement",
+            "prose": "Implement the following out-of-band authentication mechanisms under {{ ia-2.13_prm_1 }}: {{ ia-2.13_prm_2 }}."
+        },
+        {
+            "id": "ia-2.13_gdn",
+            "name": "guidance",
+            "prose": "Out-of-band authentication refers to the use of two separate communication paths to identify and authenticate users or devices to an information system. The first path (i.e., the in-band path) is used to identify and authenticate users or devices and is generally the path through which information flows. The second path (i.e., the out-of-band path) is used to independently verify the authentication and/or requested action. For example, a user authenticates via a notebook computer to a remote server to which the user desires access and requests some action of the server via that communication path. Subsequently, the server contacts the user via the user\u2019s cell phone to verify that the requested action originated from the user. The user may confirm the intended action to an individual on the telephone or provide an authentication code via the telephone. Out-of-band authentication can be used to mitigate actual or suspected \u201cman-in the-middle\u201d attacks. The conditions or criteria for activation include suspicious activities, new threat indicators, elevated threat levels, or the impact or classification level of information in requested transactions."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

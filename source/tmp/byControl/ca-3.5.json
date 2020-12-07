@@ -1,0 +1,27 @@
+{
+    "id": "ca-3.5",
+    "class": "SP800-53-enhancement",
+    "title": "Restrictions on External System Connections",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-3(5)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-03(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-7.5",
+            "rel": "moved-to",
+            "text": "SC-7(5)"
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

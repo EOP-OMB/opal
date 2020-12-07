@@ -1,0 +1,34 @@
+{
+    "id": "sa-8.12",
+    "class": "SP800-53-enhancement",
+    "title": "Hierarchical Protection",
+    "parameters": [
+        {
+            "id": "sa-8.12_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(12)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(12)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.12_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of hierarchical protection in {{ sa-8.12_prm_1 }}."
+        },
+        {
+            "id": "sa-8.12_gdn",
+            "name": "guidance",
+            "prose": "The principle of hierarchical protection states that a component need not be protected from more trustworthy components. In the degenerate case of the most trusted component, it protects itself from all other components. For example, if an operating system kernel is deemed the most trustworthy component in a system, then it protects itself from all untrusted applications it supports, but the applications, conversely, do not need to protect themselves from the kernel. The trustworthiness of users is a consideration for applying the principle of hierarchical protection. A trusted system need not protect itself from an equally trustworthy user, reflecting use of untrusted systems in \u201csystem high\u201d environments where users are highly trustworthy and where other protections are put in place to bound and protect the \u201csystem high\u201d execution environment."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

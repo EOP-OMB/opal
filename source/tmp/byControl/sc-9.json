@@ -1,0 +1,27 @@
+{
+    "id": "sc-9",
+    "class": "SP800-53",
+    "title": "Transmission Confidentiality",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-9"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-09"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-8",
+            "rel": "incorporated-into",
+            "text": "SC-8"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

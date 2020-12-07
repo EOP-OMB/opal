@@ -1,0 +1,65 @@
+{
+    "id": "ac-3.10",
+    "class": "SP800-53-enhancement",
+    "title": "Audited Override of Access Control Mechanisms",
+    "parameters": [
+        {
+            "id": "ac-3.10_prm_1",
+            "label": "organization-defined conditions"
+        },
+        {
+            "id": "ac-3.10_prm_2",
+            "label": "organization-defined roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(10)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(10)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-10",
+            "rel": "related",
+            "text": "AU-10"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        },
+        {
+            "href": "#au-14",
+            "rel": "related",
+            "text": "AU-14"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-3.10_smt",
+            "name": "statement",
+            "prose": "Employ an audited override of automated access control mechanisms under {{ ac-3.10_prm_1 }} by {{ ac-3.10_prm_2 }}."
+        },
+        {
+            "id": "ac-3.10_gdn",
+            "name": "guidance",
+            "prose": "In certain situations, such as when there is a threat to human life or an event that threatens the organization\u2019s ability to carry out critical missions or business functions, an override capability for access control mechanisms may be needed. Override conditions are defined by organizations and used only in those limited circumstances. Audit events are defined in AU-2. Audit records are generated in AU-12."
+        }
+    ],
+    "group_title": "Access Control"
+}

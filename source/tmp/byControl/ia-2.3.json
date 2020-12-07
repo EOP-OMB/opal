@@ -1,0 +1,27 @@
+{
+    "id": "ia-2.3",
+    "class": "SP800-53-enhancement",
+    "title": "Local Access to Privileged Accounts",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(3)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2.1",
+            "rel": "incorporated-into",
+            "text": "IA-2(1)"
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

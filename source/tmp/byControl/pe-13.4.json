@@ -1,0 +1,38 @@
+{
+    "id": "pe-13.4",
+    "class": "SP800-53-enhancement",
+    "title": "Inspections",
+    "parameters": [
+        {
+            "id": "pe-13.4_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "pe-13.4_prm_2",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-13(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-13(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-13.4_smt",
+            "name": "statement",
+            "prose": "Ensure that the facility undergoes {{ pe-13.4_prm_1 }} fire protection inspections by authorized and qualified inspectors and identified deficiencies are resolved within {{ pe-13.4_prm_2 }}."
+        },
+        {
+            "id": "pe-13.4_gdn",
+            "name": "guidance",
+            "prose": "Authorized and qualified personnel within the jurisdiction of the organization include state, county, and city fire inspectors and fire marshals. Organizations provide escorts during inspections in situations where the systems that reside within the facilities contain sensitive information."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

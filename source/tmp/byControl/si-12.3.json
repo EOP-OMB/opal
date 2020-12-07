@@ -1,0 +1,41 @@
+{
+    "id": "si-12.3",
+    "class": "SP800-53-enhancement",
+    "title": "Information Disposal",
+    "parameters": [
+        {
+            "id": "si-12.3_prm_1",
+            "label": "organization-defined techniques"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-12(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-12(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-12.3_smt",
+            "name": "statement",
+            "prose": "Use the following techniques to dispose of, destroy, or erase information following the retention period: {{ si-12.3_prm_1 }}."
+        },
+        {
+            "id": "si-12.3_gdn",
+            "name": "guidance",
+            "prose": "Organizations can minimize both security and privacy risks by disposing of information when it is no longer needed. The disposal or destruction of information applies to originals as well as copies and archived records, including system logs that may contain personally identifiable information."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

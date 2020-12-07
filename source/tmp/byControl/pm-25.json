@@ -1,0 +1,106 @@
+{
+    "id": "pm-25",
+    "class": "SP800-53",
+    "title": "Minimization of Personally Identifiable Information Used in Testing, Training, and Research",
+    "parameters": [
+        {
+            "id": "pm-25_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PM-25"
+        },
+        {
+            "name": "sort-id",
+            "value": "PM-25"
+        }
+    ],
+    "links": [
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130, Appendix II]"
+        },
+        {
+            "href": "#pm-23",
+            "rel": "related",
+            "text": "PM-23"
+        },
+        {
+            "href": "#pt-3",
+            "rel": "related",
+            "text": "PT-3"
+        },
+        {
+            "href": "#sa-3",
+            "rel": "related",
+            "text": "SA-3"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pm-25_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "pm-25_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Develop, document, and implement policies and procedures that address the use of personally identifiable information for internal testing, training, and research;"
+                },
+                {
+                    "id": "pm-25_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Limit or minimize the amount of personally identifiable information used for internal testing, training, and research purposes;"
+                },
+                {
+                    "id": "pm-25_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "c."
+                        }
+                    ],
+                    "prose": "Authorize the use of personally identifiable information when such information is required for internal testing, training, and research; and"
+                },
+                {
+                    "id": "pm-25_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "d."
+                        }
+                    ],
+                    "prose": "Review and update policies and procedures {{ pm-25_prm_1 }}."
+                }
+            ]
+        },
+        {
+            "id": "pm-25_gdn",
+            "name": "guidance",
+            "prose": "The use of personally identifiable information in testing, research, and training increases the risk of unauthorized disclosure or misuse of such information. Organizations consult with the senior agency official for privacy and/or legal counsel to ensure that the use of personally identifiable information in testing, training, and research is compatible with the original purpose for which it was collected. When possible, organizations use placeholder data to avoid exposure of personally identifiable information when conducting testing, training, and research."
+        }
+    ],
+    "group_title": "Program Management"
+}

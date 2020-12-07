@@ -1,0 +1,27 @@
+{
+    "id": "sa-13",
+    "class": "SP800-53",
+    "title": "Trustworthiness",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-13"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-13"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-8",
+            "rel": "incorporated-into",
+            "text": "SA-8"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

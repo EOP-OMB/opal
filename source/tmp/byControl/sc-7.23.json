@@ -1,0 +1,28 @@
+{
+    "id": "sc-7.23",
+    "class": "SP800-53-enhancement",
+    "title": "Disable Sender Feedback on Protocol Validation Failure",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(23)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(23)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.23_smt",
+            "name": "statement",
+            "prose": "Disable feedback to senders on protocol format validation failure."
+        },
+        {
+            "id": "sc-7.23_gdn",
+            "name": "guidance",
+            "prose": "Disabling feedback to senders when there is a failure in protocol validation format prevents adversaries from obtaining information that would otherwise be unavailable."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

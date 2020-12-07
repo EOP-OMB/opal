@@ -1,0 +1,60 @@
+{
+    "id": "ac-6.4",
+    "class": "SP800-53-enhancement",
+    "title": "Separate Processing Domains",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-6(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-06(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#sc-2",
+            "rel": "related",
+            "text": "SC-2"
+        },
+        {
+            "href": "#sc-3",
+            "rel": "related",
+            "text": "SC-3"
+        },
+        {
+            "href": "#sc-30",
+            "rel": "related",
+            "text": "SC-30"
+        },
+        {
+            "href": "#sc-32",
+            "rel": "related",
+            "text": "SC-32"
+        },
+        {
+            "href": "#sc-39",
+            "rel": "related",
+            "text": "SC-39"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-6.4_smt",
+            "name": "statement",
+            "prose": "Provide separate processing domains to enable finer-grained allocation of user privileges."
+        },
+        {
+            "id": "ac-6.4_gdn",
+            "name": "guidance",
+            "prose": "Providing separate processing domains for finer-grained allocation of user privileges includes using virtualization techniques to permit additional user privileges within a virtual machine while restricting privileges to other virtual machines or to the underlying physical machine, implementing separate physical domains, and employing hardware or software domain separation mechanisms."
+        }
+    ],
+    "group_title": "Access Control"
+}

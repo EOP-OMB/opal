@@ -1,0 +1,59 @@
+{
+    "id": "sc-41",
+    "class": "SP800-53",
+    "title": "Port and I/O Device Access",
+    "parameters": [
+        {
+            "id": "sc-41_prm_1",
+            "select": {
+                "alternatives": [
+                    "Physically",
+                    "Logically"
+                ]
+            }
+        },
+        {
+            "id": "sc-41_prm_2",
+            "label": "organization-defined connection ports or input/output devices"
+        },
+        {
+            "id": "sc-41_prm_3",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-41"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-41"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-20",
+            "rel": "related",
+            "text": "AC-20"
+        },
+        {
+            "href": "#mp-7",
+            "rel": "related",
+            "text": "MP-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-41_smt",
+            "name": "statement",
+            "prose": "\n               {{ sc-41_prm_1 }} disable or remove {{ sc-41_prm_2 }} on the following systems or system components: {{ sc-41_prm_3 }}."
+        },
+        {
+            "id": "sc-41_gdn",
+            "name": "guidance",
+            "prose": "Connection ports include Universal Serial Bus (USB), Thunderbolt, and Firewire (IEEE 1394). Input/output (I/O) devices include compact disc and digital versatile disc drives. Disabling or removing such connection ports and I/O devices helps prevent the exfiltration of information from systems and the introduction of malicious code from those ports or devices. Physically disabling or removing ports and/or devices is the stronger action."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

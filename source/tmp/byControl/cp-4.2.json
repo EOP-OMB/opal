@@ -1,0 +1,59 @@
+{
+    "id": "cp-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Alternate Processing Site",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-04(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-7",
+            "rel": "related",
+            "text": "CP-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-4.2_smt",
+            "name": "statement",
+            "prose": "Test the contingency plan at the alternate processing site:",
+            "parts": [
+                {
+                    "id": "cp-4.2_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "To familiarize contingency personnel with the facility and available resources; and"
+                },
+                {
+                    "id": "cp-4.2_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "To evaluate the capabilities of the alternate processing site to support contingency operations."
+                }
+            ]
+        },
+        {
+            "id": "cp-4.2_gdn",
+            "name": "guidance",
+            "prose": "Conditions at the alternate processing site may be significantly different than the conditions at the primary site. Having the opportunity to visit the alternate site and experience the actual capabilities available at the site can provide valuable information on potential vulnerabilities that could affect essential organizational mission and business functions. The on-site visit can also provide an opportunity to refine the contingency plan to address the vulnerabilities discovered during testing."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

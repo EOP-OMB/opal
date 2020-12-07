@@ -1,0 +1,51 @@
+{
+    "id": "ir-4.15",
+    "class": "SP800-53-enhancement",
+    "title": "Public Relations and Reputation Repair",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(15)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(15)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.15_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ir-4.15_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Manage public relations associated with an incident; and"
+                },
+                {
+                    "id": "ir-4.15_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Employ measures to repair the reputation of the organization."
+                }
+            ]
+        },
+        {
+            "id": "ir-4.15_gdn",
+            "name": "guidance",
+            "prose": "It is important for an organization to have a strategy in place for addressing incidents that have been brought to the attention of the general public, have cast the organization in a negative light, or have affected the organization\u2019s constituents (e.g., partners, customers). Such publicity can be extremely harmful to the organization and affect its ability to carry out its mission and business functions. Taking proactive steps to repair the organization\u2019s reputation is an essential aspect of reestablishing the trust and confidence of its constituents."
+        }
+    ],
+    "group_title": "Incident Response"
+}

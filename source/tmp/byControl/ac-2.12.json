@@ -1,0 +1,88 @@
+{
+    "id": "ac-2.12",
+    "class": "SP800-53-enhancement",
+    "title": "Account Monitoring for Atypical Usage",
+    "parameters": [
+        {
+            "id": "ac-2.12_prm_1",
+            "label": "organization-defined atypical usage"
+        },
+        {
+            "id": "ac-2.12_prm_2",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(12)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(12)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-7",
+            "rel": "related",
+            "text": "AU-7"
+        },
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#ir-8",
+            "rel": "related",
+            "text": "IR-8"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.12_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ac-2.12_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Monitor system accounts for {{ ac-2.12_prm_1 }}; and"
+                },
+                {
+                    "id": "ac-2.12_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Report atypical usage of system accounts to {{ ac-2.12_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "ac-2.12_gdn",
+            "name": "guidance",
+            "prose": "Atypical usage includes accessing systems at certain times of the day or from locations that are not consistent with the normal usage patterns of individuals. Monitoring for atypical usage may reveal rogue behavior by individuals or an attack in progress. Account monitoring may inadvertently create privacy risks since data collected to identify atypical usage may reveal previously unknown information about the behavior of individuals. Organizations assess and document privacy risks from monitoring accounts for atypical usage in their privacy impact assessment and make determinations that are in alignment with their privacy program plan."
+        }
+    ],
+    "group_title": "Access Control"
+}

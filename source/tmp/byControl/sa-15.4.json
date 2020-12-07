@@ -1,0 +1,27 @@
+{
+    "id": "sa-15.4",
+    "class": "SP800-53-enhancement",
+    "title": "Threat Modeling and Vulnerability Analysis",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-15(4)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-15(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-11.2",
+            "rel": "incorporated-into",
+            "text": "SA-11(2)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

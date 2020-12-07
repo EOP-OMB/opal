@@ -1,0 +1,124 @@
+{
+    "id": "cm-8.3",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Unauthorized Component Detection",
+    "parameters": [
+        {
+            "id": "cm-8.3_prm_1",
+            "label": "organization-defined automated mechanisms"
+        },
+        {
+            "id": "cm-8.3_prm_2",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "cm-8.3_prm_3",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "disable network access by such components",
+                    "isolate the components",
+                    "notify {{ cm-8.3_prm_4 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "cm-8.3_prm_4",
+            "depends-on": "cm-8.3_prm_3",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-8(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-08(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-19",
+            "rel": "related",
+            "text": "AC-19"
+        },
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#ra-5",
+            "rel": "related",
+            "text": "RA-5"
+        },
+        {
+            "href": "#sc-3",
+            "rel": "related",
+            "text": "SC-3"
+        },
+        {
+            "href": "#sc-39",
+            "rel": "related",
+            "text": "SC-39"
+        },
+        {
+            "href": "#sc-44",
+            "rel": "related",
+            "text": "SC-44"
+        },
+        {
+            "href": "#si-3",
+            "rel": "related",
+            "text": "SI-3"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-8.3_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cm-8.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Detect the presence of unauthorized hardware, software, and firmware components within the system using {{ cm-8.3_prm_1 }}\n                     {{ cm-8.3_prm_2 }}; and"
+                },
+                {
+                    "id": "cm-8.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Take the following actions when unauthorized components are detected: {{ cm-8.3_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "cm-8.3_gdn",
+            "name": "guidance",
+            "prose": "Automated unauthorized component detection is applied in addition to the monitoring for unauthorized remote connections and mobile devices. Monitoring for unauthorized system components may be accomplished on an ongoing basis or by the periodic scanning of systems for that purpose. Automated mechanisms may also be used to prevent the connection of unauthorized components (see CM-7(9)). Automated mechanisms can be implemented in systems or in separate system components. When acquiring and implementing automated mechanisms, organizations consider whether such mechanisms depend on the ability of the system component to support an agent or supplicant in order to be detected since some types of components do not have or cannot support agents (e.g., IoT devices, sensors). Isolation can be achieved , for example, by placing unauthorized system components in separate domains or subnets or quarantining such components. This type of  component isolation is commonly referred to as \u201csandboxing.\u201d"
+        }
+    ],
+    "group_title": "Configuration Management"
+}

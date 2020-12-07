@@ -1,0 +1,27 @@
+{
+    "id": "sa-19.3",
+    "class": "SP800-53-enhancement",
+    "title": "Component Disposal",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-19(3)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-19(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-12",
+            "rel": "moved-to",
+            "text": "SR-12"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

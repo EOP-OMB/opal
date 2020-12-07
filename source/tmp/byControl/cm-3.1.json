@@ -1,0 +1,114 @@
+{
+    "id": "cm-3.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Documentation, Notification, and Prohibition of Changes",
+    "parameters": [
+        {
+            "id": "cm-3.1_prm_1",
+            "label": "organization-defined automated mechanisms"
+        },
+        {
+            "id": "cm-3.1_prm_2",
+            "label": "organization-defined approval authorities"
+        },
+        {
+            "id": "cm-3.1_prm_3",
+            "label": "organization-defined time period"
+        },
+        {
+            "id": "cm-3.1_prm_4",
+            "label": "organization-defined personnel"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-3(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-03(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-3.1_smt",
+            "name": "statement",
+            "prose": "Use {{ cm-3.1_prm_1 }} to:",
+            "parts": [
+                {
+                    "id": "cm-3.1_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Document proposed changes to the system;"
+                },
+                {
+                    "id": "cm-3.1_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Notify {{ cm-3.1_prm_2 }} of proposed changes to the system and request change approval;"
+                },
+                {
+                    "id": "cm-3.1_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Highlight proposed changes to the system that have not been approved or disapproved within {{ cm-3.1_prm_3 }};"
+                },
+                {
+                    "id": "cm-3.1_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(d)"
+                        }
+                    ],
+                    "prose": "Prohibit changes to the system until designated approvals are received;"
+                },
+                {
+                    "id": "cm-3.1_smt.e",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(e)"
+                        }
+                    ],
+                    "prose": "Document all changes to the system; and"
+                },
+                {
+                    "id": "cm-3.1_smt.f",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(f)"
+                        }
+                    ],
+                    "prose": "Notify {{ cm-3.1_prm_4 }} when approved changes to the system are completed."
+                }
+            ]
+        },
+        {
+            "id": "cm-3.1_gdn",
+            "name": "guidance",
+            "prose": "None."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

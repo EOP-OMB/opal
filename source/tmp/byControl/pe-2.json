@@ -1,0 +1,325 @@
+{
+    "id": "pe-2",
+    "class": "SP800-53",
+    "title": "Physical Access Authorizations",
+    "parameters": [
+        {
+            "id": "pe-2_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-2"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-02"
+        }
+    ],
+    "links": [
+        {
+            "href": "#7ba1d91c-3934-4d5a-8532-b32f864ad34c",
+            "rel": "reference",
+            "text": "[FIPS 201-2]"
+        },
+        {
+            "href": "#858705be-3c1f-48aa-a328-0ce398d95ef0",
+            "rel": "reference",
+            "text": "[SP 800-73-4]"
+        },
+        {
+            "href": "#7af2e6ec-9f7e-4232-ad3f-09888eb0793a",
+            "rel": "reference",
+            "text": "[SP 800-76-2]"
+        },
+        {
+            "href": "#828856bd-d7c4-427b-8b51-815517ec382d",
+            "rel": "reference",
+            "text": "[SP 800-78-4]"
+        },
+        {
+            "href": "#at-3",
+            "rel": "related",
+            "text": "AT-3"
+        },
+        {
+            "href": "#au-9",
+            "rel": "related",
+            "text": "AU-9"
+        },
+        {
+            "href": "#ia-4",
+            "rel": "related",
+            "text": "IA-4"
+        },
+        {
+            "href": "#ma-5",
+            "rel": "related",
+            "text": "MA-5"
+        },
+        {
+            "href": "#mp-2",
+            "rel": "related",
+            "text": "MP-2"
+        },
+        {
+            "href": "#pe-3",
+            "rel": "related",
+            "text": "PE-3"
+        },
+        {
+            "href": "#pe-4",
+            "rel": "related",
+            "text": "PE-4"
+        },
+        {
+            "href": "#pe-5",
+            "rel": "related",
+            "text": "PE-5"
+        },
+        {
+            "href": "#pe-8",
+            "rel": "related",
+            "text": "PE-8"
+        },
+        {
+            "href": "#pm-12",
+            "rel": "related",
+            "text": "PM-12"
+        },
+        {
+            "href": "#ps-3",
+            "rel": "related",
+            "text": "PS-3"
+        },
+        {
+            "href": "#ps-4",
+            "rel": "related",
+            "text": "PS-4"
+        },
+        {
+            "href": "#ps-5",
+            "rel": "related",
+            "text": "PS-5"
+        },
+        {
+            "href": "#ps-6",
+            "rel": "related",
+            "text": "PS-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-2_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "pe-2_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Develop, approve, and maintain a list of individuals with authorized access to the facility where the system resides;"
+                },
+                {
+                    "id": "pe-2_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Issue authorization credentials for facility access;"
+                },
+                {
+                    "id": "pe-2_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "c."
+                        }
+                    ],
+                    "prose": "Review the access list detailing authorized facility access by individuals {{ pe-2_prm_1 }}; and"
+                },
+                {
+                    "id": "pe-2_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "d."
+                        }
+                    ],
+                    "prose": "Remove individuals from the facility access list when access is no longer required."
+                }
+            ]
+        },
+        {
+            "id": "pe-2_gdn",
+            "name": "guidance",
+            "prose": "Physical access authorizations apply to employees and visitors. Individuals with permanent physical access authorization credentials are not considered visitors. Authorization credentials include ID badges, identification cards, and smart cards. Organizations determine the strength of authorization credentials needed consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Physical access authorizations may not be necessary to access certain areas within facilities that are designated as publicly accessible."
+        }
+    ],
+    "controls": [
+        {
+            "id": "pe-2.1",
+            "class": "SP800-53-enhancement",
+            "title": "Access by Position or Role",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PE-2(1)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PE-02(01)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pe-2.1_smt",
+                    "name": "statement",
+                    "prose": "Authorize physical access to the facility where the system resides based on position or role."
+                },
+                {
+                    "id": "pe-2.1_gdn",
+                    "name": "guidance",
+                    "prose": "Role-based facility access includes access by authorized permanent and regular/routine maintenance personnel, duty officers, and emergency medical staff."
+                }
+            ]
+        },
+        {
+            "id": "pe-2.2",
+            "class": "SP800-53-enhancement",
+            "title": "Two Forms of Identification",
+            "parameters": [
+                {
+                    "id": "pe-2.2_prm_1",
+                    "label": "organization-defined list of acceptable forms of identification"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PE-2(2)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PE-02(02)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ia-2",
+                    "rel": "related",
+                    "text": "IA-2"
+                },
+                {
+                    "href": "#ia-4",
+                    "rel": "related",
+                    "text": "IA-4"
+                },
+                {
+                    "href": "#ia-5",
+                    "rel": "related",
+                    "text": "IA-5"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pe-2.2_smt",
+                    "name": "statement",
+                    "prose": "Require two forms of identification from the following forms of identification for visitor access to the facility where the system resides: {{ pe-2.2_prm_1 }}."
+                },
+                {
+                    "id": "pe-2.2_gdn",
+                    "name": "guidance",
+                    "prose": "Acceptable forms of identification include passports, REAL ID-compliant drivers\u2019 licenses, and Personal Identity Verification (PIV) cards. For gaining access to facilities using automated mechanisms, organizations may use PIV cards, key cards, PINs, and biometrics."
+                }
+            ]
+        },
+        {
+            "id": "pe-2.3",
+            "class": "SP800-53-enhancement",
+            "title": "Restrict Unescorted Access",
+            "parameters": [
+                {
+                    "id": "pe-2.3_prm_1",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "security clearances for all information contained within the system",
+                            "formal access authorizations for all information contained within the system",
+                            "need for access to all information contained within the system",
+                            "\n                     {{ pe-2.3_prm_2 }}\n                  "
+                        ]
+                    }
+                },
+                {
+                    "id": "pe-2.3_prm_2",
+                    "depends-on": "pe-2.3_prm_1",
+                    "label": "organization-defined physical access authorizations"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "PE-2(3)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "PE-02(03)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ps-2",
+                    "rel": "related",
+                    "text": "PS-2"
+                },
+                {
+                    "href": "#ps-6",
+                    "rel": "related",
+                    "text": "PS-6"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "pe-2.3_smt",
+                    "name": "statement",
+                    "prose": "Restrict unescorted access to the facility where the system resides to personnel with {{ pe-2.3_prm_1 }}."
+                },
+                {
+                    "id": "pe-2.3_gdn",
+                    "name": "guidance",
+                    "prose": "Individuals without required security clearances, access approvals, or need to know are escorted by individuals with appropriate physical access authorizations to ensure that information is not exposed or otherwise compromised."
+                }
+            ]
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

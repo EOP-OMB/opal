@@ -1,0 +1,68 @@
+{
+    "id": "ac-6.7",
+    "class": "SP800-53-enhancement",
+    "title": "Review of User Privileges",
+    "parameters": [
+        {
+            "id": "ac-6.7_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "ac-6.7_prm_2",
+            "label": "organization-defined roles or classes of users"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-6(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-06(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-6.7_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ac-6.7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Review {{ ac-6.7_prm_1 }} the privileges assigned to {{ ac-6.7_prm_2 }} to validate the need for such privileges; and"
+                },
+                {
+                    "id": "ac-6.7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Reassign or remove privileges, if necessary, to correctly reflect organizational mission and business needs."
+                }
+            ]
+        },
+        {
+            "id": "ac-6.7_gdn",
+            "name": "guidance",
+            "prose": "The need for certain assigned user privileges may change over time to reflect changes in organizational mission and business functions, environments of operation, technologies, or threats. A periodic review of assigned user privileges is necessary to determine if the rationale for assigning such privileges remains valid. If the need cannot be revalidated, organizations take appropriate corrective actions."
+        }
+    ],
+    "group_title": "Access Control"
+}

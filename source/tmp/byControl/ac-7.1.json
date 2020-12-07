@@ -1,0 +1,27 @@
+{
+    "id": "ac-7.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automatic Account Lock",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-7(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-07(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-7",
+            "rel": "incorporated-into",
+            "text": "AC-7"
+        }
+    ],
+    "group_title": "Access Control"
+}

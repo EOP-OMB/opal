@@ -1,0 +1,55 @@
+{
+    "id": "cm-6.2",
+    "class": "SP800-53-enhancement",
+    "title": "Respond to Unauthorized Changes",
+    "parameters": [
+        {
+            "id": "cm-6.2_prm_1",
+            "label": "organization-defined configuration settings"
+        },
+        {
+            "id": "cm-6.2_prm_2",
+            "label": "organization-defined actions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-6(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-06(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ir-4",
+            "rel": "related",
+            "text": "IR-4"
+        },
+        {
+            "href": "#ir-6",
+            "rel": "related",
+            "text": "IR-6"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-6.2_smt",
+            "name": "statement",
+            "prose": "Take the following actions in response to unauthorized changes to {{ cm-6.2_prm_1 }}: {{ cm-6.2_prm_2 }}."
+        },
+        {
+            "id": "cm-6.2_gdn",
+            "name": "guidance",
+            "prose": "Responses to unauthorized changes to configuration settings include alerting designated organizational personnel, restoring established configuration settings, or\u2014in extreme cases\u2014halting affected system processing."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

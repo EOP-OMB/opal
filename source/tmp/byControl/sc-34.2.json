@@ -1,0 +1,70 @@
+{
+    "id": "sc-34.2",
+    "class": "SP800-53-enhancement",
+    "title": "Integrity Protection on Read-only Media",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-34(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-34(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-3",
+            "rel": "related",
+            "text": "CM-3"
+        },
+        {
+            "href": "#cm-5",
+            "rel": "related",
+            "text": "CM-5"
+        },
+        {
+            "href": "#cm-9",
+            "rel": "related",
+            "text": "CM-9"
+        },
+        {
+            "href": "#mp-2",
+            "rel": "related",
+            "text": "MP-2"
+        },
+        {
+            "href": "#mp-4",
+            "rel": "related",
+            "text": "MP-4"
+        },
+        {
+            "href": "#mp-5",
+            "rel": "related",
+            "text": "MP-5"
+        },
+        {
+            "href": "#sc-28",
+            "rel": "related",
+            "text": "SC-28"
+        },
+        {
+            "href": "#si-3",
+            "rel": "related",
+            "text": "SI-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-34.2_smt",
+            "name": "statement",
+            "prose": "Protect the integrity of information prior to storage on read-only media and control the media after such information has been recorded onto the media."
+        },
+        {
+            "id": "sc-34.2_gdn",
+            "name": "guidance",
+            "prose": "Controls prevent the substitution of media into systems or the reprogramming of programmable read-only media prior to installation into the systems. Integrity protection controls include a combination of prevention, detection, and response."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

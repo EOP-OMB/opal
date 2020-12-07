@@ -1,0 +1,56 @@
+{
+    "id": "cp-9.5",
+    "class": "SP800-53-enhancement",
+    "title": "Transfer to Alternate Storage Site",
+    "parameters": [
+        {
+            "id": "cp-9.5_prm_1",
+            "label": "organization-defined time period and transfer rate consistent with the recovery time and recovery point objectives"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-9(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-09(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-7",
+            "rel": "related",
+            "text": "CP-7"
+        },
+        {
+            "href": "#mp-3",
+            "rel": "related",
+            "text": "MP-3"
+        },
+        {
+            "href": "#mp-4",
+            "rel": "related",
+            "text": "MP-4"
+        },
+        {
+            "href": "#mp-5",
+            "rel": "related",
+            "text": "MP-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-9.5_smt",
+            "name": "statement",
+            "prose": "Transfer system backup information to the alternate storage site {{ cp-9.5_prm_1 }}."
+        },
+        {
+            "id": "cp-9.5_gdn",
+            "name": "guidance",
+            "prose": "System backup information can be transferred to alternate storage sites either electronically or by the physical shipment of storage media."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

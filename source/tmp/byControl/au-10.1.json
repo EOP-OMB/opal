@@ -1,0 +1,69 @@
+{
+    "id": "au-10.1",
+    "class": "SP800-53-enhancement",
+    "title": "Association of Identities",
+    "parameters": [
+        {
+            "id": "au-10.1_prm_1",
+            "label": "organization-defined strength of binding"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-10(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-10(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#ac-16",
+            "rel": "related",
+            "text": "AC-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-10.1_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "au-10.1_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Bind the identity of the information producer with the information to {{ au-10.1_prm_1 }}; and"
+                },
+                {
+                    "id": "au-10.1_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Provide the means for authorized individuals to determine the identity of the producer of the information."
+                }
+            ]
+        },
+        {
+            "id": "au-10.1_gdn",
+            "name": "guidance",
+            "prose": "Binding identities to the information supports audit requirements that provide organizational personnel with the means to identify who produced specific information in the event of an information transfer. Organizations determine and approve the strength of attribute binding between the information producer and the information based on the security category of the information and other relevant risk factors."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

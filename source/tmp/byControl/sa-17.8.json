@@ -1,0 +1,38 @@
+{
+    "id": "sa-17.8",
+    "class": "SP800-53-enhancement",
+    "title": "Orchestration",
+    "parameters": [
+        {
+            "id": "sa-17.8_prm_1",
+            "label": "organization-defined critical systems or system components"
+        },
+        {
+            "id": "sa-17.8_prm_2",
+            "label": "organization-defined capabilities, by system or component"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-17(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-17(08)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-17.8_smt",
+            "name": "statement",
+            "prose": "Design {{ sa-17.8_prm_1 }} with coordinated behavior to implement the following capabilities: {{ sa-17.8_prm_2 }}."
+        },
+        {
+            "id": "sa-17.8_gdn",
+            "name": "guidance",
+            "prose": "Security resources that are distributed, located at different layers or in different system elements, or are implemented to support different aspects of trustworthiness can interact in unforeseen or incorrect ways. Adverse consequences can include cascading failures, interference, or coverage gaps. Coordination of the behavior of security resources (e.g., by ensuring that one patch is installed across all resources before making a configuration change that assumes that the patch is propagated) can avert such negative interactions."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}
