@@ -1,0 +1,34 @@
+{
+    "id": "ca-7.5",
+    "class": "SP800-53-enhancement",
+    "title": "Consistency Analysis",
+    "parameters": [
+        {
+            "id": "ca-7.5_prm_1",
+            "label": "organization-defined actions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-7(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-07(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-7.5_smt",
+            "name": "statement",
+            "prose": "Employ the following actions to validate that policies are established and implemented controls are operating in a consistent manner: {{ ca-7.5_prm_1 }}."
+        },
+        {
+            "id": "ca-7.5_gdn",
+            "name": "guidance",
+            "prose": "Security and privacy controls are often added incrementally to a system. As a result, policies for selecting and implementing controls may be inconsistent, and the controls could fail to work together in a consistent or coordinated manner. At a minimum, the lack of consistency and coordination could mean that there are unacceptable security and privacy gaps in the system. At worst, it could mean that some of the controls implemented in one location or by one component are actually impeding the functionality of other controls (e.g., encrypting internal network traffic can impede monitoring). In other situations, failing to consistently monitor all implemented network protocols (e.g., a dual stack of IPv4 and IPv6) may create unintended vulnerabilities in the system that could be exploited by adversaries. It is important to validate\u2014through testing, monitoring, and analysis\u2014that the implemented controls are operating in a consistent, coordinated, non-interfering manner."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

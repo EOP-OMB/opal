@@ -1,0 +1,45 @@
+{
+    "id": "sa-15.12",
+    "class": "SP800-53-enhancement",
+    "title": "Minimize Personally Identifiable Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-15(12)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-15(12)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pm-25",
+            "rel": "related",
+            "text": "PM-25"
+        },
+        {
+            "href": "#sa-3",
+            "rel": "related",
+            "text": "SA-3"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-15.12_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system or system component to minimize the use of personally identifiable information in development and test environments."
+        },
+        {
+            "id": "sa-15.12_gdn",
+            "name": "guidance",
+            "prose": "Organizations can minimize the risk to an individual\u2019s privacy by using techniques such as de-identification or synthetic data. Limiting the use of personally identifiable information in development and test environments helps reduce the level of privacy risk created by a system."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

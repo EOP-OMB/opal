@@ -1,0 +1,32 @@
+{
+    "id": "sa-6",
+    "class": "SP800-53",
+    "title": "Software Usage Restrictions",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-6"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-06"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-10",
+            "rel": "incorporated-into",
+            "text": "CM-10"
+        },
+        {
+            "href": "#si-7",
+            "rel": "incorporated-into",
+            "text": "SI-7"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,28 @@
+{
+    "id": "mp-8.3",
+    "class": "SP800-53-enhancement",
+    "title": "Controlled Unclassified Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-8(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-08(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-8.3_smt",
+            "name": "statement",
+            "prose": "Downgrade system media containing controlled unclassified information prior to public release."
+        },
+        {
+            "id": "mp-8.3_gdn",
+            "name": "guidance",
+            "prose": "The downgrading of controlled unclassified information uses approved sanitization tools, techniques, and procedures."
+        }
+    ],
+    "group_title": "Media Protection"
+}

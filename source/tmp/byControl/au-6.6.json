@@ -1,0 +1,28 @@
+{
+    "id": "au-6.6",
+    "class": "SP800-53-enhancement",
+    "title": "Correlation with Physical Monitoring",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-6(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-06(06)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-6.6_smt",
+            "name": "statement",
+            "prose": "Correlate information from audit records with information obtained from monitoring physical access to further enhance the ability to identify suspicious, inappropriate, unusual, or malevolent activity."
+        },
+        {
+            "id": "au-6.6_gdn",
+            "name": "guidance",
+            "prose": "The correlation of physical audit record information and the audit records from systems may assist organizations in identifying suspicious behavior or supporting evidence of such behavior. For example, the correlation of an individual\u2019s identity for logical access to certain systems with the additional physical security information that the individual was present at the facility when the logical access occurred may be useful in investigations."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

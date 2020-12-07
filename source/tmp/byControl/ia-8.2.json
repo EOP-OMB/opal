@@ -1,0 +1,51 @@
+{
+    "id": "ia-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Acceptance of External Authenticators",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-8.2_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ia-8.2_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Accept only external authenticators that are NIST-compliant; and"
+                },
+                {
+                    "id": "ia-8.2_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Document and maintain a list of accepted external authenticators."
+                }
+            ]
+        },
+        {
+            "id": "ia-8.2_gdn",
+            "name": "guidance",
+            "prose": "Acceptance of only NIST-compliant external authenticators applies to organizational systems that are accessible to the public (e.g., public-facing websites). External authenticators are issued by nonfederal government entities and are compliant with [SP 800-63B]. Approved external authenticators meet or exceed the minimum Federal Government-wide technical, security, privacy, and organizational maturity requirements. Meeting or exceeding Federal requirements allows Federal Government relying parties to trust external authenticators in connection with an authentication transaction at a specified authenticator assurance level."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

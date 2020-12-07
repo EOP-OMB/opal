@@ -1,0 +1,35 @@
+{
+    "id": "mp-7.2",
+    "class": "SP800-53-enhancement",
+    "title": "Prohibit Use of Sanitization-resistant Media",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-7(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-07(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-7.2_smt",
+            "name": "statement",
+            "prose": "Prohibit the use of sanitization-resistant media in organizational systems."
+        },
+        {
+            "id": "mp-7.2_gdn",
+            "name": "guidance",
+            "prose": "Sanitization resistance refers to how resistant media are to non-destructive sanitization techniques with respect to the capability to purge information from media. Certain types of media do not support sanitization commands, or if supported, the interfaces are not supported in a standardized way across these devices. Sanitization-resistant media includes compact flash, embedded flash on boards and devices, solid state drives, and USB removable media."
+        }
+    ],
+    "group_title": "Media Protection"
+}

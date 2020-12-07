@@ -1,0 +1,35 @@
+{
+    "id": "cp-6.1",
+    "class": "SP800-53-enhancement",
+    "title": "Separation from Primary Site",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-6(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-06(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-6.1_smt",
+            "name": "statement",
+            "prose": "Identify an alternate storage site that is sufficiently separated from the primary storage site to reduce susceptibility to the same threats."
+        },
+        {
+            "id": "cp-6.1_gdn",
+            "name": "guidance",
+            "prose": "Threats that affect alternate storage sites are defined in organizational risk assessments and include natural disasters, structural failures, hostile attacks, and errors of omission or commission. Organizations determine what is considered a sufficient degree of separation between primary and alternate storage sites based on the types of threats that are of concern. For threats such as hostile attacks, the degree of separation between sites is less relevant."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

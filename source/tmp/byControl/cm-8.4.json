@@ -1,0 +1,48 @@
+{
+    "id": "cm-8.4",
+    "class": "SP800-53-enhancement",
+    "title": "Accountability Information",
+    "parameters": [
+        {
+            "id": "cm-8.4_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "name",
+                    "position",
+                    "role"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-8(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-08(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-8.4_smt",
+            "name": "statement",
+            "prose": "Include in the system component inventory information, a means for identifying by {{ cm-8.4_prm_1 }}, individuals responsible and accountable for administering those components."
+        },
+        {
+            "id": "cm-8.4_gdn",
+            "name": "guidance",
+            "prose": "Identifying individuals who are responsible and accountable for administering system components ensures that the assigned components are properly administered and that organizations can contact those individuals if some action is required (e.g., when the component is determined to be the source of a breach, needs to be recalled or replaced, or needs to be relocated)."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

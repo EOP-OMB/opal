@@ -1,0 +1,28 @@
+{
+    "id": "sa-10.4",
+    "class": "SP800-53-enhancement",
+    "title": "Trusted Generation",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-10(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-10(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-10.4_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to employ tools for comparing newly generated versions of security-relevant hardware descriptions, source code, and object code with previous versions."
+        },
+        {
+            "id": "sa-10.4_gdn",
+            "name": "guidance",
+            "prose": "The trusted generation of descriptions, source code, and object code addresses authorized changes to hardware, software, and firmware components between versions during development. The focus is on the efficacy of the configuration management process by the developer to ensure that newly generated versions of security-relevant hardware descriptions, source code, and object code continue to enforce the security policy for the system, system component, or system service. In contrast, SA-10(1) and SA-10(3) allow organizations to detect unauthorized changes to hardware, software, and firmware components using tools, techniques, or mechanisms provided by developers."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

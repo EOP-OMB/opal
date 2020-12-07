@@ -1,0 +1,41 @@
+{
+    "id": "au-9.4",
+    "class": "SP800-53-enhancement",
+    "title": "Access by Subset of Privileged Users",
+    "parameters": [
+        {
+            "id": "au-9.4_prm_1",
+            "label": "organization-defined subset of privileged users or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-9(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-09(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-5",
+            "rel": "related",
+            "text": "AC-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-9.4_smt",
+            "name": "statement",
+            "prose": "Authorize access to management of audit logging functionality to only {{ au-9.4_prm_1 }}."
+        },
+        {
+            "id": "au-9.4_gdn",
+            "name": "guidance",
+            "prose": "Individuals or roles with privileged access to a system and who are also the subject of an audit by that system may affect the reliability of the audit information by inhibiting audit activities or modifying audit records. Requiring privileged access to be further defined between audit-related privileges and other privileges limits the number of users or roles with audit-related privileges."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

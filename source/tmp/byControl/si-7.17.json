@@ -1,0 +1,41 @@
+{
+    "id": "si-7.17",
+    "class": "SP800-53-enhancement",
+    "title": "Runtime Application Self-protection",
+    "parameters": [
+        {
+            "id": "si-7.17_prm_1",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(17)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(17)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-16",
+            "rel": "related",
+            "text": "SI-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.17_smt",
+            "name": "statement",
+            "prose": "Implement {{ si-7.17_prm_1 }} for application self-protection at runtime."
+        },
+        {
+            "id": "si-7.17_gdn",
+            "name": "guidance",
+            "prose": "Runtime application self-protection employs runtime instrumentation to detect and block the exploitation of software vulnerabilities by taking advantage of information from the software in execution. Runtime exploit prevention differs from traditional perimeter-based protections such as guards and firewalls which can only detect and block attacks by using network information without contextual awareness. Runtime application self-protection technology can reduce the susceptibility of software to attacks by monitoring its inputs and blocking those inputs that could allow attacks. It can also help protect the runtime environment from unwanted changes and tampering. When a threat is detected, runtime application self-protection technology can prevent exploitation and take other actions (e.g., sending a warning message to the user, terminating the user's session, terminating the application, or sending an alert to organizational personnel). Runtime application self-protection solutions can be deployed in either a monitor or protection mode."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

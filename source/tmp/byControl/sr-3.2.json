@@ -1,0 +1,34 @@
+{
+    "id": "sr-3.2",
+    "class": "SP800-53-enhancement",
+    "title": "Limitation of Harm",
+    "parameters": [
+        {
+            "id": "sr-3.2_prm_1",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-3(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-03(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-3.2_smt",
+            "name": "statement",
+            "prose": "Employ the following controls to limit harm from potential adversaries identifying and targeting the organizational supply chain: {{ sr-3.2_prm_1 }}."
+        },
+        {
+            "id": "sr-3.2_gdn",
+            "name": "guidance",
+            "prose": "Controls that can be implemented to reduce the probability of adversaries successfully identifying and targeting the supply chain include avoiding the purchase of custom or non-standardized configurations, employing approved vendor lists with standing reputations in industry, following pre-agreed maintenance schedules and update and patch delivery mechanisms, maintaining a contingency plan in case of a supply chain event, using procurement carve-outs that provide exclusions to commitments or obligations, using diverse delivery routes, and minimizing the time between purchase decisions and delivery."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

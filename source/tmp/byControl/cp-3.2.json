@@ -1,0 +1,28 @@
+{
+    "id": "cp-3.2",
+    "class": "SP800-53-enhancement",
+    "title": "Mechanisms Used in Training Environments",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-3(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-03(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-3.2_smt",
+            "name": "statement",
+            "prose": "Employ mechanisms used in operations to provide a more thorough and realistic contingency training environment."
+        },
+        {
+            "id": "cp-3.2_gdn",
+            "name": "guidance",
+            "prose": "Operational mechanisms refer to processes that have been established to accomplish an organizational goal or a system that supports a particular organizational mission or business objective. Actual mission and business processes, systems, and/or facilities may be used to generate simulated events and enhance the realism of simulated events during contingency training."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

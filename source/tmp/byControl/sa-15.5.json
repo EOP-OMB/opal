@@ -1,0 +1,56 @@
+{
+    "id": "sa-15.5",
+    "class": "SP800-53-enhancement",
+    "title": "Attack Surface Reduction",
+    "parameters": [
+        {
+            "id": "sa-15.5_prm_1",
+            "label": "organization-defined thresholds"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-15(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-15(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        },
+        {
+            "href": "#cm-7",
+            "rel": "related",
+            "text": "CM-7"
+        },
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        },
+        {
+            "href": "#sa-11",
+            "rel": "related",
+            "text": "SA-11"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-15.5_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to reduce attack surfaces to {{ sa-15.5_prm_1 }}."
+        },
+        {
+            "id": "sa-15.5_gdn",
+            "name": "guidance",
+            "prose": "Attack surface reduction is closely aligned with threat and vulnerability analyses and system architecture and design. Attack surface reduction is a means of reducing risk to organizations by giving attackers less opportunity to exploit weaknesses or deficiencies (i.e., potential vulnerabilities) within systems, system components, and system services. Attack surface reduction includes implementing the concept of layered defenses, applying the principles of least privilege and least functionality, applying secure software development practices, deprecating unsafe functions, reducing entry points available to unauthorized users, reducing the amount of code that executes, and eliminating application programming interfaces (APIs) that are vulnerable to attacks."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

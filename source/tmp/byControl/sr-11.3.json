@@ -1,0 +1,41 @@
+{
+    "id": "sr-11.3",
+    "class": "SP800-53-enhancement",
+    "title": "Anti-counterfeit Scanning",
+    "parameters": [
+        {
+            "id": "sr-11.3_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-11(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-11(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-5",
+            "rel": "related",
+            "text": "RA-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-11.3_smt",
+            "name": "statement",
+            "prose": "Scan for counterfeit system components {{ sr-11.3_prm_1 }}."
+        },
+        {
+            "id": "sr-11.3_gdn",
+            "name": "guidance",
+            "prose": "The type of component determines the type of scanning to be conducted (e.g., web application scanning if the component is a web application)."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

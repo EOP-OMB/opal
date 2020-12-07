@@ -1,0 +1,135 @@
+{
+    "id": "sc-7.4",
+    "class": "SP800-53-enhancement",
+    "title": "External Telecommunications Services",
+    "parameters": [
+        {
+            "id": "sc-7.4_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#sc-8",
+            "rel": "related",
+            "text": "SC-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sc-7.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Implement a managed interface for each external telecommunication service;"
+                },
+                {
+                    "id": "sc-7.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Establish a traffic flow policy for each managed interface;"
+                },
+                {
+                    "id": "sc-7.4_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Protect the confidentiality and integrity of the information being transmitted across each interface;"
+                },
+                {
+                    "id": "sc-7.4_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(d)"
+                        }
+                    ],
+                    "prose": "Document each exception to the traffic flow policy with a supporting mission or business need and duration of that need;"
+                },
+                {
+                    "id": "sc-7.4_smt.e",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(e)"
+                        }
+                    ],
+                    "prose": "Review exceptions to the traffic flow policy {{ sc-7.4_prm_1 }} and remove exceptions that are no longer supported by an explicit mission or business need;"
+                },
+                {
+                    "id": "sc-7.4_smt.f",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(f)"
+                        }
+                    ],
+                    "prose": "Prevent unauthorized exchange of control plane traffic with external networks;"
+                },
+                {
+                    "id": "sc-7.4_smt.g",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(g)"
+                        }
+                    ],
+                    "prose": "Publish information to enable remote networks to detect unauthorized control plane traffic from internal networks; and"
+                },
+                {
+                    "id": "sc-7.4_smt.h",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(h)"
+                        }
+                    ],
+                    "prose": "Filter unauthorized control plane traffic from external networks."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.4_gdn",
+            "name": "guidance",
+            "prose": "External telecommunications services can provide data and/or voice communications services. Examples of control plane traffic include routing, Domain Name System (DNS), and management. Unauthorized control plane traffic can occur through a technique known as \u201cspoofing.\u201d"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

@@ -1,0 +1,34 @@
+{
+    "id": "ia-8.4",
+    "class": "SP800-53-enhancement",
+    "title": "Use of Defined Profiles",
+    "parameters": [
+        {
+            "id": "ia-8.4_prm_1",
+            "label": "organization-defined identity management profiles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-8(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-08(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-8.4_smt",
+            "name": "statement",
+            "prose": "Conform to the following profiles for identity management {{ ia-8.4_prm_1 }}."
+        },
+        {
+            "id": "ia-8.4_gdn",
+            "name": "guidance",
+            "prose": "Organizations define profiles for identity management based on open identity management standards. To ensure that open identity management standards are viable, robust, reliable, sustainable, and interoperable as documented, the Federal Government assesses and scopes the standards and technology implementations against applicable laws, executive orders, directives, policies, regulations, standards, and guidelines."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

@@ -1,0 +1,50 @@
+{
+    "id": "au-16.2",
+    "class": "SP800-53-enhancement",
+    "title": "Sharing of Audit Information",
+    "parameters": [
+        {
+            "id": "au-16.2_prm_1",
+            "label": "organization-defined organizations"
+        },
+        {
+            "id": "au-16.2_prm_2",
+            "label": "organization-defined cross-organizational sharing agreements"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-16(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-16(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ir-4",
+            "rel": "related",
+            "text": "IR-4"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-16.2_smt",
+            "name": "statement",
+            "prose": "Provide cross-organizational audit information to {{ au-16.2_prm_1 }} based on {{ au-16.2_prm_2 }}."
+        },
+        {
+            "id": "au-16.2_gdn",
+            "name": "guidance",
+            "prose": "Due to the distributed nature of the audit information, cross-organization sharing of audit information may be essential for effective analysis of the auditing being performed. For example, the audit records of one organization may not provide sufficient information to determine the appropriate or inappropriate use of organizational information resources by individuals in other organizations. In some instances, only individuals\u2019 home organizations have the appropriate knowledge to make such determinations, thus requiring the sharing of audit information among organizations."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

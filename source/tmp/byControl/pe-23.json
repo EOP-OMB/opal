@@ -1,0 +1,83 @@
+{
+    "id": "pe-23",
+    "class": "SP800-53",
+    "title": "Facility Location",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-23"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-23"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-2",
+            "rel": "related",
+            "text": "CP-2"
+        },
+        {
+            "href": "#pe-18",
+            "rel": "related",
+            "text": "PE-18"
+        },
+        {
+            "href": "#pe-19",
+            "rel": "related",
+            "text": "PE-19"
+        },
+        {
+            "href": "#pm-8",
+            "rel": "related",
+            "text": "PM-8"
+        },
+        {
+            "href": "#pm-9",
+            "rel": "related",
+            "text": "PM-9"
+        },
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-23_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "pe-23_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Plan the location or site of the facility where the system resides considering physical and environmental hazards; and"
+                },
+                {
+                    "id": "pe-23_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "For existing facilities, consider the physical and environmental hazards in the organizational risk management strategy."
+                }
+            ]
+        },
+        {
+            "id": "pe-23_gdn",
+            "name": "guidance",
+            "prose": "Physical and environmental hazards include floods, fires, tornadoes, earthquakes, hurricanes, terrorism, vandalism, an electromagnetic pulse, electrical interference, and other forms of incoming electromagnetic radiation. The location of system components within the facility is addressed in PE-18."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

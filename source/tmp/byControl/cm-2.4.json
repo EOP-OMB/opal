@@ -1,0 +1,27 @@
+{
+    "id": "cm-2.4",
+    "class": "SP800-53-enhancement",
+    "title": "Unauthorized Software",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-2(4)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-02(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-7.4",
+            "rel": "incorporated-into",
+            "text": "CM-7(4)"
+        }
+    ],
+    "group_title": "Configuration Management"
+}

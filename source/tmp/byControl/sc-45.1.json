@@ -1,0 +1,65 @@
+{
+    "id": "sc-45.1",
+    "class": "SP800-53-enhancement",
+    "title": "Synchronization with Authoritative Time Source",
+    "parameters": [
+        {
+            "id": "sc-45.1_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "sc-45.1_prm_2",
+            "label": "organization-defined authoritative time source"
+        },
+        {
+            "id": "sc-45.1_prm_3",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-45(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-45(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-45.1_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sc-45.1_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Compare the internal system clocks {{ sc-45.1_prm_1 }} with {{ sc-45.1_prm_2 }}; and"
+                },
+                {
+                    "id": "sc-45.1_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Synchronize the internal system clocks to the authoritative time source when the time difference is greater than {{ sc-45.1_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "sc-45.1_gdn",
+            "name": "guidance",
+            "prose": "Synchronization of internal system clocks with an authoritative source provides uniformity of time stamps for systems with multiple system clocks and systems connected over a network."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

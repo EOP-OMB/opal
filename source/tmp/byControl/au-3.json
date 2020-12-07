@@ -1,0 +1,254 @@
+{
+    "id": "au-3",
+    "class": "SP800-53",
+    "title": "Content of Audit Records",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-3"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-03"
+        }
+    ],
+    "links": [
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130]"
+        },
+        {
+            "href": "#98d415ca-7281-4064-9931-0c366637e324",
+            "rel": "reference",
+            "text": "[IR 8062]"
+        },
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-8",
+            "rel": "related",
+            "text": "AU-8"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        },
+        {
+            "href": "#au-14",
+            "rel": "related",
+            "text": "AU-14"
+        },
+        {
+            "href": "#ma-4",
+            "rel": "related",
+            "text": "MA-4"
+        },
+        {
+            "href": "#pl-9",
+            "rel": "related",
+            "text": "PL-9"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        },
+        {
+            "href": "#si-11",
+            "rel": "related",
+            "text": "SI-11"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-3_smt",
+            "name": "statement",
+            "prose": "Ensure that audit records contain information that establishes the following:",
+            "parts": [
+                {
+                    "id": "au-3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "What type of event occurred;"
+                },
+                {
+                    "id": "au-3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "When the event occurred;"
+                },
+                {
+                    "id": "au-3_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "c."
+                        }
+                    ],
+                    "prose": "Where the event occurred;"
+                },
+                {
+                    "id": "au-3_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "d."
+                        }
+                    ],
+                    "prose": "Source of the event;"
+                },
+                {
+                    "id": "au-3_smt.e",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "e."
+                        }
+                    ],
+                    "prose": "Outcome of the event; and"
+                },
+                {
+                    "id": "au-3_smt.f",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "f."
+                        }
+                    ],
+                    "prose": "Identity of any individuals, subjects, or objects/entities associated with the event."
+                }
+            ]
+        },
+        {
+            "id": "au-3_gdn",
+            "name": "guidance",
+            "prose": "Audit record content that may be necessary to support the auditing function includes event descriptions (item a), time stamps (item b), source and destination addresses (item c), user or process identifiers (items d and f), success or fail indications (item e), and filenames involved (items a, c, e, and f) . Event outcomes include indicators of event success or failure and event-specific results, such as the system security and privacy posture after the event occurred. Organizations consider how audit records can reveal information about individuals that may give rise to privacy risks and how best to mitigate such risks. For example, there is the potential to reveal personally identifiable information in the audit trail, especially if the trail records inputs or is based on patterns or time of usage."
+        }
+    ],
+    "controls": [
+        {
+            "id": "au-3.1",
+            "class": "SP800-53-enhancement",
+            "title": "Additional Audit Information",
+            "parameters": [
+                {
+                    "id": "au-3.1_prm_1",
+                    "label": "organization-defined additional information"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-3(1)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-03(01)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-3.1_smt",
+                    "name": "statement",
+                    "prose": "Generate audit records containing the following additional information: {{ au-3.1_prm_1 }}."
+                },
+                {
+                    "id": "au-3.1_gdn",
+                    "name": "guidance",
+                    "prose": "The ability to add information generated in audit records is dependent on system functionality to configure the audit record content. Organizations may consider additional information in audit records including, but not limited to, access control or flow control rules invoked and individual identities of group account users. Organizations may also consider limiting additional audit record information to only information that is explicitly needed for audit requirements. This facilitates the use of audit trails and audit logs by not including information in audit records that could potentially be misleading, make it more difficult to locate information of interest, or increase the risk to individuals' privacy."
+                }
+            ]
+        },
+        {
+            "id": "au-3.2",
+            "class": "SP800-53-enhancement",
+            "title": "Centralized Management of Planned Audit Record Content",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-3(2)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-03(02)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#pl-9",
+                    "rel": "incorporated-into",
+                    "text": "PL-9"
+                }
+            ]
+        },
+        {
+            "id": "au-3.3",
+            "class": "SP800-53-enhancement",
+            "title": "Limit Personally Identifiable Information Elements",
+            "parameters": [
+                {
+                    "id": "au-3.3_prm_1",
+                    "label": "organization-defined elements"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-3(3)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-03(03)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ra-3",
+                    "rel": "related",
+                    "text": "RA-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-3.3_smt",
+                    "name": "statement",
+                    "prose": "Limit personally identifiable information contained in audit records to the following elements identified in the privacy risk assessment: {{ au-3.3_prm_1 }}."
+                },
+                {
+                    "id": "au-3.3_gdn",
+                    "name": "guidance",
+                    "prose": "Limiting personally identifiable information in audit records when such information is not needed for operational purposes helps reduce the level of privacy risk created by a system."
+                }
+            ]
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

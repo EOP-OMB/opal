@@ -1,0 +1,34 @@
+{
+    "id": "sa-8.11",
+    "class": "SP800-53-enhancement",
+    "title": "Inverse Modification Threshold",
+    "parameters": [
+        {
+            "id": "sa-8.11_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(11)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(11)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.11_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of inverse modification threshold in {{ sa-8.11_prm_1 }}."
+        },
+        {
+            "id": "sa-8.11_gdn",
+            "name": "guidance",
+            "prose": "The principle of inverse modification threshold builds on the principle of trusted components and the principle of hierarchical trust and states that the degree of protection provided to a component is commensurate with its trustworthiness. As the trust placed in a component increases, the protection against unauthorized modification of the component also increases to the same degree. Protection from unauthorized modification can come in the form of the component\u2019s own self-protection and innate trustworthiness, or it can come from the protections afforded to the component from other elements or attributes of the security architecture (to include protections in the environment of operation)."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

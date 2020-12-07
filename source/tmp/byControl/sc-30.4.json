@@ -1,0 +1,41 @@
+{
+    "id": "sc-30.4",
+    "class": "SP800-53-enhancement",
+    "title": "Misleading Information",
+    "parameters": [
+        {
+            "id": "sc-30.4_prm_1",
+            "label": "organization-defined system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-30(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-30(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-26",
+            "rel": "related",
+            "text": "SC-26"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-30.4_smt",
+            "name": "statement",
+            "prose": "Employ realistic, but misleading information in {{ sc-30.4_prm_1 }} about its security state or posture."
+        },
+        {
+            "id": "sc-30.4_gdn",
+            "name": "guidance",
+            "prose": "Employing misleading information is intended to confuse potential adversaries regarding the nature and extent of controls deployed by organizations. Thus, adversaries may employ incorrect and ineffective attack techniques. One technique for misleading adversaries is for organizations to place misleading information regarding the specific controls deployed in external systems that are known to be targeted by adversaries. Another technique is the use of deception nets that mimic actual aspects of organizational systems but use, for example, out-of-date software configurations."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

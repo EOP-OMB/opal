@@ -1,0 +1,32 @@
+{
+    "id": "ac-3.6",
+    "class": "SP800-53-enhancement",
+    "title": "Protection of User and System Information",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(6)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-4",
+            "rel": "incorporated-into",
+            "text": "MP-4"
+        },
+        {
+            "href": "#sc-28",
+            "rel": "incorporated-into",
+            "text": "SC-28"
+        }
+    ],
+    "group_title": "Access Control"
+}

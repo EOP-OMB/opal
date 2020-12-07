@@ -1,0 +1,34 @@
+{
+    "id": "ac-21.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Decision Support",
+    "parameters": [
+        {
+            "id": "ac-21.1_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-21(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-21(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-21.1_smt",
+            "name": "statement",
+            "prose": "Employ {{ ac-21.1_prm_1 }} to enforce information-sharing decisions by authorized users based on access authorizations of sharing partners and access restrictions on information to be shared."
+        },
+        {
+            "id": "ac-21.1_gdn",
+            "name": "guidance",
+            "prose": "Automated mechanisms are used to enforce information sharing decisions."
+        }
+    ],
+    "group_title": "Access Control"
+}

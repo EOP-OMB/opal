@@ -1,0 +1,119 @@
+{
+    "id": "cm-7.5",
+    "class": "SP800-53-enhancement",
+    "title": "Authorized Software",
+    "parameters": [
+        {
+            "id": "cm-7.5_prm_1",
+            "label": "organization-defined software programs authorized to execute on the system"
+        },
+        {
+            "id": "cm-7.5_prm_2",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-7(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-07(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-2",
+            "rel": "related",
+            "text": "CM-2"
+        },
+        {
+            "href": "#cm-6",
+            "rel": "related",
+            "text": "CM-6"
+        },
+        {
+            "href": "#cm-8",
+            "rel": "related",
+            "text": "CM-8"
+        },
+        {
+            "href": "#cm-10",
+            "rel": "related",
+            "text": "CM-10"
+        },
+        {
+            "href": "#pl-9",
+            "rel": "related",
+            "text": "PL-9"
+        },
+        {
+            "href": "#pm-5",
+            "rel": "related",
+            "text": "PM-5"
+        },
+        {
+            "href": "#sa-10",
+            "rel": "related",
+            "text": "SA-10"
+        },
+        {
+            "href": "#sc-34",
+            "rel": "related",
+            "text": "SC-34"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-7.5_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cm-7.5_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Identify {{ cm-7.5_prm_1 }};"
+                },
+                {
+                    "id": "cm-7.5_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs on the system; and"
+                },
+                {
+                    "id": "cm-7.5_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Review and update the list of authorized software programs {{ cm-7.5_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "cm-7.5_gdn",
+            "name": "guidance",
+            "prose": "Authorized software programs can be limited to specific versions or from a specific source. To facilitate a comprehensive authorized software process and increase the strength of protection for attacks that bypass application level authorized software, software programs may be decomposed into and monitored at different levels of detail. These levels include applications, application programming interfaces, application modules, scripts, system processes, system services, kernel functions, registries, drivers, and dynamic link libraries. The concept of permitting the execution of authorized software may also be applied to user actions, system ports and protocols, IP addresses/ranges, websites, and MAC addresses. Organizations consider verifying the integrity of authorized software programs using digital signatures, cryptographic checksums, or hash functions. Verification of authorized software can occur either prior to execution or at system startup. The identification of authorized URLs for websites is addressed in CA-3(5) and SC-7."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

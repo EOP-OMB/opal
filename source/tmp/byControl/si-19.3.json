@@ -1,0 +1,28 @@
+{
+    "id": "si-19.3",
+    "class": "SP800-53-enhancement",
+    "title": "Release",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-19(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-19(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-19.3_smt",
+            "name": "statement",
+            "prose": "Remove personally identifiable information elements from a dataset prior to its release if those elements in the dataset do not need to be part of the data release."
+        },
+        {
+            "id": "si-19.3_gdn",
+            "name": "guidance",
+            "prose": "Prior to releasing a dataset, a data custodian considers the intended uses of the dataset and determines if it is necessary to release personally identifiable information. If the personally identifiable information is not necessary, the information can be removed using de-identification techniques."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

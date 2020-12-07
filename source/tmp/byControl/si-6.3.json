@@ -1,0 +1,51 @@
+{
+    "id": "si-6.3",
+    "class": "SP800-53-enhancement",
+    "title": "Report Verification Results",
+    "parameters": [
+        {
+            "id": "si-6.3_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-6(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-06(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        },
+        {
+            "href": "#sr-4",
+            "rel": "related",
+            "text": "SR-4"
+        },
+        {
+            "href": "#sr-5",
+            "rel": "related",
+            "text": "SR-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-6.3_smt",
+            "name": "statement",
+            "prose": "Report the results of security and privacy function verification to {{ si-6.3_prm_1 }}."
+        },
+        {
+            "id": "si-6.3_gdn",
+            "name": "guidance",
+            "prose": "Organizational personnel with potential interest in the results of the verification of security and privacy functions include systems security officers, senior agency information security officers, and senior agency officials for privacy."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

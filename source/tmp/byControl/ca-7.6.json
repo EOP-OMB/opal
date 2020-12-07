@@ -1,0 +1,34 @@
+{
+    "id": "ca-7.6",
+    "class": "SP800-53-enhancement",
+    "title": "Automation Support for Monitoring",
+    "parameters": [
+        {
+            "id": "ca-7.6_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-7(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-07(06)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-7.6_smt",
+            "name": "statement",
+            "prose": "Ensure the accuracy, currency, and availability of monitoring results for the system using {{ ca-7.6_prm_1 }}."
+        },
+        {
+            "id": "ca-7.6_gdn",
+            "name": "guidance",
+            "prose": "Using automated tools for monitoring helps to maintain the accuracy, currency, and availability of monitoring information which in turns helps to increase the level of ongoing awareness of the system security and privacy posture in support of organizational risk management decisions."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

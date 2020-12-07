@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.3",
+    "class": "SP800-53-enhancement",
+    "title": "Trusted Shipping and Warehousing",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(3)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-3",
+            "rel": "incorporated-into",
+            "text": "SR-3"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

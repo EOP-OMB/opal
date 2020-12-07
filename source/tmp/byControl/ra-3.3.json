@@ -1,0 +1,41 @@
+{
+    "id": "ra-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Threat Awareness",
+    "parameters": [
+        {
+            "id": "ra-3.3_prm_1",
+            "label": "organization-defined means"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "RA-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "RA-03(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#at-2",
+            "rel": "related",
+            "text": "AT-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ra-3.3_smt",
+            "name": "statement",
+            "prose": "Determine the current cyber threat environment on an ongoing basis using {{ ra-3.3_prm_1 }}."
+        },
+        {
+            "id": "ra-3.3_gdn",
+            "name": "guidance",
+            "prose": "The threat awareness information that is gathered feeds into the organization\u2019s information security operations to ensure that procedures are updated in response to the changing threat environment. For example, at higher threat levels, organizations may change the privilege or authentication thresholds required to perform certain operations."
+        }
+    ],
+    "group_title": "Risk Assessment"
+}

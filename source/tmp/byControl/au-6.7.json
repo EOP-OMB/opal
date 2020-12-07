@@ -1,0 +1,41 @@
+{
+    "id": "au-6.7",
+    "class": "SP800-53-enhancement",
+    "title": "Permitted Actions",
+    "parameters": [
+        {
+            "id": "au-6.7_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "system process",
+                    "role",
+                    "user"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-6(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-06(07)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-6.7_smt",
+            "name": "statement",
+            "prose": "Specify the permitted actions for each {{ au-6.7_prm_1 }} associated with the review, analysis, and reporting of audit record information."
+        },
+        {
+            "id": "au-6.7_gdn",
+            "name": "guidance",
+            "prose": "Organizations specify permitted actions for system processes, roles, and users associated with the review, analysis, and reporting of audit records through system account management activities. Specifying permitted actions on audit record information is a way to enforce the principle of least privilege. Permitted actions are enforced by the system and include read, write, execute, append, and delete."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

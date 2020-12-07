@@ -1,0 +1,46 @@
+{
+    "id": "au-9.2",
+    "class": "SP800-53-enhancement",
+    "title": "Store on Separate Physical Systems or Components",
+    "parameters": [
+        {
+            "id": "au-9.2_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-9(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-09(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-4",
+            "rel": "related",
+            "text": "AU-4"
+        },
+        {
+            "href": "#au-5",
+            "rel": "related",
+            "text": "AU-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-9.2_smt",
+            "name": "statement",
+            "prose": "Store audit records {{ au-9.2_prm_1 }} in a repository that is part of a physically different system or system component than the system or component being audited."
+        },
+        {
+            "id": "au-9.2_gdn",
+            "name": "guidance",
+            "prose": "Storing audit records in a repository separate from the audited system or system component helps to ensure that a compromise of the system being audited does not also result in a compromise of the audit records. Storing audit records on separate physical systems or components also preserves the confidentiality and integrity of audit records and facilitates the management of audit records as an organization-wide activity. Storing audit records on separate systems or components applies to initial generation as well as backup or long-term storage of audit records."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

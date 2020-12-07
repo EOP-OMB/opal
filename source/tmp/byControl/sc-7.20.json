@@ -1,0 +1,34 @@
+{
+    "id": "sc-7.20",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Isolation and Segregation",
+    "parameters": [
+        {
+            "id": "sc-7.20_prm_1",
+            "label": "organization-defined system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(20)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(20)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.20_smt",
+            "name": "statement",
+            "prose": "Provide the capability to dynamically isolate {{ sc-7.20_prm_1 }} from other system components."
+        },
+        {
+            "id": "sc-7.20_gdn",
+            "name": "guidance",
+            "prose": "The capability to dynamically isolate certain internal system components is useful when it is necessary to partition or separate system components of questionable origin from components that possess greater trustworthiness. Component isolation reduces the attack surface of organizational systems. Isolating selected system components can also limit the damage from successful attacks when such attacks occur."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

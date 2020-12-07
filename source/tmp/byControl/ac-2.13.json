@@ -1,0 +1,50 @@
+{
+    "id": "ac-2.13",
+    "class": "SP800-53-enhancement",
+    "title": "Disable Accounts for High-risk Individuals",
+    "parameters": [
+        {
+            "id": "ac-2.13_prm_1",
+            "label": "organization-defined time period"
+        },
+        {
+            "id": "ac-2.13_prm_2",
+            "label": "organization-defined significant risks"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(13)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(13)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.13_smt",
+            "name": "statement",
+            "prose": "Disable accounts of individuals within {{ ac-2.13_prm_1 }} of discovery of {{ ac-2.13_prm_2 }}."
+        },
+        {
+            "id": "ac-2.13_gdn",
+            "name": "guidance",
+            "prose": "Users who pose a significant security and/or privacy risk include individuals for whom reliable evidence indicates either the intention to use authorized access to systems to cause harm or through whom adversaries will cause harm. Such harm includes adverse impacts to organizational operations, organizational assets, individuals, other organizations, or the Nation. Close coordination among system administrators, legal staff, human resource managers, and authorizing officials is essential when disabling system accounts for high-risk individuals."
+        }
+    ],
+    "group_title": "Access Control"
+}

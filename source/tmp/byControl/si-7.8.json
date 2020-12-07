@@ -1,0 +1,69 @@
+{
+    "id": "si-7.8",
+    "class": "SP800-53-enhancement",
+    "title": "Auditing Capability for Significant Events",
+    "parameters": [
+        {
+            "id": "si-7.8_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "generate an audit record",
+                    "alert current user",
+                    "alert {{ si-7.8_prm_2 }}\n                  ",
+                    "\n                     {{ si-7.8_prm_3 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "si-7.8_prm_2",
+            "depends-on": "si-7.8_prm_1",
+            "label": "organization-defined personnel or roles"
+        },
+        {
+            "id": "si-7.8_prm_3",
+            "depends-on": "si-7.8_prm_1",
+            "label": "organization-defined other actions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(08)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.8_smt",
+            "name": "statement",
+            "prose": "Upon detection of a potential integrity violation, provide the capability to audit the event and initiate the following actions: {{ si-7.8_prm_1 }}."
+        },
+        {
+            "id": "si-7.8_gdn",
+            "name": "guidance",
+            "prose": "Organizations select response actions based on types of software, specific software, or information for which there are potential integrity violations."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

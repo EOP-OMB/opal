@@ -1,0 +1,35 @@
+{
+    "id": "si-18.4",
+    "class": "SP800-53-enhancement",
+    "title": "Individual Requests",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-18(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-18(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pm-22",
+            "rel": "related",
+            "text": "PM-22"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-18.4_smt",
+            "name": "statement",
+            "prose": "Correct or delete personally identifiable information upon request by individuals or their designated representatives."
+        },
+        {
+            "id": "si-18.4_gdn",
+            "name": "guidance",
+            "prose": "Inaccurate personally identifiable information maintained by organizations may cause problems for individuals, especially in those business functions where inaccurate information may result in inappropriate decisions or the denial of benefits and services to individuals. Even correct information, in certain circumstances, can cause problems for individuals that outweigh the benefits of an organization maintaining the information. Organizations use discretion when determining if personally identifiable information is to be corrected or deleted based on the scope of requests, the changes sought, the impact of the changes, and laws, regulations, and policies. Organizational personnel consult with the senior agency official for privacy and legal counsel regarding appropriate instances of correction or deletion."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

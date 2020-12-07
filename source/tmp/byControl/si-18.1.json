@@ -1,0 +1,51 @@
+{
+    "id": "si-18.1",
+    "class": "SP800-53-enhancement",
+    "title": "Automation Support",
+    "parameters": [
+        {
+            "id": "si-18.1_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-18(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-18(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pm-18",
+            "rel": "related",
+            "text": "PM-18"
+        },
+        {
+            "href": "#pm-22",
+            "rel": "related",
+            "text": "PM-22"
+        },
+        {
+            "href": "#ra-8",
+            "rel": "related",
+            "text": "RA-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-18.1_smt",
+            "name": "statement",
+            "prose": "Correct or delete personally identifiable information that is inaccurate or outdated, incorrectly determined regarding impact, or incorrectly de-identified using {{ si-18.1_prm_1 }}."
+        },
+        {
+            "id": "si-18.1_gdn",
+            "name": "guidance",
+            "prose": "The use of automated mechanisms to improve data quality may inadvertently create privacy risks. Automated tools may connect to external or otherwise unrelated systems, and the matching of records between these systems may create linkages with unintended consequences. Organizations assess and document these risks in their privacy impact assessments and make determinations that are in alignment with their privacy program plans.\nAs data is obtained and used across the information life cycle, it is important to confirm the accuracy and relevance of personally identifiable information. Automated mechanisms can augment existing data quality processes and procedures and enable an organization to better identify and manage personally identifiable information in large-scale systems. For example, automated tools can greatly improve efforts to consistently normalize data or identify malformed data. Automated tools can also be used to improve the auditing of data and detect errors that may incorrectly alter personally identifiable information or incorrectly associate such information with the wrong individual. Automated capabilities backstop processes and procedures at-scale and enable more fine-grained detection and correction of data quality errors."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

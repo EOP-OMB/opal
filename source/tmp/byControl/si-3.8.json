@@ -1,0 +1,89 @@
+{
+    "id": "si-3.8",
+    "class": "SP800-53-enhancement",
+    "title": "Detect Unauthorized Commands",
+    "parameters": [
+        {
+            "id": "si-3.8_prm_1",
+            "label": "organization-defined system hardware components"
+        },
+        {
+            "id": "si-3.8_prm_2",
+            "label": "organization-defined unauthorized operating system commands"
+        },
+        {
+            "id": "si-3.8_prm_3",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "issue a warning",
+                    "audit the command execution",
+                    "prevent the execution of the command"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-3(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-03(08)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-3.8_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-3.8_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Detect the following unauthorized operating system commands through the kernel application programming interface on {{ si-3.8_prm_1 }}: {{ si-3.8_prm_2 }}; and"
+                },
+                {
+                    "id": "si-3.8_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "\n                     {{ si-3.8_prm_3 }}."
+                }
+            ]
+        },
+        {
+            "id": "si-3.8_gdn",
+            "name": "guidance",
+            "prose": "Detecting unauthorized commands can be applied to critical interfaces other than kernel-based interfaces, including interfaces with virtual machines and privileged applications. Unauthorized operating system commands include commands for kernel functions from system processes that are not trusted to initiate such commands as well as commands for kernel functions that are suspicious even though commands of that type are reasonable for processes to initiate. Organizations can define the malicious commands to be detected by a combination of command types, command classes, or specific instances of commands. Organizations can also define hardware components by component type, component, component location in the network, or a combination thereof. Organizations may select different actions for different types, classes, or instances of malicious commands."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

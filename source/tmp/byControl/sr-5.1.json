@@ -1,0 +1,45 @@
+{
+    "id": "sr-5.1",
+    "class": "SP800-53-enhancement",
+    "title": "Adequate Supply",
+    "parameters": [
+        {
+            "id": "sr-5.1_prm_1",
+            "label": "organization-defined critical system components"
+        },
+        {
+            "id": "sr-5.1_prm_2",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-5(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-05(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-9",
+            "rel": "related",
+            "text": "RA-9"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-5.1_smt",
+            "name": "statement",
+            "prose": "Employ the following controls to ensure an adequate supply of {{ sr-5.1_prm_1 }}: {{ sr-5.1_prm_2 }}."
+        },
+        {
+            "id": "sr-5.1_gdn",
+            "name": "guidance",
+            "prose": "Adversaries can attempt to impede organizational operations by disrupting the supply of critical system components or corrupting supplier operations. Organizations may track systems and component mean time to failure to mitigate the loss of temporary or permanent system function. Controls to ensure that adequate supplies of critical system components include the use of multiple suppliers throughout the supply chain for the identified critical components, stockpiling spare components to ensure operation during mission-critical times, and the identification of functionally identical or similar components that may be used, if necessary."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

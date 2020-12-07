@@ -1,0 +1,35 @@
+{
+    "id": "au-14.3",
+    "class": "SP800-53-enhancement",
+    "title": "Remote Viewing and Listening",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-14(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-14(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-17",
+            "rel": "related",
+            "text": "AC-17"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-14.3_smt",
+            "name": "statement",
+            "prose": "Provide and implement the capability for authorized users to remotely view and hear content related to an established user session in real time."
+        },
+        {
+            "id": "au-14.3_gdn",
+            "name": "guidance",
+            "prose": "None."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

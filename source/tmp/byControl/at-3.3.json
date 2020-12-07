@@ -1,0 +1,28 @@
+{
+    "id": "at-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Practical Exercises",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AT-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AT-03(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "at-3.3_smt",
+            "name": "statement",
+            "prose": "Provide practical exercises in security and privacy training that reinforce training objectives."
+        },
+        {
+            "id": "at-3.3_gdn",
+            "name": "guidance",
+            "prose": "Practical exercises for security include training for software developers that addresses simulated attacks that exploit common software vulnerabilities or spear or whale phishing attacks targeted at senior leaders or executives. Practical exercises for privacy include modules with quizzes on identifying and processing personally identifiable information in various scenarios or scenarios on conducting privacy impact assessments."
+        }
+    ],
+    "group_title": "Awareness and Training"
+}

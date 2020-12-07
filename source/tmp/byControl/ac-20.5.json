@@ -1,0 +1,50 @@
+{
+    "id": "ac-20.5",
+    "class": "SP800-53-enhancement",
+    "title": "Portable Storage Devices \u2014 Prohibited Use",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-20(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-20(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-7",
+            "rel": "related",
+            "text": "MP-7"
+        },
+        {
+            "href": "#pl-4",
+            "rel": "related",
+            "text": "PL-4"
+        },
+        {
+            "href": "#ps-6",
+            "rel": "related",
+            "text": "PS-6"
+        },
+        {
+            "href": "#sc-41",
+            "rel": "related",
+            "text": "SC-41"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-20.5_smt",
+            "name": "statement",
+            "prose": "Prohibit the use of organization-controlled portable storage devices by authorized individuals on external systems."
+        },
+        {
+            "id": "ac-20.5_gdn",
+            "name": "guidance",
+            "prose": "Limits on the use of organization-controlled portable storage devices in external systems include a complete prohibition of the use of such devices. Prohibiting such use is enforced using technical methods and/or nontechnical (i.e., process-based) methods."
+        }
+    ],
+    "group_title": "Access Control"
+}

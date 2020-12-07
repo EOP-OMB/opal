@@ -1,0 +1,55 @@
+{
+    "id": "ir-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Reconfiguration",
+    "parameters": [
+        {
+            "id": "ir-4.2_prm_1",
+            "label": "organization-defined system components"
+        },
+        {
+            "id": "ir-4.2_prm_2",
+            "label": "organization-defined types of dynamic reconfiguration"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-2",
+            "rel": "related",
+            "text": "AC-2"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#cm-2",
+            "rel": "related",
+            "text": "CM-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.2_smt",
+            "name": "statement",
+            "prose": "Include the following types of dynamic reconfiguration for {{ ir-4.2_prm_1 }} as part of the incident response capability: {{ ir-4.2_prm_2 }}."
+        },
+        {
+            "id": "ir-4.2_gdn",
+            "name": "guidance",
+            "prose": "Dynamic reconfiguration includes changes to router rules, access control lists, intrusion detection or prevention system parameters, and filter rules for guards or firewalls. Organizations may perform dynamic reconfiguration of systems to stop attacks, misdirect attackers, and isolate components of systems, thus limiting the extent of the damage from breaches or compromises. Organizations include specific time frames for achieving the reconfiguration of systems in the definition of the reconfiguration capability, considering the potential need for rapid response to effectively address cyber threats."
+        }
+    ],
+    "group_title": "Incident Response"
+}

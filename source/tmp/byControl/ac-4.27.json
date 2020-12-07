@@ -1,0 +1,28 @@
+{
+    "id": "ac-4.27",
+    "class": "SP800-53-enhancement",
+    "title": "Redundant/independent Filtering Mechanisms",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(27)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(27)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.27_smt",
+            "name": "statement",
+            "prose": "When transferring information between different security domains, implement content filtering solutions that provide redundant and independent filtering mechanisms for each data type."
+        },
+        {
+            "id": "ac-4.27_gdn",
+            "name": "guidance",
+            "prose": "Content filtering is the process of inspecting information as it traverses a cross-domain solution and determines if the information meets a predefined policy. Redundant and independent content filtering eliminates a single point of failure filtering system. Independence is defined as the implementation of a content filter that uses a different code base and supporting libraries (e.g., two JPEG filters using different vendors\u2019 JPEG libraries) and multiple, independent system processes."
+        }
+    ],
+    "group_title": "Access Control"
+}

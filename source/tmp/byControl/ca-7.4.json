@@ -1,0 +1,63 @@
+{
+    "id": "ca-7.4",
+    "class": "SP800-53-enhancement",
+    "title": "Risk Monitoring",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-7(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-07(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-7.4_smt",
+            "name": "statement",
+            "prose": "Ensure risk monitoring is an integral part of the continuous monitoring strategy that includes the following:",
+            "parts": [
+                {
+                    "id": "ca-7.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Effectiveness monitoring;"
+                },
+                {
+                    "id": "ca-7.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Compliance monitoring; and"
+                },
+                {
+                    "id": "ca-7.4_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Change monitoring."
+                }
+            ]
+        },
+        {
+            "id": "ca-7.4_gdn",
+            "name": "guidance",
+            "prose": "Risk monitoring is informed by the established organizational risk tolerance. Effectiveness monitoring determines the ongoing effectiveness of the implemented risk response measures. Compliance monitoring verifies that required risk response measures are implemented. It also verifies that security and privacy requirements are satisfied. Change monitoring identifies changes to organizational systems and environments of operation that may affect security and privacy risk."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

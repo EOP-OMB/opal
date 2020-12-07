@@ -1,0 +1,28 @@
+{
+    "id": "sa-11.9",
+    "class": "SP800-53-enhancement",
+    "title": "Interactive Application Security Testing",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-11(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-11(09)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-11.9_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to employ interactive application security testing tools to identify flaws and document the results."
+        },
+        {
+            "id": "sa-11.9_gdn",
+            "name": "guidance",
+            "prose": "Interactive (also known as instrumentation-based) application security testing is a method of detecting vulnerabilities by observing applications as they run during testing. The use of instrumentation relies on direct measurements of the actual running applications and uses access to the code, user interaction, libraries, frameworks, backend connections, and configurations to directly measure control effectiveness. When combined with analysis techniques, interactive application security testing can identify a broad range of potential vulnerabilities and confirm control effectiveness. Instrumentation-based testing works in real time and can be used continuously throughout the system development life cycle."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

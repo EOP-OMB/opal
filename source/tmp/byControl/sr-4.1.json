@@ -1,0 +1,51 @@
+{
+    "id": "sr-4.1",
+    "class": "SP800-53-enhancement",
+    "title": "Identity",
+    "parameters": [
+        {
+            "id": "sr-4.1_prm_1",
+            "label": "organization-defined supply chain elements, processes, and personnel associated with organization-defined systems and critical system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-4(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-04(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2",
+            "rel": "related",
+            "text": "IA-2"
+        },
+        {
+            "href": "#ia-8",
+            "rel": "related",
+            "text": "IA-8"
+        },
+        {
+            "href": "#pe-16",
+            "rel": "related",
+            "text": "PE-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-4.1_smt",
+            "name": "statement",
+            "prose": "Establish and maintain unique identification of the following supply chain elements, processes, and personnel associated with the identified system and critical system components: {{ sr-4.1_prm_1 }}."
+        },
+        {
+            "id": "sr-4.1_gdn",
+            "name": "guidance",
+            "prose": "Knowing who and what is in the supply chains of organizations is critical to gaining visibility into supply chain activities. Visibility into supply chain activities is also important for monitoring and identifying high-risk events and activities. Without reasonable visibility into supply chains elements, processes, and personnel, it is very difficult for organizations to understand and manage risk and reduce their susceptibility to adverse events. Supply chain elements include organizations, entities, or tools used for the research and development, design, manufacturing, acquisition, delivery, integration, operations, maintenance, and disposal of systems and system components. Supply chain processes include development processes for hardware, software, and firmware; shipping and handling procedures; configuration management tools, techniques, and measures to maintain provenance; personnel and physical security programs; or other programs, processes, or procedures associated with the production and distribution of supply chain elements. Supply chain personnel are individuals with specific roles and responsibilities related to the secure the research and development, design, manufacturing, acquisition, delivery, integration, operations and maintenance, and disposal of a system or system component. Identification methods are sufficient to support an investigation in case of a supply chain change (e.g. if a supply company is purchased), compromise, or event."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

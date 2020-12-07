@@ -1,0 +1,28 @@
+{
+    "id": "ir-4.12",
+    "class": "SP800-53-enhancement",
+    "title": "Malicious Code and Forensic Analysis",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(12)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(12)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.12_smt",
+            "name": "statement",
+            "prose": "Analyze malicious code and/or other residual artifacts remaining in the system after the incident."
+        },
+        {
+            "id": "ir-4.12_gdn",
+            "name": "guidance",
+            "prose": "When conducted carefully in an isolated environment, analysis of malicious code and other residual artifacts of a security incident or breach can give the organization insight into adversary tactics, techniques, and procedures. It can also indicate the identity or some defining characteristics of the adversary. In addition, malicious code analysis can help the organization develop responses to future incidents."
+        }
+    ],
+    "group_title": "Incident Response"
+}

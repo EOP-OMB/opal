@@ -1,0 +1,34 @@
+{
+    "id": "sa-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Least Common Mechanism",
+    "parameters": [
+        {
+            "id": "sa-8.2_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.2_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of least common mechanism in {{ sa-8.2_prm_1 }}."
+        },
+        {
+            "id": "sa-8.2_gdn",
+            "name": "guidance",
+            "prose": "The principle of least common mechanism states that the amount of mechanism common to more than one user and depended on by all users is minimized [POPEK74]. Mechanism minimization implies that different components of a system refrain from using the same mechanism to access a system resource. Every shared mechanism (especially a mechanism involving shared variables) represents a potential information path between users and is designed with care to ensure that it does not unintentionally compromise security [SALTZER75]. Implementing the principle of least common mechanism helps to reduce the adverse consequences of sharing the system state among different programs. A single program that corrupts a shared state (including shared variables) has the potential to corrupt other programs that are dependent on the state. The principle of least common mechanism also supports the principle of simplicity of design and addresses the issue of covert storage channels [LAMPSON73]."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

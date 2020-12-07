@@ -1,0 +1,41 @@
+{
+    "id": "si-7.9",
+    "class": "SP800-53-enhancement",
+    "title": "Verify Boot Process",
+    "parameters": [
+        {
+            "id": "si-7.9_prm_1",
+            "label": "organization-defined system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(09)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#si-6",
+            "rel": "related",
+            "text": "SI-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.9_smt",
+            "name": "statement",
+            "prose": "Verify the integrity of the boot process of the following system components: {{ si-7.9_prm_1 }}."
+        },
+        {
+            "id": "si-7.9_gdn",
+            "name": "guidance",
+            "prose": "Ensuring the integrity of boot processes is critical to starting system components in known, trustworthy states. Integrity verification mechanisms provide a level of assurance that only trusted code is executed during boot processes."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

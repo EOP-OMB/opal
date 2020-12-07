@@ -1,0 +1,49 @@
+{
+    "id": "pt-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Just-in-time Consent",
+    "parameters": [
+        {
+            "id": "pt-4.2_prm_1",
+            "label": "organization-defined consent mechanisms"
+        },
+        {
+            "id": "pt-4.2_prm_2",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "pt-4.2_prm_3",
+            "label": "organization-defined personally identifiable information processing"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PT-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PT-04(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pt-2",
+            "rel": "related",
+            "text": "PT-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pt-4.2_smt",
+            "name": "statement",
+            "prose": "Present {{ pt-4.2_prm_1 }} to individuals at {{ pt-4.2_prm_2 }} and in conjunction with {{ pt-4.2_prm_3 }}."
+        },
+        {
+            "id": "pt-4.2_gdn",
+            "name": "guidance",
+            "prose": "Just-in-time consent enables individuals to participate in how their personally identifiable information is being processed at the time or in conjunction with specific types of data processing when such participation may be most useful to the individual. Individual assumptions about how personally identifiable information is being processed might not be accurate or reliable if time has passed since the individual last gave consent or the type of processing creates significant privacy risk. Organizations use discretion to determine when to use just-in-time consent and may use supporting information on demographics, focus groups, or surveys to learn more about individuals\u2019 privacy interests and concerns."
+        }
+    ],
+    "group_title": "Personally Identifiable Information Processing and Transparency"
+}

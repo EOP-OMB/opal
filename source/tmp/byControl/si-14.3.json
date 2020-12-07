@@ -1,0 +1,46 @@
+{
+    "id": "si-14.3",
+    "class": "SP800-53-enhancement",
+    "title": "Non-persistent Connectivity",
+    "parameters": [
+        {
+            "id": "si-14.3_prm_1",
+            "select": {
+                "alternatives": [
+                    "completion of a request",
+                    "a period of non-use"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-14(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-14(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-10",
+            "rel": "related",
+            "text": "SC-10"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-14.3_smt",
+            "name": "statement",
+            "prose": "Establish connections to the system on demand and terminate connections after {{ si-14.3_prm_1 }}."
+        },
+        {
+            "id": "si-14.3_gdn",
+            "name": "guidance",
+            "prose": "Persistent connections to systems can provide advanced adversaries with paths to move laterally through systems and potentially position themselves closer to high value assets. Limiting the availability of such connections impedes the adversary\u2019s ability to move freely through organizational systems."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

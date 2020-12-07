@@ -1,0 +1,40 @@
+{
+    "id": "si-4.3",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Tool and Mechanism Integration",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pm-23",
+            "rel": "related",
+            "text": "PM-23"
+        },
+        {
+            "href": "#pm-25",
+            "rel": "related",
+            "text": "PM-25"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.3_smt",
+            "name": "statement",
+            "prose": "Employ automated tools and mechanisms to integrate intrusion detection tools and mechanisms into access control and flow control mechanisms."
+        },
+        {
+            "id": "si-4.3_gdn",
+            "name": "guidance",
+            "prose": "Using automated tools and mechanisms to integrate intrusion detection tools and mechanisms into access and flow control mechanisms facilitates a rapid response to attacks by enabling the reconfiguration of mechanisms in support of attack isolation and elimination."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

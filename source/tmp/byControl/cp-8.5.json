@@ -1,0 +1,41 @@
+{
+    "id": "cp-8.5",
+    "class": "SP800-53-enhancement",
+    "title": "Alternate Telecommunication Service Testing",
+    "parameters": [
+        {
+            "id": "cp-8.5_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-8(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-08(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-3",
+            "rel": "related",
+            "text": "CP-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-8.5_smt",
+            "name": "statement",
+            "prose": "Test alternate telecommunication services {{ cp-8.5_prm_1 }}."
+        },
+        {
+            "id": "cp-8.5_gdn",
+            "name": "guidance",
+            "prose": "Alternate telecommunications services testing is arranged through contractual agreements with service providers. The testing may occur in parallel with normal operations to ensure that there is no degradation in organizational missions or functions."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

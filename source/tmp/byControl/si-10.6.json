@@ -1,0 +1,40 @@
+{
+    "id": "si-10.6",
+    "class": "SP800-53-enhancement",
+    "title": "Injection Prevention",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-10(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-10(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-10.6_smt",
+            "name": "statement",
+            "prose": "Prevent untrusted data injections."
+        },
+        {
+            "id": "si-10.6_gdn",
+            "name": "guidance",
+            "prose": "Untrusted data injections may be prevented using a parameterized interface or output escaping (output encoding). Parameterized interfaces separate data from code so that injections of malicious or unintended data cannot change the semantics of commands being sent. Output escaping uses specified characters to inform the interpreter\u2019s parser whether data is trusted. Prevention of untrusted data injections are with respect to the information inputs defined by the organization in the base control (SI-10)."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

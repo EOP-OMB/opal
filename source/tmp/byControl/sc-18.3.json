@@ -1,0 +1,34 @@
+{
+    "id": "sc-18.3",
+    "class": "SP800-53-enhancement",
+    "title": "Prevent Downloading and Execution",
+    "parameters": [
+        {
+            "id": "sc-18.3_prm_1",
+            "label": "organization-defined unacceptable mobile code"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-18(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-18(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-18.3_smt",
+            "name": "statement",
+            "prose": "Prevent the download and execution of {{ sc-18.3_prm_1 }}."
+        },
+        {
+            "id": "sc-18.3_gdn",
+            "name": "guidance",
+            "prose": "None."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

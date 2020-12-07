@@ -1,0 +1,28 @@
+{
+    "id": "cp-8.2",
+    "class": "SP800-53-enhancement",
+    "title": "Single Points of Failure",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-8(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-08(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-8.2_smt",
+            "name": "statement",
+            "prose": "Obtain alternate telecommunications services to reduce the likelihood of sharing a single point of failure with primary telecommunications services."
+        },
+        {
+            "id": "cp-8.2_gdn",
+            "name": "guidance",
+            "prose": "In certain circumstances, telecommunications service providers or services may share the same physical lines, which increases the vulnerability of a single failure point. It is important to have provider transparency for the actual physical transmission capability for telecommunication services."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

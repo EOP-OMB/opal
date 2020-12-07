@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.6",
+    "class": "SP800-53-enhancement",
+    "title": "Minimizing Procurement Time",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(6)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-5.1",
+            "rel": "incorporated-into",
+            "text": "SR-5(1)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,28 @@
+{
+    "id": "cm-9.1",
+    "class": "SP800-53-enhancement",
+    "title": "Assignment of Responsibility",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-9(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-09(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-9.1_smt",
+            "name": "statement",
+            "prose": "Assign responsibility for developing the configuration management process to organizational personnel that are not directly involved in system development."
+        },
+        {
+            "id": "cm-9.1_gdn",
+            "name": "guidance",
+            "prose": "In the absence of dedicated configuration management teams assigned within organizations, system developers may be tasked with developing configuration management processes using personnel who are not directly involved in system development or system integration. This separation of duties ensures that organizations establish and maintain a sufficient degree of independence between the system development and integration processes and configuration management processes to facilitate quality control and more effective oversight."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

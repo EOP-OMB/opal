@@ -1,0 +1,84 @@
+{
+    "id": "ac-2.3",
+    "class": "SP800-53-enhancement",
+    "title": "Disable Accounts",
+    "parameters": [
+        {
+            "id": "ac-2.3_prm_1",
+            "label": "organization-defined time period"
+        },
+        {
+            "id": "ac-2.3_prm_2",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.3_smt",
+            "name": "statement",
+            "prose": "Disable accounts within {{ ac-2.3_prm_1 }} when the accounts:",
+            "parts": [
+                {
+                    "id": "ac-2.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Have expired;"
+                },
+                {
+                    "id": "ac-2.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Are no longer associated with a user or individual;"
+                },
+                {
+                    "id": "ac-2.3_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Are in violation of organizational policy; or"
+                },
+                {
+                    "id": "ac-2.3_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(d)"
+                        }
+                    ],
+                    "prose": "Have been inactive for {{ ac-2.3_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "ac-2.3_gdn",
+            "name": "guidance",
+            "prose": "Disabling expired, inactive, or otherwise anomalous accounts supports the concepts of least privilege and least functionality which reduce the attack surface of the system."
+        }
+    ],
+    "group_title": "Access Control"
+}

@@ -1,0 +1,74 @@
+{
+    "id": "ac-17.4",
+    "class": "SP800-53-enhancement",
+    "title": "Privileged Commands and Access",
+    "parameters": [
+        {
+            "id": "ac-17.4_prm_1",
+            "label": "organization-defined needs"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-17(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-17(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-17.4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ac-17.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Authorize the execution of privileged commands and access to security-relevant information via remote access only in a format that provides assessable evidence and for the following needs: {{ ac-17.4_prm_1 }}; and"
+                },
+                {
+                    "id": "ac-17.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Document the rationale for remote access in the security plan for the system."
+                }
+            ]
+        },
+        {
+            "id": "ac-17.4_gdn",
+            "name": "guidance",
+            "prose": "Remote access to systems represents a significant potential vulnerability that can be exploited by adversaries. As such, restricting the execution of privileged commands and access to security-relevant information via remote access reduces the exposure of the organization and the susceptibility to threats by adversaries to the remote access capability."
+        }
+    ],
+    "group_title": "Access Control"
+}

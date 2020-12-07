@@ -1,0 +1,79 @@
+{
+    "id": "si-13.4",
+    "class": "SP800-53-enhancement",
+    "title": "Standby Component Installation and Notification",
+    "parameters": [
+        {
+            "id": "si-13.4_prm_1",
+            "label": "organization-defined time period"
+        },
+        {
+            "id": "si-13.4_prm_2",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "Activate {{ si-13.4_prm_3 }}\n                  ",
+                    "Automatically shut down the system",
+                    "\n                     {{ si-13.4_prm_4 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "si-13.4_prm_3",
+            "depends-on": "si-13.4_prm_2",
+            "label": "organization-defined alarm"
+        },
+        {
+            "id": "si-13.4_prm_4",
+            "depends-on": "si-13.4_prm_2",
+            "label": "organization-defined action"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-13(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-13(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-13.4_smt",
+            "name": "statement",
+            "prose": "If system component failures are detected:",
+            "parts": [
+                {
+                    "id": "si-13.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Ensure that the standby components are successfully and transparently installed within {{ si-13.4_prm_1 }}; and"
+                },
+                {
+                    "id": "si-13.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "\n                     {{ si-13.4_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "si-13.4_gdn",
+            "name": "guidance",
+            "prose": "Automatic or manual transfer of components from standby to active mode can occur upon the detection of component failures."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

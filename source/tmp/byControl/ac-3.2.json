@@ -1,0 +1,46 @@
+{
+    "id": "ac-3.2",
+    "class": "SP800-53-enhancement",
+    "title": "Dual Authorization",
+    "parameters": [
+        {
+            "id": "ac-3.2_prm_1",
+            "label": "organization-defined privileged commands and/or other organization-defined actions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-9",
+            "rel": "related",
+            "text": "CP-9"
+        },
+        {
+            "href": "#mp-6",
+            "rel": "related",
+            "text": "MP-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-3.2_smt",
+            "name": "statement",
+            "prose": "Enforce dual authorization for {{ ac-3.2_prm_1 }}."
+        },
+        {
+            "id": "ac-3.2_gdn",
+            "name": "guidance",
+            "prose": "Dual authorization, also known as two-person control, reduces risk related to insider threats. Dual authorization mechanisms require the approval of two authorized individuals to execute. To reduce the risk of collusion, organizations consider rotating dual authorization duties to other individuals. Organizations consider the risk associated with implementing dual authorization mechanisms when immediate responses are necessary to ensure public and environmental safety."
+        }
+    ],
+    "group_title": "Access Control"
+}

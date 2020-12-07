@@ -1,0 +1,59 @@
+{
+    "id": "ma-5.4",
+    "class": "SP800-53-enhancement",
+    "title": "Foreign Nationals",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-5(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-05(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ps-3",
+            "rel": "related",
+            "text": "PS-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-5.4_smt",
+            "name": "statement",
+            "prose": "Ensure that:",
+            "parts": [
+                {
+                    "id": "ma-5.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Foreign nationals with appropriate security clearances are used to conduct maintenance and diagnostic activities on classified systems only when the systems are jointly owned and operated by the United States and foreign allied governments, or owned and operated solely by foreign allied governments; and"
+                },
+                {
+                    "id": "ma-5.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Approvals, consents, and detailed operational conditions regarding the use of foreign nationals to conduct maintenance and diagnostic activities on classified systems are fully documented within Memoranda of Agreements."
+                }
+            ]
+        },
+        {
+            "id": "ma-5.4_gdn",
+            "name": "guidance",
+            "prose": "Personnel who conduct maintenance and diagnostic activities on organizational systems may be exposed to classified information. If non-U.S. citizens are permitted to perform maintenance and diagnostics activities on classified systems, then additional vetting is required to ensure agreements and restrictions are not being violated."
+        }
+    ],
+    "group_title": "Maintenance"
+}

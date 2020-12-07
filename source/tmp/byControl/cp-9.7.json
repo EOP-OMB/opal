@@ -1,0 +1,51 @@
+{
+    "id": "cp-9.7",
+    "class": "SP800-53-enhancement",
+    "title": "Dual Authorization",
+    "parameters": [
+        {
+            "id": "cp-9.7_prm_1",
+            "label": "organization-defined backup information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-9(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-09(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-5",
+            "rel": "related",
+            "text": "AC-5"
+        },
+        {
+            "href": "#mp-2",
+            "rel": "related",
+            "text": "MP-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-9.7_smt",
+            "name": "statement",
+            "prose": "Enforce dual authorization for the deletion or destruction of {{ cp-9.7_prm_1 }}."
+        },
+        {
+            "id": "cp-9.7_gdn",
+            "name": "guidance",
+            "prose": "Dual authorization ensures that deletion or destruction of backup information cannot occur unless two qualified individuals carry out the task. Individuals deleting or destroying backup information possess the skills or expertise to determine if the proposed deletion or destruction of information reflects organizational policies and procedures. Dual authorization may also be known as two-person control. To reduce the risk of collusion, organizations consider rotating dual authorization duties to other individuals."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

@@ -1,0 +1,61 @@
+{
+    "id": "si-4.7",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Response to Suspicious Events",
+    "parameters": [
+        {
+            "id": "si-4.7_prm_1",
+            "label": "organization-defined incident response personnel (identified by name and/or by role)"
+        },
+        {
+            "id": "si-4.7_prm_2",
+            "label": "organization-defined least-disruptive actions to terminate suspicious events"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(07)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.7_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-4.7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Notify {{ si-4.7_prm_1 }} of detected suspicious events; and"
+                },
+                {
+                    "id": "si-4.7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Take the following actions upon detection: {{ si-4.7_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "si-4.7_gdn",
+            "name": "guidance",
+            "prose": "Least-disruptive actions include initiating requests for human responses."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

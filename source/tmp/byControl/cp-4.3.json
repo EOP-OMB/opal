@@ -1,0 +1,34 @@
+{
+    "id": "cp-4.3",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Testing",
+    "parameters": [
+        {
+            "id": "cp-4.3_prm_1",
+            "label": "organization-defined automated mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-4(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-04(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-4.3_smt",
+            "name": "statement",
+            "prose": "Test the contingency plan using {{ cp-4.3_prm_1 }}."
+        },
+        {
+            "id": "cp-4.3_gdn",
+            "name": "guidance",
+            "prose": "Automated mechanisms facilitate thorough and effective testing of contingency plans by providing more complete coverage of contingency issues, selecting more realistic test scenarios and environments, and effectively stressing the system and supported mission and business functions."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

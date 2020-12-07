@@ -1,0 +1,27 @@
+{
+    "id": "cp-9.4",
+    "class": "SP800-53-enhancement",
+    "title": "Protection from Unauthorized Modification",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-9(4)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-09(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-9",
+            "rel": "incorporated-into",
+            "text": "CP-9"
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

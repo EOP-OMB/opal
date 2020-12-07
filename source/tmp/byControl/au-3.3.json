@@ -1,0 +1,41 @@
+{
+    "id": "au-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Limit Personally Identifiable Information Elements",
+    "parameters": [
+        {
+            "id": "au-3.3_prm_1",
+            "label": "organization-defined elements"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-03(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-3",
+            "rel": "related",
+            "text": "RA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-3.3_smt",
+            "name": "statement",
+            "prose": "Limit personally identifiable information contained in audit records to the following elements identified in the privacy risk assessment: {{ au-3.3_prm_1 }}."
+        },
+        {
+            "id": "au-3.3_gdn",
+            "name": "guidance",
+            "prose": "Limiting personally identifiable information in audit records when such information is not needed for operational purposes helps reduce the level of privacy risk created by a system."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

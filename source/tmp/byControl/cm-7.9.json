@@ -1,0 +1,72 @@
+{
+    "id": "cm-7.9",
+    "class": "SP800-53-enhancement",
+    "title": "Prohibiting The Use of Unauthorized Hardware",
+    "parameters": [
+        {
+            "id": "cm-7.9_prm_1",
+            "label": "organization-defined hardware components authorized for system use"
+        },
+        {
+            "id": "cm-7.9_prm_2",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-7(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-07(09)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-7.9_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cm-7.9_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Identify {{ cm-7.9_prm_1 }};"
+                },
+                {
+                    "id": "cm-7.9_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Prohibit the use or connection of unauthorized hardware components;"
+                },
+                {
+                    "id": "cm-7.9_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Review and update the list of authorized hardware components {{ cm-7.9_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "cm-7.9_gdn",
+            "name": "guidance",
+            "prose": "Hardware components provide the foundation for organizational systems and the platform for the execution of authorized software programs. Managing the inventory of hardware components and controlling which hardware components are permitted to be installed or connected to organizational systems is essential in order to provide adequate security."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

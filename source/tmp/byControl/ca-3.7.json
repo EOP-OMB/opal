@@ -1,0 +1,58 @@
+{
+    "id": "ca-3.7",
+    "class": "SP800-53-enhancement",
+    "title": "Transitive Information Exchanges",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-3(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-03(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-7",
+            "rel": "related",
+            "text": "SC-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-3.7_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ca-3.7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Identify transitive (downstream) information exchanges with other systems through the systems identified in CA-3a; and"
+                },
+                {
+                    "id": "ca-3.7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Take measures to ensure that transitive (downstream) information exchanges cease when the controls on identified transitive (downstream) systems cannot be verified or validated."
+                }
+            ]
+        },
+        {
+            "id": "ca-3.7_gdn",
+            "name": "guidance",
+            "prose": "Transitive or \u201cdownstream\u201d information exchanges are information exchanges between the system or systems with which the organizational system exchanges information and other systems. For mission-essential systems, services, and applications, including high value assets, it is necessary to identify such information exchanges. The transparency of the controls or protection measures in place in such downstream systems connected directly or indirectly to organizational systems is essential to understanding the security and privacy risks resulting from those information exchanges. Organizational systems can inherit risk from downstream systems through transitive connections and information exchanges, which can make the organizational systems more susceptible to threats, hazards, and adverse impacts."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

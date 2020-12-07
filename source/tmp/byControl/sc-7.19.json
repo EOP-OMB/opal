@@ -1,0 +1,34 @@
+{
+    "id": "sc-7.19",
+    "class": "SP800-53-enhancement",
+    "title": "Block Communication from Non-organizationally Configured Hosts",
+    "parameters": [
+        {
+            "id": "sc-7.19_prm_1",
+            "label": "organization-defined communication clients"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(19)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(19)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.19_smt",
+            "name": "statement",
+            "prose": "Block inbound and outbound communications traffic between {{ sc-7.19_prm_1 }} that are independently configured by end users and external service providers."
+        },
+        {
+            "id": "sc-7.19_gdn",
+            "name": "guidance",
+            "prose": "Communication clients independently configured by end users and external service providers include instant messaging clients and video conferencing software and applications. Traffic blocking does not apply to communication clients that are configured by organizations to perform authorized functions."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

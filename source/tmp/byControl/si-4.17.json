@@ -1,0 +1,55 @@
+{
+    "id": "si-4.17",
+    "class": "SP800-53-enhancement",
+    "title": "Integrated Situational Awareness",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(17)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(17)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-16",
+            "rel": "related",
+            "text": "AU-16"
+        },
+        {
+            "href": "#pe-6",
+            "rel": "related",
+            "text": "PE-6"
+        },
+        {
+            "href": "#sr-2",
+            "rel": "related",
+            "text": "SR-2"
+        },
+        {
+            "href": "#sr-4",
+            "rel": "related",
+            "text": "SR-4"
+        },
+        {
+            "href": "#sr-6",
+            "rel": "related",
+            "text": "SR-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.17_smt",
+            "name": "statement",
+            "prose": "Correlate information from monitoring physical, cyber, and supply chain activities to achieve integrated, organization-wide situational awareness."
+        },
+        {
+            "id": "si-4.17_gdn",
+            "name": "guidance",
+            "prose": "Correlating monitoring information from a more diverse set of information sources helps to achieve integrated situational awareness. Integrated situational awareness from a combination of physical, cyber, and supply chain monitoring activities enhances the capability of organizations to more quickly detect sophisticated attacks and investigate the methods and techniques employed to carry out such attacks. In contrast to SI-4(16), which correlates the various cyber monitoring information, integrated situational awareness is intended to correlate monitoring beyond the cyber domain. Correlation of monitoring information from multiple activities may help reveal attacks on organizations that are operating across multiple attack vectors."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

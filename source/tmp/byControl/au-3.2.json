@@ -1,0 +1,27 @@
+{
+    "id": "au-3.2",
+    "class": "SP800-53-enhancement",
+    "title": "Centralized Management of Planned Audit Record Content",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-3(2)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-03(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pl-9",
+            "rel": "incorporated-into",
+            "text": "PL-9"
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

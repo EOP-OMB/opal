@@ -1,0 +1,40 @@
+{
+    "id": "sa-17.6",
+    "class": "SP800-53-enhancement",
+    "title": "Structure for Testing",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-17(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-17(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-5",
+            "rel": "related",
+            "text": "SA-5"
+        },
+        {
+            "href": "#sa-11",
+            "rel": "related",
+            "text": "SA-11"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-17.6_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to structure security-relevant hardware, software, and firmware to facilitate testing."
+        },
+        {
+            "id": "sa-17.6_gdn",
+            "name": "guidance",
+            "prose": "Applying the security design principles in [SP 800-160-1] promotes complete, consistent, and comprehensive testing and evaluation of systems, system components, and services. The thoroughness of such testing contributes to the evidence produced to generate an effective assurance case or argument as to the trustworthiness of the system, system component, or service."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

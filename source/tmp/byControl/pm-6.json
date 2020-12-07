@@ -1,0 +1,65 @@
+{
+    "id": "pm-6",
+    "class": "SP800-53",
+    "title": "Measures of Performance",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PM-6"
+        },
+        {
+            "name": "sort-id",
+            "value": "PM-06"
+        }
+    ],
+    "links": [
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130]"
+        },
+        {
+            "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+            "rel": "reference",
+            "text": "[SP 800-37]"
+        },
+        {
+            "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+            "rel": "reference",
+            "text": "[SP 800-39]"
+        },
+        {
+            "href": "#7798067b-4ed0-4adc-a505-79dad4741693",
+            "rel": "reference",
+            "text": "[SP 800-55]"
+        },
+        {
+            "href": "#067223d8-1ec7-45c5-b21b-c848da6de8fb",
+            "rel": "reference",
+            "text": "[SP 800-137]"
+        },
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#pm-9",
+            "rel": "related",
+            "text": "PM-9"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pm-6_smt",
+            "name": "statement",
+            "prose": "Develop, monitor, and report on the results of information security and privacy measures of performance."
+        },
+        {
+            "id": "pm-6_gdn",
+            "name": "guidance",
+            "prose": "Measures of performance are outcome-based metrics used by an organization to measure the effectiveness or efficiency of the information security and privacy programs and the controls employed in support of the program. To facilitate security and privacy risk management, organizations consider aligning measures of performance with the organizational risk tolerance as defined in the risk management strategy."
+        }
+    ],
+    "group_title": "Program Management"
+}

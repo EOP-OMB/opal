@@ -1,0 +1,41 @@
+{
+    "id": "sa-8.15",
+    "class": "SP800-53-enhancement",
+    "title": "Predicate Permission",
+    "parameters": [
+        {
+            "id": "sa-8.15_prm_1",
+            "label": "organization-defined systems or system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-8(15)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-08(15)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-5",
+            "rel": "related",
+            "text": "AC-5"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-8.15_smt",
+            "name": "statement",
+            "prose": "Implement the security design principle of predicate permission in {{ sa-8.15_prm_1 }}."
+        },
+        {
+            "id": "sa-8.15_gdn",
+            "name": "guidance",
+            "prose": "The principle of predicate permission states that system designers consider requiring multiple authorized entities to provide consent before a highly critical operation or access to highly sensitive data, information, or resources is allowed to proceed. [SALTZER75] originally named predicate permission the separation of privilege. It is also equivalent to separation of duty. The division of privilege among multiple parties decreases the likelihood of abuse and provides the safeguard that no single accident, deception, or breach of trust is sufficient to enable an unrecoverable action that can lead to significantly damaging effects. The design options for such a mechanism may require simultaneous action (e.g., the firing of a nuclear weapon requires two different authorized individuals to give the correct command within a small time window) or a sequence of operations where each successive action is enabled by some prior action, but no single individual is able to enable more than one action."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

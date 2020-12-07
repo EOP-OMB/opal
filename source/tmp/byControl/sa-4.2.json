@@ -1,0 +1,52 @@
+{
+    "id": "sa-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Design and Implementation Information for Controls",
+    "parameters": [
+        {
+            "id": "sa-4.2_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "security-relevant external system interfaces",
+                    "high-level design",
+                    "low-level design",
+                    "source code or hardware schematics",
+                    "\n                     {{ sa-4.2_prm_2 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "sa-4.2_prm_2",
+            "depends-on": "sa-4.2_prm_1",
+            "label": "organization-defined design and implementation information"
+        },
+        {
+            "id": "sa-4.2_prm_3",
+            "label": "organization-defined level of detail"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-04(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-4.2_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to provide design and implementation information for the controls that includes: {{ sa-4.2_prm_1 }} at {{ sa-4.2_prm_3 }}."
+        },
+        {
+            "id": "sa-4.2_gdn",
+            "name": "guidance",
+            "prose": "Organizations may require different levels of detail in the documentation for the design and implementation of controls in organizational systems, system components, or system services based on mission and business requirements, requirements for resiliency and trustworthiness, and requirements for analysis and testing. Systems can be partitioned into multiple subsystems. Each subsystem within the system can contain one or more modules. The high-level design for the system is expressed in terms of subsystems and the interfaces between subsystems providing security-relevant functionality. The low-level design for the system is expressed in terms of modules and the interfaces between modules providing security-relevant functionality. Design and implementation documentation can include manufacturer, version, serial number, verification hash signature, software libraries used, date of purchase or download, and the vendor or download source. Source code and hardware schematics are referred to as the implementation representation of the system."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

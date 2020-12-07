@@ -1,0 +1,27 @@
+{
+    "id": "ps-6.1",
+    "class": "SP800-53-enhancement",
+    "title": "Information Requiring Special Protection",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PS-6(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "PS-06(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ps-3",
+            "rel": "incorporated-into",
+            "text": "PS-3"
+        }
+    ],
+    "group_title": "Personnel Security"
+}

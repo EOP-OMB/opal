@@ -1,0 +1,34 @@
+{
+    "id": "ac-4.13",
+    "class": "SP800-53-enhancement",
+    "title": "Decomposition into Policy-relevant Subcomponents",
+    "parameters": [
+        {
+            "id": "ac-4.13_prm_1",
+            "label": "organization-defined policy-relevant subcomponents"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(13)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(13)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.13_smt",
+            "name": "statement",
+            "prose": "When transferring information between different security domains, decompose information into {{ ac-4.13_prm_1 }} for submission to policy enforcement mechanisms."
+        },
+        {
+            "id": "ac-4.13_gdn",
+            "name": "guidance",
+            "prose": "Decomposing information into policy-relevant subcomponents prior to information transfer facilitates policy decisions on source, destination, certificates, classification, attachments, and other security- or privacy-related component differentiators. Policy enforcement mechanisms apply filtering, inspection, and/or sanitization rules to the policy-relevant subcomponents of information to facilitate flow enforcement prior to transferring such information to different security domains."
+        }
+    ],
+    "group_title": "Access Control"
+}

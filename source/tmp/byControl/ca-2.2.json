@@ -1,0 +1,76 @@
+{
+    "id": "ca-2.2",
+    "class": "SP800-53-enhancement",
+    "title": "Specialized Assessments",
+    "parameters": [
+        {
+            "id": "ca-2.2_prm_1",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "ca-2.2_prm_2",
+            "select": {
+                "alternatives": [
+                    "announced",
+                    "unannounced"
+                ]
+            }
+        },
+        {
+            "id": "ca-2.2_prm_3",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "in-depth monitoring",
+                    "security instrumentation",
+                    "automated security test cases",
+                    "vulnerability scanning",
+                    "malicious user testing",
+                    "insider threat assessment",
+                    "performance and load testing",
+                    "data leakage or data loss assessment {{ ca-2.2_prm_4 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "ca-2.2_prm_4",
+            "depends-on": "ca-2.2_prm_3",
+            "label": "organization-defined other forms of assessment"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CA-2(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CA-02(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pe-3",
+            "rel": "related",
+            "text": "PE-3"
+        },
+        {
+            "href": "#si-2",
+            "rel": "related",
+            "text": "SI-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ca-2.2_smt",
+            "name": "statement",
+            "prose": "Include as part of control assessments, {{ ca-2.2_prm_1 }}, {{ ca-2.2_prm_2 }}, {{ ca-2.2_prm_3 }}."
+        },
+        {
+            "id": "ca-2.2_gdn",
+            "name": "guidance",
+            "prose": "Organizations can conduct specialized assessments, including verification and validation, system monitoring, insider threat assessments, malicious user testing, and other forms of testing. These assessments can improve readiness by exercising organizational capabilities and indicating current levels of performance as a means of focusing actions to improve security and privacy. Organizations conduct specialized assessments in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Authorizing officials approve the assessment methods in coordination with the organizational risk executive function. Organizations can include vulnerabilities uncovered during assessments into vulnerability remediation processes. Specialized assessments can also be conducted early in the system development life cycle (e.g., during initial design, development, and unit testing)."
+        }
+    ],
+    "group_title": "Assessment, Authorization, and Monitoring"
+}

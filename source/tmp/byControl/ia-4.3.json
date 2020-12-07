@@ -1,0 +1,27 @@
+{
+    "id": "ia-4.3",
+    "class": "SP800-53-enhancement",
+    "title": "Multiple Forms of Certification",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-4(3)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-04(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-12.2",
+            "rel": "incorporated-into",
+            "text": "IA-12(2)"
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

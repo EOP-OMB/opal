@@ -1,0 +1,80 @@
+{
+    "id": "cp-8.4",
+    "class": "SP800-53-enhancement",
+    "title": "Provider Contingency Plan",
+    "parameters": [
+        {
+            "id": "cp-8.4_prm_1",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-8(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-08(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-3",
+            "rel": "related",
+            "text": "CP-3"
+        },
+        {
+            "href": "#cp-4",
+            "rel": "related",
+            "text": "CP-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-8.4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "cp-8.4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Require primary and alternate telecommunications service providers to have contingency plans;"
+                },
+                {
+                    "id": "cp-8.4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Review provider contingency plans to ensure that the plans meet organizational contingency requirements; and"
+                },
+                {
+                    "id": "cp-8.4_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Obtain evidence of contingency testing and training by providers {{ cp-8.4_prm_1 }}."
+                }
+            ]
+        },
+        {
+            "id": "cp-8.4_gdn",
+            "name": "guidance",
+            "prose": "Reviews of provider contingency plans consider the proprietary nature of such plans. In some situations, a summary of provider contingency plans may be sufficient evidence for organizations to satisfy the review requirement. Telecommunications service providers may also participate in ongoing disaster recovery exercises in coordination with the Department of Homeland Security and state and local governments. Organizations may use these types of activities to satisfy evidentiary requirements related to service provider contingency plan reviews, testing, and training."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

@@ -1,0 +1,45 @@
+{
+    "id": "si-4.21",
+    "class": "SP800-53-enhancement",
+    "title": "Probationary Periods",
+    "parameters": [
+        {
+            "id": "si-4.21_prm_1",
+            "label": "organization-defined probationary period"
+        },
+        {
+            "id": "si-4.21_prm_2",
+            "label": "organization-defined additional monitoring"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(21)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(21)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-18",
+            "rel": "related",
+            "text": "AC-18"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.21_smt",
+            "name": "statement",
+            "prose": "Implement the following additional monitoring of individuals during {{ si-4.21_prm_1 }}: {{ si-4.21_prm_2 }}."
+        },
+        {
+            "id": "si-4.21_gdn",
+            "name": "guidance",
+            "prose": "During probationary periods, employees do not have permanent employment status within organizations. Without such status or access to information that is resident on the system, additional monitoring can help identify any potentially malicious activity or inappropriate behavior."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

@@ -1,0 +1,28 @@
+{
+    "id": "sc-20.2",
+    "class": "SP800-53-enhancement",
+    "title": "Data Origin and Integrity",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-20(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-20(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-20.2_smt",
+            "name": "statement",
+            "prose": "Provide data origin and integrity protection artifacts for internal name/address resolution queries."
+        },
+        {
+            "id": "sc-20.2_gdn",
+            "name": "guidance",
+            "prose": "None."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

@@ -1,0 +1,27 @@
+{
+    "id": "sa-5.4",
+    "class": "SP800-53-enhancement",
+    "title": "Low-level Design",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-5(4)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-05(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-4.2",
+            "rel": "incorporated-into",
+            "text": "SA-4(2)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,27 @@
+{
+    "id": "sa-5.1",
+    "class": "SP800-53-enhancement",
+    "title": "Functional Properties of Security Controls",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-5(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-05(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-4.1",
+            "rel": "incorporated-into",
+            "text": "SA-4(1)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

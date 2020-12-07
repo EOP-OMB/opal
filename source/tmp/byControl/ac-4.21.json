@@ -1,0 +1,45 @@
+{
+    "id": "ac-4.21",
+    "class": "SP800-53-enhancement",
+    "title": "Physical or Logical Separation of Information Flows",
+    "parameters": [
+        {
+            "id": "ac-4.21_prm_1",
+            "label": "organization-defined mechanisms and/or techniques"
+        },
+        {
+            "id": "ac-4.21_prm_2",
+            "label": "organization-defined required separations by types of information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(21)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(21)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-32",
+            "rel": "related",
+            "text": "SC-32"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.21_smt",
+            "name": "statement",
+            "prose": "Separate information flows logically or physically using {{ ac-4.21_prm_1 }} to accomplish {{ ac-4.21_prm_2 }}."
+        },
+        {
+            "id": "ac-4.21_gdn",
+            "name": "guidance",
+            "prose": "Enforcing the separation of information flows associated with defined types of data can enhance protection by ensuring that information is not commingled while in transit and by enabling flow control by transmission paths that are not otherwise achievable. Types of separable information include inbound and outbound communications traffic, service requests and responses, and information of differing security impact or classification levels."
+        }
+    ],
+    "group_title": "Access Control"
+}

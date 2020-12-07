@@ -1,0 +1,27 @@
+{
+    "id": "pl-3",
+    "class": "SP800-53",
+    "title": "System Security Plan Update",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PL-3"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "PL-03"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pl-2",
+            "rel": "incorporated-into",
+            "text": "PL-2"
+        }
+    ],
+    "group_title": "Planning"
+}

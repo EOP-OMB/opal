@@ -1,0 +1,28 @@
+{
+    "id": "mp-5.3",
+    "class": "SP800-53-enhancement",
+    "title": "Custodians",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-5(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-05(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-5.3_smt",
+            "name": "statement",
+            "prose": "Employ an identified custodian during transport of system media outside of controlled areas."
+        },
+        {
+            "id": "mp-5.3_gdn",
+            "name": "guidance",
+            "prose": "Identified custodians provide organizations with specific points of contact during the media transport process and facilitate individual accountability. Custodial responsibilities can be transferred from one individual to another if an unambiguous custodian is identified."
+        }
+    ],
+    "group_title": "Media Protection"
+}

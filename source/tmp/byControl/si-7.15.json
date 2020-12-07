@@ -1,0 +1,51 @@
+{
+    "id": "si-7.15",
+    "class": "SP800-53-enhancement",
+    "title": "Code Authentication",
+    "parameters": [
+        {
+            "id": "si-7.15_prm_1",
+            "label": "organization-defined software or firmware components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(15)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(15)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-5",
+            "rel": "related",
+            "text": "CM-5"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.15_smt",
+            "name": "statement",
+            "prose": "Implement cryptographic mechanisms to authenticate the following software or firmware components prior to installation: {{ si-7.15_prm_1 }}."
+        },
+        {
+            "id": "si-7.15_gdn",
+            "name": "guidance",
+            "prose": "Cryptographic authentication includes verifying that software or firmware components have been digitally signed using certificates recognized and approved by organizations. Code signing is an effective method to protect against malicious code. Organizations that employ cryptographic mechanisms also consider cryptographic key management solutions."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

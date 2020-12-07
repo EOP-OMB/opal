@@ -1,0 +1,51 @@
+{
+    "id": "cp-11",
+    "class": "SP800-53",
+    "title": "Alternate Communications Protocols",
+    "parameters": [
+        {
+            "id": "cp-11_prm_1",
+            "label": "organization-defined alternative communications protocols"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-11"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-11"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-2",
+            "rel": "related",
+            "text": "CP-2"
+        },
+        {
+            "href": "#cp-8",
+            "rel": "related",
+            "text": "CP-8"
+        },
+        {
+            "href": "#cp-13",
+            "rel": "related",
+            "text": "CP-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-11_smt",
+            "name": "statement",
+            "prose": "Provide the capability to employ {{ cp-11_prm_1 }} in support of maintaining continuity of operations."
+        },
+        {
+            "id": "cp-11_gdn",
+            "name": "guidance",
+            "prose": "Contingency plans and the contingency training or testing associated with those plans incorporate an alternate communications protocol capability as part of establishing resilience in organizational systems. Switching communications protocols may affect software applications and operational aspects of systems. Organizations assess the potential side effects of introducing alternate communications protocols prior to implementation."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

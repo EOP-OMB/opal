@@ -1,0 +1,38 @@
+{
+    "id": "sa-11.4",
+    "class": "SP800-53-enhancement",
+    "title": "Manual Code Reviews",
+    "parameters": [
+        {
+            "id": "sa-11.4_prm_1",
+            "label": "organization-defined specific code"
+        },
+        {
+            "id": "sa-11.4_prm_2",
+            "label": "organization-defined processes, procedures, and/or techniques"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-11(4)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-11(04)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-11.4_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to perform a manual code review of {{ sa-11.4_prm_1 }} using the following processes, procedures, and/or techniques: {{ sa-11.4_prm_2 }}."
+        },
+        {
+            "id": "sa-11.4_gdn",
+            "name": "guidance",
+            "prose": "Manual code reviews are usually reserved for the critical software and firmware components of systems. Manual code reviews are effective at identifying weaknesses that require knowledge of the application\u2019s requirements or context that, in most cases, is unavailable to automated analytic tools and techniques, such as static and dynamic analysis. The benefits of manual code review include the ability to verify access control matrices against application controls and review detailed aspects of cryptographic implementations and controls."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

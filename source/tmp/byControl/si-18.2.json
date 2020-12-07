@@ -1,0 +1,45 @@
+{
+    "id": "si-18.2",
+    "class": "SP800-53-enhancement",
+    "title": "Data Tags",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-18(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-18(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-16",
+            "rel": "related",
+            "text": "AC-16"
+        },
+        {
+            "href": "#sc-16",
+            "rel": "related",
+            "text": "SC-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-18.2_smt",
+            "name": "statement",
+            "prose": "Employ data tags to automate the correction or deletion of personally identifiable information across the information life cycle within organizational systems."
+        },
+        {
+            "id": "si-18.2_gdn",
+            "name": "guidance",
+            "prose": "Data tagging personally identifiable information includes tags that note processing permissions, authority to process, de-identification, impact level, information life cycle stage, and retention or last updated dates. Employing data tags for personally identifiable information can support the use of automation tools to correct or delete relevant personally identifiable information."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

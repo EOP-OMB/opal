@@ -1,0 +1,40 @@
+{
+    "id": "cm-11.2",
+    "class": "SP800-53-enhancement",
+    "title": "Software Installation with Privileged Status",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-11(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-11(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-5",
+            "rel": "related",
+            "text": "AC-5"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-11.2_smt",
+            "name": "statement",
+            "prose": "Allow user installation of software only with explicit privileged status."
+        },
+        {
+            "id": "cm-11.2_gdn",
+            "name": "guidance",
+            "prose": "Privileged status can be obtained, for example, by serving in the role of system administrator."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

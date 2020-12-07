@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.4",
+    "class": "SP800-53-enhancement",
+    "title": "Diversity of Suppliers",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(4)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(04)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-3.1",
+            "rel": "moved-to",
+            "text": "SR-3(1)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

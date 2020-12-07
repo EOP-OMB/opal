@@ -1,0 +1,70 @@
+{
+    "id": "cm-7.7",
+    "class": "SP800-53-enhancement",
+    "title": "Code Execution in Protected Environments",
+    "parameters": [
+        {
+            "id": "cm-7.7_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-7(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-07(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-10",
+            "rel": "related",
+            "text": "CM-10"
+        },
+        {
+            "href": "#sc-44",
+            "rel": "related",
+            "text": "SC-44"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-7.7_smt",
+            "name": "statement",
+            "prose": "Allow execution of binary or machine-executable code only in confined physical or virtual machine environments and with the explicit approval of {{ cm-7.7_prm_1 }} when such code is:",
+            "parts": [
+                {
+                    "id": "cm-7.7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Obtained from sources with limited or no warranty; and/or"
+                },
+                {
+                    "id": "cm-7.7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Without the provision of source code."
+                }
+            ]
+        },
+        {
+            "id": "cm-7.7_gdn",
+            "name": "guidance",
+            "prose": "Code execution in protected environments applies to all sources of binary or machine-executable code, including commercial software and firmware and open-source software."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

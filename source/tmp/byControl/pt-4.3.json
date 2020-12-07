@@ -1,0 +1,41 @@
+{
+    "id": "pt-4.3",
+    "class": "SP800-53-enhancement",
+    "title": "Revocation",
+    "parameters": [
+        {
+            "id": "pt-4.3_prm_1",
+            "label": "organization-defined tools or mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PT-4(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PT-04(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pt-2",
+            "rel": "related",
+            "text": "PT-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pt-4.3_smt",
+            "name": "statement",
+            "prose": "Implement {{ pt-4.3_prm_1 }} for individuals to revoke consent to the processing of their personally identifiable information."
+        },
+        {
+            "id": "pt-4.3_gdn",
+            "name": "guidance",
+            "prose": "Revocation of consent enables individuals to exercise control over their initial consent decision when circumstances change. Organizations consider usability factors in enabling easy-to-use revocation capabilities."
+        }
+    ],
+    "group_title": "Personally Identifiable Information Processing and Transparency"
+}

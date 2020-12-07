@@ -1,0 +1,45 @@
+{
+    "id": "sc-42.2",
+    "class": "SP800-53-enhancement",
+    "title": "Authorized Use",
+    "parameters": [
+        {
+            "id": "sc-42.2_prm_1",
+            "label": "organization-defined sensors"
+        },
+        {
+            "id": "sc-42.2_prm_2",
+            "label": "organization-defined measures"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-42(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-42(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pt-2",
+            "rel": "related",
+            "text": "PT-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-42.2_smt",
+            "name": "statement",
+            "prose": "Employ the following measures so that data or information collected by {{ sc-42.2_prm_1 }} is only used for authorized purposes: {{ sc-42.2_prm_2 }}."
+        },
+        {
+            "id": "sc-42.2_gdn",
+            "name": "guidance",
+            "prose": "Information collected by sensors for a specific authorized purpose could be misused for some unauthorized purpose. For example, GPS sensors that are used to support traffic navigation could be misused to track the movements of individuals. Measures to mitigate such activities include additional training to help ensure that authorized individuals do not abuse their authority and, in the case where sensor data is maintained by external parties, contractual restrictions on the use of such data."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

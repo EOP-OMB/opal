@@ -1,0 +1,51 @@
+{
+    "id": "ac-6.5",
+    "class": "SP800-53-enhancement",
+    "title": "Privileged Accounts",
+    "parameters": [
+        {
+            "id": "ac-6.5_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-6(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-06(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2",
+            "rel": "related",
+            "text": "IA-2"
+        },
+        {
+            "href": "#ma-3",
+            "rel": "related",
+            "text": "MA-3"
+        },
+        {
+            "href": "#ma-4",
+            "rel": "related",
+            "text": "MA-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-6.5_smt",
+            "name": "statement",
+            "prose": "Restrict privileged accounts on the system to {{ ac-6.5_prm_1 }}."
+        },
+        {
+            "id": "ac-6.5_gdn",
+            "name": "guidance",
+            "prose": "Privileged accounts, including super user accounts, are typically described as system administrator for various types of commercial off-the-shelf operating systems. Restricting privileged accounts to specific personnel or roles prevents day-to-day users from accessing privileged information or privileged functions. Organizations may differentiate in the application of restricting privileged accounts between allowed privileges for local accounts and for domain accounts provided that they retain the ability to control system configurations for key parameters and as otherwise necessary to sufficiently mitigate risk."
+        }
+    ],
+    "group_title": "Access Control"
+}

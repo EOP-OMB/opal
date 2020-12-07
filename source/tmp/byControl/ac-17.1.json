@@ -1,0 +1,50 @@
+{
+    "id": "ac-17.1",
+    "class": "SP800-53-enhancement",
+    "title": "Monitoring and Control",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-17(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-17(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-6",
+            "rel": "related",
+            "text": "AU-6"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        },
+        {
+            "href": "#au-14",
+            "rel": "related",
+            "text": "AU-14"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-17.1_smt",
+            "name": "statement",
+            "prose": "Employ automated mechanisms to monitor and control remote access methods."
+        },
+        {
+            "id": "ac-17.1_gdn",
+            "name": "guidance",
+            "prose": "Monitoring and control of remote access methods allows organizations to detect attacks and help ensure compliance with remote access policies by auditing the connection activities of remote users on a variety of system components, including servers, notebook computers, workstations, smart phones, and tablets. Audit logging for remote access is enforced by AU-2. Audit events are defined in AU-2a."
+        }
+    ],
+    "group_title": "Access Control"
+}

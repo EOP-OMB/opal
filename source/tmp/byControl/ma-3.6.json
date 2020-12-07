@@ -1,0 +1,40 @@
+{
+    "id": "ma-3.6",
+    "class": "SP800-53-enhancement",
+    "title": "Software Updates and Patches",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-3(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-03(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-3.6_smt",
+            "name": "statement",
+            "prose": "Inspect maintenance tools to ensure the latest software updates and patches are installed."
+        },
+        {
+            "id": "ma-3.6_gdn",
+            "name": "guidance",
+            "prose": "Maintenance tools using outdated and/or unpatched software can provide a threat vector for adversaries and result in a significant vulnerability for organizations."
+        }
+    ],
+    "group_title": "Maintenance"
+}

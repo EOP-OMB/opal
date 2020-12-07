@@ -1,0 +1,46 @@
+{
+    "id": "ac-20.2",
+    "class": "SP800-53-enhancement",
+    "title": "Portable Storage Devices \u2014 Restricted Use",
+    "parameters": [
+        {
+            "id": "ac-20.2_prm_1",
+            "label": "organization-defined restrictions"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-20(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-20(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#mp-7",
+            "rel": "related",
+            "text": "MP-7"
+        },
+        {
+            "href": "#sc-41",
+            "rel": "related",
+            "text": "SC-41"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-20.2_smt",
+            "name": "statement",
+            "prose": "Restrict the use of organization-controlled portable storage devices by authorized individuals on external systems using {{ ac-20.2_prm_1 }}."
+        },
+        {
+            "id": "ac-20.2_gdn",
+            "name": "guidance",
+            "prose": "Limits on the use of organization-controlled portable storage devices in external systems include restrictions on how the devices may be used and under what conditions the devices may be used."
+        }
+    ],
+    "group_title": "Access Control"
+}

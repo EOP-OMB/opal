@@ -1,0 +1,84 @@
+{
+    "id": "si-11",
+    "class": "SP800-53",
+    "title": "Error Handling",
+    "parameters": [
+        {
+            "id": "si-11_prm_1",
+            "label": "organization-defined personnel or roles"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-11"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-11"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-3",
+            "rel": "related",
+            "text": "AU-3"
+        },
+        {
+            "href": "#sc-31",
+            "rel": "related",
+            "text": "SC-31"
+        },
+        {
+            "href": "#si-2",
+            "rel": "related",
+            "text": "SI-2"
+        },
+        {
+            "href": "#si-15",
+            "rel": "related",
+            "text": "SI-15"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-11_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-11_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Generate error messages that provide information necessary for corrective actions without revealing information that could be exploited; and"
+                },
+                {
+                    "id": "si-11_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Reveal error messages only to {{ si-11_prm_1 }}."
+                }
+            ]
+        },
+        {
+            "id": "si-11_gdn",
+            "name": "guidance",
+            "prose": "Organizations consider the structure and content of error messages. The extent to which systems can handle error conditions is guided and informed by organizational policy and operational requirements. Exploitable information includes stack traces and implementation details; erroneous logon attempts with passwords mistakenly entered as the username; mission or business information that can be derived from, if not stated explicitly by, the information recorded; and personally identifiable information, such as account numbers, social security numbers, and credit card numbers. Error messages may also provide a covert channel for transmitting information."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

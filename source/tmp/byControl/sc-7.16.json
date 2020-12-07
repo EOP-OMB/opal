@@ -1,0 +1,28 @@
+{
+    "id": "sc-7.16",
+    "class": "SP800-53-enhancement",
+    "title": "Prevent Discovery of System Components",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(16)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(16)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.16_smt",
+            "name": "statement",
+            "prose": "Prevent the discovery of specific system components that represent a managed interface."
+        },
+        {
+            "id": "sc-7.16_gdn",
+            "name": "guidance",
+            "prose": "Preventing the discovery of system components representing a managed interface helps protect network addresses of those components from discovery through common tools and techniques used to identify devices on networks. Network addresses are not available for discovery and require prior knowledge for access. Preventing the discovery of components and devices can be accomplished by not publishing network addresses, using network address translation, or not entering the addresses in domain name systems. Another prevention technique is to periodically change network addresses."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

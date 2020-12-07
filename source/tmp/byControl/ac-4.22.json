@@ -1,0 +1,28 @@
+{
+    "id": "ac-4.22",
+    "class": "SP800-53-enhancement",
+    "title": "Access Only",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(22)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(22)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.22_smt",
+            "name": "statement",
+            "prose": "Provide access from a single device to computing platforms, applications, or data residing in multiple different security domains, while preventing information flow between the different security domains."
+        },
+        {
+            "id": "ac-4.22_gdn",
+            "name": "guidance",
+            "prose": "The system provides a capability for users to access each connected security domain without providing any mechanisms to allow users to transfer data or information between the different security domains. An example of an access-only solution is a terminal that provides a user access to information with different security classifications while assuredly keeping the information separate."
+        }
+    ],
+    "group_title": "Access Control"
+}

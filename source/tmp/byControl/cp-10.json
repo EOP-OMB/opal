@@ -1,0 +1,297 @@
+{
+    "id": "cp-10",
+    "class": "SP800-53",
+    "title": "System Recovery and Reconstitution",
+    "parameters": [
+        {
+            "id": "cp-10_prm_1",
+            "label": "organization-defined time period consistent with recovery time and recovery point objectives"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-10"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-10"
+        }
+    ],
+    "links": [
+        {
+            "href": "#bc39f179-c735-4da2-b7a7-b2b622119755",
+            "rel": "reference",
+            "text": "[SP 800-34]"
+        },
+        {
+            "href": "#cp-2",
+            "rel": "related",
+            "text": "CP-2"
+        },
+        {
+            "href": "#cp-4",
+            "rel": "related",
+            "text": "CP-4"
+        },
+        {
+            "href": "#cp-6",
+            "rel": "related",
+            "text": "CP-6"
+        },
+        {
+            "href": "#cp-7",
+            "rel": "related",
+            "text": "CP-7"
+        },
+        {
+            "href": "#cp-9",
+            "rel": "related",
+            "text": "CP-9"
+        },
+        {
+            "href": "#ir-4",
+            "rel": "related",
+            "text": "IR-4"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        },
+        {
+            "href": "#sc-24",
+            "rel": "related",
+            "text": "SC-24"
+        },
+        {
+            "href": "#si-13",
+            "rel": "related",
+            "text": "SI-13"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-10_smt",
+            "name": "statement",
+            "prose": "Provide for the recovery and reconstitution of the system to a known state within {{ cp-10_prm_1 }} after a disruption, compromise, or failure."
+        },
+        {
+            "id": "cp-10_gdn",
+            "name": "guidance",
+            "prose": "Recovery is executing contingency plan activities to restore organizational mission and business functions. Reconstitution takes place following recovery and includes activities for returning systems to fully operational states. Recovery and reconstitution operations reflect mission and business priorities; recovery point, recovery time, and reconstitution objectives; and organizational metrics consistent with contingency plan requirements. Reconstitution includes the deactivation of interim system capabilities that may have been needed during recovery operations. Reconstitution also includes assessments of fully restored system capabilities, reestablishment of continuous monitoring activities, system reauthorization (if required), and activities to prepare the system and organization for future disruptions, breaches, compromises, or failures. Recovery and reconstitution capabilities can include automated mechanisms and manual procedures. Organizations establish recovery time and recovery point objectives as part of contingency planning."
+        }
+    ],
+    "controls": [
+        {
+            "id": "cp-10.1",
+            "class": "SP800-53-enhancement",
+            "title": "Contingency Plan Testing",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(1)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(01)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#cp-4",
+                    "rel": "incorporated-into",
+                    "text": "CP-4"
+                }
+            ]
+        },
+        {
+            "id": "cp-10.2",
+            "class": "SP800-53-enhancement",
+            "title": "Transaction Recovery",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(2)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(02)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "cp-10.2_smt",
+                    "name": "statement",
+                    "prose": "Implement transaction recovery for systems that are transaction-based."
+                },
+                {
+                    "id": "cp-10.2_gdn",
+                    "name": "guidance",
+                    "prose": "Transaction-based systems include database management systems and transaction processing systems. Mechanisms supporting transaction recovery include transaction rollback and transaction journaling."
+                }
+            ]
+        },
+        {
+            "id": "cp-10.3",
+            "class": "SP800-53-enhancement",
+            "title": "Compensating Security Controls",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(3)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(03)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "cp-10.3_smt",
+                    "name": "statement",
+                    "prose": "\n                  *Addressed through tailoring procedures.*\n               "
+                }
+            ]
+        },
+        {
+            "id": "cp-10.4",
+            "class": "SP800-53-enhancement",
+            "title": "Restore Within Time Period",
+            "parameters": [
+                {
+                    "id": "cp-10.4_prm_1",
+                    "label": "organization-defined restoration time periods"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(4)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(04)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#cm-2",
+                    "rel": "related",
+                    "text": "CM-2"
+                },
+                {
+                    "href": "#cm-6",
+                    "rel": "related",
+                    "text": "CM-6"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "cp-10.4_smt",
+                    "name": "statement",
+                    "prose": "Provide the capability to restore system components within {{ cp-10.4_prm_1 }} from configuration-controlled and integrity-protected information representing a known, operational state for the components."
+                },
+                {
+                    "id": "cp-10.4_gdn",
+                    "name": "guidance",
+                    "prose": "Restoration of system components includes reimaging, which restores the components to known, operational states."
+                }
+            ]
+        },
+        {
+            "id": "cp-10.5",
+            "class": "SP800-53-enhancement",
+            "title": "Failover Capability",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(5)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(05)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#si-13",
+                    "rel": "incorporated-into",
+                    "text": "SI-13"
+                }
+            ]
+        },
+        {
+            "id": "cp-10.6",
+            "class": "SP800-53-enhancement",
+            "title": "Component Protection",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "CP-10(6)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "CP-10(06)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#mp-2",
+                    "rel": "related",
+                    "text": "MP-2"
+                },
+                {
+                    "href": "#mp-4",
+                    "rel": "related",
+                    "text": "MP-4"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pe-6",
+                    "rel": "related",
+                    "text": "PE-6"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "cp-10.6_smt",
+                    "name": "statement",
+                    "prose": "Protect system components used for recovery and reconstitution."
+                },
+                {
+                    "id": "cp-10.6_gdn",
+                    "name": "guidance",
+                    "prose": "Protection of system recovery and reconstitution components (i.e., hardware, firmware, and software) includes physical and technical controls. Backup and restoration components used for recovery and reconstitution include router tables, compilers, and other system software."
+                }
+            ]
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

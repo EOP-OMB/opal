@@ -1,0 +1,266 @@
+{
+    "id": "mp-4",
+    "class": "SP800-53",
+    "title": "Media Storage",
+    "parameters": [
+        {
+            "id": "mp-4_prm_1",
+            "label": "organization-defined types of digital and/or non-digital media"
+        },
+        {
+            "id": "mp-4_prm_2",
+            "label": "organization-defined controlled areas"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "MP-4"
+        },
+        {
+            "name": "sort-id",
+            "value": "MP-04"
+        }
+    ],
+    "links": [
+        {
+            "href": "#628d22a1-6a11-4784-bc59-5cd9497b5445",
+            "rel": "reference",
+            "text": "[FIPS 199]"
+        },
+        {
+            "href": "#20957dbb-6a1e-40a2-b38a-66f67d33ac2e",
+            "rel": "reference",
+            "text": "[SP 800-56A]"
+        },
+        {
+            "href": "#0d083d8a-5cc6-46f1-8d79-3081d42bcb75",
+            "rel": "reference",
+            "text": "[SP 800-56B]"
+        },
+        {
+            "href": "#eef62b16-c796-4554-955c-505824135b8a",
+            "rel": "reference",
+            "text": "[SP 800-56C]"
+        },
+        {
+            "href": "#110e26af-4765-49e1-8740-6750f83fcda1",
+            "rel": "reference",
+            "text": "[SP 800-57-1]"
+        },
+        {
+            "href": "#e7942589-e267-4a5a-a3d9-f39a7aae81f0",
+            "rel": "reference",
+            "text": "[SP 800-57-2]"
+        },
+        {
+            "href": "#8306620b-1920-4d73-8b21-12008528595f",
+            "rel": "reference",
+            "text": "[SP 800-57-3]"
+        },
+        {
+            "href": "#22f2d4f0-4365-4e88-a30d-275c1f5473ea",
+            "rel": "reference",
+            "text": "[SP 800-111]"
+        },
+        {
+            "href": "#ac-19",
+            "rel": "related",
+            "text": "AC-19"
+        },
+        {
+            "href": "#cp-2",
+            "rel": "related",
+            "text": "CP-2"
+        },
+        {
+            "href": "#cp-6",
+            "rel": "related",
+            "text": "CP-6"
+        },
+        {
+            "href": "#cp-9",
+            "rel": "related",
+            "text": "CP-9"
+        },
+        {
+            "href": "#cp-10",
+            "rel": "related",
+            "text": "CP-10"
+        },
+        {
+            "href": "#mp-2",
+            "rel": "related",
+            "text": "MP-2"
+        },
+        {
+            "href": "#mp-7",
+            "rel": "related",
+            "text": "MP-7"
+        },
+        {
+            "href": "#pe-3",
+            "rel": "related",
+            "text": "PE-3"
+        },
+        {
+            "href": "#pl-2",
+            "rel": "related",
+            "text": "PL-2"
+        },
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        },
+        {
+            "href": "#sc-13",
+            "rel": "related",
+            "text": "SC-13"
+        },
+        {
+            "href": "#sc-28",
+            "rel": "related",
+            "text": "SC-28"
+        },
+        {
+            "href": "#sc-34",
+            "rel": "related",
+            "text": "SC-34"
+        },
+        {
+            "href": "#si-12",
+            "rel": "related",
+            "text": "SI-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "mp-4_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "mp-4_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Physically control and securely store {{ mp-4_prm_1 }} within {{ mp-4_prm_2 }}; and"
+                },
+                {
+                    "id": "mp-4_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Protect system media types defined in MP-4a until the media are destroyed or sanitized using approved equipment, techniques, and procedures."
+                }
+            ]
+        },
+        {
+            "id": "mp-4_gdn",
+            "name": "guidance",
+            "prose": "System media includes digital and non-digital media. Digital media includes flash drives, diskettes, magnetic tapes, external or removable hard disk drives (e.g., solid state, magnetic), compact discs, and digital versatile discs. Non-digital media includes paper and microfilm. Physically controlling stored media includes conducting inventories, ensuring procedures are in place to allow individuals to check out and return media to the library, and maintaining accountability for stored media. Secure storage includes a locked drawer, desk, or cabinet or a controlled media library. The type of media storage is commensurate with the security category or classification of the information on the media. Controlled areas are spaces that provide physical and procedural controls to meet the requirements established for protecting information and systems. Fewer controls may be needed for media that contains information determined to be in the public domain, publicly releasable, or have limited adverse impacts on organizations, operations, or individuals if accessed by other than authorized personnel. In these situations, physical access controls provide adequate protection."
+        }
+    ],
+    "controls": [
+        {
+            "id": "mp-4.1",
+            "class": "SP800-53-enhancement",
+            "title": "Cryptographic Protection",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "MP-4(1)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "MP-04(01)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-28.1",
+                    "rel": "incorporated-into",
+                    "text": "SC-28(1)"
+                }
+            ]
+        },
+        {
+            "id": "mp-4.2",
+            "class": "SP800-53-enhancement",
+            "title": "Automated Restricted Access",
+            "parameters": [
+                {
+                    "id": "mp-4.2_prm_1",
+                    "label": "organization-defined automated mechanisms"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "MP-4(2)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "MP-04(02)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "mp-4.2_smt",
+                    "name": "statement",
+                    "prose": "Restrict access to media storage areas and log access attempts and access granted using {{ mp-4.2_prm_1 }}."
+                },
+                {
+                    "id": "mp-4.2_gdn",
+                    "name": "guidance",
+                    "prose": "Automated mechanisms include keypads, biometric readers, or card readers on the external entries to media storage areas."
+                }
+            ]
+        }
+    ],
+    "group_title": "Media Protection"
+}

@@ -1,0 +1,27 @@
+{
+    "id": "si-3.9",
+    "class": "SP800-53-enhancement",
+    "title": "Authenticate Remote Commands",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-3(9)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-03(09)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-17.10",
+            "rel": "moved-to",
+            "text": "AC-17(10)"
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

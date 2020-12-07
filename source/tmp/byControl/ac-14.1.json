@@ -1,0 +1,27 @@
+{
+    "id": "ac-14.1",
+    "class": "SP800-53-enhancement",
+    "title": "Necessary Uses",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-14(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-14(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-14",
+            "rel": "incorporated-into",
+            "text": "AC-14"
+        }
+    ],
+    "group_title": "Access Control"
+}

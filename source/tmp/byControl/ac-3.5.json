@@ -1,0 +1,46 @@
+{
+    "id": "ac-3.5",
+    "class": "SP800-53-enhancement",
+    "title": "Security-relevant Information",
+    "parameters": [
+        {
+            "id": "ac-3.5_prm_1",
+            "label": "organization-defined security-relevant information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-3(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-03(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-6",
+            "rel": "related",
+            "text": "CM-6"
+        },
+        {
+            "href": "#sc-39",
+            "rel": "related",
+            "text": "SC-39"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-3.5_smt",
+            "name": "statement",
+            "prose": "Prevent access to {{ ac-3.5_prm_1 }} except during secure, non-operable system states."
+        },
+        {
+            "id": "ac-3.5_gdn",
+            "name": "guidance",
+            "prose": "Security-relevant information is information within systems that can potentially impact the operation of security functions or the provision of security services in a manner that could result in failure to enforce system security and privacy policies or maintain the separation of code and data. Security-relevant information includes access control lists, filtering rules for routers or firewalls, configuration parameters for security services, and cryptographic key management information. Secure, non-operable system states include the times in which systems are not performing mission or business-related processing, such as when the system is offline for maintenance, boot-up, troubleshooting, or shut down."
+        }
+    ],
+    "group_title": "Access Control"
+}

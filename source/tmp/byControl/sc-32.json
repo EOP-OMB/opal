@@ -1,0 +1,123 @@
+{
+    "id": "sc-32",
+    "class": "SP800-53",
+    "title": "System Partitioning",
+    "parameters": [
+        {
+            "id": "sc-32_prm_1",
+            "label": "organization-defined system components"
+        },
+        {
+            "id": "sc-32_prm_2",
+            "select": {
+                "alternatives": [
+                    "physical",
+                    "logical"
+                ]
+            }
+        },
+        {
+            "id": "sc-32_prm_3",
+            "label": "organization-defined circumstances for physical or logical separation of components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-32"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-32"
+        }
+    ],
+    "links": [
+        {
+            "href": "#628d22a1-6a11-4784-bc59-5cd9497b5445",
+            "rel": "reference",
+            "text": "[FIPS 199]"
+        },
+        {
+            "href": "#d4296805-2dca-4c63-a95f-eeccaa826aec",
+            "rel": "reference",
+            "text": "[IR 8179]"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#ac-6",
+            "rel": "related",
+            "text": "AC-6"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        },
+        {
+            "href": "#sc-2",
+            "rel": "related",
+            "text": "SC-2"
+        },
+        {
+            "href": "#sc-3",
+            "rel": "related",
+            "text": "SC-3"
+        },
+        {
+            "href": "#sc-7",
+            "rel": "related",
+            "text": "SC-7"
+        },
+        {
+            "href": "#sc-36",
+            "rel": "related",
+            "text": "SC-36"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-32_smt",
+            "name": "statement",
+            "prose": "Partition the system into {{ sc-32_prm_1 }} residing in separate {{ sc-32_prm_2 }} domains or environments based on {{ sc-32_prm_3 }}."
+        },
+        {
+            "id": "sc-32_gdn",
+            "name": "guidance",
+            "prose": "System partitioning is part of a defense-in-depth protection strategy. Organizations determine the degree of physical separation of system components. Physical separation options include physically distinct components in separate racks in the same room, critical components in separate rooms, and geographical separation of critical components. Security categorization can guide the selection of candidates for domain partitioning. Managed interfaces restrict or prohibit network access and information flow among partitioned system components."
+        }
+    ],
+    "controls": [
+        {
+            "id": "sc-32.1",
+            "class": "SP800-53-enhancement",
+            "title": "Separate Physical Domains for Privileged Functions",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-32(1)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-32(01)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-32.1_smt",
+                    "name": "statement",
+                    "prose": "Partition privileged functions into separate physical domains."
+                },
+                {
+                    "id": "sc-32.1_gdn",
+                    "name": "guidance",
+                    "prose": "Privileged functions that operate in a single physical domain may represent a single point of failure if that domain becomes compromised or experiences a denial of service."
+                }
+            ]
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

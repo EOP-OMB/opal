@@ -1,0 +1,34 @@
+{
+    "id": "ir-4.9",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Response Capability",
+    "parameters": [
+        {
+            "id": "ir-4.9_prm_1",
+            "label": "organization-defined dynamic response capabilities"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(09)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.9_smt",
+            "name": "statement",
+            "prose": "Employ {{ ir-4.9_prm_1 }} to respond to incidents."
+        },
+        {
+            "id": "ir-4.9_gdn",
+            "name": "guidance",
+            "prose": "The dynamic response capability addresses the timely deployment of new or replacement organizational capabilities in response to incidents. This includes capabilities implemented at the mission and business process level and at the system level."
+        }
+    ],
+    "group_title": "Incident Response"
+}

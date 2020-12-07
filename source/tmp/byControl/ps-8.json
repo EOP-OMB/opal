@@ -1,0 +1,183 @@
+{
+    "id": "ps-8",
+    "class": "SP800-53",
+    "title": "Personnel Sanctions",
+    "parameters": [
+        {
+            "id": "ps-8_prm_1",
+            "label": "organization-defined personnel or roles"
+        },
+        {
+            "id": "ps-8_prm_2",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PS-8"
+        },
+        {
+            "name": "sort-id",
+            "value": "PS-08"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-1",
+            "rel": "related",
+            "text": "AC-1"
+        },
+        {
+            "href": "#at-1",
+            "rel": "related",
+            "text": "AT-1"
+        },
+        {
+            "href": "#au-1",
+            "rel": "related",
+            "text": "AU-1"
+        },
+        {
+            "href": "#ca-1",
+            "rel": "related",
+            "text": "CA-1"
+        },
+        {
+            "href": "#cm-1",
+            "rel": "related",
+            "text": "CM-1"
+        },
+        {
+            "href": "#cp-1",
+            "rel": "related",
+            "text": "CP-1"
+        },
+        {
+            "href": "#ia-1",
+            "rel": "related",
+            "text": "IA-1"
+        },
+        {
+            "href": "#ir-1",
+            "rel": "related",
+            "text": "IR-1"
+        },
+        {
+            "href": "#ma-1",
+            "rel": "related",
+            "text": "MA-1"
+        },
+        {
+            "href": "#mp-1",
+            "rel": "related",
+            "text": "MP-1"
+        },
+        {
+            "href": "#pe-1",
+            "rel": "related",
+            "text": "PE-1"
+        },
+        {
+            "href": "#pl-1",
+            "rel": "related",
+            "text": "PL-1"
+        },
+        {
+            "href": "#pm-1",
+            "rel": "related",
+            "text": "PM-1"
+        },
+        {
+            "href": "#ps-1",
+            "rel": "related",
+            "text": "PS-1"
+        },
+        {
+            "href": "#pt-1",
+            "rel": "related",
+            "text": "PT-1"
+        },
+        {
+            "href": "#ra-1",
+            "rel": "related",
+            "text": "RA-1"
+        },
+        {
+            "href": "#sa-1",
+            "rel": "related",
+            "text": "SA-1"
+        },
+        {
+            "href": "#sc-1",
+            "rel": "related",
+            "text": "SC-1"
+        },
+        {
+            "href": "#si-1",
+            "rel": "related",
+            "text": "SI-1"
+        },
+        {
+            "href": "#sr-1",
+            "rel": "related",
+            "text": "SR-1"
+        },
+        {
+            "href": "#pl-4",
+            "rel": "related",
+            "text": "PL-4"
+        },
+        {
+            "href": "#pm-12",
+            "rel": "related",
+            "text": "PM-12"
+        },
+        {
+            "href": "#ps-6",
+            "rel": "related",
+            "text": "PS-6"
+        },
+        {
+            "href": "#pt-1",
+            "rel": "related",
+            "text": "PT-1"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ps-8_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "ps-8_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Employ a formal sanctions process for individuals failing to comply with established information security and privacy policies and procedures; and"
+                },
+                {
+                    "id": "ps-8_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Notify {{ ps-8_prm_1 }} within {{ ps-8_prm_2 }} when a formal employee sanctions process is initiated, identifying the individual sanctioned and the reason for the sanction."
+                }
+            ]
+        },
+        {
+            "id": "ps-8_gdn",
+            "name": "guidance",
+            "prose": "Organizational sanctions reflect applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Sanctions processes are described in access agreements and can be included as part of general personnel policies for organizations and/or specified in security and privacy policies. Organizations consult with the Office of the General Counsel regarding matters of employee sanctions."
+        }
+    ],
+    "group_title": "Personnel Security"
+}

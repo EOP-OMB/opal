@@ -1,0 +1,69 @@
+{
+    "id": "sa-15.3",
+    "class": "SP800-53-enhancement",
+    "title": "Criticality Analysis",
+    "parameters": [
+        {
+            "id": "sa-15.3_prm_1",
+            "label": "organization-defined decision points in the system development life cycle"
+        },
+        {
+            "id": "sa-15.3_prm_2",
+            "label": "organization-defined breadth and depth of criticality analysis"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-15(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-15(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-9",
+            "rel": "related",
+            "text": "RA-9"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-15.3_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to perform a criticality analysis:",
+            "parts": [
+                {
+                    "id": "sa-15.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "At the following decision points in the system development life cycle: {{ sa-15.3_prm_1 }}; and"
+                },
+                {
+                    "id": "sa-15.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "At the following level of rigor: {{ sa-15.3_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "sa-15.3_gdn",
+            "name": "guidance",
+            "prose": "Criticality analysis performed by the developer provides input to the criticality analysis performed by organizations. Developer input is essential to organizational criticality analysis because organizations may not have access to detailed design documentation for system components that are developed as commercial off-the-shelf products. Such design documentation includes functional specifications, high-level designs, low-level designs, source code, and hardware schematics. Criticality analysis is important for organizational systems that are designated as high value assets. High value assets can be moderate- or high-impact systems due to heightened adversarial interest or potential adverse effects on the federal enterprise. Developer input is especially important when organizations conduct supply chain criticality analyses."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

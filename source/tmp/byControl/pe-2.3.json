@@ -1,0 +1,59 @@
+{
+    "id": "pe-2.3",
+    "class": "SP800-53-enhancement",
+    "title": "Restrict Unescorted Access",
+    "parameters": [
+        {
+            "id": "pe-2.3_prm_1",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "security clearances for all information contained within the system",
+                    "formal access authorizations for all information contained within the system",
+                    "need for access to all information contained within the system",
+                    "\n                     {{ pe-2.3_prm_2 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "pe-2.3_prm_2",
+            "depends-on": "pe-2.3_prm_1",
+            "label": "organization-defined physical access authorizations"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-2(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-02(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ps-2",
+            "rel": "related",
+            "text": "PS-2"
+        },
+        {
+            "href": "#ps-6",
+            "rel": "related",
+            "text": "PS-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-2.3_smt",
+            "name": "statement",
+            "prose": "Restrict unescorted access to the facility where the system resides to personnel with {{ pe-2.3_prm_1 }}."
+        },
+        {
+            "id": "pe-2.3_gdn",
+            "name": "guidance",
+            "prose": "Individuals without required security clearances, access approvals, or need to know are escorted by individuals with appropriate physical access authorizations to ensure that information is not exposed or otherwise compromised."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

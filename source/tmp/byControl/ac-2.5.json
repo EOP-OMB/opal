@@ -1,0 +1,41 @@
+{
+    "id": "ac-2.5",
+    "class": "SP800-53-enhancement",
+    "title": "Inactivity Logout",
+    "parameters": [
+        {
+            "id": "ac-2.5_prm_1",
+            "label": "organization-defined time period of expected inactivity or description of when to log out"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-11",
+            "rel": "related",
+            "text": "AC-11"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.5_smt",
+            "name": "statement",
+            "prose": "Require that users log out when {{ ac-2.5_prm_1 }}."
+        },
+        {
+            "id": "ac-2.5_gdn",
+            "name": "guidance",
+            "prose": "Inactivity logout is behavior- or policy-based and requires users to take physical action to log out when they are expecting inactivity longer than the defined period. Automatic enforcement of inactivity logout is addressed by AC-11."
+        }
+    ],
+    "group_title": "Access Control"
+}

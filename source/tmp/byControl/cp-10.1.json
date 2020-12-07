@@ -1,0 +1,27 @@
+{
+    "id": "cp-10.1",
+    "class": "SP800-53-enhancement",
+    "title": "Contingency Plan Testing",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-10(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-10(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cp-4",
+            "rel": "incorporated-into",
+            "text": "CP-4"
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

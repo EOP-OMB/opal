@@ -1,0 +1,4152 @@
+{
+    "id": "au",
+    "class": "family",
+    "title": "Audit and Accountability",
+    "controls": [
+        {
+            "id": "au-1",
+            "class": "SP800-53",
+            "title": "Policy and Procedures",
+            "parameters": [
+                {
+                    "id": "au-1_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "au-1_prm_2",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "organization-level",
+                            "mission/business process-level",
+                            "system-level"
+                        ]
+                    }
+                },
+                {
+                    "id": "au-1_prm_3",
+                    "label": "organization-defined official"
+                },
+                {
+                    "id": "au-1_prm_4",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "au-1_prm_5",
+                    "label": "organization-defined events"
+                },
+                {
+                    "id": "au-1_prm_6",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "au-1_prm_7",
+                    "label": "organization-defined events"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-1"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-01"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#c7ac44e8-10db-4b64-b2b9-9e32ec1efed0",
+                    "rel": "reference",
+                    "text": "[SP 800-12]"
+                },
+                {
+                    "href": "#08b07465-dbdc-48d6-8a0b-37279602ac16",
+                    "rel": "reference",
+                    "text": "[SP 800-30]"
+                },
+                {
+                    "href": "#cec037f3-8aba-4c97-84b4-4082f9e515d2",
+                    "rel": "reference",
+                    "text": "[SP 800-39]"
+                },
+                {
+                    "href": "#4c0ec2ee-a0d6-428a-9043-4504bc3ade6f",
+                    "rel": "reference",
+                    "text": "[SP 800-100]"
+                },
+                {
+                    "href": "#pm-9",
+                    "rel": "related",
+                    "text": "PM-9"
+                },
+                {
+                    "href": "#ps-8",
+                    "rel": "related",
+                    "text": "PS-8"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-1_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-1_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Develop, document, and disseminate to {{ au-1_prm_1 }}:",
+                            "parts": [
+                                {
+                                    "id": "au-1_smt.a.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "\n                     {{ au-1_prm_2 }} audit and accountability policy that:",
+                                    "parts": [
+                                        {
+                                            "id": "au-1_smt.a.1.a",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(a)"
+                                                }
+                                            ],
+                                            "prose": "Addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and"
+                                        },
+                                        {
+                                            "id": "au-1_smt.a.1.b",
+                                            "name": "item",
+                                            "properties": [
+                                                {
+                                                    "name": "label",
+                                                    "value": "(b)"
+                                                }
+                                            ],
+                                            "prose": "Is consistent with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines; and"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "au-1_smt.a.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures to facilitate the implementation of the audit and accountability policy and the associated audit and accountability controls;"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "au-1_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Designate an {{ au-1_prm_3 }} to manage the development, documentation, and dissemination of the audit and accountability policy and procedures; and"
+                        },
+                        {
+                            "id": "au-1_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Review and update the current audit and accountability:",
+                            "parts": [
+                                {
+                                    "id": "au-1_smt.c.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Policy {{ au-1_prm_4 }} and following {{ au-1_prm_5 }}; and"
+                                },
+                                {
+                                    "id": "au-1_smt.c.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Procedures {{ au-1_prm_6 }} and following {{ au-1_prm_7 }}."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "au-1_gdn",
+                    "name": "guidance",
+                    "prose": "Audit and accountability policy and procedures address the controls in the AU family that are implemented within systems and organizations. The risk management strategy is an important factor in establishing such policies and procedures. Policies and procedures contribute to security and privacy assurance. Therefore, it is important that security and privacy programs collaborate on the development of audit and accountability policy and procedures. Security and privacy program policies and procedures at the organization level are preferable, in general, and may obviate the need for mission- or system-specific policies and procedures. The policy can be included as part of the general security and privacy policy or be represented by multiple policies that reflect the complex nature of organizations. Procedures can be established for security and privacy programs, for mission or business processes, and for systems, if needed. Procedures describe how the policies or controls are implemented and can be directed at the individual or role that is the object of the procedure. Procedures can be documented in system security and privacy plans or in one or more separate documents. Events that may precipitate an update to audit and accountability policy and procedures include assessment or audit findings, security or privacy incidents, or changes in applicable laws, executive orders, directives, regulations, policies, standards, and guidelines. Simply restating controls does not constitute an organizational policy or procedure."
+                }
+            ]
+        },
+        {
+            "id": "au-2",
+            "class": "SP800-53",
+            "title": "Event Logging",
+            "parameters": [
+                {
+                    "id": "au-2_prm_1",
+                    "label": "organization-defined event types that the system is capable of logging"
+                },
+                {
+                    "id": "au-2_prm_2",
+                    "label": "organization-defined event types (subset of the event types defined in AU-2a.) along with the frequency of (or situation requiring) logging for each identified event type"
+                },
+                {
+                    "id": "au-2_prm_3",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-2"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-02"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#5eee45d8-3313-4fdc-8d54-1742092bbdd6",
+                    "rel": "reference",
+                    "text": "[SP 800-92]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#ac-7",
+                    "rel": "related",
+                    "text": "AC-7"
+                },
+                {
+                    "href": "#ac-8",
+                    "rel": "related",
+                    "text": "AC-8"
+                },
+                {
+                    "href": "#ac-16",
+                    "rel": "related",
+                    "text": "AC-16"
+                },
+                {
+                    "href": "#ac-17",
+                    "rel": "related",
+                    "text": "AC-17"
+                },
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-11",
+                    "rel": "related",
+                    "text": "AU-11"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#cm-3",
+                    "rel": "related",
+                    "text": "CM-3"
+                },
+                {
+                    "href": "#cm-5",
+                    "rel": "related",
+                    "text": "CM-5"
+                },
+                {
+                    "href": "#cm-6",
+                    "rel": "related",
+                    "text": "CM-6"
+                },
+                {
+                    "href": "#cm-13",
+                    "rel": "related",
+                    "text": "CM-13"
+                },
+                {
+                    "href": "#ia-3",
+                    "rel": "related",
+                    "text": "IA-3"
+                },
+                {
+                    "href": "#ma-4",
+                    "rel": "related",
+                    "text": "MA-4"
+                },
+                {
+                    "href": "#mp-4",
+                    "rel": "related",
+                    "text": "MP-4"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pm-21",
+                    "rel": "related",
+                    "text": "PM-21"
+                },
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                },
+                {
+                    "href": "#ra-8",
+                    "rel": "related",
+                    "text": "RA-8"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sc-7",
+                    "rel": "related",
+                    "text": "SC-7"
+                },
+                {
+                    "href": "#sc-18",
+                    "rel": "related",
+                    "text": "SC-18"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-7",
+                    "rel": "related",
+                    "text": "SI-7"
+                },
+                {
+                    "href": "#si-10",
+                    "rel": "related",
+                    "text": "SI-10"
+                },
+                {
+                    "href": "#si-11",
+                    "rel": "related",
+                    "text": "SI-11"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-2_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-2_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Identify the types of events that the system is capable of logging in support of the audit function: {{ au-2_prm_1 }};"
+                        },
+                        {
+                            "id": "au-2_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Coordinate the event logging function with other organizational entities requiring audit-related information to guide and inform the selection criteria for events to be logged;"
+                        },
+                        {
+                            "id": "au-2_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Specify the following event types for logging within the system: {{ au-2_prm_2 }};"
+                        },
+                        {
+                            "id": "au-2_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Provide a rationale for why the event types selected for logging are deemed to be adequate to support after-the-fact investigations of incidents; and"
+                        },
+                        {
+                            "id": "au-2_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Review and update the event types selected for logging {{ au-2_prm_3 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-2_gdn",
+                    "name": "guidance",
+                    "prose": "An event is an observable occurrence in a system. The types of events that require logging are those events that are significant and relevant to the security of systems and the privacy of individuals. Event logging also supports specific monitoring and auditing needs. Event types include password changes, failed logons or failed accesses related to systems, security or privacy attribute changes, administrative privilege usage, PIV credential usage, data action changes, query parameters, or external credential usage. In determining the set of event types that require logging, organizations consider the monitoring and auditing appropriate for each of the controls to be implemented. For completeness, event logging includes all protocols that are operational and supported by the system.\nTo balance monitoring and auditing requirements with other system needs, event logging requires identifying the subset of event types that are logged at a given point in time. For example, organizations may determine that systems need the capability to log every file access successful and unsuccessful, but not activate that capability except for specific circumstances due to the potential burden on system performance. The types of events that organizations desire to be logged may change. Reviewing and updating the set of logged events is necessary to help ensure that the events remain relevant and continue to support the needs of the organization. Organizations consider how the types of logging events can reveal information about individuals that may give rise to privacy risk and how best to mitigate such risks. For example, there is the potential to reveal personally identifiable information in the audit trail, especially if the logging event is based on patterns or time of usage.\nEvent logging requirements, including the need to log specific event types, may be referenced in other controls and control enhancements. These include AC-2(4), AC-3(10), AC-6(9), AC-17(1), CM-3f, CM-5(1), IA-3(3.b), MA-4(1), MP-4(2), PE-3, PM-21, PT-7, RA-8, SC-7(9), SC-7(15), SI-3(8), SI-4(22), SI-7(8), and SI-10(1). Organizations include event types that are required by applicable laws, executive orders, directives, policies, regulations, standards, and guidelines. Audit records can be generated at various levels, including at the packet level as information traverses the network. Selecting the appropriate level of event logging is an important part of a monitoring and auditing capability and can identify the root causes of problems. When defining event types, organizations consider the logging necessary to cover related event types, such as the steps in distributed, transaction-based processes and the actions that occur in service-oriented architectures."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-2.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Compilation of Audit Records from Multiple Sources",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-2(1)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-02(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-12",
+                            "rel": "incorporated-into",
+                            "text": "AU-12"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-2.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Selection of Audit Events by Component",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-2(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-02(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-12",
+                            "rel": "incorporated-into",
+                            "text": "AU-12"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-2.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Reviews and Updates",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-2(3)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-02(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-2",
+                            "rel": "incorporated-into",
+                            "text": "AU-2"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-2.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Privileged Functions",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-2(4)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-02(04)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-6.9",
+                            "rel": "incorporated-into",
+                            "text": "AC-6(9)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-3",
+            "class": "SP800-53",
+            "title": "Content of Audit Records",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-3"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-03"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#98d415ca-7281-4064-9931-0c366637e324",
+                    "rel": "reference",
+                    "text": "[IR 8062]"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-8",
+                    "rel": "related",
+                    "text": "AU-8"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#ma-4",
+                    "rel": "related",
+                    "text": "MA-4"
+                },
+                {
+                    "href": "#pl-9",
+                    "rel": "related",
+                    "text": "PL-9"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#si-7",
+                    "rel": "related",
+                    "text": "SI-7"
+                },
+                {
+                    "href": "#si-11",
+                    "rel": "related",
+                    "text": "SI-11"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-3_smt",
+                    "name": "statement",
+                    "prose": "Ensure that audit records contain information that establishes the following:",
+                    "parts": [
+                        {
+                            "id": "au-3_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "What type of event occurred;"
+                        },
+                        {
+                            "id": "au-3_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "When the event occurred;"
+                        },
+                        {
+                            "id": "au-3_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Where the event occurred;"
+                        },
+                        {
+                            "id": "au-3_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "d."
+                                }
+                            ],
+                            "prose": "Source of the event;"
+                        },
+                        {
+                            "id": "au-3_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "e."
+                                }
+                            ],
+                            "prose": "Outcome of the event; and"
+                        },
+                        {
+                            "id": "au-3_smt.f",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "f."
+                                }
+                            ],
+                            "prose": "Identity of any individuals, subjects, or objects/entities associated with the event."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-3_gdn",
+                    "name": "guidance",
+                    "prose": "Audit record content that may be necessary to support the auditing function includes event descriptions (item a), time stamps (item b), source and destination addresses (item c), user or process identifiers (items d and f), success or fail indications (item e), and filenames involved (items a, c, e, and f) . Event outcomes include indicators of event success or failure and event-specific results, such as the system security and privacy posture after the event occurred. Organizations consider how audit records can reveal information about individuals that may give rise to privacy risks and how best to mitigate such risks. For example, there is the potential to reveal personally identifiable information in the audit trail, especially if the trail records inputs or is based on patterns or time of usage."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-3.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Additional Audit Information",
+                    "parameters": [
+                        {
+                            "id": "au-3.1_prm_1",
+                            "label": "organization-defined additional information"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-3(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-03(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-3.1_smt",
+                            "name": "statement",
+                            "prose": "Generate audit records containing the following additional information: {{ au-3.1_prm_1 }}."
+                        },
+                        {
+                            "id": "au-3.1_gdn",
+                            "name": "guidance",
+                            "prose": "The ability to add information generated in audit records is dependent on system functionality to configure the audit record content. Organizations may consider additional information in audit records including, but not limited to, access control or flow control rules invoked and individual identities of group account users. Organizations may also consider limiting additional audit record information to only information that is explicitly needed for audit requirements. This facilitates the use of audit trails and audit logs by not including information in audit records that could potentially be misleading, make it more difficult to locate information of interest, or increase the risk to individuals' privacy."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-3.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Centralized Management of Planned Audit Record Content",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-3(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-03(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pl-9",
+                            "rel": "incorporated-into",
+                            "text": "PL-9"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-3.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Limit Personally Identifiable Information Elements",
+                    "parameters": [
+                        {
+                            "id": "au-3.3_prm_1",
+                            "label": "organization-defined elements"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-3(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-03(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ra-3",
+                            "rel": "related",
+                            "text": "RA-3"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-3.3_smt",
+                            "name": "statement",
+                            "prose": "Limit personally identifiable information contained in audit records to the following elements identified in the privacy risk assessment: {{ au-3.3_prm_1 }}."
+                        },
+                        {
+                            "id": "au-3.3_gdn",
+                            "name": "guidance",
+                            "prose": "Limiting personally identifiable information in audit records when such information is not needed for operational purposes helps reduce the level of privacy risk created by a system."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-4",
+            "class": "SP800-53",
+            "title": "Audit Log Storage Capacity",
+            "parameters": [
+                {
+                    "id": "au-4_prm_1",
+                    "label": "organization-defined audit log retention requirements"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-4"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-04"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#au-11",
+                    "rel": "related",
+                    "text": "AU-11"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-4_smt",
+                    "name": "statement",
+                    "prose": "Allocate audit log storage capacity to accommodate {{ au-4_prm_1 }}."
+                },
+                {
+                    "id": "au-4_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations consider the types of audit logging to be performed and the audit log processing requirements when allocating audit log storage capacity. Allocating sufficient audit log storage capacity reduces the likelihood of such capacity being exceeded and resulting in the potential loss or reduction of audit logging capability."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-4.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Transfer to Alternate Storage",
+                    "parameters": [
+                        {
+                            "id": "au-4.1_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-4(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-04(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-4.1_smt",
+                            "name": "statement",
+                            "prose": "Transfer audit logs {{ au-4.1_prm_1 }} to a different system, system component, or media other than the system or system component conducting the logging."
+                        },
+                        {
+                            "id": "au-4.1_gdn",
+                            "name": "guidance",
+                            "prose": "Audit log transfer, also known as off-loading, is a common process in systems with limited audit log storage capacity and thus supports availability of the audit logs. The initial audit log storage is only used in a transitory fashion until the system can communicate with the secondary or alternate system allocated to audit log storage, at which point the audit logs are transferred. Transferring audit logs to alternate storage is similar to AU-9(2) in that audit logs are transferred to a different entity. However, the purpose of selecting AU-9(2) is to protect the confidentiality and integrity of audit records. Organizations can select either control enhancement to obtain the benefit of increased audit log storage capacity and preserving the confidentiality, integrity, and availability of audit records and logs."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-5",
+            "class": "SP800-53",
+            "title": "Response to Audit Logging Process Failures",
+            "parameters": [
+                {
+                    "id": "au-5_prm_1",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "au-5_prm_2",
+                    "label": "organization-defined time period"
+                },
+                {
+                    "id": "au-5_prm_3",
+                    "label": "organization-defined additional actions"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-5"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-05"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#au-11",
+                    "rel": "related",
+                    "text": "AU-11"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-5_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-5_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Alert {{ au-5_prm_1 }} within {{ au-5_prm_2 }} in the event of an audit logging process failure; and"
+                        },
+                        {
+                            "id": "au-5_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Take the following additional actions: {{ au-5_prm_3 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-5_gdn",
+                    "name": "guidance",
+                    "prose": "Audit logging process failures include software and hardware errors, failures in audit log capturing mechanisms, and reaching or exceeding audit log storage capacity. Organization-defined actions include overwriting oldest audit records, shutting down the system, and stopping the generation of audit records. Organizations may choose to define additional actions for audit logging process failures based on the type of failure, the location of the failure, the severity of the failure, or a combination of such factors. When the audit logging process failure is related to storage, the response is carried out for the audit log storage repository (i.e., the distinct system component where the audit logs are stored), the system on which the audit logs reside, the total audit log storage capacity of the organization (i.e., all audit log storage repositories combined), or all three. Organizations may decide to take no additional actions after alerting designated roles or personnel."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-5.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Storage Capacity Warning",
+                    "parameters": [
+                        {
+                            "id": "au-5.1_prm_1",
+                            "label": "organization-defined personnel, roles, and/or locations"
+                        },
+                        {
+                            "id": "au-5.1_prm_2",
+                            "label": "organization-defined time period"
+                        },
+                        {
+                            "id": "au-5.1_prm_3",
+                            "label": "organization-defined percentage"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-5(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-05(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-5.1_smt",
+                            "name": "statement",
+                            "prose": "Provide a warning to {{ au-5.1_prm_1 }} within {{ au-5.1_prm_2 }} when allocated audit log storage volume reaches {{ au-5.1_prm_3 }} of repository maximum audit log storage capacity."
+                        },
+                        {
+                            "id": "au-5.1_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations may have multiple audit log storage repositories distributed across multiple system components with each repository having different storage volume capacities."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-5.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Real-time Alerts",
+                    "parameters": [
+                        {
+                            "id": "au-5.2_prm_1",
+                            "label": "organization-defined real-time period"
+                        },
+                        {
+                            "id": "au-5.2_prm_2",
+                            "label": "organization-defined personnel, roles, and/or locations"
+                        },
+                        {
+                            "id": "au-5.2_prm_3",
+                            "label": "organization-defined audit logging failure events requiring real-time alerts"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-5(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-05(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-5.2_smt",
+                            "name": "statement",
+                            "prose": "Provide an alert within {{ au-5.2_prm_1 }} to {{ au-5.2_prm_2 }} when the following audit failure events occur: {{ au-5.2_prm_3 }}."
+                        },
+                        {
+                            "id": "au-5.2_gdn",
+                            "name": "guidance",
+                            "prose": "Alerts provide organizations with urgent messages. Real-time alerts provide these messages at information technology speed (i.e., the time from event detection to alert occurs in seconds or less)."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-5.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Configurable Traffic Volume Thresholds",
+                    "parameters": [
+                        {
+                            "id": "au-5.3_prm_1",
+                            "select": {
+                                "alternatives": [
+                                    "reject",
+                                    "delay"
+                                ]
+                            }
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-5(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-05(03)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-5.3_smt",
+                            "name": "statement",
+                            "prose": "Enforce configurable network communications traffic volume thresholds reflecting limits on audit log storage capacity and {{ au-5.3_prm_1 }} network traffic above those thresholds."
+                        },
+                        {
+                            "id": "au-5.3_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations have the capability to reject or delay the processing of network communications traffic if audit logging information about such traffic is determined to exceed the storage capacity of the system audit logging function. The rejection or delay response is triggered by the established organizational traffic volume thresholds that can be adjusted based on changes to audit log storage capacity."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-5.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Shutdown on Failure",
+                    "parameters": [
+                        {
+                            "id": "au-5.4_prm_1",
+                            "select": {
+                                "alternatives": [
+                                    "full system shutdown",
+                                    "partial system shutdown",
+                                    "degraded operational mode with limited mission or business functionality available"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "au-5.4_prm_2",
+                            "label": "organization-defined audit logging failures"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-5(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-05(04)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-15",
+                            "rel": "related",
+                            "text": "AU-15"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-5.4_smt",
+                            "name": "statement",
+                            "prose": "Invoke a {{ au-5.4_prm_1 }} in the event of {{ au-5.4_prm_2 }}, unless an alternate audit logging capability exists."
+                        },
+                        {
+                            "id": "au-5.4_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations determine the types of audit logging failures that can trigger automatic system shutdowns or degraded operations. Because of the importance of ensuring mission and business continuity, organizations may determine that the nature of the audit logging failure is not so severe that it warrants a complete shutdown of the system supporting the core organizational mission and business functions. In those instances, partial system shutdowns or operating in a degraded mode with reduced capability may be viable alternatives."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-5.5",
+                    "class": "SP800-53-enhancement",
+                    "title": "Alternate Audit Logging Capability",
+                    "parameters": [
+                        {
+                            "id": "au-5.5_prm_1",
+                            "label": "organization-defined alternate audit logging functionality"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-5(5)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-05(05)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-9",
+                            "rel": "related",
+                            "text": "AU-9"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-5.5_smt",
+                            "name": "statement",
+                            "prose": "Provide an alternate audit logging capability in the event of a failure in primary audit logging capability that implements {{ au-5.5_prm_1 }}."
+                        },
+                        {
+                            "id": "au-5.5_gdn",
+                            "name": "guidance",
+                            "prose": "Since an alternate audit logging capability may be a short-term protection solution employed until the failure in the primary audit logging capability is corrected, organizations may determine that the alternate audit logging capability need only provide a subset of the primary audit logging functionality that is impacted by the failure."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-6",
+            "class": "SP800-53",
+            "title": "Audit Record Review, Analysis, and Reporting",
+            "parameters": [
+                {
+                    "id": "au-6_prm_1",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "au-6_prm_2",
+                    "label": "organization-defined inappropriate or unusual activity"
+                },
+                {
+                    "id": "au-6_prm_3",
+                    "label": "organization-defined personnel or roles"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-6"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-06"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#cfdb1858-c473-46b3-89f9-a700308d0be2",
+                    "rel": "reference",
+                    "text": "[SP 800-86]"
+                },
+                {
+                    "href": "#10cf2fad-a216-41f9-bb1a-531b7e3119e3",
+                    "rel": "reference",
+                    "text": "[SP 800-101]"
+                },
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-5",
+                    "rel": "related",
+                    "text": "AC-5"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#ac-7",
+                    "rel": "related",
+                    "text": "AC-7"
+                },
+                {
+                    "href": "#ac-17",
+                    "rel": "related",
+                    "text": "AC-17"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-16",
+                    "rel": "related",
+                    "text": "AU-16"
+                },
+                {
+                    "href": "#ca-2",
+                    "rel": "related",
+                    "text": "CA-2"
+                },
+                {
+                    "href": "#ca-7",
+                    "rel": "related",
+                    "text": "CA-7"
+                },
+                {
+                    "href": "#cm-2",
+                    "rel": "related",
+                    "text": "CM-2"
+                },
+                {
+                    "href": "#cm-5",
+                    "rel": "related",
+                    "text": "CM-5"
+                },
+                {
+                    "href": "#cm-6",
+                    "rel": "related",
+                    "text": "CM-6"
+                },
+                {
+                    "href": "#cm-10",
+                    "rel": "related",
+                    "text": "CM-10"
+                },
+                {
+                    "href": "#cm-11",
+                    "rel": "related",
+                    "text": "CM-11"
+                },
+                {
+                    "href": "#ia-2",
+                    "rel": "related",
+                    "text": "IA-2"
+                },
+                {
+                    "href": "#ia-3",
+                    "rel": "related",
+                    "text": "IA-3"
+                },
+                {
+                    "href": "#ia-5",
+                    "rel": "related",
+                    "text": "IA-5"
+                },
+                {
+                    "href": "#ia-8",
+                    "rel": "related",
+                    "text": "IA-8"
+                },
+                {
+                    "href": "#ir-5",
+                    "rel": "related",
+                    "text": "IR-5"
+                },
+                {
+                    "href": "#ma-4",
+                    "rel": "related",
+                    "text": "MA-4"
+                },
+                {
+                    "href": "#mp-4",
+                    "rel": "related",
+                    "text": "MP-4"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pe-6",
+                    "rel": "related",
+                    "text": "PE-6"
+                },
+                {
+                    "href": "#ra-5",
+                    "rel": "related",
+                    "text": "RA-5"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sc-7",
+                    "rel": "related",
+                    "text": "SC-7"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-7",
+                    "rel": "related",
+                    "text": "SI-7"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-6_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-6_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Review and analyze system audit records {{ au-6_prm_1 }} for indications of {{ au-6_prm_2 }} and the potential impact of the inappropriate or unusual activity;"
+                        },
+                        {
+                            "id": "au-6_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Report findings to {{ au-6_prm_3 }}; and"
+                        },
+                        {
+                            "id": "au-6_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Adjust the level of audit record review, analysis, and reporting within the system when there is a change in risk based on law enforcement information, intelligence information, or other credible sources of information."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6_gdn",
+                    "name": "guidance",
+                    "prose": "Audit record review, analysis, and reporting covers information security- and privacy-related logging performed by organizations, including logging that results from the monitoring of account usage, remote access, wireless connectivity, mobile device connection, configuration settings, system component inventory, use of maintenance tools and non-local maintenance, physical access, temperature and humidity, equipment delivery and removal, communications at system interfaces, and use of mobile code or Voice over Internet Protocol (VoIP). Findings can be reported to organizational entities that include the incident response team, help desk, and security or privacy offices. If organizations are prohibited from reviewing and analyzing audit records or unable to conduct such activities, the review or analysis may be carried out by other organizations granted such authority. The frequency, scope, and/or depth of the audit record review, analysis, and reporting may be adjusted to meet organizational needs based on new information received."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-6.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automated Process Integration",
+                    "parameters": [
+                        {
+                            "id": "au-6.1_prm_1",
+                            "label": "organization-defined automated mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pm-7",
+                            "rel": "related",
+                            "text": "PM-7"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.1_smt",
+                            "name": "statement",
+                            "prose": "Integrate audit record review, analysis, and reporting processes using {{ au-6.1_prm_1 }}."
+                        },
+                        {
+                            "id": "au-6.1_gdn",
+                            "name": "guidance",
+                            "prose": "Organizational processes that benefit from integrated audit record review, analysis, and reporting include incident response, continuous monitoring, contingency planning, investigation and response to suspicious activities, and Inspector General audits."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automated Security Alerts",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#si-4",
+                            "rel": "incorporated-into",
+                            "text": "SI-4"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Correlate Audit Record Repositories",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-12",
+                            "rel": "related",
+                            "text": "AU-12"
+                        },
+                        {
+                            "href": "#ir-4",
+                            "rel": "related",
+                            "text": "IR-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.3_smt",
+                            "name": "statement",
+                            "prose": "Analyze and correlate audit records across different repositories to gain organization-wide situational awareness."
+                        },
+                        {
+                            "id": "au-6.3_gdn",
+                            "name": "guidance",
+                            "prose": "Organization-wide situational awareness includes awareness across all three levels of risk management (i.e., organizational level, mission/business process level, and information system level) and supports cross-organization awareness."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Central Review and Analysis",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(04)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-2",
+                            "rel": "related",
+                            "text": "AU-2"
+                        },
+                        {
+                            "href": "#au-12",
+                            "rel": "related",
+                            "text": "AU-12"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.4_smt",
+                            "name": "statement",
+                            "prose": "Provide and implement the capability to centrally review and analyze audit records from multiple components within the system."
+                        },
+                        {
+                            "id": "au-6.4_gdn",
+                            "name": "guidance",
+                            "prose": "Automated mechanisms for centralized reviews and analyses include Security Information and Event Management products."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.5",
+                    "class": "SP800-53-enhancement",
+                    "title": "Integrated Analysis of Audit Records",
+                    "parameters": [
+                        {
+                            "id": "au-6.5_prm_1",
+                            "select": {
+                                "how-many": "one or more",
+                                "alternatives": [
+                                    "vulnerability scanning information",
+                                    "performance data",
+                                    "system monitoring information",
+                                    "\n                     {{ au-6.5_prm_2 }}\n                  "
+                                ]
+                            }
+                        },
+                        {
+                            "id": "au-6.5_prm_2",
+                            "depends-on": "au-6.5_prm_1",
+                            "label": "organization-defined data/information collected from other sources"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(5)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(05)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-12",
+                            "rel": "related",
+                            "text": "AU-12"
+                        },
+                        {
+                            "href": "#ir-4",
+                            "rel": "related",
+                            "text": "IR-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.5_smt",
+                            "name": "statement",
+                            "prose": "Integrate analysis of audit records with analysis of {{ au-6.5_prm_1 }} to further enhance the ability to identify inappropriate or unusual activity."
+                        },
+                        {
+                            "id": "au-6.5_gdn",
+                            "name": "guidance",
+                            "prose": "Integrated analysis of audit records does not require vulnerability scanning, the generation of performance data, or system monitoring. Rather, integrated analysis requires that the analysis of information generated by scanning, monitoring, or other data collection activities is integrated with the analysis of audit record information. Security Information and Event Management tools can facilitate audit record aggregation or consolidation from multiple system components as well as audit record correlation and analysis. The use of standardized audit record analysis scripts developed by organizations (with localized script adjustments, as necessary) provides more cost-effective approaches for analyzing audit record information collected. The correlation of audit record information with vulnerability scanning information is important in determining the veracity of vulnerability scans of the system and in correlating attack detection events with scanning results. Correlation with performance data can uncover denial-of-service attacks or other types of attacks that result in the unauthorized use of resources. Correlation with system monitoring information can assist in uncovering attacks and in better relating audit information to operational situations."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.6",
+                    "class": "SP800-53-enhancement",
+                    "title": "Correlation with Physical Monitoring",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(6)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(06)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.6_smt",
+                            "name": "statement",
+                            "prose": "Correlate information from audit records with information obtained from monitoring physical access to further enhance the ability to identify suspicious, inappropriate, unusual, or malevolent activity."
+                        },
+                        {
+                            "id": "au-6.6_gdn",
+                            "name": "guidance",
+                            "prose": "The correlation of physical audit record information and the audit records from systems may assist organizations in identifying suspicious behavior or supporting evidence of such behavior. For example, the correlation of an individual\u2019s identity for logical access to certain systems with the additional physical security information that the individual was present at the facility when the logical access occurred may be useful in investigations."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.7",
+                    "class": "SP800-53-enhancement",
+                    "title": "Permitted Actions",
+                    "parameters": [
+                        {
+                            "id": "au-6.7_prm_1",
+                            "select": {
+                                "how-many": "one or more",
+                                "alternatives": [
+                                    "system process",
+                                    "role",
+                                    "user"
+                                ]
+                            }
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(7)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(07)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.7_smt",
+                            "name": "statement",
+                            "prose": "Specify the permitted actions for each {{ au-6.7_prm_1 }} associated with the review, analysis, and reporting of audit record information."
+                        },
+                        {
+                            "id": "au-6.7_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations specify permitted actions for system processes, roles, and users associated with the review, analysis, and reporting of audit records through system account management activities. Specifying permitted actions on audit record information is a way to enforce the principle of least privilege. Permitted actions are enforced by the system and include read, write, execute, append, and delete."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.8",
+                    "class": "SP800-53-enhancement",
+                    "title": "Full Text Analysis of Privileged Commands",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(8)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(08)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-3",
+                            "rel": "related",
+                            "text": "AU-3"
+                        },
+                        {
+                            "href": "#au-9",
+                            "rel": "related",
+                            "text": "AU-9"
+                        },
+                        {
+                            "href": "#au-11",
+                            "rel": "related",
+                            "text": "AU-11"
+                        },
+                        {
+                            "href": "#au-12",
+                            "rel": "related",
+                            "text": "AU-12"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.8_smt",
+                            "name": "statement",
+                            "prose": "Perform a full text analysis of logged privileged commands in a physically distinct component or subsystem of the system, or other system that is dedicated to that analysis."
+                        },
+                        {
+                            "id": "au-6.8_gdn",
+                            "name": "guidance",
+                            "prose": "Full text analysis of privileged commands requires a distinct environment for the analysis of audit record information related to privileged users without compromising such information on the system where the users have elevated privileges, including the capability to execute privileged commands. Full text analysis refers to analysis that considers the full text of privileged commands (i.e., commands and parameters) as opposed to analysis that considers only the name of the command. Full text analysis includes the use of pattern matching and heuristics."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.9",
+                    "class": "SP800-53-enhancement",
+                    "title": "Correlation with Information from Nontechnical Sources",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(9)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(09)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#pm-12",
+                            "rel": "related",
+                            "text": "PM-12"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-6.9_smt",
+                            "name": "statement",
+                            "prose": "Correlate information from nontechnical sources with audit record information to enhance organization-wide situational awareness."
+                        },
+                        {
+                            "id": "au-6.9_gdn",
+                            "name": "guidance",
+                            "prose": "Nontechnical sources include records that document organizational policy violations related to harassment incidents and the improper use of information assets. Such information can lead to a directed analytical effort to detect potential malicious insider activity. Organizations limit access to information that is available from nontechnical sources due to its sensitive nature. Limited access minimizes the potential for inadvertent release of privacy-related information to individuals who do not have a need to know. The correlation of information from nontechnical sources with audit record information generally occurs only when individuals are suspected of being involved in an incident. Organizations obtain legal advice prior to initiating such actions."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-6.10",
+                    "class": "SP800-53-enhancement",
+                    "title": "Audit Level Adjustment",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-6(10)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-06(10)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-6",
+                            "rel": "incorporated-into",
+                            "text": "AU-6"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-7",
+            "class": "SP800-53",
+            "title": "Audit Record Reduction and Report Generation",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-7"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-07"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-16",
+                    "rel": "related",
+                    "text": "AU-16"
+                },
+                {
+                    "href": "#cm-5",
+                    "rel": "related",
+                    "text": "CM-5"
+                },
+                {
+                    "href": "#ia-5",
+                    "rel": "related",
+                    "text": "IA-5"
+                },
+                {
+                    "href": "#ir-4",
+                    "rel": "related",
+                    "text": "IR-4"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-7_smt",
+                    "name": "statement",
+                    "prose": "Provide and implement an audit record reduction and report generation capability that:",
+                    "parts": [
+                        {
+                            "id": "au-7_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Supports on-demand audit record review, analysis, and reporting requirements and after-the-fact investigations of incidents; and"
+                        },
+                        {
+                            "id": "au-7_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Does not alter the original content or time ordering of audit records."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-7_gdn",
+                    "name": "guidance",
+                    "prose": "Audit record reduction is a process that manipulates collected audit log information and organizes it into a summary format that is more meaningful to analysts. Audit record reduction and report generation capabilities do not always emanate from the same system or from the same organizational entities that conduct audit logging activities. The audit record reduction capability includes modern data mining techniques with advanced data filters to identify anomalous behavior in audit records. The report generation capability provided by the system can generate customizable reports. Time ordering of audit records can be an issue if the granularity of the timestamp in the record is insufficient."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-7.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automatic Processing",
+                    "parameters": [
+                        {
+                            "id": "au-7.1_prm_1",
+                            "label": "organization-defined fields within audit records"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-7(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-07(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-7.1_smt",
+                            "name": "statement",
+                            "prose": "Provide and implement the capability to process, sort, and search audit records for events of interest based on the following content: {{ au-7.1_prm_1 }}."
+                        },
+                        {
+                            "id": "au-7.1_gdn",
+                            "name": "guidance",
+                            "prose": "Events of interest can be identified by the content of audit records, including system resources involved, information objects accessed, identities of individuals, event types, event locations, event dates and times, Internet Protocol addresses involved, or event success or failure. Organizations may define event criteria to any degree of granularity required, such as locations selectable by a general networking location or by specific system component."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-7.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Automatic Sort and Search",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-7(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-07(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-7.1",
+                            "rel": "incorporated-into",
+                            "text": "AU-7(1)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-8",
+            "class": "SP800-53",
+            "title": "Time Stamps",
+            "parameters": [
+                {
+                    "id": "au-8_prm_1",
+                    "label": "organization-defined granularity of time measurement"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-8"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-08"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#sc-45",
+                    "rel": "related",
+                    "text": "SC-45"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-8_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-8_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Use internal system clocks to generate time stamps for audit records; and"
+                        },
+                        {
+                            "id": "au-8_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Record time stamps for audit records that meet {{ au-8_prm_1 }} and that use Coordinated Universal Time, have a fixed local time offset from Coordinated Universal Time, or that include the local time offset as part of the time stamp."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-8_gdn",
+                    "name": "guidance",
+                    "prose": "Time stamps generated by the system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC. Granularity of time measurements refers to the degree of synchronization between system clocks and reference clocks (e.g., clocks synchronizing within hundreds of milliseconds or tens of milliseconds). Organizations may define different time granularities for different system components. Time service can be critical to other security capabilities such as access control and identification and authentication, depending on the nature of the mechanisms used to support those capabilities."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-8.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Synchronization with Authoritative Time Source",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-8(1)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-08(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#sc-45.1",
+                            "rel": "moved-to",
+                            "text": "SC-45(1)"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-8.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Secondary Authoritative Time Source",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-8(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-08(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#sc-45.2",
+                            "rel": "moved-to",
+                            "text": "SC-45(2)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-9",
+            "class": "SP800-53",
+            "title": "Protection of Audit Information",
+            "parameters": [
+                {
+                    "id": "au-9_prm_1",
+                    "label": "organization-defined personnel or roles"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-9"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-09"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#678e3d6c-150b-4393-aec5-6e3481eb1e00",
+                    "rel": "reference",
+                    "text": "[FIPS 140-3]"
+                },
+                {
+                    "href": "#eea3c092-42ed-4382-a6f4-1adadef01b9d",
+                    "rel": "reference",
+                    "text": "[FIPS 180-4]"
+                },
+                {
+                    "href": "#a295ca19-8c75-4b4c-8800-98024732e181",
+                    "rel": "reference",
+                    "text": "[FIPS 202]"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-11",
+                    "rel": "related",
+                    "text": "AU-11"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#au-15",
+                    "rel": "related",
+                    "text": "AU-15"
+                },
+                {
+                    "href": "#mp-2",
+                    "rel": "related",
+                    "text": "MP-2"
+                },
+                {
+                    "href": "#mp-4",
+                    "rel": "related",
+                    "text": "MP-4"
+                },
+                {
+                    "href": "#pe-2",
+                    "rel": "related",
+                    "text": "PE-2"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pe-6",
+                    "rel": "related",
+                    "text": "PE-6"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sc-8",
+                    "rel": "related",
+                    "text": "SC-8"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-9_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-9_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Protect audit information and audit logging tools from unauthorized access, modification, and deletion; and"
+                        },
+                        {
+                            "id": "au-9_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Alert {{ au-9_prm_1 }} upon detection of unauthorized access, modification, or deletion of audit information."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9_gdn",
+                    "name": "guidance",
+                    "prose": "Audit information includes all information needed to successfully audit system activity, such as audit records, audit log settings, audit reports, and personally identifiable information. Audit logging tools are those programs and devices used to conduct system audit and logging activities. Protection of audit information focuses on technical protection and limits the ability to access and execute audit logging tools to authorized individuals. Physical protection of audit information is addressed by both media protection controls and physical and environmental protection controls."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-9.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Hardware Write-once Media",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-4",
+                            "rel": "related",
+                            "text": "AU-4"
+                        },
+                        {
+                            "href": "#au-5",
+                            "rel": "related",
+                            "text": "AU-5"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.1_smt",
+                            "name": "statement",
+                            "prose": "Write audit trails to hardware-enforced, write-once media."
+                        },
+                        {
+                            "id": "au-9.1_gdn",
+                            "name": "guidance",
+                            "prose": "Writing audit trails to hardware-enforced, write-once media applies to the initial generation of audit trails (i.e., the collection of audit records that represents the information to be used for detection, analysis, and reporting purposes) and to the backup of those audit trails. Writing audit trails to hardware-enforced, write-once media does not apply to the initial generation of audit records prior to being written to an audit trail. Write-once, read-many (WORM) media includes Compact Disc-Recordable (CD-R), Blu-Ray Disc Recordable (BD-R), and Digital Versatile Disc-Recordable (DVD-R). In contrast, the use of switchable write-protection media, such as tape cartridges, Universal Serial Bus (USB) drives, Compact Disc Re-Writeable (CD-RW), and Digital Versatile Disc-Read Write (DVD-RW) results in write-protected but not write-once media."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Store on Separate Physical Systems or Components",
+                    "parameters": [
+                        {
+                            "id": "au-9.2_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-4",
+                            "rel": "related",
+                            "text": "AU-4"
+                        },
+                        {
+                            "href": "#au-5",
+                            "rel": "related",
+                            "text": "AU-5"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.2_smt",
+                            "name": "statement",
+                            "prose": "Store audit records {{ au-9.2_prm_1 }} in a repository that is part of a physically different system or system component than the system or component being audited."
+                        },
+                        {
+                            "id": "au-9.2_gdn",
+                            "name": "guidance",
+                            "prose": "Storing audit records in a repository separate from the audited system or system component helps to ensure that a compromise of the system being audited does not also result in a compromise of the audit records. Storing audit records on separate physical systems or components also preserves the confidentiality and integrity of audit records and facilitates the management of audit records as an organization-wide activity. Storing audit records on separate systems or components applies to initial generation as well as backup or long-term storage of audit records."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Cryptographic Protection",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-10",
+                            "rel": "related",
+                            "text": "AU-10"
+                        },
+                        {
+                            "href": "#sc-12",
+                            "rel": "related",
+                            "text": "SC-12"
+                        },
+                        {
+                            "href": "#sc-13",
+                            "rel": "related",
+                            "text": "SC-13"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.3_smt",
+                            "name": "statement",
+                            "prose": "Implement cryptographic mechanisms to protect the integrity of audit information and audit tools."
+                        },
+                        {
+                            "id": "au-9.3_gdn",
+                            "name": "guidance",
+                            "prose": "Cryptographic mechanisms used for protecting the integrity of audit information include signed hash functions using asymmetric cryptography. This enables the distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Access by Subset of Privileged Users",
+                    "parameters": [
+                        {
+                            "id": "au-9.4_prm_1",
+                            "label": "organization-defined subset of privileged users or roles"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(04)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-5",
+                            "rel": "related",
+                            "text": "AC-5"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.4_smt",
+                            "name": "statement",
+                            "prose": "Authorize access to management of audit logging functionality to only {{ au-9.4_prm_1 }}."
+                        },
+                        {
+                            "id": "au-9.4_gdn",
+                            "name": "guidance",
+                            "prose": "Individuals or roles with privileged access to a system and who are also the subject of an audit by that system may affect the reliability of the audit information by inhibiting audit activities or modifying audit records. Requiring privileged access to be further defined between audit-related privileges and other privileges limits the number of users or roles with audit-related privileges."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.5",
+                    "class": "SP800-53-enhancement",
+                    "title": "Dual Authorization",
+                    "parameters": [
+                        {
+                            "id": "au-9.5_prm_1",
+                            "select": {
+                                "how-many": "one or more",
+                                "alternatives": [
+                                    "movement",
+                                    "deletion"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "au-9.5_prm_2",
+                            "label": "organization-defined audit information"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(5)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(05)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.5_smt",
+                            "name": "statement",
+                            "prose": "Enforce dual authorization for {{ au-9.5_prm_1 }} of {{ au-9.5_prm_2 }}."
+                        },
+                        {
+                            "id": "au-9.5_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations may choose different selection options for different types of audit information. Dual authorization mechanisms (also known as two-person control) require the approval of two authorized individuals to execute audit functions. To reduce the risk of collusion, organizations consider rotating dual authorization duties to other individuals. Organizations do not require dual authorization mechanisms when immediate responses are necessary to ensure public and environmental safety."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.6",
+                    "class": "SP800-53-enhancement",
+                    "title": "Read-only Access",
+                    "parameters": [
+                        {
+                            "id": "au-9.6_prm_1",
+                            "label": "organization-defined subset of privileged users or roles"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(6)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(06)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.6_smt",
+                            "name": "statement",
+                            "prose": "Authorize read-only access to audit information to {{ au-9.6_prm_1 }}."
+                        },
+                        {
+                            "id": "au-9.6_gdn",
+                            "name": "guidance",
+                            "prose": "Restricting privileged user or role authorizations to read-only helps to limit the potential damage to organizations that could be initiated by such users or roles, such as deleting audit records to cover up malicious activity."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-9.7",
+                    "class": "SP800-53-enhancement",
+                    "title": "Store on Component with Different Operating System",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-9(7)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-09(07)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-4",
+                            "rel": "related",
+                            "text": "AU-4"
+                        },
+                        {
+                            "href": "#au-5",
+                            "rel": "related",
+                            "text": "AU-5"
+                        },
+                        {
+                            "href": "#au-11",
+                            "rel": "related",
+                            "text": "AU-11"
+                        },
+                        {
+                            "href": "#sc-29",
+                            "rel": "related",
+                            "text": "SC-29"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-9.7_smt",
+                            "name": "statement",
+                            "prose": "Store audit information on a component running a different operating system than the system or component being audited."
+                        },
+                        {
+                            "id": "au-9.7_gdn",
+                            "name": "guidance",
+                            "prose": "Storing auditing information on a system component running a different operating system reduces the risk of a vulnerability specific to the system, resulting in a compromise of the audit records."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-10",
+            "class": "SP800-53",
+            "title": "Non-repudiation",
+            "parameters": [
+                {
+                    "id": "au-10_prm_1",
+                    "label": "organization-defined actions to be covered by non-repudiation"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-10"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-10"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#678e3d6c-150b-4393-aec5-6e3481eb1e00",
+                    "rel": "reference",
+                    "text": "[FIPS 140-3]"
+                },
+                {
+                    "href": "#eea3c092-42ed-4382-a6f4-1adadef01b9d",
+                    "rel": "reference",
+                    "text": "[FIPS 180-4]"
+                },
+                {
+                    "href": "#7c37a38d-21d7-40d8-bc3d-b5e27eac17e1",
+                    "rel": "reference",
+                    "text": "[FIPS 186-4]"
+                },
+                {
+                    "href": "#a295ca19-8c75-4b4c-8800-98024732e181",
+                    "rel": "reference",
+                    "text": "[FIPS 202]"
+                },
+                {
+                    "href": "#1c71b420-2bd9-4e52-9fc8-390f58b85b59",
+                    "rel": "reference",
+                    "text": "[SP 800-177]"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sc-8",
+                    "rel": "related",
+                    "text": "SC-8"
+                },
+                {
+                    "href": "#sc-12",
+                    "rel": "related",
+                    "text": "SC-12"
+                },
+                {
+                    "href": "#sc-13",
+                    "rel": "related",
+                    "text": "SC-13"
+                },
+                {
+                    "href": "#sc-16",
+                    "rel": "related",
+                    "text": "SC-16"
+                },
+                {
+                    "href": "#sc-17",
+                    "rel": "related",
+                    "text": "SC-17"
+                },
+                {
+                    "href": "#sc-23",
+                    "rel": "related",
+                    "text": "SC-23"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-10_smt",
+                    "name": "statement",
+                    "prose": "Provide irrefutable evidence that an individual (or process acting on behalf of an individual) has performed {{ au-10_prm_1 }}."
+                },
+                {
+                    "id": "au-10_gdn",
+                    "name": "guidance",
+                    "prose": "Types of individual actions covered by non-repudiation include creating information, sending and receiving messages, and approving information. Non-repudiation protects against claims by authors of not having authored certain documents, senders of not having transmitted messages, receivers of not having received messages, and signatories of not having signed documents. Non-repudiation services can be used to determine if information originated from an individual or if an individual took specific actions (e.g., sending an email, signing a contract, approving a procurement request, or receiving specific information). Organizations obtain non-repudiation services by employing various techniques or mechanisms, including digital signatures and digital message receipts."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-10.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Association of Identities",
+                    "parameters": [
+                        {
+                            "id": "au-10.1_prm_1",
+                            "label": "organization-defined strength of binding"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-10(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-10(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        },
+                        {
+                            "href": "#ac-16",
+                            "rel": "related",
+                            "text": "AC-16"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-10.1_smt",
+                            "name": "statement",
+                            "parts": [
+                                {
+                                    "id": "au-10.1_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Bind the identity of the information producer with the information to {{ au-10.1_prm_1 }}; and"
+                                },
+                                {
+                                    "id": "au-10.1_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Provide the means for authorized individuals to determine the identity of the producer of the information."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "au-10.1_gdn",
+                            "name": "guidance",
+                            "prose": "Binding identities to the information supports audit requirements that provide organizational personnel with the means to identify who produced specific information in the event of an information transfer. Organizations determine and approve the strength of attribute binding between the information producer and the information based on the security category of the information and other relevant risk factors."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-10.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Validate Binding of Information Producer Identity",
+                    "parameters": [
+                        {
+                            "id": "au-10.2_prm_1",
+                            "label": "organization-defined frequency"
+                        },
+                        {
+                            "id": "au-10.2_prm_2",
+                            "label": "organization-defined actions"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-10(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-10(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        },
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        },
+                        {
+                            "href": "#ac-16",
+                            "rel": "related",
+                            "text": "AC-16"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-10.2_smt",
+                            "name": "statement",
+                            "parts": [
+                                {
+                                    "id": "au-10.2_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Validate the binding of the information producer identity to the information at {{ au-10.2_prm_1 }}; and"
+                                },
+                                {
+                                    "id": "au-10.2_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Perform {{ au-10.2_prm_2 }} in the event of a validation error."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "au-10.2_gdn",
+                            "name": "guidance",
+                            "prose": "Validating the binding of the information producer identity to the information prevents the modification of information between production and review. The validation of bindings can be achieved by, for example, using cryptographic checksums. Organizations determine if validations are in response to user requests or generated automatically."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-10.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Chain of Custody",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-10(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-10(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        },
+                        {
+                            "href": "#ac-16",
+                            "rel": "related",
+                            "text": "AC-16"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-10.3_smt",
+                            "name": "statement",
+                            "prose": "Maintain reviewer or releaser credentials within the established chain of custody for information reviewed or released."
+                        },
+                        {
+                            "id": "au-10.3_gdn",
+                            "name": "guidance",
+                            "prose": "Chain of custody is a process that tracks the movement of evidence through its collection, safeguarding, and analysis life cycle by documenting each individual who handled the evidence, the date and time the evidence was collected or transferred, and the purpose for the transfer. If the reviewer is a human or if the review function is automated but separate from the release or transfer function, the system associates the identity of the reviewer of the information to be released with the information and the information label. In the case of human reviews, maintaining the credentials of reviewers or releasers provides the organization with the means to identify who reviewed and released the information. In the case of automated reviews, it ensures that only approved review functions are used."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-10.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Validate Binding of Information Reviewer Identity",
+                    "parameters": [
+                        {
+                            "id": "au-10.4_prm_1",
+                            "label": "organization-defined security domains"
+                        },
+                        {
+                            "id": "au-10.4_prm_2",
+                            "label": "organization-defined actions"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-10(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-10(04)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-4",
+                            "rel": "related",
+                            "text": "AC-4"
+                        },
+                        {
+                            "href": "#ac-16",
+                            "rel": "related",
+                            "text": "AC-16"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-10.4_smt",
+                            "name": "statement",
+                            "parts": [
+                                {
+                                    "id": "au-10.4_smt.a",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(a)"
+                                        }
+                                    ],
+                                    "prose": "Validate the binding of the information reviewer identity to the information at the transfer or release points prior to release or transfer between {{ au-10.4_prm_1 }}; and"
+                                },
+                                {
+                                    "id": "au-10.4_smt.b",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "(b)"
+                                        }
+                                    ],
+                                    "prose": "Perform {{ au-10.4_prm_2 }} in the event of a validation error."
+                                }
+                            ]
+                        },
+                        {
+                            "id": "au-10.4_gdn",
+                            "name": "guidance",
+                            "prose": "Validating the binding of the information reviewer identity to the information at transfer or release points prevents the unauthorized modification of information between review and the transfer or release. The validation of bindings can be achieved by using cryptographic checksums. Organizations determine if validations are in response to user requests or generated automatically."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-10.5",
+                    "class": "SP800-53-enhancement",
+                    "title": "Digital Signatures",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-10(5)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-10(05)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#si-7",
+                            "rel": "incorporated-into",
+                            "text": "SI-7"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-11",
+            "class": "SP800-53",
+            "title": "Audit Record Retention",
+            "parameters": [
+                {
+                    "id": "au-11_prm_1",
+                    "label": "organization-defined time period consistent with records retention policy"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-11"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-11"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+                    "rel": "reference",
+                    "text": "[OMB A-130]"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#mp-6",
+                    "rel": "related",
+                    "text": "MP-6"
+                },
+                {
+                    "href": "#ra-5",
+                    "rel": "related",
+                    "text": "RA-5"
+                },
+                {
+                    "href": "#si-12",
+                    "rel": "related",
+                    "text": "SI-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-11_smt",
+                    "name": "statement",
+                    "prose": "Retain audit records for {{ au-11_prm_1 }} to provide support for after-the-fact investigations of incidents and to meet regulatory and organizational information retention requirements."
+                },
+                {
+                    "id": "au-11_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations retain audit records until it is determined that the records are no longer needed for administrative, legal, audit, or other operational purposes. This includes the retention and availability of audit records relative to Freedom of Information Act (FOIA) requests, subpoenas, and law enforcement actions. Organizations develop standard categories of audit records relative to such types of actions and standard response processes for each type of action. The National Archives and Records Administration (NARA) General Records Schedules provide federal policy on records retention."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-11.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Long-term Retrieval Capability",
+                    "parameters": [
+                        {
+                            "id": "au-11.1_prm_1",
+                            "label": "organization-defined measures"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-11(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-11(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-11.1_smt",
+                            "name": "statement",
+                            "prose": "Employ {{ au-11.1_prm_1 }} to ensure that long-term audit records generated by the system can be retrieved."
+                        },
+                        {
+                            "id": "au-11.1_gdn",
+                            "name": "guidance",
+                            "prose": "Organizations need to access and read audit records requiring long-term storage (on the order of years). Measures employed to help facilitate the retrieval of audit records include converting records to newer formats, retaining equipment capable of reading the records, and retaining the necessary documentation to help personnel understand how to interpret the records."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-12",
+            "class": "SP800-53",
+            "title": "Audit Record Generation",
+            "parameters": [
+                {
+                    "id": "au-12_prm_1",
+                    "label": "organization-defined system components"
+                },
+                {
+                    "id": "au-12_prm_2",
+                    "label": "organization-defined personnel or roles"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-12"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-12"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-6",
+                    "rel": "related",
+                    "text": "AC-6"
+                },
+                {
+                    "href": "#ac-17",
+                    "rel": "related",
+                    "text": "AC-17"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#au-14",
+                    "rel": "related",
+                    "text": "AU-14"
+                },
+                {
+                    "href": "#cm-5",
+                    "rel": "related",
+                    "text": "CM-5"
+                },
+                {
+                    "href": "#ma-4",
+                    "rel": "related",
+                    "text": "MA-4"
+                },
+                {
+                    "href": "#mp-4",
+                    "rel": "related",
+                    "text": "MP-4"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#sa-8",
+                    "rel": "related",
+                    "text": "SA-8"
+                },
+                {
+                    "href": "#sc-18",
+                    "rel": "related",
+                    "text": "SC-18"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#si-7",
+                    "rel": "related",
+                    "text": "SI-7"
+                },
+                {
+                    "href": "#si-10",
+                    "rel": "related",
+                    "text": "SI-10"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-12_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-12_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Provide audit record generation capability for the event types the system is capable of auditing as defined in AU-2a on {{ au-12_prm_1 }};"
+                        },
+                        {
+                            "id": "au-12_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Allow {{ au-12_prm_2 }} to select the event types that are to be logged by specific components of the system; and"
+                        },
+                        {
+                            "id": "au-12_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "c."
+                                }
+                            ],
+                            "prose": "Generate audit records for the event types defined in AU-2c that include the audit record content defined in AU-3."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-12_gdn",
+                    "name": "guidance",
+                    "prose": "Audit records can be generated from many different system components. The event types specified in AU-2d are the event types for which audit logs are to be generated and are a subset of all event types for which the system can generate audit records."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-12.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "System-wide and Time-correlated Audit Trail",
+                    "parameters": [
+                        {
+                            "id": "au-12.1_prm_1",
+                            "label": "organization-defined system components"
+                        },
+                        {
+                            "id": "au-12.1_prm_2",
+                            "label": "organization-defined level of tolerance for the relationship between time stamps of individual records in the audit trail"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-12(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-12(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-8",
+                            "rel": "related",
+                            "text": "AU-8"
+                        },
+                        {
+                            "href": "#sc-45",
+                            "rel": "related",
+                            "text": "SC-45"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-12.1_smt",
+                            "name": "statement",
+                            "prose": "Compile audit records from {{ au-12.1_prm_1 }} into a system-wide (logical or physical) audit trail that is time-correlated to within {{ au-12.1_prm_2 }}."
+                        },
+                        {
+                            "id": "au-12.1_gdn",
+                            "name": "guidance",
+                            "prose": "Audit trails are time-correlated if the time stamps in the individual audit records can be reliably related to the time stamps in other audit records to achieve a time ordering of the records within organizational tolerances."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-12.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Standardized Formats",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-12(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-12(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-12.2_smt",
+                            "name": "statement",
+                            "prose": "Produce a system-wide (logical or physical) audit trail composed of audit records in a standardized format."
+                        },
+                        {
+                            "id": "au-12.2_gdn",
+                            "name": "guidance",
+                            "prose": "Audit records that follow common standards promote interoperability and information exchange between devices and systems. Promoting interoperability and information exchange facilitates the production of event information that can be readily analyzed and correlated. If logging mechanisms do not conform to standardized formats, systems may convert individual audit records into standardized formats when compiling system-wide audit trails."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-12.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Changes by Authorized Individuals",
+                    "parameters": [
+                        {
+                            "id": "au-12.3_prm_1",
+                            "label": "organization-defined individuals or roles"
+                        },
+                        {
+                            "id": "au-12.3_prm_2",
+                            "label": "organization-defined system components"
+                        },
+                        {
+                            "id": "au-12.3_prm_3",
+                            "label": "organization-defined selectable event criteria"
+                        },
+                        {
+                            "id": "au-12.3_prm_4",
+                            "label": "organization-defined time thresholds"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-12(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-12(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-3",
+                            "rel": "related",
+                            "text": "AC-3"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-12.3_smt",
+                            "name": "statement",
+                            "prose": "Provide and implement the capability for {{ au-12.3_prm_1 }} to change the logging to be performed on {{ au-12.3_prm_2 }} based on {{ au-12.3_prm_3 }} within {{ au-12.3_prm_4 }}."
+                        },
+                        {
+                            "id": "au-12.3_gdn",
+                            "name": "guidance",
+                            "prose": "Permitting authorized individuals to make changes to system logging enables organizations to extend or limit logging as necessary to meet organizational requirements. Logging that is limited to conserve system resources may be extended (either temporarily or permanently) to address certain threat situations. In addition, logging may be limited to a specific set of event types to facilitate audit reduction, analysis, and reporting. Organizations can establish time thresholds in which logging actions are changed (e.g., near real-time, within minutes, or within hours)."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-12.4",
+                    "class": "SP800-53-enhancement",
+                    "title": "Query Parameter Audits of Personally Identifiable Information",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-12(4)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-12(04)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-12.4_smt",
+                            "name": "statement",
+                            "prose": "Provide and implement the capability for auditing the parameters of user query events for data sets containing personally identifiable information."
+                        },
+                        {
+                            "id": "au-12.4_gdn",
+                            "name": "guidance",
+                            "prose": "Query parameters are explicit criteria that an individual or automated system submits to a system to retrieve data. Auditing of query parameters for datasets that contain personally identifiable information augments the capability of an organization to track and understand the access, usage, or sharing of personally identifiable information by authorized personnel."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-13",
+            "class": "SP800-53",
+            "title": "Monitoring for Information Disclosure",
+            "parameters": [
+                {
+                    "id": "au-13_prm_1",
+                    "label": "organization-defined open-source information and/or information sites"
+                },
+                {
+                    "id": "au-13_prm_2",
+                    "label": "organization-defined frequency"
+                },
+                {
+                    "id": "au-13_prm_3",
+                    "label": "organization-defined personnel or roles"
+                },
+                {
+                    "id": "au-13_prm_4",
+                    "label": "organization-defined additional actions"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-13"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-13"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-22",
+                    "rel": "related",
+                    "text": "AC-22"
+                },
+                {
+                    "href": "#pe-3",
+                    "rel": "related",
+                    "text": "PE-3"
+                },
+                {
+                    "href": "#pm-12",
+                    "rel": "related",
+                    "text": "PM-12"
+                },
+                {
+                    "href": "#ra-5",
+                    "rel": "related",
+                    "text": "RA-5"
+                },
+                {
+                    "href": "#sc-7",
+                    "rel": "related",
+                    "text": "SC-7"
+                },
+                {
+                    "href": "#si-20",
+                    "rel": "related",
+                    "text": "SI-20"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-13_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-13_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Monitor {{ au-13_prm_1 }}\n                  {{ au-13_prm_2 }} for evidence of unauthorized disclosure of organizational information; and"
+                        },
+                        {
+                            "id": "au-13_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "If an information disclosure is discovered:",
+                            "parts": [
+                                {
+                                    "id": "au-13_smt.b.1",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "1."
+                                        }
+                                    ],
+                                    "prose": "Notify {{ au-13_prm_3 }}; and"
+                                },
+                                {
+                                    "id": "au-13_smt.b.2",
+                                    "name": "item",
+                                    "properties": [
+                                        {
+                                            "name": "label",
+                                            "value": "2."
+                                        }
+                                    ],
+                                    "prose": "Take the following additional actions: {{ au-13_prm_4 }}."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "au-13_gdn",
+                    "name": "guidance",
+                    "prose": "Unauthorized disclosure of information is a form of data leakage. Open-source information includes social networking sites and code-sharing platforms and repositories. Examples of organizational information include personally identifiable information retained by the organization or proprietary information generated by the organization."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-13.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Use of Automated Tools",
+                    "parameters": [
+                        {
+                            "id": "au-13.1_prm_1",
+                            "label": "organization-defined automated mechanisms"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-13(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-13(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-13.1_smt",
+                            "name": "statement",
+                            "prose": "Monitor open-source information and information sites using {{ au-13.1_prm_1 }}."
+                        },
+                        {
+                            "id": "au-13.1_gdn",
+                            "name": "guidance",
+                            "prose": "Automated mechanisms include commercial services that provide notifications and alerts to organizations and automated scripts to monitor new posts on websites."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-13.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Review of Monitored Sites",
+                    "parameters": [
+                        {
+                            "id": "au-13.2_prm_1",
+                            "label": "organization-defined frequency"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-13(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-13(02)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-13.2_smt",
+                            "name": "statement",
+                            "prose": "Review the list of open-source information sites being monitored {{ au-13.2_prm_1 }}."
+                        },
+                        {
+                            "id": "au-13.2_gdn",
+                            "name": "guidance",
+                            "prose": "Reviewing the current list of open-source information sites being monitored on a regular basis helps to ensure that the selected sites remain relevant. The review also provides the opportunity to add new open-source information sites with the potential to provide evidence of unauthorized disclosure of organizational information. The list of sites monitored can be guided and informed by threat intelligence of other credible sources of information."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-13.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Unauthorized Replication of Information",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-13(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-13(03)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-13.3_smt",
+                            "name": "statement",
+                            "prose": "Employ discovery techniques, processes, and tools to determine if external entities are replicating organizational information in an unauthorized manner."
+                        },
+                        {
+                            "id": "au-13.3_gdn",
+                            "name": "guidance",
+                            "prose": "The unauthorized use or replication of organizational information by external entities can cause adverse impacts on organizational operations and assets, including damage to reputation. Such activity can include the replication of an organizational website by an adversary or hostile threat actor who attempts to impersonate the web-hosting organization. Discovery tools, techniques, and processes used to determine if external entities are replicating organizational information in an unauthorized manner include scanning external websites, monitoring social media, and training staff to recognize the unauthorized use of organizational information."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-14",
+            "class": "SP800-53",
+            "title": "Session Audit",
+            "parameters": [
+                {
+                    "id": "au-14_prm_1",
+                    "label": "organization-defined users or roles"
+                },
+                {
+                    "id": "au-14_prm_2",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "record",
+                            "view",
+                            "hear",
+                            "log"
+                        ]
+                    }
+                },
+                {
+                    "id": "au-14_prm_3",
+                    "label": "organization-defined circumstances"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-14"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-14"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#ac-8",
+                    "rel": "related",
+                    "text": "AC-8"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-4",
+                    "rel": "related",
+                    "text": "AU-4"
+                },
+                {
+                    "href": "#au-5",
+                    "rel": "related",
+                    "text": "AU-5"
+                },
+                {
+                    "href": "#au-8",
+                    "rel": "related",
+                    "text": "AU-8"
+                },
+                {
+                    "href": "#au-9",
+                    "rel": "related",
+                    "text": "AU-9"
+                },
+                {
+                    "href": "#au-11",
+                    "rel": "related",
+                    "text": "AU-11"
+                },
+                {
+                    "href": "#au-12",
+                    "rel": "related",
+                    "text": "AU-12"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-14_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "au-14_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "a."
+                                }
+                            ],
+                            "prose": "Provide and implement the capability for {{ au-14_prm_1 }} to {{ au-14_prm_2 }} the content of a user session under {{ au-14_prm_3 }}; and"
+                        },
+                        {
+                            "id": "au-14_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "b."
+                                }
+                            ],
+                            "prose": "Develop, integrate, and use session auditing activities in consultation with legal counsel and in accordance with applicable laws, executive orders, directives, regulations, policies, standards, and guidelines."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-14_gdn",
+                    "name": "guidance",
+                    "prose": "Session audits can include monitoring keystrokes, tracking websites visited, and recording information and/or file transfers. Session audit capability is implemented in addition to event logging and may involve implementation of specialized session capture technology. Organizations consider how session auditing can reveal information about individuals that may give rise to privacy risk as well as how to mitigate those risks. Because session auditing can impact system and network performance, organizations activate the capability under well-defined situations (e.g., the organization is suspicious of a specific individual). Organizations consult with legal counsel, civil liberties officials, and privacy officials to ensure that any legal, privacy, civil rights, or civil liberties issues, including the use of personally identifiable information, are appropriately addressed."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-14.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "System Start-up",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-14(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-14(01)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-14.1_smt",
+                            "name": "statement",
+                            "prose": "Initiate session audits automatically at system start-up."
+                        },
+                        {
+                            "id": "au-14.1_gdn",
+                            "name": "guidance",
+                            "prose": "The automatic initiation of session audits at startup helps to ensure that the information being captured on selected individuals is complete and not subject to compromise through tampering by malicious threat actors."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-14.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Capture and Record Content",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-14(2)"
+                        },
+                        {
+                            "name": "status",
+                            "value": "Withdrawn"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-14(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#au-14",
+                            "rel": "incorporated-into",
+                            "text": "AU-14"
+                        }
+                    ]
+                },
+                {
+                    "id": "au-14.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Remote Viewing and Listening",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-14(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-14(03)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ac-17",
+                            "rel": "related",
+                            "text": "AC-17"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-14.3_smt",
+                            "name": "statement",
+                            "prose": "Provide and implement the capability for authorized users to remotely view and hear content related to an established user session in real time."
+                        },
+                        {
+                            "id": "au-14.3_gdn",
+                            "name": "guidance",
+                            "prose": "None."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "au-15",
+            "class": "SP800-53",
+            "title": "Alternate Audit Logging Capability",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-15"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-15"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-5.5",
+                    "rel": "moved-to",
+                    "text": "AU-5(5)"
+                }
+            ]
+        },
+        {
+            "id": "au-16",
+            "class": "SP800-53",
+            "title": "Cross-organizational Audit Logging",
+            "parameters": [
+                {
+                    "id": "au-16_prm_1",
+                    "label": "organization-defined methods"
+                },
+                {
+                    "id": "au-16_prm_2",
+                    "label": "organization-defined audit information"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "AU-16"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "AU-16"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-3",
+                    "rel": "related",
+                    "text": "AU-3"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#au-7",
+                    "rel": "related",
+                    "text": "AU-7"
+                },
+                {
+                    "href": "#ca-3",
+                    "rel": "related",
+                    "text": "CA-3"
+                },
+                {
+                    "href": "#pt-7",
+                    "rel": "related",
+                    "text": "PT-7"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "au-16_smt",
+                    "name": "statement",
+                    "prose": "Employ {{ au-16_prm_1 }} for coordinating {{ au-16_prm_2 }} among external organizations when audit information is transmitted across organizational boundaries."
+                },
+                {
+                    "id": "au-16_gdn",
+                    "name": "guidance",
+                    "prose": "When organizations use systems or services of external organizations, the audit logging capability necessitates a coordinated, cross-organization approach. For example, maintaining the identity of individuals who request specific services across organizational boundaries may often be difficult, and doing so may prove to have significant performance and privacy ramifications. Therefore, it is often the case that cross-organizational audit logging simply captures the identity of individuals who issue requests at the initial system, and subsequent systems record that the requests originated from authorized individuals. Organizations consider including processes for coordinating audit information requirements and protection of audit information in information exchange agreements."
+                }
+            ],
+            "controls": [
+                {
+                    "id": "au-16.1",
+                    "class": "SP800-53-enhancement",
+                    "title": "Identity Preservation",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-16(1)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-16(01)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ia-2",
+                            "rel": "related",
+                            "text": "IA-2"
+                        },
+                        {
+                            "href": "#ia-4",
+                            "rel": "related",
+                            "text": "IA-4"
+                        },
+                        {
+                            "href": "#ia-5",
+                            "rel": "related",
+                            "text": "IA-5"
+                        },
+                        {
+                            "href": "#ia-8",
+                            "rel": "related",
+                            "text": "IA-8"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-16.1_smt",
+                            "name": "statement",
+                            "prose": "Preserve the identity of individuals in cross-organizational audit trails."
+                        },
+                        {
+                            "id": "au-16.1_gdn",
+                            "name": "guidance",
+                            "prose": "Identity preservation is applied when there is a need to be able to trace actions that are performed across organizational boundaries to a specific individual."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-16.2",
+                    "class": "SP800-53-enhancement",
+                    "title": "Sharing of Audit Information",
+                    "parameters": [
+                        {
+                            "id": "au-16.2_prm_1",
+                            "label": "organization-defined organizations"
+                        },
+                        {
+                            "id": "au-16.2_prm_2",
+                            "label": "organization-defined cross-organizational sharing agreements"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-16(2)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-16(02)"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "href": "#ir-4",
+                            "rel": "related",
+                            "text": "IR-4"
+                        },
+                        {
+                            "href": "#si-4",
+                            "rel": "related",
+                            "text": "SI-4"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-16.2_smt",
+                            "name": "statement",
+                            "prose": "Provide cross-organizational audit information to {{ au-16.2_prm_1 }} based on {{ au-16.2_prm_2 }}."
+                        },
+                        {
+                            "id": "au-16.2_gdn",
+                            "name": "guidance",
+                            "prose": "Due to the distributed nature of the audit information, cross-organization sharing of audit information may be essential for effective analysis of the auditing being performed. For example, the audit records of one organization may not provide sufficient information to determine the appropriate or inappropriate use of organizational information resources by individuals in other organizations. In some instances, only individuals\u2019 home organizations have the appropriate knowledge to make such determinations, thus requiring the sharing of audit information among organizations."
+                        }
+                    ]
+                },
+                {
+                    "id": "au-16.3",
+                    "class": "SP800-53-enhancement",
+                    "title": "Disassociability",
+                    "parameters": [
+                        {
+                            "id": "au-16.3_prm_1",
+                            "label": "organization-defined measures"
+                        }
+                    ],
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "AU-16(3)"
+                        },
+                        {
+                            "name": "sort-id",
+                            "value": "AU-16(03)"
+                        }
+                    ],
+                    "parts": [
+                        {
+                            "id": "au-16.3_smt",
+                            "name": "statement",
+                            "prose": "Implement {{ au-16.3_prm_1 }} to disassociate individuals from audit information transmitted across organizational boundaries."
+                        },
+                        {
+                            "id": "au-16.3_gdn",
+                            "name": "guidance",
+                            "prose": "Preserving identities in audit trails could have privacy ramifications, such as enabling the tracking and profiling of individuals, but may not be operationally necessary. These risks could be further amplified when transmitting information across organizational boundaries. Implementing privacy-enhancing cryptographic techniques can disassociate individuals from audit information and reduce privacy risk while maintaining accountability."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.8",
+    "class": "SP800-53-enhancement",
+    "title": "Use of All-source Intelligence",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(8)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(08)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ra-3.2",
+            "rel": "incorporated-into",
+            "text": "RA-3(2)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

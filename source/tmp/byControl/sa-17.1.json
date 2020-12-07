@@ -1,0 +1,75 @@
+{
+    "id": "sa-17.1",
+    "class": "SP800-53-enhancement",
+    "title": "Formal Policy Model",
+    "parameters": [
+        {
+            "id": "sa-17.1_prm_1",
+            "label": "organization-defined elements of organizational security and privacy policy"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-17(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-17(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-3",
+            "rel": "related",
+            "text": "AC-3"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#ac-25",
+            "rel": "related",
+            "text": "AC-25"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-17.1_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to:",
+            "parts": [
+                {
+                    "id": "sa-17.1_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Produce, as an integral part of the development process, a formal policy model describing the {{ sa-17.1_prm_1 }} to be enforced; and"
+                },
+                {
+                    "id": "sa-17.1_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Prove that the formal policy model is internally consistent and sufficient to enforce the defined elements of the organizational security and privacy policy when implemented."
+                }
+            ]
+        },
+        {
+            "id": "sa-17.1_gdn",
+            "name": "guidance",
+            "prose": "Formal models describe specific behaviors or security and privacy policies using formal languages, thus enabling the correctness of those behaviors and policies to be formally proven. Not all components of systems can be modeled. Generally, formal specifications are scoped to the behaviors or policies of interest, such as nondiscretionary access control policies. Organizations choose the formal modeling language and approach based on the nature of the behaviors and policies to be described and the available tools."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

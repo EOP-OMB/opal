@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.7",
+    "class": "SP800-53-enhancement",
+    "title": "Assessments Prior to Selection / Acceptance / Update",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(7)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-5.2",
+            "rel": "moved-to",
+            "text": "SR-5(2)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

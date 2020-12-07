@@ -1,0 +1,42 @@
+{
+    "id": "au-5.1",
+    "class": "SP800-53-enhancement",
+    "title": "Storage Capacity Warning",
+    "parameters": [
+        {
+            "id": "au-5.1_prm_1",
+            "label": "organization-defined personnel, roles, and/or locations"
+        },
+        {
+            "id": "au-5.1_prm_2",
+            "label": "organization-defined time period"
+        },
+        {
+            "id": "au-5.1_prm_3",
+            "label": "organization-defined percentage"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-5(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-05(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-5.1_smt",
+            "name": "statement",
+            "prose": "Provide a warning to {{ au-5.1_prm_1 }} within {{ au-5.1_prm_2 }} when allocated audit log storage volume reaches {{ au-5.1_prm_3 }} of repository maximum audit log storage capacity."
+        },
+        {
+            "id": "au-5.1_gdn",
+            "name": "guidance",
+            "prose": "Organizations may have multiple audit log storage repositories distributed across multiple system components with each repository having different storage volume capacities."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

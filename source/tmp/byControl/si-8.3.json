@@ -1,0 +1,28 @@
+{
+    "id": "si-8.3",
+    "class": "SP800-53-enhancement",
+    "title": "Continuous Learning Capability",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-8(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-08(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-8.3_smt",
+            "name": "statement",
+            "prose": "Implement spam protection mechanisms with a learning capability to more effectively identify legitimate communications traffic."
+        },
+        {
+            "id": "si-8.3_gdn",
+            "name": "guidance",
+            "prose": "Learning mechanisms include Bayesian filters that respond to user inputs that identify specific traffic as spam or legitimate by updating algorithm parameters and thereby more accurately separating types of traffic."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

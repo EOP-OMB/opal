@@ -1,0 +1,40 @@
+{
+    "id": "si-4.14",
+    "class": "SP800-53-enhancement",
+    "title": "Wireless Intrusion Detection",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(14)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(14)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-18",
+            "rel": "related",
+            "text": "AC-18"
+        },
+        {
+            "href": "#ia-3",
+            "rel": "related",
+            "text": "IA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.14_smt",
+            "name": "statement",
+            "prose": "Employ a wireless intrusion detection system to identify rogue wireless devices and to detect attack attempts and potential compromises or breaches to the system."
+        },
+        {
+            "id": "si-4.14_gdn",
+            "name": "guidance",
+            "prose": "Wireless signals may radiate beyond organizational facilities. Organizations proactively search for unauthorized wireless connections, including the conduct of thorough scans for unauthorized wireless access points. Wireless scans are not limited to those areas within facilities containing systems but also include areas outside of facilities to verify that unauthorized wireless access points are not connected to organizational systems."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

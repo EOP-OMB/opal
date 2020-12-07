@@ -1,0 +1,34 @@
+{
+    "id": "sc-7.26",
+    "class": "SP800-53-enhancement",
+    "title": "Classified National Security System Connections",
+    "parameters": [
+        {
+            "id": "sc-7.26_prm_1",
+            "label": "organization-defined boundary protection device"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7(26)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07(26)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7.26_smt",
+            "name": "statement",
+            "prose": "Prohibit the direct connection of a classified national security system to an external network without the use of {{ sc-7.26_prm_1 }}."
+        },
+        {
+            "id": "sc-7.26_gdn",
+            "name": "guidance",
+            "prose": "A direct connection is a dedicated physical or virtual connection between two or more systems. Organizations typically do not have complete control over external networks, including the Internet. Boundary protection devices (e.g., firewalls, gateways, and routers) mediate communications and information flows between classified national security systems and external networks. In addition, approved boundary protection devices (typically managed interface or cross-domain systems) provide information flow enforcement from systems to external networks."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

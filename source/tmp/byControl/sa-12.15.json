@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.15",
+    "class": "SP800-53-enhancement",
+    "title": "Processes to Address Weaknesses or Deficiencies",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(15)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(15)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-3",
+            "rel": "incorporated-into",
+            "text": "SR-3"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

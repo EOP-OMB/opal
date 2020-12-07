@@ -1,0 +1,27 @@
+{
+    "id": "ir-10",
+    "class": "SP800-53",
+    "title": "Incident Analysis",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-10"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-10"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ir-4.11",
+            "rel": "incorporated-into",
+            "text": "IR-4(11)"
+        }
+    ],
+    "group_title": "Incident Response"
+}

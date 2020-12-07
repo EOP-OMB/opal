@@ -1,0 +1,45 @@
+{
+    "id": "ac-4.26",
+    "class": "SP800-53-enhancement",
+    "title": "Audit Filtering Actions",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(26)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(26)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-2",
+            "rel": "related",
+            "text": "AU-2"
+        },
+        {
+            "href": "#au-3",
+            "rel": "related",
+            "text": "AU-3"
+        },
+        {
+            "href": "#au-12",
+            "rel": "related",
+            "text": "AU-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.26_smt",
+            "name": "statement",
+            "prose": "When transferring information between different security domains, record and audit content filtering actions and results for the information being filtered."
+        },
+        {
+            "id": "ac-4.26_gdn",
+            "name": "guidance",
+            "prose": "Content filtering is the process of inspecting information as it traverses a cross-domain solution and determines if the information meets a predefined policy. Content filtering actions and the results of filtering actions are recorded for individual messages to ensure that the correct filter actions were applied. Content filter reports are used to assist in troubleshooting actions by, for example, determining why message content was modified and/or why it failed the filtering process. Audit events are defined in AU-2. Audit records are generated in AU-12."
+        }
+    ],
+    "group_title": "Access Control"
+}

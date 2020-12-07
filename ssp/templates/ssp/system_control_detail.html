@@ -1,21 +1,25 @@
-{% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <h1><a href="{% url 'ssp:system_control_edit' object.id %}">Edit</a></h1>
 <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
     <tr>
         <td colspan="2">
             <p>
-                <a href="{% url 'admin:ssp_system_control_change' object.id %}"
-                   target="_blank"><b>{{ object.nist_control.label }}&nbsp;
-                    {{ object.nist_control.control_title }}</b></a>
-                <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}<b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
+                <a href="{% url 'ssp:system_control_edit' object.id %}" target="_blank">(E)</a>
+                <a href="{% url 'admin:ssp_nist_control_change' object.nist_control_id %}" target="_blank">
+                    <b>{{ object.nist_control.label }}&nbsp;{{ object.nist_control.control_title }}</b>
+                </a>
+                <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}
+                <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
                 <b>Control Origination:</b> {{ object.control_origination }}
             </p>
-            <p><b>Statement:</b><br>
-                {{ object.nist_control.get_statement | safe }}</p>
-            <p><b>Guidance:</b><br>
-                {{ object.nist_control.get_guidance | safe }}</p>
+            <p>
+                <b>Statement:</b><br>
+                {{ object.nist_control.get_statement }}
+            </p>
+            <p>
+                <b>Guidance:</b><br>
+                {{ object.nist_control.get_guidance | safe }}
+            </p>
         </td>
     </tr>
     <tr>

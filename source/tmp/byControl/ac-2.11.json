@@ -1,0 +1,38 @@
+{
+    "id": "ac-2.11",
+    "class": "SP800-53-enhancement",
+    "title": "Usage Conditions",
+    "parameters": [
+        {
+            "id": "ac-2.11_prm_1",
+            "label": "organization-defined circumstances and/or usage conditions"
+        },
+        {
+            "id": "ac-2.11_prm_2",
+            "label": "organization-defined system accounts"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-2(11)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-02(11)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-2.11_smt",
+            "name": "statement",
+            "prose": "Enforce {{ ac-2.11_prm_1 }} for  {{ ac-2.11_prm_2 }}."
+        },
+        {
+            "id": "ac-2.11_gdn",
+            "name": "guidance",
+            "prose": "Specifying and enforcing usage conditions helps to enforce the principle of least privilege, increase user accountability, and enable effective account monitoring. Account monitoring includes alerts generated if the account is used in violation of organizational parameters. Organizations can describe specific conditions or circumstances under which system accounts can be used, such as by restricting usage to certain days of the week, time of day, or specific durations of time."
+        }
+    ],
+    "group_title": "Access Control"
+}

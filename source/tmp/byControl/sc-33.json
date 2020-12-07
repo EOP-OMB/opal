@@ -1,0 +1,27 @@
+{
+    "id": "sc-33",
+    "class": "SP800-53",
+    "title": "Transmission Preparation Integrity",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-33"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-33"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-8",
+            "rel": "incorporated-into",
+            "text": "SC-8"
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

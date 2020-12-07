@@ -1,0 +1,73 @@
+{
+    "id": "sc-5.3",
+    "class": "SP800-53-enhancement",
+    "title": "Detection and Monitoring",
+    "parameters": [
+        {
+            "id": "sc-5.3_prm_1",
+            "label": "organization-defined monitoring tools"
+        },
+        {
+            "id": "sc-5.3_prm_2",
+            "label": "organization-defined system resources"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-5(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-05(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#si-4",
+            "rel": "related",
+            "text": "SI-4"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-5.3_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sc-5.3_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Employ the following monitoring tools to detect indicators of denial-of-service attacks against, or launched from, the system: {{ sc-5.3_prm_1 }}; and"
+                },
+                {
+                    "id": "sc-5.3_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Monitor the following system resources to determine if sufficient resources exist to prevent effective denial-of-service attacks: {{ sc-5.3_prm_2 }}."
+                }
+            ]
+        },
+        {
+            "id": "sc-5.3_gdn",
+            "name": "guidance",
+            "prose": "Organizations consider the utilization and capacity of system resources when managing risk associated with a denial of service due to malicious attacks. Denial-of-service attacks can originate from external or internal sources. System resources that are sensitive to denial of service include physical disk storage, memory, and CPU cycles. Techniques used to prevent denial-of-service attacks related to storage utilization and capacity include instituting disk quotas, configuring systems to automatically alert administrators when specific storage capacity thresholds are reached, using file compression technologies to maximize available storage space, and imposing separate partitions for system and user data."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

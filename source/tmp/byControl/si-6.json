@@ -1,0 +1,259 @@
+{
+    "id": "si-6",
+    "class": "SP800-53",
+    "title": "Security and Privacy Function Verification",
+    "parameters": [
+        {
+            "id": "si-6_prm_1",
+            "label": "organization-defined security and privacy functions"
+        },
+        {
+            "id": "si-6_prm_2",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "\n                  {{ si-6_prm_3 }}\n               ",
+                    "upon command by user with appropriate privilege",
+                    "\n                  {{ si-6_prm_4 }}\n               "
+                ]
+            }
+        },
+        {
+            "id": "si-6_prm_3",
+            "depends-on": "si-6_prm_2",
+            "label": "organization-defined system transitional states"
+        },
+        {
+            "id": "si-6_prm_4",
+            "depends-on": "si-6_prm_2",
+            "label": "organization-defined frequency"
+        },
+        {
+            "id": "si-6_prm_5",
+            "label": "organization-defined personnel or roles"
+        },
+        {
+            "id": "si-6_prm_6",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "Shut the system down",
+                    "Restart the system",
+                    "\n                  {{ si-6_prm_7 }}\n               "
+                ]
+            }
+        },
+        {
+            "id": "si-6_prm_7",
+            "depends-on": "si-6_prm_6",
+            "label": "organization-defined alternative action(s)"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-6"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-06"
+        }
+    ],
+    "links": [
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130]"
+        },
+        {
+            "href": "#ca-7",
+            "rel": "related",
+            "text": "CA-7"
+        },
+        {
+            "href": "#cm-4",
+            "rel": "related",
+            "text": "CM-4"
+        },
+        {
+            "href": "#cm-6",
+            "rel": "related",
+            "text": "CM-6"
+        },
+        {
+            "href": "#si-7",
+            "rel": "related",
+            "text": "SI-7"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-6_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-6_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Verify the correct operation of {{ si-6_prm_1 }};"
+                },
+                {
+                    "id": "si-6_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Perform the verification of the functions specified in SI-6a {{ si-6_prm_2 }};"
+                },
+                {
+                    "id": "si-6_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "c."
+                        }
+                    ],
+                    "prose": "Alert {{ si-6_prm_5 }} to failed security and privacy verification tests; and"
+                },
+                {
+                    "id": "si-6_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "d."
+                        }
+                    ],
+                    "prose": "\n                  {{ si-6_prm_6 }} when anomalies are discovered."
+                }
+            ]
+        },
+        {
+            "id": "si-6_gdn",
+            "name": "guidance",
+            "prose": "Transitional states for systems include system startup, restart, shutdown, and abort. System notifications include hardware indicator lights, electronic alerts to system administrators, and messages to local computer consoles. In contrast to security function verification, privacy function verification ensures that privacy functions operate as expected and are approved by the senior agency official for privacy or that privacy attributes are applied or used as expected."
+        }
+    ],
+    "controls": [
+        {
+            "id": "si-6.1",
+            "class": "SP800-53-enhancement",
+            "title": "Notification of Failed Security Tests",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SI-6(1)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SI-06(01)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#si-6",
+                    "rel": "incorporated-into",
+                    "text": "SI-6"
+                }
+            ]
+        },
+        {
+            "id": "si-6.2",
+            "class": "SP800-53-enhancement",
+            "title": "Automation Support for Distributed Testing",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SI-6(2)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SI-06(02)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#si-2",
+                    "rel": "related",
+                    "text": "SI-2"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "si-6.2_smt",
+                    "name": "statement",
+                    "prose": "Implement automated mechanisms to support the management of distributed security and privacy function testing."
+                },
+                {
+                    "id": "si-6.2_gdn",
+                    "name": "guidance",
+                    "prose": "The use of automated mechanisms to support the management of distributed function testing helps to ensure the integrity, timeliness, completeness, and efficacy of such testing."
+                }
+            ]
+        },
+        {
+            "id": "si-6.3",
+            "class": "SP800-53-enhancement",
+            "title": "Report Verification Results",
+            "parameters": [
+                {
+                    "id": "si-6.3_prm_1",
+                    "label": "organization-defined personnel or roles"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SI-6(3)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SI-06(03)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                },
+                {
+                    "href": "#sr-4",
+                    "rel": "related",
+                    "text": "SR-4"
+                },
+                {
+                    "href": "#sr-5",
+                    "rel": "related",
+                    "text": "SR-5"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "si-6.3_smt",
+                    "name": "statement",
+                    "prose": "Report the results of security and privacy function verification to {{ si-6.3_prm_1 }}."
+                },
+                {
+                    "id": "si-6.3_gdn",
+                    "name": "guidance",
+                    "prose": "Organizational personnel with potential interest in the results of the verification of security and privacy functions include systems security officers, senior agency information security officers, and senior agency officials for privacy."
+                }
+            ]
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

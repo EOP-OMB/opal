@@ -1,0 +1,28 @@
+{
+    "id": "ia-5.15",
+    "class": "SP800-53-enhancement",
+    "title": "Gsa-approved Products and Services",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-5(15)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-05(15)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-5.15_smt",
+            "name": "statement",
+            "prose": "Use only General Services Administration-approved products and services for identity, credential, and access management."
+        },
+        {
+            "id": "ia-5.15_gdn",
+            "name": "guidance",
+            "prose": "General Services Administration (GSA)-approved products and services are products and services that have been approved through the GSA conformance program, where applicable, and posted to the GSA Approved Products List. GSA provides guidance for teams to design and build functional and secure systems that comply with Federal Identity, Credential, and Access Management (FICAM) policies, technologies, and implementation patterns."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

@@ -1,0 +1,41 @@
+{
+    "id": "ac-7.3",
+    "class": "SP800-53-enhancement",
+    "title": "Biometric Attempt Limiting",
+    "parameters": [
+        {
+            "id": "ac-7.3_prm_1",
+            "label": "organization-defined number"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-7(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-07(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-3",
+            "rel": "related",
+            "text": "IA-3"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-7.3_smt",
+            "name": "statement",
+            "prose": "Limit the number of unsuccessful biometric logon attempts to {{ ac-7.3_prm_1 }}."
+        },
+        {
+            "id": "ac-7.3_gdn",
+            "name": "guidance",
+            "prose": "Biometrics are probabilistic in nature. The ability to successfully authenticate can be impacted by many factors, including matching performance and presentation attack detection mechanisms. Organizations select the appropriate number of attempts for users based on organizationally-defined factors."
+        }
+    ],
+    "group_title": "Access Control"
+}

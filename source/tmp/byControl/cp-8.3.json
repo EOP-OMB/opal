@@ -1,0 +1,28 @@
+{
+    "id": "cp-8.3",
+    "class": "SP800-53-enhancement",
+    "title": "Separation of Primary and Alternate Providers",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CP-8(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CP-08(03)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cp-8.3_smt",
+            "name": "statement",
+            "prose": "Obtain alternate telecommunications services from providers that are separated from primary service providers to reduce susceptibility to the same threats."
+        },
+        {
+            "id": "cp-8.3_gdn",
+            "name": "guidance",
+            "prose": "Threats that affect telecommunications services are defined in organizational assessments of risk and include natural disasters, structural failures, cyber or physical attacks, and errors of omission or commission. Organizations can reduce common susceptibilities by minimizing shared infrastructure among telecommunications service providers and achieving sufficient geographic separation between services. Organizations may consider using a single service provider in situations where the service provider can provide alternate telecommunications services that meet the separation needs addressed in the risk assessment."
+        }
+    ],
+    "group_title": "Contingency Planning"
+}

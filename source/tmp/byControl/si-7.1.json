@@ -1,0 +1,55 @@
+{
+    "id": "si-7.1",
+    "class": "SP800-53-enhancement",
+    "title": "Integrity Checks",
+    "parameters": [
+        {
+            "id": "si-7.1_prm_1",
+            "label": "organization-defined software, firmware, and information"
+        },
+        {
+            "id": "si-7.1_prm_2",
+            "select": {
+                "how-many": "one or more",
+                "alternatives": [
+                    "at startup",
+                    "at {{ si-7.1_prm_3 }}\n                  ",
+                    "\n                     {{ si-7.1_prm_4 }}\n                  "
+                ]
+            }
+        },
+        {
+            "id": "si-7.1_prm_3",
+            "depends-on": "si-7.1_prm_2",
+            "label": "organization-defined transitional states or security-relevant events"
+        },
+        {
+            "id": "si-7.1_prm_4",
+            "depends-on": "si-7.1_prm_2",
+            "label": "organization-defined frequency"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(01)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.1_smt",
+            "name": "statement",
+            "prose": "Perform an integrity check of {{ si-7.1_prm_1 }}\n                  {{ si-7.1_prm_2 }}."
+        },
+        {
+            "id": "si-7.1_gdn",
+            "name": "guidance",
+            "prose": "Security-relevant events include the identification of new threats to which organizational systems are susceptible and the installation of new hardware, software, or firmware. Transitional states include system startup, restart, shutdown, and abort."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

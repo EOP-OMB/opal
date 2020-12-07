@@ -1,0 +1,58 @@
+{
+    "id": "sa-4.5",
+    "class": "SP800-53-enhancement",
+    "title": "System, Component, and Service Configurations",
+    "parameters": [
+        {
+            "id": "sa-4.5_prm_1",
+            "label": "organization-defined security configurations"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-4(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-04(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-4.5_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to:",
+            "parts": [
+                {
+                    "id": "sa-4.5_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Deliver the system, component, or service with {{ sa-4.5_prm_1 }} implemented; and"
+                },
+                {
+                    "id": "sa-4.5_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Use the configurations as the default for any subsequent system, component, or service reinstallation or upgrade."
+                }
+            ]
+        },
+        {
+            "id": "sa-4.5_gdn",
+            "name": "guidance",
+            "prose": "Examples of security configurations include the U.S. Government Configuration Baseline (USGCB), Security Technical Implementation Guides (STIGs), and any limitations on functions, ports, protocols, and services. Security characteristics can include requiring that default passwords have been changed."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

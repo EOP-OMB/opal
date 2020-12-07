@@ -1,0 +1,34 @@
+{
+    "id": "ac-17.9",
+    "class": "SP800-53-enhancement",
+    "title": "Disconnect or Disable Access",
+    "parameters": [
+        {
+            "id": "ac-17.9_prm_1",
+            "label": "organization-defined time period"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-17(9)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-17(09)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-17.9_smt",
+            "name": "statement",
+            "prose": "Provide the capability to disconnect or disable remote access to the system within {{ ac-17.9_prm_1 }}."
+        },
+        {
+            "id": "ac-17.9_gdn",
+            "name": "guidance",
+            "prose": "The speed of system disconnect or disablement varies based on the criticality of missions or business functions and the need to eliminate immediate or future remote access to systems."
+        }
+    ],
+    "group_title": "Access Control"
+}

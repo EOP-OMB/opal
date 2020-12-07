@@ -1,0 +1,27 @@
+{
+    "id": "si-7.14",
+    "class": "SP800-53-enhancement",
+    "title": "Binary or Machine Executable Code",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(14)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(14)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-7.8",
+            "rel": "moved-to",
+            "text": "CM-7(8)"
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

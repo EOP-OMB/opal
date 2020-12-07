@@ -1,0 +1,27 @@
+{
+    "id": "cm-2.1",
+    "class": "SP800-53-enhancement",
+    "title": "Reviews and Updates",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-2(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-02(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-2",
+            "rel": "incorporated-into",
+            "text": "CM-2"
+        }
+    ],
+    "group_title": "Configuration Management"
+}

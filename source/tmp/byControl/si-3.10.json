@@ -1,0 +1,57 @@
+{
+    "id": "si-3.10",
+    "class": "SP800-53-enhancement",
+    "title": "Malicious Code Analysis",
+    "parameters": [
+        {
+            "id": "si-3.10_prm_1",
+            "label": "organization-defined tools and techniques"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-3(10)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-03(10)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-3.10_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "si-3.10_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Employ the following tools and techniques to analyze the characteristics and behavior of malicious code: {{ si-3.10_prm_1 }}; and"
+                },
+                {
+                    "id": "si-3.10_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Incorporate the results from malicious code analysis into organizational incident response and flaw remediation processes."
+                }
+            ]
+        },
+        {
+            "id": "si-3.10_gdn",
+            "name": "guidance",
+            "prose": "The use of malicious code analysis tools provides organizations with a more in-depth understanding of adversary tradecraft (i.e., tactics, techniques, and procedures) and the functionality and purpose of specific instances of malicious code. Understanding the characteristics of malicious code facilitates effective organizational responses to current and future threats. Organizations can conduct malicious code analyses by employing reverse engineering techniques or by monitoring the behavior of executing code."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

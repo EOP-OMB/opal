@@ -1,0 +1,27 @@
+{
+    "id": "au-2.1",
+    "class": "SP800-53-enhancement",
+    "title": "Compilation of Audit Records from Multiple Sources",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-2(1)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-02(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-12",
+            "rel": "incorporated-into",
+            "text": "AU-12"
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

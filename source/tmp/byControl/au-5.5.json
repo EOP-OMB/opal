@@ -1,0 +1,41 @@
+{
+    "id": "au-5.5",
+    "class": "SP800-53-enhancement",
+    "title": "Alternate Audit Logging Capability",
+    "parameters": [
+        {
+            "id": "au-5.5_prm_1",
+            "label": "organization-defined alternate audit logging functionality"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-5(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-05(05)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-9",
+            "rel": "related",
+            "text": "AU-9"
+        }
+    ],
+    "parts": [
+        {
+            "id": "au-5.5_smt",
+            "name": "statement",
+            "prose": "Provide an alternate audit logging capability in the event of a failure in primary audit logging capability that implements {{ au-5.5_prm_1 }}."
+        },
+        {
+            "id": "au-5.5_gdn",
+            "name": "guidance",
+            "prose": "Since an alternate audit logging capability may be a short-term protection solution employed until the failure in the primary audit logging capability is corrected, organizations may determine that the alternate audit logging capability need only provide a subset of the primary audit logging functionality that is impacted by the failure."
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

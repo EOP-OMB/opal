@@ -1,0 +1,28 @@
+{
+    "id": "ac-16.2",
+    "class": "SP800-53-enhancement",
+    "title": "Attribute Value Changes by Authorized Individuals",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-16(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-16(02)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-16.2_smt",
+            "name": "statement",
+            "prose": "Provide authorized individuals (or processes acting on behalf of individuals) the capability to define or change the value of associated security and privacy attributes."
+        },
+        {
+            "id": "ac-16.2_gdn",
+            "name": "guidance",
+            "prose": "The content or assigned values of attributes can directly affect the ability of individuals to access organizational information. Therefore, it is important for systems to be able to limit the ability to create or modify attributes to authorized individuals."
+        }
+    ],
+    "group_title": "Access Control"
+}

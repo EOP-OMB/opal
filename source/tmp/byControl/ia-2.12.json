@@ -1,0 +1,28 @@
+{
+    "id": "ia-2.12",
+    "class": "SP800-53-enhancement",
+    "title": "Acceptance of PIV Credentials",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(12)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(12)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-2.12_smt",
+            "name": "statement",
+            "prose": "Accept and electronically verify Personal Identity Verification-compliant credentials."
+        },
+        {
+            "id": "ia-2.12_gdn",
+            "name": "guidance",
+            "prose": "Acceptance of Personal Identity Verification (PIV)-compliant credentials applies to organizations implementing logical access control and physical access control systems. PIV-compliant credentials are those credentials issued by federal agencies that conform to FIPS Publication 201 and supporting guidance documents. The adequacy and reliability of PIV card issuers are authorized using [SP 800-79-2]. Acceptance of PIV-compliant credentials includes derived PIV credentials, the use of which is addressed in [SP 800-166]. The DOD Common Access Card (CAC) is an example of a PIV credential."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

@@ -1,0 +1,41 @@
+{
+    "id": "cm-3.6",
+    "class": "SP800-53-enhancement",
+    "title": "Cryptography Management",
+    "parameters": [
+        {
+            "id": "cm-3.6_prm_1",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-3(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-03(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sc-12",
+            "rel": "related",
+            "text": "SC-12"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-3.6_smt",
+            "name": "statement",
+            "prose": "Ensure that cryptographic mechanisms used to provide the following controls are under configuration management: {{ cm-3.6_prm_1 }}."
+        },
+        {
+            "id": "cm-3.6_gdn",
+            "name": "guidance",
+            "prose": "The controls referenced in the control enhancement refer to security and privacy controls from the control catalog. Regardless of the cryptographic mechanisms employed, processes and procedures are in place to manage those mechanisms. For example, if system components use certificates for identification and authentication, a process is implemented to address the expiration of those certificates."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

@@ -1,0 +1,28 @@
+{
+    "id": "sa-11.8",
+    "class": "SP800-53-enhancement",
+    "title": "Dynamic Code Analysis",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-11(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-11(08)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-11.8_smt",
+            "name": "statement",
+            "prose": "Require the developer of the system, system component, or system service to employ dynamic code analysis tools to identify common flaws and document the results of the analysis."
+        },
+        {
+            "id": "sa-11.8_gdn",
+            "name": "guidance",
+            "prose": "Dynamic code analysis provides runtime verification of software programs using tools capable of monitoring programs for memory corruption, user privilege issues, and other potential security problems. Dynamic code analysis employs runtime tools to ensure that security functionality performs in the way it was designed. A type of dynamic analysis, known as fuzz testing, induces program failures by deliberately introducing malformed or random data into software programs. Fuzz testing strategies are derived from the intended use of applications and the functional and design specifications for the applications. To understand the scope of dynamic code analysis and the assurance provided, organizations may also consider conducting code coverage analysis (i.e., checking the degree to which the code has been tested using metrics such as percent of subroutines tested or percent of program statements called during execution of the test suite) and/or concordance analysis (i.e., checking for words that are out of place in software code, such as non-English language words or derogatory terms)."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

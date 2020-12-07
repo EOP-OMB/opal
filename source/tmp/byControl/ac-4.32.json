@@ -1,0 +1,74 @@
+{
+    "id": "ac-4.32",
+    "class": "SP800-53-enhancement",
+    "title": "Process Requirements for Information Transfer",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-4(32)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-04(32)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-4.32_smt",
+            "name": "statement",
+            "prose": "When transferring information between different security domains, the process that transfers information between filter pipelines:",
+            "parts": [
+                {
+                    "id": "ac-4.32_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(a)"
+                        }
+                    ],
+                    "prose": "Does not filter message content;"
+                },
+                {
+                    "id": "ac-4.32_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(b)"
+                        }
+                    ],
+                    "prose": "Validates filtering metadata;"
+                },
+                {
+                    "id": "ac-4.32_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(c)"
+                        }
+                    ],
+                    "prose": "Ensures the content associated with the filtering metadata has successfully completed filtering; and"
+                },
+                {
+                    "id": "ac-4.32_smt.d",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "(d)"
+                        }
+                    ],
+                    "prose": "Transfers the content to the destination filter pipeline."
+                }
+            ]
+        },
+        {
+            "id": "ac-4.32_gdn",
+            "name": "guidance",
+            "prose": "The processes transferring information between filter pipelines have minimum complexity and functionality to provide assurance that the processes operate correctly."
+        }
+    ],
+    "group_title": "Access Control"
+}

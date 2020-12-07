@@ -1,0 +1,28 @@
+{
+    "id": "ia-2.5",
+    "class": "SP800-53-enhancement",
+    "title": "Individual Authentication with Group Authentication",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IA-2(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IA-02(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ia-2.5_smt",
+            "name": "statement",
+            "prose": "When shared accounts or authenticators are employed, require users to be individually authenticated before granting access to the shared accounts or resources."
+        },
+        {
+            "id": "ia-2.5_gdn",
+            "name": "guidance",
+            "prose": "Individual authentication prior to shared group authentication mitigates the risk of using group accounts or authenticators."
+        }
+    ],
+    "group_title": "Identification and Authentication"
+}

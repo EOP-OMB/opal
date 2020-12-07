@@ -1,0 +1,35 @@
+{
+    "id": "ir-6.3",
+    "class": "SP800-53-enhancement",
+    "title": "Supply Chain Coordination",
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-6(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-06(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-8",
+            "rel": "related",
+            "text": "SR-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-6.3_smt",
+            "name": "statement",
+            "prose": "Provide incident information to the provider of the product or service and other organizations involved in the supply chain or supply chain governance for systems or system components related to the incident."
+        },
+        {
+            "id": "ir-6.3_gdn",
+            "name": "guidance",
+            "prose": "Organizations involved in supply chain activities include product developers, system integrators, manufacturers, packagers, assemblers, distributors, vendors, and resellers. Entities that provide supply chain governance include the Federal Acquisition Security Council (FASC). Supply chain incidents include compromises or breaches that involve information technology products, system components, development processes or personnel, distribution processes, or warehousing facilities. Organizations determine the appropriate information to share and consider the value gained from informing external organizations about supply chain incidents, including the ability to improve processes or to identify the root cause of an incident."
+        }
+    ],
+    "group_title": "Incident Response"
+}

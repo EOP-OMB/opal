@@ -1,0 +1,56 @@
+{
+    "id": "sr-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Track and Trace",
+    "parameters": [
+        {
+            "id": "sr-4.2_prm_1",
+            "label": "organization-defined systems and critical system components"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-04(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ia-2",
+            "rel": "related",
+            "text": "IA-2"
+        },
+        {
+            "href": "#ia-8",
+            "rel": "related",
+            "text": "IA-8"
+        },
+        {
+            "href": "#pe-16",
+            "rel": "related",
+            "text": "PE-16"
+        },
+        {
+            "href": "#pl-2",
+            "rel": "related",
+            "text": "PL-2"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-4.2_smt",
+            "name": "statement",
+            "prose": "Establish and maintain unique identification of the following systems and critical system components for tracking through the supply chain: {{ sr-4.2_prm_1 }}."
+        },
+        {
+            "id": "sr-4.2_gdn",
+            "name": "guidance",
+            "prose": "Tracking the unique identification of systems and system components during development and transport activities provides a foundational identity structure for the establishment and maintenance of provenance. For example, system components may be labeled using serial numbers or tagged using radio-frequency identification tags. Labels and tags can help provide better visibility into the provenance of a system or system component. A system or system component may have more than one unique identifier. Identification methods are sufficient to support a forensic investigation after a supply chain compromise or event."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

@@ -1,0 +1,38 @@
+{
+    "id": "si-4.10",
+    "class": "SP800-53-enhancement",
+    "title": "Visibility of Encrypted Communications",
+    "parameters": [
+        {
+            "id": "si-4.10_prm_1",
+            "label": "organization-defined encrypted communications traffic"
+        },
+        {
+            "id": "si-4.10_prm_2",
+            "label": "organization-defined system monitoring tools and mechanisms"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(10)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(10)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.10_smt",
+            "name": "statement",
+            "prose": "Make provisions so that {{ si-4.10_prm_1 }} is visible to {{ si-4.10_prm_2 }}."
+        },
+        {
+            "id": "si-4.10_gdn",
+            "name": "guidance",
+            "prose": "Organizations balance the need to encrypt communications traffic to protect data confidentiality with the need to maintain visibility into such traffic from a monitoring perspective. Organizations determine whether the visibility requirement applies to internal encrypted traffic, encrypted traffic intended for external destinations, or a subset of the traffic types."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

@@ -1,0 +1,56 @@
+{
+    "id": "sr-4.3",
+    "class": "SP800-53-enhancement",
+    "title": "Validate as Genuine and Not Altered",
+    "parameters": [
+        {
+            "id": "sr-4.3_prm_1",
+            "label": "organization-defined controls"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-4(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-04(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#at-3",
+            "rel": "related",
+            "text": "AT-3"
+        },
+        {
+            "href": "#sr-9",
+            "rel": "related",
+            "text": "SR-9"
+        },
+        {
+            "href": "#sr-10",
+            "rel": "related",
+            "text": "SR-10"
+        },
+        {
+            "href": "#sr-11",
+            "rel": "related",
+            "text": "SR-11"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-4.3_smt",
+            "name": "statement",
+            "prose": "Employ the following controls to validate that the system or system component received is genuine and has not been altered: {{ sr-4.3_prm_1 }}."
+        },
+        {
+            "id": "sr-4.3_gdn",
+            "name": "guidance",
+            "prose": "For many systems and system components, especially hardware, there are technical means to determine if the items are genuine or have been altered, including optical and nanotechnology tagging, physically unclonable functions, side-channel analysis, cryptographic hash verifications or digital signatures, and visible anti-tamper labels or stickers. Controls can also include monitoring for out of specification performance, which can be an indicator of tampering or counterfeits. Organizations may leverage supplier and contractor processes for validating that a system or component is genuine and has not been altered and for replacing a suspect system or component. Some indications of tampering may be visible and addressable before accepting delivery, such as inconsistent packaging, broken seals, and incorrect labels. When a system or system component is suspected of being altered or counterfeit, the supplier, contractor, or original equipment manufacturer may be able to replace the item or provide a forensic capability to determine the origin of the counterfeit or altered item. Organizations can provide training to personnel on how to identify suspicious system or component deliveries."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}

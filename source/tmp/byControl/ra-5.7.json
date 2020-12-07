@@ -1,0 +1,27 @@
+{
+    "id": "ra-5.7",
+    "class": "SP800-53-enhancement",
+    "title": "Automated Detection and Notification of Unauthorized Components",
+    "properties": [
+        {
+            "name": "label",
+            "value": "RA-5(7)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "RA-05(07)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#cm-8",
+            "rel": "incorporated-into",
+            "text": "CM-8"
+        }
+    ],
+    "group_title": "Risk Assessment"
+}

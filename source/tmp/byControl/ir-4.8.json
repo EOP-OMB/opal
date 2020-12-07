@@ -1,0 +1,50 @@
+{
+    "id": "ir-4.8",
+    "class": "SP800-53-enhancement",
+    "title": "Correlation with External Organizations",
+    "parameters": [
+        {
+            "id": "ir-4.8_prm_1",
+            "label": "organization-defined external organizations"
+        },
+        {
+            "id": "ir-4.8_prm_2",
+            "label": "organization-defined incident information"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "IR-4(8)"
+        },
+        {
+            "name": "sort-id",
+            "value": "IR-04(08)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-16",
+            "rel": "related",
+            "text": "AU-16"
+        },
+        {
+            "href": "#pm-16",
+            "rel": "related",
+            "text": "PM-16"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ir-4.8_smt",
+            "name": "statement",
+            "prose": "Coordinate with {{ ir-4.8_prm_1 }} to correlate and share {{ ir-4.8_prm_2 }} to achieve a cross-organization perspective on incident awareness and more effective incident responses."
+        },
+        {
+            "id": "ir-4.8_gdn",
+            "name": "guidance",
+            "prose": "The coordination of incident information with external organizations\u2014including mission or business partners, military or coalition partners, customers, and developers\u2014can provide significant benefits. Cross-organizational coordination can serve as an important risk management capability. This capability allows organizations to leverage information from a variety of sources to effectively respond to incidents and breaches that could potentially affect the organization\u2019s operations, assets, and individuals."
+        }
+    ],
+    "group_title": "Incident Response"
+}

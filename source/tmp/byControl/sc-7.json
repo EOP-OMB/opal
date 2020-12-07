@@ -1,0 +1,1514 @@
+{
+    "id": "sc-7",
+    "class": "SP800-53",
+    "title": "Boundary Protection",
+    "parameters": [
+        {
+            "id": "sc-7_prm_1",
+            "select": {
+                "alternatives": [
+                    "physically",
+                    "logically"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-7"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-07"
+        }
+    ],
+    "links": [
+        {
+            "href": "#27847491-5ce1-4f6a-a1e4-9e483782f0ef",
+            "rel": "reference",
+            "text": "[OMB A-130]"
+        },
+        {
+            "href": "#628d22a1-6a11-4784-bc59-5cd9497b5445",
+            "rel": "reference",
+            "text": "[FIPS 199]"
+        },
+        {
+            "href": "#482e4c99-9dc4-41ad-bba8-0f3f0032c1f8",
+            "rel": "reference",
+            "text": "[SP 800-37]"
+        },
+        {
+            "href": "#a7f0e897-29a3-45c4-bd88-40dfef0e034a",
+            "rel": "reference",
+            "text": "[SP 800-41]"
+        },
+        {
+            "href": "#d4d7c760-2907-403b-8b2a-767ca5370ecd",
+            "rel": "reference",
+            "text": "[SP 800-77]"
+        },
+        {
+            "href": "#f5edfe51-d1f2-422e-9b27-5d0e90b49c72",
+            "rel": "reference",
+            "text": "[SP 800-189]"
+        },
+        {
+            "href": "#ac-4",
+            "rel": "related",
+            "text": "AC-4"
+        },
+        {
+            "href": "#ac-17",
+            "rel": "related",
+            "text": "AC-17"
+        },
+        {
+            "href": "#ac-18",
+            "rel": "related",
+            "text": "AC-18"
+        },
+        {
+            "href": "#ac-19",
+            "rel": "related",
+            "text": "AC-19"
+        },
+        {
+            "href": "#ac-20",
+            "rel": "related",
+            "text": "AC-20"
+        },
+        {
+            "href": "#au-13",
+            "rel": "related",
+            "text": "AU-13"
+        },
+        {
+            "href": "#ca-3",
+            "rel": "related",
+            "text": "CA-3"
+        },
+        {
+            "href": "#cm-2",
+            "rel": "related",
+            "text": "CM-2"
+        },
+        {
+            "href": "#cm-4",
+            "rel": "related",
+            "text": "CM-4"
+        },
+        {
+            "href": "#cm-7",
+            "rel": "related",
+            "text": "CM-7"
+        },
+        {
+            "href": "#cm-10",
+            "rel": "related",
+            "text": "CM-10"
+        },
+        {
+            "href": "#cp-8",
+            "rel": "related",
+            "text": "CP-8"
+        },
+        {
+            "href": "#cp-10",
+            "rel": "related",
+            "text": "CP-10"
+        },
+        {
+            "href": "#ir-4",
+            "rel": "related",
+            "text": "IR-4"
+        },
+        {
+            "href": "#ma-4",
+            "rel": "related",
+            "text": "MA-4"
+        },
+        {
+            "href": "#pe-3",
+            "rel": "related",
+            "text": "PE-3"
+        },
+        {
+            "href": "#pl-8",
+            "rel": "related",
+            "text": "PL-8"
+        },
+        {
+            "href": "#pm-12",
+            "rel": "related",
+            "text": "PM-12"
+        },
+        {
+            "href": "#sa-8",
+            "rel": "related",
+            "text": "SA-8"
+        },
+        {
+            "href": "#sa-17",
+            "rel": "related",
+            "text": "SA-17"
+        },
+        {
+            "href": "#sc-5",
+            "rel": "related",
+            "text": "SC-5"
+        },
+        {
+            "href": "#sc-26",
+            "rel": "related",
+            "text": "SC-26"
+        },
+        {
+            "href": "#sc-32",
+            "rel": "related",
+            "text": "SC-32"
+        },
+        {
+            "href": "#sc-35",
+            "rel": "related",
+            "text": "SC-35"
+        },
+        {
+            "href": "#sc-43",
+            "rel": "related",
+            "text": "SC-43"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-7_smt",
+            "name": "statement",
+            "parts": [
+                {
+                    "id": "sc-7_smt.a",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "a."
+                        }
+                    ],
+                    "prose": "Monitor and control communications at the external managed interfaces to the system and at key internal managed interfaces within the system;"
+                },
+                {
+                    "id": "sc-7_smt.b",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "b."
+                        }
+                    ],
+                    "prose": "Implement subnetworks for publicly accessible system components that are {{ sc-7_prm_1 }} separated from internal organizational networks; and"
+                },
+                {
+                    "id": "sc-7_smt.c",
+                    "name": "item",
+                    "properties": [
+                        {
+                            "name": "label",
+                            "value": "c."
+                        }
+                    ],
+                    "prose": "Connect to external networks or systems only through managed interfaces consisting of boundary protection devices arranged in accordance with an organizational security and privacy architecture."
+                }
+            ]
+        },
+        {
+            "id": "sc-7_gdn",
+            "name": "guidance",
+            "prose": "Managed interfaces include gateways, routers, firewalls, guards, network-based malicious code analysis, virtualization systems, or encrypted tunnels implemented within a security architecture. Subnetworks that are physically or logically separated from internal networks are referred to as demilitarized zones or DMZs. Restricting or prohibiting interfaces within organizational systems includes restricting external web traffic to designated web servers within managed interfaces, prohibiting external traffic that appears to be spoofing internal addresses, and prohibiting internal traffic that appears to be spoofing external addresses. Commercial telecommunications services are provided by network components and consolidated management systems shared by customers. These services may also include third party-provided access lines and other service elements. Such services may represent sources of increased risk despite contract security provisions. Boundary protection may be implemented as a common control for all or part of an organizational network such that the boundary to be protected is greater than a system-specific boundary (i.e., an authorization boundary)."
+        }
+    ],
+    "controls": [
+        {
+            "id": "sc-7.1",
+            "class": "SP800-53-enhancement",
+            "title": "Physically Separated Subnetworks",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(1)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(01)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-7",
+                    "rel": "incorporated-into",
+                    "text": "SC-7"
+                }
+            ]
+        },
+        {
+            "id": "sc-7.2",
+            "class": "SP800-53-enhancement",
+            "title": "Public Access",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(2)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(02)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-7",
+                    "rel": "incorporated-into",
+                    "text": "SC-7"
+                }
+            ]
+        },
+        {
+            "id": "sc-7.3",
+            "class": "SP800-53-enhancement",
+            "title": "Access Points",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(3)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(03)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.3_smt",
+                    "name": "statement",
+                    "prose": "Limit the number of external network connections to the system."
+                },
+                {
+                    "id": "sc-7.3_gdn",
+                    "name": "guidance",
+                    "prose": "Limiting the number of external network connections facilitates monitoring of inbound and outbound communications traffic. The Trusted Internet Connection [DHS TIC] initiative is an example of a federal guideline that requires limits on the number of external network connections. Limiting the number of external network connections to the system is  important during transition periods from older to newer technologies (e.g., transitioning from IPv4 to IPv6 network protocols). Such transitions may require implementing the older and newer technologies simultaneously during the transition period and thus increase the number of access points to the system."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.4",
+            "class": "SP800-53-enhancement",
+            "title": "External Telecommunications Services",
+            "parameters": [
+                {
+                    "id": "sc-7.4_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(4)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(04)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#sc-8",
+                    "rel": "related",
+                    "text": "SC-8"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.4_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "sc-7.4_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(a)"
+                                }
+                            ],
+                            "prose": "Implement a managed interface for each external telecommunication service;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(b)"
+                                }
+                            ],
+                            "prose": "Establish a traffic flow policy for each managed interface;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(c)"
+                                }
+                            ],
+                            "prose": "Protect the confidentiality and integrity of the information being transmitted across each interface;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(d)"
+                                }
+                            ],
+                            "prose": "Document each exception to the traffic flow policy with a supporting mission or business need and duration of that need;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.e",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(e)"
+                                }
+                            ],
+                            "prose": "Review exceptions to the traffic flow policy {{ sc-7.4_prm_1 }} and remove exceptions that are no longer supported by an explicit mission or business need;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.f",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(f)"
+                                }
+                            ],
+                            "prose": "Prevent unauthorized exchange of control plane traffic with external networks;"
+                        },
+                        {
+                            "id": "sc-7.4_smt.g",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(g)"
+                                }
+                            ],
+                            "prose": "Publish information to enable remote networks to detect unauthorized control plane traffic from internal networks; and"
+                        },
+                        {
+                            "id": "sc-7.4_smt.h",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(h)"
+                                }
+                            ],
+                            "prose": "Filter unauthorized control plane traffic from external networks."
+                        }
+                    ]
+                },
+                {
+                    "id": "sc-7.4_gdn",
+                    "name": "guidance",
+                    "prose": "External telecommunications services can provide data and/or voice communications services. Examples of control plane traffic include routing, Domain Name System (DNS), and management. Unauthorized control plane traffic can occur through a technique known as \u201cspoofing.\u201d"
+                }
+            ]
+        },
+        {
+            "id": "sc-7.5",
+            "class": "SP800-53-enhancement",
+            "title": "Deny by Default \u2014 Allow by Exception",
+            "parameters": [
+                {
+                    "id": "sc-7.5_prm_1",
+                    "select": {
+                        "how-many": "one or more",
+                        "alternatives": [
+                            "at managed interfaces",
+                            "for {{ sc-7.5_prm_2 }}\n                  "
+                        ]
+                    }
+                },
+                {
+                    "id": "sc-7.5_prm_2",
+                    "depends-on": "sc-7.5_prm_1",
+                    "label": "organization-defined systems"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(5)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(05)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.5_smt",
+                    "name": "statement",
+                    "prose": "Deny network communications traffic by default and allow network communications traffic by exception {{ sc-7.5_prm_1 }}."
+                },
+                {
+                    "id": "sc-7.5_gdn",
+                    "name": "guidance",
+                    "prose": "Denying by default and allowing by exception applies to inbound and outbound network communications traffic. A deny-all, permit-by-exception network communications traffic policy ensures that only those system connections that are essential and approved are allowed. Deny by default, allow by exception also applies to a system that is connected to an external system."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.6",
+            "class": "SP800-53-enhancement",
+            "title": "Response to Recognized Failures",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(6)"
+                },
+                {
+                    "name": "status",
+                    "value": "Withdrawn"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(06)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-7.18",
+                    "rel": "incorporated-into",
+                    "text": "SC-7(18)"
+                }
+            ]
+        },
+        {
+            "id": "sc-7.7",
+            "class": "SP800-53-enhancement",
+            "title": "Split Tunneling for Remote Devices",
+            "parameters": [
+                {
+                    "id": "sc-7.7_prm_1",
+                    "label": "organization-defined safeguards"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(7)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(07)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.7_smt",
+                    "name": "statement",
+                    "prose": "Prevent split tunneling for remote devices connecting to organizational systems unless the split tunnel is securely provisioned using {{ sc-7.7_prm_1 }}."
+                },
+                {
+                    "id": "sc-7.7_gdn",
+                    "name": "guidance",
+                    "prose": "Split tunneling is the process of allowing a remote user or device to establish a non-remote connection with a system and simultaneously communicate via some other connection to a resource in an external network. This method of network access enables a user to access remote devices and simultaneously, access uncontrolled networks. Split tunneling might be desirable by remote users to communicate with local system resources, such as printers or file servers. However, split tunneling can facilitate unauthorized external connections, making the system vulnerable to attack and to exfiltration of organizational information. Split tunneling can be prevented by disabling configuration settings that allow such capability in remote devices and by preventing those configuration settings from being configurable by users. Prevention can also be achieved by the detection of split tunneling (or of configuration settings that allow split tunneling) in the remote device, and by prohibiting the connection if the remote device is using split tunneling. A virtual private network (VPN) can be used to securely provision a split tunnel. A securely provisioned VPN includes locking connectivity to exclusive, managed, and named environments, or to a specific set of pre-approved addresses, without user control."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.8",
+            "class": "SP800-53-enhancement",
+            "title": "Route Traffic to Authenticated Proxy Servers",
+            "parameters": [
+                {
+                    "id": "sc-7.8_prm_1",
+                    "label": "organization-defined internal communications traffic"
+                },
+                {
+                    "id": "sc-7.8_prm_2",
+                    "label": "organization-defined external networks"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(8)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(08)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.8_smt",
+                    "name": "statement",
+                    "prose": "Route {{ sc-7.8_prm_1 }} to {{ sc-7.8_prm_2 }} through authenticated proxy servers at managed interfaces."
+                },
+                {
+                    "id": "sc-7.8_gdn",
+                    "name": "guidance",
+                    "prose": "External networks are networks outside of organizational control. A proxy server is a server (i.e., system or application) that acts as an intermediary for clients requesting system resources from non-organizational or other organizational servers. System resources that may be requested include files, connections, web pages, or services. Client requests established through a connection to a proxy server are assessed to manage complexity and provide additional protection by limiting direct connectivity. Web content filtering devices are one of the most common proxy servers that provide access to the Internet. Proxy servers can support the logging of Transmission Control Protocol sessions and the blocking of specific Uniform Resource Locators, Internet Protocol addresses, and domain names. Web proxies can be configured with organization-defined lists of authorized and unauthorized websites. Note that proxy servers may inhibit the use of virtual private networks (VPNs) and create the potential for \u201cman-in-the-middle\u201d attacks (depending on the implementation)."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.9",
+            "class": "SP800-53-enhancement",
+            "title": "Restrict Threatening Outgoing Communications Traffic",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(9)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(09)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#au-6",
+                    "rel": "related",
+                    "text": "AU-6"
+                },
+                {
+                    "href": "#sc-5",
+                    "rel": "related",
+                    "text": "SC-5"
+                },
+                {
+                    "href": "#sc-38",
+                    "rel": "related",
+                    "text": "SC-38"
+                },
+                {
+                    "href": "#sc-44",
+                    "rel": "related",
+                    "text": "SC-44"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.9_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "sc-7.9_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(a)"
+                                }
+                            ],
+                            "prose": "Detect and deny outgoing communications traffic posing a threat to external systems; and"
+                        },
+                        {
+                            "id": "sc-7.9_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(b)"
+                                }
+                            ],
+                            "prose": "Audit the identity of internal users associated with denied communications."
+                        }
+                    ]
+                },
+                {
+                    "id": "sc-7.9_gdn",
+                    "name": "guidance",
+                    "prose": "Detecting outgoing communications traffic from internal actions that may pose threats to external systems is known as extrusion detection. Extrusion detection is carried out within the system at managed interfaces. Extrusion detection includes the analysis of incoming and outgoing communications traffic while searching for indications of internal threats to the security of external systems. Internal threats to external systems include traffic indicative of denial-of-service attacks, traffic with spoofed source addresses, and traffic that contains malicious code. Organizations have criteria to determine, update, and manage identified threats related to extrusion detection."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.10",
+            "class": "SP800-53-enhancement",
+            "title": "Prevent Exfiltration",
+            "parameters": [
+                {
+                    "id": "sc-7.10_prm_1",
+                    "label": "organization-defined frequency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(10)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(10)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ca-8",
+                    "rel": "related",
+                    "text": "CA-8"
+                },
+                {
+                    "href": "#si-3",
+                    "rel": "related",
+                    "text": "SI-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.10_smt",
+                    "name": "statement",
+                    "parts": [
+                        {
+                            "id": "sc-7.10_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(a)"
+                                }
+                            ],
+                            "prose": "Prevent the exfiltration of information; and"
+                        },
+                        {
+                            "id": "sc-7.10_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(b)"
+                                }
+                            ],
+                            "prose": "Conduct exfiltration tests {{ sc-7.10_prm_1 }}."
+                        }
+                    ]
+                },
+                {
+                    "id": "sc-7.10_gdn",
+                    "name": "guidance",
+                    "prose": "Prevention of exfiltration applies to both the intentional and unintentional exfiltration of information. Techniques used to prevent the exfiltration of information from systems may be implemented at internal endpoints, external boundaries, and across managed interfaces and include adherence to protocol formats, monitoring for beaconing activity from systems, disconnecting external network interfaces except when explicitly needed, employing traffic profile analysis to detect deviations from the volume and types of traffic expected, call backs to command and control centers, conducting penetration testing, monitoring for steganography, disassembling and reassembling packet headers, and using data loss and data leakage prevention tools. Devices that enforce strict adherence to protocol formats include deep packet inspection firewalls and Extensible Markup Language (XML) gateways. The devices verify adherence to protocol formats and specifications at the application layer and identify vulnerabilities that cannot be detected by devices that operate at the network or transport layers. The prevention of exfiltration is similar to data loss prevention or data leakage prevention and is closely associated with cross-domain solutions and system guards that enforce information flow requirements."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.11",
+            "class": "SP800-53-enhancement",
+            "title": "Restrict Incoming Communications Traffic",
+            "parameters": [
+                {
+                    "id": "sc-7.11_prm_1",
+                    "label": "organization-defined authorized sources"
+                },
+                {
+                    "id": "sc-7.11_prm_2",
+                    "label": "organization-defined authorized destinations"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(11)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(11)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.11_smt",
+                    "name": "statement",
+                    "prose": "Only allow incoming communications from {{ sc-7.11_prm_1 }} to be routed to {{ sc-7.11_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.11_gdn",
+                    "name": "guidance",
+                    "prose": "General source address validation techniques are applied to restrict the use of illegal and unallocated source addresses as well as source addresses that should only be used within the system. The restriction of incoming communications traffic provides determinations that source and destination address pairs represent authorized or allowed communications. Determinations can be based on several factors, including the presence of such address pairs in the lists of authorized or allowed communications, the absence of such address pairs in lists of unauthorized or disallowed pairs, or meeting more general rules for authorized or allowed source and destination pairs. Strong authentication of network addresses is not possible without the use of explicit security protocols, and thus, addresses can often be spoofed. Further, identity-based incoming traffic restriction methods can be employed, including router access control lists and firewall rules."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.12",
+            "class": "SP800-53-enhancement",
+            "title": "Host-based Protection",
+            "parameters": [
+                {
+                    "id": "sc-7.12_prm_1",
+                    "label": "organization-defined host-based boundary protection mechanisms"
+                },
+                {
+                    "id": "sc-7.12_prm_2",
+                    "label": "organization-defined system components"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(12)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(12)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.12_smt",
+                    "name": "statement",
+                    "prose": "Implement {{ sc-7.12_prm_1 }} at {{ sc-7.12_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.12_gdn",
+                    "name": "guidance",
+                    "prose": "Host-based boundary protection mechanisms include host-based firewalls. System components that employ host-based boundary protection mechanisms include servers, workstations, notebook computers, and mobile devices."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.13",
+            "class": "SP800-53-enhancement",
+            "title": "Isolation of Security Tools, Mechanisms, and Support Components",
+            "parameters": [
+                {
+                    "id": "sc-7.13_prm_1",
+                    "label": "organization-defined information security tools, mechanisms, and support components"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(13)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(13)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-2",
+                    "rel": "related",
+                    "text": "SC-2"
+                },
+                {
+                    "href": "#sc-3",
+                    "rel": "related",
+                    "text": "SC-3"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.13_smt",
+                    "name": "statement",
+                    "prose": "Isolate {{ sc-7.13_prm_1 }} from other internal system components by implementing physically separate subnetworks with managed interfaces to other components of the system."
+                },
+                {
+                    "id": "sc-7.13_gdn",
+                    "name": "guidance",
+                    "prose": "Physically separate subnetworks with managed interfaces are useful in isolating computer network defenses from critical operational processing networks to prevent adversaries from discovering the analysis and forensics techniques employed by organizations."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.14",
+            "class": "SP800-53-enhancement",
+            "title": "Protect Against Unauthorized Physical Connections",
+            "parameters": [
+                {
+                    "id": "sc-7.14_prm_1",
+                    "label": "organization-defined managed interfaces"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(14)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(14)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#pe-4",
+                    "rel": "related",
+                    "text": "PE-4"
+                },
+                {
+                    "href": "#pe-19",
+                    "rel": "related",
+                    "text": "PE-19"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.14_smt",
+                    "name": "statement",
+                    "prose": "Protect against unauthorized physical connections at {{ sc-7.14_prm_1 }}."
+                },
+                {
+                    "id": "sc-7.14_gdn",
+                    "name": "guidance",
+                    "prose": "Systems that operate at different security categories or classification levels may share common physical and environmental controls, since the systems may share space within the same facilities. In practice, it is possible that these separate systems may share common equipment rooms, wiring closets, and cable distribution paths. Protection against unauthorized physical connections can be achieved by using clearly identified and physically separated cable trays, connection frames, and patch panels for each side of managed interfaces with physical access controls that enforce limited authorized access to these items."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.15",
+            "class": "SP800-53-enhancement",
+            "title": "Networked Privileged Accesses",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(15)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(15)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ac-2",
+                    "rel": "related",
+                    "text": "AC-2"
+                },
+                {
+                    "href": "#ac-3",
+                    "rel": "related",
+                    "text": "AC-3"
+                },
+                {
+                    "href": "#au-2",
+                    "rel": "related",
+                    "text": "AU-2"
+                },
+                {
+                    "href": "#si-4",
+                    "rel": "related",
+                    "text": "SI-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.15_smt",
+                    "name": "statement",
+                    "prose": "Route networked, privileged accesses through a dedicated, managed interface for purposes of access control and auditing."
+                },
+                {
+                    "id": "sc-7.15_gdn",
+                    "name": "guidance",
+                    "prose": "Privileged access provides greater accessibility to system functions, including security functions. Adversaries attempt to gain privileged access to systems through remote access to cause adverse mission or business impacts, such as by exfiltrating information or bringing down a critical system capability. Routing networked, privileged access requests through a dedicated, managed interface further restricts privileged access for increased access control and auditing."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.16",
+            "class": "SP800-53-enhancement",
+            "title": "Prevent Discovery of System Components",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(16)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(16)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.16_smt",
+                    "name": "statement",
+                    "prose": "Prevent the discovery of specific system components that represent a managed interface."
+                },
+                {
+                    "id": "sc-7.16_gdn",
+                    "name": "guidance",
+                    "prose": "Preventing the discovery of system components representing a managed interface helps protect network addresses of those components from discovery through common tools and techniques used to identify devices on networks. Network addresses are not available for discovery and require prior knowledge for access. Preventing the discovery of components and devices can be accomplished by not publishing network addresses, using network address translation, or not entering the addresses in domain name systems. Another prevention technique is to periodically change network addresses."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.17",
+            "class": "SP800-53-enhancement",
+            "title": "Automated Enforcement of Protocol Formats",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(17)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(17)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#sc-4",
+                    "rel": "related",
+                    "text": "SC-4"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.17_smt",
+                    "name": "statement",
+                    "prose": "Enforce adherence to protocol formats."
+                },
+                {
+                    "id": "sc-7.17_gdn",
+                    "name": "guidance",
+                    "prose": "System components that enforce protocol formats include deep packet inspection firewalls and XML gateways. The components verify adherence to protocol formats and specifications at the application layer and identify vulnerabilities that cannot be detected by devices operating at the network or transport layers."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.18",
+            "class": "SP800-53-enhancement",
+            "title": "Fail Secure",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(18)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(18)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#cp-2",
+                    "rel": "related",
+                    "text": "CP-2"
+                },
+                {
+                    "href": "#cp-12",
+                    "rel": "related",
+                    "text": "CP-12"
+                },
+                {
+                    "href": "#sc-24",
+                    "rel": "related",
+                    "text": "SC-24"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.18_smt",
+                    "name": "statement",
+                    "prose": "Prevent systems from entering unsecure states in the event of an operational failure of a boundary protection device."
+                },
+                {
+                    "id": "sc-7.18_gdn",
+                    "name": "guidance",
+                    "prose": "Fail secure is a condition achieved by employing mechanisms to ensure that in the event of operational failures of boundary protection devices at managed interfaces, systems do not enter into unsecure states where intended security properties no longer hold. Managed interfaces include routers, firewalls, and application gateways that reside on protected subnetworks (commonly referred to as demilitarized zones). Failures of boundary protection devices cannot lead to or cause information external to the devices to enter the devices nor can failures permit unauthorized information releases."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.19",
+            "class": "SP800-53-enhancement",
+            "title": "Block Communication from Non-organizationally Configured Hosts",
+            "parameters": [
+                {
+                    "id": "sc-7.19_prm_1",
+                    "label": "organization-defined communication clients"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(19)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(19)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.19_smt",
+                    "name": "statement",
+                    "prose": "Block inbound and outbound communications traffic between {{ sc-7.19_prm_1 }} that are independently configured by end users and external service providers."
+                },
+                {
+                    "id": "sc-7.19_gdn",
+                    "name": "guidance",
+                    "prose": "Communication clients independently configured by end users and external service providers include instant messaging clients and video conferencing software and applications. Traffic blocking does not apply to communication clients that are configured by organizations to perform authorized functions."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.20",
+            "class": "SP800-53-enhancement",
+            "title": "Dynamic Isolation and Segregation",
+            "parameters": [
+                {
+                    "id": "sc-7.20_prm_1",
+                    "label": "organization-defined system components"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(20)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(20)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.20_smt",
+                    "name": "statement",
+                    "prose": "Provide the capability to dynamically isolate {{ sc-7.20_prm_1 }} from other system components."
+                },
+                {
+                    "id": "sc-7.20_gdn",
+                    "name": "guidance",
+                    "prose": "The capability to dynamically isolate certain internal system components is useful when it is necessary to partition or separate system components of questionable origin from components that possess greater trustworthiness. Component isolation reduces the attack surface of organizational systems. Isolating selected system components can also limit the damage from successful attacks when such attacks occur."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.21",
+            "class": "SP800-53-enhancement",
+            "title": "Isolation of System Components",
+            "parameters": [
+                {
+                    "id": "sc-7.21_prm_1",
+                    "label": "organization-defined system components"
+                },
+                {
+                    "id": "sc-7.21_prm_2",
+                    "label": "organization-defined missions and/or business functions"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(21)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(21)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#ca-9",
+                    "rel": "related",
+                    "text": "CA-9"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.21_smt",
+                    "name": "statement",
+                    "prose": "Employ boundary protection mechanisms to isolate {{ sc-7.21_prm_1 }} supporting {{ sc-7.21_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.21_gdn",
+                    "name": "guidance",
+                    "prose": "Organizations can isolate system components that perform different mission or business functions. Such isolation limits unauthorized information flows among system components and provides the opportunity to deploy greater levels of protection for selected system components. Isolating system components with boundary protection mechanisms provides the capability for increased protection of individual system components and to more effectively control information flows between those components. Isolating system components provides enhanced protection that limits the potential harm from hostile cyber-attacks and errors. The degree of isolation varies depending upon the mechanisms chosen. Boundary protection mechanisms include routers, gateways, and firewalls that separate system components into physically separate networks or subnetworks; cross-domain devices that separate subnetworks; virtualization techniques; and the encryption of information flows among system components using distinct encryption keys."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.22",
+            "class": "SP800-53-enhancement",
+            "title": "Separate Subnets for Connecting to Different Security Domains",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(22)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(22)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.22_smt",
+                    "name": "statement",
+                    "prose": "Implement separate network addresses to connect to systems in different security domains."
+                },
+                {
+                    "id": "sc-7.22_gdn",
+                    "name": "guidance",
+                    "prose": "The decomposition of systems into subnetworks (i.e., subnets) helps to provide the appropriate level of protection for network connections to different security domains that contain information with different security categories or classification levels."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.23",
+            "class": "SP800-53-enhancement",
+            "title": "Disable Sender Feedback on Protocol Validation Failure",
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(23)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(23)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.23_smt",
+                    "name": "statement",
+                    "prose": "Disable feedback to senders on protocol format validation failure."
+                },
+                {
+                    "id": "sc-7.23_gdn",
+                    "name": "guidance",
+                    "prose": "Disabling feedback to senders when there is a failure in protocol validation format prevents adversaries from obtaining information that would otherwise be unavailable."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.24",
+            "class": "SP800-53-enhancement",
+            "title": "Personally Identifiable Information",
+            "parameters": [
+                {
+                    "id": "sc-7.24_prm_1",
+                    "label": "organization-defined processing rules"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(24)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(24)"
+                }
+            ],
+            "links": [
+                {
+                    "href": "#pt-2",
+                    "rel": "related",
+                    "text": "PT-2"
+                },
+                {
+                    "href": "#si-15",
+                    "rel": "related",
+                    "text": "SI-15"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.24_smt",
+                    "name": "statement",
+                    "prose": "For systems that process personally identifiable information:",
+                    "parts": [
+                        {
+                            "id": "sc-7.24_smt.a",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(a)"
+                                }
+                            ],
+                            "prose": "Apply the following processing rules to data elements of personally identifiable information: {{ sc-7.24_prm_1 }};"
+                        },
+                        {
+                            "id": "sc-7.24_smt.b",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(b)"
+                                }
+                            ],
+                            "prose": "Monitor for permitted processing at the external interfaces to the system and at key internal boundaries within the system;"
+                        },
+                        {
+                            "id": "sc-7.24_smt.c",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(c)"
+                                }
+                            ],
+                            "prose": "Document each processing exception; and"
+                        },
+                        {
+                            "id": "sc-7.24_smt.d",
+                            "name": "item",
+                            "properties": [
+                                {
+                                    "name": "label",
+                                    "value": "(d)"
+                                }
+                            ],
+                            "prose": "Review and remove exceptions that are no longer supported."
+                        }
+                    ]
+                },
+                {
+                    "id": "sc-7.24_gdn",
+                    "name": "guidance",
+                    "prose": "Managing the processing of personally identifiable information is an important aspect of protecting an individual\u2019s privacy. Applying, monitoring for, and documenting exceptions to processing rules ensure that personally identifiable information is processed only in accordance with established privacy requirements."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.25",
+            "class": "SP800-53-enhancement",
+            "title": "Unclassified National Security System Connections",
+            "parameters": [
+                {
+                    "id": "sc-7.25_prm_1",
+                    "label": "organization-defined unclassified national security system"
+                },
+                {
+                    "id": "sc-7.25_prm_2",
+                    "label": "organization-defined boundary protection device"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(25)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(25)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.25_smt",
+                    "name": "statement",
+                    "prose": "Prohibit the direct connection of {{ sc-7.25_prm_1 }} to an external network without the use of {{ sc-7.25_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.25_gdn",
+                    "name": "guidance",
+                    "prose": "A direct connection is a dedicated physical or virtual connection between two or more systems. Organizations typically do not have complete control over external networks, including the Internet. Boundary protection devices (e.g., firewalls, gateways, and routers) mediate communications and information flows between unclassified national security systems and external networks."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.26",
+            "class": "SP800-53-enhancement",
+            "title": "Classified National Security System Connections",
+            "parameters": [
+                {
+                    "id": "sc-7.26_prm_1",
+                    "label": "organization-defined boundary protection device"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(26)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(26)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.26_smt",
+                    "name": "statement",
+                    "prose": "Prohibit the direct connection of a classified national security system to an external network without the use of {{ sc-7.26_prm_1 }}."
+                },
+                {
+                    "id": "sc-7.26_gdn",
+                    "name": "guidance",
+                    "prose": "A direct connection is a dedicated physical or virtual connection between two or more systems. Organizations typically do not have complete control over external networks, including the Internet. Boundary protection devices (e.g., firewalls, gateways, and routers) mediate communications and information flows between classified national security systems and external networks. In addition, approved boundary protection devices (typically managed interface or cross-domain systems) provide information flow enforcement from systems to external networks."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.27",
+            "class": "SP800-53-enhancement",
+            "title": "Unclassified Non-national Security System Connections",
+            "parameters": [
+                {
+                    "id": "sc-7.27_prm_1",
+                    "label": "organization-defined unclassified non-national security system"
+                },
+                {
+                    "id": "sc-7.27_prm_2",
+                    "label": "organization-defined boundary protection device"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(27)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(27)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.27_smt",
+                    "name": "statement",
+                    "prose": "Prohibit the direct connection of {{ sc-7.27_prm_1 }} to an external network without the use of {{ sc-7.27_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.27_gdn",
+                    "name": "guidance",
+                    "prose": "A direct connection is a dedicated physical or virtual connection between two or more systems. Organizations typically do not have complete control over external networks, including the Internet. Boundary protection devices (e.g., firewalls, gateways, and routers) mediate communications and information flows between unclassified non-national security systems and external networks."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.28",
+            "class": "SP800-53-enhancement",
+            "title": "Connections to Public Networks",
+            "parameters": [
+                {
+                    "id": "sc-7.28_prm_1",
+                    "label": "organization-defined system"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(28)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(28)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.28_smt",
+                    "name": "statement",
+                    "prose": "Prohibit the direct connection of {{ sc-7.28_prm_1 }} to a public network."
+                },
+                {
+                    "id": "sc-7.28_gdn",
+                    "name": "guidance",
+                    "prose": "A direct connection is a dedicated physical or virtual connection between two or more systems. A public network is a network accessible to the public, including the Internet and organizational extranets with public access."
+                }
+            ]
+        },
+        {
+            "id": "sc-7.29",
+            "class": "SP800-53-enhancement",
+            "title": "Separate Subnets to Isolate Functions",
+            "parameters": [
+                {
+                    "id": "sc-7.29_prm_1",
+                    "select": {
+                        "alternatives": [
+                            "physically",
+                            "logically"
+                        ]
+                    }
+                },
+                {
+                    "id": "sc-7.29_prm_2",
+                    "label": "organization-defined critical system components and functions"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "label",
+                    "value": "SC-7(29)"
+                },
+                {
+                    "name": "sort-id",
+                    "value": "SC-07(29)"
+                }
+            ],
+            "parts": [
+                {
+                    "id": "sc-7.29_smt",
+                    "name": "statement",
+                    "prose": "Implement {{ sc-7.29_prm_1 }} separate subnetworks to isolate the following critical system components and functions: {{ sc-7.29_prm_2 }}."
+                },
+                {
+                    "id": "sc-7.29_gdn",
+                    "name": "guidance",
+                    "prose": "Separating critical system components and functions from other noncritical system components and functions through separate subnetworks may be necessary to reduce susceptibility to a catastrophic or debilitating breach or compromise that results in system failure. For example, physically separating the command and control function from the in-flight entertainment function through separate subnetworks in a commercial aircraft provides an increased level of assurance in the trustworthiness of critical system functions."
+                }
+            ]
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

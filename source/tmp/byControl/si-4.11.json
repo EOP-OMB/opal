@@ -1,0 +1,34 @@
+{
+    "id": "si-4.11",
+    "class": "SP800-53-enhancement",
+    "title": "Analyze Communications Traffic Anomalies",
+    "parameters": [
+        {
+            "id": "si-4.11_prm_1",
+            "label": "organization-defined interior points within the system"
+        }
+    ],
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-4(11)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-04(11)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-4.11_smt",
+            "name": "statement",
+            "prose": "Analyze outbound communications traffic at the external interfaces to the system and selected {{ si-4.11_prm_1 }} to discover anomalies."
+        },
+        {
+            "id": "si-4.11_gdn",
+            "name": "guidance",
+            "prose": "Organization-defined interior points include subnetworks and subsystems. Anomalies within organizational systems include large file transfers, long-time persistent connections, attempts to access information from unexpected locations, the use of unusual protocols and ports, the use of unmonitored network protocols (e.g., IPv6 usage during IPv4 transition), and attempted communications with suspected malicious external addresses."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.9",
+    "class": "SP800-53-enhancement",
+    "title": "Operations Security",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(9)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(09)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-7",
+            "rel": "moved-to",
+            "text": "SR-7"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

@@ -1,0 +1,45 @@
+{
+    "id": "si-7.3",
+    "class": "SP800-53-enhancement",
+    "title": "Centrally Managed Integrity Tools",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SI-7(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SI-07(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-3",
+            "rel": "related",
+            "text": "AU-3"
+        },
+        {
+            "href": "#si-2",
+            "rel": "related",
+            "text": "SI-2"
+        },
+        {
+            "href": "#si-8",
+            "rel": "related",
+            "text": "SI-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "si-7.3_smt",
+            "name": "statement",
+            "prose": "Employ centrally managed integrity verification tools."
+        },
+        {
+            "id": "si-7.3_gdn",
+            "name": "guidance",
+            "prose": "Centrally managed integrity verification tools provides greater consistency in the application of such tools and can facilitate more comprehensive coverage of integrity verification actions."
+        }
+    ],
+    "group_title": "System and Information Integrity"
+}

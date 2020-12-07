@@ -1,0 +1,28 @@
+{
+    "id": "pe-3.7",
+    "class": "SP800-53-enhancement",
+    "title": "Physical Barriers",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PE-3(7)"
+        },
+        {
+            "name": "sort-id",
+            "value": "PE-03(07)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "pe-3.7_smt",
+            "name": "statement",
+            "prose": "Limit access using physical barriers."
+        },
+        {
+            "id": "pe-3.7_gdn",
+            "name": "guidance",
+            "prose": "Physical barriers include bollards, concrete slabs, jersey walls, and hydraulic active vehicle barriers."
+        }
+    ],
+    "group_title": "Physical and Environmental Protection"
+}

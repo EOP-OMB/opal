@@ -1,0 +1,27 @@
+{
+    "id": "pl-2.2",
+    "class": "SP800-53-enhancement",
+    "title": "Functional Architecture",
+    "properties": [
+        {
+            "name": "label",
+            "value": "PL-2(2)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "PL-02(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#pl-8",
+            "rel": "incorporated-into",
+            "text": "PL-8"
+        }
+    ],
+    "group_title": "Planning"
+}

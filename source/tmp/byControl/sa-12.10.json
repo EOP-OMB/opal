@@ -1,0 +1,27 @@
+{
+    "id": "sa-12.10",
+    "class": "SP800-53-enhancement",
+    "title": "Validate as Genuine and Not Altered",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-12(10)"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-12(10)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-4.3",
+            "rel": "moved-to",
+            "text": "SR-4(3)"
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

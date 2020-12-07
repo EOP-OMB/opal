@@ -1,0 +1,28 @@
+{
+    "id": "ma-5.5",
+    "class": "SP800-53-enhancement",
+    "title": "Non-system Maintenance",
+    "properties": [
+        {
+            "name": "label",
+            "value": "MA-5(5)"
+        },
+        {
+            "name": "sort-id",
+            "value": "MA-05(05)"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ma-5.5_smt",
+            "name": "statement",
+            "prose": "Ensure that non-escorted personnel performing maintenance activities not directly associated with the system but in the physical proximity of the system, have required access authorizations."
+        },
+        {
+            "id": "ma-5.5_gdn",
+            "name": "guidance",
+            "prose": "Personnel who perform maintenance activities in other capacities not directly related to the system include physical plant personnel and custodial personnel."
+        }
+    ],
+    "group_title": "Maintenance"
+}

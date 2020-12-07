@@ -1,0 +1,27 @@
+{
+    "id": "au-15",
+    "class": "SP800-53",
+    "title": "Alternate Audit Logging Capability",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AU-15"
+        },
+        {
+            "name": "status",
+            "value": "Withdrawn"
+        },
+        {
+            "name": "sort-id",
+            "value": "AU-15"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-5.5",
+            "rel": "moved-to",
+            "text": "AU-5(5)"
+        }
+    ],
+    "group_title": "Audit and Accountability"
+}

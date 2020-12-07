@@ -1,0 +1,50 @@
+{
+    "id": "ac-6.6",
+    "class": "SP800-53-enhancement",
+    "title": "Privileged Access by Non-organizational Users",
+    "properties": [
+        {
+            "name": "label",
+            "value": "AC-6(6)"
+        },
+        {
+            "name": "sort-id",
+            "value": "AC-06(06)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ac-18",
+            "rel": "related",
+            "text": "AC-18"
+        },
+        {
+            "href": "#ac-19",
+            "rel": "related",
+            "text": "AC-19"
+        },
+        {
+            "href": "#ia-2",
+            "rel": "related",
+            "text": "IA-2"
+        },
+        {
+            "href": "#ia-8",
+            "rel": "related",
+            "text": "IA-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "ac-6.6_smt",
+            "name": "statement",
+            "prose": "Prohibit privileged access to the system by non-organizational users."
+        },
+        {
+            "id": "ac-6.6_gdn",
+            "name": "guidance",
+            "prose": "An organizational user is an employee or an individual considered by the organization to have the equivalent status of an employee. Organizational users include contractors, guest researchers, or individuals detailed from other organizations. A non-organizational user is a user who is not an organizational user. Policies and procedures for granting equivalent status of employees to individuals include a need-to-know, citizenship, and the relationship to the organization."
+        }
+    ],
+    "group_title": "Access Control"
+}

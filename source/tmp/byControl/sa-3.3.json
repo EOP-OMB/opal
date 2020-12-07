@@ -1,0 +1,35 @@
+{
+    "id": "sa-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Technology Refresh",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SA-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SA-03(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#ma-6",
+            "rel": "related",
+            "text": "MA-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sa-3.3_smt",
+            "name": "statement",
+            "prose": "Plan for and implement a technology refresh schedule for the system throughout the system development life cycle."
+        },
+        {
+            "id": "sa-3.3_gdn",
+            "name": "guidance",
+            "prose": "Technology refresh planning may encompass hardware, software, firmware, processes, personnel skill sets, suppliers, service providers, and facilities. The use of obsolete or nearing obsolete technology may increase the security and privacy risks associated with unsupported components, counterfeit or repurposed components, components unable to implement security or privacy requirements, slow or inoperable components, components from untrusted sources, inadvertent personnel error, or increased complexity. Technology refreshes typically occur during the operations and maintenance stage of the system development life cycle."
+        }
+    ],
+    "group_title": "System and Services Acquisition"
+}

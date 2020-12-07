@@ -1,0 +1,45 @@
+{
+    "id": "cm-4.2",
+    "class": "SP800-53-enhancement",
+    "title": "Verification of Controls",
+    "properties": [
+        {
+            "name": "label",
+            "value": "CM-4(2)"
+        },
+        {
+            "name": "sort-id",
+            "value": "CM-04(02)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sa-11",
+            "rel": "related",
+            "text": "SA-11"
+        },
+        {
+            "href": "#sc-3",
+            "rel": "related",
+            "text": "SC-3"
+        },
+        {
+            "href": "#si-6",
+            "rel": "related",
+            "text": "SI-6"
+        }
+    ],
+    "parts": [
+        {
+            "id": "cm-4.2_smt",
+            "name": "statement",
+            "prose": "After system changes, verify that the impacted controls are implemented correctly, operating as intended, and producing the desired outcome with regard to meeting the security and privacy requirements for the system."
+        },
+        {
+            "id": "cm-4.2_gdn",
+            "name": "guidance",
+            "prose": "Implementation in this context refers to installing changed code in the operational system that may have an impact on security or privacy controls."
+        }
+    ],
+    "group_title": "Configuration Management"
+}

@@ -1,0 +1,40 @@
+{
+    "id": "sc-16.1",
+    "class": "SP800-53-enhancement",
+    "title": "Integrity Verification",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SC-16(1)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SC-16(01)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#au-10",
+            "rel": "related",
+            "text": "AU-10"
+        },
+        {
+            "href": "#sc-8",
+            "rel": "related",
+            "text": "SC-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sc-16.1_smt",
+            "name": "statement",
+            "prose": "Verify the integrity of transmitted security and privacy attributes."
+        },
+        {
+            "id": "sc-16.1_gdn",
+            "name": "guidance",
+            "prose": "Part of verifying the integrity of transmitted information is ensuring that security and privacy attributes that are associated with such information have not been modified in an unauthorized manner. Unauthorized modification of security or privacy attributes can result in a loss of integrity for transmitted information."
+        }
+    ],
+    "group_title": "System and Communications Protection"
+}

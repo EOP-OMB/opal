@@ -1,0 +1,40 @@
+{
+    "id": "sr-3.3",
+    "class": "SP800-53-enhancement",
+    "title": "Sub-tier Flow Down",
+    "properties": [
+        {
+            "name": "label",
+            "value": "SR-3(3)"
+        },
+        {
+            "name": "sort-id",
+            "value": "SR-03(03)"
+        }
+    ],
+    "links": [
+        {
+            "href": "#sr-5",
+            "rel": "related",
+            "text": "SR-5"
+        },
+        {
+            "href": "#sr-8",
+            "rel": "related",
+            "text": "SR-8"
+        }
+    ],
+    "parts": [
+        {
+            "id": "sr-3.3_smt",
+            "name": "statement",
+            "prose": "Ensure that the controls included in the contracts of prime contractors are also included in the contracts of subcontractors."
+        },
+        {
+            "id": "sr-3.3_gdn",
+            "name": "guidance",
+            "prose": "To manage supply chain risk effectively and holistically, it is important that organizations ensure that supply chain risk management controls are included at all tiers in the supply chain. This includes ensuring that Tier 1 (prime) contractors have implemented processes to facilitate the \u201cflow down\u201d of supply chain risk management controls to sub-tier contractors. The controls subject to flow down are identified in SR-3b."
+        }
+    ],
+    "group_title": "Supply Chain Risk Management"
+}
