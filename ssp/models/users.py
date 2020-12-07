@@ -44,7 +44,7 @@ class telephone_number(PrimitiveModel):
 
 
 class location(ExtendedBasicModel):
-    address = models.ForeignKey(address, on_delete=models.PROTECT)
+    address = models.ForeignKey(address, on_delete=models.PROTECT, related_name='location_set')
     emailAddresses = customMany2ManyField(email)
     telephoneNumbers = customMany2ManyField(telephone_number)
 
@@ -63,7 +63,7 @@ class person(ExtendedBasicModel):
     An individual who can be assigned roles within a system.
     """
     name = models.CharField(max_length=100)
-    short_name = models.CharField(max_length=25)
+    short_name = models.CharField(max_length=25) #Samira: short_name already exists in the BasicModel. No need to have it here.
     organizations = customMany2ManyField(organization)
     locations = customMany2ManyField(location)
     email_addresses = customMany2ManyField(email)
@@ -71,3 +71,4 @@ class person(ExtendedBasicModel):
 
     def __str__(self):
         return self.name
+
