@@ -69,7 +69,7 @@ class system_inventory_item(ExtendedBasicModel):
 
 
 class system_user(BasicModel):
-    user = models.ForeignKey(person, on_delete=models.PROTECT)
+    user = models.ForeignKey(person, on_delete=models.PROTECT, related_name='system_user_set')
     roles = customMany2ManyField(user_role)
 
 
