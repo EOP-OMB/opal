@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'ssp.apps.ssp',
     'django_extensions',
     'fixture_magic',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [

@@ -3,8 +3,8 @@ import json
 import os
 import shutil
 
-def break_up_catalog(file_path="/Users/dan/PycharmProjects/opal-master/source/"
-                     ,file_name="NIST_SP-800-53_rev5-FINAL_catalog.json"):
+
+def break_up_catalog(file_path, file_name):
     """
     Takes an OSCAL Catalog file and breaks it into seperate json files.
     One file is created for each family, control, and enhancement
@@ -16,49 +16,51 @@ def break_up_catalog(file_path="/Users/dan/PycharmProjects/opal-master/source/"
     # file_path = "/Users/dan/PycharmProjects/opal-master/source/"
     # file_name = "NIST_SP-800-53_rev5-FINAL_catalog.json"
     f = file_path + file_name
-    shutil.rmtree(file_path + 'tmp')
-    os.makedirs(file_path + 'tmp')
-    os.makedirs(file_path + 'tmp/byControl')
-    os.makedirs(file_path + 'tmp/byFamily')
+    catalog_source = file_name.replace('.json', '')
+    catalog_dir = file_path + 'tmp/' + catalog_source
+    if os.path.isdir(catalog_dir):
+        shutil.rmtree(catalog_dir)
+    os.makedirs(catalog_dir)
 
     catalogDict = json.loads(open(f, 'r').read())
     for group in catalogDict['catalog']['groups']:
-        logging.debug("Extracting " + group['title'] + " family...")
-        group_file_name = file_path + "tmp/byFamily/" + group.get("id")+".json"
-        gf = open(group_file_name,'w')
-        json.dump(group,gf,indent=4)
+        group_directory_name = file_path + "tmp/" + catalog_source + "/" + group.get("id") + "/"
+        os.makedirs(group_directory_name)
+        # gf = open(group_file_name,'w')
+        # json.dump(group,gf,indent=4)
         for control in group['controls']:
-            logging.debug("Extracting " + control['title'] + "(" + control['id'] + ") control...")
             control["group_title"] = group["title"]
-            control_file_name = file_path + "tmp/byControl/" + control['id']+".json"
-            cf = open(control_file_name,'w')
+            control["catalog"] = catalog_source
+            control_file_name = group_directory_name + control['id'] + ".json"
+            cf = open(control_file_name, 'w')
             json.dump(control, cf, indent=4)
             if 'controls' in control:
-                logging.debug("Found control enhancements, extracting...")
                 for enhancement in control['controls']:
-                    logging.debug("Extracting " + control['title'] + " enhancement...")
                     enhancement["group_title"] = group["title"]
-                    enhancement_file_name = file_path + "tmp/byControl/" + enhancement['id']+".json"
-                    ef = open(enhancement_file_name,'w')
-                    json.dump(enhancement,ef, indent=4)
+                    enhancement["catalog"] = catalog_source
+                    enhancement_file_name = group_directory_name + enhancement['id'] + ".json"
+                    ef = open(enhancement_file_name, 'w')
+                    json.dump(enhancement, ef, indent=4)
+
 
 def import_all_controls(path):
     """
     imports all control json files in given directory
     """
     import os
+    for root, dirs, files in os.walk(path, topdown=False):
+        for name in files:
+            if name.endswith(".json"):
+                import_individual_control(os.path.join(root, name))
+        # for name in dirs:
+        #     print(os.path.join(root, name))
 
-    directory = path
-    for filename in os.listdir(directory):
-        if filename.endswith(".json") :
-            import_individual_control(os.path.join(directory, filename))
-        else:
-            continue
 
-
-def save_parameter(id,type,text,depends_on=''):
-    param_id, created = t.nist_control_parameter.objects.get_or_create(param_id=id,param_type=type,param_text=text,param_depends_on=depends_on)
+def save_parameter(id, type, text, depends_on=''):
+    param_id, created = t.nist_control_parameter.objects.get_or_create(param_id=id, param_type=type, param_text=text,
+                                                                       param_depends_on=depends_on)
     return param_id
+
 
 def clean_param_text(str):
     str = str.translate(str.maketrans('', '', '\n\t\r')).split(' ')
@@ -66,14 +68,17 @@ def clean_param_text(str):
         str.remove('')
     return ' '.join(str)
 
+
 def import_individual_control(file_name):
     cntrl = json.loads(open(file_name, 'r').read())
     group_id = cntrl["id"][0:1]
     group_title = cntrl["group_title"]
+    cntrl_catalog = cntrl["catalog"]
     parameter_list = []
     cntrl_status = "Active"
     cntrl_label = ""
     cntrl_sortID = ""
+
 
     for item in cntrl["properties"]:
         if item["name"] == 'status':
@@ -84,33 +89,36 @@ def import_individual_control(file_name):
             cntrl_sortID = item["value"]
 
     control_id, created = t.nist_control.objects.get_or_create(group_id=group_id,
-                                         group_title=group_title,
-                                         source="NIST SP-800 53 rev5 FINAL",
-                                         control_id=cntrl["id"],
-                                         control_title=cntrl["title"],
-                                         label=cntrl_label,
-                                         sort_id=cntrl_sortID,
-                                         status=cntrl_status)
+                                                               group_title=group_title,
+                                                               source=cntrl_catalog,
+                                                               control_id=cntrl["id"],
+                                                               control_title=cntrl["title"],
+                                                               label=cntrl_label,
+                                                               sort_id=cntrl_sortID,
+                                                               status=cntrl_status,
+                                                               catalog=cntrl_catalog)
 
     if 'parameters' in cntrl:
         for param in cntrl['parameters']:
+            param_id = None
             if 'label' in param:
-                param_id = save_parameter(param["id"],"label",clean_param_text(param['label']))
+                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']))
             if 'select' in param:
                 param_text = ','.join(param['select']['alternatives'])
-                param_id = save_parameter(param["id"], "select",clean_param_text(param_text))
+                param_id = save_parameter(param["id"], "select", clean_param_text(param_text))
             if 'depends-on' in param:
-                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']),param["depends-on"])
-            t.nist_control.objects.get(pk=control_id.id).parameters.add(param_id)
+                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']), param["depends-on"])
+            if param_id is not None:
+                t.nist_control.objects.get(pk=control_id.id).parameters.add(param_id)
 
     if 'parts' in cntrl:
         cntrl_stmnt_text = ''
         logging.debug("Found parts, extracting (better strap in, this could get messy)...")
         for part in cntrl['parts']:
             cntrl_stmnt_text += addControlPart(part)
-            cntrl_stmnt, created = t.nist_control_statement.objects.get_or_create(statement_type=part['name'],
-                                                                                nist_control_id=control_id.id,
-                                                                                statement_text=cntrl_stmnt_text)
+            t.nist_control_statement.objects.get_or_create(statement_type=part['name'],
+                                                           nist_control_id=control_id.id,
+                                                           statement_text=cntrl_stmnt_text)
             cntrl_stmnt_text = ''
 
 
@@ -136,6 +144,8 @@ def addControlPart(part, indent=0):
             logging.debug("Added subpart...")
     return t
 
+
 def run():
-    break_up_catalog("source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
-    import_all_controls("source/tmp/byControl")
+    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev4_catalog.json")
+    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
+    import_all_controls("/Users/dan/PycharmProjects/opal_omb/source/tmp/")

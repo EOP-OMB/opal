@@ -200,3 +200,4 @@ ssp/__pycache__/
 !/db.sqlite3
 /ssp/static/
 /static/
+/source/tmp/

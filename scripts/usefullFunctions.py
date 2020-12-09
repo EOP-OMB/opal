@@ -6,7 +6,7 @@ def startLogging():
     logging.basicConfig(  # filename=logFile,
         filemode='w',
         format='%(name)s - %(levelname)s - %(message)s',
-        level=logging.ERROR
+        level=logging.debug()
     )
 
 def addControlsToGroup(group_name,controls):
@@ -50,18 +50,20 @@ def listRolesWithControlCount():
     for i in sort_roles:
         print(i[0], i[1])
 
-def linkSystemControltoNISTControl():
-    for item, key in system_control.objects.all().values_list('control_id', 'pk'):
+def linkSystemControltoNISTControl(catalog):
+    from ssp.models.controls import system_control, nist_control
+    logging.debug("Stsrting...")
+    for item, key in system_control.objects.all().values_list('nist_control', 'pk'):
         control = system_control.objects.get(pk=key)
-        logging.debug('Opened control ' + control.control_id)
-        nist_control_id = item.lower().replace(' ','').replace('(', '.').replace(')', '')
+        logging.debug('Opened control ' + control.title)
+        nist_control_id = control.short_name
         logging.debug('Looking up ' + nist_control_id)
         try:
-            control.nist_control = nist_control.objects.get(control_id=nist_control_id)
+            control.nist_control = nist_control.objects.get(sort_id=nist_control_id,catalog=catalog)
             control.save()
             logging.debug('Found nist control, link established')
         except nist_control.DoesNotExist:
-            logging.debug("".join(item[0].lower().split()).replace('(', '.').replace(')', '') + ' not found')
+            logging.debug(nist_control_id + ' not found')
 
 
 def createFixtures():

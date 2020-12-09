@@ -14,7 +14,7 @@
             </p>
             <p>
                 <b>Statement:</b><br>
-                {{ object.nist_control.get_statement }}
+                {{ object.nist_control.get_statement | safe }}
             </p>
             <p>
                 <b>Guidance:</b><br>

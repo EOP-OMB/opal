@@ -12,9 +12,9 @@ def run():
     #print(nist_control_parameter().get_dictionary_json)
 
     #Creating JSON for person model all data
-    print("---- person model JSON ----")
-    queryset = person.objects.all()
-    serializer = person_serializer(queryset, many=True)
+    print("---- information_type model JSON ----")
+    queryset = information_type.objects.filter(pk=1)
+    serializer = information_type_serializer(queryset, many=True)
     data = serializer.data
     json_data = JSONRenderer().render(data)
     json_object = json.loads(json_data)
