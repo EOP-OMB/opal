@@ -23,6 +23,9 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
                 'security_objective_confidentiality', 'security_objective_integrity',
                 'security_objective_availability'))
         }),
+        ('Users', {
+            'fields': ['system_users',]
+        }),
         ('System Diagrams', {
             'fields': (('authorization_boundary_diagram',
                         'network_architecture_diagram',
