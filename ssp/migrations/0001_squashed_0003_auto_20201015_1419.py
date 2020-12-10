@@ -8,8 +8,6 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('ssp', '0001_initial'), ('ssp', '0002_auto_20201015_1354'), ('ssp', '0003_auto_20201015_1419')]
-
     initial = True
 
     dependencies = [

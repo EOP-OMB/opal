@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ssp', '0003_auto_20201015_1419'),
+        ('ssp', '0001_squashed_0003_auto_20201015_1419'),
     ]
 
     operations = [
