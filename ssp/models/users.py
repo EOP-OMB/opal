@@ -62,6 +62,10 @@ class person(ExtendedBasicModel):
     """
     An individual who can be assigned roles within a system.
     """
+
+    class Meta:
+        ordering = ('name',)
+
     name = models.CharField(max_length=100)
     organizations = customMany2ManyField(organization)
     locations = customMany2ManyField(location)
