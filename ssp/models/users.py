@@ -63,7 +63,6 @@ class person(ExtendedBasicModel):
     An individual who can be assigned roles within a system.
     """
     name = models.CharField(max_length=100)
-    short_name = models.CharField(max_length=25)
     organizations = customMany2ManyField(organization)
     locations = customMany2ManyField(location)
     email_addresses = customMany2ManyField(email)
