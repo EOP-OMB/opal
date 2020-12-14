@@ -1,5 +1,9 @@
 from ssp.models.users import *
 
+#Samira:
+#from django.core import serializers
+import json
+
 # objects related to security controls
 
 # Objects to hold control catalog data that should be displayed in the SSP
@@ -22,6 +26,32 @@ class nist_control_parameter(PrimitiveModel):
     def __str__(self):
         return self.param_id
 
+    #Samira: Sample JSON export using dictionary -- will be removed later
+    @property
+    def get_dictionary_json(self):
+        key_value_list = [
+            ['id', 'pk'],
+            ['uuid', 'uuid'],
+            ['param_id', 'param_id'],
+            ['param_type', 'param_type'],
+            ['param_text', 'param_text'],
+            ['param_depends_on', 'param_depends_on'],
+            ['param_class', 'param_class']
+        ]
+        if len(nist_control_parameter.objects.all()) == 0:
+            return None
+        else:
+            return_list = []
+            for obj in nist_control_parameter.objects.all():
+                dict = {}
+                for kv in key_value_list:
+                    if kv[0] == 'uuid':
+                        dict[kv[0]]= str(getattr(obj, kv[1])) #Had to add this line to fix the UUID error when converting the list to json
+                    else:
+                        dict[kv[0]] = getattr(obj, kv[1])
+                return_list.append(dict)
+            json_str = json.dumps(return_list, indent=2)
+            return json_str
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
@@ -44,7 +74,7 @@ class nist_control(PrimitiveModel):
     status = models.CharField(max_length=255, blank=True)
     parameters = customMany2ManyField(nist_control_parameter)
     links = customMany2ManyField(link)
-    catalog = models.CharField(max_length=50)
+    catalog = models.CharField(max_length=50,null=True)
 
 
     def getStatementText(self, statement_type):
@@ -102,7 +132,7 @@ class control_parameter(BasicModel):
 
 control_implementation_status_choices = [
     ('Implemented', 'Implemented'),
-    ('Partially Implemented ', 'Partially Implemented'),
+    ('Parti1ally Implemented ', 'Partially Implemented'),
     ('Planned ', 'Planned'),
     ('Alternative Implementation', 'Alternative Implementation'),
     ('Not Applicable', 'Not Applicable'),
@@ -131,3 +161,8 @@ class system_control(ExtendedBasicModel):
         return self.control_statements.order_by('control_statement_id')
 
 
+"""
+***********************************************************
+******************  Serializer Classes  *******************
+***********************************************************
+"""

@@ -69,7 +69,7 @@ class system_inventory_item(ExtendedBasicModel):
 
 
 class system_user(BasicModel):
-    user = models.ForeignKey(person, on_delete=models.PROTECT)
+    user = models.ForeignKey(person, on_delete=models.PROTECT, related_name='system_user_set')
     roles = customMany2ManyField(user_role)
 
 
@@ -115,3 +115,19 @@ class system_security_plan(ExtendedBasicModel):
     @property
     def selected_controls(self):
         return self._get_selected_controls()
+
+
+"""
+***********************************************************
+******************  Serializer Classes  *******************
+***********************************************************
+"""
+
+class system_user_serializer(serializers.ModelSerializer):
+    roles = user_role_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = system_user
+        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'roles']
+        depth = 1
+

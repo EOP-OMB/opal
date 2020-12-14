@@ -1,6 +1,8 @@
 from opal.settings import BASE_DIR
 import ssp.models as t
 import logging
+from rest_framework.renderers import JSONRenderer
+import json
 
 def startLogging():
     logging.basicConfig(  # filename=logFile,
@@ -78,4 +80,15 @@ def createFixtures():
             cmd = 'python manage.py dumpdata ssp.' + model.__name__ + ' --natural-foreign --natural-primary -o ' + fixture_dir + model.__name__ + '.json'
             os.system(cmd)
 
-
+def serializerJSON(data):
+    json_data = JSONRenderer().render(data)
+    json_object = json.loads(json_data)
+    json_str = json.dumps(json_object, indent=2)
+    '''
+    Samira: could not define a many2many field with hyphen or an alias for the many2many field in the serializer class. 
+    This is a workaround to replace '_' with '-' to match OSCAL.
+    '''
+    json_str = json_str.replace('short_name', 'short-name')
+    json_str = json_str.replace('telephone_numbers','telephone-numbers')
+    json_str = json_str.replace('email_addresses', 'email-addresses')
+    return json_str

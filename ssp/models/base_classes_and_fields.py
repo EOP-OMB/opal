@@ -2,6 +2,10 @@ from django.db import models
 from tinymce.models import HTMLField
 import uuid
 
+#Samira:
+from scripts.usefullFunctions import serializerJSON
+from rest_framework_json_api import serializers
+
 contactInfoType = [('work', 'Work'),
                    ('personal', 'Personal'),
                    ('shared', 'Shared'),
@@ -70,6 +74,13 @@ class element_property(PrimitiveModel):
     def __str__(self):
         return self.name + ': ' + self.value
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = element_property.objects.filter(pk=id)
+        serializer = element_property_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
 
 class hashed_value(BasicModel):
     """
@@ -78,6 +89,13 @@ class hashed_value(BasicModel):
     value = customTextField()
     algorithm = models.CharField(max_length=100)
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = hashed_value.objects.filter(pk=id)
+        serializer = hashed_value_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
 
 class link(PrimitiveModel):
     text = models.CharField(max_length=255)
@@ -85,16 +103,31 @@ class link(PrimitiveModel):
     requires_authentication = models.BooleanField(default=False)
     rel = models.CharField(max_length=255, blank=True)
     mediaType = models.CharField(max_length=255, blank=True)
-    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True)
+    hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True, related_name='link_set')
+    #Samira: Added related_name='link_set' to be used in creating the serializers.
 
     def __str__(self):
         return self.text
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = link.objects.filter(pk=id)
+        serializer = link_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
 
 
 class annotation(BasicModel):
     annotationID = models.CharField(max_length=25)
     ns = models.CharField(max_length=100)
     value = customTextField()
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = annotation.objects.filter(pk=id)
+        serializer = annotation_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
 
 
 class ExtendedBasicModel(BasicModel):
@@ -107,3 +140,52 @@ class ExtendedBasicModel(BasicModel):
 
     class Meta:
         abstract = True
+
+
+"""
+***********************************************************
+******************  Serializer Classes  *******************
+***********************************************************
+"""
+
+class element_property_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = element_property
+        fields = ['id', 'uuid', 'value', 'name', 'property_id', 'ns', 'prop_class']
+
+
+class link_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = link
+        fields = ['id', 'uuid', 'text', 'href', 'requires_authentication', 'rel', 'mediaType']
+        depth = 1
+
+
+from ssp.models.common import attachment_serializer
+class hashed_value_serializer(serializers.ModelSerializer):
+    link_set = link_serializer(many=True, read_only=True)
+    attachment_set = attachment_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = hashed_value
+        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'value', 'algorithm', 'link_set','attachment_set']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+class annotation_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = annotation
+        fields = ['id', 'uuid', 'annotationID','ns','value', 'title', 'short_name', 'desc', 'remarks']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
