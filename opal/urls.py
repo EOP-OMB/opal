@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     # path('ssp/', include('ssp.urls')),
     path('tinymce/', include('tinymce.urls')),
+    path('oauth2/', include('django_auth_adfs.urls')),
 ]

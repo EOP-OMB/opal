@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ssp.apps.ssp',
     'django_extensions',
     'fixture_magic',
+    'django_auth_adfs',
     # 'mod_wsgi.server',
 ]
 
@@ -54,6 +55,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # With this you can force a user to login without using
+    # the LoginRequiredMixin on every view class
+    #
+    # You can specify URLs for which login is not enforced by
+    # specifying them in the LOGIN_EXEMPT_URLS setting.
+    'django_auth_adfs.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'opal.urls'
@@ -122,3 +129,29 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
+
+
+AUTHENTICATION_BACKENDS = (
+    'django_auth_adfs.backend.AdfsAuthCodeBackend',
+)
+
+# checkout the documentation for more settings
+AUTH_ADFS = {
+    "SERVER": "adfs.omb.gov",
+    "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    # Make sure to read the documentation about the AUDIENCE setting
+    # when you configured the identifier as a URL!
+    "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    # "CA_BUNDLE": "/path/to/ca-bundle.pem",
+    "CLAIM_MAPPING": {"first_name": "given_name",
+                      "last_name": "family_name",
+                      "email": "email"},
+    "USERNAME_CLAIM": "winaccountname",
+    "GROUP_CLAIM": "group"
+}
+
+# Configure django to redirect users to the right URL for login
+LOGIN_URL = "django_auth_adfs:login"
+LOGIN_REDIRECT_URL = "/"
+
