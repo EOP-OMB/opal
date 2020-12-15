@@ -90,8 +90,14 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR + '/db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR + '/db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'opal',
+        'USER': 'opal',
+        'PASSWORD': 'F@7-L6vLQqP88h9e*XQPge=q7jCZg$Ht_+UewD!CV#5cSU!rQ@',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
