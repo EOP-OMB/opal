@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'opal',
         'USER': 'opal',
-        'PASSWORD': 'F@7-L6vLQqP88h9e*XQPge=q7jCZg$Ht_+UewD!CV#5cSU!rQ@',
+        'PASSWORD': 'use_a_strong_password',
         'HOST': 'localhost',
         'PORT': '',
     }

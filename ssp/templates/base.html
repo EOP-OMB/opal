@@ -28,10 +28,7 @@
       <img class="img-responsive" src="{% static 'ssp/images/red_fire_opal.gif' %}" alt="OPAL Image" height="100" width="100"><b>OPAL</b><hr>
       <div class="sidebar-heading">Menu </div>
       <div class="list-group list-group-flush">
-          <a href="{% url 'ssp:list_system_security_planView' %}" class="list-group-item list-group-item-action bg-light">SSP List</a>
-          <a href="{% url 'ssp:nist_control_list_view' %}" class="list-group-item list-group-item-action bg-light">NIST Control List</a>
-          <a href="{% url 'ssp:system_control_list_view' %}" class="list-group-item list-group-item-action bg-light">System Control List</a>
-          <a href="{% url 'admin:index' %}" class="list-group-item list-group-item-action bg-light">Admin</a>
+          {% block sidebar %}{%  endblock %}
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -56,13 +53,15 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Table of Contents
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="{% url 'ssp:list_system_security_planView' %}" class="list-group-item list-group-item-action bg-light">SSP List</a>
+                <a class="dropdown-item" href="{% url 'ssp:nist_control_list_view' %}" class="list-group-item list-group-item-action bg-light">NIST Control List</a>
+                <a class="dropdown-item" href="{% url 'ssp:system_control_list_view' %}" class="list-group-item list-group-item-action bg-light">System Control List</a>
+                <a class="dropdown-item" href="{% url 'admin:index' %}" class="list-group-item list-group-item-action bg-light">Admin</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                {% block dropdown-menu %}{% endblock %}
               </div>
             </li>
           </ul>

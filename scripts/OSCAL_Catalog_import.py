@@ -146,6 +146,6 @@ def addControlPart(part, indent=0):
 
 
 def run():
-    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev4_catalog.json")
-    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
-    import_all_controls("/Users/dan/PycharmProjects/opal_omb/source/tmp/")
+    break_up_catalog("/Users/dan/PycharmProjects/opal-omb/source/", "NIST_SP-800-53_rev4_catalog.json")
+    break_up_catalog("/Users/dan/PycharmProjects/opal-omb/source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
+    import_all_controls("/Users/dan/PycharmProjects/opal-omb/source/tmp/")

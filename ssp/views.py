@@ -79,6 +79,7 @@ class nist_control_detail_view(generic.DetailView):
 
 class system_control_list_view(generic.ListView):
     model = system_control
+    queryset = nist_control.objects.order_by('sort_id')
 
 
 class system_control_detail_view(generic.DetailView):
@@ -87,6 +88,7 @@ class system_control_detail_view(generic.DetailView):
 
 class system_security_plan_list_view(generic.ListView):
     model = system_security_plan
+    queryset = system_security_plan.objects.order_by('title')
 
 
 class system_security_plan_detail_view(generic.DetailView):

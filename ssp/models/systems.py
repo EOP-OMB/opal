@@ -110,7 +110,7 @@ class system_security_plan(ExtendedBasicModel):
         selected_controls = self.control_baseline.controls
         for item in self.additional_selected_controls.all():
             selected_controls.add(item)
-        return selected_controls
+        return selected_controls.order_by('sort_id')
 
     @property
     def selected_controls(self):

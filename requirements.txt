@@ -14,8 +14,7 @@ idna==2.10
 inflection==0.5.1
 lxml==4.6.2
 pathlib==1.0.1
-pkg-resources==0.0.0
-psycopg2==2.8.6
+psycopg2-binary
 pycparser==2.20
 PyJWT==1.7.1
 python-docx==0.8.10
