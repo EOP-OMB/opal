@@ -309,7 +309,6 @@ class inventory_item_type_serializer(serializers.ModelSerializer):
         }
 
 
-
 class system_security_plan_serializer(serializers.ModelSerializer):
     system_components = system_component_serializer(read_only=True, many=True)
     system_services = system_service_serializer(read_only=True, many=True)
