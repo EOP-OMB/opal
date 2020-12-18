@@ -1,7 +1,5 @@
 from ssp.models.users import *
 
-#Samira:
-#from django.core import serializers
 import json
 
 # objects related to security controls
@@ -53,14 +51,29 @@ class nist_control_parameter(PrimitiveModel):
             json_str = json.dumps(return_list, indent=2)
             return json_str
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = nist_control_parameter.objects.filter(pk=id)
+        serializer = nist_control_parameter_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
+
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
-    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE, null=True)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE, null=True, related_name='nist_control_statement_set')
     statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 
     def __str__(self):
         return self.nist_control.label + ' - ' + self.statement_type.capitalize()
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = nist_control_statement.objects.filter(pk=id)
+        serializer = nist_control_statement_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
 
 
 class nist_control(PrimitiveModel):
@@ -94,14 +107,27 @@ class nist_control(PrimitiveModel):
 
     # TODO: Add methods for objectives and whatever the other type is
 
-
     def __str__(self):
         long_title = self.group_title + ' | ' + self.label + ' | ' + self.control_title
         return long_title
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = nist_control.objects.filter(pk=id)
+        serializer = nist_control_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
 
 class control_baseline(BasicModel):
     controls = customMany2ManyField(nist_control)
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = control_baseline.objects.filter(pk=id)
+        serializer = control_baseline_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
 
 
 class control_statement(ExtendedBasicModel):
@@ -116,10 +142,23 @@ class control_statement(ExtendedBasicModel):
     control_statement_responsible_roles = customMany2ManyField(user_role)
     control_statement_text = customTextField()
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = control_statement.objects.filter(pk=id)
+        serializer = control_statement_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
 
 class control_parameter(BasicModel):
     control_parameter_id = models.CharField(max_length=25)
     value = customTextField()
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = control_parameter.objects.filter(pk=id)
+        serializer = control_parameter_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
 
 
 # class control_implementation(ExtendedBasicModel):
@@ -154,11 +193,17 @@ class system_control(ExtendedBasicModel):
     control_statements = customMany2ManyField(control_statement)
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
-    nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
+    nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, related_name='system_control_set')
 
     @property
     def sorted_statement_set(self):
         return self.control_statements.order_by('control_statement_id')
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = system_control.objects.filter(pk=id)
+        serializer = system_control_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
 
 
 """
@@ -166,3 +211,92 @@ class system_control(ExtendedBasicModel):
 ******************  Serializer Classes  *******************
 ***********************************************************
 """
+
+class nist_control_parameter_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = nist_control_parameter
+        fields = ['id', 'uuid', 'param_id', 'param_type', 'param_text', 'param_depends_on', 'param_class']
+
+
+
+class nist_control_statement_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = nist_control_statement
+        fields = ['id', 'uuid', 'statement_type', 'statement_text', 'nist_control_id']
+        depth = 1
+
+
+
+class control_statement_serializer(serializers.ModelSerializer):
+    control_statement_responsible_roles = user_role_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = control_statement
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'control_statement_id', 'control_statement_responsible_roles', 'control_statement_text']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class control_parameter_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = control_parameter
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'control_parameter_id', 'value']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class system_control_serializer(serializers.ModelSerializer):
+    control_parameters = control_parameter_serializer(many=True, read_only=True)
+    control_statements = control_statement_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = system_control
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'control_parameters', 'control_statements', 'control_status', 'control_origination', 'nist_control_id']
+        depth = 1
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class nist_control_serializer(serializers.ModelSerializer):
+    parameters = nist_control_parameter_serializer(many=True, read_only=True)
+    links = link_serializer(many=True, read_only=True)
+    system_control_set = system_control_serializer(many=True, read_only=True)
+    nist_control_statement_set = nist_control_statement_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = nist_control
+        fields = ['id', 'uuid', 'group_id', 'group_title', 'control_id', 'source', 'control_title',
+                  'label', 'sort_id', 'status', 'catalog', 'parameters', 'links', 'system_control_set', 'nist_control_statement_set']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class control_baseline_serializer(serializers.ModelSerializer):
+    controls = nist_control_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = control_baseline
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','controls']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }

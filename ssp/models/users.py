@@ -146,7 +146,13 @@ class user_function_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = user_function
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class user_privilege_serializer(serializers.ModelSerializer):
@@ -154,7 +160,13 @@ class user_privilege_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = user_privilege
-        fields= ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks','functionsPerformed']
+        fields= ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','functionsPerformed']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class user_role_serializer(serializers.ModelSerializer):
@@ -162,7 +174,13 @@ class user_role_serializer(serializers.ModelSerializer):
 
     class Meta:
         model= user_role
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'properties','annotations','links','user_privileges']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links','user_privileges']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class email_serializer(serializers.ModelSerializer):
@@ -171,12 +189,24 @@ class email_serializer(serializers.ModelSerializer):
         model = email
         fields = ['id', 'uuid', 'email', 'type', 'supports_rich_text']
 
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
 
 class telephone_number_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = telephone_number
         fields = ['id', 'uuid', 'number', 'type']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class location_serializer(serializers.ModelSerializer):
@@ -185,8 +215,14 @@ class location_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = location
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'properties','annotations','links', 'emailAaddresses', 'telephoneNumbers']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'emailAddresses', 'telephoneNumbers','address_id']
         depth = 1
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class address_serializer(serializers.ModelSerializer):
@@ -194,7 +230,13 @@ class address_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = address
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'properties', 'type', 'postal_address', 'city', 'state', 'postal_code', 'country', 'location_set']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'type', 'postal_address', 'city', 'state', 'postal_code', 'country', 'location_set']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class organization_serializer(serializers.ModelSerializer):
@@ -204,20 +246,24 @@ class organization_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = organization
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'properties','annotations','links','locations', 'email_addresses', 'telephone_number']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'locations', 'email_addresses', 'telephone_numbers']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
 
 
-from ssp.models.systems import system_user_serializer
+
 class person_serializer(serializers.ModelSerializer):
     organizations = organization_serializer(many=True, read_only=True)
     locations = location_serializer(many=True, read_only=True)
     email_addresses = email_serializer(many=True, read_only=True)
     telephone_numbers = telephone_number_serializer(many=True, read_only=True)
-    system_user_set = system_user_serializer(many=True, read_only=True)
 
     class Meta:
         model = person
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'name', 'organizations', 'locations', 'email_addresses', 'telephone_numbers','system_user_set']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'name', 'organizations', 'locations', 'email_addresses', 'telephone_numbers']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},

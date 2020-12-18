@@ -155,22 +155,22 @@ class element_property_serializer(serializers.ModelSerializer):
         fields = ['id', 'uuid', 'value', 'name', 'property_id', 'ns', 'prop_class']
 
 
+
 class link_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = link
-        fields = ['id', 'uuid', 'text', 'href', 'requires_authentication', 'rel', 'mediaType']
+        fields = ['id', 'uuid', 'text', 'href', 'requires_authentication', 'rel', 'mediaType', 'hash_id']
         depth = 1
 
 
-from ssp.models.common import attachment_serializer
+
 class hashed_value_serializer(serializers.ModelSerializer):
     link_set = link_serializer(many=True, read_only=True)
-    attachment_set = attachment_serializer(many=True, read_only=True)
 
     class Meta:
         model = hashed_value
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'value', 'algorithm', 'link_set','attachment_set']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'value', 'algorithm', 'link_set']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
@@ -178,11 +178,12 @@ class hashed_value_serializer(serializers.ModelSerializer):
         }
 
 
+
 class annotation_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = annotation
-        fields = ['id', 'uuid', 'annotationID','ns','value', 'title', 'short_name', 'desc', 'remarks']
+        fields = ['id', 'uuid', 'annotationID','ns','value', 'title', 'short-name', 'description', 'remarks']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
