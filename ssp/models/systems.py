@@ -309,24 +309,37 @@ class inventory_item_type_serializer(serializers.ModelSerializer):
         }
 
 
+class leveraged_authorization_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = system_security_plan
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'properties', 'annotations', 'links', 'date_authorized','remarks']
+
+    extra_kwargs = {
+        'short-name': {'source': 'short_name'},
+        'description': {'source': 'desc'}
+    }
+
+
 class system_security_plan_serializer(serializers.ModelSerializer):
     system_components = system_component_serializer(read_only=True, many=True)
     system_services = system_service_serializer(read_only=True, many=True)
     system_interconnections = system_interconnection_serializer(read_only=True, many=True)
     system_inventory_items = system_inventory_item_serializer(read_only=True, many=True)
     additional_selected_controls = nist_control_serializer(read_only=True, many=True)
-    #leveraged_authorization = system_security_plan_serializer(read_only=True, many=True)
+    leveraged_authorization = leveraged_authorization_serializer(read_only=True, many=True)
     controls = system_control_serializer(read_only=True, many=True)
     system_users = system_user_serializer(read_only=True, many=True)
     information_types = information_type_serializer(read_only=True, many=True)
 
+    system_status = status_serializer(read_only=True, many=False)
+
     class Meta:
         model = system_security_plan
         fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties', 'annotations', 'links', 'published', 'lastModified',
-                  'version','oscalVersion','system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
-                  'additional_selected_controls',  'controls', 'system_users', 'date_authorized', 'security_sensitivity_level',
+                  'version','oscalVersion', 'leveraged_authorization', 'system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
+                  'additional_selected_controls', 'controls', 'system_users', 'date_authorized', 'security_sensitivity_level',
                   'information_types', 'security_objective_confidentiality', 'security_objective_integrity', 'security_objective_availability',
-                  'control_baseline_id', 'data_flow_diagram_id', 'authorization_boundary_diagram_id', 'network_architecture_diagram_id', 'system_status_id']
+                  'control_baseline_id', 'data_flow_diagram_id', 'authorization_boundary_diagram_id', 'network_architecture_diagram_id', 'system_status']
         depth = 1
 
         extra_kwargs = {
