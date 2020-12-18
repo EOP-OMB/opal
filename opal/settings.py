@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'ssp.apps.ssp',
     'django_extensions',
     'fixture_magic',
-    'django_auth_adfs',
-    # 'mod_wsgi.server',
     #Samira:
+    #'django_auth_adfs',
+    #'mod_wsgi.server',
     'rest_framework',
 ]
 
@@ -57,12 +57,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #Samira:
+    """
     # With this you can force a user to login without using
     # the LoginRequiredMixin on every view class
     #
     # You can specify URLs for which login is not enforced by
     # specifying them in the LOGIN_EXEMPT_URLS setting.
     'django_auth_adfs.middleware.LoginRequiredMiddleware',
+    """
 ]
 
 ROOT_URLCONF = 'opal.urls'
@@ -132,6 +135,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 
+#Samira:
+"""
 
 AUTHENTICATION_BACKENDS = (
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
@@ -156,7 +161,7 @@ AUTH_ADFS = {
 # Configure django to redirect users to the right URL for login
 LOGIN_URL = "django_auth_adfs:login"
 LOGIN_REDIRECT_URL = "/"
-
+"""
 
 #Samira:
 REST_FRAMEWORK = {
