@@ -12,8 +12,6 @@ class system_component(ExtendedBasicModel):
     provider or a backup tool.
     """
     component_type = models.CharField(max_length=100)
-    component_title = models.CharField(max_length=100)
-    component_description = customTextField()
     component_information_types = customMany2ManyField(information_type)
     component_status = models.ForeignKey(status, on_delete=models.PROTECT, null=True)
     component_responsible_roles = customMany2ManyField(user_role)

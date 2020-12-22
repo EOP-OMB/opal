@@ -7,16 +7,16 @@ from ssp import models
 
 @admin.register(models.system_security_plan)
 class systemSecurityPlanAdmin(admin.ModelAdmin):
-    filter_horizontal = ['information_types', 'system_components', 'system_services', 'system_interconnections',
-                         'system_inventory_items',
-                         'controls', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
+    filter_horizontal = ['information_types', 'system_services', 'system_interconnections',
+                         'system_inventory_items', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
+    filter_vertical = ['controls', 'system_components']
     fieldsets = (
         ('Title', {
             'fields': (('title', 'short_name'), 'desc')
         }),
         ('System', {
             'fields': (('published', 'lastModified', 'date_authorized', 'system_status'), ('version', 'oscalVersion'),
-                       'control_baseline')
+                       'control_baseline','controls','system_components')
         }),
         ('FIPS Level', {
             'fields': ('information_types', (

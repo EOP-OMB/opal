@@ -5,9 +5,12 @@
     <a href="#information_types">System Information Types</a>
     <a href="#system_components">System Components</a>
     {% for component in object.system_components.all %}
-        <a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a>
+        &nbsp;&nbsp;<a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a>
     {% endfor %}
     <a href="#system_controls">System Controls</a>
+    {% for control in object.controls.all %}
+        &nbsp;&nbsp;<a href="#control:{{ control.id }}">{{ control.nist_control.label }}&nbsp;{{ control.nist_control.control_title }}</a>
+    {% endfor %}
 {% endblock %}
 
 {% block content %}
@@ -58,8 +61,9 @@
                 <div style="margin-left: 30px">{{ component.desc | safe }}</div>
         {% endfor %}
     <h3><a id="system_controls">System Controls</a></h3>
-        {% for c in object.selected_controls.all %}
+        {% for c in object.controls.all %}
             {% with c as object %}
+                <a id="control:{{ c.id }}">
                 {% include "ssp/system_control_detail.html" %}
             {% endwith %}
             <p></p>

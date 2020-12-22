@@ -76,6 +76,9 @@ class nist_control(PrimitiveModel):
     links = customMany2ManyField(link)
     catalog = models.CharField(max_length=50,null=True)
 
+    class Meta:
+        ordering = ['sort_id','catalog','control_title']
+
 
     def getStatementText(self, statement_type):
         t = nist_control_statement.objects.filter(nist_control=self,
@@ -159,6 +162,9 @@ class system_control(ExtendedBasicModel):
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True)
+
+    class Meta:
+         ordering = ['nist_control']
 
     @property
     def sorted_statement_set(self):
