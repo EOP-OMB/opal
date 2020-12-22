@@ -19,9 +19,10 @@ parameter_type_choices = [('label', 'Label'),
 class nist_control_parameter(PrimitiveModel):
     param_id = models.CharField(max_length=255)
     param_type = models.CharField(max_length=255, choices=parameter_type_choices)
-    param_text = models.CharField(max_length=255, blank=True)
+    param_text = models.CharField(max_length=1024, blank=True)
     param_depends_on = models.CharField(max_length=255, blank=True)
     param_class = models.CharField(max_length=255, blank=True)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.param_id
@@ -55,7 +56,7 @@ class nist_control_parameter(PrimitiveModel):
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
-    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE, null=True)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE)
     statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 
@@ -72,7 +73,6 @@ class nist_control(PrimitiveModel):
     label = models.CharField(max_length=50)
     sort_id = models.CharField(max_length=50)
     status = models.CharField(max_length=255, blank=True)
-    parameters = customMany2ManyField(nist_control_parameter)
     links = customMany2ManyField(link)
     catalog = models.CharField(max_length=50,null=True)
 
@@ -91,6 +91,10 @@ class nist_control(PrimitiveModel):
     @property
     def get_statement(self):
         return self.getStatementText('statement')
+
+    @property
+    def parameters(self):
+        return nist_control_parameter.objects.filter(nist_control=self)
 
     # TODO: Add methods for objectives and whatever the other type is
 

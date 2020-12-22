@@ -87,12 +87,21 @@ class control_baselineAdmin(admin.ModelAdmin):
     filter_horizontal = ['controls']
 
 
+class nist_control_parameterAdmin(admin.TabularInline):
+    model = models.nist_control_parameter
+    extra = 0
+
+class nist_control_statementAdmin(admin.TabularInline):
+    model = models.nist_control_statement
+    extra = 0
+
 @admin.register(models.nist_control)
 class nist_controlAdmin(admin.ModelAdmin):
-    filter_horizontal = ['parameters']
-    list_filter = ['group_title']
-    list_display = ['group_id', 'group_title', 'control_id', 'label']
-    list_display_links = ['group_id', 'group_title', 'control_id', 'label']
+    list_filter = ['catalog','group_title']
+    list_display = ['catalog', 'group_title', 'control_id', 'label']
+    list_display_links = ['catalog', 'group_title', 'control_id', 'label']
+    ordering = ('sort_id','catalog')
+    inlines = [nist_control_parameterAdmin,nist_control_statementAdmin,]
 
 
 @admin.register(models.link)
