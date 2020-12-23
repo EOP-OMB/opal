@@ -161,6 +161,19 @@ class system_security_plan(ExtendedBasicModel):
     data_flow_diagram = models.ForeignKey(attachment, on_delete=models.PROTECT, related_name='system_data_flow_diagram',
                                           blank=True, null=True)
 
+    """
+    Samira: NestedProxyFields are added to make the JSON export match with OSCAL format. They don't change the table definition in the database. 
+    Each NestedProxyField needs a serializer and the main serializer uses them in the field section.
+    """
+    metadata = NestedProxyField('title', 'published', 'lastModified', 'version','oscalVersion', 'properties', 'annotations', 'links', 'remarks')
+    system_information = NestedProxyField('information_types')
+    security_impact_level = NestedProxyField('security_objective_confidentiality', 'security_objective_integrity', 'security_objective_availability')
+    system_characteristics = NestedProxyField('short_name', 'desc', 'date_authorized', 'security_sensitivity_level', 'system_information', 'security_impact_level', 'system_status', 'authorization_boundary_diagram',
+                              'network_architecture_diagram', 'data_flow_diagram')
+    system_implementation = NestedProxyField('leveraged_authorization', 'system_users', 'system_components', 'system_inventory_items')
+    control_implementation = NestedProxyField('controls')
+
+
     def _get_selected_controls(self):
         selected_controls = self.control_baseline.controls
         for item in self.additional_selected_controls.all():
@@ -177,16 +190,17 @@ class system_security_plan(ExtendedBasicModel):
         serializer = system_security_plan_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @staticmethod
+    def get_serializer_json_OSCAL(id=1):
+        queryset = system_security_plan.objects.filter(pk=id)
+        serializer = system_security_plan_OSCAL_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
 
 """
 ***********************************************************
 ******************  Serializer Classes  *******************
 ***********************************************************
-"""
-
-"""
-Samira: If a model has a foreign key to a model in another module, 
-the foreign model's serializer should be redefined in the module. 
 """
 
 class system_component_serializer(serializers.ModelSerializer):
@@ -199,7 +213,7 @@ class system_component_serializer(serializers.ModelSerializer):
     class Meta:
         model = system_component
 
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'component_type', 'component_title', 'component_description', 'component_information_types', 'component_status', 'component_responsible_roles', 'component_status_id']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'component_type', 'component_title', 'component_description', 'component_information_types', 'component_status', 'component_responsible_roles']
         depth = 1
 
         extra_kwargs = {
@@ -213,7 +227,7 @@ class port_range_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = port_range
-        fields = ['id', 'uuid', 'state', 'title', 'short-name', 'description', 'remarks','start', 'end', 'transport']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','start', 'end', 'transport']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
@@ -223,10 +237,10 @@ class port_range_serializer(serializers.ModelSerializer):
 
 
 class protocol_serializer(serializers.ModelSerializer):
-
+    portRanges = port_range_serializer(read_only=True, many=True)
     class Meta:
-        model = port_range
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','start', 'end', 'portRanges']
+        model = protocol
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'portRanges']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
@@ -241,7 +255,8 @@ class system_service_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = system_service
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','properties','annotations','links', 'protocols', 'service_purpose', 'service_information_types']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','properties','annotations','links',
+                  'protocols', 'service_purpose', 'service_information_types']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
@@ -255,7 +270,8 @@ class system_interconnection_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = system_interconnection
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','properties','annotations','links', 'interconnection_responsible_roles']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','properties','annotations','links',
+                  'interconnection_responsible_roles']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
@@ -266,10 +282,11 @@ class system_interconnection_serializer(serializers.ModelSerializer):
 
 class system_user_serializer(serializers.ModelSerializer):
     roles = user_role_serializer(many=True, read_only=True)
+    user = person_serializer(many=False, read_only=True)
 
     class Meta:
         model = system_user
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'roles','user_id']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'roles','user']
         depth = 1
 
         extra_kwargs = {
@@ -283,7 +300,8 @@ class system_inventory_item_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = system_inventory_item
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties', 'annotations', 'links', 'item_special_configuration_settings','inventory_item_type_id']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties', 'annotations', 'links',
+                  'item_special_configuration_settings','inventory_item_type']
         depth = 1
 
         extra_kwargs = {
@@ -320,6 +338,7 @@ class leveraged_authorization_serializer(serializers.ModelSerializer):
     }
 
 
+
 class system_security_plan_serializer(serializers.ModelSerializer):
     system_components = system_component_serializer(read_only=True, many=True)
     system_services = system_service_serializer(read_only=True, many=True)
@@ -332,6 +351,9 @@ class system_security_plan_serializer(serializers.ModelSerializer):
     information_types = information_type_serializer(read_only=True, many=True)
 
     system_status = status_serializer(read_only=True, many=False)
+    authorization_boundary_diagram = attachment_serializer(read_only=True, many=False)
+    network_architecture_diagram = attachment_serializer(read_only=True, many=False)
+    data_flow_diagram = attachment_serializer(read_only=True, many=False)
 
     class Meta:
         model = system_security_plan
@@ -347,7 +369,103 @@ class system_security_plan_serializer(serializers.ModelSerializer):
             'description': {'source': 'desc'}
         }
 
-    #Samira: Temporarily removed 'leveraged_authorization' from the list to ask about its type.
+
+
+class metadata_serializer(serializers.ModelSerializer):
+    properties = element_property_serializer(read_only=True, many=True)
+    links = link_serializer(read_only=True, many=True)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['title', 'published', 'lastModified', 'version','oscalVersion', 'properties', 'annotations', 'links', 'remarks']
+
+
+
+
+
+class system_information_serilaizer(serializers.ModelSerializer):
+    information_types = information_type_serializer(read_only=True, many=True)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['information_types']
+
+
+
+class security_impact_level_serializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = system_security_plan
+        fields = ['security_objective_confidentiality', 'security_objective_integrity', 'security_objective_availability']
+
+
+class system_characteristics_serializer(serializers.ModelSerializer):
+    system_information = system_information_serilaizer(required=False)
+    security_impact_level = security_impact_level_serializer(required=False)
+    system_status = status_serializer(read_only=True, many=False)
+    authorization_boundary_diagram = attachment_serializer(read_only=True, many=False)
+    network_architecture_diagram = attachment_serializer(read_only=True, many=False)
+    data_flow_diagram = attachment_serializer(read_only=True, many=False)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['system_name', 'desc', 'date_authorized', 'security_sensitivity_level', 'system_information', 'security_impact_level', 'system_status', 'authorization_boundary_diagram',
+                              'network_architecture_diagram', 'data_flow_diagram']
+
+        extra_kwargs = {
+            'system_name': {'source': 'short_name'}
+        }
+
+
+
+class system_control_serializer(serializers.ModelSerializer):
+    """Samira: Redefined this serializer in this module to make the fields like format outline in OSCAL."""
+    control_parameters = control_parameter_serializer(many=True, read_only=True)
+    control_statements = control_statement_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = system_control
+        fields = ['uuid', 'control-id', 'properties', 'annotations', 'links', 'control_parameters', 'control_statements', 'remarks']
+
+        depth = 1
+
+        extra_kwargs = {
+            'control-id': {'source': 'id'}
+        }
+
+
+
+class system_implementation_serializer(serializers.ModelSerializer):
+    leveraged_authorization = leveraged_authorization_serializer(read_only=True, many=True)
+    system_users = system_user_serializer(read_only=True, many=True)
+    system_components = system_component_serializer(read_only=True, many=True)
+    system_inventory_items = system_inventory_item_serializer(read_only=True, many=True)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['leveraged_authorization', 'system_users', 'system_components', 'system_inventory_items']
+
+
+
+class control_implementation_serializer(serializers.ModelSerializer):
+    controls = system_control_serializer(read_only=True, many=True)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['controls']
+
+
+class system_security_plan_OSCAL_serializer(serializers.ModelSerializer):
+    metadata = metadata_serializer(required=False)
+    system_characteristics = system_characteristics_serializer(required=False)
+    system_implementation = system_implementation_serializer(required=False)
+    control_implementation = control_implementation_serializer(required=False)
+
+    class Meta:
+        model = system_security_plan
+        fields = ['id', 'uuid', 'metadata', 'system_characteristics', 'system_implementation', 'control_implementation']
+
+
 
 class link_serializer(serializers.ModelSerializer):
     inventory_item_type_set = inventory_item_type_serializer(read_only=True, many=True)
@@ -391,125 +509,6 @@ class person_serializer(serializers.ModelSerializer):
 
 
 
-class status1_serializer(serializers.ModelSerializer):
-    system_component_set = system_component_serializer(read_only=True, many=True)
-
-    class Meta:
-        model = status
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'state', 'system_component_set']
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class status2_serializer(serializers.ModelSerializer):
-    ssp_system_status_set = system_security_plan_serializer(read_only=True, many=True)
-
-    class Meta:
-        model = status
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'state', 'ssp_system_status_set']
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class attachment1_serializer(serializers.ModelSerializer):
-    system_authorization_boundary_diagram = system_security_plan_serializer(read_only=True, many=True)
-
-    class Meta:
-        model = attachment
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'attachment_type', 'attachment', 'filename', 'mediaType', 'caption', 'system_authorization_boundary_diagram']
-        depth = 1
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class hashed_value1_serializer(serializers.ModelSerializer):
-    attachment_set = attachment1_serializer(many=True, read_only=True)
-
-    class Meta:
-        model = hashed_value
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'value', 'algorithm', 'attachment_set']
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class attachment2_serializer(serializers.ModelSerializer):
-    system_network_architecture_diagram = system_security_plan_serializer(read_only=True, many=True)
-
-    class Meta:
-        model = attachment
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties', 'annotations', 'links',
-                  'attachment_type', 'attachment', 'filename', 'mediaType', 'caption',
-                  'system_network_architecture_diagram']
-        depth = 1
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class hashed_value2_serializer(serializers.ModelSerializer):
-    attachment_set = attachment2_serializer(many=True, read_only=True)
-
-    class Meta:
-        model = hashed_value
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'value', 'algorithm', 'attachment_set']
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class attachment3_serializer(serializers.ModelSerializer):
-    system_data_flow_diagram = system_security_plan_serializer(read_only=True, many=True)
-
-    class Meta:
-        model = attachment
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties', 'annotations', 'links',
-                  'attachment_type', 'attachment', 'filename', 'mediaType', 'caption',
-                  'system_data_flow_diagram']
-        depth = 1
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
-class hashed_value3_serializer(serializers.ModelSerializer):
-    attachment_set = attachment3_serializer(many=True, read_only=True)
-
-    class Meta:
-        model = hashed_value
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'value', 'algorithm', 'attachment_set']
-
-        extra_kwargs = {
-            'short-name': {'source': 'short_name'},
-            'description': {'source': 'desc'}
-        }
-
-
-
 class control_baseline_serializer(serializers.ModelSerializer):
     controls = nist_control_serializer(many=True, read_only=True)
     ssp_control_baseline_set = system_security_plan_serializer(many=True, read_only=True)
@@ -520,5 +519,22 @@ class control_baseline_serializer(serializers.ModelSerializer):
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class system_control_serializer(serializers.ModelSerializer):
+    parameter_settings = control_parameter_serializer(many=True, read_only=True)
+    statements = control_statement_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = system_control
+        fields = ['uuid', 'control-id', 'props','annotations','links', 'parameter-settings', 'statements', 'remarks']
+        depth = 1
+
+        extra_kwargs = {
+            'control-id': {'source': 'id'},
+            'props': {'source': 'properties'},
             'description': {'source': 'desc'}
         }

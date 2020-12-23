@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework_tricks.models.fields import NestedProxyField
 from tinymce.models import HTMLField
 import uuid
 

@@ -7,6 +7,7 @@ django-mssql-backend==2.8.1
 django-tinymce==3.1.0
 djangorestframework==3.12.2
 djangorestframework-jsonapi==4.0.0
+django-rest-framework-tricks==0.2.11
 inflection==0.5.1
 lxml==4.6.2
 mysql-client==0.0.1
