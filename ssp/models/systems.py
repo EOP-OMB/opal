@@ -522,19 +522,3 @@ class control_baseline_serializer(serializers.ModelSerializer):
             'description': {'source': 'desc'}
         }
 
-
-
-class system_control_serializer(serializers.ModelSerializer):
-    parameter_settings = control_parameter_serializer(many=True, read_only=True)
-    statements = control_statement_serializer(many=True, read_only=True)
-
-    class Meta:
-        model = system_control
-        fields = ['uuid', 'control-id', 'props','annotations','links', 'parameter-settings', 'statements', 'remarks']
-        depth = 1
-
-        extra_kwargs = {
-            'control-id': {'source': 'id'},
-            'props': {'source': 'properties'},
-            'description': {'source': 'desc'}
-        }
