@@ -40,6 +40,7 @@ class attachment(ExtendedBasicModel):
     mediaType = models.CharField(max_length=100, blank=True)
     hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True, related_name='attachment_set')
     caption = models.CharField(max_length=200, blank=True)
+    depth = 1
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -54,24 +55,54 @@ class attachment(ExtendedBasicModel):
 ***********************************************************
 """
 
-
 class status_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = status
-        fields = ['id', 'uuid', 'state', 'title', 'short_name', 'desc', 'remarks', 'state']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'state']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class information_type_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = information_type
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'confidentialityImpact','integrityImpact','availabilityImpact']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'confidentialityImpact','integrityImpact','availabilityImpact']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
 
 
 class attachment_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = attachment
-        fields = ['id', 'uuid', 'title', 'short_name', 'desc', 'remarks', 'properties','annotations','links', 'attachment_type', 'attachment', 'filename', 'mediaType', 'caption']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'attachment_type', 'attachment', 'filename', 'mediaType', 'caption','hash_id']
         depth = 1
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
+
+
+
+class hashed_value_serializer(serializers.ModelSerializer):
+    attachment_set = attachment_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = hashed_value
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'value', 'algorithm', 'attachment_set']
+
+        extra_kwargs = {
+            'short-name': {'source': 'short_name'},
+            'description': {'source': 'desc'}
+        }
