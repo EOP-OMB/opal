@@ -62,7 +62,7 @@ MIDDLEWARE = [
     #
     # You can specify URLs for which login is not enforced by
     # specifying them in the LOGIN_EXEMPT_URLS setting.
-    'django_auth_adfs.middleware.LoginRequiredMiddleware',
+    # 'django_auth_adfs.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'opal.urls'
@@ -90,8 +90,12 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR + '/db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'opal',
+        'USER': 'opal',
+        'PASSWORD': 'use_a_strong_password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -135,7 +139,8 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 
 AUTHENTICATION_BACKENDS = (
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
-)
+    'django.contrib.auth.backends.ModelBackend',
+    )
 
 # checkout the documentation for more settings
 AUTH_ADFS = {

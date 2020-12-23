@@ -1,4 +1,18 @@
 {% extends "base.html" %}
+{% block sidebar %}
+    <a href="#system_description">System Description</a>
+    <a href="#system_diagrams">System Diagrams</a>
+    <a href="#information_types">System Information Types</a>
+    <a href="#system_components">System Components</a>
+    {% for component in object.system_components.all %}
+        &nbsp;&nbsp;<a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a>
+    {% endfor %}
+    <a href="#system_controls">System Controls</a>
+    {% for control in object.controls.all %}
+        &nbsp;&nbsp;<a href="#control:{{ control.id }}">{{ control.nist_control.label }}&nbsp;{{ control.nist_control.control_title }}</a>
+    {% endfor %}
+{% endblock %}
+
 {% block content %}
     {% load admin_urls %}
     <h1>{{ object.title }}</h1>
@@ -12,20 +26,6 @@
     </table>
 
     <hr>
-    <p>Table of Contents</p>
-    <ol>
-        <li><a href="#system_description">System Description</a></li>
-        <li><a href="#system_diagrams">System Diagrams</a></li>
-        <li><a href="#information_types">System Information Types</a></li>
-        <li><a href="#system_components">System Components</a>
-            <ol>
-            {% for component in object.system_components.all %}
-                <li><a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a></li>
-            {% endfor %}
-            </ol></li>
-        <li><a href="#system_controls">System Controls</a></li>
-    </ol>
-
     <h2><a href="{% url 'admin:ssp_system_security_plan_change' object.id %}" target="_blank">{{ object.title }} ({{ object.short_name}})</a></h2>
         <h3><a id="system_description">System Description</a></h3>
         <div style="margin-left: 30px">{{ object.desc | safe }}</div>
@@ -63,6 +63,7 @@
     <h3><a id="system_controls">System Controls</a></h3>
         {% for c in object.controls.all %}
             {% with c as object %}
+                <a id="control:{{ c.id }}">
                 {% include "ssp/system_control_detail.html" %}
             {% endwith %}
             <p></p>

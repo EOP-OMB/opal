@@ -7,16 +7,16 @@ from ssp import models
 
 @admin.register(models.system_security_plan)
 class systemSecurityPlanAdmin(admin.ModelAdmin):
-    filter_horizontal = ['information_types', 'system_components', 'system_services', 'system_interconnections',
-                         'system_inventory_items',
-                         'controls', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
+    filter_horizontal = ['information_types', 'system_services', 'system_interconnections',
+                         'system_inventory_items', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
+    filter_vertical = ['controls', 'system_components']
     fieldsets = (
         ('Title', {
             'fields': (('title', 'short_name'), 'desc')
         }),
         ('System', {
             'fields': (('published', 'lastModified', 'date_authorized', 'system_status'), ('version', 'oscalVersion'),
-                       'control_baseline')
+                       'control_baseline','controls','system_components')
         }),
         ('FIPS Level', {
             'fields': ('information_types', (
@@ -87,12 +87,21 @@ class control_baselineAdmin(admin.ModelAdmin):
     filter_horizontal = ['controls']
 
 
+class nist_control_parameterAdmin(admin.TabularInline):
+    model = models.nist_control_parameter
+    extra = 0
+
+class nist_control_statementAdmin(admin.TabularInline):
+    model = models.nist_control_statement
+    extra = 0
+
 @admin.register(models.nist_control)
 class nist_controlAdmin(admin.ModelAdmin):
-    filter_horizontal = ['parameters']
-    list_filter = ['group_title']
-    list_display = ['group_id', 'group_title', 'control_id', 'label']
-    list_display_links = ['group_id', 'group_title', 'control_id', 'label']
+    list_filter = ['catalog','group_title']
+    list_display = ['catalog', 'group_title', 'control_id', 'label']
+    list_display_links = ['catalog', 'group_title', 'control_id', 'label']
+    ordering = ('sort_id','catalog')
+    inlines = [nist_control_parameterAdmin,nist_control_statementAdmin,]
 
 
 @admin.register(models.link)

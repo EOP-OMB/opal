@@ -56,9 +56,9 @@ def import_all_controls(path):
         #     print(os.path.join(root, name))
 
 
-def save_parameter(id, type, text, depends_on=''):
+def save_parameter(id, type, text, nist_control, depends_on=''):
     param_id, created = t.nist_control_parameter.objects.get_or_create(param_id=id, param_type=type, param_text=text,
-                                                                       param_depends_on=depends_on)
+                                                                       param_depends_on=depends_on, nist_control=nist_control)
     return param_id
 
 
@@ -70,8 +70,9 @@ def clean_param_text(str):
 
 
 def import_individual_control(file_name):
+    logging.debug("Opening file " + file_name)
     cntrl = json.loads(open(file_name, 'r').read())
-    group_id = cntrl["id"][0:1]
+    group_id = str(cntrl["id"][0:2]).upper()
     group_title = cntrl["group_title"]
     cntrl_catalog = cntrl["catalog"]
     parameter_list = []
@@ -98,18 +99,21 @@ def import_individual_control(file_name):
                                                                status=cntrl_status,
                                                                catalog=cntrl_catalog)
 
+    if created:
+        logging.debug("Found existing entry for " + cntrl["title"] + " from catalog " + cntrl_catalog)
+    else:
+        logging.debug("No existing entry for " + cntrl["title"] + "from catalog " + cntrl_catalog + " found. Created New entry.")
+
     if 'parameters' in cntrl:
         for param in cntrl['parameters']:
             param_id = None
             if 'label' in param:
-                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']))
+                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']), control_id)
             if 'select' in param:
                 param_text = ','.join(param['select']['alternatives'])
-                param_id = save_parameter(param["id"], "select", clean_param_text(param_text))
+                param_id = save_parameter(param["id"], "select", clean_param_text(param_text), control_id)
             if 'depends-on' in param:
-                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']), param["depends-on"])
-            if param_id is not None:
-                t.nist_control.objects.get(pk=control_id.id).parameters.add(param_id)
+                param_id = save_parameter(param["id"], "label", clean_param_text(param['label']), control_id, param["depends-on"])
 
     if 'parts' in cntrl:
         cntrl_stmnt_text = ''
@@ -146,6 +150,6 @@ def addControlPart(part, indent=0):
 
 
 def run():
-    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev4_catalog.json")
-    break_up_catalog("/Users/dan/PycharmProjects/opal_omb/source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
-    import_all_controls("/Users/dan/PycharmProjects/opal_omb/source/tmp/")
+    break_up_catalog("/Users/dan/PycharmProjects/opal/source/", "NIST_SP-800-53_rev4_catalog.json")
+    break_up_catalog("/Users/dan/PycharmProjects/opal/source/", "NIST_SP-800-53_rev5-FINAL_catalog.json")
+    import_all_controls("/Users/dan/PycharmProjects/opal/source/tmp/")

@@ -5,7 +5,7 @@ Provides a simple web application for managing System Security Plans.  The data 
 1. Clone the repository to your local directory\
    `cd /opt/`\
    `sudo mkdir opal`\
-   `sudo chown -R user:user /opt/opal/`\
+   `sudo chown -R user:user /opt/opal/`
 1. Install some required packages\
    `sudo apt-get install python3-venv apache2-dev libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev python3-pip`
 1. It is recomended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
@@ -21,8 +21,7 @@ Provides a simple web application for managing System Security Plans.  The data 
 1. Create a superuser:\
    `python manage.py createsuperuser`
 1. Start the Server\
-   `python manage.py collectstatic`\
-   `python manage.py runmodwsgi --user www-data --group www-data`\
+   `python manage.py runserver`\
 ## Start the app in a docker container
 1. Clone the repository to your local directory
 1. Build the image\

@@ -8,7 +8,7 @@ def startLogging():
     logging.basicConfig(  # filename=logFile,
         filemode='w',
         format='%(name)s - %(levelname)s - %(message)s',
-        level=logging.debug()
+        level=logging.DEBUG
     )
 
 def addControlsToGroup(group_name,controls):

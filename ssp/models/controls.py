@@ -17,9 +17,10 @@ parameter_type_choices = [('label', 'Label'),
 class nist_control_parameter(PrimitiveModel):
     param_id = models.CharField(max_length=255)
     param_type = models.CharField(max_length=255, choices=parameter_type_choices)
-    param_text = models.CharField(max_length=255, blank=True)
+    param_text = models.CharField(max_length=1024, blank=True)
     param_depends_on = models.CharField(max_length=255, blank=True)
     param_class = models.CharField(max_length=255, blank=True)
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.param_id
@@ -61,7 +62,7 @@ class nist_control_parameter(PrimitiveModel):
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
-    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE, null=True, related_name='nist_control_statement_set')
+    nist_control = models.ForeignKey('nist_control', on_delete=models.CASCADE)
     statement_type = models.CharField(max_length=255)
     statement_text = customTextField()
 
@@ -85,9 +86,11 @@ class nist_control(PrimitiveModel):
     label = models.CharField(max_length=50)
     sort_id = models.CharField(max_length=50)
     status = models.CharField(max_length=255, blank=True)
-    parameters = customMany2ManyField(nist_control_parameter)
     links = customMany2ManyField(link)
     catalog = models.CharField(max_length=50,null=True)
+
+    class Meta:
+        ordering = ['sort_id','catalog','control_title']
 
 
     def getStatementText(self, statement_type):
@@ -104,6 +107,10 @@ class nist_control(PrimitiveModel):
     @property
     def get_statement(self):
         return self.getStatementText('statement')
+
+    @property
+    def parameters(self):
+        return nist_control_parameter.objects.filter(nist_control=self)
 
     # TODO: Add methods for objectives and whatever the other type is
 
@@ -194,6 +201,9 @@ class system_control(ExtendedBasicModel):
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, related_name='system_control_set')
+
+    class Meta:
+         ordering = ['nist_control']
 
     @property
     def sorted_statement_set(self):
