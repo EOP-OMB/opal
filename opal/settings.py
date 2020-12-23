@@ -13,26 +13,32 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+if os.environ.get('OPAL_PROD') == True:
+    opal_prod = True
+else:
+    opal_prod = False
+
+#Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = BASE_DIR + '/static'
-MEDIA_ROOT = BASE_DIR + '/ssp/uploads'
+MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%%-#hhw5q=w6h7$o$#u4e1*52u1mwud0ux^1daoh54w1k*(v-&'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+if opal_prod:
+    DEBUG=False
+    ALLOWED_HOSTS = ['ssp.omb.gov']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_auth_adfs',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,11 +49,9 @@ INSTALLED_APPS = [
     'ssp.apps.ssp',
     'django_extensions',
     'fixture_magic',
-    'django_auth_adfs',
-    # 'mod_wsgi.server',
-    #Samira:
     'rest_framework',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,14 +60,15 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',]
+
+if opal_prod:
     # With this you can force a user to login without using
     # the LoginRequiredMixin on every view class
     #
     # You can specify URLs for which login is not enforced by
     # specifying them in the LOGIN_EXEMPT_URLS setting.
-    # 'django_auth_adfs.middleware.LoginRequiredMiddleware',
-]
+    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware',)
 
 ROOT_URLCONF = 'opal.urls'
 
@@ -88,80 +93,24 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'opal',
-        'USER': 'opal',
-        'PASSWORD': 'use_a_strong_password',
-        'HOST': 'localhost',
-        'PORT': '',
+if opal_prod:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'opal',
+            'USER': 'opal',
+            'PASSWORD': 'use_a_strong_password',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'EST'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
-
-
-AUTHENTICATION_BACKENDS = (
-    'django_auth_adfs.backend.AdfsAuthCodeBackend',
-    'django.contrib.auth.backends.ModelBackend',
-    )
-
-# checkout the documentation for more settings
-AUTH_ADFS = {
-    "SERVER": "adfs.omb.gov",
-    "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    # Make sure to read the documentation about the AUDIENCE setting
-    # when you configured the identifier as a URL!
-    "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    # "CA_BUNDLE": "/path/to/ca-bundle.pem",
-    "CLAIM_MAPPING": {"first_name": "given_name",
-                      "last_name": "family_name",
-                      "email": "email"},
-    "USERNAME_CLAIM": "winaccountname",
-    "GROUP_CLAIM": "group"
-}
-
-# Configure django to redirect users to the right URL for login
-LOGIN_URL = "django_auth_adfs:login"
-LOGIN_REDIRECT_URL = "/"
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR + '/db.sqlite3',
+        }
+    }
 
 #Samira:
 REST_FRAMEWORK = {
@@ -195,3 +144,65 @@ REST_FRAMEWORK = {
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 }
+
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     },
+# ]
+
+# Internationalization
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'EST'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+STATIC_URL = '/static/'
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
+if opal_prod:
+    AUTHENTICATION_BACKENDS = (
+    'django_auth_adfs.backend.AdfsAuthCodeBackend',
+    )
+
+    # checkout the documentation for more settings
+    AUTH_ADFS = {
+        "SERVER": "adfs.omb.gov",
+        "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+        "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+        # Make sure to read the documentation about the AUDIENCE setting
+        # when you configured the identifier as a URL!
+        "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+        # "CA_BUNDLE": "/path/to/ca-bundle.pem",
+        "CLAIM_MAPPING": {"first_name": "given_name",
+                          "last_name": "family_name",
+                          "email": "email"},
+        "USERNAME_CLAIM": "winaccountname",
+        "GROUP_CLAIM": "group"
+    }
+
+    # Configure django to redirect users to the right URL for login
+    LOGIN_URL = "django_auth_adfs:login"
+    LOGIN_REDIRECT_URL = "/"
+
+
