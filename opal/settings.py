@@ -15,8 +15,11 @@ import os
 
 if os.environ.get('OPAL_PROD') == True:
     opal_prod = True
+    #opal_secret_key = os.environ.get('SECRET_KEY')
+    opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
 else:
-    opal_prod = False
+    opal_prod = True
+    opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
 
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
@@ -25,7 +28,7 @@ MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = opal_secret_key
 
 DEBUG = True
 ALLOWED_HOSTS = ['*']
@@ -97,7 +100,7 @@ if opal_prod:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'opal',
+            'NAME': 'opal_prod',
             'USER': 'opal',
             'PASSWORD': 'use_a_strong_password',
             'HOST': 'localhost',
@@ -185,24 +188,24 @@ if opal_prod:
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
 
-    # checkout the documentation for more settings
-    AUTH_ADFS = {
-        "SERVER": "adfs.omb.gov",
-        "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-        "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-        # Make sure to read the documentation about the AUDIENCE setting
-        # when you configured the identifier as a URL!
-        "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-        # "CA_BUNDLE": "/path/to/ca-bundle.pem",
-        "CLAIM_MAPPING": {"first_name": "given_name",
-                          "last_name": "family_name",
-                          "email": "email"},
-        "USERNAME_CLAIM": "winaccountname",
-        "GROUP_CLAIM": "group"
+# checkout the documentation for more settings
+AUTH_ADFS = {
+    "SERVER": "adfs.omb.gov",
+    "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    # Make sure to read the documentation about the AUDIENCE setting
+    # when you configured the identifier as a URL!
+    "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    # "CA_BUNDLE": "/path/to/ca-bundle.pem",
+    "CLAIM_MAPPING": {"first_name": "given_name",
+                      "last_name": "family_name",
+                      "email": "email"},
+    "USERNAME_CLAIM": "winaccountname",
+    "GROUP_CLAIM": "group"
     }
 
-    # Configure django to redirect users to the right URL for login
-    LOGIN_URL = "django_auth_adfs:login"
-    LOGIN_REDIRECT_URL = "/"
+# Configure django to redirect users to the right URL for login
+LOGIN_URL = "django_auth_adfs:login"
+LOGIN_REDIRECT_URL = "/"
 
 
