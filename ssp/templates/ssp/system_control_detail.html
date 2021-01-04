@@ -4,7 +4,7 @@
     <tr>
         <td colspan="2">
             <p>
-                <a href="{% url 'admin:ssp_nist_control_change' object.id %}" target="_blank">
+                <a href="{% url 'admin:ssp_system_control_change' object.id %}" target="_blank">
                     <b>{{ object.nist_control.label }}&nbsp;{{ object.nist_control.control_title }}</b>
                 </a>
                 <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}
