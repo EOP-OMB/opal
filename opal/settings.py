@@ -102,7 +102,7 @@ if opal_prod:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'opal_prod',
             'USER': 'opal',
-            'PASSWORD': 'use_a_strong_password',
+            'PASSWORD': 'DcpwXkn3_muYG7fNyxds',
             'HOST': 'localhost',
             'PORT': '',
         }
