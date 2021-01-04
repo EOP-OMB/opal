@@ -41,12 +41,32 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
         return "System Security Plans (SSPs)"
 
 
+@admin.register(models.control_statement)
+class control_statementAdmin(admin.ModelAdmin):
+    filter_horizontal = ['control_statement_responsible_roles', 'properties', 'links', 'annotations']
+    fields = ['title', 'short_name', 'control_statement_id', 'control_statement_responsible_roles',
+              'control_statement_text', 'links', 'desc']
+
+
+@admin.register(models.control_parameter)
+class control_parameterAdmin(admin.ModelAdmin):
+    fields = [('title', 'short_name'), ('control_parameter_id', 'value'), 'desc']
+
+class control_parameterInline(admin.TabularInline):
+    model = models.system_control.control_parameters.through
+
+
+class control_statementInline(admin.TabularInline):
+    model = models.system_control.control_statements.through
+
+
 @admin.register(models.system_control)
 class system_controlAdmin(admin.ModelAdmin):
     filter_horizontal = ['properties', 'annotations', 'links', 'control_parameters', 'control_statements']
     list_filter = ['control_origination', 'nist_control__group_title']
     list_display = ['title', 'short_name', 'nist_control']
     sortable_by = ['sort_id', 'nist_control']
+    inlines = [control_statementInline,control_parameterInline]
 
     fieldsets = (
         ('Title', {
@@ -68,18 +88,6 @@ class information_typeAdmin(admin.ModelAdmin):
     fields = ['title', 'short_name', ('confidentialityImpact', 'integrityImpact', 'availabilityImpact'), 'desc']
     list_display = ['short_name', 'title', 'confidentialityImpact', 'integrityImpact', 'availabilityImpact']
     sortable_by = ['short_name', 'title', 'confidentialityImpact', 'integrityImpact', 'availabilityImpact']
-
-
-@admin.register(models.control_statement)
-class control_statementAdmin(admin.ModelAdmin):
-    filter_horizontal = ['control_statement_responsible_roles', 'properties', 'links', 'annotations']
-    fields = ['title', 'short_name', 'control_statement_id', 'control_statement_responsible_roles',
-              'control_statement_text', 'links', 'desc']
-
-
-@admin.register(models.control_parameter)
-class control_parameterAdmin(admin.ModelAdmin):
-    fields = [('title', 'short_name'), ('control_parameter_id', 'value'), 'desc']
 
 
 @admin.register(models.control_baseline)
