@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',]
 
-if env == "production":
+if env["env"] == "production":
     # With this you can force a user to login without using
     # the LoginRequiredMixin on every view class
     #
@@ -170,7 +170,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-if env == "production":
+if env["env"] == "production":
     AUTHENTICATION_BACKENDS = (
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
@@ -191,7 +191,7 @@ AUTH_ADFS = {
     "GROUP_CLAIM": "group"
     }
 
-if env == "production":
+if env["env"] == "production":
     # Configure django to redirect users to the right URL for login
     LOGIN_URL = "django_auth_adfs:login"
     LOGIN_REDIRECT_URL = "/"
