@@ -54,10 +54,12 @@ class control_parameterAdmin(admin.ModelAdmin):
 
 class control_parameterInline(admin.TabularInline):
     model = models.system_control.control_parameters.through
+    fields = [('title', 'short_name'), ('control_parameter_id', 'value')]
 
 
 class control_statementInline(admin.TabularInline):
     model = models.system_control.control_statements.through
+    fields = [('title', 'short_name'), ('control_statement_id', 'control_statement_text')]
 
 
 @admin.register(models.system_control)
@@ -74,7 +76,7 @@ class system_controlAdmin(admin.ModelAdmin):
         }),
         ('System', {
             'fields': (
-                'control_parameters', 'control_statements', 'control_status', 'control_origination', 'nist_control')
+                'control_status', 'control_origination', 'nist_control')
         }),
         ('Other', {
             'classes': ('collapse',),
