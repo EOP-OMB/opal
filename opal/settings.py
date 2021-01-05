@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if env == "production":
+if env == "production" or env == "debug":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
