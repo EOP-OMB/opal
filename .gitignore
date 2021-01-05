@@ -1,3 +1,5 @@
 /source/tmp/
 /venv/python/
 /static/
+.idea
+environment.py

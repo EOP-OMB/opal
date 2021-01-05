@@ -13,6 +13,8 @@ Provides a simple web application for managing System Security Plans.  The data 
    `source venv/bin/activate`
 1. Install the required python modules by running:\
    `pip install -r requirements.txt`
+1. create a file environment.py in you project root and enter the text "development" to run in development mode.\
+   `echo "development" > environment.py`
 1. Create a sqlite db file (or update the settings.py file with your database connection information)\
    `touch db.sqlite3`
 1. Run the initial migration to create the database objects:\
@@ -21,7 +23,7 @@ Provides a simple web application for managing System Security Plans.  The data 
 1. Create a superuser:\
    `python manage.py createsuperuser`
 1. Start the Server\
-   `python manage.py runserver`\
+   `python manage.py runserver`
 ## Start the app in a docker container
 1. Clone the repository to your local directory
 1. Build the image\

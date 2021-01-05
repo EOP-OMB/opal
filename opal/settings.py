@@ -13,13 +13,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-if os.environ.get('OPAL_PROD') == True:
-    opal_prod = True
-    #opal_secret_key = os.environ.get('SECRET_KEY')
-    opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
-else:
-    opal_prod = True
-    opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
+env = open('environment.py',"r").read()
+
+
+if env == "development":
+    print("Running in Development mode!")
+
+opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
 
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
@@ -34,7 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if opal_prod:
+if env == "production":
     DEBUG=False
     ALLOWED_HOSTS = ['ssp.omb.gov']
 
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',]
 
-if opal_prod:
+if env == "production":
     # With this you can force a user to login without using
     # the LoginRequiredMixin on every view class
     #
@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if opal_prod:
+if env == "production":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -148,20 +148,6 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 }
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -183,7 +169,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-if opal_prod:
+if env == "production":
     AUTHENTICATION_BACKENDS = (
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
@@ -204,8 +190,9 @@ AUTH_ADFS = {
     "GROUP_CLAIM": "group"
     }
 
-# Configure django to redirect users to the right URL for login
-LOGIN_URL = "django_auth_adfs:login"
-LOGIN_REDIRECT_URL = "/"
+if env == "production":
+    # Configure django to redirect users to the right URL for login
+    LOGIN_URL = "django_auth_adfs:login"
+    LOGIN_REDIRECT_URL = "/"
 
 
