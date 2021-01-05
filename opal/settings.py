@@ -13,19 +13,18 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
-env = open('environment.py',"r").read()
-
-
-if env == "development":
-    print("Running in Development mode!")
-
-opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
-
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
+
+env = open(BASE_DIR + '/environment.py',"r").read()
+
+if env == "development":
+    print("Running in Development mode!")
+
+opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = opal_secret_key
