@@ -19,23 +19,23 @@ STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
 
-env = open(BASE_DIR + '/environment.py',"r").read()
+# env = open(BASE_DIR + '/environment.py',"r").read()
 
-if env == "development":
+from opal.env_settings import env
+
+if env["env"] == "development":
     print("Running in Development mode!")
 
-opal_secret_key = '=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7'
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = opal_secret_key
+SECRET_KEY = env["opal_secret_key"]
 
 DEBUG = True
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env["allowed_hosts"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if env == "production":
-    DEBUG=False
-    ALLOWED_HOSTS = ['ssp.omb.gov']
+# if env == "production":
+#     DEBUG=False
+#     ALLOWED_HOSTS = ['ssp.omb.gov']
 
 # Application definition
 
@@ -96,23 +96,25 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'opal_prod',
-        'USER': 'opal',
-        'PASSWORD': 'DcpwXkn3_muYG7fNyxds',
-        'HOST': 'localhost',
-        'PORT': '',
+if env["database"] == "sqlite":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR + '/db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'opal_prod',
+            'USER': 'opal',
+            'PASSWORD': 'DcpwXkn3_muYG7fNyxds',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR + '/db.sqlite3',
-#     }
-# }
 
 #Samira:
 REST_FRAMEWORK = {
