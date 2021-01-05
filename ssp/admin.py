@@ -54,11 +54,19 @@ class control_parameterAdmin(admin.ModelAdmin):
 
 class control_parameterInline(admin.TabularInline):
     model = models.system_control.control_parameters.through
-    #fields = [('title', 'short_name'), ('control_parameter_id', 'value')]
+    list_display = ['title', 'short_name', 'control_parameter_id', 'value']
 
 
 class control_statementInline(admin.TabularInline):
     model = models.system_control.control_statements.through
+    #fields = ['statement']
+    readonly_fields = ['statement']
+
+    def statement(self, instance):
+        return instance.control_statement.control_statement_id + ' ' + instance.control_statement.control_statement_text
+
+    statement.short_description = 'Statement'
+
     #fields = [('title', 'short_name'), ('control_statement_id', 'control_statement_text')]
 
 
@@ -72,7 +80,7 @@ class system_controlAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Title', {
-            'fields': (('title', 'short_name'), 'desc')
+            'fields': (('title', 'short_name'))
         }),
         ('System', {
             'fields': (
@@ -80,7 +88,7 @@ class system_controlAdmin(admin.ModelAdmin):
         }),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('remarks', 'links', 'properties', 'annotations'),
+            'fields': ('remarks', 'links', 'properties', 'annotations','desc'),
         }),
     )
 
