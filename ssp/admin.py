@@ -56,7 +56,8 @@ class control_parameterAdmin(admin.ModelAdmin):
 class control_parameterInline(admin.TabularInline):
     model = models.system_control.control_parameters.through
     readonly_fields = ['parameter']
-    ordering = ['short_name']
+    ordering = ['control_parameter_id']
+    extra = 0
 
     def parameter(self, instance):
         return mark_safe(instance.control_parameter.value)
@@ -68,6 +69,7 @@ class control_statementInline(admin.TabularInline):
     model = models.system_control.control_statements.through
     readonly_fields = ['statement']
     ordering = ['short_name']
+    extra = 0
 
     def statement(self, instance):
         return mark_safe(instance.control_statement.control_statement_text)
