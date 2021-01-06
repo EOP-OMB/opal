@@ -56,6 +56,7 @@ class control_parameterAdmin(admin.ModelAdmin):
 class control_parameterInline(admin.TabularInline):
     model = models.system_control.control_parameters.through
     readonly_fields = ['parameter']
+    ordering = ['short_name']
 
     def parameter(self, instance):
         return mark_safe(instance.control_parameter.value)
@@ -65,15 +66,13 @@ class control_parameterInline(admin.TabularInline):
 
 class control_statementInline(admin.TabularInline):
     model = models.system_control.control_statements.through
-    #fields = ['statement']
     readonly_fields = ['statement']
+    ordering = ['short_name']
 
     def statement(self, instance):
         return mark_safe(instance.control_statement.control_statement_text)
 
     statement.short_description = 'Statement'
-
-    #fields = [('title', 'short_name'), ('control_statement_id', 'control_statement_text')]
 
 
 @admin.register(models.system_control)
@@ -82,7 +81,7 @@ class system_controlAdmin(admin.ModelAdmin):
     list_filter = ['control_origination', 'nist_control__group_title']
     list_display = ['title', 'short_name', 'nist_control']
     sortable_by = ['sort_id', 'nist_control']
-    inlines = [control_statementInline,control_parameterInline]
+    inlines = [control_parameterInline,control_statementInline]
     readonly_fields = ['nist_control_text',]
 
     fieldsets = (
