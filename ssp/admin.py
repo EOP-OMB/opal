@@ -68,7 +68,7 @@ class control_parameterInline(admin.TabularInline):
 class control_statementInline(admin.TabularInline):
     model = models.system_control.control_statements.through
     readonly_fields = ['statement']
-    ordering = ['short_name']
+    ordering = ['control_statement_id']
     extra = 0
 
     def statement(self, instance):

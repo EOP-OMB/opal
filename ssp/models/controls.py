@@ -166,7 +166,7 @@ class control_statement(ExtendedBasicModel):
 
 class control_parameter(BasicModel):
     class Meta:
-        ordering = ["short_name"]
+        ordering = ["control_parameter_id"]
 
     control_parameter_id = models.CharField(max_length=25)
     value = customTextField()
