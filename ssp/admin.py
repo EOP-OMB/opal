@@ -139,18 +139,17 @@ class linkAdmin(admin.ModelAdmin):
     list_display_links = None
 
 
-# TODO I'd like these to be inline for person...
-# class emailAdmin(admin.TabularInline):
-#     model = models.email
-#     extra = 1
-#
-# class phoneAdmin(admin.TabularInline):
-#     model = models.telephone_number
-#     extra = 1
-#
-# class locationAdmin(admin.TabularInline):
-#     model = models.location
-#     extra = 1
+class emailInline(admin.TabularInline):
+    model = models.person.email_addresses.through
+    extra = 1
+
+class phoneInline(admin.TabularInline):
+    model = models.person.telephone_numbers.through
+    extra = 1
+
+class locationInline(admin.TabularInline):
+    model = models.person.locations.through
+    extra = 1
 
 @admin.register(models.person)
 class personAdmin(admin.ModelAdmin):
@@ -158,7 +157,7 @@ class personAdmin(admin.ModelAdmin):
                          'annotations', 'links']
     list_display = ['name', ]
     list_filter = ['organizations', 'locations']
-    # inlines = [emailAdmin,phoneAdmin,locationAdmin]
+    inlines = [emailInline,phoneInline,locationInline]
 
     fieldsets = (
         ('Title', {
@@ -172,10 +171,10 @@ class personAdmin(admin.ModelAdmin):
             'fields': (
                 'name',)
         }),
-        ('Contact', {
-            'fields': (
-                'email_addresses', 'telephone_numbers', 'locations',)
-        }),
+        # ('Contact', {
+        #     'fields': (
+        #         'email_addresses', 'telephone_numbers', 'locations',)
+        # }),
         ('Groups', {
             'fields': ['organizations',]
         }),
