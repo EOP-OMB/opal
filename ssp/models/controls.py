@@ -151,7 +151,7 @@ class control_statement(ExtendedBasicModel):
     """
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["short_name"]
 
     control_statement_id = models.CharField(max_length=25)
     control_statement_responsible_roles = customMany2ManyField(user_role)
@@ -165,6 +165,9 @@ class control_statement(ExtendedBasicModel):
 
 
 class control_parameter(BasicModel):
+    class Meta:
+        ordering = ["short_name"]
+
     control_parameter_id = models.CharField(max_length=25)
     value = customTextField()
 
@@ -173,14 +176,6 @@ class control_parameter(BasicModel):
         queryset = control_parameter.objects.filter(pk=id)
         serializer = control_parameter_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
-
-
-# class control_implementation(ExtendedBasicModel):
-# control_id = models.CharField(max_length=25)
-# control_responsible_roles = customMany2ManyField(user_role)
-# control_parameters = customMany2ManyField(control_parameter)
-# control_statements = customMany2ManyField(control_statement)
-# nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True, blank=True)
 
 
 control_implementation_status_choices = [
