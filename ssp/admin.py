@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.apps import apps
+from django.utils.html import mark_safe
 from ssp import models
 
 
@@ -54,7 +55,12 @@ class control_parameterAdmin(admin.ModelAdmin):
 
 class control_parameterInline(admin.TabularInline):
     model = models.system_control.control_parameters.through
-    list_display = ['title', 'short_name', 'control_parameter_id', 'value']
+    readonly_fields = ['parameter']
+
+    def parameter(self, instance):
+        return mark_safe(instance.control_parameter.value)
+
+    parameter.short_description = 'parameter value'
 
 
 class control_statementInline(admin.TabularInline):
@@ -63,7 +69,7 @@ class control_statementInline(admin.TabularInline):
     readonly_fields = ['statement']
 
     def statement(self, instance):
-        return instance.control_statement.control_statement_id + ' ' + instance.control_statement.control_statement_text
+        return mark_safe(instance.control_statement.control_statement_text)
 
     statement.short_description = 'Statement'
 
@@ -77,8 +83,12 @@ class system_controlAdmin(admin.ModelAdmin):
     list_display = ['title', 'short_name', 'nist_control']
     sortable_by = ['sort_id', 'nist_control']
     inlines = [control_statementInline,control_parameterInline]
+    readonly_fields = ['nist_control_text',]
 
     fieldsets = (
+        ('NIST', {
+            'fields': ('nist_control_text',)
+        }),
         ('Title', {
             'fields': (('title', 'short_name'))
         }),
