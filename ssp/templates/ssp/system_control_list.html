@@ -4,6 +4,7 @@
 <h1>System Controls</h1>
     <table style="vertical-align: top">
         <tr>
+            <th>System</th>
             <th>Text</th>
             <th>Last Updated</th>
             <th>Actions</th>
@@ -11,6 +12,7 @@
         {% if system_control_list %}
             {% for control in system_control_list %}
                 <tr style="border-bottom-style: solid;">
+                    <td>{{ control }}</td>
                     <td  style="border-left-style: solid; border-right-style: solid">
                         <table>
                             <tr><td colspan="2">{{ control.nist_control_text }}</td></tr>

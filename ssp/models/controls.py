@@ -216,6 +216,10 @@ class system_control(ExtendedBasicModel):
     def nist_control_text(self):
         return self.nist_control.all_text
 
+    @property
+    def system_security_plan_title(self):
+        return self.system_security_plan_set.values()[0]["title"]
+
     @staticmethod
     def get_serializer_json(id=1):
         queryset = system_control.objects.filter(pk=id)
