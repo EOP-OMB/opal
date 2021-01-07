@@ -37,6 +37,10 @@ Username: admin\
 Password: admin
               
 ## Load initial data
+###The easy way:
+`python manage.py loaddata opal_ssp_db.json`
+
+###Use the import scripts to load data from public sources
 Note: These import scripts are pretty buggy right now.  Best of luck.\
 1. Create a folder at the root of your application called "source"\
    `mkdir source`
