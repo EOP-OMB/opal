@@ -12,21 +12,21 @@
         {% if system_control_list %}
             {% for control in system_control_list %}
                 <tr style="border-bottom-style: solid;">
-                    <td>{{ control }}</td>
+                    <td style="border-left-style: solid; border-right-style: solid">{{ control.system_security_plan_title }}</td>
                     <td  style="border-left-style: solid; border-right-style: solid">
                         <table>
                             <tr><td colspan="2">{{ control.nist_control_text }}</td></tr>
                             <tr><td colspan="2" bgcolor="#483d8b" height="8px"></td></tr>
                             {% for p in control.control_parameters.all %}
                                 <tr>
-                                    <td><a href="{% url 'admin:ssp_control_parameter_change' p.id %}" target="_blank">{{ p.control_parameter_id }}</a></td>
+                                    <td nowrap><a href="{% url 'admin:ssp_control_parameter_change' p.id %}" target="_blank">{{ p.control_parameter_id }}</a></td>
                                     <td><i>{{ p.value | safe }}</i></td>
                                 </tr>
                             {% endfor %}
                             <tr><td colspan="2" bgcolor="#483d8b" height="8px"></td></tr>
                             {% for s in control.sorted_statement_set.all %}
                                 <tr>
-                                    <td><a href="{% url 'admin:ssp_control_statement_change' s.id %} "target="_blank">{{ s.control_statement_id | safe }}</a></td>
+                                    <td nowrap><a href="{% url 'admin:ssp_control_statement_change' s.id %} "target="_blank">{{ s.control_statement_id | safe }}</a></td>
                                     <td>{{ s.control_statement_text | safe }}</td>
                                 </tr>
                             {% endfor %}

@@ -120,7 +120,7 @@ class nist_control(PrimitiveModel):
 
     @property
     def all_text(self):
-        html = "<h1>" + self.long_title + "</h1>"
+        html = "<b>" + self.long_title + "</b>"
         html = html + "<p>" + self.get_statement + "</p>"
         return mark_safe(html)
 
