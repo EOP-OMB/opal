@@ -1,6 +1,7 @@
 from django.db import models
 from rest_framework_tricks.models.fields import NestedProxyField
 from tinymce.models import HTMLField
+from django.utils import timezone
 import uuid
 
 #Samira:
@@ -40,6 +41,8 @@ class customTextField(HTMLField):
 
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True)
 
     class Meta:
         abstract = True

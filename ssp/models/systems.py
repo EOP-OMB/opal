@@ -1,5 +1,6 @@
 from ssp.models.controls import *
 
+
 # System Properties
 
 information_type_level_choices = [('high', 'High'), ('moderate', 'Moderate'), ('low', 'Low')]
@@ -128,10 +129,9 @@ class system_user(BasicModel):
 
 class system_security_plan(ExtendedBasicModel):
     published = models.DateTimeField()
-    lastModified = models.DateTimeField()
+    lastModified = models.DateTimeField(auto_now=True)
     version = models.CharField(max_length=25, default='1.0.0')
     oscalVersion = models.CharField(max_length=10, default='1.0.0')
-    # system_characteristics = models.ForeignKey(system_characteristic, on_delete=models.PROTECT)
     system_components = customMany2ManyField(system_component)
     system_services = customMany2ManyField(system_service)
     system_interconnections = customMany2ManyField(system_interconnection)
