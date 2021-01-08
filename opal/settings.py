@@ -19,13 +19,14 @@ STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
 
+#Set reasonable defaults for environment values
 env_defaults = {
-    "env" : "production",
-    "opal_secret_key" : "=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7",
-    "debug" : "False",
-    "allowed_hosts" : ["ssp.omb.gov"],
-    "database" : "postgres",
-    "db_password" : "DcpwXkn3_muYG7fNyxds"
+    "env" : "development",
+    "opal_secret_key" : "klchwf98p23hd81&*^*&D(Hohdqp98yphP97gp:GF2837189YB12;O",
+    "debug" : "True",
+    "allowed_hosts" : ["*"],
+    "database" : "sqlite",
+    "db_password" : "use_a_strong_password"
 }
 
 from opal.env_settings import env
