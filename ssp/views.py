@@ -74,7 +74,6 @@ class nist_control_list_view(generic.ListView):
     queryset = nist_control.objects.order_by('sort_id')
 
 
-
 class nist_control_detail_view(generic.DetailView):
     model = nist_control
 

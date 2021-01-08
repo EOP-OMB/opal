@@ -126,3 +126,5 @@ def aliasOSCAL(json_str):
     json_str = json_str.replace('"control_statements":', '"statements":')
     json_str = json_str.replace('"system_name":', '"system-name":')
     return json_str
+
+
