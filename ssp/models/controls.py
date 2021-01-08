@@ -202,6 +202,7 @@ class system_control(ExtendedBasicModel):
     control_statements = customMany2ManyField(control_statement)
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
     control_origination = models.CharField(max_length=100, choices=control_origination_choices)
+    control_primary_system = models.ForeignKey('system_security_plan', on_delete=models.DO_NOTHING, null=True)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True,
                                      related_name='system_control_set')
 

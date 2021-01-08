@@ -2,6 +2,10 @@
 {% load static %}
 {% block content %}
 <h1>System Controls</h1>
+    <form method="get">
+        {{ filter.form.as_table }}
+        <button type="submit">Filter</button>
+    </form>
     <table style="vertical-align: top">
         <tr>
             <th>System</th>
@@ -12,7 +16,7 @@
         {% if system_control_list %}
             {% for control in system_control_list %}
                 <tr style="border-bottom-style: solid;">
-                    <td style="border-left-style: solid; border-right-style: solid">{{ control.system_security_plan_title }}</td>
+                    <td style="border-left-style: solid; border-right-style: solid; vertical-align: top">{{ control.control_primary_system }}</td>
                     <td  style="border-left-style: solid; border-right-style: solid">
                         <table>
                             <tr><td colspan="2">{{ control.nist_control_text }}</td></tr>

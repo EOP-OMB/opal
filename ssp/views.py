@@ -2,6 +2,7 @@
 from django.shortcuts import *
 from django.views import generic
 from django.forms import modelformset_factory, modelform_factory, Textarea
+import django_filters
 import logging
 
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement
@@ -77,6 +78,11 @@ class nist_control_list_view(generic.ListView):
 class nist_control_detail_view(generic.DetailView):
     model = nist_control
 
+
+class system_control_list_view_filter(django_filters.FilterSet):
+    class Meta:
+        model = system_control
+        fields = ['control_status','nist_control__group_title','control_primary_system']
 
 class system_control_list_view(generic.ListView):
     model = system_control

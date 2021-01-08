@@ -13,8 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
+from django_filters.views import FilterView
 from .views import *
 
 
@@ -22,7 +22,8 @@ app_name = 'ssp'
 urlpatterns = [
     path('nist/', nist_control_list_view.as_view(), name='nist_control_list_view'),
     path('nist/<int:pk>', nist_control_detail_view.as_view(), name='nist_control_detail_view'),
-    path('control/', system_control_list_view.as_view(), name='system_control_list_view'),
+    # path('control/', system_control_list_view.as_view(), name='system_control_list_view'),
+    path('control/', FilterView.as_view(filterset_class=system_control_list_view_filter,template_name='ssp/system_control_list.html'),name='system_control_list_view'),
     path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
     path('', system_security_plan_list_view.as_view(), name='list_system_security_planView'),
     path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
