@@ -30,14 +30,14 @@
                             <tr><td colspan="2" bgcolor="#483d8b" height="8px"></td></tr>
                             {% for s in control.sorted_statement_set.all %}
                                 <tr>
-                                    <td nowrap><a href="{% url 'admin:ssp_control_statement_change' s.id %} "target="_blank">{{ s.control_statement_id | safe }}</a></td>
+                                    <td nowrap><a href="{% url 'admin:ssp_control_statement_change' s.id %} " target="_blank">{{ s.control_statement_id | safe }}</a></td>
                                     <td>{{ s.control_statement_text | safe }}</td>
                                 </tr>
                             {% endfor %}
                         </table>
                     </td>
                     <td style="vertical-align: top" nowrap>{{ control.updated_at }}</td>
-                    <td style="vertical-align: top"><a href="{% url 'admin:ssp_system_control_change' control.id %}">Edit</a></td>
+                    <td style="vertical-align: top"><a href="{% url 'admin:ssp_system_control_change' control.id %}" target="_blank">Edit</a></td>
                 </tr>
             {% endfor %}
     </table>
