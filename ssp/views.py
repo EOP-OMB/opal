@@ -2,6 +2,7 @@
 from django.shortcuts import *
 from django.views import generic
 from django.forms import modelformset_factory, modelform_factory, Textarea
+import logging
 
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement
 from .forms import SystemSecurityPlan
@@ -92,3 +93,6 @@ class system_security_plan_list_view(generic.ListView):
 
 class system_security_plan_detail_view(generic.DetailView):
     model = system_security_plan
+    log = logging.getLogger(__name__)
+    log.info('ssp ',object.__name__,'viewed by')
+

@@ -19,9 +19,23 @@ STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
 
-# env = open(BASE_DIR + '/environment.py',"r").read()
+env_defaults = {
+    "env" : "production",
+    "opal_secret_key" : "=&98a-%loivi0af$kqc*@-3+_^m_2sy(hm$vyv&u9^$1_-nbw7",
+    "debug" : "False",
+    "allowed_hosts" : ["ssp.omb.gov"],
+    "database" : "postgres",
+    "db_password" : "DcpwXkn3_muYG7fNyxds"
+}
 
 from opal.env_settings import env
+
+for k in env_defaults:
+    if k not in env:
+        env[k] = env_defaults[k]
+        print("No value found for variable ",k," using default value of " + env_defaults[k])
+    else:
+        print("Value found for variable ",k," (",env[k],")")
 
 if env["env"] == "development":
     print("Running in Development mode!")
@@ -29,13 +43,10 @@ if env["env"] == "development":
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env["opal_secret_key"]
 
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env["debug"]
 ALLOWED_HOSTS = env["allowed_hosts"]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# if env == "production":
-#     DEBUG=False
-#     ALLOWED_HOSTS = ['ssp.omb.gov']
 
 # Application definition
 
@@ -109,7 +120,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'opal_prod',
             'USER': 'opal',
-            'PASSWORD': 'DcpwXkn3_muYG7fNyxds',
+            'PASSWORD': env["db_password"],
             'HOST': 'localhost',
             'PORT': '',
         }
@@ -196,4 +207,26 @@ if env["env"] == "production":
     LOGIN_URL = "django_auth_adfs:login"
     LOGIN_REDIRECT_URL = "/"
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR + '/debug.log',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file','console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
