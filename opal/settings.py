@@ -199,7 +199,7 @@ AUTH_ADFS = {
     "CLAIM_MAPPING": {"first_name": "given_name",
                       "last_name": "family_name",
                       "email": "email"},
-    "USERNAME_CLAIM": "winaccountname",
+    "USERNAME_CLAIM": "upn",
     "GROUP_CLAIM": "group"
     }
 
