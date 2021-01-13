@@ -45,8 +45,24 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
 @admin.register(models.control_statement)
 class control_statementAdmin(admin.ModelAdmin):
     filter_horizontal = ['control_statement_responsible_roles', 'properties', 'links', 'annotations']
-    fields = ['title', 'short_name', 'control_statement_id', 'control_statement_responsible_roles',
-              'control_statement_text', 'links', 'desc']
+    #fields = ['title', 'short_name', 'control_statement_id', 'control_statement_responsible_roles','control_statement_text', 'links', 'desc']
+    readonly_fields = ['nist_control_text', ]
+
+    fieldsets = (
+        ('NIST', {
+            'fields': ('nist_control_text',)
+        }),
+        ('Title', {
+            'fields': (('title', 'short_name'))
+        }),
+        ('Statement', {
+            'fields': (('control_statement_id', 'control_statement_text'),'control_statement_responsible_roles', 'links','remarks')
+        }),
+        ('Other', {
+            'classes': ('collapse',),
+            'fields': ('properties', 'annotations', 'desc'),
+        }),
+    )
 
 
 @admin.register(models.control_parameter)

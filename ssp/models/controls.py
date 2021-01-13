@@ -157,6 +157,10 @@ class control_statement(ExtendedBasicModel):
     control_statement_responsible_roles = customMany2ManyField(user_role)
     control_statement_text = customTextField()
 
+    @property
+    def nist_control_text(self):
+        return self.system_control_set.first().nist_control.all_text
+
     @staticmethod
     def get_serializer_json(id=1):
         queryset = control_statement.objects.filter(pk=id)
