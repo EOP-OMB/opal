@@ -3,15 +3,15 @@
 {% block content %}
 <h1>System Controls</h1>
     <form method="get">
-        {{ filter.form.as_table }}
+        {{ filter.form.as_p }}
         <button type="submit">Filter</button>
     </form>
-    <table style="vertical-align: top">
-        <tr>
-            <th>System</th>
-            <th>Text</th>
-            <th>Last Updated</th>
-            <th>Actions</th>
+    <table style="vertical-align: top; border-style: solid;" >
+        <tr style="alignment: center">
+            <th style="border-style: solid;">System</th>
+            <th style="border-style: solid;">Text</th>
+            <th style="border-style: solid;">Last Updated</th>
+            <th style="border-style: solid;">Actions</th>
         </tr>
         {% if system_control_list %}
             {% for control in system_control_list %}
@@ -37,7 +37,7 @@
                         </table>
                     </td>
                     <td style="vertical-align: top" nowrap>{{ control.updated_at }}</td>
-                    <td style="vertical-align: top"><a href="{% url 'admin:ssp_system_control_change' control.id %}" target="_blank">Edit</a></td>
+                    <td style="vertical-align: top; alignment: right;"><a href="{% url 'admin:ssp_system_control_change' control.id %}" target="_blank">Edit</a></td>
                 </tr>
             {% endfor %}
     </table>
