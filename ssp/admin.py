@@ -11,6 +11,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
     filter_horizontal = ['information_types', 'system_services', 'system_interconnections',
                          'system_inventory_items', 'properties', 'links', 'leveraged_authorization', 'additional_selected_controls']
     filter_vertical = ['controls', 'system_components']
+    readonly_fields = 'lastModified'
     fieldsets = (
         ('Title', {
             'fields': (('title', 'short_name'), 'desc')
