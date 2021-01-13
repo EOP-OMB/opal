@@ -80,20 +80,18 @@ def createFixtures():
             cmd = 'python manage.py dumpdata ssp.' + model.__name__ + ' --natural-foreign --natural-primary -o ' + fixture_dir + model.__name__ + '.json'
             os.system(cmd)
 
-def serializerJSON(data):
+def serializerJSON(data, SSP=False):
     json_data = JSONRenderer().render(data)
     json_object = json.loads(json_data)
     json_str = json.dumps(json_object, indent=2)
-    return aliasOSCAL(json_str)
+    return aliasOSCAL(json_str, SSP=OSCAL)
 
-def aliasOSCAL(json_str):
+def aliasOSCAL(json_str, SSP=False):
     json_str = json_str.replace('"short_name":', '"short-name":')
     json_str = json_str.replace('"telephone_numbers:"', '"telephone-numbers":')
     json_str = json_str.replace('"email_addresses":', '"email-addresses":')
-    json_str = json_str.replace('"controls": [', '"implemented-requirements": [')
     json_str = json_str.replace('"lastModified":', '"last-modified":')
     json_str = json_str.replace('"oscalVersion":', '"oscal-version":')
-    json_str = json_str.replace('"properties":', '"props":')
     json_str = json_str.replace('"desc":', '"description":')
     json_str = json_str.replace('Impact":', '-impact":')
     json_str = json_str.replace('"system-status":', '"status":')
@@ -125,6 +123,9 @@ def aliasOSCAL(json_str):
     json_str = json_str.replace('"control_parameters":', '"parameter-settings":')
     json_str = json_str.replace('"control_statements":', '"statements":')
     json_str = json_str.replace('"system_name":', '"system-name":')
+    if SSP:
+        json_str = json_str.replace('"controls": [', '"implemented-requirements": [')
+        json_str = json_str.replace('"properties":', '"props":')
     return json_str
 
 
