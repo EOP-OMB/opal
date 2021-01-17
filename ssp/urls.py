@@ -30,4 +30,5 @@ urlpatterns = [
     path('new/', ssp_new, name='ssp_new'),
     path('<int:pk>/edit/', ssp_edit, name='ssp_edit'),
     path('sc/<int:pk>/edit', system_control_edit, name='system_control_edit'),
+    path('catalog/', import_catalog, name='import_catalog')
 ]

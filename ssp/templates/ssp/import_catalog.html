@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+    <br>
+    <h1>Import Catalog</h1>
+    <br>
+    Please enter a title for this catalog and then select a catalog file from hard drive or enter the url for a catalog file (json format).
+    <br>
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors}}
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+            <br>
+        {% endfor %}
+        <br>
+        <input type="submit" value="Import" class="submit" name="submit" />
+    </form>
+
+{% endblock %}
+

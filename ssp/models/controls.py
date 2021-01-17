@@ -1,5 +1,5 @@
 from ssp.models.users import *
-
+from opal.settings import IMPORTED_CATALOGS_DIR
 import json
 from django.utils.html import mark_safe
 
@@ -46,20 +46,6 @@ class control_parameter(BasicModel):
         queryset = control_parameter.objects.filter(pk=id)
         serializer = control_parameter_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
-
-
-
-frequency_choices = [('daily', 'Daily'),
-                    ('weekly', 'weekly'),
-                    ('monthly', 'Monthly'),
-                    ('quarterly', 'Quarterly'),
-                    ('annually', 'Annually'),
-                    ('as needed', 'As Needed')]
-
-class continuous_monitoring_action_item(BasicModel):
-    control_statements = customMany2ManyField(control_statement)
-    automated = models.BooleanField(default=True)
-    frequency = models.CharField(max_length=10, choices=frequency_choices)
 
 
 
@@ -251,6 +237,30 @@ class system_control(ExtendedBasicModel):
         queryset = system_control.objects.filter(pk=id)
         serializer = system_control_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+
+
+frequency_choices = [('daily', 'Daily'),
+                    ('weekly', 'weekly'),
+                    ('monthly', 'Monthly'),
+                    ('quarterly', 'Quarterly'),
+                    ('annually', 'Annually'),
+                    ('as needed', 'As Needed')]
+
+class continuous_monitoring_action_item(BasicModel):
+    control_statements = customMany2ManyField(control_statement)
+    automated = models.BooleanField(default=True)
+    frequency = models.CharField(max_length=10, choices=frequency_choices, default='as needed')
+
+
+
+class import_catalog(PrimitiveModel):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    file_url = models.URLField(max_length=255, blank=True, null=True)
+    file = models.FileField(upload_to=IMPORTED_CATALOGS_DIR, blank=True, null=True)
+    added_controls = models.IntegerField(blank=True, null=True)
+    updated_controls = models.IntegerField(blank=True, null=True)
+    user = models.CharField(max_length=255, blank=True, null=True)
 
 
 

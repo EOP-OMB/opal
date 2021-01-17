@@ -18,6 +18,7 @@ BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
+IMPORTED_CATALOGS_DIR = BASE_DIR + '/uploads/catalogs/'
 
 #Set reasonable defaults for environment values
 env_defaults = {
@@ -64,6 +65,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'fixture_magic',
     'rest_framework',
+    'rest_framework_tricks',
 ]
 
 

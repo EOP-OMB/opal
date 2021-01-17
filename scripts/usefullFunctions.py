@@ -3,6 +3,7 @@ import ssp.models as t
 import logging
 from rest_framework.renderers import JSONRenderer
 import json
+import os
 
 def startLogging():
     logging.basicConfig(  # filename=logFile,
@@ -84,7 +85,7 @@ def serializerJSON(data, SSP=False):
     json_data = JSONRenderer().render(data)
     json_object = json.loads(json_data)
     json_str = json.dumps(json_object, indent=2)
-    return aliasOSCAL(json_str, SSP=OSCAL)
+    return aliasOSCAL(json_str, SSP)
 
 def aliasOSCAL(json_str, SSP=False):
     json_str = json_str.replace('"short_name":', '"short-name":')
@@ -127,5 +128,13 @@ def aliasOSCAL(json_str, SSP=False):
         json_str = json_str.replace('"controls": [', '"implemented-requirements": [')
         json_str = json_str.replace('"properties":', '"props":')
     return json_str
+
+def validate_file_extension(filename, extension):
+    ext = os.path.splitext(filename)[1]  # [0] returns path+filename
+    #valid_extensions = ['.pdf', '.doc', '.docx', '.jpg', '.png', '.xlsx', '.xls']
+    if ext.lower() != extension:
+        return False
+    else:
+        return True
 
 

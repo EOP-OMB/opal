@@ -4,9 +4,13 @@ from django.views import generic
 from django.forms import modelformset_factory, modelform_factory, Textarea
 import django_filters
 import logging
+from django.http import HttpResponseRedirect
+import urllib
+import os
+
 
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement
-from .forms import SystemSecurityPlan
+from .forms import SystemSecurityPlan, ImportCatalogForm, import_catalog
 
 
 def ssp_new(request):
@@ -101,3 +105,36 @@ class system_security_plan_detail_view(generic.DetailView):
     log = logging.getLogger(__name__)
     log.info('ssp ',object.__name__,'viewed by')
 
+
+# Imaginary function to handle an uploaded file.
+#from somewhere import handle_uploaded_file
+
+def import_catalog(request):
+    if request.method == 'POST':
+        form = ImportCatalogForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            catalog = form.save(commit=False)
+            if len(request.FILES) != 0:
+                catalog.file = request.FILES['file']
+            if form.cleaned_data['file_url']:
+                result = urllib.request.urlretrieve(form.cleaned_data['file_url'])
+                catalog.file.save(os.path.basename(form.cleaned_data['file_url']), open(result[0], 'rb'))
+            catalog.save()
+
+            #form.save()
+            return HttpResponse("data submitted successfully"+str(catalog.id))
+            # process the data in form.cleaned_data as required
+            #How get id of the new record?
+            #handle_uploaded_file(request.FILES['file'])
+            #return HttpResponseRedirect('/success/url/')
+        else:
+            return render(request, 'ssp\import_catalog.html', {'form': form})
+    else:
+        form = ImportCatalogForm()
+        return render(request, 'ssp\import_catalog.html', {'form': form})
+
+#def handle_uploaded_file(f):
+#    with open('ssp/uploads/catalog/catalog.json', 'wb+') as destination:
+#        for chunk in f.chunks():
+#            destination.write(chunk)
