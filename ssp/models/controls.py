@@ -157,15 +157,16 @@ class control_statement(ExtendedBasicModel):
     control_statement_responsible_roles = customMany2ManyField(user_role)
     control_statement_text = customTextField()
 
-    def save(self, force_insert=False, force_update=False):
-        if self.system_control_set.count() > 0:
-            self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
-                               self.system_control_set.first().title, self.control_statement_id])
-            self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
-                                  self.system_control_set.first().short_name, self.control_statement_id])
-        else:
-            self.title = ' - '.join(['UNLINKED', self.control_statement_id])
-            self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
+    def save(self, force_insert=False, force_update=False,*args,**kwargs):
+        if self.id:
+            if self.system_control_set.count() > 0:
+                self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                                   self.system_control_set.first().title, self.control_statement_id])
+                self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                      self.system_control_set.first().short_name, self.control_statement_id])
+            else:
+                self.title = ' - '.join(['UNLINKED', self.control_statement_id])
+                self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
         super(control_statement, self).save(force_insert, force_update)
 
     @property
@@ -187,7 +188,7 @@ class control_parameter(BasicModel):
     value = customTextField()
 
     def save(self, force_insert=False, force_update=False):
-        if self.system_control_set.count() > 0:
+        if self.id != None and self.system_control_set.count() > 0:
             self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
                                self.system_control_set.first().title, self.control_parameter_id])
             self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
