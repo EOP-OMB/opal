@@ -157,6 +157,17 @@ class control_statement(ExtendedBasicModel):
     control_statement_responsible_roles = customMany2ManyField(user_role)
     control_statement_text = customTextField()
 
+    def save(self, force_insert=False, force_update=False):
+        if self.system_control_set.count() > 0:
+            self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                               self.system_control_set.first().title, self.control_statement_id])
+            self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                  self.system_control_set.first().short_name, self.control_statement_id])
+        else:
+            self.title = ' - '.join(['UNLINKED', self.control_statement_id])
+            self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
+        super(control_statement, self).save(force_insert, force_update)
+
     @property
     def nist_control_text(self):
         return self.system_control_set.first().nist_control.all_text
@@ -174,6 +185,17 @@ class control_parameter(BasicModel):
 
     control_parameter_id = models.CharField(max_length=25)
     value = customTextField()
+
+    def save(self, force_insert=False, force_update=False):
+        if self.system_control_set.count() > 0:
+            self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                               self.system_control_set.first().title, self.control_parameter_id])
+            self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                  self.system_control_set.first().short_name, self.control_parameter_id])
+        else:
+            self.title = ' - '.join(['UNLINKED', self.control_parameter_id])
+            self.short_name = '-'.join(['UNLINKED', self.control_parameter_id])
+        super(control_parameter, self).save(force_insert, force_update)
 
     @staticmethod
     def get_serializer_json(id=1):
