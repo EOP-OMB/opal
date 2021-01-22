@@ -9,46 +9,6 @@ from django.utils.html import mark_safe
 
 
 
-class control_statement(ExtendedBasicModel):
-    """
-    responses to the requirements defined in each control.  control_statement_id should be
-    in the format 'Part a.'.
-    """
-
-    class Meta:
-        ordering = ["short_name"]
-
-    control_statement_id = models.CharField(max_length=25)
-    control_statement_responsible_roles = customMany2ManyField(user_role)
-    control_statement_text = customTextField()
-
-    @property
-    def nist_control_text(self):
-        return self.system_control_set.first().nist_control.all_text
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = control_statement.objects.filter(pk=id)
-        serializer = control_statement_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
-
-
-class control_parameter(BasicModel):
-    class Meta:
-        ordering = ["control_parameter_id"]
-
-    control_parameter_id = models.CharField(max_length=25)
-    value = customTextField()
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = control_parameter.objects.filter(pk=id)
-        serializer = control_parameter_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
-
-
 parameter_type_choices = [('label', 'Label'),
                           ('description', 'Description'),
                           ('constraint', 'Constraint'),
@@ -186,6 +146,67 @@ class control_baseline(BasicModel):
         serializer = control_baseline_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+
+
+class control_statement(ExtendedBasicModel):
+    """
+    responses to the requirements defined in each control.  control_statement_id should be
+    in the format 'Part a.'.
+    """
+
+    class Meta:
+        ordering = ["short_name"]
+
+    control_statement_id = models.CharField(max_length=25)
+    control_statement_responsible_roles = customMany2ManyField(user_role)
+    control_statement_text = customTextField()
+
+    def save(self, force_insert=False, force_update=False,*args,**kwargs):
+        if self.id:
+            if self.system_control_set.count() > 0:
+                self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                                   self.system_control_set.first().title, self.control_statement_id])
+                self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                      self.system_control_set.first().short_name, self.control_statement_id])
+            else:
+                self.title = ' - '.join(['UNLINKED', self.control_statement_id])
+                self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
+        super(control_statement, self).save(force_insert, force_update)
+
+    @property
+    def nist_control_text(self):
+        return self.system_control_set.first().nist_control.all_text
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = control_statement.objects.filter(pk=id)
+        serializer = control_statement_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+
+class control_parameter(BasicModel):
+    class Meta:
+        ordering = ["control_parameter_id"]
+
+    control_parameter_id = models.CharField(max_length=25)
+    value = customTextField()
+
+    def save(self, force_insert=False, force_update=False):
+        if self.id != None and self.system_control_set.count() > 0:
+            self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                               self.system_control_set.first().title, self.control_parameter_id])
+            self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                  self.system_control_set.first().short_name, self.control_parameter_id])
+        else:
+            self.title = ' - '.join(['UNLINKED', self.control_parameter_id])
+            self.short_name = '-'.join(['UNLINKED', self.control_parameter_id])
+        super(control_parameter, self).save(force_insert, force_update)
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = control_parameter.objects.filter(pk=id)
+        serializer = control_parameter_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
 
 
 

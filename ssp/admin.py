@@ -112,7 +112,7 @@ class system_controlAdmin(admin.ModelAdmin):
         }),
         ('System', {
             'fields': (
-                'control_status', 'control_origination', 'nist_control')
+                'control_status', 'control_origination', 'nist_control','control_primary_system')
         }),
         ('Other', {
             'classes': ('collapse',),
