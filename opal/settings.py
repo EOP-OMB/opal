@@ -23,13 +23,17 @@ MEDIA_URL = '/uploads/'
 env_defaults = {
     "env" : "development",
     "opal_secret_key" : "klchwf98p23hd81&*^*&D(Hohdqp98yphP97gp:GF2837189YB12;O",
-    "debug" : "True",
+    "debug" : "False",
     "allowed_hosts" : ["*"],
     "database" : "sqlite",
-    "db_password" : "use_a_strong_password"
+    "db_name" : "opal_prod",
+    "db_user" : "opal",
+    "db_password" : "use_a_strong_password",
+    "db_host" : "localhost",
+    "db_port" : ""
 }
 
-from opal.env_settings import env
+from opal.local_settings import env
 
 for k in env_defaults:
     if k not in env:
@@ -119,11 +123,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'opal_prod',
-            'USER': 'opal',
+            'NAME': env['db_name'],
+            'USER': env['db_user'],
             'PASSWORD': env["db_password"],
-            'HOST': 'localhost',
-            'PORT': '',
+            'HOST': env["db_host"],
+            'PORT': env["db_port"],
         }
     }
 
