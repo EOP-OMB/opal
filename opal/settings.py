@@ -39,9 +39,9 @@ from opal.local_settings import env
 for k in env_defaults:
     if k not in env:
         env[k] = env_defaults[k]
-        print("No value found for variable ",k," using default value of " + env_defaults[k])
+        print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
     else:
-        print("Value found for variable ",k," (",env[k],")")
+        print("Value found for variable ",k," (",str(env[k]),")")
 
 if env["env"] == "development":
     print("Running in Development mode!")
@@ -237,3 +237,30 @@ LOGGING = {
     },
 }
 
+#Samira: I had to add this because I was getting errors about TINYMCE_DEFAULT_CONFIG not being set when I wanted to dubug OSCAL_Catalog_import.py in pycharm(not running it with manage.py).
+TINYMCE_DEFAULT_CONFIG = {
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'silver',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}

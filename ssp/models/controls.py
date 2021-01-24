@@ -279,6 +279,8 @@ class import_catalog(PrimitiveModel):
     title = models.CharField(max_length=255, blank=True, null=True)
     file_url = models.URLField(max_length=255, blank=True, null=True)
     file = models.FileField(upload_to=IMPORTED_CATALOGS_DIR, blank=True, null=True)
+    control_baseline = models.ForeignKey(control_baseline, on_delete=models.DO_NOTHING, null=True, blank=True,
+                                     related_name='import_catalog_set')
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)

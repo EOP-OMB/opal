@@ -1,5 +1,5 @@
 from opal.settings import BASE_DIR
-import ssp.models as t
+#import ssp.models as t
 import logging
 from rest_framework.renderers import JSONRenderer
 import json
