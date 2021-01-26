@@ -43,14 +43,14 @@ class nist_control_parameter(PrimitiveModel):
         else:
             return_list = []
             for obj in nist_control_parameter.objects.all():
-                dict = {}
+                d = {}
                 for kv in key_value_list:
                     if kv[0] == 'uuid':
-                        dict[kv[0]] = str(getattr(obj, kv[
+                        d[kv[0]] = str(getattr(obj, kv[
                             1]))  # Had to add this line to fix the UUID error when converting the list to json
                     else:
-                        dict[kv[0]] = getattr(obj, kv[1])
-                return_list.append(dict)
+                        d[kv[0]] = getattr(obj, kv[1])
+                return_list.append(d)
             json_str = json.dumps(return_list, indent=2)
             return json_str
 
@@ -157,12 +157,12 @@ class control_statement(ExtendedBasicModel):
     control_statement_responsible_roles = customMany2ManyField(user_role)
     control_statement_text = customTextField()
 
-    def save(self, force_insert=False, force_update=False,*args,**kwargs):
-        if self.id != None and self.system_control_set.count() > 0:
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if self.id is not None and self.system_control_set.count() > 0:
             self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
-                               self.system_control_set.first().title, self.control_statement_id])
+                                     self.system_control_set.first().title, self.control_statement_id])
             self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
-                                  self.system_control_set.first().short_name, self.control_statement_id])
+                                        self.system_control_set.first().short_name, self.control_statement_id])
         else:
             self.title = ' - '.join(['UNLINKED', self.control_statement_id])
             self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
@@ -187,11 +187,11 @@ class control_parameter(BasicModel):
     value = customTextField()
 
     def save(self, force_insert=False, force_update=False):
-        if self.id != None and self.system_control_set.count() > 0:
+        if self.id is not None and self.system_control_set.count() > 0:
             self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
-                               self.system_control_set.first().title, self.control_parameter_id])
+                                     self.system_control_set.first().title, self.control_parameter_id])
             self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
-                                  self.system_control_set.first().short_name, self.control_parameter_id])
+                                        self.system_control_set.first().short_name, self.control_parameter_id])
         else:
             self.title = ' - '.join(['UNLINKED', self.control_parameter_id])
             self.short_name = '-'.join(['UNLINKED', self.control_parameter_id])
