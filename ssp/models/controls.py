@@ -125,7 +125,7 @@ class nist_control(PrimitiveModel):
         return mark_safe(html)
 
     def __str__(self):
-        return self.long_title
+        return '(' + self.catalog + ')' + self.long_title
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -158,15 +158,14 @@ class control_statement(ExtendedBasicModel):
     control_statement_text = customTextField()
 
     def save(self, force_insert=False, force_update=False,*args,**kwargs):
-        if self.id:
-            if self.system_control_set.count() > 0:
-                self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
-                                   self.system_control_set.first().title, self.control_statement_id])
-                self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
-                                      self.system_control_set.first().short_name, self.control_statement_id])
-            else:
-                self.title = ' - '.join(['UNLINKED', self.control_statement_id])
-                self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
+        if self.id != None and self.system_control_set.count() > 0:
+            self.title = ' - '.join([self.system_control_set.first().control_primary_system.short_name,
+                               self.system_control_set.first().title, self.control_statement_id])
+            self.short_name = '-'.join([self.system_control_set.first().control_primary_system.short_name,
+                                  self.system_control_set.first().short_name, self.control_statement_id])
+        else:
+            self.title = ' - '.join(['UNLINKED', self.control_statement_id])
+            self.short_name = '-'.join(['UNLINKED', self.control_statement_id])
         super(control_statement, self).save(force_insert, force_update)
 
     @property
