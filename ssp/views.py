@@ -140,11 +140,13 @@ def import_catalog(request):
             catalog.save()
 
             if catalog.file_url:
-                try:
-                    catalog_link = link.objects.get(href=catalog.file_url)
-                except link.DoesNotExist:
-                    catalog_link = link(text=catalog.title, href=catalog.file_url)
-                    catalog_link.save()
+
+                catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
+                                                                'text': catalog.title,
+                                                                'href': catalog.file_url
+                                                            })
+                catalog.link = catalog_link
+                catalog_link.save()
 
                 catalog_control_baseline.link = catalog_link
                 catalog_control_baseline.save()
