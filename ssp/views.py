@@ -115,60 +115,92 @@ class system_security_plan_detail_view(generic.DetailView):
 #from somewhere import handle_uploaded_file
 
 def import_catalog(request):
+
+    """For scanning file streams, ClamAV should be installed and clamd should be running in Poweshell. Also pip install pyclamd for using Clam daemon in python"""
+    try:
+        import pyclamd
+        cd = pyclamd.ClamdAgnostic()
+        clamd_running = True
+    except Exception as e:
+        logging.debug(str(e))
+        clamd_running = False
+
     if request.method == 'POST':
         form = ImportCatalogForm(request.POST, request.FILES)
 
         if form.is_valid():
             catalog = form.save(commit=False)
+
+            """Uploaded JSON files will be saved without being scanned when ClamAV daemon is down"""
+
             if len(request.FILES) != 0:
-                catalog.file = request.FILES['file']
+                if clamd_running:
+                    scan_results = cd.scan_stream(request.FILES['file'])
+                    if scan_results is None:
+                        catalog.file = request.FILES['file']
+                else:
+                    catalog.file = request.FILES['file']
+
             if form.cleaned_data['file_url']:
                 result = urllib.request.urlretrieve(form.cleaned_data['file_url'])
-                catalog.file.save(os.path.basename(form.cleaned_data['file_url']), File(open(result[0], 'rb')))
-            catalog.save()
-            if request.user.is_authenticated:
-                catalog.user = request.user.username
+                if clamd_running:
+                    scan_results = cd.scan_stream(File(open(result[0], 'rb')))
+                    if scan_results is None:
+                        catalog.file.save(os.path.basename(form.cleaned_data['file_url']), File(open(result[0], 'rb')))
+                else:
+                    catalog.file.save(os.path.basename(form.cleaned_data['file_url']), File(open(result[0], 'rb')))
+
+            if (clamd_running and scan_results is None) or not clamd_running:
+
+                if request.user.is_authenticated:
+                    catalog.user = request.user.username
+
+                try:
+                    catalog_control_baseline = control_baseline.objects.get(title=catalog.title)
+                except control_baseline.DoesNotExist:
+                    catalog_control_baseline = control_baseline(title=catalog.title)
+                    catalog_control_baseline.save()
+
+                catalog.control_baseline = catalog_control_baseline
+
+
+                if catalog.file_url:
+
+                    catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
+                                                                    'text': catalog.title,
+                                                                    'href': catalog.file_url
+                                                                })
+
+                    catalog_control_baseline.link = catalog_link
+                    catalog_control_baseline.save()
+
                 catalog.save()
 
-            try:
-                catalog_control_baseline = control_baseline.objects.get(title=catalog.title)
-            except control_baseline.DoesNotExist:
-                catalog_control_baseline = control_baseline(title=catalog.title)
-                catalog_control_baseline.save()
+                # form.save()
 
-            catalog.control_baseline = catalog_control_baseline
-            catalog.save()
+                if form.cleaned_data['file']:
+                    file_path =str(catalog.file)
+                    catalog_name = str(form.cleaned_data['file'])
+                else:
+                    file_path = form.cleaned_data['file_url']
+                    file_path_list = file_path.split('/')
+                    catalog_name = file_path_list[-1]
 
-            if catalog.file_url:
+                added, updated = run(str(catalog.file), catalog_name)
+                catalog.added_controls = added
+                catalog.updated_controls = updated
+                catalog.save()
 
-                catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
-                                                                'text': catalog.title,
-                                                                'href': catalog.file_url
-                                                            })
-                catalog.link = catalog_link
-                catalog_link.save()
-
-                catalog_control_baseline.link = catalog_link
-                catalog_control_baseline.save()
-
-            # form.save()
-
-            if form.cleaned_data['file']:
-                file_path =str(catalog.file)
-                catalog_name = str(form.cleaned_data['file'])
-            else:
-                file_path = form.cleaned_data['file_url']
-                file_path_list = file_path.split('/')
-                catalog_name = file_path_list[-1]
-
-            added, updated = run(str(catalog.file), catalog_name)
-            catalog.added_controls = added
-            catalog.updated_controls = updated
-            catalog.save()
-
-            messages.success(request, 'Imported OSCAL Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
-            return render(request, 'ssp\import_catalog.html', {'form': form})
-            #return HttpResponse("data submitted successfully")
+                if clamd_running:
+                    scan_news = "Virus scan accepted this file. "
+                else:
+                    scan_news = "Virus scan is down. "
+                messages.success(request, scan_news + 'Imported OSCAL Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
+                return render(request, 'ssp\import_catalog.html', {'form': form})
+                #return HttpResponse("data submitted successfully")
+            elif scan_results is not None:
+                messages.success(request, 'Virus scan rejected this file: '+str(scan_results['stream']))
+                return render(request, 'ssp\import_catalog.html', {'form': form})
 
         else:
             return render(request, 'ssp\import_catalog.html', {'form': form})

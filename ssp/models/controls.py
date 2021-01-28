@@ -283,7 +283,7 @@ class import_catalog(PrimitiveModel):
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)
-    link = models.ForeignKey(link, on_delete=models.DO_NOTHING, null=True, blank=True)
+
 
 
 
