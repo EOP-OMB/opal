@@ -179,8 +179,29 @@ class system_security_plan(ExtendedBasicModel):
         return selected_controls.order_by('sort_id')
 
     @property
+    def get_system_owner(self):
+        system_owner = self.system_users.filter(short_name='so').get().user.name
+        if system_owner is None:
+            system_owner = "No system owner is defined.  Click <a href=some link>here</a> to add one"
+            # need more code here to link the new system_user to the system_security_plan
+        return system_owner
+
+    @property
+    def is_tic(self):
+        """
+        Cool code goes here
+        :return:
+        """
+        return "I don't know how to find this yet"
+
+    @property
     def selected_controls(self):
         return self._get_selected_controls()
+
+    @property
+    def controlFamilies(self):
+        families = self.controls.filter(nist_control__sort_id__endswith='-01').order_by('nist_control__sort_id').all()
+        return families
 
     @staticmethod
     def get_serializer_json(id=1):

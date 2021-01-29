@@ -111,6 +111,7 @@ class system_security_plan_detail_view(generic.DetailView):
     log.info('ssp ',object.__name__,'viewed by')
 
 
+
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
@@ -194,14 +195,14 @@ def import_catalog(request):
                 else:
                     scan_news = "Virus scan is down. "
                 messages.success(request, scan_news + 'Imported OSCAL Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
-                return render(request, 'ssp\import_catalog.html', {'form': form})
+                return render(request, 'ssp/import_catalog.html', {'form': form})
                 #return HttpResponse("data submitted successfully")
             elif scan_results is not None:
                 messages.success(request, 'Virus scan rejected this file: '+str(scan_results['stream']))
-                return render(request, 'ssp\import_catalog.html', {'form': form})
+                return render(request, 'ssp/import_catalog.html', {'form': form})
 
         else:
-            return render(request, 'ssp\import_catalog.html', {'form': form})
+            return render(request, 'ssp/import_catalog.html', {'form': form})
     else:
         form = ImportCatalogForm()
-        return render(request, 'ssp\import_catalog.html', {'form': form})
+        return render(request, 'ssp/import_catalog.html', {'form': form})

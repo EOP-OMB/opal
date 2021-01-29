@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 {% block sidebar %}
-    <a href="#system_description">System Description</a>
-    <a href="#system_diagrams">System Diagrams</a>
-    <a href="#information_types">System Information Types</a>
-    <a href="#system_components">System Components</a>
+    <ol type="I">
+    <li><a href="#system_description">System Description</a></li>
+    <li><a href="#system_diagrams">System Diagrams</a></li>
+    <li><a href="#information_types">System Information Types</a></li>
+    <li><a href="#system_components">System Components</a></li>
+    <ol type="1">
     {% for component in object.system_components.all %}
-        &nbsp;&nbsp;<a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a>
+        &nbsp;&nbsp;<li><a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a></li>
     {% endfor %}
-    <a href="#system_controls">System Controls</a>
-    {% for control in object.controls.all %}
-        &nbsp;&nbsp;<a href="#control:{{ control.id }}">{{ control.nist_control.label }}&nbsp;{{ control.nist_control.control_title }}</a>
+    </ol>
+    <li><a href="#system_controls">System Controls</a></li>
+    <ol type="1">
+    {% for control in object.controlFamilies %}
+        <li><a href="#control:{{ control.id }}">{{ control.nist_control.control_title }}</a></li>
     {% endfor %}
+    </ol>
+    </ol>
 {% endblock %}
 
 {% block content %}
