@@ -7,7 +7,7 @@ import sys
 
 added_nist_controls = 0
 updated_nist_controls = 0
-
+control_baseline = t.control_baseline
 
 def break_up_catalog(file_path, file_name):
     """
@@ -53,6 +53,8 @@ def import_all_controls(path):
     imports all control json files in given directory
     """
     import os
+
+    control_baseline.controls.clear()
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
             if name.endswith(".json"):
@@ -115,6 +117,8 @@ def import_individual_control(file_name):
                                                                     'catalog':cntrl_catalog
                                                                })
 
+    control_baseline.controls.add(control_id)
+
     if not created:
         logging.debug("Found existing entry for " + cntrl["title"] + " from catalog " + cntrl_catalog)
         updated_nist_controls += 1
@@ -122,6 +126,8 @@ def import_individual_control(file_name):
     else:
         logging.debug("No existing entry for " + cntrl["title"] + "from catalog " + cntrl_catalog + " found. Created New entry.")
         added_nist_controls += 1
+
+
 
     if 'parameters' in cntrl:
         for param in cntrl['parameters']:
@@ -173,9 +179,11 @@ def addControlPart(part, indent=0):
     return t
 
 
-def run(file_path=BASE_DIR + '/source/NIST_SP-800-53_rev4_catalog.json', file_name='NIST_SP-800-53_rev4_catalog.json'):
-    global added_nist_controls, updated_nist_controls
+def run(catalog_control_baseline, file_path=BASE_DIR + '/source/NIST_SP-800-53_rev4_catalog.json', file_name='NIST_SP-800-53_rev4_catalog.json'):
+    global added_nist_controls, updated_nist_controls, control_baseline
     added_nist_controls = updated_nist_controls = 0
+    control_baseline = catalog_control_baseline
+
     break_up_catalog(file_path, file_name)
     #break_up_catalog(BASE_DIR + '/source/', "NIST_SP-800-53_rev5-FINAL_catalog.json")
     import_all_controls(BASE_DIR + '/source/tmp/' + file_name.replace('.json', ''))

@@ -116,7 +116,10 @@ class system_security_plan_detail_view(generic.DetailView):
 
 def import_catalog(request):
 
-    """For scanning file streams, ClamAV should be installed and clamd should be running in Poweshell. Also pip install pyclamd for using Clam daemon in python"""
+    """For scanning file streams, ClamAV should be installed and clamd should be running in Poweshell. Also pip install pyclamd for using Clam daemon in python
+    (  https://www.clamav.net/documents/installing-clamav-on-windows & https://pypi.org/project/pyClamd/  )
+    Note: There is another python module (clamd) which I tried first. It opens a UNIX socket which was not working with my Windows """
+
     try:
         import pyclamd
         cd = pyclamd.ClamdAgnostic()
@@ -155,22 +158,17 @@ def import_catalog(request):
                 if request.user.is_authenticated:
                     catalog.user = request.user.username
 
-                try:
-                    catalog_control_baseline = control_baseline.objects.get(title=catalog.title)
-                except control_baseline.DoesNotExist:
-                    catalog_control_baseline = control_baseline(title=catalog.title)
-                    catalog_control_baseline.save()
 
+
+
+                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title)
                 catalog.control_baseline = catalog_control_baseline
 
-
                 if catalog.file_url:
-
                     catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
                                                                     'text': catalog.title,
                                                                     'href': catalog.file_url
                                                                 })
-
                     catalog_control_baseline.link = catalog_link
                     catalog_control_baseline.save()
 
@@ -186,7 +184,7 @@ def import_catalog(request):
                     file_path_list = file_path.split('/')
                     catalog_name = file_path_list[-1]
 
-                added, updated = run(str(catalog.file), catalog_name)
+                added, updated = run(catalog.control_baseline, str(catalog.file), catalog_name)
                 catalog.added_controls = added
                 catalog.updated_controls = updated
                 catalog.save()
