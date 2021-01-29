@@ -18,7 +18,7 @@ BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
-IMPORTED_CATALOGS_DIR = 'uploads/catalogs/'
+IMPORTED_CATALOGS_DIR = 'catalogs/'
 
 #Set reasonable defaults for environment values
 env_defaults = {
@@ -235,32 +235,4 @@ LOGGING = {
             'propagate': True,
         },
     },
-}
-
-#Samira: I had to add this because I was getting errors about TINYMCE_DEFAULT_CONFIG not being set when I wanted to dubug OSCAL_Catalog_import.py in pycharm(not running it with manage.py).
-TINYMCE_DEFAULT_CONFIG = {
-    'cleanup_on_startup': True,
-    'custom_undo_redo_levels': 20,
-    'selector': 'textarea',
-    'theme': 'silver',
-    'plugins': '''
-            textcolor save link image media preview codesample contextmenu
-            table code lists fullscreen  insertdatetime  nonbreaking
-            contextmenu directionality searchreplace wordcount visualblocks
-            visualchars code fullscreen autolink lists  charmap print  hr
-            anchor pagebreak
-            ''',
-    'toolbar1': '''
-            fullscreen preview bold italic underline | fontselect,
-            fontsizeselect  | forecolor backcolor | alignleft alignright |
-            aligncenter alignjustify | indent outdent | bullist numlist table |
-            | link image media | codesample |
-            ''',
-    'toolbar2': '''
-            visualblocks visualchars |
-            charmap hr pagebreak nonbreaking anchor |  code |
-            ''',
-    'contextmenu': 'formats | link image',
-    'menubar': True,
-    'statusbar': True,
 }

@@ -140,6 +140,7 @@ def import_catalog(request):
             if len(request.FILES) != 0:
                 if clamd_running:
                     scan_results = cd.scan_stream(request.FILES['file'])
+                    #scan_results = cd.scan_stream(cd.EICAR()) This is a test to see behavir when virus found
                     if scan_results is None:
                         catalog.file = request.FILES['file']
                 else:
@@ -160,9 +161,7 @@ def import_catalog(request):
                     catalog.user = request.user.username
 
 
-
-
-                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title)
+                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title,short_name=catalog.title)
                 catalog.control_baseline = catalog_control_baseline
 
                 if catalog.file_url:
@@ -173,10 +172,12 @@ def import_catalog(request):
                     catalog_control_baseline.link = catalog_link
                     catalog_control_baseline.save()
 
+                print("----file info----")
+                print(catalog.file.name, catalog.file.path)
+                print("-----------------")
                 catalog.save()
 
                 # form.save()
-
                 if form.cleaned_data['file']:
                     file_path =str(catalog.file)
                     catalog_name = str(form.cleaned_data['file'])
@@ -185,7 +186,8 @@ def import_catalog(request):
                     file_path_list = file_path.split('/')
                     catalog_name = file_path_list[-1]
 
-                added, updated = run(catalog.control_baseline, str(catalog.file), catalog_name)
+                #Uploaded files are in \uploads\catalog (\uploads is MEDIA_ROOT)
+                added, updated = run(catalog.control_baseline, catalog.file.path, catalog_name)
                 catalog.added_controls = added
                 catalog.updated_controls = updated
                 catalog.save()
@@ -194,7 +196,7 @@ def import_catalog(request):
                     scan_news = "Virus scan accepted this file. "
                 else:
                     scan_news = "Virus scan is down. "
-                messages.success(request, scan_news + 'Imported OSCAL Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
+                messages.success(request, scan_news + 'Imported NIST Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
                 return render(request, 'ssp/import_catalog.html', {'form': form})
                 #return HttpResponse("data submitted successfully")
             elif scan_results is not None:
