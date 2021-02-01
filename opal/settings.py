@@ -58,6 +58,9 @@ ALLOWED_HOSTS = env["allowed_hosts"]
 
 INSTALLED_APPS = [
     'django_auth_adfs',
+    'dal',
+    'dal_select2',
+    'dal_queryset_sequence',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
