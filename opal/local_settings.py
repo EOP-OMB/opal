@@ -13,5 +13,3 @@ env = {
     "db_password" : "DcpwXkn3_muYG7fNyxds",
     "db_user" : "opal",
     "db_host" : "localhost",
-    "db_port" : ""
-}

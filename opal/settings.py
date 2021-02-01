@@ -18,6 +18,7 @@ BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = BASE_DIR + '/static'
 MEDIA_ROOT = BASE_DIR + '/uploads'
 MEDIA_URL = '/uploads/'
+IMPORTED_CATALOGS_DIR = 'catalogs/'
 
 #Set reasonable defaults for environment values
 env_defaults = {
@@ -38,9 +39,9 @@ from opal.local_settings import env
 for k in env_defaults:
     if k not in env:
         env[k] = env_defaults[k]
-        print("No value found for variable ",k," using default value of " + env_defaults[k])
+        print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
     else:
-        print("Value found for variable ",k," (",env[k],")")
+        print("Value found for variable ",k," (",str(env[k]),")")
 
 if env["env"] == "development":
     print("Running in Development mode!")
@@ -57,6 +58,9 @@ ALLOWED_HOSTS = env["allowed_hosts"]
 
 INSTALLED_APPS = [
     'django_auth_adfs',
+    'dal',
+    'dal_select2',
+    'dal_queryset_sequence',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,6 +72,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'fixture_magic',
     'rest_framework',
+    'rest_framework_tricks',
 ]
 
 
@@ -234,4 +239,3 @@ LOGGING = {
         },
     },
 }
-

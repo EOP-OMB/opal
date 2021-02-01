@@ -5,3 +5,4 @@
 environment.py
 local_settings.py
 __init__.py
+/uploads/catalogs/

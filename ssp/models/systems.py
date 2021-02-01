@@ -179,8 +179,29 @@ class system_security_plan(ExtendedBasicModel):
         return selected_controls.order_by('sort_id')
 
     @property
+    def get_system_owner(self):
+        system_owner = self.system_users.filter(short_name='so').get().user.name
+        if system_owner is None:
+            system_owner = "No system owner is defined.  Click <a href=some link>here</a> to add one"
+            # need more code here to link the new system_user to the system_security_plan
+        return system_owner
+
+    @property
+    def is_tic(self):
+        """
+        Cool code goes here
+        :return:
+        """
+        return "I don't know how to find this yet"
+
+    @property
     def selected_controls(self):
         return self._get_selected_controls()
+
+    @property
+    def controlFamilies(self):
+        families = self.controls.filter(nist_control__sort_id__endswith='-01').order_by('nist_control__sort_id').all()
+        return families
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -192,7 +213,7 @@ class system_security_plan(ExtendedBasicModel):
     def get_serializer_json_OSCAL(id=1):
         queryset = system_security_plan.objects.filter(pk=id)
         serializer = system_security_plan_OSCAL_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 """
@@ -211,7 +232,7 @@ class system_component_serializer(serializers.ModelSerializer):
     class Meta:
         model = system_component
 
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'component_type', 'component_title', 'component_description', 'component_information_types', 'component_status', 'component_responsible_roles']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'properties','annotations','links', 'component_type', 'component_information_types', 'component_status', 'component_responsible_roles']
         depth = 1
 
         extra_kwargs = {
@@ -359,7 +380,7 @@ class system_security_plan_serializer(serializers.ModelSerializer):
                   'version','oscalVersion', 'leveraged_authorization', 'system_components', 'system_services', 'system_interconnections', 'system_inventory_items',
                   'additional_selected_controls', 'controls', 'system_users', 'date_authorized', 'security_sensitivity_level',
                   'information_types', 'security_objective_confidentiality', 'security_objective_integrity', 'security_objective_availability',
-                  'control_baseline_id', 'data_flow_diagram_id', 'authorization_boundary_diagram_id', 'network_architecture_diagram_id', 'system_status']
+                  'control_baseline_id', 'data_flow_diagram', 'authorization_boundary_diagram', 'network_architecture_diagram', 'system_status']
         depth = 1
 
         extra_kwargs = {
@@ -510,10 +531,11 @@ class person_serializer(serializers.ModelSerializer):
 class control_baseline_serializer(serializers.ModelSerializer):
     controls = nist_control_serializer(many=True, read_only=True)
     ssp_control_baseline_set = system_security_plan_serializer(many=True, read_only=True)
+    link = link_serializer(many=False, read_only=True)
 
     class Meta:
         model = control_baseline
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'controls', 'ssp_control_baseline_set']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'controls', 'link', 'ssp_control_baseline_set']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},

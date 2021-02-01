@@ -4,9 +4,18 @@ from django.views import generic
 from django.forms import modelformset_factory, modelform_factory, Textarea
 import django_filters
 import logging
+from django.http import HttpResponseRedirect
+import urllib
+import os
+from ssp.models.base_classes_and_fields import *
+from ssp.models.controls import *
+from django.contrib import messages
 
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement
-from .forms import SystemSecurityPlan
+from .forms import SystemSecurityPlan, ImportCatalogForm, import_catalog
+
+from django.core.files import File
+from scripts.OSCAL_Catalog_import import run
 
 
 def ssp_new(request):
@@ -101,3 +110,99 @@ class system_security_plan_detail_view(generic.DetailView):
     log = logging.getLogger(__name__)
     log.info('ssp ',object.__name__,'viewed by')
 
+# Imaginary function to handle an uploaded file.
+#from somewhere import handle_uploaded_file
+
+def import_catalog(request):
+
+    """For scanning file streams, ClamAV should be installed and clamd should be running in Poweshell. Also pip install pyclamd for using Clam daemon in python
+    (  https://www.clamav.net/documents/installing-clamav-on-windows & https://pypi.org/project/pyClamd/  )
+    Note: There is another python module (clamd) which I tried first. It opens a UNIX socket which was not working with my Windows """
+
+    try:
+        import pyclamd
+        cd = pyclamd.ClamdAgnostic()
+        clamd_running = True
+    except Exception as e:
+        logging.debug(str(e))
+        clamd_running = False
+
+    if request.method == 'POST':
+        form = ImportCatalogForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            catalog = form.save(commit=False)
+
+            """Uploaded JSON files will be saved without being scanned when ClamAV daemon is down"""
+
+            if len(request.FILES) != 0:
+                if clamd_running:
+                    scan_results = cd.scan_stream(request.FILES['file'])
+                    #scan_results = cd.scan_stream(cd.EICAR()) This is a test to see behavir when virus found
+                    if scan_results is None:
+                        catalog.file = request.FILES['file']
+                else:
+                    catalog.file = request.FILES['file']
+
+            if form.cleaned_data['file_url']:
+                result = urllib.request.urlretrieve(form.cleaned_data['file_url'])
+                if clamd_running:
+                    scan_results = cd.scan_stream(File(open(result[0], 'rb')))
+                    if scan_results is None:
+                        catalog.file.save(os.path.basename(form.cleaned_data['file_url']), File(open(result[0], 'rb')))
+                else:
+                    catalog.file.save(os.path.basename(form.cleaned_data['file_url']), File(open(result[0], 'rb')))
+
+            if (clamd_running and scan_results is None) or not clamd_running:
+
+                if request.user.is_authenticated:
+                    catalog.user = request.user.username
+
+
+                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title,short_name=catalog.title)
+                catalog.control_baseline = catalog_control_baseline
+
+                if catalog.file_url:
+                    catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
+                                                                    'text': catalog.title,
+                                                                    'href': catalog.file_url
+                                                                })
+                    catalog_control_baseline.link = catalog_link
+                    catalog_control_baseline.save()
+
+                print("----file info----")
+                print(catalog.file.name, catalog.file.path)
+                print("-----------------")
+                catalog.save()
+
+                # form.save()
+                if form.cleaned_data['file']:
+                    file_path =str(catalog.file)
+                    catalog_name = str(form.cleaned_data['file'])
+                else:
+                    file_path = form.cleaned_data['file_url']
+                    file_path_list = file_path.split('/')
+                    catalog_name = file_path_list[-1]
+
+                #Uploaded files are in \uploads\catalog (\uploads is MEDIA_ROOT)
+                added, updated = run(catalog.control_baseline, catalog.file.path, catalog_name)
+                catalog.added_controls = added
+                catalog.updated_controls = updated
+                catalog.save()
+
+                if clamd_running:
+                    scan_news = "Virus scan accepted this file. "
+                else:
+                    scan_news = "Virus scan is down. "
+                messages.success(request, scan_news + 'Imported NIST Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
+                return render(request, 'ssp/import_catalog.html', {'form': form})
+                #return HttpResponse("data submitted successfully")
+            elif scan_results is not None:
+                messages.success(request, 'Virus scan rejected this file: '+str(scan_results['stream']))
+                return render(request, 'ssp/import_catalog.html', {'form': form})
+
+        else:
+            return render(request, 'ssp/import_catalog.html', {'form': form})
+    else:
+        form = ImportCatalogForm()
+        return render(request, 'ssp/import_catalog.html', {'form': form})

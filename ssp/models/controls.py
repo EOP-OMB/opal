@@ -1,11 +1,13 @@
 from ssp.models.users import *
-
+from opal.settings import IMPORTED_CATALOGS_DIR
 import json
 from django.utils.html import mark_safe
 
 # objects related to security controls
 
 # Objects to hold control catalog data that should be displayed in the SSP
+
+
 
 parameter_type_choices = [('label', 'Label'),
                           ('description', 'Description'),
@@ -136,12 +138,14 @@ class nist_control(PrimitiveModel):
 
 class control_baseline(BasicModel):
     controls = customMany2ManyField(nist_control)
+    link = models.ForeignKey(link, on_delete=models.PROTECT, null=True, blank=True, related_name='control_baseline_set')
 
     @staticmethod
     def get_serializer_json(id=1):
         queryset = control_baseline.objects.filter(pk=id)
         serializer = control_baseline_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
 
 
 class control_statement(ExtendedBasicModel):
@@ -204,6 +208,7 @@ class control_parameter(BasicModel):
         return (serializerJSON(serializer.data))
 
 
+
 control_implementation_status_choices = [
     ('Implemented', 'Implemented'),
     ('Parti1ally Implemented ', 'Partially Implemented'),
@@ -252,6 +257,34 @@ class system_control(ExtendedBasicModel):
         queryset = system_control.objects.filter(pk=id)
         serializer = system_control_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+
+
+frequency_choices = [('daily', 'Daily'),
+                    ('weekly', 'weekly'),
+                    ('monthly', 'Monthly'),
+                    ('quarterly', 'Quarterly'),
+                    ('annually', 'Annually'),
+                    ('as needed', 'As Needed')]
+
+class continuous_monitoring_action_item(BasicModel):
+    control_statements = customMany2ManyField(control_statement)
+    automated = models.BooleanField(default=True)
+    frequency = models.CharField(max_length=10, choices=frequency_choices, default='as needed')
+
+
+
+class import_catalog(PrimitiveModel):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    file_url = models.URLField(max_length=255, blank=True, null=True)
+    file = models.FileField(upload_to=IMPORTED_CATALOGS_DIR, blank=True, null=True)
+    control_baseline = models.ForeignKey(control_baseline, on_delete=models.DO_NOTHING, null=True, blank=True,
+                                     related_name='import_catalog_set')
+    added_controls = models.IntegerField(blank=True, null=True)
+    updated_controls = models.IntegerField(blank=True, null=True)
+    user = models.CharField(max_length=255, blank=True, null=True)
+
+
 
 
 """
@@ -336,12 +369,25 @@ class nist_control_serializer(serializers.ModelSerializer):
 
 class control_baseline_serializer(serializers.ModelSerializer):
     controls = nist_control_serializer(many=True, read_only=True)
+    link = link_serializer(many=False, read_only=True)
 
     class Meta:
         model = control_baseline
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'controls']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'controls', 'link']
 
         extra_kwargs = {
             'short-name': {'source': 'short_name'},
             'description': {'source': 'desc'}
         }
+        depth = 1
+
+
+class link_serializer(serializers.ModelSerializer):
+    hash = hashed_value_serializer(many=False, read_only=True)
+    control_baseline_set = control_baseline_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = link
+        fields = ['id', 'uuid', 'text', 'href', 'requires_authentication', 'rel', 'mediaType', 'hash',
+                  'control_baseline_set']
+        depth = 1

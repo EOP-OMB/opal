@@ -1,8 +1,9 @@
 from opal.settings import BASE_DIR
-import ssp.models as t
+#import ssp.models as t
 import logging
 from rest_framework.renderers import JSONRenderer
 import json
+import os
 
 def startLogging():
     logging.basicConfig(  # filename=logFile,
@@ -80,20 +81,18 @@ def createFixtures():
             cmd = 'python manage.py dumpdata ssp.' + model.__name__ + ' --natural-foreign --natural-primary -o ' + fixture_dir + model.__name__ + '.json'
             os.system(cmd)
 
-def serializerJSON(data):
+def serializerJSON(data, SSP=False):
     json_data = JSONRenderer().render(data)
     json_object = json.loads(json_data)
     json_str = json.dumps(json_object, indent=2)
-    return aliasOSCAL(json_str)
+    return aliasOSCAL(json_str, SSP)
 
-def aliasOSCAL(json_str):
+def aliasOSCAL(json_str, SSP=False):
     json_str = json_str.replace('"short_name":', '"short-name":')
     json_str = json_str.replace('"telephone_numbers:"', '"telephone-numbers":')
     json_str = json_str.replace('"email_addresses":', '"email-addresses":')
-    json_str = json_str.replace('"controls": [', '"implemented-requirements": [')
     json_str = json_str.replace('"lastModified":', '"last-modified":')
     json_str = json_str.replace('"oscalVersion":', '"oscal-version":')
-    json_str = json_str.replace('"properties":', '"props":')
     json_str = json_str.replace('"desc":', '"description":')
     json_str = json_str.replace('Impact":', '-impact":')
     json_str = json_str.replace('"system-status":', '"status":')
@@ -125,6 +124,17 @@ def aliasOSCAL(json_str):
     json_str = json_str.replace('"control_parameters":', '"parameter-settings":')
     json_str = json_str.replace('"control_statements":', '"statements":')
     json_str = json_str.replace('"system_name":', '"system-name":')
+    if SSP:
+        json_str = json_str.replace('"controls": [', '"implemented-requirements": [')
+        json_str = json_str.replace('"properties":', '"props":')
     return json_str
+
+def validate_file_extension(filename, extension):
+    ext = os.path.splitext(filename)[1]  # [0] returns path+filename
+    #valid_extensions = ['.pdf', '.doc', '.docx', '.jpg', '.png', '.xlsx', '.xls']
+    if ext.lower() != extension:
+        return False
+    else:
+        return True
 
 

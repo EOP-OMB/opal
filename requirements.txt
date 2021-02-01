@@ -25,3 +25,5 @@ sqlparse==0.4.1
 urllib3==1.26.2
 uuid==1.30
 django-filter==2.4.0
+pyClamd==0.4.0
+
