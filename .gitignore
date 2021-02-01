@@ -3,5 +3,5 @@
 /static/
 .idea
 environment.py
-env_settings.py
+local_settings.py
 __init__.py
