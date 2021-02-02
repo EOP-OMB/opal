@@ -110,8 +110,6 @@ class system_security_plan_detail_view(generic.DetailView):
     log = logging.getLogger(__name__)
     log.info('ssp ',object.__name__,'viewed by')
 
-
-
 # Imaginary function to handle an uploaded file.
 #from somewhere import handle_uploaded_file
 
