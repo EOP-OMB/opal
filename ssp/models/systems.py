@@ -70,8 +70,23 @@ class system_service(ExtendedBasicModel):
         return (serializerJSON(serializer.data))
 
 
+connection_security_choices = [('IPSec','Internet Protocal Security (IPSec)'),
+                               ('VPN','Virtual Private Network (VPN)'),
+                               ('SSL','Secure Sockets Layer (SSL)'),
+                               ('TLS','Transport Layer Security (TLS)')]
+
+data_direction_choices = [('in','Incoming'),
+                          ('out','Outgoing'),
+                          ('both','Both')]
 
 class system_interconnection(ExtendedBasicModel):
+    external_ip_range = models.CharField(max_length=255,blank=True,null=True)
+    external_organization = models.ForeignKey(organization, on_delete=models.PROTECT, null=True)
+    external_poc = models.ForeignKey(person, on_delete=models.PROTECT, null=True)
+    connection_security = models.CharField(max_length=20,choices=connection_security_choices,default='TLS')
+    data_direction = models.CharField(max_length=20,choices=data_direction_choices,default='both')
+    permitted_protocols = customMany2ManyField(protocol)
+    desc = customTextField(verbose_name='Information Being Transmitted')
     interconnection_responsible_roles = customMany2ManyField(user_role)
 
     @staticmethod
