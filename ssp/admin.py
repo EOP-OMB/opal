@@ -207,6 +207,26 @@ class personAdmin(admin.ModelAdmin):
         }),
     )
 
+@admin.register(models.system_interconnection)
+class system_interconnectionAdmin(admin.ModelAdmin):
+    filter_vertical = ['interconnection_responsible_roles', 'permitted_protocols']
+    list_display = ['external_ip_range','external_organization','external_poc','connection_security','data_direction','desc']
+    list_filter = ['external_organization']
+
+    fieldsets = (
+        ('Title', {
+            'fields': ('title', 'short_name',)
+        }),
+        ('Description', {
+            'fields': ['desc', ]
+        }),
+        ('Connection', {
+            'fields': ('external_ip_range','external_organization','external_poc','connection_security','data_direction',)
+        }),
+        ('Other', {
+            'fields': ('permitted_protocols','interconnection_responsible_roles')
+        })
+    )
 
 # all other models
 models = apps.get_models()
