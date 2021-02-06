@@ -213,10 +213,11 @@ def system_user_new(request,sspid,roleid):
             person_obj = person.objects.get(id=int(person_id))
             ssp_obj = system_security_plan.objects.get(id=sspid)
             role_obj = user_role.objects.get(id=roleid)
-            user_obj = system_user(user=person_obj)
-            user_obj.title = role_obj.title
-            user_obj.short_name = role_obj.short_name
-            user_obj.save()
+            user_obj, created = system_user.objects.get_or_create(user=person_obj)
+            if created:
+                user_obj.title = role_obj.title
+                user_obj.short_name = role_obj.short_name
+                user_obj.save()
             user_obj.roles.add(role_obj)
             ssp_obj.system_users.add(user_obj)
 
