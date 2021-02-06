@@ -28,7 +28,7 @@ class nist_control_parameter(PrimitiveModel):
     def __str__(self):
         return self.param_id
 
-    # Samira: Sample JSON export using dictionary -- will be removed later
+    #Sample JSON export using dictionary -- will be removed later
     @property
     def get_dictionary_json(self):
         key_value_list = [

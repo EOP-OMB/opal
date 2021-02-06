@@ -11,8 +11,8 @@ from ssp.models.base_classes_and_fields import *
 from ssp.models.controls import *
 from django.contrib import messages
 
-from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement
-from .forms import SystemSecurityPlan, ImportCatalogForm, import_catalog
+from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement, system_user, user_role, person
+from .forms import SystemSecurityPlan, ImportCatalogForm, import_catalog, SystemUserNewForm
 
 from django.core.files import File
 from scripts.OSCAL_Catalog_import import run
@@ -23,7 +23,7 @@ def ssp_new(request):
         form = SystemSecurityPlan(request.POST)
         if form.is_valid():
             ssp = form.save()
-            return redirect('system_security_plan_detail_view', pk=ssp.pk)
+            return redirect('ssp:system_security_plan_detail_view', pk=ssp.pk)
     else:
         form = SystemSecurityPlan()
     return render(request, 'ssp/ssp_edit.html', {'form': form})
@@ -35,7 +35,7 @@ def ssp_edit(request, pk):
         form = SystemSecurityPlan(request.POST, instance=ssp)
         if form.is_valid():
             form.save()
-            return redirect('system_security_plan_detail_view', pk=pk)
+            return redirect('ssp:system_security_plan_detail_view', pk=pk)
     else:
         form = SystemSecurityPlan(instance=ssp)
     return render(request, 'ssp/ssp_edit.html', {'form': form})
@@ -110,12 +110,10 @@ class system_security_plan_detail_view(generic.DetailView):
     log = logging.getLogger(__name__)
     log.info('ssp ',object.__name__,'viewed by')
 
-# Imaginary function to handle an uploaded file.
-#from somewhere import handle_uploaded_file
 
 def import_catalog(request):
 
-    """For scanning file streams, ClamAV should be installed and clamd should be running in Poweshell. Also pip install pyclamd for using Clam daemon in python
+    """For scanning file streams, ClamAV should be installed and clamd should be running in Powershell. Also pip install pyclamd for using Clam daemon in python
     (  https://www.clamav.net/documents/installing-clamav-on-windows & https://pypi.org/project/pyClamd/  )
     Note: There is another python module (clamd) which I tried first. It opens a UNIX socket which was not working with my Windows """
 
@@ -206,3 +204,25 @@ def import_catalog(request):
     else:
         form = ImportCatalogForm()
         return render(request, 'ssp/import_catalog.html', {'form': form})
+
+def system_user_new(request,sspid,roleid):
+    if request.method == "POST":
+        form = SystemUserNewForm(request.POST)
+        if form.is_valid():
+            person_id = form.cleaned_data['user']
+            person_obj = person.objects.get(id=int(person_id))
+            ssp_obj = system_security_plan.objects.get(id=sspid)
+            role_obj = user_role.objects.get(id=roleid)
+            user_obj = system_user(user=person_obj)
+            user_obj.title = role_obj.title
+            user_obj.short_name = role_obj.short_name
+            user_obj.save()
+            user_obj.roles.add(role_obj)
+            ssp_obj.system_users.add(user_obj)
+
+            return redirect('ssp:system_security_plan_detail_view', pk=sspid)
+
+    else:
+        form = SystemUserNewForm()
+    return render(request, 'ssp/system_user_new.html', {'form': form})
+

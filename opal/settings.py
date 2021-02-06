@@ -136,8 +136,6 @@ else:
         }
     }
 
-
-#Samira:
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PAGINATION_CLASS':

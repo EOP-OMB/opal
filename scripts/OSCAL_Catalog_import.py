@@ -189,5 +189,5 @@ def run(catalog_control_baseline=None, file_path=BASE_DIR + '/source/NIST_SP-800
     import_all_controls(BASE_DIR + '/source/tmp/' + file_name.replace('.json', ''))
     return added_nist_controls, updated_nist_controls
 
-#Samira: Modified this file to use it in import_catalog view which imports one catalog file at a time.
+#Modified this file to use it in import_catalog view which imports one catalog file at a time.
 

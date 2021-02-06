@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from ssp.models import system_security_plan, import_catalog
+from ssp.models import system_security_plan, import_catalog, person, system_user
 from scripts.usefullFunctions import validate_file_extension
 
 
@@ -47,5 +47,30 @@ class ImportCatalogForm(ModelForm):
 
         return self.cleaned_data
 
+
+class SystemUserNewForm(forms.Form):
+    PEOPLE=[]
+    for prsn in person.objects.all():
+        prsn_id = prsn.pk
+        prsn_display = 'Name: '+ prsn.name + ', Title: ' + prsn.title
+        prsn_tuple = (prsn_id,prsn_display)
+        PEOPLE.append(prsn_tuple)
+
+    user = forms.CharField(label='User', max_length=255, required=True, widget=forms.Select(choices=PEOPLE))
+
+
+    def __init__(self, *args, **kwargs):
+        super(SystemUserNewForm, self).__init__(*args, **kwargs)  # Call to ModelForm constructor
+        self.fields['user'].widget.attrs['style'] = 'width:660px; height:30px;'
+
+    def clean(self):
+        super(SystemUserNewForm, self).clean()
+
+        user = self.cleaned_data.get('user')
+
+        if len(user) == 0 :
+            self.add_error('user', "User required") #field error
+
+        return self.cleaned_data
 
 
