@@ -48,5 +48,7 @@ Note: These import scripts are pretty buggy right now.  Best of luck.\
    `wget https://github.com/usnistgov/oscal-content/raw/master/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5-FINAL_catalog.json -O source/NIST_SP-800-53_rev4_catalog.json`
 1. Run the import script for the NIST Controls\
    `python manage.py runscript OSCAL_Catalog_import`
+   
+   `Update: This script is modified now to run in OPAL website. Click on Import > NIST Catalog and upload the file or enter its URL to import it.`
 1. Assuming you have a Word document in the FedRAMP template with your controls in it, You can import those using the importSecurityControlsFromWord script\
    `python manage.py runscript importSecurityControlsFromWord(path\to\file.docx)`

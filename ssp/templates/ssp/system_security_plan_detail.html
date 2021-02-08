@@ -21,7 +21,8 @@
 
 {% block content %}
     {% load admin_urls %}
-    <h1>{{ object.title }}</h1>
+    <h1>{{ object.title }} </h1>
+    System Owner: {{ object.get_system_owner | safe }}
     <hr>
     <table>
         <tr style="padding: 10px">
@@ -37,7 +38,8 @@
         <div style="margin-left: 30px">{{ object.desc | safe }}</div>
     <h3><a id="system_diagrams">System Diagrams</a></h3>
         <ul>
-            <li><b>Authorization Boundary Diagram: </b>{{ object.authorization_boundary_diagram.attachment.url }}
+            <li><b>Authorization Boundary Diagram: </b>
+                <img src="{{ object.authorization_boundary_diagram.attachment.url }}">
             <li><b>Network Architecture Diagram: </b>{{ object.network_architecture_diagram.attachment.url }}
             <li><b>Data Flow Diagram: </b>{{ object.data_flow_diagram.attachment.url }}
         </ul>
@@ -62,7 +64,7 @@
         </table>
     <h3><a id="system_components">System Components</a></h3>
         {% for component in object.system_components.all %}
-            <h4 style="margin-left: 15px"><a id="system_component:{{ component.id }}">
+            <h4 style="margin-left: 15px">
                 <a href="{% url 'admin:ssp_system_component_change' component.id %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></a></h4>
                 <div style="margin-left: 30px">{{ component.desc | safe }}</div>
         {% endfor %}

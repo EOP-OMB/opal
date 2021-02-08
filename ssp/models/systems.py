@@ -175,7 +175,7 @@ class system_security_plan(ExtendedBasicModel):
                                           blank=True, null=True)
 
     """
-    Samira: NestedProxyFields are added to make the JSON export match with OSCAL format. They don't change the table definition in the database. 
+    NestedProxyFields are added to make the JSON export match with OSCAL format. They don't change the table definition in the database. 
     Each NestedProxyField needs a serializer and the main serializer uses them in the field section.
     """
     metadata = NestedProxyField('title', 'published', 'lastModified', 'version','oscalVersion', 'properties', 'annotations', 'links', 'remarks')
@@ -195,11 +195,22 @@ class system_security_plan(ExtendedBasicModel):
 
     @property
     def get_system_owner(self):
-        system_owner = self.system_users.filter(short_name='so').get().user.name
-        if system_owner is None:
-            system_owner = "No system owner is defined.  Click <a href=some link>here</a> to add one"
-            # need more code here to link the new system_user to the system_security_plan
-        return system_owner
+        from django.core.exceptions import ObjectDoesNotExist
+
+        #It is posible for a ssp to have multiple system owners (added in admin page).
+        system_owners = self.system_users.filter(roles__title="System Owner")
+        if not system_owners:
+            role = user_role.objects.get(title='System Owner')
+            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
+            return "No system owner is defined.  Click <a href=%s>here</a> to add one." % url
+        else:
+            names = ""
+            for so in system_owners:
+                if names != "":
+                    names += " - "
+                names += so.user.name
+            return names
+
 
     @property
     def is_tic(self):
@@ -453,7 +464,7 @@ class system_characteristics_serializer(serializers.ModelSerializer):
 
 
 class system_control_serializer(serializers.ModelSerializer):
-    """Samira: Redefined this serializer in this module to make the fields like format outline in OSCAL."""
+    """Redefined this serializer in this module to make the fields like format outline in OSCAL."""
     control_parameters = control_parameter_serializer(many=True, read_only=True)
     control_statements = control_statement_serializer(many=True, read_only=True)
 

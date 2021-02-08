@@ -15,9 +15,10 @@ import os
 
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
-STATIC_ROOT = BASE_DIR + '/static'
-MEDIA_ROOT = BASE_DIR + '/uploads'
-MEDIA_URL = '/uploads/'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
 
 #Set reasonable defaults for environment values
@@ -83,7 +84,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',]
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.contrib.staticfiles',
+]
 
 if env["env"] == "production":
     # With this you can force a user to login without using
@@ -136,8 +139,6 @@ else:
         }
     }
 
-
-#Samira:
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PAGINATION_CLASS':

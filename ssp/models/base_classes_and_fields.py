@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 from django.utils import timezone
 import uuid
 
-#Samira:
+
 from scripts.usefullFunctions import serializerJSON
 from rest_framework_json_api import serializers
 
@@ -108,7 +108,7 @@ class link(PrimitiveModel):
     rel = models.CharField(max_length=255, blank=True)
     mediaType = models.CharField(max_length=255, blank=True)
     hash = models.ForeignKey(hashed_value, on_delete=models.PROTECT, null=True, blank=True, related_name='link_set')
-    #Samira: Added related_name='link_set' to be used in creating the serializers.
+    #: Added related_name='link_set' to be used in creating the serializers.
 
     def __str__(self):
         return self.text
