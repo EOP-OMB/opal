@@ -38,7 +38,8 @@
         <div style="margin-left: 30px">{{ object.desc | safe }}</div>
     <h3><a id="system_diagrams">System Diagrams</a></h3>
         <ul>
-            <li><b>Authorization Boundary Diagram: </b>{{ object.authorization_boundary_diagram.attachment.url }}
+            <li><b>Authorization Boundary Diagram: </b>
+                <img src="{{ object.authorization_boundary_diagram.attachment.url }}">
             <li><b>Network Architecture Diagram: </b>{{ object.network_architecture_diagram.attachment.url }}
             <li><b>Data Flow Diagram: </b>{{ object.data_flow_diagram.attachment.url }}
         </ul>

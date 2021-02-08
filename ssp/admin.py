@@ -19,7 +19,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
         }),
         ('System', {
             'fields': (('published', 'date_authorized', 'system_status'), ('version', 'oscalVersion'),
-                       'control_baseline', 'controls', 'system_components')
+                       'control_baseline', 'controls', 'system_components', 'system_services', 'system_interconnections','system_inventory_items')
         }),
         ('FIPS Level', {
             'fields': ('information_types', (
@@ -158,8 +158,8 @@ class nist_controlAdmin(admin.ModelAdmin):
 
 @admin.register(models.link)
 class linkAdmin(admin.ModelAdmin):
-    list_display = ['text', 'href', 'mediaType', 'requires_authentication']
-    list_editable = ['text', 'href', 'mediaType', 'requires_authentication']
+    list_display = ['text', 'href', 'rel', 'mediaType', 'requires_authentication']
+    list_editable = ['text', 'href', 'rel', 'mediaType', 'requires_authentication']
     list_display_links = None
 
 
@@ -198,10 +198,10 @@ class personAdmin(admin.ModelAdmin):
             'fields': (
                 'name',)
         }),
-        # ('Contact', {
-        #     'fields': (
-        #         'email_addresses', 'telephone_numbers', 'locations',)
-        # }),
+        ('Contact', {
+            'fields': (
+                'email_addresses', 'telephone_numbers', 'locations',)
+        }),
         ('Groups', {
             'fields': ['organizations', ]
         }),
