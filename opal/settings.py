@@ -17,8 +17,8 @@ import os
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'static')
-MEDIA_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
 
 #Set reasonable defaults for environment values
