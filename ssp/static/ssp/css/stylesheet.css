@@ -1,0 +1,23 @@
+td {
+    border: 2px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: top;
+}
+
+th {
+    border: 2px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: bottom;
+    text-align: center;
+}
+
+.floating {
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+}
+
+.container-fluid {
+    margin-top: 15px;
+}

@@ -3,6 +3,7 @@ from rest_framework_tricks.models.fields import NestedProxyField
 from tinymce.models import HTMLField
 from django.utils import timezone
 import uuid
+from django.template.defaultfilters import truncatechars
 
 
 from scripts.usefullFunctions import serializerJSON

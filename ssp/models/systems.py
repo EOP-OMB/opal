@@ -1,6 +1,5 @@
 from ssp.models.controls import *
 
-
 # System Properties
 
 information_type_level_choices = [('high', 'High'), ('moderate', 'Moderate'), ('low', 'Low')]
