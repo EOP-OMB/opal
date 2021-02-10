@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from opal.local_settings import env
 
 urlpatterns = [
     path('', include('ssp.urls'), name='index'),
     path('admin/', admin.site.urls, name='admin'),
-    # path('ssp/', include('ssp.urls')),
     path('tinymce/', include('tinymce.urls')),
-    path('oauth2/', include('django_auth_adfs.urls')),
 ]
+
+if env["adfs_enabled"]:
+    urlpatterns.append(path('oauth2/', include('django_auth_adfs.urls')))
