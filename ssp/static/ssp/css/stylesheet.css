@@ -19,5 +19,18 @@ th {
 }
 
 .container-fluid {
-    margin-top: 15px;
+    margin-top: 60px;
+}
+
+.navbar {
+    width : 80%;
+}
+
+#sidebar-wrapper .list-group {
+  width: 20%;
+}
+
+.nav-link {
+    white-space: nowrap;
+    padding: 0rem;
 }

@@ -1,13 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
+{% block dropdown %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div style="float: right; width: 100%">
+            <a style="float: right" href="{% url 'admin:ssp_system_control_add' %}">Add a new Plan</a>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-<h1>System Security Plans (SSPs)</h1>
-{% if system_security_plan_list %}
-    {% for plan in system_security_plan_list %}
-        <a href="{% url 'ssp:system_security_plan_detail_view' plan.id %}">{{ plan.title }}</a><br>
-    {% endfor %}
-{% else %}
-    <p>No plans are available.</p>
-{% endif %}
-    <a href="{% url 'ssp:ssp_new' %}">Add New System Security Plan</a>
+    <h1>System Security Plans (SSPs)</h1>
+    {% if system_security_plan_list %}
+        <table>
+        <tr>
+            <th>System</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date Approved</th>
+        </tr>
+        {% for plan in system_security_plan_list %}
+            <tr>
+            <td nowrap="True"><a href="{% url 'ssp:system_security_plan_detail_view' plan.id %}">{{ plan.title }}</a></td>
+            <td>{{ plan.desc | truncatewords_html:100 | safe }}</td>
+            <td nowrap="True">{{ plan.system_status }}</td>
+            <td nowrap="True">{{ plan.date_authorized | date:"SHORT_DATE_FORMAT" }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>No plans are available.</p>
+    {% endif %}
 {% endblock %}
