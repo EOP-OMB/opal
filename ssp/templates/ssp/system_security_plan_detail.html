@@ -1,24 +1,45 @@
 {% extends "base.html" %}
 {% block sidebar %}
-    <ol type="I">
-    <li><a href="#system_description">System Description</a></li>
-    <li><a href="#system_diagrams">System Diagrams</a></li>
-    <li><a href="#information_types">System Information Types</a></li>
-    <li><a href="#system_components">System Components</a></li>
-    <ol type="1">
-    {% for component in object.system_components.all %}
-        &nbsp;&nbsp;<li><a href="#system_component:{{ component.id }}">{{ component.title }} ({{ component.component_type }})</a></li>
-    {% endfor %}
-    </ol>
-    <li><a href="#system_controls">System Controls</a></li>
-    <ol type="1">
-    {% for control in object.controlFamilies %}
-        <li><a href="#control:{{ control.id }}">{{ control.nist_control.control_title }}</a></li>
-    {% endfor %}
-    </ol>
-    </ol>
 {% endblock %}
-
+{% block dropdown %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div style="float: right; width: 100%">
+        <li class="nav-item dropdown" style="float: right; list-style-type: none">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Page Contents
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <ul style="list-style-type: upper-roman">
+                    <li class="nav-item"><a class="nav-link" href="#system_description">System Description</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#system_diagrams">System Diagrams</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#information_types">System Information Types</a></li>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item"><a class="nav-link" href="#system_components">System Components</a></li>
+                    <ul style="list-style-type: decimal">
+                        {% for component in object.system_components.all %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#system_component:{{ component.id }}">
+                                    {{ component.title }}({{ component.component_type }})
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="dropdown-divider"></div>
+                    <li class="nav-item"><a class="nav-link" href="#system_controls">System Controls</a></li>
+                    <ul style="list-style-type: decimal">
+                        {% for control in object.controlFamilies %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#control:{{ control.id }}">{{ control.nist_control.control_title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </ul>
+                <div class="dropdown-divider"></div>
+            </div>
+        </li>
+    </div>
+{% endblock %}
 {% block content %}
     {% load admin_urls %}
     <h1>{{ object.title }} </h1>

@@ -15,27 +15,54 @@ import os
 
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
 
+# Other Variables
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
+ROOT_URLCONF = 'opal.urls'
+WSGI_APPLICATION = 'opal.wsgi.application'
+
+# Internationalization
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'EST'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+
 #Set reasonable defaults for environment values
 env_defaults = {
     "env" : "development",
-    "opal_secret_key" : "klchwf98p23hd81&*^*&D(Hohdqp98yphP97gp:GF2837189YB12;O",
-    "debug" : "False",
+    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
+    "debug" : "True",
     "allowed_hosts" : ["*"],
     "database" : "sqlite",
-    "db_name" : "opal_prod",
-    "db_user" : "opal",
-    "db_password" : "use_a_strong_password",
+    "db_password" : "",
+    "db_name" : "",
+    "db_user" : "",
     "db_host" : "localhost",
-    "db_port" : ""
+    "db_port" : "",
+    "adfs_enabled" : False,
+    "adfs_server" : "adfs.server.url",
+    "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
+    "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
+    "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
 }
 
-from opal.local_settings import env
+if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
+    from opal.local_settings import env
+else:
+    env = {}
 
 for k in env_defaults:
     if k not in env:
@@ -58,7 +85,6 @@ ALLOWED_HOSTS = env["allowed_hosts"]
 # Application definition
 
 INSTALLED_APPS = [
-    'django_auth_adfs',
     'dal',
     'dal_select2',
     'dal_queryset_sequence',
@@ -69,11 +95,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
-    'ssp.apps.ssp',
     'django_extensions',
     'fixture_magic',
     'rest_framework',
     'rest_framework_tricks',
+    'ssp.apps.ssp',
 ]
 
 
@@ -87,16 +113,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'django.contrib.staticfiles',
 ]
-
-if env["env"] == "production":
-    # With this you can force a user to login without using
-    # the LoginRequiredMixin on every view class
-    #
-    # You can specify URLs for which login is not enforced by
-    # specifying them in the LOGIN_EXEMPT_URLS setting.
-    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware',)
-
-ROOT_URLCONF = 'opal.urls'
 
 TEMPLATES = [
     {
@@ -113,8 +129,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = 'opal.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -171,49 +185,40 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 }
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'EST'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
-
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-if env["env"] == "production":
+if env["adfs_enabled"] :
+    INSTALLED_APPS.append('django_auth_adfs')
+
+    # With this you can force a user to login without using
+    # the LoginRequiredMixin on every view class
+    #
+    # You can specify URLs for which login is not enforced by
+    # specifying them in the LOGIN_EXEMPT_URLS setting.
+    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware',)
+
     AUTHENTICATION_BACKENDS = (
     'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
 
-# checkout the documentation for more settings
-AUTH_ADFS = {
-    "SERVER": "adfs.omb.gov",
-    "CLIENT_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "RELYING_PARTY_ID": "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    # Make sure to read the documentation about the AUDIENCE setting
-    # when you configured the identifier as a URL!
-    "AUDIENCE": "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    # "CA_BUNDLE": "/path/to/ca-bundle.pem",
-    "CLAIM_MAPPING": {"first_name": "given_name",
-                      "last_name": "family_name",
-                      "email": "email"},
-    "USERNAME_CLAIM": "upn",
-    "GROUP_CLAIM": "group"
-    }
+    # checkout the documentation of django_auth_adfs for more settings
+    AUTH_ADFS = {
+        "SERVER": env["adfs_server"],
+        "CLIENT_ID": env["adfs_client_id"],
+        "RELYING_PARTY_ID": env["adfs_relying_party_id"],
+        # Make sure to read the documentation about the AUDIENCE setting
+        # when you configured the identifier as a URL!
+        "AUDIENCE": env["adfs_audience"],
+        # "CA_BUNDLE": "/path/to/ca-bundle.pem",
+        "CLAIM_MAPPING": {"first_name": "given_name",
+                        "last_name": "family_name",
+                        "email": "email"},
+        "USERNAME_CLAIM": "upn",
+        "GROUP_CLAIM": "group"
+        }
 
-if env["env"] == "production":
     # Configure django to redirect users to the right URL for login
     LOGIN_URL = "django_auth_adfs:login"
     LOGIN_REDIRECT_URL = "/"
@@ -225,7 +230,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR + '/debug.log',
+            'filename': os.path.join(BASE_DIR,'debug.log')
         },
         'console': {
             'level': 'INFO',

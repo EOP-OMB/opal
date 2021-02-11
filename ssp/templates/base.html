@@ -4,110 +4,81 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>OPAL</title>
+    <title>OPAL</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'ssp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'ssp/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="{% static 'ssp/css/simple-sidebar.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'ssp/css/simple-sidebar.css' %}" rel="stylesheet">
 
-  <!-- OPAL custom styles -->
-  <link href="{% static 'ssp/css/stylesheet.css' %}" rel="stylesheet">
+    <!-- OPAL custom styles -->
+    <link href="{% static 'ssp/css/stylesheet.css' %}" rel="stylesheet">
 </head>
 
 <body>
 
-  <div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-      <img class="img-responsive" src="{% static 'ssp/images/red_fire_opal.gif' %}" alt="OPAL Image" height="100" width="100"><b>OPAL</b><hr>
-      <div class="sidebar-heading">Contents </div>
-      <div class="list-group list-group-flush">
-          {% block sidebar %}{%  endblock %}
-      </div>
+    <div class="bg-light border-right" style="width: 20%" id="sidebar-wrapper">
+        <img class="img-responsive" src="{% static 'ssp/images/red_fire_opal.gif' %}" alt="OPAL Image" height="100"
+             width="100"><b>OPAL</b>
+        <hr>
+        <div class="sidebar-heading">Navigation</div>
+        <div class="list-group list-group-flush">
+            <a class="nav-link" href="{% url 'ssp:list_system_security_planView' %}">System Security Plans</a>
+            <a class="nav-link" href="{% url 'ssp:system_control_list_view' %}">System Controls</a>
+            <a class="nav-link" href="{% url 'ssp:import_catalog' %}">NIST Catalog</a>
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+            {% block sidebar %}{% endblock %}
+            {% block import-dropdown-menu %}{% endblock %}
+        </div>
     </div>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom floating">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom floating">
+            <div>
+                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div></div>
+            {% block dropdown %}{% endblock %}
+        </nav>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'ssp:list_system_security_planView' %}">SSP List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'ssp:system_control_list_view' %}">All System Controls</a>
-            </li>
-
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Import
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'ssp:import_catalog' %}">NIST Catalog</a>
-                <div class="dropdown-divider"></div>
-                {% block import-dropdown-menu %}{% endblock %}
-              </div>
-            </li>
-
-
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Links
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'admin:index' %}" class="list-group-item list-group-item-action bg-light">Admin</a>
-                <div class="dropdown-divider"></div>
-                {% block dropdown-menu %}{% endblock %}
-              </div>
-            </li>
-          </ul>
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
         </div>
-      </nav>
-
-      <div class="container-fluid">
-          {% block content %}{% endblock %}
-      </div>
     </div>
     <!-- /#page-content-wrapper -->
 
-  </div>
-  <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="{% static 'ssp/vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'ssp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'ssp/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'ssp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
-  </script>
+</script>
 
 </body>
 
