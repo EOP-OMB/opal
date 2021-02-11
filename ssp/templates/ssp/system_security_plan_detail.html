@@ -22,13 +22,35 @@
 {% block content %}
     {% load admin_urls %}
     <h1>{{ object.title }} </h1>
-    System Owner: {{ object.get_system_owner | safe }}
+    <br>
     <hr>
     <table>
         <tr style="padding: 10px">
-            <td style="padding-right: 10px; border-right-style: solid; border-right-width: 1px"><b>System Status</b>: {{ object.system_characteristics.system_status }}</td>
+            <td style="padding: 10px"><b>Security Objective Confidentiality: </b>: {{ object.security_objective_confidentiality }}</td>
+            <td style="padding: 10px"><b>Security Objective Integrity: </b>: {{ object.security_objective_integrity }}</td>
+            <td style="padding: 10px"><b>Security Objective Availability: </b>: {{ object.security_objective_availability }}</td>
+        </tr>
+    </table>
+    <hr>
+    <b>Organizational Unit: </b>{{ object.organizational_unit }}<br>
+    <b>System Owner: </b>{{ object.get_system_owner | safe }}<br>
+    <b>Authorizing Official: </b>{{ object.get_authorizing_official | safe }}<br>
+    <b>Information System Security Officer: </b>{{ object.get_information_system_security_officer | safe }}<br>
+    <b>Information System Security Manager: </b>{{ object.get_information_system_security_manager | safe }}<br>
+    <hr>
+    <b>Authorization Date: </b>{{ object.date_authorized | date:'d M Y' }}<br>
+    <b>Authorization Decision: </b>{{ object.system_status }}<br>
+    <b>Authorization Revocation Date: </b>{{ object.authorization_revocation_date | date:'d M Y' }}<br>
+    <b>Authorization Revocation Reason: </b>{{ object.authorization_revocation_reason  }}<br>
+    <hr>
+    <b>System Operator Type: </b>{{ object.system_operator_type }}<br>
+    <b>Public: </b>{{ object.public | yesno:"Yes,No" }}<br>
+    <hr>
+    <table>
+        <tr style="padding: 10px">
+            <td style="padding: 10px"><b>System Status</b>: {{ object.system_characteristics.system_status }}</td>
             <td style="padding: 10px"><b>Version</b>: {{ object.version }}</td>
-            <td style="padding-left: 10px; border-left-style: solid; border-left-width: 1px"><b>Last Modified</b>: {{ object.lastModified }}</td>
+            <td style="padding: 10px"><b>Last Modified</b>: {{ object.lastModified }}</td>
         </tr>
     </table>
 

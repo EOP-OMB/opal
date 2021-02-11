@@ -18,7 +18,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
             'fields': (('title', 'short_name'), 'desc')
         }),
         ('System', {
-            'fields': (('published', 'date_authorized', 'system_status'), ('version', 'oscalVersion'),
+            'fields': (('published', 'date_authorized', 'system_status', 'authorization_revocation_date', 'authorization_revocation_reason'), ('version', 'oscalVersion'),
                        'control_baseline', 'controls', 'system_components', 'system_services', 'system_interconnections','system_inventory_items')
         }),
         ('FIPS Level', {
@@ -36,7 +36,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
         }),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('remarks', 'links', 'properties', 'annotations'),
+            'fields': ('remarks', 'links', 'properties', 'annotations', 'organizational_unit', 'system_operator_type', 'public'),
         }),
     )
 

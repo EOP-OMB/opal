@@ -172,6 +172,11 @@ class system_security_plan(ExtendedBasicModel):
                                                      null=True)
     data_flow_diagram = models.ForeignKey(attachment, on_delete=models.PROTECT, related_name='system_data_flow_diagram',
                                           blank=True, null=True)
+    organizational_unit = models.ForeignKey(organization, on_delete=models.PROTECT, related_name='organizational_unit_set', blank=True, null=True)
+    authorization_revocation_date = models.DateTimeField(null=True)
+    authorization_revocation_reason = models.CharField(max_length=200, null=True, blank=True)
+    system_operator_type = models.CharField(max_length=20, null=True, blank=True)
+    public = models.BooleanField(default=True)
 
     """
     NestedProxyFields are added to make the JSON export match with OSCAL format. They don't change the table definition in the database. 
@@ -194,14 +199,12 @@ class system_security_plan(ExtendedBasicModel):
 
     @property
     def get_system_owner(self):
-        from django.core.exceptions import ObjectDoesNotExist
-
         #It is posible for a ssp to have multiple system owners (added in admin page).
-        system_owners = self.system_users.filter(roles__title="System Owner")
+        system_owners = self.system_users.filter(roles__short_name="SO")
         if not system_owners:
-            role = user_role.objects.get(title='System Owner')
+            role = user_role.objects.get(short_name='SO')
             url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
-            return "No system owner is defined.  Click <a href=%s>here</a> to add one." % url
+            return "No System Owner is defined.  Click <a href=%s>here</a> to add one." % url
         else:
             names = ""
             for so in system_owners:
@@ -209,6 +212,53 @@ class system_security_plan(ExtendedBasicModel):
                     names += " - "
                 names += so.user.name
             return names
+
+    @property
+    def get_authorizing_official(self):
+        authorizing_officials = self.system_users.filter(roles__short_name="AO")
+        if not authorizing_officials:
+            role = user_role.objects.get(short_name='AO')
+            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
+            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
+        else:
+            names = ""
+            for ao in authorizing_officials:
+                if names != "":
+                    names += " - "
+                names += ao.user.name
+            return names
+
+    @property
+    def get_information_system_security_officer(self):
+        issos = self.system_users.filter(roles__short_name="ISSO")
+        if not issos:
+            role = user_role.objects.get(short_name='ISSO')
+            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
+            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
+        else:
+            names = ""
+            for isso in issos:
+                if names != "":
+                    names += " - "
+                names += isso.user.name
+            return names
+
+    @property
+    def get_information_system_security_manager(self):
+        issms = self.system_users.filter(roles__short_name="ISSM")
+        if not issms:
+            role = user_role.objects.get(short_name='ISSM')
+            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
+            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
+        else:
+            names = ""
+            for issm in issms:
+                if names != "":
+                    names += " - "
+                names += issm.user.name
+            return names
+
+
 
 
     @property
@@ -311,10 +361,15 @@ class system_service_serializer(serializers.ModelSerializer):
 
 class system_interconnection_serializer(serializers.ModelSerializer):
     interconnection_responsible_roles = user_role_serializer(read_only=True, many=True)
+    external_organization = organization_serializer(read_only=True, many=False)
+    external_poc = person_serializer(read_only=True, many=False)
+    permitted_protocols = protocol_serializer(read_only=True, many=True)
 
     class Meta:
         model = system_interconnection
         fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks','properties','annotations','links',
+                  'external_ip_range', 'external_organization', 'external_poc',
+                  'connection_security', 'data_direction', 'permitted_protocols', 'desc',
                   'interconnection_responsible_roles']
 
         extra_kwargs = {
