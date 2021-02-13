@@ -62,6 +62,12 @@ class nist_control_parameter(PrimitiveModel):
         serializer = nist_control_parameter_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = nist_control_parameter.objects.filter(pk=self.pk)
+        serializer = nist_control_parameter_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 class nist_control_statement(PrimitiveModel):
     # control_id = models.CharField(max_length=50)
@@ -77,6 +83,12 @@ class nist_control_statement(PrimitiveModel):
         queryset = nist_control_statement.objects.filter(pk=id)
         serializer = nist_control_statement_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = nist_control_statement.objects.filter(pk=self.pk)
+        serializer = nist_control_statement_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 class nist_control(PrimitiveModel):
@@ -135,6 +147,12 @@ class nist_control(PrimitiveModel):
         serializer = nist_control_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = nist_control.objects.filter(pk=self.pk)
+        serializer = nist_control_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 class control_baseline(BasicModel):
     controls = customMany2ManyField(nist_control)
@@ -145,6 +163,12 @@ class control_baseline(BasicModel):
         queryset = control_baseline.objects.filter(pk=id)
         serializer = control_baseline_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = control_baseline.objects.filter(pk=self.pk)
+        serializer = control_baseline_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -182,6 +206,12 @@ class control_statement(ExtendedBasicModel):
         serializer = control_statement_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = control_statement.objects.filter(pk=self.pk)
+        serializer = control_statement_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 class control_parameter(BasicModel):
     class Meta:
@@ -206,6 +236,12 @@ class control_parameter(BasicModel):
         queryset = control_parameter.objects.filter(pk=id)
         serializer = control_parameter_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = control_parameter.objects.filter(pk=self.pk)
+        serializer = control_parameter_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -258,6 +294,12 @@ class system_control(ExtendedBasicModel):
         serializer = system_control_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_control.objects.filter(pk=self.pk)
+        serializer = system_control_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 frequency_choices = [('daily', 'Daily'),
@@ -272,6 +314,18 @@ class continuous_monitoring_action_item(BasicModel):
     automated = models.BooleanField(default=True)
     frequency = models.CharField(max_length=10, choices=frequency_choices, default='as needed')
 
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = continuous_monitoring_action_item.objects.filter(pk=id)
+        serializer = continuous_monitoring_action_item_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = continuous_monitoring_action_item.objects.filter(pk=self.pk)
+        serializer = continuous_monitoring_action_item_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class import_catalog(PrimitiveModel):
@@ -283,7 +337,6 @@ class import_catalog(PrimitiveModel):
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)
-
 
 
 
@@ -391,3 +444,12 @@ class link_serializer(serializers.ModelSerializer):
         fields = ['id', 'uuid', 'text', 'href', 'requires_authentication', 'rel', 'mediaType', 'hash',
                   'control_baseline_set']
         depth = 1
+
+
+
+class continuous_monitoring_action_item_serializer(serializers.ModelSerializer):
+    control_statements = control_statement_serializer(many=True, read_only=True)
+
+    class Meta:
+        model = continuous_monitoring_action_item
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'control_statements', 'automated', 'frequecny']

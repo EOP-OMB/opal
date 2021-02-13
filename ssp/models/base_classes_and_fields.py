@@ -85,6 +85,12 @@ class element_property(PrimitiveModel):
         serializer = element_property_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = element_property.objects.filter(pk=self.pk)
+        serializer = element_property_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class hashed_value(BasicModel):
@@ -99,6 +105,12 @@ class hashed_value(BasicModel):
         queryset = hashed_value.objects.filter(pk=id)
         serializer = hashed_value_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = hashed_value.objects.filter(pk=self.pk)
+        serializer = hashed_value_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -120,6 +132,12 @@ class link(PrimitiveModel):
         serializer = link_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = link.objects.filter(pk=self.pk)
+        serializer = link_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class annotation(BasicModel):
@@ -132,6 +150,12 @@ class annotation(BasicModel):
         queryset = annotation.objects.filter(pk=id)
         serializer = annotation_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = annotation.objects.filter(pk=self.pk)
+        serializer = annotation_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 

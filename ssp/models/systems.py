@@ -21,6 +21,12 @@ class system_component(ExtendedBasicModel):
         serializer = system_component_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_component.objects.filter(pk=self.pk)
+        serializer = system_component_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class port_range(BasicModel):
@@ -38,6 +44,12 @@ class port_range(BasicModel):
         serializer = port_range_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = port_range.objects.filter(pk=self.pk)
+        serializer = port_range_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class protocol(BasicModel):
@@ -48,6 +60,12 @@ class protocol(BasicModel):
         queryset = protocol.objects.filter(pk=id)
         serializer = protocol_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = protocol.objects.filter(pk=self.pk)
+        serializer = protocol_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -67,6 +85,12 @@ class system_service(ExtendedBasicModel):
         queryset = system_service.objects.filter(pk=id)
         serializer = system_service_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_service.objects.filter(pk=self.pk)
+        serializer = system_service_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 connection_security_choices = [('IPSec','Internet Protocal Security (IPSec)'),
@@ -94,6 +118,12 @@ class system_interconnection(ExtendedBasicModel):
         serializer = system_interconnection_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_interconnection.objects.filter(pk=self.pk)
+        serializer = system_interconnection_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class inventory_item_type(ExtendedBasicModel):
@@ -112,6 +142,12 @@ class inventory_item_type(ExtendedBasicModel):
         serializer = inventory_item_type_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = inventory_item_type.objects.filter(pk=self.pk)
+        serializer = inventory_item_type_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class system_inventory_item(ExtendedBasicModel):
@@ -127,6 +163,12 @@ class system_inventory_item(ExtendedBasicModel):
         serializer = system_inventory_item_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_inventory_item.objects.filter(pk=self.pk)
+        serializer = system_inventory_item_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class system_user(BasicModel):
@@ -138,6 +180,12 @@ class system_user(BasicModel):
         queryset = system_user.objects.filter(pk=id)
         serializer = system_user_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_user.objects.filter(pk=self.pk)
+        serializer = system_user_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -258,9 +306,6 @@ class system_security_plan(ExtendedBasicModel):
                 names += issm.user.name
             return names
 
-
-
-
     @property
     def is_tic(self):
         """
@@ -284,9 +329,9 @@ class system_security_plan(ExtendedBasicModel):
         serializer = system_security_plan_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
-    @staticmethod
-    def get_serializer_json_OSCAL(id=1):
-        queryset = system_security_plan.objects.filter(pk=id)
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_security_plan.objects.filter(pk=self.pk)
         serializer = system_security_plan_OSCAL_serializer(queryset, many=True)
         return (serializerJSON(serializer.data, SSP=True))
 

@@ -12,6 +12,12 @@ class user_function(BasicModel):
         serializer = user_function_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = user_function.objects.filter(pk=self.pk)
+        serializer = user_function_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class user_privilege(BasicModel):
@@ -23,6 +29,12 @@ class user_privilege(BasicModel):
         serializer = user_privilege_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = user_privilege.objects.filter(pk=self.pk)
+        serializer = user_privilege_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class user_role(ExtendedBasicModel):
@@ -33,6 +45,12 @@ class user_role(ExtendedBasicModel):
         queryset = user_role.objects.filter(pk=id)
         serializer = user_role_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = user_role.objects.filter(pk=self.pk)
+        serializer = user_role_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -51,6 +69,12 @@ class address(BasicModel):
         serializer = address_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = address.objects.filter(pk=self.pk)
+        serializer = address_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class email(PrimitiveModel):
@@ -67,6 +91,12 @@ class email(PrimitiveModel):
         serializer = email_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = email.objects.filter(pk=self.pk)
+        serializer = email_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class telephone_number(PrimitiveModel):
@@ -82,6 +112,12 @@ class telephone_number(PrimitiveModel):
         serializer = telephone_number_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = telephone_number.objects.filter(pk=self.pk)
+        serializer = telephone_number_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 
 class location(ExtendedBasicModel):
@@ -94,6 +130,12 @@ class location(ExtendedBasicModel):
         queryset = location.objects.filter(pk=id)
         serializer = location_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = location.objects.filter(pk=self.pk)
+        serializer = location_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 class organization(ExtendedBasicModel):
@@ -109,6 +151,12 @@ class organization(ExtendedBasicModel):
         queryset = organization.objects.filter(pk=id)
         serializer = organization_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = organization.objects.filter(pk=self.pk)
+        serializer = organization_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 
@@ -134,6 +182,12 @@ class person(ExtendedBasicModel):
         queryset = person.objects.filter(pk=id)
         serializer = person_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = person.objects.filter(pk=self.pk)
+        serializer = person_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 """

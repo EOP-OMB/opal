@@ -5,12 +5,12 @@ def run():
     #Using Dictionary property
     #print(nist_control_parameter().get_dictionary_json)
 
-    #queryset = control_baseline.objects.filter(pk=1)
-    #serializer = control_baseline_serializer(queryset, many=True)
-    #print(serializerJSON(serializer.data))
+    queryset = system_interconnection.objects.filter(pk=2)
+    serializer = system_interconnection_serializer(queryset, many=True)
+    print(serializerJSON(serializer.data))
 
-    f = open(BASE_DIR + '/opal.json', "w")
+    """f = open(BASE_DIR + '/opal.json', "w")
     f.write(control_baseline().get_serializer_json(1))
     f.close()
-    print("JSON file is created")
+    print("JSON file is created")"""
 

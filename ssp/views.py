@@ -228,3 +228,17 @@ def system_user_new(request,sspid,roleid):
         form = SystemUserNewForm()
     return render(request, 'ssp/system_user_new.html', {'form': form})
 
+def oscal_json(request,objid,objurl):
+    from django.contrib.contenttypes.models import ContentType
+    url_list = objurl.split('_')
+    del url_list[0]
+    del url_list[-1]
+    model_name = '_'.join(url_list)
+    content_type = ContentType.objects.get(app_label=u'ssp', model=model_name)
+    model_object = content_type.model_class()
+    model_instance = model_object.objects.get(pk=objid)
+    try:
+        page_content = model_instance.get_serializer_json_OSCAL
+    except:
+        page_content = "No content. OSCAL JSON serializer might not exist for this  model."
+    return render(request, 'ssp/oscal_json.html', {'result':page_content})

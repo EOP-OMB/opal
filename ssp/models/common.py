@@ -12,6 +12,12 @@ class status(BasicModel):
         serializer = status_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = status.objects.filter(pk=self.pk)
+        serializer = status_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 class information_type(BasicModel):
     """
@@ -31,6 +37,12 @@ class information_type(BasicModel):
         serializer = information_type_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
 
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = information_type.objects.filter(pk=self.pk)
+        serializer = information_type_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
+
 
 # Other common objects used in many places
 class attachment(ExtendedBasicModel):
@@ -47,6 +59,12 @@ class attachment(ExtendedBasicModel):
         queryset = attachment.objects.filter(pk=id)
         serializer = attachment_serializer(queryset, many=True)
         return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = attachment.objects.filter(pk=self.pk)
+        serializer = attachment_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 """

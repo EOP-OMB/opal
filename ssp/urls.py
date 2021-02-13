@@ -31,5 +31,6 @@ urlpatterns = [
     path('<int:pk>/edit/', ssp_edit, name='ssp_edit'),
     path('sc/<int:pk>/edit', system_control_edit, name='system_control_edit'),
     path('catalog/', import_catalog, name='import_catalog'),
-    path('system-user-new/<int:sspid>/<int:roleid>/', system_user_new, name='system_user_new')
+    path('system-user-new/<int:sspid>/<int:roleid>/', system_user_new, name='system_user_new'),
+    path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json')
 ]
