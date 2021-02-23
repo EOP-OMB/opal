@@ -9,3 +9,16 @@ __init__.py
 /ssp/fixtures/opal_ssp_db.json
 /migrations/
 *.log
+db.sqlite3
+media/
+opal.json
+opal/__pycache__/
+opal/local_settings.py.orig
+scripts/__pycache__/
+scripts/data_surgery_scripts/
+ssp/__pycache__/
+ssp/migrations/
+ssp/models/__pycache__/
+ssp/templatetags/
+uploads/
+
