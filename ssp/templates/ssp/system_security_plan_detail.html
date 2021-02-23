@@ -13,6 +13,10 @@
                 <ul style="list-style-type: upper-roman">
                     <li class="nav-item"><a class="nav-link" href="#system_description">System Description</a></li>
                     <li class="nav-item"><a class="nav-link" href="#system_diagrams">System Diagrams</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#system_personnel">System Personnel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#authorization_status">Authorization Status</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#system_status">System Status</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#fisma_security_objectives">FISMA Security Objectives</a></li>
                     <li class="nav-item"><a class="nav-link" href="#information_types">System Information Types</a></li>
                     <div class="dropdown-divider"></div>
                     <li class="nav-item"><a class="nav-link" href="#system_components">System Components</a></li>
@@ -44,37 +48,6 @@
     {% load admin_urls %}
     <h1>{{ object.title }} </h1>
     <hr>
-    <table>
-        <tr style="padding: 10px">
-            <td style="padding: 10px"><b>Security Objective Confidentiality: </b>: {{ object.security_objective_confidentiality }}</td>
-            <td style="padding: 10px"><b>Security Objective Integrity: </b>: {{ object.security_objective_integrity }}</td>
-            <td style="padding: 10px"><b>Security Objective Availability: </b>: {{ object.security_objective_availability }}</td>
-        </tr>
-    </table>
-    <hr>
-    <b>Organizational Unit: </b>{{ object.organizational_unit }}<br>
-    <b>System Owner: </b>{{ object.get_system_owner | safe }}<br>
-    <b>Authorizing Official: </b>{{ object.get_authorizing_official | safe }}<br>
-    <b>Information System Security Officer: </b>{{ object.get_information_system_security_officer | safe }}<br>
-    <b>Information System Security Manager: </b>{{ object.get_information_system_security_manager | safe }}<br>
-    <hr>
-    <b>Authorization Date: </b>{{ object.date_authorized | date:'d M Y' }}<br>
-    <b>Authorization Decision: </b>{{ object.system_status }}<br>
-    <b>Authorization Revocation Date: </b>{{ object.authorization_revocation_date | date:'d M Y' }}<br>
-    <b>Authorization Revocation Reason: </b>{{ object.authorization_revocation_reason  }}<br>
-    <hr>
-    <b>System Operator Type: </b>{{ object.system_operator_type }}<br>
-    <b>Public: </b>{{ object.public | yesno:"Yes,No" }}<br>
-    <hr>
-    <table>
-        <tr style="padding: 10px">
-            <td style="padding: 10px"><b>System Status</b>: {{ object.system_characteristics.system_status }}</td>
-            <td style="padding: 10px"><b>Version</b>: {{ object.version }}</td>
-            <td style="padding: 10px"><b>Last Modified</b>: {{ object.lastModified }}</td>
-        </tr>
-    </table>
-
-    <hr>
     <h2><a href="{% url 'admin:ssp_system_security_plan_change' object.id %}" target="_blank">{{ object.title }} ({{ object.short_name}})</a></h2>
         <h3><a id="system_description">System Description</a></h3>
         <div style="margin-left: 30px">{{ object.desc | safe }}</div>
@@ -85,6 +58,39 @@
             <li><b>Network Architecture Diagram: </b>{{ object.network_architecture_diagram.attachment.url }}
             <li><b>Data Flow Diagram: </b>{{ object.data_flow_diagram.attachment.url }}
         </ul>
+    <h3><a id="system_personnel">System Personnel</a></h3>
+        <ul>
+            <li>Organizational Unit: {{ object.organizational_unit }}</li>
+            <li>Authorizing Official: {{ object.get_authorizing_official | safe }}</li>
+            <li>System Owner: {{ object.get_system_owner | safe }}</li>
+            <li>Information System Security Officer: {{ object.get_information_system_security_officer | safe }}</li>
+            <li>Information System Security Manager: {{ object.get_information_system_security_manager | safe }}</li>
+        </ul>
+    <h3><a id="authorization_status">Authorization Status</a></h3>
+    <ul>
+        <li>Authorization Date: {{ object.date_authorized | date:'d M Y' }}</li>
+        <li>Authorization Decision: {{ object.system_status }}</li>
+        <li>Authorization Revocation Date: {{ object.authorization_revocation_date | date:'d M Y' }}</li>
+        <li>Authorization Revocation Reason: {{ object.authorization_revocation_reason  }}</li>
+    </ul>
+    <h3><a id="system_status">System Status</a></h3>
+    <table>
+        <tr style="padding: 10px">
+            <td style="padding: 10px"><b>System Status</b>: {{ object.system_characteristics.system_status }}</td>
+            <td style="padding: 10px"><b>SSP Version</b>: {{ object.version }}</td>
+            <td style="padding: 10px"><b>SSP Last Modified</b>: {{ object.lastModified }}</td>
+        </tr>
+    </table>
+    <br>
+    <h3><a id="fisma_security_objectives">FISMA Security Objectives</a></h3>
+        <table>
+            <tr style="padding: 10px">
+                <td style="padding: 10px"><b>Security Objective Confidentiality: </b>: {{ object.security_objective_confidentiality }}</td>
+                <td style="padding: 10px"><b>Security Objective Integrity: </b>: {{ object.security_objective_integrity }}</td>
+                <td style="padding: 10px"><b>Security Objective Availability: </b>: {{ object.security_objective_availability }}</td>
+            </tr>
+        </table>
+    <br>
     <h3><a id="information_types">System Information Types</a></h3>
         <table border="2" cellpadding="3">
             <tr>

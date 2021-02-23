@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 from django_filters.views import FilterView
-from .views import *
-
+from ssp.views import *
 
 app_name = 'ssp'
 urlpatterns = [
     path('nist/', nist_control_list_view.as_view(), name='nist_control_list_view'),
     path('nist/<int:pk>', nist_control_detail_view.as_view(), name='nist_control_detail_view'),
     # path('control/', system_control_list_view.as_view(), name='system_control_list_view'),
-    path('control/', FilterView.as_view(filterset_class=system_control_list_view_filter,template_name='ssp/system_control_list.html'),name='system_control_list_view'),
+    path('control/', FilterView.as_view(filterset_class=system_control_list_view_filter,
+                                        template_name='ssp/system_control_list.html'), name='system_control_list_view'),
     path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
     path('', system_security_plan_list_view.as_view(), name='list_system_security_planView'),
     path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
@@ -32,5 +32,5 @@ urlpatterns = [
     path('sc/<int:pk>/edit', system_control_edit, name='system_control_edit'),
     path('catalog/', import_catalog, name='import_catalog'),
     path('system-user-new/<int:sspid>/<int:roleid>/', system_user_new, name='system_user_new'),
-    path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json')
+    path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json'),
 ]

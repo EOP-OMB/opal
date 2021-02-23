@@ -1,22 +1,20 @@
 # Create your views here.
+import logging
+import os
+import urllib
+
+import django_filters
+from django.contrib import messages
+from django.core.files import File
+from django.forms import modelformset_factory, Textarea
 from django.shortcuts import *
 from django.views import generic
-from django.forms import modelformset_factory, modelform_factory, Textarea
-import django_filters
-import logging
-from django.http import HttpResponseRedirect
-import urllib
-import os
-from ssp.models.base_classes_and_fields import *
-from ssp.models.controls import *
-from django.contrib import messages
 
-from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement, system_user, user_role, person
-from .forms import SystemSecurityPlan, ImportCatalogForm, import_catalog, SystemUserNewForm
-
-from django.core.files import File
 from scripts.OSCAL_Catalog_import import run
-
+from ssp.models.controls import *
+from .forms import SystemSecurityPlan, ImportCatalogForm, SystemUserNewForm
+from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement, \
+    system_user, user_role, person
 
 
 def ssp_new(request):
@@ -44,23 +42,25 @@ def ssp_edit(request, pk):
 
 def system_control_edit(request, pk):
     sc = get_object_or_404(system_control, pk=pk)
-    sc_FormSet = modelformset_factory(system_control,fields=('control_status','control_origination'))
-    sc_paramFormSet = modelformset_factory(control_parameter, fields=('control_parameter_id','value'), widgets={'value': Textarea(attrs={'cols':30,'rows':1})})
-    sc_statementFormSet = modelformset_factory(control_statement, fields=('control_statement_id','control_statement_text'))
+    sc_FormSet = modelformset_factory(system_control, fields=('control_status', 'control_origination'))
+    sc_paramFormSet = modelformset_factory(control_parameter, fields=('control_parameter_id', 'value'),
+                                           widgets={'value': Textarea(attrs={'cols': 30, 'rows': 1})})
+    sc_statementFormSet = modelformset_factory(control_statement,
+                                               fields=('control_statement_id', 'control_statement_text'))
     if request.method == "POST":
         sc_paramFormSet = sc_paramFormSet(queryset=control_parameter.objects.filter(system_control=sc.id))
         if sc_paramFormSet.is_valid():
             sc_paramFormSet.save(commit=False)
-            # paramater Titles are control title - paramater id
+            # parameter Titles are control title - parameter id
             sc_paramFormSet.title = sc.title + ' - ' + sc_paramFormSet.control_parameter_id
-            # paramater short_name should be the control it relates to
+            # parameter short_name should be the control it relates to
             sc_paramFormSet.short_name = sc.short_name
             sc_paramFormSet.save()
         else:
             form_is_not_valid = True
         if sc_statementFormSet.is_valid():
             sc_statementFormSet.save(commit=False)
-            # Statement Titles are control title - paramater id
+            # Statement Titles are control title - parameter id
             sc_statementFormSet.title = sc.title + ' - ' + sc_statementFormSet.control_statement_id
             # Statement short_name should be the control it relates to
             sc_statementFormSet.short_name = sc.short_name
@@ -77,7 +77,10 @@ def system_control_edit(request, pk):
         sc_formset = sc_FormSet(queryset=system_control.objects.filter(pk=sc.id))
         param_formset = sc_paramFormSet(queryset=control_parameter.objects.filter(system_control=sc.id))
         statement_formset = sc_statementFormSet(queryset=control_statement.objects.filter(system_control=sc.id))
-    return render(request, 'ssp/system_control_edit.html', {'object': sc,'sc_formset': sc_formset,'param_formset':param_formset,'statement_formset':statement_formset})
+    return render(request, 'ssp/system_control_edit.html',
+                  {'object': sc, 'sc_formset': sc_formset, 'param_formset': param_formset,
+                   'statement_formset': statement_formset})
+
 
 class nist_control_list_view(generic.ListView):
     model = nist_control
@@ -91,7 +94,8 @@ class nist_control_detail_view(generic.DetailView):
 class system_control_list_view_filter(django_filters.FilterSet):
     class Meta:
         model = system_control
-        fields = ['control_status','nist_control__group_title','control_primary_system']
+        fields = ['control_status', 'nist_control__group_title', 'control_primary_system']
+
 
 class system_control_list_view(generic.ListView):
     model = system_control
@@ -109,11 +113,10 @@ class system_security_plan_list_view(generic.ListView):
 class system_security_plan_detail_view(generic.DetailView):
     model = system_security_plan
     log = logging.getLogger(__name__)
-    log.info('ssp ',object.__name__,'viewed by')
+    log.info('ssp ', object.__name__, 'viewed by')
 
 
 def import_catalog(request):
-
     """For scanning file streams, ClamAV should be installed and clamd should be running in Powershell. Also pip install pyclamd for using Clam daemon in python
     (  https://www.clamav.net/documents/installing-clamav-on-windows & https://pypi.org/project/pyClamd/  )
     Note: There is another python module (clamd) which I tried first. It opens a UNIX socket which was not working with my Windows """
@@ -137,7 +140,7 @@ def import_catalog(request):
             if len(request.FILES) != 0:
                 if clamd_running:
                     scan_results = cd.scan_stream(request.FILES['file'])
-                    #scan_results = cd.scan_stream(cd.EICAR()) This is a test to see behavir when virus found
+                    # scan_results = cd.scan_stream(cd.EICAR()) This is a test to see behavir when virus found
                     if scan_results is None:
                         catalog.file = request.FILES['file']
                 else:
@@ -157,15 +160,15 @@ def import_catalog(request):
                 if request.user.is_authenticated:
                     catalog.user = request.user.username
 
-
-                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title,short_name=catalog.title)
+                catalog_control_baseline, created = control_baseline.objects.get_or_create(title=catalog.title,
+                                                                                           short_name=catalog.title)
                 catalog.control_baseline = catalog_control_baseline
 
                 if catalog.file_url:
                     catalog_link, created = link.objects.update_or_create(href=catalog.file_url, defaults={
-                                                                    'text': catalog.title,
-                                                                    'href': catalog.file_url
-                                                                })
+                        'text': catalog.title,
+                        'href': catalog.file_url
+                    })
                     catalog_control_baseline.link = catalog_link
                     catalog_control_baseline.save()
 
@@ -176,14 +179,14 @@ def import_catalog(request):
 
                 # form.save()
                 if form.cleaned_data['file']:
-                    file_path =str(catalog.file)
+                    file_path = str(catalog.file)
                     catalog_name = str(form.cleaned_data['file'])
                 else:
                     file_path = form.cleaned_data['file_url']
                     file_path_list = file_path.split('/')
                     catalog_name = file_path_list[-1]
 
-                #Uploaded files are in \uploads\catalog (\uploads is MEDIA_ROOT)
+                # Uploaded files are in \uploads\catalog (\uploads is MEDIA_ROOT)
                 added, updated = run(catalog.control_baseline, catalog.file.path, catalog_name)
                 catalog.added_controls = added
                 catalog.updated_controls = updated
@@ -193,11 +196,12 @@ def import_catalog(request):
                     scan_news = "Virus scan accepted this file. "
                 else:
                     scan_news = "Virus scan is down. "
-                messages.success(request, scan_news + 'Imported NIST Catalog successfully. Added '+str(added)+ ' and updated '+ str(updated)+ ' NIST Controls.')
+                messages.success(request, scan_news + 'Imported NIST Catalog successfully. Added ' + str(
+                    added) + ' and updated ' + str(updated) + ' NIST Controls.')
                 return render(request, 'ssp/import_catalog.html', {'form': form})
-                #return HttpResponse("data submitted successfully")
+                # return HttpResponse("data submitted successfully")
             elif scan_results is not None:
-                messages.success(request, 'Virus scan rejected this file: '+str(scan_results['stream']))
+                messages.success(request, 'Virus scan rejected this file: ' + str(scan_results['stream']))
                 return render(request, 'ssp/import_catalog.html', {'form': form})
 
         else:
@@ -206,7 +210,8 @@ def import_catalog(request):
         form = ImportCatalogForm()
         return render(request, 'ssp/import_catalog.html', {'form': form})
 
-def system_user_new(request,sspid,roleid):
+
+def system_user_new(request, sspid, roleid):
     if request.method == "POST":
         form = SystemUserNewForm(request.POST)
         if form.is_valid():
@@ -228,7 +233,8 @@ def system_user_new(request,sspid,roleid):
         form = SystemUserNewForm()
     return render(request, 'ssp/system_user_new.html', {'form': form})
 
-def oscal_json(request,objid,objurl):
+
+def oscal_json(request, objid, objurl):
     from django.contrib.contenttypes.models import ContentType
     url_list = objurl.split('_')
     del url_list[0]
@@ -241,4 +247,4 @@ def oscal_json(request,objid,objurl):
         page_content = model_instance.get_serializer_json_OSCAL
     except:
         page_content = "No content. OSCAL JSON serializer might not exist for this  model."
-    return render(request, 'ssp/oscal_json.html', {'result':page_content})
+    return render(request, 'ssp/oscal_json.html', {'result': page_content})

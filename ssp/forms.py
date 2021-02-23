@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from ssp.models import system_security_plan, import_catalog, person, system_user
+from ssp.models.systems import system_security_plan, import_catalog
 from scripts.usefullFunctions import validate_file_extension
 
 
@@ -31,9 +31,9 @@ class ImportCatalogForm(ModelForm):
         file_url = self.cleaned_data.get('file_url')
         file = self.cleaned_data.get('file')
 
-        if len(title) == 0 :
-            self.add_error('title', "Title required") #field error
-            #self._errors['title'] = self.error_class(['Title required']) #another way of adding field error
+        if len(title) == 0:
+            self.add_error('title', "Title required")  # field error
+            # self._errors['title'] = self.error_class(['Title required']) #another way of adding field error
         if file:
             if not validate_file_extension(file.name, '.json'):
                 self.add_error('file', 'URL for a Catalog file with JSON format required')
@@ -41,23 +41,15 @@ class ImportCatalogForm(ModelForm):
             if not validate_file_extension(file_url, '.json'):
                 self.add_error('file_url', 'Catalog file with JSON format required')
         if not file_url and not file:
-            raise forms.ValidationError("Either a file or a URL required") #non_field error
+            raise forms.ValidationError("Either a file or a URL required")  # non_field error
         if file_url and file:
-            raise forms.ValidationError("Only a file or a URL required") #non_field error
+            raise forms.ValidationError("Only a file or a URL required")  # non_field error
 
         return self.cleaned_data
 
 
 class SystemUserNewForm(forms.Form):
-    PEOPLE=[]
-    for prsn in person.objects.all():
-        prsn_id = prsn.pk
-        prsn_display = 'Name: '+ prsn.name + ', Title: ' + prsn.title
-        prsn_tuple = (prsn_id,prsn_display)
-        PEOPLE.append(prsn_tuple)
-
-    user = forms.CharField(label='User', max_length=255, required=True, widget=forms.Select(choices=PEOPLE))
-
+    user = forms.CharField(label='User', max_length=255, required=True)
 
     def __init__(self, *args, **kwargs):
         super(SystemUserNewForm, self).__init__(*args, **kwargs)  # Call to ModelForm constructor
@@ -68,9 +60,7 @@ class SystemUserNewForm(forms.Form):
 
         user = self.cleaned_data.get('user')
 
-        if len(user) == 0 :
-            self.add_error('user', "User required") #field error
+        if len(user) == 0:
+            self.add_error('user', "User required")  # field error
 
         return self.cleaned_data
-
-
