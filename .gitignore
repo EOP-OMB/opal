@@ -3,6 +3,6 @@
 /static/
 .idea
 environment.py
-local_settings.py
+/opal/local_settings.py
 __init__.py
 /uploads/catalogs/
