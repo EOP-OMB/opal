@@ -6,3 +6,6 @@ environment.py
 /opal/local_settings.py
 __init__.py
 /uploads/catalogs/
+/ssp/fixtures/opal_ssp_db.json
+/migrations/
+*.log

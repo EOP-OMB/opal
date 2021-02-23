@@ -1,5 +1,4 @@
 """
-This file contains the production settings for the opal application as deployed at OMB.  
 To run a local copy for development or other reasons, add this file to your .gitignore file
 and then modify the values as needed. 
 """
@@ -9,10 +8,10 @@ env = {
     "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
     "debug" : "True",
     "allowed_hosts" : ["*"],
-    #"database" : "postgres",
-    "database" : "sqlite",
+    "database" : "postgres",
+    #"database" : "sqlite",
     "db_name" : "opal_dev",
-    "db_password" : "DcpwXkn3_muYG7fNyxds",
+    "db_password" : "someting_good",
     "db_user" : "opal_dev",
     "db_host" : "localhost",
     "db_port" : "",
