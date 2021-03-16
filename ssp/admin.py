@@ -10,7 +10,7 @@ from ssp import models
 class systemSecurityPlanAdmin(admin.ModelAdmin):
     filter_horizontal = ['information_types', 'system_services', 'system_interconnections',
                          'system_inventory_items', 'properties', 'links', 'leveraged_authorization',
-                         'additional_selected_controls']
+                         'additional_selected_controls', 'attachments']
     filter_vertical = ['controls', 'system_components']
 
     fieldsets = (
@@ -36,7 +36,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
         }),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('remarks', 'links', 'properties', 'annotations', 'organizational_unit', 'system_operator_type', 'public'),
+            'fields': ('attachments', 'remarks', 'links', 'properties', 'annotations', 'organizational_unit', 'system_operator_type', 'public'),
         }),
     )
 

@@ -9,6 +9,7 @@ from django.core.files import File
 from django.forms import modelformset_factory, Textarea
 from django.shortcuts import *
 from django.views import generic
+from django.urls import reverse
 
 from scripts.OSCAL_Catalog_import import run
 from ssp.models.controls import *
@@ -248,3 +249,9 @@ def oscal_json(request, objid, objurl):
     except:
         page_content = "No content. OSCAL JSON serializer might not exist for this  model."
     return render(request, 'ssp/oscal_json.html', {'result': page_content})
+
+def clone_control(control, ssp):
+    c = system_control.objects.get(pk=control)
+    new_ssp = system_security_plan.objects.get(pk=ssp)
+    clone = c.clone_control(new_ssp)
+    return redirect(reverse('admin:ssp_system_control_change',args=clone.pk))

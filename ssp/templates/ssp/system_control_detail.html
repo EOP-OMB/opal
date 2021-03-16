@@ -70,7 +70,6 @@
         {% for l in s.links.all %}
             <tr>
                 <td><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
-                <td>{{ l.requires_authentication }}</td>
             </tr>
         {% endfor %}
     {% endfor %}

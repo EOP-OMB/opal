@@ -225,6 +225,7 @@ class system_security_plan(ExtendedBasicModel):
     authorization_revocation_reason = models.CharField(max_length=200, null=True, blank=True)
     system_operator_type = models.CharField(max_length=20, null=True, blank=True)
     public = models.BooleanField(default=True)
+    attachments = customMany2ManyField(attachment)
 
     """
     NestedProxyFields are added to make the JSON export match with OSCAL format. They don't change the table definition in the database. 

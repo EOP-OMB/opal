@@ -2,6 +2,7 @@ from ssp.models.users import *
 from opal.settings import IMPORTED_CATALOGS_DIR
 import json
 from django.utils.html import mark_safe
+from model_clone import CloneMixin
 
 # objects related to security controls
 
@@ -264,7 +265,7 @@ control_origination_choices = [
     ('N/A', 'N/A')]
 
 
-class system_control(ExtendedBasicModel):
+class system_control(CloneMixin, ExtendedBasicModel):
     control_parameters = customMany2ManyField(control_parameter)
     control_statements = customMany2ManyField(control_statement)
     control_status = models.CharField(max_length=100, choices=control_implementation_status_choices)
@@ -272,6 +273,8 @@ class system_control(ExtendedBasicModel):
     control_primary_system = models.ForeignKey('system_security_plan', on_delete=models.DO_NOTHING, null=True)
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True,
                                      related_name='system_control_set')
+
+    _clone_many_to_many_fields = ['control_parameters','control_statements']
 
     class Meta:
         ordering = ['nist_control']
@@ -287,6 +290,15 @@ class system_control(ExtendedBasicModel):
     @property
     def system_security_plan_title(self):
         return self.system_security_plan_set.values()[0]["title"]
+
+    def clone_control(self,new_ssp):
+        new_title = new_ssp.title + ' ' + self.nist_control.control_title
+        new_short_name = self.nist_control.sort_id + '-' + new_ssp.short_name
+        clone = self.make_clone(attrs={'title': new_title,'short_name': new_short_name, 'control_primary_system': new_ssp})
+        new_ssp.controls.add(clone)
+        new_ssp.controls.remove(self)
+        return clone
+
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -325,7 +337,6 @@ class continuous_monitoring_action_item(BasicModel):
         queryset = continuous_monitoring_action_item.objects.filter(pk=self.pk)
         serializer = continuous_monitoring_action_item_serializer(queryset, many=True)
         return (serializerJSON(serializer.data, SSP=True))
-
 
 
 class import_catalog(PrimitiveModel):
