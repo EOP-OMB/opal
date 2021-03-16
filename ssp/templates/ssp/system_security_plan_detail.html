@@ -43,6 +43,7 @@
             </div>
         </li>
     </div>
+</div>
 {% endblock %}
 {% block content %}
     {% load admin_urls %}
@@ -115,13 +116,13 @@
     <h3><a id="system_components">System Components</a></h3>
         {% for component in object.system_components.all %}
             <h4 style="margin-left: 15px">
-                <a href="{% url 'admin:ssp_system_component_change' component.id %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></a></h4>
+                <a href="{% url 'admin:ssp_system_component_change' component.id %}" target="_blank">{{ component.title }} ({{ component.component_type }})</a></h4>
                 <div style="margin-left: 30px">{{ component.desc | safe }}</div>
         {% endfor %}
     <h3><a id="system_controls">System Controls</a></h3>
         {% for c in object.controls.all %}
             {% with c as object %}
-                <a id="control:{{ c.id }}">
+                <a id="control:{{ c.id }}"></a>
                 {% include "ssp/system_control_detail.html" %}
             {% endwith %}
             <p></p>
