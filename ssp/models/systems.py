@@ -190,7 +190,7 @@ class system_user(BasicModel):
 
 
 class system_security_plan(ExtendedBasicModel):
-    published = models.DateTimeField()
+    published = models.DateField(null=True, blank=True)
     lastModified = models.DateTimeField(auto_now=True)
     version = models.CharField(max_length=25, default='1.0.0')
     oscalVersion = models.CharField(max_length=10, default='1.0.0')
@@ -203,7 +203,7 @@ class system_security_plan(ExtendedBasicModel):
     leveraged_authorization = customMany2ManyField('system_security_plan')
     controls = customMany2ManyField(system_control)
     system_users = customMany2ManyField(system_user)
-    date_authorized = models.DateTimeField(null=True)
+    date_authorized = models.DateField(null=True, blank=True)
     security_sensitivity_level = models.CharField(max_length=10, choices=information_type_level_choices, blank=True)
     information_types = customMany2ManyField(information_type)
     security_objective_confidentiality = models.CharField(max_length=10, choices=information_type_level_choices,
@@ -221,7 +221,7 @@ class system_security_plan(ExtendedBasicModel):
     data_flow_diagram = models.ForeignKey(attachment, on_delete=models.PROTECT, related_name='system_data_flow_diagram',
                                           blank=True, null=True)
     organizational_unit = models.ForeignKey(organization, on_delete=models.PROTECT, related_name='organizational_unit_set', blank=True, null=True)
-    authorization_revocation_date = models.DateTimeField(null=True)
+    authorization_revocation_date = models.DateField(null=True, blank=True)
     authorization_revocation_reason = models.CharField(max_length=200, null=True, blank=True)
     system_operator_type = models.CharField(max_length=20, null=True, blank=True)
     public = models.BooleanField(default=True)
