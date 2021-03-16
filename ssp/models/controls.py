@@ -9,7 +9,6 @@ from model_clone import CloneMixin
 # Objects to hold control catalog data that should be displayed in the SSP
 
 
-
 parameter_type_choices = [('label', 'Label'),
                           ('description', 'Description'),
                           ('constraint', 'Constraint'),
@@ -29,7 +28,7 @@ class nist_control_parameter(PrimitiveModel):
     def __str__(self):
         return self.param_id
 
-    #Sample JSON export using dictionary -- will be removed later
+    # Sample JSON export using dictionary -- will be removed later
     @property
     def get_dictionary_json(self):
         key_value_list = [
@@ -172,7 +171,6 @@ class control_baseline(BasicModel):
         return (serializerJSON(serializer.data, SSP=True))
 
 
-
 class control_statement(ExtendedBasicModel):
     """
     responses to the requirements defined in each control.  control_statement_id should be
@@ -216,7 +214,7 @@ class control_statement(ExtendedBasicModel):
 
 class control_parameter(BasicModel):
     class Meta:
-        ordering = ["short_name","control_parameter_id"]
+        ordering = ["short_name", "control_parameter_id"]
 
     control_parameter_id = models.CharField(max_length=25)
     value = customTextField()
@@ -243,7 +241,6 @@ class control_parameter(BasicModel):
         queryset = control_parameter.objects.filter(pk=self.pk)
         serializer = control_parameter_serializer(queryset, many=True)
         return (serializerJSON(serializer.data, SSP=True))
-
 
 
 control_implementation_status_choices = [
@@ -274,7 +271,7 @@ class system_control(CloneMixin, ExtendedBasicModel):
     nist_control = models.ForeignKey(nist_control, on_delete=models.DO_NOTHING, null=True,
                                      related_name='system_control_set')
 
-    _clone_many_to_many_fields = ['control_parameters','control_statements']
+    _clone_many_to_many_fields = ['control_parameters', 'control_statements']
 
     class Meta:
         ordering = ['nist_control']
@@ -291,14 +288,14 @@ class system_control(CloneMixin, ExtendedBasicModel):
     def system_security_plan_title(self):
         return self.system_security_plan_set.values()[0]["title"]
 
-    def clone_control(self,new_ssp):
+    def clone_control(self, new_ssp):
         new_title = new_ssp.title + ' ' + self.nist_control.control_title
         new_short_name = self.nist_control.sort_id + '-' + new_ssp.short_name
-        clone = self.make_clone(attrs={'title': new_title,'short_name': new_short_name, 'control_primary_system': new_ssp})
+        clone = self.make_clone(
+            attrs={'title': new_title, 'short_name': new_short_name, 'control_primary_system': new_ssp})
         new_ssp.controls.add(clone)
         new_ssp.controls.remove(self)
         return clone
-
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -313,13 +310,13 @@ class system_control(CloneMixin, ExtendedBasicModel):
         return (serializerJSON(serializer.data, SSP=True))
 
 
-
 frequency_choices = [('daily', 'Daily'),
-                    ('weekly', 'weekly'),
-                    ('monthly', 'Monthly'),
-                    ('quarterly', 'Quarterly'),
-                    ('annually', 'Annually'),
-                    ('as needed', 'As Needed')]
+                     ('weekly', 'weekly'),
+                     ('monthly', 'Monthly'),
+                     ('quarterly', 'Quarterly'),
+                     ('annually', 'Annually'),
+                     ('as needed', 'As Needed')]
+
 
 class continuous_monitoring_action_item(BasicModel):
     control_statements = customMany2ManyField(control_statement)
@@ -344,11 +341,10 @@ class import_catalog(PrimitiveModel):
     file_url = models.URLField(max_length=255, blank=True, null=True)
     file = models.FileField(upload_to=IMPORTED_CATALOGS_DIR, blank=True, null=True)
     control_baseline = models.ForeignKey(control_baseline, on_delete=models.DO_NOTHING, null=True, blank=True,
-                                     related_name='import_catalog_set')
+                                         related_name='import_catalog_set')
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)
-
 
 
 """
@@ -457,10 +453,10 @@ class link_serializer(serializers.ModelSerializer):
         depth = 1
 
 
-
 class continuous_monitoring_action_item_serializer(serializers.ModelSerializer):
     control_statements = control_statement_serializer(many=True, read_only=True)
 
     class Meta:
         model = continuous_monitoring_action_item
-        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'control_statements', 'automated', 'frequecny']
+        fields = ['id', 'uuid', 'title', 'short-name', 'description', 'remarks', 'control_statements', 'automated',
+                  'frequecny']

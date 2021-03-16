@@ -228,6 +228,25 @@ class system_interconnectionAdmin(admin.ModelAdmin):
         })
     )
 
+@admin.register(models.attachment)
+class attachmentAdmin(admin.ModelAdmin):
+    list_display = ['title','attachment_type','desc']
+
+    fieldsets = (
+        ('Title', {
+            'fields': ('title', 'short_name')
+        }),
+        ('File', {
+            'fields': ('attachment', 'attachment_type')
+        }),
+        ('Description', {
+            'fields': ('desc',)
+        }),
+        ('Other', {
+            'fields': ('filename','mediaType', 'hash', 'caption')
+        })
+    )
+
 # all other models
 models = apps.get_models()
 

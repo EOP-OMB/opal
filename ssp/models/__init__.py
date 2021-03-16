@@ -5,9 +5,6 @@ from ssp.models.controls import *
 from ssp.models.systems import *
 
 
-# TODO create a json function for each class
-
-
 
 
 
