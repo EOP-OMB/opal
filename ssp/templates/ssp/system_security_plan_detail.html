@@ -90,7 +90,7 @@
         {% for attachment in object.attachments.all %}
             <tr>
                 <td>{{ attachment.title }} ({{ attachment.short_name }})</td>
-                <td><a href="{{ attachment.url }}">Download</a></td>
+                <td><a href="{{ attachment.attachment.url }}">Download</a></td>
                 <td><a href="{% url 'admin:ssp_attachment_change' attachment.id %}" target="_blank">Edit</a></td>
             </tr>                
         {% endfor %}
