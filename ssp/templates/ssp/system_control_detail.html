@@ -38,25 +38,18 @@
                         {% endfor %}
                     </td>
                 </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td valign="top" colspan="2">
-            <table>
                 <tr>
                     <td valign="top"><b>Roles:</b></td>
                     <td>
                         {% for r in object.control_responsible_roles.all %}
                             {{ r.title | safe }}<br>
                         {% endfor %}
-                    <td>
                     </td>
                 </tr>
             </table>
+        </td>
     </tr>
 </table>
-
 <table style="alignment: center; border-style: solid; width: 90% ">
     <tr>
         <td colspan="2"><b>How is the control implemented?</b></td>
