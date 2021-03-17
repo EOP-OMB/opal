@@ -1,25 +1,50 @@
-/source/tmp/
-/venv/
-/static/
-.idea
+source/tmp/
+static/
 environment.py
-/opal/local_settings.py
-__init__.py
-/uploads/catalogs/
-/ssp/fixtures/opal_ssp_db.json
-/migrations/
-*.log
-db.sqlite3
-media/
+opal/local_settings.py
 opal.json
-opal/__pycache__/
-opal/local_settings.py.orig
-scripts/__pycache__/
-scripts/data_surgery_scripts/
-ssp/__pycache__/
-ssp/migrations/
-ssp/models/__pycache__/
-ssp/templatetags/
 uploads/
 ssp/fixtures/prod_data
 
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# Backup files #
+*.bak
+
+# If you are using PyCharm #
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+*.iws /out/
+
+# Python #
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environments
+.env
+.venv
+env/
+venv
+ENV/
+env.bak/
+venv.bak/
