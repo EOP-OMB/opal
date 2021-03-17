@@ -2,22 +2,23 @@
 To run a local copy for development or other reasons, add this file to your .gitignore file
 and then modify the values as needed. 
 """
+import secrets
 
 env = {
     "env" : "production",
-    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
+    "opal_secret_key" : secrets.token_urlsafe(), #set a random secret key each time the application starts
     "debug" : "False",
-    "allowed_hosts" : ["ssp.omb.gov"],
+    "allowed_hosts" : ["*"],
     "database" : "postgres",
-    #"database" : "sqlite",
-    "db_name" : "opal_prod",
-    "db_password" : "DcpwXkn3_muYG7fNyxds",
-    "db_user" : "opal_dev",
+    #"database" : "sqlite", # uncomment this line and comment out the line above to use sqlite
+    "db_name" : "opal",
+    "db_password" : "use_a_stron_password",
+    "db_user" : "opal_system",
     "db_host" : "localhost",
     "db_port" : "",
     "adfs_enabled" : False,
-    "adfs_server" : "adfs.omb.gov",
-    "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "adfs_relying_party_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "adfs_audience" : "microsoft:identityserver:3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
+    "adfs_server" : "adfs.example.com",
+    "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
+    "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
+    "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
 }
