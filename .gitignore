@@ -21,4 +21,5 @@ ssp/migrations/
 ssp/models/__pycache__/
 ssp/templatetags/
 uploads/
+ssp/fixtures/prod_data
 
