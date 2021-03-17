@@ -65,13 +65,14 @@
         <tr>
             <td valign="top" width="60"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
                                            target="_blank">{{ s.control_statement_id | safe }}</a></td>
-            <td>{{ s.control_statement_text | safe }}</td>
+            <td>{{ s.control_statement_text | safe }}
+                <p>
+                {% for l in s.links.all %}
+                        <li><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></li>
+                {% endfor %}
+                </p>
+            </td>
         </tr>
-        {% for l in s.links.all %}
-            <tr>
-                <td colspan="2"><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
-            </tr>
-        {% endfor %}
     {% endfor %}
 </table>
 <p></p>
