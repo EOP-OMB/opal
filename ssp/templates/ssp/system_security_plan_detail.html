@@ -85,6 +85,17 @@
         </tr>
     </table>
     <br>
+    <h3><a id="information_types">Attachments</a></h3>
+        <table>
+        {% for attachment in object.attachments.all %}
+            <tr>
+                <td>{{ attachment.title }} ({{ attachment.short_name }})</td>
+                <td><a href="{{ attachment.url }}">Download</a></td>
+                <td><a href="{% url 'admin:ssp_attachment_change' attachment.id %}" target="_blank">Edit</a></td>
+            </tr>                
+        {% endfor %}
+        </table>
+    <br>
     <h3><a id="fisma_security_objectives">FISMA Security Objectives</a></h3>
         <table>
             <tr style="padding: 10px">
