@@ -69,7 +69,7 @@
         </tr>
         {% for l in s.links.all %}
             <tr>
-                <td><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
+                <td colspan="2"><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
             </tr>
         {% endfor %}
     {% endfor %}
