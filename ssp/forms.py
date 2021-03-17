@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from ssp.models.systems import system_security_plan, import_catalog
+from ssp.models.users import person
 from scripts.usefullFunctions import validate_file_extension
 
 
@@ -49,7 +50,7 @@ class ImportCatalogForm(ModelForm):
 
 
 class SystemUserNewForm(forms.Form):
-    user = forms.CharField(label='User', max_length=255, required=True)
+    user = forms.ModelChoiceField(queryset=person.objects.all(),label='User', required=True)
 
     def __init__(self, *args, **kwargs):
         super(SystemUserNewForm, self).__init__(*args, **kwargs)  # Call to ModelForm constructor
@@ -59,8 +60,5 @@ class SystemUserNewForm(forms.Form):
         super(SystemUserNewForm, self).clean()
 
         user = self.cleaned_data.get('user')
-
-        if len(user) == 0:
-            self.add_error('user', "User required")  # field error
 
         return self.cleaned_data

@@ -216,8 +216,9 @@ def system_user_new(request, sspid, roleid):
     if request.method == "POST":
         form = SystemUserNewForm(request.POST)
         if form.is_valid():
-            person_id = form.cleaned_data['user']
-            person_obj = person.objects.get(id=int(person_id))
+            # person_id = form.cleaned_data['user']
+            # person_obj = person.objects.get(id=person_id.id)
+            person_obj = form.cleaned_data['user']
             ssp_obj = system_security_plan.objects.get(id=sspid)
             role_obj = user_role.objects.get(id=roleid)
             user_obj, created = system_user.objects.get_or_create(user=person_obj)

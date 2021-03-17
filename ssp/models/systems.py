@@ -248,66 +248,37 @@ class system_security_plan(ExtendedBasicModel):
             selected_controls.add(item)
         return selected_controls.order_by('sort_id')
 
-    @property
-    def get_system_owner(self):
-        #It is posible for a ssp to have multiple system owners (added in admin page).
-        system_owners = self.system_users.filter(roles__short_name="SO")
-        if not system_owners:
-            role = user_role.objects.get(short_name='SO')
+    def _get_system_user_with_role(self,role_short_name):
+        users = self.system_users.filter(roles__short_name=role_short_name)
+        if not users:
+            role = user_role.objects.get(short_name=role_short_name)
             url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
-            return "No System Owner is defined.  Click <a href=%s>here</a> to add one." % url
+            error_msg = ' '.join(['<b>No',role.title,'is defined. Click <a href=',url,'>here</a> to add one.</b>'])
+            return error_msg
         else:
             names = ""
-            for so in system_owners:
+            for u in users:
                 if names != "":
                     names += " - "
-                names += so.user.name
+                names += u.user.name
             return names
+
+    @property
+    def get_system_owner(self):
+        return self._get_system_user_with_role("SO")
 
     @property
     def get_authorizing_official(self):
-        authorizing_officials = self.system_users.filter(roles__short_name="AO")
-        if not authorizing_officials:
-            role = user_role.objects.get(short_name='AO')
-            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
-            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
-        else:
-            names = ""
-            for ao in authorizing_officials:
-                if names != "":
-                    names += " - "
-                names += ao.user.name
-            return names
+        return self._get_system_user_with_role("AO")
 
     @property
     def get_information_system_security_officer(self):
-        issos = self.system_users.filter(roles__short_name="ISSO")
-        if not issos:
-            role = user_role.objects.get(short_name='ISSO')
-            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
-            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
-        else:
-            names = ""
-            for isso in issos:
-                if names != "":
-                    names += " - "
-                names += isso.user.name
-            return names
+        return self._get_system_user_with_role("ISSO")
+
 
     @property
     def get_information_system_security_manager(self):
-        issms = self.system_users.filter(roles__short_name="ISSM")
-        if not issms:
-            role = user_role.objects.get(short_name='ISSM')
-            url = '/system-user-new/' + str(self.pk) + '/' + str(role.pk)
-            return "No Authorizing Official defined.  Click <a href=%s>here</a> to add one." % url
-        else:
-            names = ""
-            for issm in issms:
-                if names != "":
-                    names += " - "
-                names += issm.user.name
-            return names
+        return self._get_system_user_with_role("ISSM")
 
     @property
     def is_tic(self):
