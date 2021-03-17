@@ -1,0 +1,287 @@
+[
+{
+  "model": "ssp.user_role",
+  "pk": 1,
+  "fields": {
+    "uuid": "7046756f-d7a3-4db3-b280-716c2654c59b",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "System Administrator",
+    "short_name": "SysAdmin",
+    "desc": "<p>Information System Administrator has root/admin access to all componenets in the information system. &nbsp;</p>\r\n<p>This is the highest level of user access and should be granted to only a few highly trusted users</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 2,
+  "fields": {
+    "uuid": "6b135495-6cfd-4830-bc66-03ed676f1de1",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Account Manager",
+    "short_name": "AcctMngr",
+    "desc": "<p>An Account Manager is responsable for the creation of user accounts within the information system. &nbsp;They may create the accounts manually or oversee a process that allows automatice account creation. Account Managers are also responsable for ensuring that accounts are disabled and/or deleted as required by information system policies.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 3,
+  "fields": {
+    "uuid": "fa288157-b495-42fb-b436-303304d35b06",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Server Administrator",
+    "short_name": "ServerAdmin",
+    "desc": "<p>Server Administrators have administrative control (root/admin or equivilent) of one or more servers. This includes the ability to make changes to both the content and configuration of the server. Some configuration settings may be enforced by policies controlled at the information system level (i.e. group policies in Windows).</p>\r\n<p>Users should be granted this role only to those servers needed to perform job functions. All activities of these accounts should be logged.&nbsp;</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 4,
+  "fields": {
+    "uuid": "3b808c09-1270-46a2-aae9-0ed1bf6c9dd7",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Network Administrator",
+    "short_name": "NetworkAdmin",
+    "desc": "<p>Network Administrators are responsable for all network devices within the information system. &nbsp;This includes devices used primarily for connectivity such as network switches and hubs as well as devices which control data flow such as firewalls, vpn endpoints, etc. Network Administrators are also responsable for coordinating with third party service providers that deliver connectivty or other network services to the information system.</p>\r\n<p>Access to these kinds of accounts should be strictly controlled and all activity should be logged. Accounts of this type are considered privileged accounts. Access to these accounts requires the approval of the Network Lead and the ISSO.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 5,
+  "fields": {
+    "uuid": "b05be195-a575-4865-b0b9-d6f1f29b2948",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Database Administrator",
+    "short_name": "DBA",
+    "desc": "<p>Database Administrator have administrative control of one or more databases. Administartive control means the user has the ability to make changes to both the content and configuration of the database. This includes configuration of the database instance itself such as managing resources and defining database defaults and behaviors as well as creation, modification and deletion of database objects and data.</p>\r\n<p>Some database configuration settings may be configured and enforced by policies controlled at the information system or server level (i.e. group policies in Windows or password complexity policies). Database Administrators &nbsp;should be granted access only to those databases needed to perform job functions. All activities of these accounts should be logged. Accounts of this type are considered privileged accounts. Access to these accounts requires the approval of the System Owner and the Database Team Lead.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 6,
+  "fields": {
+    "uuid": "bda61c65-77e9-4753-9fd0-46f533e5293e",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Backup Administrator",
+    "short_name": "BackupAdmin",
+    "desc": "<p>The Backup Administrator is responsable for configuring, monitoring, and executing information system backups. &nbsp;Since backups are by nature a copy of information system data which must then be protected, this role creates unique security concerns and should be assigned to a subset of information system users in other administrator roles.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 7,
+  "fields": {
+    "uuid": "f9598059-e0c6-4f9f-88ed-5e983ba09eff",
+    "created_at": "2021-01-07T15:45:35.578Z",
+    "updated_at": "2021-01-07T15:45:35.647Z",
+    "title": "Limited Administrator",
+    "short_name": "LmtdAdmin",
+    "desc": "<p>Limited Administrators can modify some settings and files on a limited set of servers under controlled circumstances. &nbsp;For example, a user who has permisions to create and destroy database objects in a certain database schema but does not have the full privligaes of a DBA would be considered a Limited Administrator. &nbsp;Accounts of this type are not usually considered privileged accounts, but may be designated as privileged accounts depending on the specific permisions.&nbsp;</p>\r\n<p>Access to these accounts is determined by the System Owner.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 8,
+  "fields": {
+    "uuid": "9ce9c21e-9ae2-4bfb-b21d-a08180885759",
+    "created_at": "2021-01-13T18:45:55.014Z",
+    "updated_at": "2021-01-13T18:45:55.014Z",
+    "title": "Risk Executive",
+    "short_name": "RE",
+    "desc": "<ul>\r\n<li>Define the organization&rsquo;s risk management strategy with respect to the selection of security controls</li>\r\n<li>Promote the use of common controls to more effectively use organizational resources</li>\r\n<li>Promote collaboration and cooperation among organizational entities&nbsp;</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 9,
+  "fields": {
+    "uuid": "d6ed00ad-18b1-4801-96eb-9a002fe36420",
+    "created_at": "2021-01-13T18:46:53.520Z",
+    "updated_at": "2021-01-13T18:46:53.520Z",
+    "title": "Chief Information Officer",
+    "short_name": "CIO",
+    "desc": "<ul>\r\n<li>Establish expectations for the security control selection and ongoing monitoring processes to provide a more consistent identification of security controls throughout the organization</li>\r\n<li>Provide resources as needed to support information system owners when selecting security controls</li>\r\n<li>Ensure the organization&rsquo;s risk management strategy is integrated into the enterprise architecture</li>\r\n<li>Participate in the selection and approval of organizational level common security controls</li>\r\n<li>Maintain organizational relationships and connections&nbsp;</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 10,
+  "fields": {
+    "uuid": "3246e29b-27fa-48c3-b9ab-03274bdb0d26",
+    "created_at": "2021-01-13T18:49:02.185Z",
+    "updated_at": "2021-01-13T18:49:12.374Z",
+    "title": "Chief Information Security Officer",
+    "short_name": "CISO",
+    "desc": "<ul>\r\n<li>Develop organization-wide security control selection guidance consistent with the organization&rsquo;s risk management strategy</li>\r\n<li>Assign responsibility for common controls to individuals or organizations</li>\r\n<li>Establish and maintain a catalog of the organization&rsquo;s common security controls</li>\r\n<li>Review the common security controls periodically and, when necessary, update the common security control selections</li>\r\n<li>Define and disseminate organization-defined parameter values for relevant security controls</li>\r\n<li>Acquire/develop and maintain tools, templates, or checklists to support the security control selection process and the development of system security plans</li>\r\n<li>Develop an organization-wide continuous monitoring strategy</li>\r\n<li>Provide training on selecting security controls and documenting them in the security plan</li>\r\n<li>Lead the organization&rsquo;s process for selecting security controls consistent with the organizational guidance</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      7
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 11,
+  "fields": {
+    "uuid": "1cd7160a-9f5e-41ec-88d6-9d71cdb10ca6",
+    "created_at": "2021-01-13T18:49:58.113Z",
+    "updated_at": "2021-01-13T18:49:58.113Z",
+    "title": "Authorizing Official",
+    "short_name": "AO",
+    "desc": "<ul>\r\n<li>Review the security plan to determine if the plan is complete, consistent, and satisfies the stated security<br />requirements for the information system</li>\r\n<li>Determine if the security plan correctly identifies the potential risk to organizational operations, assets,<br />individuals, other organizations, and the Nation and recommend changes to the plan if it is insufficient</li>\r\n<li>Approve the selected set of security controls, including all tailoring and supplementation decisions, any use<br />restrictions, and the minimum assurance requirements</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 12,
+  "fields": {
+    "uuid": "292dbf2e-5d29-40c1-a632-f44ecaed087c",
+    "created_at": "2021-01-13T18:50:57.284Z",
+    "updated_at": "2021-01-13T18:50:57.284Z",
+    "title": "Information System Security Officer",
+    "short_name": "ISSO",
+    "desc": "<ul>\r\n<li>Support the information system owner in selecting security controls for the information system</li>\r\n<li>Participate in the selection of the organization&rsquo;s common security controls and in determining their<br />suitability for use in the information system</li>\r\n<li>Review the security controls regarding their adequacy in protecting the information and information system</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 13,
+  "fields": {
+    "uuid": "8c90beac-c7f3-4b95-8e06-1efdd92ff70d",
+    "created_at": "2021-01-13T18:51:58.892Z",
+    "updated_at": "2021-01-13T18:53:03.293Z",
+    "title": "Information System Security Engineer",
+    "short_name": "ISSE",
+    "desc": "<ul>\r\n<li>Provide advice in describing the system and its functions, information types, operating environments, and<br />security requirements</li>\r\n<li>Review the adequacy of the security controls and their ability to protect the information system and its<br />information</li>\r\n<li>Assist in tailoring the security controls</li>\r\n<li>Assist in determining the assurance measures that can be used to meet the minimum assurance requirements</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 14,
+  "fields": {
+    "uuid": "020a6106-6a17-495d-9c07-53b0ada9c827",
+    "created_at": "2021-01-13T18:52:47.038Z",
+    "updated_at": "2021-01-13T18:52:47.038Z",
+    "title": "User",
+    "short_name": "User",
+    "desc": "<p>Any user of the information system</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 15,
+  "fields": {
+    "uuid": "e7bcec23-6d17-4314-97c2-af4602103284",
+    "created_at": "2021-01-13T18:53:54.559Z",
+    "updated_at": "2021-01-13T18:53:54.559Z",
+    "title": "System Owner",
+    "short_name": "SO",
+    "desc": "<ul>\r\n<li>Select, tailor, and supplement the security controls following organizational guidance, documenting the<br />decisions in the security plan with appropriate rationale for the decisions</li>\r\n<li>Determine the suitability of common controls for use in the information system</li>\r\n<li>Determine the need for use restrictions in the information system</li>\r\n<li>Determine the assurance measures that meet the NIST SP 800-53 minimum assurance requirements selected<br />for the system</li>\r\n<li>Document the tailored and supplemented set of security controls in the security plan in sufficient detail to<br />enable a compliant implementation of the control</li>\r\n<li>Define the continuous monitoring strategy for the information system</li>\r\n<li>Obtain approval for the tailored and supplemented security controls, common controls, compensating<br />controls, use restrictions, and assurance requirements prior to their implementation</li>\r\n<li>Review the security controls periodically and, when necessary, update the security control selections</li>\r\n<li>Maintain and update the system security plan&nbsp;</li>\r\n</ul>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": []
+  }
+},
+{
+  "model": "ssp.user_role",
+  "pk": 16,
+  "fields": {
+    "uuid": "23de332c-d890-4718-8abd-214734e7ee91",
+    "created_at": "2021-02-04T14:24:00.764Z",
+    "updated_at": "2021-02-04T14:24:00.764Z",
+    "title": "Domain Admin",
+    "short_name": "DA",
+    "desc": "<p>Specifically for Windows Domains, this role has control over domain settings including allowing systems to join or be removed from the domain, deploying and pushing settings using GPO policies and administration of any system in the domain.</p>",
+    "remarks": "",
+    "properties": [],
+    "annotations": [],
+    "links": [],
+    "user_privileges": [
+      3,
+      4,
+      8,
+      10
+    ]
+  }
+}
+]
