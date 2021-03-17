@@ -3,9 +3,7 @@ Provides a simple web application for managing System Security Plans.  The data 
 # Deployment Instructions
 ## Clone and configure the app
 1. Clone the repository to your local directory\
-   `cd /opt/`\
-   `sudo mkdir opal`\
-   `sudo chown -R user:user /opt/opal/`
+   `git clone https://gitlab.max.gov/max-security/opal.git`
 1. Install some required packages\
    `sudo apt-get install python3-venv apache2-dev libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev python3-pip`
 1. It is recomended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
@@ -13,9 +11,9 @@ Provides a simple web application for managing System Security Plans.  The data 
    `source venv/bin/activate`
 1. Install the required python modules by running:\
    `pip install -r requirements.txt`
-1. create a file environment.py in you project root and enter the text "development" to run in development mode.\
-   `echo "development" > environment.py`
-1. Create a sqlite db file (or update the settings.py file with your database connection information)\
+1. create a local settings file\
+   `cp opal/local_settings.py.template opal/local_settings.py`
+1. Create a sqlite db file (or update the local_settings.py file with your database connection information)\
    `touch db.sqlite3`
 1. Run the initial migration to create the database objects:\
    `python manage.py makemigrations`\
@@ -35,20 +33,3 @@ Note: A default superuser account is created in the docker container. You should
 
 Username: admin\
 Password: admin
-              
-## Load initial data
-###The easy way:
-`python manage.py loaddata opal_ssp_db.json`
-
-###Use the import scripts to load data from public sources
-Note: These import scripts are pretty buggy right now.  Best of luck.\
-1. Create a folder at the root of your application called "source"\
-   `mkdir source`
-1. Download the NIST SP 800-53 rev. 5 JSON catalog\
-   `wget https://github.com/usnistgov/oscal-content/raw/master/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5-FINAL_catalog.json -O source/NIST_SP-800-53_rev4_catalog.json`
-1. Run the import script for the NIST Controls\
-   `python manage.py runscript OSCAL_Catalog_import`
-   
-   `Update: This script is modified now to run in OPAL website. Click on Import > NIST Catalog and upload the file or enter its URL to import it.`
-1. Assuming you have a Word document in the FedRAMP template with your controls in it, You can import those using the importSecurityControlsFromWord script\
-   `python manage.py runscript importSecurityControlsFromWord(path\to\file.docx)`
