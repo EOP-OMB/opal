@@ -13,6 +13,16 @@ th {
     text-align: center;
 }
 
+.td-row-header {
+    width: 1px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.td-content {
+    width: available;
+}
+
 .floating {
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
