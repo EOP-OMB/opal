@@ -25,8 +25,8 @@
         <td colspan="2">
             <table style="width: 100%">
                 <tr>
-                    <td valign="top"><b>Parameters:</b></td>
-                    <td>
+                    <td class="td-row-header">Parameters:</td>
+                    <td class="td-content">
                         {% for p in object.control_parameters.all %}
                             <div style="white-space: nowrap">
                                 <a href="{% url 'admin:ssp_control_parameter_change' p.id %}" target="_blank">
@@ -38,40 +38,35 @@
                         {% endfor %}
                     </td>
                 </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td valign="top" colspan="2">
-            <table>
                 <tr>
-                    <td valign="top"><b>Roles:</b></td>
-                    <td>
+                    <td class="td-row-header">Roles:</td>
+                    <td class="td-content">
                         {% for r in object.control_responsible_roles.all %}
                             {{ r.title | safe }}<br>
                         {% endfor %}
-                    <td>
                     </td>
                 </tr>
             </table>
+        </td>
     </tr>
 </table>
-
 <table style="alignment: center; border-style: solid; width: 90% ">
     <tr>
         <td colspan="2"><b>How is the control implemented?</b></td>
     </tr>
     {% for s in object.sorted_statement_set.all %}
         <tr>
-            <td valign="top" width="60"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
+            <td class="td-row-header"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
                                            target="_blank">{{ s.control_statement_id | safe }}</a></td>
-            <td>{{ s.control_statement_text | safe }}</td>
+            <td class="td-content">
+                {{ s.control_statement_text | safe }}
+                <p>
+                {% for l in s.links.all %}
+                        <li><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></li>
+                {% endfor %}
+                </p>
+            </td>
         </tr>
-        {% for l in s.links.all %}
-            <tr>
-                <td colspan="2"><a href="{{ l.href }}" target="_blank">{{ l.text }}</a></td>
-            </tr>
-        {% endfor %}
     {% endfor %}
 </table>
 <p></p>

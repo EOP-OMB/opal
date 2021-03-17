@@ -47,7 +47,7 @@
 {% endblock %}
 {% block content %}
     {% load admin_urls %}
-    <h1>{{ object.title }} </h1>
+    <h1>{{ object.title }}</h1>
     <hr>
     <h2><a href="{% url 'admin:ssp_system_security_plan_change' object.id %}" target="_blank">{{ object.title }} ({{ object.short_name}})</a></h2>
         <h3><a id="system_description">System Description</a></h3>
@@ -98,10 +98,17 @@
     <br>
     <h3><a id="fisma_security_objectives">FISMA Security Objectives</a></h3>
         <table>
-            <tr style="padding: 10px">
-                <td style="padding: 10px"><b>Security Objective Confidentiality: </b>: {{ object.security_objective_confidentiality }}</td>
-                <td style="padding: 10px"><b>Security Objective Integrity: </b>: {{ object.security_objective_integrity }}</td>
-                <td style="padding: 10px"><b>Security Objective Availability: </b>: {{ object.security_objective_availability }}</td>
+            <tr>
+                <td style="padding: 10px" class="td-row-header">Confidentiality:</td>
+                <td>{{ object.security_objective_confidentiality }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px" class="td-row-header">Integrity:</td>
+                <td>{{ object.security_objective_integrity }}</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px" class="td-row-header">Availability:</td>
+                <td>{{ object.security_objective_availability }}</td>
             </tr>
         </table>
     <br>
