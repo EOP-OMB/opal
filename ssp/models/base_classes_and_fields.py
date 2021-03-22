@@ -1,13 +1,10 @@
-from django.db import models
-from rest_framework_tricks.models.fields import NestedProxyField
-from tinymce.models import HTMLField
-from django.utils import timezone
 import uuid
-from django.template.defaultfilters import truncatechars
 
+from django.db import models
+from rest_framework_json_api import serializers
+from tinymce.models import HTMLField
 
 from scripts.usefullFunctions import serializerJSON
-from rest_framework_json_api import serializers
 
 contactInfoType = [('work', 'Work'),
                    ('personal', 'Personal'),

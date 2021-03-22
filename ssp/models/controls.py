@@ -1,8 +1,10 @@
-from ssp.models.users import *
-from opal.settings import IMPORTED_CATALOGS_DIR
 import json
+
 from django.utils.html import mark_safe
 from model_clone import CloneMixin
+
+from opal.settings import IMPORTED_CATALOGS_DIR
+from ssp.models.users import *
 
 # objects related to security controls
 
