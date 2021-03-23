@@ -1,18 +1,37 @@
 # Create your tests here.
 from django.test import TestCase
 from model_mommy import mommy
-
+import json
 from ssp.models.systems import *
 from ssp.models.users import *
 
 
+def test_creation(o):
+    t = mommy.make(o)
+
+def test_export(o):
+    t = mommy.make(o)
+    j = json.loads(t.get_serializer_json_OSCAL)[0]
+    d = t.__dict__
+    errors = list()
+    for key in j:
+        if (key in d and str(d[key]) == str(j[key])):
+            pass
+        else:
+            errors.append(key)
+    return errors
+
+
 # models test
 class element_propertyTest(TestCase):
-
     def test_element_property_creation(self):
         t = mommy.make(element_property)
         self.assertTrue(isinstance(t, element_property))
         self.assertEqual(t.__str__(), t.name + ': ' + t.value)
+
+    def test_element_property_export(self):
+        errors = test_export(element_property)
+        self.assertEqual(len(errors), 0)
 
 
 class hashed_valueTest(TestCase):
