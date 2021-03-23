@@ -1,3 +1,5 @@
+from rest_framework_tricks.models.fields import NestedProxyField
+
 from ssp.models.controls import *
 
 # System Properties
@@ -133,7 +135,7 @@ class inventory_item_type(ExtendedBasicModel):
     """
     use = customTextField()
     responsibleRoles = customMany2ManyField(user_role)
-    baseline_configuration = models.ForeignKey(link, on_delete=models.PROTECT, blank=True,
+    baseline_configuration = models.ForeignKey(link, on_delete=models.PROTECT, blank=True, null=True,
                                                related_name='baseline_configuration')
 
     @staticmethod

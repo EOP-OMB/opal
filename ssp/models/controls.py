@@ -141,7 +141,7 @@ class nist_control(PrimitiveModel):
         return mark_safe(html)
 
     def __str__(self):
-        return '(' + self.catalog + ')' + self.long_title
+        return '(' + str(self.catalog) + ')' + self.long_title
 
     @staticmethod
     def get_serializer_json(id=1):
@@ -347,6 +347,9 @@ class import_catalog(PrimitiveModel):
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 """

@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_tricks',
     'ssp.apps.ssp',
+    'coverage',
 ]
 
 
