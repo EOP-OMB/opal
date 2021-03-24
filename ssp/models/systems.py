@@ -138,12 +138,6 @@ class inventory_item_type(ExtendedBasicModel):
     baseline_configuration = models.ForeignKey(link, on_delete=models.PROTECT, blank=True, null=True,
                                                related_name='baseline_configuration')
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = inventory_item_type.objects.filter(pk=id)
-        serializer = inventory_item_type_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = inventory_item_type.objects.filter(pk=self.pk)
@@ -159,12 +153,6 @@ class system_inventory_item(ExtendedBasicModel):
     inventory_item_type = models.ForeignKey(inventory_item_type, on_delete=models.PROTECT, related_name='system_inventory_item_set')
     item_special_configuration_settings = customTextField()
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_inventory_item.objects.filter(pk=id)
-        serializer = system_inventory_item_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = system_inventory_item.objects.filter(pk=self.pk)
@@ -176,12 +164,6 @@ class system_inventory_item(ExtendedBasicModel):
 class system_user(BasicModel):
     user = models.ForeignKey(person, on_delete=models.PROTECT, related_name='system_user_set')
     roles = customMany2ManyField(user_role)
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_user.objects.filter(pk=id)
-        serializer = system_user_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -298,12 +280,6 @@ class system_security_plan(ExtendedBasicModel):
     def controlFamilies(self):
         families = self.controls.filter(nist_control__sort_id__endswith='-01').order_by('nist_control__sort_id').all()
         return families
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_security_plan.objects.filter(pk=id)
-        serializer = system_security_plan_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):

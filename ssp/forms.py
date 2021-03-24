@@ -32,9 +32,8 @@ class ImportCatalogForm(ModelForm):
         file_url = self.cleaned_data.get('file_url')
         file = self.cleaned_data.get('file')
 
-        if len(title) == 0:
+        if len(str(title).strip()) == 0:
             self.add_error('title', "Title required")  # field error
-            # self._errors['title'] = self.error_class(['Title required']) #another way of adding field error
         if file:
             if not validate_file_extension(file.name, '.json'):
                 self.add_error('file', 'URL for a Catalog file with JSON format required')

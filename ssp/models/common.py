@@ -31,11 +31,11 @@ class information_type(BasicModel):
     integrityImpact = models.CharField(max_length=50, choices=fisma_levels)
     availabilityImpact = models.CharField(max_length=50, choices=fisma_levels)
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = information_type.objects.filter(pk=id)
-        serializer = information_type_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
+    # @staticmethod
+    # def get_serializer_json(id=1):
+    #     queryset = information_type.objects.filter(pk=id)
+    #     serializer = information_type_serializer(queryset, many=True)
+    #     return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -54,11 +54,11 @@ class attachment(ExtendedBasicModel):
     caption = models.CharField(max_length=200, blank=True)
     depth = 1
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = attachment.objects.filter(pk=id)
-        serializer = attachment_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
+    # @staticmethod
+    # def get_serializer_json(id=1):
+    #     queryset = attachment.objects.filter(pk=id)
+    #     serializer = attachment_serializer(queryset, many=True)
+    #     return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):

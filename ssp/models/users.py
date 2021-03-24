@@ -6,12 +6,6 @@ class user_function(BasicModel):
     list of functions assigned to roles. e.g. backup servers, deploy software, etc.
     """
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = user_function.objects.filter(pk=id)
-        serializer = user_function_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = user_function.objects.filter(pk=self.pk)
@@ -23,12 +17,6 @@ class user_function(BasicModel):
 class user_privilege(BasicModel):
     functionsPerformed = customMany2ManyField(user_function)
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = user_privilege.objects.filter(pk=id)
-        serializer = user_privilege_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = user_privilege.objects.filter(pk=self.pk)
@@ -39,12 +27,6 @@ class user_privilege(BasicModel):
 
 class user_role(ExtendedBasicModel):
     user_privileges = customMany2ManyField(user_privilege)
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = user_role.objects.filter(pk=id)
-        serializer = user_role_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -63,12 +45,6 @@ class address(BasicModel):
     postal_code = models.CharField(max_length=25)
     country = models.CharField(max_length=100)
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = address.objects.filter(pk=id)
-        serializer = address_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = address.objects.filter(pk=self.pk)
@@ -85,12 +61,6 @@ class email(PrimitiveModel):
     def __str__(self):
         return self.type + ': ' + self.email
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = email.objects.filter(pk=id)
-        serializer = email_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = email.objects.filter(pk=self.pk)
@@ -106,12 +76,6 @@ class telephone_number(PrimitiveModel):
     def __str__(self):
         return self.type + ': ' + self.number
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = telephone_number.objects.filter(pk=id)
-        serializer = telephone_number_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = telephone_number.objects.filter(pk=self.pk)
@@ -125,11 +89,6 @@ class location(ExtendedBasicModel):
     emailAddresses = customMany2ManyField(email)
     telephoneNumbers = customMany2ManyField(telephone_number)
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = location.objects.filter(pk=id)
-        serializer = location_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -146,11 +105,6 @@ class organization(ExtendedBasicModel):
     email_addresses = customMany2ManyField(email)
     telephone_numbers = customMany2ManyField(telephone_number)
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = organization.objects.filter(pk=id)
-        serializer = organization_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -177,11 +131,6 @@ class person(ExtendedBasicModel):
     def __str__(self):
         return self.name
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = person.objects.filter(pk=id)
-        serializer = person_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
