@@ -1,7 +1,11 @@
 # OSCAL Policy Administation Library (opal)
+
 Provides a simple web application for managing System Security Plans.  The data modle is based on the OSCAL standard. 
-# Deployment Instructions
-## Clone and configure the app
+
+## Deployment Instructions
+
+### Clone and configure the app
+
 1. Clone the repository to your local directory\
    `git clone https://gitlab.max.gov/max-security/opal.git`
 1. Install some required packages\
@@ -27,7 +31,7 @@ Provides a simple web application for managing System Security Plans.  The data 
 1. Build the image\
     `docker build -t opal:opal .`
 1. Run the container\
-    `docker run -p 8000:8000`
+    `docker run --rm -it --name opal -p 8000:8000 opal:opal`
     
 Note: A default superuser account is created in the docker container. You should immedietly change the password and create additional secure superuser accounts.
 
