@@ -1,11 +1,7 @@
 # OSCAL Policy Administation Library (opal)
-
-Provides a simple web application for managing System Security Plans.  The data modle is based on the OSCAL standard. 
-
-## Deployment Instructions
-
-### Clone and configure the app
-
+Provides a simple web application for managing System Security Plans.  The data model is based on the OSCAL standard. 
+# Deployment Instructions
+## Clone and configure the app
 1. Clone the repository to your local directory\
    `git clone https://gitlab.max.gov/max-security/opal.git`
 1. Install some required packages\
