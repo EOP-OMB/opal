@@ -33,3 +33,18 @@ Note: A default superuser account is created in the docker container. You should
 
 Username: admin\
 Password: admin
+
+## Using PostgreSQL
+
+Set your .env based on the env.sample and set DATABASE to postgres.
+
+While the Dockerfile will prepare a SQLite database, it will not initialize a PostgreSQL database.  We do that here.
+
+`docker-compose build`
+`docker-compose up -d`
+
+```shell
+docker-compose web run python manage.py migrate
+docker-compose web run python manage.py loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json
+docker-compose web run python manage.py collectstatic --noinput
+```

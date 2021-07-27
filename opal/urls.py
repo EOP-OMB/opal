@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from opal.local_settings import env
+from opal.settings import env
 
 urlpatterns = [
     path('', include('ssp.urls'), name='index'),

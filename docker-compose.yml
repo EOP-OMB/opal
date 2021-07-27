@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=opal
+      - DB_USER=opal
+      - DB_PASSWORD=${DB_PASSWORD}
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:

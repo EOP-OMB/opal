@@ -42,7 +42,7 @@ USE_TZ = True
 
 env = {
     "opal_secret_key" : os.environ.get("SECRET_KEY", secrets.token_urlsafe()),
-    "debug" : os.environ.get("DEBUG", False),
+    "debug" : os.environ.get("DEBUG", "False") == "True",
     "allowed_hosts" : ["*"],
     "database" : os.environ.get("DATABASE", "sqlite"),
     "db_password" : os.environ.get("DB_PASSWORD", ""),
