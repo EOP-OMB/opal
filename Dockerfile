@@ -22,9 +22,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 # copy all the files to the container
 COPY . /usr/src/app/
 
-RUN mv opal/local_settings.py.docker opal/local_settings.py \
-  && touch db.sqlite3 \
-  && python3 manage.py makemigrations \
+RUN python3 manage.py makemigrations \
   && python3 manage.py migrate \
   && python3 manage.py loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json \
   && python3 manage.py collectstatic --noinput \
