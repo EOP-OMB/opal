@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import secrets
 import os
 
 #Path variables for application
@@ -39,18 +40,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-#Set reasonable defaults for environment values
-env_defaults = {
-    "env" : "development",
-    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
-    "debug" : "True",
+env = {
+    "opal_secret_key" : os.environ.get("SECRET_KEY", secrets.token_urlsafe()),
+    "debug" : os.environ.get("DEBUG", False),
     "allowed_hosts" : ["*"],
-    "database" : "sqlite",
-    "db_password" : "",
-    "db_name" : "",
-    "db_user" : "",
-    "db_host" : "localhost",
-    "db_port" : "",
+    "database" : os.environ.get("DATABASE", "sqlite"),
+    "db_password" : os.environ.get("DB_PASSWORD", ""),
+    "db_name" : os.environ.get("DB_NAME", ""),
+    "db_user" : os.environ.get("DB_USER", ""),
+    "db_host" : os.environ.get("DB_HOST", "localhost"),
+    "db_port" : os.environ.get("DB_PORT", ""),
     "adfs_enabled" : False,
     "adfs_server" : "adfs.server.url",
     "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
@@ -58,21 +57,6 @@ env_defaults = {
     "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
     "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
 }
-
-if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
-    from opal.local_settings import env
-else:
-    env = {}
-
-for k in env_defaults:
-    if k not in env:
-        env[k] = env_defaults[k]
-        #print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
-    # else:
-        # print("Value found for variable ",k," (",str(env[k]),")")
-
-if env["env"] == "development":
-    print("Running in Development mode!")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env["opal_secret_key"]
