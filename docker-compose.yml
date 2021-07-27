@@ -9,8 +9,8 @@ services:
       - DATABASE=postgres
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_NAME=opal
-      - DB_USER=opal
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
   db:
     image: postgres:12
