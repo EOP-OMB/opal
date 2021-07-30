@@ -44,7 +44,7 @@ While the Dockerfile will prepare a SQLite database, it will not initialize a Po
 `docker-compose up -d`
 
 ```shell
-docker-compose web run python manage.py migrate
-docker-compose web run python manage.py loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json
-docker-compose web run python manage.py collectstatic --noinput
+docker-compose run web migrate
+docker-compose run web loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json
+docker-compose run web python manage.py collectstatic --noinput
 ```
