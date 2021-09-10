@@ -30,6 +30,6 @@ python-docx==0.8.10
 pytz==2021.1
 requests==2.25.1
 six==1.15.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 urllib3==1.26.4
 uuid==1.30
