@@ -106,6 +106,12 @@ class system_control_detail_view(generic.DetailView):
     model = system_control
 
 
+class link_list_view(generic.ListView):
+    model = link
+
+class attachment_list_view(generic.ListView):
+    model = attachment
+
 class system_security_plan_list_view(generic.ListView):
     model = system_security_plan
     queryset = system_security_plan.objects.order_by('title')
@@ -256,3 +262,4 @@ def clone_control(control, ssp):
     new_ssp = system_security_plan.objects.get(pk=ssp)
     clone = c.clone_control(new_ssp)
     return redirect(reverse('admin:ssp_system_control_change',args=clone.pk))
+

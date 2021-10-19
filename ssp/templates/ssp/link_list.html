@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Links</h1>
+{% if link_list %}
+    <table>
+    <tr>
+        <th>Description</th>
+        <th>Link</th>
+        <th>Requires Authentication</th>
+    </tr>
+    {% for link in link_list %}
+        <tr><td>{{ link.text }}</td><td><a href="{{ link.href}}" target="_blank">{{ link.href}}</a></td><td>{{ link.requires_authentication }}</td></tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No Links are available.</p>
+{% endif %}
+{% endblock %}
