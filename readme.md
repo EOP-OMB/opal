@@ -1,4 +1,4 @@
-# OSCAL Policy Administation Library (opal)
+# OSCAL Policy Administration Library (opal)
 Provides a simple web application for managing System Security Plans.  The data model is based on the OSCAL standard. 
 # Deployment Instructions
 ## Clone and configure the app
