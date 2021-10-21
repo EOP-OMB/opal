@@ -232,6 +232,14 @@ class system_security_plan(ExtendedBasicModel):
             selected_controls.add(item)
         return selected_controls.order_by('sort_id')
 
+    def _get_missing_controls(self):
+        selected_controls = self._get_selected_controls()
+        missing_controls=[]
+        for c in selected_controls:
+            if not self.controls.filter(nist_control=c.id).exists():
+                missing_controls.append(c)
+        return missing_controls
+
     def _get_system_user_with_role(self,role_short_name):
         users = self.system_users.filter(roles__short_name=role_short_name)
         if not users:
@@ -246,6 +254,10 @@ class system_security_plan(ExtendedBasicModel):
                     names += " - "
                 names += u.user.name
             return names
+
+    @property
+    def get_missing_controls(self):
+        return self._get_missing_controls
 
     @property
     def get_system_owner(self):
