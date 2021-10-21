@@ -19,7 +19,7 @@ class systemSecurityPlanAdmin(admin.ModelAdmin):
         }),
         ('System', {
             'fields': (('published', 'date_authorized', 'system_status', 'authorization_revocation_date', 'authorization_revocation_reason'), ('version', 'oscalVersion'),
-                       'control_baseline', 'controls', 'system_components', 'system_services', 'system_interconnections','system_inventory_items')
+                       'control_baseline', 'additional_selected_controls','controls', 'system_components', 'system_services', 'system_interconnections','system_inventory_items')
         }),
         ('FIPS Level', {
             'fields': ('information_types', (
