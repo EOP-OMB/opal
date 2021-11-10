@@ -25,6 +25,8 @@ urlpatterns = [
     path('control/', FilterView.as_view(filterset_class=system_control_list_view_filter,
                                         template_name='ssp/system_control_list.html'), name='system_control_list_view'),
     path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
+    path('attachments', attachment_list_view.as_view(), name='attachment_list_view'),
+    path('links', link_list_view.as_view(), name='link_list_view'),
     path('', system_security_plan_list_view.as_view(), name='list_system_security_planView'),
     path('<int:pk>', system_security_plan_detail_view.as_view(), name='system_security_plan_detail_view'),
     path('new/', ssp_new, name='ssp_new'),
@@ -33,5 +35,5 @@ urlpatterns = [
     path('catalog/', import_catalog, name='import_catalog'),
     path('system-user-new/<int:sspid>/<int:roleid>/', system_user_new, name='system_user_new'),
     path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json'),
-    path('clone_control/<int:ssp>/<int:control>', clone_control, name='clone_control')
+    path('clone_control/<int:ssp>/<int:control>/', clone_system_control, name='clone_control')
 ]

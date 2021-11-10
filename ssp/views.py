@@ -106,6 +106,12 @@ class system_control_detail_view(generic.DetailView):
     model = system_control
 
 
+class link_list_view(generic.ListView):
+    model = link
+
+class attachment_list_view(generic.ListView):
+    model = attachment
+
 class system_security_plan_list_view(generic.ListView):
     model = system_security_plan
     queryset = system_security_plan.objects.order_by('title')
@@ -251,8 +257,31 @@ def oscal_json(request, objid, objurl):
         page_content = "No content. OSCAL JSON serializer might not exist for this  model."
     return render(request, 'ssp/oscal_json.html', {'result': page_content})
 
-def clone_control(control, ssp):
+
+def clone_system_control(result, ssp, control):
     c = system_control.objects.get(pk=control)
     new_ssp = system_security_plan.objects.get(pk=ssp)
     clone = c.clone_control(new_ssp)
-    return redirect(reverse('admin:ssp_system_control_change',args=clone.pk))
+    return redirect('admin:ssp_system_control_change', clone.pk)
+
+def add_system_control(ssp, nist_control_to_add, inherit_from_ssp="None"):
+    s = system_security_plan.objects.get(pk=ssp)
+    nc = nist_control.objects.get(pk=nist_control_to_add)
+    new_control = system_control(title =s.title + ' ' + nc.label,
+                                 short_name =nc.control_id + '-' + s.short_name,
+                                 control_primary_system = s
+                                 )
+    new_control.save()
+    if inherit_from_ssp != 'None':
+        i = system_security_plan.objects.get(pk=inherit_from_ssp)
+        if i.controls.filter(nist_control=nc).exists:
+            source_control = i.controls.get(nist_control=nc)
+            for p in source_control.control_parameters:
+                new_control.control_parameters.add(p)
+            for s in source_control.control_statements:
+                new_control.control_statements.add(s)
+    new_control.save()
+    return new_control
+
+
+

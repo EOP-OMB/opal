@@ -1,3 +1,5 @@
+from rest_framework_tricks.models.fields import NestedProxyField
+
 from ssp.models.controls import *
 
 # System Properties
@@ -133,14 +135,8 @@ class inventory_item_type(ExtendedBasicModel):
     """
     use = customTextField()
     responsibleRoles = customMany2ManyField(user_role)
-    baseline_configuration = models.ForeignKey(link, on_delete=models.PROTECT, blank=True,
+    baseline_configuration = models.ForeignKey(link, on_delete=models.PROTECT, blank=True, null=True,
                                                related_name='baseline_configuration')
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = inventory_item_type.objects.filter(pk=id)
-        serializer = inventory_item_type_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -157,12 +153,6 @@ class system_inventory_item(ExtendedBasicModel):
     inventory_item_type = models.ForeignKey(inventory_item_type, on_delete=models.PROTECT, related_name='system_inventory_item_set')
     item_special_configuration_settings = customTextField()
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_inventory_item.objects.filter(pk=id)
-        serializer = system_inventory_item_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = system_inventory_item.objects.filter(pk=self.pk)
@@ -174,12 +164,6 @@ class system_inventory_item(ExtendedBasicModel):
 class system_user(BasicModel):
     user = models.ForeignKey(person, on_delete=models.PROTECT, related_name='system_user_set')
     roles = customMany2ManyField(user_role)
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_user.objects.filter(pk=id)
-        serializer = system_user_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -248,6 +232,14 @@ class system_security_plan(ExtendedBasicModel):
             selected_controls.add(item)
         return selected_controls.order_by('sort_id')
 
+    def _get_missing_controls(self):
+        selected_controls = self._get_selected_controls()
+        missing_controls=[]
+        for c in selected_controls:
+            if not self.controls.filter(nist_control=c.id).exists():
+                missing_controls.append(c)
+        return missing_controls
+
     def _get_system_user_with_role(self,role_short_name):
         users = self.system_users.filter(roles__short_name=role_short_name)
         if not users:
@@ -262,6 +254,10 @@ class system_security_plan(ExtendedBasicModel):
                     names += " - "
                 names += u.user.name
             return names
+
+    @property
+    def get_missing_controls(self):
+        return self._get_missing_controls
 
     @property
     def get_system_owner(self):
@@ -296,12 +292,6 @@ class system_security_plan(ExtendedBasicModel):
     def controlFamilies(self):
         families = self.controls.filter(nist_control__sort_id__endswith='-01').order_by('nist_control__sort_id').all()
         return families
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_security_plan.objects.filter(pk=id)
-        serializer = system_security_plan_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):

@@ -1,8 +1,10 @@
-from ssp.models.users import *
-from opal.settings import IMPORTED_CATALOGS_DIR
 import json
+
 from django.utils.html import mark_safe
 from model_clone import CloneMixin
+
+from opal.settings import IMPORTED_CATALOGS_DIR
+from ssp.models.users import *
 
 # objects related to security controls
 
@@ -56,12 +58,6 @@ class nist_control_parameter(PrimitiveModel):
             json_str = json.dumps(return_list, indent=2)
             return json_str
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = nist_control_parameter.objects.filter(pk=id)
-        serializer = nist_control_parameter_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = nist_control_parameter.objects.filter(pk=self.pk)
@@ -77,12 +73,6 @@ class nist_control_statement(PrimitiveModel):
 
     def __str__(self):
         return self.nist_control.label + ' - ' + self.statement_type.capitalize()
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = nist_control_statement.objects.filter(pk=id)
-        serializer = nist_control_statement_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -139,13 +129,7 @@ class nist_control(PrimitiveModel):
         return mark_safe(html)
 
     def __str__(self):
-        return '(' + self.catalog + ')' + self.long_title
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = nist_control.objects.filter(pk=id)
-        serializer = nist_control_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
+        return '(' + str(self.catalog) + ')' + self.long_title
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -157,12 +141,6 @@ class nist_control(PrimitiveModel):
 class control_baseline(BasicModel):
     controls = customMany2ManyField(nist_control)
     link = models.ForeignKey(link, on_delete=models.PROTECT, null=True, blank=True, related_name='control_baseline_set')
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = control_baseline.objects.filter(pk=id)
-        serializer = control_baseline_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -199,12 +177,6 @@ class control_statement(ExtendedBasicModel):
     def nist_control_text(self):
         return self.system_control_set.first().nist_control.all_text
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = control_statement.objects.filter(pk=id)
-        serializer = control_statement_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = control_statement.objects.filter(pk=self.pk)
@@ -229,12 +201,6 @@ class control_parameter(BasicModel):
             self.title = ' - '.join(['UNLINKED', self.control_parameter_id])
             self.short_name = '-'.join(['UNLINKED', self.control_parameter_id])
         super(control_parameter, self).save(force_insert, force_update)
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = control_parameter.objects.filter(pk=id)
-        serializer = control_parameter_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -293,15 +259,14 @@ class system_control(CloneMixin, ExtendedBasicModel):
         new_short_name = self.nist_control.sort_id + '-' + new_ssp.short_name
         clone = self.make_clone(
             attrs={'title': new_title, 'short_name': new_short_name, 'control_primary_system': new_ssp})
+        for param in self.control_parameters.all():
+            clone.control_parameters.add(param.id)
+        for statement in self.control_statements.all():
+            clone.control_statements.add(statement.id)
+        clone.save
         new_ssp.controls.add(clone)
         new_ssp.controls.remove(self)
         return clone
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_control.objects.filter(pk=id)
-        serializer = system_control_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
 
     @property
     def get_serializer_json_OSCAL(self):
@@ -323,12 +288,6 @@ class continuous_monitoring_action_item(BasicModel):
     automated = models.BooleanField(default=True)
     frequency = models.CharField(max_length=10, choices=frequency_choices, default='as needed')
 
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = continuous_monitoring_action_item.objects.filter(pk=id)
-        serializer = continuous_monitoring_action_item_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
     @property
     def get_serializer_json_OSCAL(self):
         queryset = continuous_monitoring_action_item.objects.filter(pk=self.pk)
@@ -345,6 +304,9 @@ class import_catalog(PrimitiveModel):
     added_controls = models.IntegerField(blank=True, null=True)
     updated_controls = models.IntegerField(blank=True, null=True)
     user = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 """

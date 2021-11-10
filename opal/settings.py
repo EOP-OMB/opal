@@ -100,6 +100,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_tricks',
     'ssp.apps.ssp',
+    'coverage',
 ]
 
 
@@ -133,6 +134,7 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if env["database"] == "sqlite":
     DATABASES = {
