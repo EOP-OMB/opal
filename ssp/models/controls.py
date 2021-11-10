@@ -259,6 +259,11 @@ class system_control(CloneMixin, ExtendedBasicModel):
         new_short_name = self.nist_control.sort_id + '-' + new_ssp.short_name
         clone = self.make_clone(
             attrs={'title': new_title, 'short_name': new_short_name, 'control_primary_system': new_ssp})
+        for param in self.control_parameters.all():
+            clone.control_parameters.add(param.id)
+        for statement in self.control_statements.all():
+            clone.control_statements.add(statement.id)
+        clone.save
         new_ssp.controls.add(clone)
         new_ssp.controls.remove(self)
         return clone
