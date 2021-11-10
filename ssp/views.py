@@ -257,12 +257,12 @@ def oscal_json(request, objid, objurl):
         page_content = "No content. OSCAL JSON serializer might not exist for this  model."
     return render(request, 'ssp/oscal_json.html', {'result': page_content})
 
-# TODO: Wire this function into the SSP List View
-def clone_system_control(control, ssp):
+
+def clone_system_control(result, ssp, control):
     c = system_control.objects.get(pk=control)
     new_ssp = system_security_plan.objects.get(pk=ssp)
-    clone = c.clone_system_control(new_ssp)
-    return redirect(reverse('admin:ssp_system_control_change',args=clone.pk))
+    clone = c.clone_control(new_ssp)
+    return redirect('admin:ssp_system_control_change', clone.pk)
 
 def add_system_control(ssp, nist_control_to_add, inherit_from_ssp="None"):
     s = system_security_plan.objects.get(pk=ssp)
