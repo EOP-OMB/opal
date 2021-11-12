@@ -10,5 +10,5 @@ class test_evidence(ExtendedBasicModel):
     """
     type = models.CharField(max_length=255, choices=type_choices)
     testing_conditions = models.CharField(max_length=2000)
-    results = models.ForeignKey(attachment,on_delete=models.PROTECT,null=True,blank=True)
+    results = customMany2ManyField(attachment)
     controls = customMany2ManyField(system_control)

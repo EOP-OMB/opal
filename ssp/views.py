@@ -16,7 +16,7 @@ from ssp.models.controls import *
 from .forms import SystemSecurityPlan, ImportCatalogForm, SystemUserNewForm
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement, \
     system_user, user_role, person
-
+from .models import test_evidence
 
 def ssp_new(request):
     if request.method == "POST":
@@ -91,6 +91,13 @@ class nist_control_list_view(generic.ListView):
 class nist_control_detail_view(generic.DetailView):
     model = nist_control
 
+
+class evidence_list_view(generic.ListView):
+    model = test_evidence
+
+
+class evidence_detail_view(generic.DetailView):
+    model = test_evidence
 
 class system_control_list_view_filter(django_filters.FilterSet):
     class Meta:
