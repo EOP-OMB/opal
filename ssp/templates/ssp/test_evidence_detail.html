@@ -7,6 +7,8 @@
             <p>
                 <h1>{{ object }}</h1>
             </p>
+	    <p><h2>Description</h2></p>
+	    <p>{{ object.desc | safe }}</p>
 	    <p><h2>Type</h2></p>
 	    <p>{{ object.type }}</p>
 	    <p><h2>Testing Conditions</h2></p>
