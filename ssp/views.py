@@ -16,7 +16,6 @@ from ssp.models.controls import *
 from .forms import SystemSecurityPlan, ImportCatalogForm, SystemUserNewForm
 from .models import system_control, system_security_plan, nist_control, control_parameter, control_statement, \
     system_user, user_role, person, test_evidence
-from .models import test_evidence
 
 def ssp_new(request):
     if request.method == "POST":
