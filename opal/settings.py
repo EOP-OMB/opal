@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import secrets
 from pathlib import Path
 import os
 
@@ -39,37 +39,36 @@ USE_L10N = True
 USE_TZ = True
 
 
-#Set reasonable defaults for environment values
-env_defaults = {
-    "env" : "development",
-    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
-    "debug" : "True",
-    "allowed_hosts" : ["*"],
-    "database" : "sqlite",
-    "db_password" : "",
-    "db_name" : "",
-    "db_user" : "",
-    "db_host" : "localhost",
-    "db_port" : "",
-    "adfs_enabled" : False,
-    "adfs_server" : "adfs.server.url",
-    "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
-}
+#All of the following values MUST be defined as environment variables in your system
+env_var = [
+    "env", #development or production
+    "opal_secret_key", #secret key used to create sessions
+    "debug", #True of False
+    "allowed_hosts", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
+    "database", #sqlite or postgres
+    "db_password", #can be blank if using sqlite
+    "db_name", #name of db in postgres, can be blank if using sqlite
+    "db_user", #can be blank if using sqlite
+    "db_host", #can be blank if using sqlite
+    "db_port", #can be blank if using sqlite
+    "adfs_enabled", #True or False
+    "adfs_server", #can be blank if adfs_enabled is False
+    "adfs_client_id", #can be blank if adfs_enabled is False
+    "adfs_client_id", #can be blank if adfs_enabled is False
+    "adfs_relying_party_id", #can be blank if adfs_enabled is False
+    "adfs_audience" #can be blank if adfs_enabled is False
+]
 
-if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
-    from opal.local_settings import env
-else:
-    env = {}
+env = {}
 
-for k in env_defaults:
-    if k not in env:
-        env[k] = env_defaults[k]
-        #print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
-    # else:
-        # print("Value found for variable ",k," (",str(env[k]),")")
+for k in env_var:
+    if k == "allowed_hosts":
+        # allowed_hosts must be a list
+        env[k] = os.getenv(k,'').split(',')
+    elif k == "opal_secret_key":
+        env[k] = os.getenv(k,secrets.token_urlsafe())
+    else:
+        env[k] = os.getenv(k,'')
 
 if env["env"] == "development":
     print("Running in Development mode!")
@@ -136,14 +135,7 @@ TEMPLATES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if env["database"] == "sqlite":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR + '/db.sqlite3',
-        }
-    }
-else:
+if env["database"] == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -154,8 +146,16 @@ else:
             'PORT': env["db_port"],
         }
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR + '/db.sqlite3',
+        }
+    }
 
 REST_FRAMEWORK = {
+    # TODO enable ADFS for REST Framework https://django-auth-adfs.readthedocs.io/en/latest/rest_framework.html
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
@@ -191,7 +191,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     )
 
-if env["adfs_enabled"] :
+if env["adfs_enabled"] == "True":
     INSTALLED_APPS.append('django_auth_adfs')
 
     # With this you can force a user to login without using
