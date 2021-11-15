@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Test Evidence</h1>
+{% if test_evidence_list %}
+    <ul>
+    {% for control in test_evidence_list %}
+        <li><a href="{% url 'ssp:evidence_detail_view' control.id %}">{{ control }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No controls are available.</p>
+{% endif %}
+{% endblock %}
+
