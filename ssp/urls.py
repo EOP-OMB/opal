@@ -16,12 +16,16 @@ Including another URLconf
 from django.urls import path
 from django_filters.views import FilterView
 from ssp.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'ssp'
 urlpatterns = [
     path('nist/', nist_control_list_view.as_view(), name='nist_control_list_view'),
     path('nist/<int:pk>', nist_control_detail_view.as_view(), name='nist_control_detail_view'),
     # path('control/', system_control_list_view.as_view(), name='system_control_list_view'),
+    path('evidence/', evidence_list_view.as_view(), name='evidence_list_view'),
+    path('evidence/<int:pk>', evidence_detail_view.as_view(), name='evidence_detail_view'),
     path('control/', FilterView.as_view(filterset_class=system_control_list_view_filter,
                                         template_name='ssp/system_control_list.html'), name='system_control_list_view'),
     path('control/<int:pk>', system_control_detail_view.as_view(), name='system_control_detail_view'),
@@ -36,4 +40,4 @@ urlpatterns = [
     path('system-user-new/<int:sspid>/<int:roleid>/', system_user_new, name='system_user_new'),
     path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json'),
     path('clone_control/<int:ssp>/<int:control>/', clone_system_control, name='clone_control')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
