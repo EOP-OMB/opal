@@ -35,5 +35,5 @@ USER www-data
 # use -p 8000:8000 with `docker run` to access the service
 EXPOSE 8000
 
-ENTRYPOINT [ "python", "manage.py" ]
-CMD ["runserver", "0.0.0.0:8000"]
+ start-server
+CMD ["mod_wsgi-express", "start-server"]

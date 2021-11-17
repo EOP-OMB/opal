@@ -59,14 +59,16 @@ env_var = [
     "adfs_audience" #can be blank if adfs_enabled is False
 ]
 
-env = {}
+env = {"env":"development","debug":"True","database":"mysql","adfs_enabled":"False"}
 
 for k in env_var:
     if k == "allowed_hosts":
         # allowed_hosts must be a list
-        env[k] = os.getenv(k,'').split(',')
+        env[k] = os.getenv(k,'*').split(',')
     elif k == "opal_secret_key":
         env[k] = os.getenv(k,secrets.token_urlsafe())
+    elif k in env.keys():
+        env[k] = os.getenv(k,env[k])
     else:
         env[k] = os.getenv(k,'')
 
