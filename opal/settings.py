@@ -75,6 +75,9 @@ for k in env_defaults:
 if env["env"] == "development":
     print("Running in Development mode!")
 
+if env["env"] == "production":
+    SECURE_SSL_REDIRECT = True
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env["opal_secret_key"]
 
@@ -193,6 +196,9 @@ AUTHENTICATION_BACKENDS = (
     )
 
 if env["adfs_enabled"] :
+    # assuming you are running behind a proxy see https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECURE_PROXY_SSL_HEADER
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
     INSTALLED_APPS.append('django_auth_adfs')
 
     # With this you can force a user to login without using
