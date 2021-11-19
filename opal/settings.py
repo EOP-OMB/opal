@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from opal.local_settings import env
 
 #Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
