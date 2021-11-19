@@ -13,14 +13,14 @@ import secrets
 from pathlib import Path
 import os
 
-#Path variables for application
+# Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
 
@@ -38,42 +38,45 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-#All of the following values MUST be defined as environment variables in your system
+# All of the following values MUST be defined as environment variables in your system
 env_var = [
-    "env", #development or production
-    "opal_secret_key", #secret key used to create sessions
-    "debug", #True of False
-    "allowed_hosts", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
-    "database", #sqlite or postgres
-    "db_password", #can be blank if using sqlite
-    "db_name", #name of db in postgres, can be blank if using sqlite
-    "db_user", #can be blank if using sqlite
-    "db_host", #can be blank if using sqlite
-    "db_port", #can be blank if using sqlite
-    "adfs_enabled", #True or False
-    "adfs_server", #can be blank if adfs_enabled is False
-    "adfs_client_id", #can be blank if adfs_enabled is False
-    "adfs_client_id", #can be blank if adfs_enabled is False
-    "adfs_relying_party_id", #can be blank if adfs_enabled is False
-    "adfs_audience" #can be blank if adfs_enabled is False
+    "env",  # development or production
+    "opal_secret_key",  # secret key used to create sessions
+    "debug",  # True of False
+    "allowed_hosts",
+    # Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
+    "database",  # sqlite or postgres
+    "db_password",  # can be blank if using sqlite
+    "db_name",  # name of db in postgres, can be blank if using sqlite
+    "db_user",  # can be blank if using sqlite
+    "db_host",  # can be blank if using sqlite
+    "db_port",  # can be blank if using sqlite
+    "adfs_enabled",  # True or False
+    "adfs_server",  # can be blank if adfs_enabled is False
+    "adfs_client_id",  # can be blank if adfs_enabled is False
+    "adfs_client_id",  # can be blank if adfs_enabled is False
+    "adfs_relying_party_id",  # can be blank if adfs_enabled is False
+    "adfs_audience"  # can be blank if adfs_enabled is False
 ]
 
-env = {"env":"development","debug":"True","database":"mysql","adfs_enabled":"False"}
+env = {"env": "development", "debug": "True", "database": "mysql", "adfs_enabled": "False"}
 
 for k in env_var:
     if k == "allowed_hosts":
         # allowed_hosts must be a list
-        env[k] = os.getenv(k,'*').split(',')
+        env[k] = os.getenv(k, '*').split(',')
     elif k == "opal_secret_key":
-        env[k] = os.getenv(k,secrets.token_urlsafe())
+        env[k] = os.getenv(k, secrets.token_urlsafe())
     elif k in env.keys():
-        env[k] = os.getenv(k,env[k])
-    else:
-        env[k] = os.getenv(k,'')
+        env[k] = os.getenv(k, env[k])
+    if os.getenv("debug") == "True":
+        print("Value found for variable ", k, " (", str(env[k]), ")")
 
 if env["env"] == "development":
     print("Running in Development mode!")
+
+if env["env"] == "production":
+    SECURE_SSL_REDIRECT = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env["opal_secret_key"]
@@ -81,7 +84,6 @@ SECRET_KEY = env["opal_secret_key"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env["debug"]
 ALLOWED_HOSTS = env["allowed_hosts"]
-
 
 # Application definition
 
@@ -104,7 +106,6 @@ INSTALLED_APPS = [
     'coverage',
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -113,7 +114,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
 ]
 
 TEMPLATES = [
@@ -191,9 +192,12 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    )
+)
 
 if env["adfs_enabled"] == "True":
+    # assuming you are running behind a proxy see https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECURE_PROXY_SSL_HEADER
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
     INSTALLED_APPS.append('django_auth_adfs')
 
     # With this you can force a user to login without using
@@ -201,10 +205,10 @@ if env["adfs_enabled"] == "True":
     #
     # You can specify URLs for which login is not enforced by
     # specifying them in the LOGIN_EXEMPT_URLS setting.
-    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware',)
+    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware', )
 
     AUTHENTICATION_BACKENDS = (
-    'django_auth_adfs.backend.AdfsAuthCodeBackend',
+        'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
 
     # checkout the documentation of django_auth_adfs for more settings
@@ -217,11 +221,11 @@ if env["adfs_enabled"] == "True":
         "AUDIENCE": env["adfs_audience"],
         # "CA_BUNDLE": "/path/to/ca-bundle.pem",
         "CLAIM_MAPPING": {"first_name": "given_name",
-                        "last_name": "family_name",
-                        "email": "email"},
+                          "last_name": "family_name",
+                          "email": "email"},
         "USERNAME_CLAIM": "upn",
         "GROUP_CLAIM": "group"
-        }
+    }
 
     # Configure django to redirect users to the right URL for login
     LOGIN_URL = "django_auth_adfs:login"
@@ -234,7 +238,7 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR,'debug.log')
+            'filename': os.path.join(BASE_DIR, 'debug.log')
         },
         'console': {
             'level': 'INFO',
@@ -243,7 +247,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file','console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
             'propagate': True,
         },
