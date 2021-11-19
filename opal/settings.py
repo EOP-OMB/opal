@@ -68,9 +68,11 @@ else:
 for k in env_defaults:
     if k not in env:
         env[k] = env_defaults[k]
-        #print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
-    # else:
-        # print("Value found for variable ",k," (",str(env[k]),")")
+        if env["debug"]:
+            print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
+    else:
+        if env["debug"]:
+            print("Value found for variable ",k," (",str(env[k]),")")
 
 if env["env"] == "development":
     print("Running in Development mode!")
