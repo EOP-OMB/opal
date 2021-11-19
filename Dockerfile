@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim-buster as stage1
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -19,20 +19,26 @@ RUN apt-get update \
 COPY requirements.txt /usr/src/app/
 RUN pip3 install --no-cache-dir -r requirements.txt
 
+from stage1 as stage2
 # copy all the files to the container
 COPY . /usr/src/app/
 
-RUN touch db.sqlite3 \
-  && python3 manage.py makemigrations \
-  && python3 manage.py migrate \
-  && python3 manage.py loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json \
-  && python3 manage.py collectstatic --noinput \
-  && chown -R www-data:www-data .
+RUN touch db.sqlite3
+RUN python3 manage.py makemigrations admin ssp
+RUN python3 manage.py migrate admin
+RUN python3 manage.py migrate ssp
+RUN python3 manage.py loaddata admin_user.json fixture_information_type.json fixture_status.json fixture_user_function.json fixture_user_privilege.json fixture_user_role.json
+RUN python3 manage.py collectstatic --noinput
+RUN chown -R www-data:www-data .
 
+from stage2
 # run as an unprivileged user
 # USER www-data
 
 # use -p 8000:8000 with `docker run` to access the service
 EXPOSE 8000
 
-CMD ["mod_wsgi-express", "start-server", "--user", "www-data", "--group", "www-data", "opal/wsgi.py"]
+ENV log_level DEBUG
+
+# CMD ["mod_wsgi-express", "start-server", "--user", "www-data", "--group", "www-data", "opal/wsgi.py"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

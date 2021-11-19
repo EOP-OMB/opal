@@ -47,7 +47,7 @@ env_var = [
     # Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
     "database",  # sqlite or postgres
     "db_password",  # can be blank if using sqlite
-    "db_name",  # name of db in postgres, can be blank if using sqlite
+    "db_name",  # name of db in postgres, name and relative path to file if using sqlite
     "db_user",  # can be blank if using sqlite
     "db_host",  # can be blank if using sqlite
     "db_port",  # can be blank if using sqlite
@@ -56,10 +56,11 @@ env_var = [
     "adfs_client_id",  # can be blank if adfs_enabled is False
     "adfs_client_id",  # can be blank if adfs_enabled is False
     "adfs_relying_party_id",  # can be blank if adfs_enabled is False
-    "adfs_audience"  # can be blank if adfs_enabled is False
+    "adfs_audience",  # can be blank if adfs_enabled is False
+    "log_level",  # can be INFO, DEBUG, WARNING, CRITICAL, ERROR
 ]
 
-env = {"env": "development", "debug": "True", "database": "mysql", "adfs_enabled": "False"}
+env = {"env": "development", "debug": "True", "database": "sqlite", "adfs_enabled": "False", "log_level": "INFO", "db_name": "db.sqlite3"}
 
 for k in env_var:
     if k == "allowed_hosts":
@@ -153,7 +154,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR + '/db.sqlite3',
+            'NAME': BASE_DIR + env['db_name'],
         }
     }
 
@@ -236,19 +237,19 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'WARNING',
+            'level': env["log_level"],
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'debug.log')
         },
         'console': {
-            'level': 'INFO',
+            'level': env["log_level"],
             'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
-            'level': 'DEBUG',
+            'level': env["log_level"],
             'propagate': True,
         },
     },
