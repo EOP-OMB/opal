@@ -1,0 +1,226 @@
+[
+{
+  "model": "ssp.port_range",
+  "pk": 2,
+  "fields": {
+    "uuid": "2868ac13-ec9a-4710-ba8c-f3e57b6b13ec",
+    "created_at": "2021-02-04T13:55:15.850Z",
+    "updated_at": "2021-02-04T13:55:15.850Z",
+    "title": "HTTPS/TLS",
+    "short_name": "",
+    "desc": "",
+    "remarks": "",
+    "start": 443,
+    "end": 443,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 3,
+  "fields": {
+    "uuid": "b7862c5e-e4aa-4d43-98bf-f2f3626e53d5",
+    "created_at": "2021-02-04T13:55:58.314Z",
+    "updated_at": "2021-02-04T13:55:58.314Z",
+    "title": "SMTP/TLS",
+    "short_name": "email",
+    "desc": "",
+    "remarks": "",
+    "start": 25,
+    "end": 25,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 4,
+  "fields": {
+    "uuid": "6d671066-cd4f-4e60-b084-b85d80002736",
+    "created_at": "2021-02-04T13:56:27.109Z",
+    "updated_at": "2021-02-04T13:56:27.109Z",
+    "title": "ssh",
+    "short_name": "",
+    "desc": "",
+    "remarks": "",
+    "start": 22,
+    "end": 22,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 5,
+  "fields": {
+    "uuid": "f22f60e5-151f-439b-9e88-a0fa256ccd3d",
+    "created_at": "2021-02-04T13:56:43.193Z",
+    "updated_at": "2021-02-04T13:56:43.193Z",
+    "title": "http",
+    "short_name": "",
+    "desc": "",
+    "remarks": "",
+    "start": 80,
+    "end": 80,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 6,
+  "fields": {
+    "uuid": "4234b0bf-244f-487e-b3db-57d7328a6f69",
+    "created_at": "2021-02-04T17:57:24.455Z",
+    "updated_at": "2021-02-04T17:57:24.455Z",
+    "title": "smb",
+    "short_name": "smb",
+    "desc": "",
+    "remarks": "",
+    "start": 445,
+    "end": 445,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 7,
+  "fields": {
+    "uuid": "f5be61f0-caad-43fe-a8db-15d63abc5aa3",
+    "created_at": "2021-02-05T15:51:55.028Z",
+    "updated_at": "2021-02-05T15:51:55.028Z",
+    "title": "ftp",
+    "short_name": "ftp",
+    "desc": "",
+    "remarks": "",
+    "start": 20,
+    "end": 21,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 8,
+  "fields": {
+    "uuid": "1a0eea8d-01a4-4952-9b00-e58199215c72",
+    "created_at": "2021-02-05T15:53:05.526Z",
+    "updated_at": "2021-02-05T15:53:05.526Z",
+    "title": "",
+    "short_name": "",
+    "desc": "",
+    "remarks": "",
+    "start": 23,
+    "end": 23,
+    "transport": "TCP"
+  }
+},
+{
+  "model": "ssp.port_range",
+  "pk": 9,
+  "fields": {
+    "uuid": "dd31d533-e015-4f6c-b202-fcfce1f11ba7",
+    "created_at": "2021-02-05T15:58:46.709Z",
+    "updated_at": "2021-02-05T15:58:46.709Z",
+    "title": "",
+    "short_name": "",
+    "desc": "",
+    "remarks": "",
+    "start": 53,
+    "end": 53,
+    "transport": "TCP/UDP"
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 6,
+  "fields": {
+    "uuid": "d1b58a44-b457-40bc-8c60-997b7de733d3",
+    "created_at": "2021-02-04T17:57:26.673Z",
+    "updated_at": "2021-02-04T17:57:26.673Z",
+    "title": "smb",
+    "short_name": "smb",
+    "desc": "",
+    "remarks": "",
+    "portRanges": [
+      6
+    ]
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 7,
+  "fields": {
+    "uuid": "bdea8437-bb44-47eb-b715-4a2afa0856fb",
+    "created_at": "2021-02-05T15:51:58.473Z",
+    "updated_at": "2021-02-05T15:51:58.473Z",
+    "title": "File Transfer Protocol",
+    "short_name": "ftp",
+    "desc": "<p>FTP is one of the most commonly used file transfer protocols on the Internet and within private networks. An FTP server can easily be set up with little networking knowledge and provides the ability to easily relocate files from one system to another. FTP control is handled on TCP port 21 and its data transfer can use TCP port 20 as well as dynamic ports depending on the specific configuration.</p>",
+    "remarks": "<p>RFC 959</p>",
+    "portRanges": [
+      7
+    ]
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 8,
+  "fields": {
+    "uuid": "719c74a2-49eb-48f9-8ca3-4108ef008c3f",
+    "created_at": "2021-02-05T15:52:33.767Z",
+    "updated_at": "2021-02-05T15:52:33.767Z",
+    "title": "Secure Shell",
+    "short_name": "ssh",
+    "desc": "<p>SSH is the primary method used to manage network devices securely at the command level. It is typically used as a secure alternative to Telnet which does not support secure connections.</p>",
+    "remarks": "<p>RFC 4250-4256</p>",
+    "portRanges": [
+      4
+    ]
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 9,
+  "fields": {
+    "uuid": "eeb0c843-e6ca-4ae4-9a0a-3f3eae040379",
+    "created_at": "2021-02-05T15:53:20.687Z",
+    "updated_at": "2021-02-05T15:53:20.687Z",
+    "title": "Telnet",
+    "short_name": "telnet",
+    "desc": "<p>Telnet is the primary method used to manage network devices at the command level. Unlike SSH which provides a secure connection, Telnet does not, it simply provides a basic unsecured connection. Many lower level network devices support Telnet and not SSH as it required some additional processing. Caution should be used when connecting to a device using Telnet over a public network as the login credentials will be transmitted in the clear.</p>",
+    "remarks": "<p>RFC 854</p>",
+    "portRanges": [
+      8
+    ]
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 10,
+  "fields": {
+    "uuid": "848195d9-054e-43d7-8698-46542e00522f",
+    "created_at": "2021-02-05T15:54:19.825Z",
+    "updated_at": "2021-02-05T15:54:19.825Z",
+    "title": "Simple Mail Transfer Protocol",
+    "short_name": "SMTP",
+    "desc": "<p>SMTP is used for two primary functions, it is used to transfer mail (email) from source to destination between mail servers and it is used by end users to send email to a mail system.</p>",
+    "remarks": "<p>RFC 5321</p>",
+    "portRanges": [
+      3
+    ]
+  }
+},
+{
+  "model": "ssp.protocol",
+  "pk": 11,
+  "fields": {
+    "uuid": "213f8cef-2839-490b-94c9-5c6f068d0945",
+    "created_at": "2021-02-05T15:59:11.873Z",
+    "updated_at": "2021-02-05T15:59:11.873Z",
+    "title": "Domain Name System",
+    "short_name": "dns",
+    "desc": "<p>The DNS is used widely on the public internet and on private networks to translate domain names into IP addresses, typically for network routing. DNS is hieratical with main root servers that contain databases that list the managers of high level Top Level Domains (TLD) (such as .com). These different TLD managers then contain information for the second level domains that are typically used by individual users (for example, cisco.com). A DNS server can also be set up within a private network to private naming services between the hosts of the internal network without being part of the global system.</p>",
+    "remarks": "<p>RFC 1034-1035</p>",
+    "portRanges": [
+      9
+    ]
+  }
+}
+]
