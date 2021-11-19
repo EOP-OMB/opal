@@ -70,6 +70,8 @@ for k in env_var:
         env[k] = os.getenv(k, secrets.token_urlsafe())
     elif k in env.keys():
         env[k] = os.getenv(k, env[k])
+    else:
+        env[k] = ''
     if os.getenv("debug") == "True":
         print("Value found for variable ", k, " (", str(env[k]), ")")
 
@@ -145,9 +147,9 @@ if env["database"] == "postgres":
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': env['db_name'],
             'USER': env['db_user'],
-            'PASSWORD': env["db_password"],
-            'HOST': env["db_host"],
-            'PORT': env["db_port"],
+            'PASSWORD': env['db_password'],
+            'HOST': env['db_host'],
+            'PORT': env['db_port'],
         }
     }
 else:
