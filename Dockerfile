@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 
 # install dependencies
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev \
+  && apt-get install -y --no-install-recommends apache2 apache2-dev python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -30,10 +30,9 @@ RUN touch db.sqlite3 \
   && chown -R www-data:www-data .
 
 # run as an unprivileged user
-USER www-data
+# USER www-data
 
 # use -p 8000:8000 with `docker run` to access the service
 EXPOSE 8000
 
- start-server
-CMD ["mod_wsgi-express", "start-server"]
+CMD ["mod_wsgi-express", "start-server", "--user", "www-data", "--group", "www-data", "opal/wsgi.py"]
