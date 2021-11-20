@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+# noinspection PyCompatibility
 import secrets
 from pathlib import Path
 import os
@@ -43,8 +44,7 @@ env_var = [
     "env",  # development or production
     "opal_secret_key",  # secret key used to create sessions
     "debug",  # True of False
-    "allowed_hosts",
-    # Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
+    "allowed_hosts",  # Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
     "database",  # sqlite or postgres
     "db_password",  # can be blank if using sqlite
     "db_name",  # name of db in postgres, name and relative path to file if using sqlite
@@ -117,7 +117,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.staticfiles',
 ]
 
 TEMPLATES = [
@@ -172,11 +171,11 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
-        # If you're performance testing, you will want to use the browseable API
+        # If you're performance testing, you will want to use the browsable API
         # without forms, as the forms can generate their own queries.
         # If performance testing, enable:
         # 'example.utils.BrowsableAPIRendererWithoutForms',
-        # Otherwise, to play around with the browseable API, enable:
+        # Otherwise, to play around with the browsable API, enable:
         'rest_framework.renderers.BrowsableAPIRenderer'
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
