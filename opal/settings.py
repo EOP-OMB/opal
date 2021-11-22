@@ -75,6 +75,10 @@ for k in env_var:
     if os.getenv("debug") == "True":
         print("Value found for variable ", k, " (", str(env[k]), ")")
 
+# The above works great if you are using environment variables, but if you need to fallback to a local_settings file you can just create it in the same directory as settings.py and it will override all of the above stuff
+if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
+    from opal.local_settings import env
+
 if env["env"] == "development":
     print("Running in Development mode!")
 
