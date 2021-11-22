@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: opal
+  template:
+    metadata:
+      labels:
+        component: opal
+    spec:
+      containers:
+        - name: opal
+          image: cs4p/opal
+          ports:
+            - containerPort: 8000
+          env:
+            - name: env
+              value: "development"
+            - name: opal_secret_key
+              value: ""
+            - name: debug
+              value: "True"
+            - name: allowed_hosts
+              value: '*'
+            - name: database
+              value: "sqlite"
+            - name: db_password
+              valueFrom:
+                secretKeyRef:
+                  name: opal-passwords
+                  key: db_password
+            - name: db_name
+              value: "opal"
+            - name: db_user
+              value: "opal_system"
+            - name: db_host
+              value: "localhost"
+            - name: db_port
+              value: "5432"
+            - name: adfs_enabled
+              value: "False"
+            - name: adfs_server
+              value: "adfs.example.com"
+            - name: adfs_client_id
+              value: "00000000-0000-0000-0000-000000000000"
+            - name: adfs_relying_party_id
+              value: "00000000-0000-0000-0000-000000000000"
+            - name: adfs_audience
+              value: "microsoft:identityserver:00000000-0000-0000-0000-000000000000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opal
+spec:
+  type: ClusterIP
+  selector:
+    component: opal
+  ports:
+    - port: 80
+      targetPort: 8000

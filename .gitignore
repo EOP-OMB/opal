@@ -31,6 +31,7 @@ media
 .idea/**/gradle.xml
 .idea/**/libraries
 *.iws /out/
+.idea/
 
 # Python #
 *.py[cod]
@@ -48,3 +49,6 @@ venv
 ENV/
 env.bak/
 venv.bak/
+
+
+/media/

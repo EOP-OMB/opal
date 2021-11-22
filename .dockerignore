@@ -8,3 +8,10 @@ __init__.py
 /ssp/fixtures/opal_ssp_db.json
 /migrations/
 *.log
+/opal/local_settings.py
+/opal/local_settings.py.docker
+/opal/local_settings.py.template
+/ssp/fixtures/2021_10_19_03_00_PM_omb_data.json
+/db.sqlite3
+/ssp/migrations/
+/media/
