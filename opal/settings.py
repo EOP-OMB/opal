@@ -59,6 +59,7 @@ env_defaults = {
     "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
     "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
     "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
+    "log_level" : "INFO"
 }
 
 if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
