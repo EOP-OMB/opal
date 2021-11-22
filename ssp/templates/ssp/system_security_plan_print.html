@@ -1,57 +1,4 @@
-{% extends "base.html" %}
-{% block sidebar %}
-{% endblock %}
-{% block dropdown %}
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div style="float: right; width: 100%">
-        <li class="nav-item dropdown" style="float: right; list-style-type: none">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Page Contents
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <ul style="list-style-type: upper-roman">
-                    <li class="nav-item"><a class="nav-link" href="#system_description">System Description</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#system_diagrams">System Diagrams</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#system_personnel">System Personnel</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#authorization_status">Authorization Status</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#system_status">System Status</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#fisma_security_objectives">FISMA Security Objectives</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#information_types">System Information Types</a></li>
-                    <div class="dropdown-divider"></div>
-                    <li class="nav-item"><a class="nav-link" href="#system_components">System Components</a></li>
-                    <ul style="list-style-type: decimal">
-                        {% for component in object.system_components.all %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="#system_component:{{ component.id }}">
-                                    {{ component.title }}({{ component.component_type }})
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="dropdown-divider"></div>
-                    <li class="nav-item"><a class="nav-link" href="#system_controls">System Controls</a></li>
-                    <ul style="list-style-type: decimal">
-                        {% for control in object.controlFamilies %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="#control:{{ control.id }}">{{ control.nist_control.control_title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="dropdown-divider"></div>
-                    <li class="nav-item"><a class="nav-link" href="#missing_system_controls">Missing Controls</a></li>
-                </ul>
-                <div class="dropdown-divider"></div>
-            </div>
-        </li>
-        <li class="nav-divider" style="float: right; list-style-type: none">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-        <li class="nav-link" style="float: right"><a href="{% url 'ssp:system_security_plan_print_view' object.id %}" target="_blank">Print</a></li>
-    </div>
-</div>
-{% endblock %}
-{% block content %}
-    {% load admin_urls %}
-    <h1>{{ object.title }}</h1>
+<h1>{{ object.title }}</h1>
     <hr>
     <h2><a href="{% url 'admin:ssp_system_security_plan_change' object.id %}" target="_blank">{{ object.title }} ({{ object.short_name}})</a></h2>
         <h3><a id="system_description">System Description</a></h3>
@@ -71,7 +18,6 @@
             <li>Authorizing Official: {{ object.get_authorizing_official | safe }}</li>
             <li>System Owner: {{ object.get_system_owner | safe }}</li>
             <li>Information System Security Officer: {{ object.get_information_system_security_officer | safe }}</li>
-            <li>Information System Security Manager: {{ object.get_information_system_security_manager | safe }}</li>
         </ul>
     <h3><a id="authorization_status">Authorization Status</a></h3>
     <ul>
@@ -147,12 +93,3 @@
             {% include "ssp/system_control_detail.html" with object=c ssp_id=object.id %}
             <p></p>
         {% endfor %}
-    <h3><a id="missing_system_controls">Missing System Controls</a></h3>
-        {% for c in object.get_missing_controls %}
-            {% with c as control %}
-                <a id="control:{{ control.id }}"></a>
-                {% include "ssp/nist_control_detail.html" %}
-            {% endwith %}
-            <p></p>
-        {% endfor %}
-{% endblock %}
