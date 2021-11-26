@@ -10,6 +10,7 @@ cryptojwt==1.6.0
 Django==3.2.9
 django-auth-adfs==1.9.1
 django-autocomplete-light==3.8.2
+django-binary-database-files==1.0.15
 django-clone==2.9.6
 django-environ==0.8.1
 django-extensions==3.1.5

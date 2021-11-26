@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'rest_framework_tricks',
     'ssp.apps.ssp',
     'coverage',
+    'binary_database_files',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,8 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 if env("DATABASE") == "postgres":
@@ -137,9 +140,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR + env('DB_NAME'),
+            'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
         }
     }
+    print("using database " + DATABASES['default']['NAME'])
 
 REST_FRAMEWORK = {
     # TODO enable ADFS for REST Framework https://django-auth-adfs.readthedocs.io/en/latest/rest_framework.html
