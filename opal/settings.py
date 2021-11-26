@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import secrets
 from pathlib import Path
 import os
-from opal.local_settings import env
+import re
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Path variables for application
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
@@ -25,6 +30,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
+
 
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
@@ -42,52 +48,20 @@ USE_TZ = True
 
 
 #Set reasonable defaults for environment values
-env_defaults = {
-    "env" : "development",
-    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
-    "debug" : "True",
-    "allowed_hosts" : ["*"],
-    "database" : "sqlite",
-    "db_password" : "",
-    "db_name" : "",
-    "db_user" : "",
-    "db_host" : "localhost",
-    "db_port" : "",
-    "adfs_enabled" : False,
-    "adfs_server" : "adfs.server.url",
-    "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
-    "log_level" : "INFO"
-}
 
-if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
-    from opal.local_settings import env
-else:
-    env = {}
 
-for k in env_defaults:
-    if k not in env:
-        env[k] = env_defaults[k]
-        if env["debug"]:
-            print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
-    else:
-        if env["debug"]:
-            print("Value found for variable ",k," (",str(env[k]),")")
-
-if env["env"] == "development":
+if env("ENVIRONMENT") == "development":
     print("Running in Development mode!")
 
-if env["env"] == "production":
+if env("ENVIRONMENT") == "production":
     SECURE_SSL_REDIRECT = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env["opal_secret_key"]
+SECRET_KEY = env("OPAL_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env["debug"]
-ALLOWED_HOSTS = env["allowed_hosts"]
+DEBUG = env("DEBUG")
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 # Application definition
 
@@ -141,22 +115,22 @@ TEMPLATES = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if env["database"] == "postgres":
+if env("DATABASE") == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env['db_name'],
-            'USER': env['db_user'],
-            'PASSWORD': env['db_password'],
-            'HOST': env['db_host'],
-            'PORT': env['db_port'],
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
         }
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR + env['db_name'],
+            'NAME': BASE_DIR + env('DB_NAME'),
         }
     }
 
@@ -197,7 +171,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-if env["adfs_enabled"] == "True":
+if env("ADFS_ENABLED") == "True":
     # assuming you are running behind a proxy see https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECURE_PROXY_SSL_HEADER
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -216,12 +190,12 @@ if env["adfs_enabled"] == "True":
 
     # checkout the documentation of django_auth_adfs for more settings
     AUTH_ADFS = {
-        "SERVER": env["adfs_server"],
-        "CLIENT_ID": env["adfs_client_id"],
-        "RELYING_PARTY_ID": env["adfs_relying_party_id"],
+        "SERVER": env("ADFS_SERVER"),
+        "CLIENT_ID": env("ADFS_CLIENT_ID"),
+        "RELYING_PARTY_ID": env("ADFS_RELYING_PARTY_ID"),
         # Make sure to read the documentation about the AUDIENCE setting
         # when you configured the identifier as a URL!
-        "AUDIENCE": env["adfs_audience"],
+        "AUDIENCE": env("ADFS_AUDIENCE"),
         # "CA_BUNDLE": "/path/to/ca-bundle.pem",
         "CLAIM_MAPPING": {"first_name": "given_name",
                           "last_name": "family_name",
@@ -239,19 +213,19 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': env["log_level"],
+            'level': env("LOG_LEVEL"),
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'debug.log')
         },
         'console': {
-            'level': env["log_level"],
+            'level': env("LOG_LEVEL"),
             'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
-            'level': env["log_level"],
+            'level': env("LOG_LEVEL"),
             'propagate': True,
         },
     },
