@@ -16,12 +16,19 @@ import os
 import re
 import environ
 
+# Path variables for application
+import pathlib
+
+BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
+
 # Initialise environment variables
 env = environ.Env()
-environ.Env.read_env()
+if os.path.exists(BASE_DIR + "/opal/.env"):
+    environ.Env.read_env()
+else:
+    print("Warning!!!  No .env file found, using default environment variables")
+    environ.Env.read_env("opal/defaults.env")
 
-# Path variables for application
-BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
