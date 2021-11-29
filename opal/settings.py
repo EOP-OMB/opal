@@ -16,8 +16,6 @@ import os
 import re
 import environ
 
-# Path variables for application
-import pathlib
 
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 
