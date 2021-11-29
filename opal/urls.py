@@ -36,4 +36,4 @@ urlpatterns = [
 ]
 
 if env("ADFS_ENABLED") == "True":
-urlpatterns.append(path('oauth2/', include('django_auth_adfs.urls')))
+    urlpatterns.append(path('oauth2/', include('django_auth_adfs.urls')))
