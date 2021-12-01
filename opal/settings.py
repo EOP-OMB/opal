@@ -24,7 +24,7 @@ env = environ.Env()
 if os.path.exists(BASE_DIR + "/opal/.env"):
     environ.Env.read_env()
 else:
-    print("Warning!!!  No .env file found, using default environment variables")
+    # print("Warning!!!  No .env file found, using default environment variables")
     environ.Env.read_env("opal/defaults.env")
 
 
