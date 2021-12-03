@@ -33,7 +33,7 @@
   "fields": {
     "uuid": "901cfe39-9527-49be-b6bd-05d064da8dc6",
     "created_at": "2021-01-07T15:45:33.986Z",
-    "updated_at": "2021-01-07T15:45:34.005Z",
+    "updated_at": "2021-03-25T18:41:52.382Z",
     "title": "Production",
     "short_name": "P",
     "desc": "<p>System is in use for critical mission activities</p>",
@@ -67,6 +67,20 @@
     "desc": "<p>The information system is undergoing a significant change. It is still in use for critical mission activities, but will need to be re-assessed.</p>",
     "remarks": "",
     "state": "under-major-modification"
+  }
+},
+{
+  "model": "ssp.status",
+  "pk": 6,
+  "fields": {
+    "uuid": "69a2372d-2f07-42e8-8cca-6c4170c541d9",
+    "created_at": "2021-03-25T18:41:36.224Z",
+    "updated_at": "2021-03-25T18:42:03.516Z",
+    "title": "Pending Approval",
+    "short_name": "PA",
+    "desc": "<p>System has been reviewed and recomended for Authorization</p>",
+    "remarks": "",
+    "state": "pending"
   }
 }
 ]

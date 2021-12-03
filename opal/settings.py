@@ -9,20 +9,33 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+# noinspection PyCompatibility
+import secrets
 from pathlib import Path
 import os
+import re
+import environ
 
-#Path variables for application
+
 BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
+
+# Initialise environment variables
+env = environ.Env()
+if os.path.exists(BASE_DIR + "/opal/.env"):
+    environ.Env.read_env()
+else:
+    # print("Warning!!!  No .env file found, using default environment variables")
+    environ.Env.read_env("opal/defaults.env")
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 IMPORTED_CATALOGS_DIR = 'catalogs/'
+
 
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
@@ -40,47 +53,20 @@ USE_TZ = True
 
 
 #Set reasonable defaults for environment values
-env_defaults = {
-    "env" : "development",
-    "opal_secret_key" : "=am5inf!4e36^9xwzt3r5$j#kv@g%9c@yya5xa-8&6v!1_bvq!",
-    "debug" : "True",
-    "allowed_hosts" : ["*"],
-    "database" : "sqlite",
-    "db_password" : "",
-    "db_name" : "",
-    "db_user" : "",
-    "db_host" : "localhost",
-    "db_port" : "",
-    "adfs_enabled" : False,
-    "adfs_server" : "adfs.server.url",
-    "adfs_client_id" : "3fbddfb7-bb0a-4eb8-9b8d-756a52e4e6b7",
-    "adfs_client_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_relying_party_id" : "00000000-0000-0000-0000-000000000000",
-    "adfs_audience" : "microsoft:identityserver:00000000-0000-0000-0000-000000000000",
-}
 
-if os.path.exists(os.path.join(BASE_DIR,'opal','local_settings.py')):
-    from opal.local_settings import env
-else:
-    env = {}
 
-for k in env_defaults:
-    if k not in env:
-        env[k] = env_defaults[k]
-        #print("No value found for variable ",k," using default value of " + str(env_defaults[k]))
-    # else:
-        # print("Value found for variable ",k," (",str(env[k]),")")
-
-if env["env"] == "development":
+if env("ENVIRONMENT") == "development":
     print("Running in Development mode!")
 
+if env("ENVIRONMENT") == "production":
+    SECURE_SSL_REDIRECT = True
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env["opal_secret_key"]
+SECRET_KEY = env("OPAL_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env["debug"]
-ALLOWED_HOSTS = env["allowed_hosts"]
-
+DEBUG = env("DEBUG")
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 # Application definition
 
@@ -101,8 +87,8 @@ INSTALLED_APPS = [
     'rest_framework_tricks',
     'ssp.apps.ssp',
     'coverage',
+    'binary_database_files',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,7 +98,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'django.contrib.staticfiles',
 ]
 
 TEMPLATES = [
@@ -134,28 +119,32 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if env["database"] == "sqlite":
+if env("DATABASE") == "postgres":
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR + '/db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
         }
     }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env['db_name'],
-            'USER': env['db_user'],
-            'PASSWORD': env["db_password"],
-            'HOST': env["db_host"],
-            'PORT': env["db_port"],
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
         }
     }
+    print("using database " + DATABASES['default']['NAME'])
 
 REST_FRAMEWORK = {
+    # TODO enable ADFS for REST Framework https://django-auth-adfs.readthedocs.io/en/latest/rest_framework.html
     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
@@ -166,11 +155,11 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
-        # If you're performance testing, you will want to use the browseable API
+        # If you're performance testing, you will want to use the browsable API
         # without forms, as the forms can generate their own queries.
         # If performance testing, enable:
         # 'example.utils.BrowsableAPIRendererWithoutForms',
-        # Otherwise, to play around with the browseable API, enable:
+        # Otherwise, to play around with the browsable API, enable:
         'rest_framework.renderers.BrowsableAPIRenderer'
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
@@ -189,9 +178,12 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    )
+)
 
-if env["adfs_enabled"] :
+if env("ADFS_ENABLED") == "True":
+    # assuming you are running behind a proxy see https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-SECURE_PROXY_SSL_HEADER
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
     INSTALLED_APPS.append('django_auth_adfs')
 
     # With this you can force a user to login without using
@@ -199,27 +191,27 @@ if env["adfs_enabled"] :
     #
     # You can specify URLs for which login is not enforced by
     # specifying them in the LOGIN_EXEMPT_URLS setting.
-    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware',)
+    MIDDLEWARE.append('django_auth_adfs.middleware.LoginRequiredMiddleware', )
 
     AUTHENTICATION_BACKENDS = (
-    'django_auth_adfs.backend.AdfsAuthCodeBackend',
+        'django_auth_adfs.backend.AdfsAuthCodeBackend',
     )
 
     # checkout the documentation of django_auth_adfs for more settings
     AUTH_ADFS = {
-        "SERVER": env["adfs_server"],
-        "CLIENT_ID": env["adfs_client_id"],
-        "RELYING_PARTY_ID": env["adfs_relying_party_id"],
+        "SERVER": env("ADFS_SERVER"),
+        "CLIENT_ID": env("ADFS_CLIENT_ID"),
+        "RELYING_PARTY_ID": env("ADFS_RELYING_PARTY_ID"),
         # Make sure to read the documentation about the AUDIENCE setting
         # when you configured the identifier as a URL!
-        "AUDIENCE": env["adfs_audience"],
+        "AUDIENCE": env("ADFS_AUDIENCE"),
         # "CA_BUNDLE": "/path/to/ca-bundle.pem",
         "CLAIM_MAPPING": {"first_name": "given_name",
-                        "last_name": "family_name",
-                        "email": "email"},
+                          "last_name": "family_name",
+                          "email": "email"},
         "USERNAME_CLAIM": "upn",
         "GROUP_CLAIM": "group"
-        }
+    }
 
     # Configure django to redirect users to the right URL for login
     LOGIN_URL = "django_auth_adfs:login"
@@ -230,19 +222,19 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'WARNING',
+            'level': env("LOG_LEVEL"),
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR,'debug.log')
+            'filename': os.path.join(BASE_DIR, 'debug.log')
         },
         'console': {
-            'level': 'INFO',
+            'level': env("LOG_LEVEL"),
             'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
         'django': {
-            'handlers': ['file','console'],
-            'level': 'DEBUG',
+            'handlers': ['file', 'console'],
+            'level': env("LOG_LEVEL"),
             'propagate': True,
         },
     },

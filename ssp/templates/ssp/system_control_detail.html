@@ -6,7 +6,10 @@
             <p>
                 <a href="{% url 'admin:ssp_system_control_change' object.id %}" target="_blank">
                     <b>{{ object.nist_control.label }}&nbsp;{{ object.nist_control.control_title }}</b>
-                </a> (<a href="{% url 'ssp:clone_control' ssp=ssp_id control=object.id %}" target="_blank">clone</a>)
+                </a>
+                {% if object.control_primary_system.id != ssp_id %}
+                    (<a href="{% url 'ssp:clone_control' ssp=ssp_id control=object.id %}" target="_blank">clone</a>)
+                {% endif %}
                 <b>&nbsp;&nbsp;|&nbsp;&nbsp;Status:</b> {{ object.control_status }}
                 <b>&nbsp;&nbsp;|&nbsp;&nbsp;</b>
                 <b>Control Origination:</b> {{ object.control_origination }}

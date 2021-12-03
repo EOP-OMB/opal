@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from opal.local_settings import env
+import os
+import environ
+from pathlib import Path
+
+BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
+
+env = environ.Env()
+if os.path.exists(BASE_DIR + "/opal/.env"):
+    environ.Env.read_env()
+else:
+    print("Warning!!!  No .env file found, using default environment variables")
+    environ.Env.read_env("opal/defaults.env")
+
 
 urlpatterns = [
     path('', include('ssp.urls'), name='index'),
@@ -23,5 +35,5 @@ urlpatterns = [
     path('tinymce/', include('tinymce.urls')),
 ]
 
-if env["adfs_enabled"]:
+if env("ADFS_ENABLED") == "True":
     urlpatterns.append(path('oauth2/', include('django_auth_adfs.urls')))
