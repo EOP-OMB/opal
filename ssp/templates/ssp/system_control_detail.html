@@ -68,6 +68,14 @@
             </td>
         </tr>
     {% endfor %}
+	<tr>
+	   <td colspan="2">
+	      <p><form action="/admin/ssp/test_evidence/add"><button type="submit">New Test Evidence</button></form></p>
+ 	   </td>
+	</tr>
 </table>
-<p></p>
+{% for e in object.test_evidence_set.all %}
+{% include "ssp/test_evidence_detail.html" with object=e %}
+{% endfor %}
+
 {% endblock %}
