@@ -5,6 +5,7 @@ opal/local_settings.py
 opal.json
 uploads/
 ssp/fixtures/prod_data
+ssp/migrations
 
 # Django #
 *.log
@@ -50,5 +51,5 @@ ENV/
 env.bak/
 venv.bak/
 
-
 /media/
+
