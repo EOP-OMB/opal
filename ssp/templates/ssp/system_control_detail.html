@@ -28,17 +28,21 @@
         <td colspan="2">
             <table style="width: 100%">
                 <tr>
-                    <td class="td-row-header">Parameters:</td>
+                    <td class="td-row-header" valign="top">Parameters:</td>
                     <td class="td-content">
+                        <table>
                         {% for p in object.control_parameters.all %}
-                            <div style="white-space: nowrap">
+                            <tr><td>
+                                <div style="white-space: nowrap">
                                 <a href="{% url 'admin:ssp_control_parameter_change' p.id %}" target="_blank">
                                     {{ p.control_parameter_id }}
                                 </a>:
-                                <i>{{ p.value | safe }}</i>
-                            </div>
-
+                                </div>
+                            </td>
+                                <td><i>{{ p.value | safe }}</i></td>
+                            </tr>
                         {% endfor %}
+                        </table>
                     </td>
                 </tr>
                 <tr>
@@ -60,7 +64,7 @@
     {% for s in object.sorted_statement_set.all %}
         <tr>
             <td class="td-row-header"><a href="{% url 'admin:ssp_control_statement_change' s.id %} "
-                                           target="_blank">{{ s.control_statement_id | safe }}</a></td>
+                                           target="_blank"><span style="white-space: nowrap">{{ s.control_statement_id | safe }}</span></a></td>
             <td class="td-content">
                 {{ s.control_statement_text | safe }}
                 <p>
