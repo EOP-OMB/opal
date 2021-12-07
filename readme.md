@@ -34,4 +34,20 @@ Note: A default superuser account is created in the docker container. You should
 Username: admin\
 Password: admin
 ## Setting environment variables
-OPAL is designed to run well in a containerized environment. It is recomended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. 
+OPAL is designed to run well in a containerized environment. It is recomended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment cariables are:
+   "environment", #development or production
+   "opal_secret_key", #secret key used to create sessions
+   "debug", #True of False
+   "allowed_hosts", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all
+   "database", #sqlite or postgres
+   "db_password", #can be blank if using sqlite
+   "db_name", #name of db in postgres, can be blank if using sqlite
+   "db_user", #can be blank if using sqlite
+   "db_host", #can be blank if using sqlite
+   "db_port", #can be blank if using sqlite
+   "adfs_enabled", #True or False
+   "adfs_server", #can be blank if adfs_enabled is False
+   "adfs_client_id", #can be blank if adfs_enabled is False
+   "adfs_client_id", #can be blank if adfs_enabled is False
+   "adfs_relying_party_id", #can be blank if adfs_enabled is False
+   "adfs_audience" #can be blank if adfs_enabled is False
