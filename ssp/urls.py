@@ -40,4 +40,4 @@ urlpatterns = [
     path('oscal-json/<str:objurl>/<int:objid>', oscal_json, name='oscal_json'),
     path('clone_control/<int:ssp>/<int:control>/', clone_system_control, name='clone_control'),
     path('<int:pk>/print/', system_security_plan_detail_view.as_view(template_name='ssp/system_security_plan_print.html'), name='system_security_plan_print_view'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
