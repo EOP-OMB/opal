@@ -34,7 +34,8 @@ Note: A default superuser account is created in the docker container. You should
 Username: admin\
 Password: admin
 ## Setting environment variables
-OPAL is designed to run well in a containerized environment. It is recomended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment cariables are: \
+OPAL is designed to run well in a containerized environment. It is recomended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: \
+
    "environment", #development or production \
    "opal_secret_key", #secret key used to create sessions \
    "debug", #True of False \
