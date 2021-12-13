@@ -1,0 +1,163 @@
+Metadata-Version: 2.1
+Name: django-nine
+Version: 0.2.4
+Summary: Version checking library.
+Home-page: https://github.com/barseghyanartur/django-nine/
+Author: Artur Barseghyan
+Author-email: artur.barseghyan@gmail.com
+License: GPL-2.0-only OR LGPL-2.1-or-later
+Project-URL: Bug Tracker, https://github.com/barseghyanartur/django-nine/issues
+Project-URL: Documentation, https://django-nine.readthedocs.io/
+Project-URL: Source Code, https://github.com/barseghyanartur/django-nine
+Project-URL: Changelog, https://django-nine.readthedocs.io/en/latest/changelog.html
+Keywords: django,compatibility
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Environment :: Web Environment
+Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Requires-Dist: Django
+
+===========
+django-nine
+===========
+`django-nine` - version checking library for Django.
+
+.. image:: https://img.shields.io/pypi/v/django-nine.svg
+   :target: https://pypi.python.org/pypi/django-nine
+   :alt: PyPI Version
+
+.. image:: https://img.shields.io/pypi/pyversions/django-nine.svg
+    :target: https://pypi.python.org/pypi/django-nine/
+    :alt: Supported Python versions
+
+.. image:: https://img.shields.io/travis/barseghyanartur/django-nine/master.svg
+   :target: http://travis-ci.org/barseghyanartur/django-nine
+   :alt: Build Status
+
+.. image:: https://img.shields.io/badge/license-GPL--2.0--only%20OR%20LGPL--2.1--or--later-blue.svg
+   :target: https://github.com/barseghyanartur/django-nine/#License
+   :alt: GPL-2.0-only OR LGPL-2.1-or-later
+
+.. image:: https://coveralls.io/repos/github/barseghyanartur/django-nine/badge.svg?branch=master
+    :target: https://coveralls.io/github/barseghyanartur/django-nine?branch=master
+    :alt: Coverage
+
+Prerequisites
+=============
+- Python 2.6, 2.7, 3.4, 3.5, 3.6, 3.7 and 3.8.
+- Django 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 2.0, 2.1, 2.2 and 3.0.
+
+Documentation
+=============
+Documentation is available on `Read the Docs
+<http://django-nine.readthedocs.io/>`_.
+
+Installation
+============
+Install latest stable version from PyPI:
+
+.. code-block:: sh
+
+    pip install django-nine
+
+Or latest stable version from GitHub:
+
+.. code-block:: sh
+
+    pip install https://github.com/barseghyanartur/django-nine/archive/stable.zip
+
+Or latest stable version from BitBucket:
+
+.. code-block:: sh
+
+    pip install https://bitbucket.org/barseghyanartur/django-nine/get/stable.zip
+
+Usage
+=====
+Get Django versions
+-------------------
+In code
+~~~~~~~
+For example, if Django version installed in your environment is 1.7.4, then
+the following would be true.
+
+.. code-block:: python
+
+    from django_nine import versions
+
+    versions.DJANGO_1_7  # True
+    versions.DJANGO_LTE_1_7  # True
+    versions.DJANGO_GTE_1_7  # True
+    versions.DJANGO_GTE_1_8  # False
+    versions.DJANGO_GTE_1_4  # True
+    versions.DJANGO_LTE_1_6  # False
+
+In templates
+~~~~~~~~~~~~
+With use of context processors
+##############################
+Add ``nine.context_processors.versions`` to your context processors.
+
+.. code-block:: python
+
+    TEMPLATES[0]['OPTIONS']['context_processors'] += \
+        ['django_nine.context_processors.versions']
+
+Or if you are using an old version of Django:
+
+.. code-block:: python
+
+    TEMPLATE_CONTEXT_PROCESSORS += ['django_nine.context_processors.versions']
+
+Testing
+=======
+Simply type:
+
+.. code-block:: sh
+
+    ./runtests.py
+
+Or use tox:
+
+.. code-block:: sh
+
+    tox
+
+Or use tox to check specific env:
+
+.. code-block:: sh
+
+    tox -e py37
+
+Or run Django tests:
+
+.. code-block:: sh
+
+    ./manage.py test nine --settings=settings.testing
+
+License
+=======
+GPL-2.0-only OR LGPL-2.1-or-later
+
+Support
+=======
+For any issues contact me at the e-mail given in the `Author`_ section.
+
+Author
+======
+Artur Barseghyan <artur.barseghyan@gmail.com>
+
+

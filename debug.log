@@ -1,0 +1,1240 @@
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 4620
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Internal Server Error: /evidence/
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 81, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 63, in resolve_template
+    return select_template(template, using=self.using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(', '.join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: ssp/test_evidence_list.html
+"GET /evidence/ HTTP/1.1" 500 86690
+Session data corrupted
+Internal Server Error: /evidence/
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 211, in render
+    nodelist.append(node.render_annotated(context))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'test_evidence_detail_view' not found. 'test_evidence_detail_view' is not a valid view function or pattern name.
+"GET /evidence/ HTTP/1.1" 500 184476
+Session data corrupted
+Internal Server Error: /evidence/
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 211, in render
+    nodelist.append(node.render_annotated(context))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'test_evidence_detail_view' not found. 'test_evidence_detail_view' is not a valid view function or pattern name.
+"GET /evidence/ HTTP/1.1" 500 184476
+Session data corrupted
+Internal Server Error: /evidence/
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 211, in render
+    nodelist.append(node.render_annotated(context))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'test_evidence_detail_view' not found. 'test_evidence_detail_view' is not a valid view function or pattern name.
+"GET /evidence/ HTTP/1.1" 500 184476
+Session data corrupted
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 81, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 63, in resolve_template
+    return select_template(template, using=self.using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(', '.join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: ssp/test_evidence_detail.html
+"GET /evidence/2 HTTP/1.1" 500 86924
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /media/OPC_Boudary_diagram.png
+Not Found: /media/OPC_Data_Flow_diagram.jpg
+"GET /media/OPC_Data_Flow_diagram.jpg HTTP/1.1" 404 5424
+"GET /media/OPC_Boudary_diagram.png HTTP/1.1" 404 5418
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/oj8588/opal/ssp/views.py", line 106, in get
+    return render(request, 'test_evidence_detail.html',context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: test_evidence_detail.html
+"GET /evidence/2 HTTP/1.1" 500 97818
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 26, in some_string
+    return userinfo["token"]
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163670
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 26, in some_string
+    return userinfo["token"]
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163670
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 26, in some_string
+    return userinfo["token"]
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163680
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 26, in some_string
+    return userinfo["token"]
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163808
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 32, in some_string
+    return r.text
+NameError: name 'r' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163760
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 32, in some_string
+    return userinfo['token']
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163844
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 32, in some_string
+    return userinfo['token']
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163707
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 988, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 671, in resolve
+    obj = self.var.resolve(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 796, in resolve
+    value = self._resolve_lookup(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 858, in _resolve_lookup
+    current = current()
+  File "/home/oj8588/opal/ssp/models/evidence.py", line 32, in some_string
+    return userinfo['token']
+NameError: name 'userinfo' is not defined
+"GET /evidence/2 HTTP/1.1" 500 163844
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 167, in render
+    values = list(values)
+TypeError: 'ManyRelatedManager' object is not iterable
+"GET /evidence/2 HTTP/1.1" 500 146556
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 167, in render
+    values = list(values)
+TypeError: 'ManyRelatedManager' object is not iterable
+"GET /evidence/2 HTTP/1.1" 500 146556
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 167, in render
+    values = list(values)
+TypeError: 'ManyRelatedManager' object is not iterable
+"GET /evidence/2 HTTP/1.1" 500 146556
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 81, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 63, in resolve_template
+    return select_template(template, using=self.using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 813, in do_for
+    sequence = parser.compile_filter(bits[in_index + 1])
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 563, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 663, in __init__
+    "from '%s'" % (token[upto:], token))
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '()' from 'object.results.all()'
+"GET /evidence/2 HTTP/1.1" 500 173328
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 81, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 63, in resolve_template
+    return select_template(template, using=self.using)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loaders/base.py", line 30, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 478, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 814, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 449, in parse
+    raise self.error(token, e)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 447, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 563, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 663, in __init__
+    "from '%s'" % (token[upto:], token))
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['file']' from 'request.FILES['file']'
+"GET /evidence/2 HTTP/1.1" 500 186125
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Session data corrupted
+Internal Server Error: /evidence/2
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: ssp_test_evidence.result
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/detail.py", line 106, in get
+    self.object = self.get_object()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/views/generic/detail.py", line 52, in get_object
+    obj = queryset.get()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/models/query.py", line 425, in get
+    num = len(clone)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/models/query.py", line 269, in __len__
+    self._fetch_all()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/models/query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/models/query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/models/sql/compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: ssp_test_evidence.result
+"GET /evidence/2 HTTP/1.1" 500 154894
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /media/evidence/au-3_test_results.csv
+"GET /media/evidence/au-3_test_results.csv HTTP/1.1" 404 5439
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    response = response.render()
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 105, in render
+    self.content = self.rendered_content
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/response.py", line 83, in rendered_content
+    return template.render(context, self._request)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 170, in render
+    return self._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/base.py", line 905, in render_annotated
+    return self.render(context)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/template/defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/oj8588/opal/venv/lib64/python3.6/site-packages/django/urls/resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'test_evidence_list_view' not found. 'test_evidence_list_view' is not a valid view function or pattern name.
+"GET / HTTP/1.1" 500 151963
+Not Found: /evidence/evidence/au-3_test_results.csv
+"GET /evidence/evidence/au-3_test_results.csv HTTP/1.1" 404 5448
+Not Found: /evidence/evidence/au-3_test_results.csv
+"GET /evidence/evidence/au-3_test_results.csv HTTP/1.1" 404 5448
+Not Found: /evidence/evidence/au-3_test_results.csv
+"GET /evidence/evidence/au-3_test_results.csv HTTP/1.1" 404 5448
+Not Found: /evidence/au-3_test_results.csv
+"GET /evidence/au-3_test_results.csv HTTP/1.1" 404 5421
+Not Found: /media/au-3_test_results_GbCujUc.csv
+"GET /media/au-3_test_results_GbCujUc.csv HTTP/1.1" 404 5436
+Not Found: /evidence/au-3_test_results_GbCujUc.csv
+"GET /evidence/au-3_test_results_GbCujUc.csv HTTP/1.1" 404 5445
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5364
+Not Found: /evidence/au-3_test_results_GbCujUc.csv
+"GET /evidence/au-3_test_results_GbCujUc.csv HTTP/1.1" 404 5445
+Not Found: /evidence/au-3_test_results_GbCujUc.csv
+"GET /evidence/au-3_test_results_GbCujUc.csv HTTP/1.1" 404 5445
+Not Found: /evidence/au-3_test_results_GbCujUc.csv
+"GET /evidence/au-3_test_results_GbCujUc.csv HTTP/1.1" 404 5445
+Not Found: /media/au-3_test_results.csv
+"GET /media/au-3_test_results.csv HTTP/1.1" 404 5412
+Not Found: /media/au-3_test_results_1F24NLZ.csv
+"GET /media/au-3_test_results_1F24NLZ.csv HTTP/1.1" 404 5436
+Not Found: /media/au-3_test_results_NFe7HJr.csv
+"GET /media/au-3_test_results_NFe7HJr.csv HTTP/1.1" 404 5436
+Not Found: /media/au-3_test_results.csv
+"GET /media/au-3_test_results.csv HTTP/1.1" 404 5412
+Not Found: /media/au-3_test_results_1F24NLZ.csv
+"GET /media/au-3_test_results_1F24NLZ.csv HTTP/1.1" 404 5436
+Not Found: /media/au-3_test_results_NFe7HJr.csv
+"GET /media/au-3_test_results_NFe7HJr.csv HTTP/1.1" 404 5436
+Not Found: /media/au-3_test_results.csv
+"GET /media/au-3_test_results.csv HTTP/1.1" 404 5412
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5538
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5538
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5538
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /media/MAX_Accreditation_Boundary_New_Reviewed_Version_20200410.png
+Not Found: /media/MAX.gov_Data_Flow_Diagrams_1-0.jpg
+"GET /media/MAX_Accreditation_Boundary_New_Reviewed_Version_20200410.png HTTP/1.1" 404 1919
+"GET /media/MAX.gov_Data_Flow_Diagrams_1-0.jpg HTTP/1.1" 404 1841
+Not Found: /media/OPC_Data_Flow_diagram.jpg
+Not Found: /media/OPC_Boudary_diagram.png
+"GET /media/OPC_Data_Flow_diagram.jpg HTTP/1.1" 404 1814
+"GET /media/OPC_Boudary_diagram.png HTTP/1.1" 404 1808
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5539
+Session data corrupted
+Session data corrupted
+Session data corrupted
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7204
+"GET /static/ssp/css/simple-sidebar.css HTTP/1.1" 304 0
+"GET /static/ssp/css/stylesheet.css HTTP/1.1" 304 0
+"GET /static/ssp/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 0
+"GET /static/ssp/vendor/jquery/jquery.min.js HTTP/1.1" 304 0
+"GET /static/ssp/images/red_fire_opal.gif HTTP/1.1" 304 0
+"GET /static/ssp/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5747
+"GET /1 HTTP/1.1" 200 1788406
+"GET /control/ HTTP/1.1" 200 1064089
+"GET /admin/ HTTP/1.1" 302 0
+"GET /admin/login/?next=/admin/ HTTP/1.1" 200 2199
+"GET /static/admin/css/base.css HTTP/1.1" 304 0
+"GET /static/admin/css/login.css HTTP/1.1" 304 0
+"GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+"GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+"GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+"GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+"POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+"GET /admin/ HTTP/1.1" 200 25853
+"GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+"GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+"GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+"GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+"GET /admin/ssp/system_security_plan/ HTTP/1.1" 200 20917
+"GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+"GET /static/admin/js/core.js HTTP/1.1" 304 0
+"GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+"GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+"GET /admin/jsi18n/ HTTP/1.1" 200 3187
+"GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+"GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+"GET /static/admin/js/actions.js HTTP/1.1" 304 0
+"GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+"GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+"GET /admin/ssp/system_security_plan/7/change/ HTTP/1.1" 200 379084
+"GET /static/admin/css/forms.css HTTP/1.1" 304 0
+"GET /static/admin/js/calendar.js HTTP/1.1" 200 7788
+"GET /static/admin/js/collapse.js HTTP/1.1" 200 1803
+"GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 200 19750
+"GET /admin/jsi18n/ HTTP/1.1" 200 3187
+"GET /static/tinymce/tinymce.min.js HTTP/1.1" 304 0
+"GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+"GET /static/django_tinymce/init_tinymce.js HTTP/1.1" 304 0
+"GET /static/admin/js/SelectBox.js HTTP/1.1" 200 4257
+"GET /static/admin/js/SelectFilter2.js HTTP/1.1" 200 12350
+"GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+"GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+"GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+"GET /static/tinymce/themes/silver/theme.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/icons/default/icons.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/autolink/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/link/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/advlist/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/lists/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/image/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/charmap/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/print/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/searchreplace/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/visualblocks/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/preview/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/anchor/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/fullscreen/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/code/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/media/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/paste/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/table/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/insertdatetime/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/help/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/plugins/wordcount/plugin.min.js HTTP/1.1" 304 0
+"GET /static/tinymce/skins/ui/oxide/skin.min.css HTTP/1.1" 304 0
+"GET /static/tinymce/skins/ui/oxide/content.min.css HTTP/1.1" 304 0
+"GET /static/tinymce/skins/content/default/content.min.css HTTP/1.1" 304 0
+"GET /static/admin/img/search.svg HTTP/1.1" 200 458
+"GET /static/admin/img/icon-calendar.svg HTTP/1.1" 200 1086
+"GET /static/admin/img/selector-icons.svg HTTP/1.1" 200 3291
+"GET / HTTP/1.1" 200 7204
+"GET /control/ HTTP/1.1" 200 1064089
+"GET /static/ssp/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 200 315300
+"GET /static/ssp/vendor/bootstrap/css/bootstrap.min.css.map HTTP/1.1" 200 646432
+/usr/lib64/python3.6/_sysconfigdata_m_linux_x86_64-linux-gnu.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7204
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5747
+"GET / HTTP/1.1" 200 7204
+"GET /1 HTTP/1.1" 200 1788406
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7204
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5747
+"GET /static/ssp/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 200 315300
+"GET /static/ssp/vendor/bootstrap/css/bootstrap.min.css.map HTTP/1.1" 200 646432
+/home/oj8588/opal/ssp/models/evidence.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7262
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 200 21307
+"GET / HTTP/1.1" 200 7262
+"GET /static/ssp/vendor/bootstrap/css/bootstrap.min.css.map HTTP/1.1" 200 646432
+"GET /static/ssp/vendor/bootstrap/js/bootstrap.bundle.min.js.map HTTP/1.1" 200 315300
+"GET /control/ HTTP/1.1" 200 1064147
+/home/oj8588/opal/ssp/urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7262
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5922
+"GET /control/ HTTP/1.1" 200 1064147
+"GET /control/ HTTP/1.1" 200 1064147
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 304 0
+"GET /control/ HTTP/1.1" 200 1062844
+"GET /control/ HTTP/1.1" 200 1064147
+"GET /control/ HTTP/1.1" 200 1064225
+"GET /control/ HTTP/1.1" 200 1064270
+"GET /control/ HTTP/1.1" 200 1064500
+"GET /control/ HTTP/1.1" 200 1064500
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 304 0
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7492
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5922
+"GET /control/ HTTP/1.1" 200 1064500
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 7492
+"GET /static/ssp/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 304 0
+"GET /static/ssp/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 304 0
+"GET /static/ssp/images/red_fire_opal.gif HTTP/1.1" 304 0
+"GET /static/ssp/css/simple-sidebar.css HTTP/1.1" 304 0
+"GET /static/ssp/css/stylesheet.css HTTP/1.1" 304 0
+"GET /static/ssp/vendor/jquery/jquery.min.js HTTP/1.1" 304 0
+"GET /static/ssp/vendor/autocomplete.js HTTP/1.1" 304 0
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5922
+"GET /control/ HTTP/1.1" 200 1064500

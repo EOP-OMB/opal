@@ -1,0 +1,3 @@
+rest_framework_json_api
+rest_framework_json_api/django_filters
+rest_framework_json_api/schemas

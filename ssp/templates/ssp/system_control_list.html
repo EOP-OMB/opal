@@ -3,7 +3,9 @@
 {% block content %}
 <h1>System Controls</h1>
     <form method="get">
-        {{ filter.form.as_p }}
+	    <input type="text" placeholder="Search..." class="lookup form-control">
+	    <input type="hidden" id="hidden-field">
+        {{ filter.form.as_p }} 
         <button type="submit">Filter</button>
     </form>
     <table style="vertical-align: top; border-style: solid;" >
