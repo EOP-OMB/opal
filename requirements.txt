@@ -18,7 +18,7 @@ django-filter==21.1
 django-fixture-magic==0.1.5
 django-nine==0.2.5
 django-rest-framework-tricks==0.2.11
-django-tinymce==3.3.0
+django-tinymce==3.4.0
 djangorestframework==3.12.4
 djangorestframework-jsonapi==4.2.1
 filelock==3.4.0
