@@ -26,7 +26,7 @@ future==0.18.2
 idna==3.3
 inflection==0.5.1
 Jinja2==3.0.3
-lxml==4.6.4
+lxml==4.6.5
 MarkupSafe==2.0.1
 mod-wsgi==4.9.0
 oidcmsg==1.5.3
