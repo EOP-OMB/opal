@@ -6,30 +6,6 @@ from ssp.models.controls import *
 
 information_type_level_choices = [('high', 'High'), ('moderate', 'Moderate'), ('low', 'Low')]
 
-class system_component(ExtendedBasicModel):
-    """
-    A component is a subset of the information system that is either severable or
-    should be described in additional detail. For example, this might be an authentication
-    provider or a backup tool.
-    """
-    component_type = models.CharField(max_length=100)
-    component_information_types = customMany2ManyField(information_type)
-    component_status = models.ForeignKey(status, on_delete=models.PROTECT, null=True, related_name='system_component_set')
-    component_responsible_roles = customMany2ManyField(user_role)
-
-    @staticmethod
-    def get_serializer_json(id=1):
-        queryset = system_component.objects.filter(pk=id)
-        serializer = system_component_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data))
-
-    @property
-    def get_serializer_json_OSCAL(self):
-        queryset = system_component.objects.filter(pk=self.pk)
-        serializer = system_component_serializer(queryset, many=True)
-        return (serializerJSON(serializer.data, SSP=True))
-
-
 
 class port_range(BasicModel):
     start = models.IntegerField()
@@ -69,6 +45,31 @@ class protocol(BasicModel):
         serializer = protocol_serializer(queryset, many=True)
         return (serializerJSON(serializer.data, SSP=True))
 
+
+
+class system_component(ExtendedBasicModel):
+    """
+    A component is a subset of the information system that is either severable or
+    should be described in additional detail. For example, this might be an authentication
+    provider or a backup tool.
+    """
+    component_type = models.CharField(max_length=100)
+    component_information_types = customMany2ManyField(information_type)
+    component_status = models.ForeignKey(status, on_delete=models.PROTECT, null=True, related_name='system_component_set')
+    component_responsible_roles = customMany2ManyField(user_role)
+    component_protocols = customMany2ManyField(protocol)
+
+    @staticmethod
+    def get_serializer_json(id=1):
+        queryset = system_component.objects.filter(pk=id)
+        serializer = system_component_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data))
+
+    @property
+    def get_serializer_json_OSCAL(self):
+        queryset = system_component.objects.filter(pk=self.pk)
+        serializer = system_component_serializer(queryset, many=True)
+        return (serializerJSON(serializer.data, SSP=True))
 
 
 class system_service(ExtendedBasicModel):
