@@ -3,7 +3,8 @@
 <table style="alignment: center; border-style: solid; width: 90%; margin-bottom: 10px ">
     <tr>
         <td colspan="2">
-            <p><b>{{ object.label }}&nbsp;{{ object.control_title }}</b></p>
+		<p><b>{{ object.label }}&nbsp;{{ object.control_title }}</b>
+		<a href="{% url 'ssp:add_control' ssp=ssp_id nist_control_to_add=object.id %}">Create</a></p>
             <p>
                 <b>Statement:</b><br>
                 {{ object.get_statement | safe }}
@@ -12,6 +13,7 @@
                 <b>Guidance:</b><br>
                 {{ object.get_guidance | safe }}
             </p>
+
         </td>
     </tr>
 </table>

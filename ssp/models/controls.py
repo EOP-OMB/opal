@@ -124,9 +124,12 @@ class nist_control(PrimitiveModel):
 
     @property
     def all_text(self):
-        html = "<b>" + self.long_title + "</b>"
-        html = html + "<p>" + self.get_statement + "</p>"
-        return mark_safe(html)
+        if self.long_title:
+            html = "<b>" + self.long_title + "</b>"
+            html = html + "<p>" + self.get_statement + "</p>"
+            return mark_safe(html)
+        else:
+            return "no nist_control found"
 
     def __str__(self):
         return '(' + str(self.catalog) + ')' + self.long_title
@@ -248,7 +251,10 @@ class system_control(CloneMixin, ExtendedBasicModel):
 
     @property
     def nist_control_text(self):
-        return self.nist_control.all_text
+        if self.nist_control:
+            return self.nist_control.all_text
+        else:
+            return "no nist control"
 
     @property
     def system_security_plan_title(self):

@@ -19,6 +19,9 @@
 
     <!-- OPAL custom styles -->
     <link href="{% static 'ssp/css/stylesheet.css' %}" rel="stylesheet">
+
+    <!-- Autocomplete styles -->
+    <link href="{% static 'ssp/css/auto-complete.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -74,7 +77,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'ssp/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'ssp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'ssp/vendor/autocomplete.js' %}"></script>
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {
@@ -82,21 +84,6 @@
         $("#wrapper").toggleClass("toggled");
     });
 
-const myData = [{
-	"id": 1,
-	"name": 'Item 1',
-	"ignore": false
-      },{
-	"id": 2,
-	"name": 'Item 2',
-	"ignore": false
-}]
-
-$('.lookup').autocomplete({
-	nameProperty: 'name',
-	valueField: '#hidden-field',
-	dataSource: myData
-});
 </script>
 
 </body>

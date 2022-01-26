@@ -2,10 +2,15 @@
 {% load static %}
 {% block content %}
 <h1>System Controls</h1>
+{{ choices }}
     <form method="get">
 	    <input type="text" placeholder="Search..." class="lookup form-control">
 	    <input type="hidden" id="hidden-field">
-        {{ filter.form.as_p }} 
+	    {% for choice in system_control_list.choices %}
+	   	the choice is {{ choice }}
+	    {% endfor %}
+	   
+	    {{ filter.form.as_p }} 
         <button type="submit">Filter</button>
     </form>
     <table style="vertical-align: top; border-style: solid;" >
@@ -21,7 +26,11 @@
                     <td style="border-left-style: solid; border-right-style: solid; vertical-align: top">{{ control.control_primary_system }}</td>
                     <td  style="border-left-style: solid; border-right-style: solid">
                         <table>
-                            <tr><td colspan="2">{{ control.nist_control_text }}</td></tr>
+			    <tr><td colspan="2">
+					    {% if control.nist_control_text %}
+					    {{ control.nist_control_text }}
+				            {% endif %}
+				    </td></tr>
                             <tr><td colspan="2" bgcolor="#483d8b" height="8px"></td></tr>
                             {% for p in control.control_parameters.all %}
                                 <tr>
@@ -47,3 +56,4 @@
     <p>No controls are available.</p>
 {% endif %}
 {% endblock %}
+
