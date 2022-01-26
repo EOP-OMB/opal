@@ -8,7 +8,7 @@ Provides a simple web application for managing System Security Plans and related
 # Deployment Instructions
 ## Running a local development version using mysql
 1. Clone the repository to your local directory\
-   `git clone https://gitlab.max.gov/max-security/opal.git`
+   `git clone https://github.com/eop-omb/opal.git`
 1. It is recomended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
    `python3 -m venv venv`\
    `source venv/bin/activate`
