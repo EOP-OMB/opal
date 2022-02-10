@@ -1,0 +1,21 @@
+Metadata-Version: 1.1
+Name: pyClamd
+Version: 0.4.0
+Summary: pyClamd is a python interface to Clamd (Clamav daemon).
+Home-page: http://xael.org/pages/pyclamd-en.html
+Author: Alexandre Norman
+Author-email: norman@xael.org
+License: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Download-URL: http://xael.org/norman/python/pyclamd/
+Description: pyClamd is a python interface to Clamd (Clamav daemon). By using pyClamd, you can add virus detection capabilities to your python software in an efficient and easy way. Instead of pyClamav which uses libclamav, pyClamd may be used by a closed source product.
+Keywords: python,clamav,antivirus,scanner,virus,libclamav
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: System
+Classifier: Topic :: Security

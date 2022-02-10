@@ -98,15 +98,31 @@ class evidence_list_view(generic.ListView):
 class evidence_detail_view(generic.DetailView):
     model = test_evidence
 
+def system_control_list_view_custom(request):
+    choices = system_control._meta.get_field('control_status').choices
+    systems = []
+    for system in system_security_plan.objects.all():
+        #item = ()
+        #item.append(system.title)
+        #item.append(system.id)
+        item = (str(system.id),system.title)
+        systems.append(item)
+    controls = system_control.objects.all()
+    template = loader.get_template('ssp/system_control_list_view_custom.html')
+    context = {
+        'choices': choices,
+        'system_control_list': controls,
+        'systems': systems
+    }
+    return HttpResponse(template.render(context, request))
+
 class system_control_list_view_filter(django_filters.FilterSet):
     class Meta:
         model = system_control
         fields = ['control_status', 'nist_control__group_title', 'control_primary_system']
 
-
 class system_control_list_view(generic.ListView):
     model = system_control
-
 
 class system_control_detail_view(generic.DetailView):
     model = system_control
@@ -270,7 +286,7 @@ def clone_system_control(result, ssp, control):
     clone = c.clone_control(new_ssp)
     return redirect('admin:ssp_system_control_change', clone.pk)
 
-def add_system_control(ssp, nist_control_to_add, inherit_from_ssp="None"):
+def add_system_control(result, ssp, nist_control_to_add, inherit_from_ssp="None"):
     s = system_security_plan.objects.get(pk=ssp)
     nc = nist_control.objects.get(pk=nist_control_to_add)
     new_control = system_control(title =s.title + ' ' + nc.label,
@@ -287,7 +303,8 @@ def add_system_control(ssp, nist_control_to_add, inherit_from_ssp="None"):
             for s in source_control.control_statements:
                 new_control.control_statements.add(s)
     new_control.save()
-    return new_control
+    return redirect('admin:ssp_system_control_change', new_control.pk)
+
 
 
 

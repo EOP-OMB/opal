@@ -148,10 +148,10 @@
             <p></p>
         {% endfor %}
     <h3><a id="missing_system_controls">Missing System Controls</a></h3>
-        {% for c in object.get_missing_controls %}
+    	{% for c in object.get_missing_controls %}
             {% with c as control %}
                 <a id="control:{{ control.id }}"></a>
-                {% include "ssp/nist_control_detail.html" %}
+                {% include "ssp/nist_control_detail.html" with object=c ssp_id=object.id %}
             {% endwith %}
             <p></p>
         {% endfor %}

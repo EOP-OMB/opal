@@ -19,6 +19,9 @@
 
     <!-- OPAL custom styles -->
     <link href="{% static 'ssp/css/stylesheet.css' %}" rel="stylesheet">
+
+    <!-- Autocomplete styles -->
+    <link href="{% static 'ssp/css/auto-complete.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -74,13 +77,13 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'ssp/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'ssp/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
 </script>
 
 </body>
