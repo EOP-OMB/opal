@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{{ catalog.to_html | safe}}
+{% endblock %}

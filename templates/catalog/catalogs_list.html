@@ -1,0 +1,9 @@
+{% if catalog_list %}
+    <ul>
+    {% for item in catalog_list %}
+        <a class="collapse-item" href="{% url 'catalog:catalog_detail_view' item.id %}">{{ item }}</a>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Catalogs are available.</p>
+{% endif %}

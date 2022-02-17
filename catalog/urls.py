@@ -15,16 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.views.generic import TemplateView
-from django.conf.urls.static import static
-from django.conf import settings
-from common.views import *
+from catalog.views import *
 
+app_name = 'catalog'
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls'), name='catalog'),
-    path('common/', include('common.urls'), name='common'),
-    path('ssp/', include('ssp.urls'), name='ssp'),
-    # path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
-    path('', base_view.as_view(), name='home_page'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', catalog_list_view.as_view(), name='catalog_list_view'),
+    path('<int:pk>', catalog_detail_view.as_view(), name='catalog_detail_view'),
+]
