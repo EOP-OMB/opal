@@ -1,7 +1,8 @@
-!/ssp/fixtures/prod_data/
-!/ssp/migrations/
-!/db.sqlite3
-!/debug.log
-!/opal_deployment_config.yaml
-!/.gitignore
-
+/ssp/fixtures/prod_data/
+**/migrations/*
+*.sqlite3
+*.log
+/opal_deployment_config.yaml
+/.gitignore
+/.idea/
+/opal/.env
