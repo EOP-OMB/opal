@@ -5,3 +5,5 @@
 !/opal_deployment_config.yaml
 !/.gitignore
 
+/venv/
+/.idea/
