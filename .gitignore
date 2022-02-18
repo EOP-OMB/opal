@@ -1,7 +1,1 @@
-!/ssp/fixtures/prod_data/
-!/ssp/migrations/
-!/db.sqlite3
-!/debug.log
-!/opal_deployment_config.yaml
-!/.gitignore
 
