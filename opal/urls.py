@@ -26,5 +26,5 @@ urlpatterns = [
     path('common/', include('common.urls'), name='common'),
     path('ssp/', include('ssp.urls'), name='ssp'),
     # path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
-    path('', base_view.as_view(), name='home_page'),
+    path('', IndexView.as_view(), name='home_page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -65,7 +65,7 @@
             </a>
             <div id="collapse-ssp" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    {% for item in ssp_list %}
+                    {% for item in obj.ssp_list %}
                         <a class="collapse-item" href="{% url 'ssp:ssp_detail_view' item.id %}">{{ item }}</a>
                     {% endfor %}
                 </div>
@@ -81,7 +81,7 @@
             </a>
             <div id="collapse-catalog" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    {% for item in catalog_list %}
+                    {% for item in obj.catalog_list %}
                         <a class="collapse-item" href="{% url 'catalog:catalog_detail_view' item.id %}">{{ item }}</a>
                     {% endfor %}
                 </div>

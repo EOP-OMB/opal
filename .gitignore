@@ -1,1 +1,6 @@
-
+*.sqlite3
+*.log
+/opal/.env
+migrations/*
+!**/migrations/__init__.py
+/.idea
