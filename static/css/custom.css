@@ -1,0 +1,6 @@
+.nav-item {
+    overflow-wrap: anywhere;
+    overflow: visible;
+    display: flex;
+    flex-wrap: wrap;
+}
