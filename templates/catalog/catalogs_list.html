@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>Catalogs</h1>
 {% if catalog_list %}
     <ul>
     {% for item in catalog_list %}
@@ -7,3 +11,4 @@
 {% else %}
     <p>No Catalogs are available.</p>
 {% endif %}
+{% endblock %}

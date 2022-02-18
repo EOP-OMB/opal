@@ -13,5 +13,5 @@ class catalog_list_view(ListView):
 
 class catalog_detail_view(DetailView):
     model = catalogs
-    context_object_name = "obj"
+    context_object_name = "catalog"
     template_name = "catalog/catalog_detail.html"

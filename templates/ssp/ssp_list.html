@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 <h1>System Security Plans</h1>
 {% if ssp_list %}
     <ul>
@@ -8,3 +11,4 @@
 {% else %}
     <p>No System Security Plans are available.</p>
 {% endif %}
+{% endblock %}
