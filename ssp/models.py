@@ -454,6 +454,9 @@ class system_characteristics(BasicModel):
         help_text="A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
         )
 
+    def __str__(self):
+        return self.system_name
+
 
 class leveraged_authorizations(BasicModel):
     """
@@ -480,6 +483,8 @@ class leveraged_authorizations(BasicModel):
         help_text="The date the system received its authorization."
         )
 
+    def __str__(self):
+        return self.title
 
 class system_functions(PrimitiveModel):
     class Meta:
@@ -491,6 +496,8 @@ class system_functions(PrimitiveModel):
         help_text="Describes a function performed for a given authorized privilege by this user class."
         )
 
+    def __str__(self):
+        return self.system_functions
 
 class privileges(BasicModel):
     """
@@ -513,6 +520,9 @@ class privileges(BasicModel):
         to=system_functions, verbose_name="Functions Performed",
         help_text="Describes a function performed for a given authorized privilege by this user class."
         )
+
+    def __str__(self):
+        return self.title
 
 
 class users(BasicModel):
@@ -546,6 +556,9 @@ class users(BasicModel):
         to=privileges, verbose_name="Privilege",
         help_text="Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege."
         )
+
+    def __str__(self):
+        return self.title
 
 
 class responsible_roles(BasicModel):
@@ -621,6 +634,9 @@ class components(BasicModel):
         help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object."
         )
 
+    def __str__(self):
+        return self.title
+
 
 class inventory_items(BasicModel):
     """
@@ -692,10 +708,12 @@ class parameters(BasicModel):
         )
     values = ShortTextField(verbose_name="Parameter Value", help_text="A parameter value or set of values.")
 
+    def __str__(self):
+        return self.param_id + ": " + self.values
 
 class implementation_status(BasicModel):
     """
-    Describes the operational status of the system. If 'other' is selected, a remark must be included to describe the current state.
+    Describes the implementation status of the control. If 'Not-Applicable' is selected, a remark must be included to explain the justification.
     """
 
     state_choices = [
