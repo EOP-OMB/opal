@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+<ul>
+{% for item in obj.model_list %}
+    <li>{{ item }}</li>
+{% empty %}
+    <li>Sorry, something went wrong.</li>
+{% endfor %}
+</ul>
+</div>
+<!-- /.container-fluid -->
+{% endblock %}

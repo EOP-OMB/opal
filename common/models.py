@@ -5,8 +5,6 @@ from itertools import chain
 from django.utils.timezone import now
 from common.functions import *
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-# from ssp.models import system_security_plans
-# from catalog.models import catalogs
 
 
 class ShortTextField(models.CharField):

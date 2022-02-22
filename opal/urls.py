@@ -27,4 +27,5 @@ urlpatterns = [
     path('ssp/', include('ssp.urls'), name='ssp'),
     # path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
     path('', IndexView.as_view(), name='home_page'),
+    path('db_status/', DatabaseStatusView.as_view(), name='db_status')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
