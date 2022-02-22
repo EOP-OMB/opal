@@ -1,4 +1,5 @@
 from common.models import *
+from catalog.models import controls
 
 
 system_status_state_choices = [
@@ -916,6 +917,8 @@ class statements(BasicModel):
         help_text="Defines how the referenced component implements a set of controls."
         )
 
+    def __str__(self):
+        return self.statement_id
 
 class implemented_requirements(BasicModel):
     """
@@ -923,8 +926,8 @@ class implemented_requirements(BasicModel):
     """
 
     class Meta:
-        verbose_name = "Control-based Requirement"
-        verbose_name_plural = "Control-based Requirements"
+        verbose_name = "Implemented Requirement"
+        verbose_name_plural = "Implemented Requirements"
 
     control_id = ShortTextField(
         verbose_name="Control Identifier Reference",
@@ -949,6 +952,13 @@ class implemented_requirements(BasicModel):
         help_text="Defines how the referenced component implements a set of controls."
         )
 
+    def __str__(self):
+        try:
+            c = controls.objects.get(control_id=self.control_id)
+            r = c.title
+        except ObjectDoesNotExist:
+            r = self.control_id
+        return r
 
 class control_implementations(BasicModel):
     """
@@ -969,10 +979,12 @@ class control_implementations(BasicModel):
         )
     implemented_requirements = CustomManyToManyField(
         to=implemented_requirements,
-        verbose_name="Control-based Requirements",
+        verbose_name="Control Based Requirements",
         help_text="Describes how the system satisfies controls."
         )
 
+    def __str__(self):
+        return self.description
 
 class system_security_plans(BasicModel):
     """
