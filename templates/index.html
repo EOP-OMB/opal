@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<h1>Step 1: Import Catalogs</h1>
+    <p>The OSCAL catalog model represents a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
+    <p>Click on any of the following links to import these common catalogs:</p>
+    <ul>
+        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-high' %}">NIST SP-800 53 rev5 HIGH baseline</a></li>
+        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-moderate' %}">NIST SP-800 53 rev5 MODERATE baseline</a></li>
+        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-low' %}">NIST SP-800 53 rev5 LOW baseline</a></li>
+        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-privacy' %}">NIST SP-800 53 rev5 PRIVACY baseline</a></li>
+    </ul>
+    {% if context.msg %}
+        {{ msg }}
+    {% endif %}
+<h1>Step 2: Creating a Profile</h1>
+    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you cna create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any System using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance
+    To create a profile start by selecting one of the imported catalogs, or you can start from an existing profile.
+<h1>Step 3: Creating Components</h1>
+    Componenets are used to describe individual system parts.  You cna define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by mutiple systems.  For example, you cna create a component for a hsared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.
 
-                <div class="container-fluid">
-
-
-
-                </div>
-                <!-- /.container-fluid -->
+    When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.
+<h1>Step 4: Control Statements</h1>
+    For every control defined in the profile, a statement must be provided that
 {% endblock %}

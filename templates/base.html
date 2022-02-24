@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>OPAL</title>
 
     {% load static %}
 
@@ -61,6 +61,13 @@
             <a class="nav-link" href="{% url 'ssp:ssp_list_view' %}">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>System Security Plans</span>
+            </a>
+        </li>
+        <!-- Nav Item - System Security Plans Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'control_profile:profile_list_view' %}">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Profiles</span>
             </a>
         </li>
 
@@ -166,7 +173,10 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            {% block content %}{% endblock %}
+            {% block content %}
+
+            {% endblock %}
+        <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
 

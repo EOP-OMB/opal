@@ -8,7 +8,7 @@ from django.apps import apps
 # Create your views here.
 
 class IndexView(TemplateView):
-    template_name = "base.html"
+    template_name = "index.html"
     context_object_name = "obj"
 
     def get_context_data(self, **kwargs):

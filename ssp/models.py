@@ -1,15 +1,15 @@
 from common.models import *
 from catalog.models import controls
 
-
 system_status_state_choices = [
-        ("operational", "Operational: The system is currently operating in production."),
-        ("under-development", "Under Development: The system is being designed, developed, or implemented"),
-        ("under-major-modification",
-         "Under Major Modification: The system is undergoing a major change, development, or transition."),
-        ("disposition", "Disposition: The system is no longer operational."),
-        ("other", "Other: Some other state, a remark must be included to describe the current state.")
-        ]
+    ("operational", "Operational: The system is currently operating in production."),
+    ("under-development", "Under Development: The system is being designed, developed, or implemented"),
+    ("under-major-modification",
+     "Under Major Modification: The system is undergoing a major change, development, or transition."),
+    ("disposition", "Disposition: The system is no longer operational."),
+    ("other", "Other: Some other state, a remark must be included to describe the current state.")
+    ]
+
 
 class import_profiles(BasicModel):
     """
@@ -44,7 +44,7 @@ class system_ids(PrimitiveModel):
     def __str__(self):
         return self.identifier_type + " - " + self.system_id
 
-    def import_oscal(self, oscal_data,logger=None):
+    def import_oscal(self, oscal_data, logger=None):
         if type(oscal_data) is dict:
             if "identifier_type" in oscal_data.keys():
                 self.identifier_type = oscal_data["identifier_type"]
@@ -68,7 +68,7 @@ class information_type_ids(PrimitiveModel):
         help_text="An identifier qualified by the given identification system used, such as NIST SP 800-60."
         )
 
-    def import_oscal(self, oscal_data,logger=None):
+    def import_oscal(self, oscal_data, logger=None):
         if type(oscal_data) is str:
             self.information_type_id = oscal_data
         return self
@@ -138,7 +138,7 @@ class information_type_impact_level(BasicModel):
         else:
             return self.selected
 
-    def import_oscal(self, oscal_data,logger=None):
+    def import_oscal(self, oscal_data, logger=None):
         if type(oscal_data) is str:
             self.base = oscal_data
             self.save()
@@ -209,7 +209,9 @@ class information_types(PrimitiveModel):
 
         html_str = "<div class='card shadow mb-4'>\n"
         html_str += "<!-- Card Header - Accordion -->\n"
-        html_str += "<a href='#collapseCard-" + str(self.uuid) + "' class='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='collapseCardExample'>"
+        html_str += "<a href='#collapseCard-" + str(
+            self.uuid
+            ) + "' class='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='false' aria-controls='collapseCardExample'>"
         html_str += "<h6 class='m-0 font-weight-bold text-primary'>" + self.title + "</h6>\n"
         html_str += "Confidentiality: " + self.confidentiality_impact.adjusted_impact_level + " "
         html_str += "Availability: " + self.availability_impact.adjusted_impact_level + " "
@@ -227,7 +229,7 @@ class information_types(PrimitiveModel):
         html_str += "</div>\n"
         return html_str
 
-    def import_oscal(self, oscal_data,logger=None):
+    def import_oscal(self, oscal_data, logger=None):
         oscal_data = self.fix_field_names(oscal_data)
         if "uuid" in oscal_data.keys():
             # check to see if the information_type already exists.  If not, create it
@@ -431,8 +433,9 @@ class system_characteristics(BasicModel):
         help_text="A target-level of availability for the system, based on the sensitivity of information within the system.",
         null=True
         )
-    status = ShortTextField(verbose_name="Status",
-        help_text="Describes the operational status of the system.",null=True,choices=system_status_state_choices
+    status = ShortTextField(
+        verbose_name="Status",
+        help_text="Describes the operational status of the system.", null=True, choices=system_status_state_choices
         )
     authorization_boundary = models.ForeignKey(
         to=authorization_boundaries, verbose_name="Authorization Boundary",
@@ -486,6 +489,7 @@ class leveraged_authorizations(BasicModel):
     def __str__(self):
         return self.title
 
+
 class system_functions(PrimitiveModel):
     class Meta:
         verbose_name = "Function"
@@ -498,6 +502,7 @@ class system_functions(PrimitiveModel):
 
     def __str__(self):
         return self.system_functions
+
 
 class privileges(BasicModel):
     """
@@ -585,7 +590,9 @@ class responsible_roles(BasicModel):
 
 class components(BasicModel):
     """
-    A defined component that can be part of an implemented system. Components may be products, services, application programming interface (APIs), policies, processes, plans, guidance, standards, or other tangible items that enable security and/or privacy.
+    A defined component that can be part of an implemented system. Components may be products, services, application
+    programming interface (APIs), policies, processes, plans, guidance, standards, or other tangible items that enable
+    security and/or privacy.
     """
 
     class Meta:
@@ -626,8 +633,9 @@ class components(BasicModel):
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
-    status = ShortTextField(verbose_name="Status",
-        help_text=" Describes the operational status of the system component.",choices=system_status_state_choices
+    status = ShortTextField(
+        verbose_name="Status",
+        help_text=" Describes the operational status of the system component.", choices=system_status_state_choices
         )
     responsible_roles = CustomManyToManyField(
         to=responsible_roles, verbose_name="Responsible Roles",
@@ -710,6 +718,7 @@ class parameters(BasicModel):
 
     def __str__(self):
         return self.param_id + ": " + self.values
+
 
 class implementation_status(BasicModel):
     """
@@ -895,7 +904,7 @@ class by_components(BasicModel):
     export = models.ForeignKey(
         to=export, verbose_name="Export",
         help_text="Identifies content intended for external consumption, such as with leveraged organizations.",
-        on_delete=models.CASCADE,null=True
+        on_delete=models.CASCADE, null=True
         )
     inherited = CustomManyToManyField(
         to=inherited, verbose_name="Inherited Control Implementation",
@@ -938,6 +947,7 @@ class statements(BasicModel):
     def __str__(self):
         return self.statement_id
 
+
 class implemented_requirements(BasicModel):
     """
     Describes how the system satisfies an individual control.
@@ -978,6 +988,7 @@ class implemented_requirements(BasicModel):
             r = self.control_id
         return r
 
+
 class control_implementations(BasicModel):
     """
     Describes how the system satisfies a set of controls.
@@ -1004,6 +1015,7 @@ class control_implementations(BasicModel):
     def __str__(self):
         return self.description
 
+
 class system_security_plans(BasicModel):
     """
     A system security plan, such as those described in NIST SP 800-18
@@ -1014,14 +1026,14 @@ class system_security_plans(BasicModel):
         verbose_name_plural = "System Security Plans (SSPs)"
 
     metadata = models.ForeignKey(to=metadata, on_delete=models.CASCADE)
-    import_profile = models.ForeignKey(to=import_profiles, on_delete=models.CASCADE,null=True)
+    import_profile = models.ForeignKey(to=import_profiles, on_delete=models.CASCADE, null=True)
     system_characteristics = models.ForeignKey(to=system_characteristics, on_delete=models.CASCADE)
     system_implementation = models.ForeignKey(to=system_implementations, on_delete=models.CASCADE)
     control_implementation = models.ForeignKey(to=control_implementations, on_delete=models.CASCADE)
     back_matter = models.ForeignKey(
         to=back_matter, verbose_name="Back matter",
         help_text="Provides a collection of identified resource objects that can be referenced by a link with a rel value of 'reference' and an href value that is a fragment '#' followed by a reference to a reference identifier. Other specialized link 'rel' values also use this pattern when indicated in that context of use.",
-        on_delete=models.CASCADE,null=True
+        on_delete=models.CASCADE, null=True
         )
 
     def __str__(self):

@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from catalog.views import *
+from control_profile.views import *
 
-app_name = 'catalog'
+
+app_name = 'control_profile'
 urlpatterns = [
-    path('', catalog_list_view.as_view(), name='catalog_list_view'),
-    path('<int:pk>', catalog_detail_view.as_view(), name='catalog_detail_view'),
-    path('import/<str:catalog_link>', import_catalog_view, name='import_catalog_view')
+    path('', profile_list_view.as_view(), name='profile_list_view'),
+    path('<int:pk>', profile_detail_view.as_view(), name='profile_detail_view'),
+    path('new', createProfileView.as_view() , name='create_profile_view')
 ]

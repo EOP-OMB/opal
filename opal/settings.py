@@ -24,7 +24,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
-]
+    ]
 
 env = environ.Env()
 if str(BASE_DIR) + "/opal/.env":
@@ -33,12 +33,10 @@ else:
     # print("Warning!!!  No .env file found, using default environment variables")
     environ.Env.read_env("str(BASE_DIR) + opal/defaults.env")
 
-
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
-
 
 if env("ENVIRONMENT") == "development":
     print("Running in Development mode!")
@@ -49,12 +47,10 @@ if env("ENVIRONMENT") == "production":
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("OPAL_SECRET_KEY")
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
-#ALLOWED_HOSTS = env("ALLOWED_HOSTS")
-ALLOWED_HOSTS = ("localhost","127.0.0.1",)
-
+# ALLOWED_HOSTS = env("ALLOWED_HOSTS")
+ALLOWED_HOSTS = ("localhost", "127.0.0.1",)
 
 # Application definition
 
@@ -66,10 +62,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'coverage',
+    'markdownx',
+    'django_extensions',
     'common',
     'catalog',
+    'control_profile',
     'ssp',
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,15 +78,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    ]
 
 ROOT_URLCONF = 'opal.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,16 +93,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+                ],
+            },
         },
-    },
-]
+    ]
 
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 WSGI_APPLICATION = 'opal.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -118,17 +115,16 @@ if env("DATABASE") == "postgres":
             'PASSWORD': env('DB_PASSWORD'),
             'HOST': env('DB_HOST'),
             'PORT': env('DB_PORT'),
+            }
         }
-    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
+            }
         }
-    }
     print("using database " + DATABASES['default']['NAME'])
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -136,18 +132,17 @@ else:
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
+        },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
+        },
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -159,7 +154,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -179,17 +173,17 @@ LOGGING = {
             'level': env("LOG_LEVEL"),
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'opal.log')
-        },
+            },
         'console': {
             'level': env("LOG_LEVEL"),
             'class': 'logging.StreamHandler',
-        }
-    },
+            }
+        },
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
             'level': env("LOG_LEVEL"),
             'propagate': True,
+            },
         },
-    },
-}
+    }

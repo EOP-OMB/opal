@@ -25,7 +25,9 @@ urlpatterns = [
     path('catalog/', include('catalog.urls'), name='catalog'),
     path('common/', include('common.urls'), name='common'),
     path('ssp/', include('ssp.urls'), name='ssp'),
-    # path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
+    path('profiles/', include('control_profile.urls'), name='control_profile'),
+    #path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
     path('', IndexView.as_view(), name='home_page'),
-    path('db_status/', DatabaseStatusView.as_view(), name='db_status')
+    path('db_status/', DatabaseStatusView.as_view(), name='db_status'),
+    path('markdownx/', include('markdownx.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

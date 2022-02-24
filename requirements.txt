@@ -3,4 +3,11 @@ backports.zoneinfo==0.2.1
 coverage==6.3.1
 Django==4.0.2
 django-environ==0.8.1
+django-extensions==3.1.5
+django-markdownx==4.0.0b1
+importlib-metadata==4.11.1
+Markdown==3.3.6
+Pillow==9.0.1
+pygraphviz==1.9
 sqlparse==0.4.2
+zipp==3.7.0

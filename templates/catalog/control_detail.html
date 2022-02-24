@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load markdown_extras %}
 {% block content %}
-{{ catalog.to_html | markdown | safe}}
+{{ control.to_html | safe}}
 {% endblock %}
