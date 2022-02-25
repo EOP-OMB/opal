@@ -641,6 +641,7 @@ class components(BasicModel):
         to=responsible_roles, verbose_name="Responsible Roles",
         help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object."
         )
+    protocals = CustomManyToManyField(to=protocals)
 
     def __str__(self):
         return self.title

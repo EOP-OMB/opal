@@ -43,7 +43,6 @@ def reset_db(app_name):
         logger.debug("Done. " + str(model.objects.count()) + " items remain in " + model._meta.model_name)
 
 def reset_all_db():
-    reset_db('catalog')
-    reset_db('ssp')
-    reset_db('common')
-
+    user_apps = ['catalog','ssp','common','control_profile']
+    for app in user_apps:
+        reset_db(app)

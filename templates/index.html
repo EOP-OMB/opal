@@ -14,12 +14,14 @@
         {{ msg }}
     {% endif %}
 <h1>Step 2: Creating a Profile</h1>
-    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you cna create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any System using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance
-    To create a profile start by selecting one of the imported catalogs, or you can start from an existing profile.
+    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any system using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance
+    You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog.
 <h1>Step 3: Creating Components</h1>
-    Componenets are used to describe individual system parts.  You cna define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by mutiple systems.  For example, you cna create a component for a hsared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.
+    Componenets are used to describe individual system parts.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.
 
     When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.
+
+
 <h1>Step 4: Control Statements</h1>
     For every control defined in the profile, a statement must be provided that
 {% endblock %}

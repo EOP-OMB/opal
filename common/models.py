@@ -310,6 +310,39 @@ class BasicModel(PrimitiveModel):
         abstract = True
 
 
+class port_ranges(BasicModel):
+    """
+    Where applicable this is the IPv4 port range on which the service operates. To be validated as a natural number (integer >= 1). A single port uses the same value for start and end. Use multiple 'port-range' entries for non-contiguous ranges.
+    """
+
+    class Meta:
+        verbose_name = "Port Range"
+        verbose_name_plural = "Port Ranges"
+
+    start = models.IntegerField(help_text="Indicates the starting port number in a port range",verbose_name="Start")
+    end = models.IntegerField(help_text="Indicates the ending port number in a port range",verbose_name="End")
+    transport = ShortTextField(max_length=3,verbose_name="Transport",choices=[('tcp','TCP'),('udp','UDP')])
+
+    def __str__(self):
+        r = str(self.start) + '-' + str(self.end) + ' ' + self.transport
+        return r
+
+
+class protocols(BasicModel):
+    """
+     Information about the protocol used to provide a service.
+    """
+
+    class Meta:
+        verbose_name = "Protocol"
+        verbose_name_plural = "Protocols"
+
+    name = ShortTextField(verbose_name="Protocol Name",help_text='The common name of the protocol, which should be the appropriate service name from the IANA Service Name and Transport Protocol Port Number Registry')
+    title = ShortTextField(verbose_name="Protocol Title",help_text="A human readable name for the protocol (e.g., Transport Layer Security).")
+    port_ranges = CustomManyToManyField(to=port_ranges,verbose_name="Port Ranges")
+
+
+
 class props(BasicModel):
     """
     An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values.
@@ -749,11 +782,13 @@ class metadata(BasicModel):
         )
     version = ShortTextField(
         verbose_name="Document Version",
-        help_text="A string used to distinguish the current version of the document from other previous (and future) versions."
+        help_text="A string used to distinguish the current version of the document from other previous (and future) versions.",
+        default="1.0"
         )
     oscal_version = ShortTextField(
         verbose_name="OSCAL Version",
-        help_text="The OSCAL model version the document was authored against."
+        help_text="The OSCAL model version the document was authored against.",
+        default="1.0.0"
         )
     revisions = CustomManyToManyField(to=revisions, verbose_name="Previous Revisions")
     document_ids = CustomManyToManyField(to=document_ids, verbose_name="Other Document IDs")

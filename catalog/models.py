@@ -1,4 +1,5 @@
 from markdownx.models import MarkdownxField
+from django.urls import reverse
 from common.models import *
 
 
@@ -304,3 +305,7 @@ class catalogs(PrimitiveModel):
 
     def __str__(self):
         return self.metadata.title
+
+    def get_absolute_url(self):
+        # TODO - this function should return some kind of permalink using the uuid
+        return reverse('catalog:catalog_detail_view', kwargs={'pk': self.pk})

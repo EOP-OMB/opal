@@ -8,7 +8,7 @@ from catalog.models import controls, params
 
 class imports(BasicModel):
     """
-    he import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
+    the import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
     Note that the OSCAL model allows including or excluding controls by pattern. This is not supported in OPAL.
     """
 
@@ -33,27 +33,8 @@ class imports(BasicModel):
         help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",related_name="exclude_controls"
         )
 
-
-class merge(BasicModel):
-    """
-    A Merge element provides structuring directives that drive how controls are organized after resolution.
-    """
-
-    class Meta:
-        verbose_name = "Merge Controls"
-        verbose_name_plural = "Merge Controls"
-
-    combine_options = [("use-first",
-                        "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"),
-                       ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
-
-    merge_options = [("flat", "flat"), ("as-is", "as-is"), ("custom", "custom")]
-
-    combine = ShortTextField(
-        choices=combine_options, verbose_name="Combination Rule",
-        help_text="A Combine element defines whether and how to combine multiple (competing) versions of the same control"
-        )
-
+    def __str__(self):
+        return self.href
 
 class modify(BasicModel):
     """
@@ -72,6 +53,11 @@ class modify(BasicModel):
         )
 
 
+merge_options = [("use-first",
+                        "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"),
+                       ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
+
+
 class profile(BasicModel):
     """
     An OSCAL document that describes a tailoring of controls from one or more catalogs, with possible modification of multiple controls.
@@ -86,9 +72,8 @@ class profile(BasicModel):
         to=imports, verbose_name="Imports",
         help_text="The import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
         )
-    merge = models.ForeignKey(
-        to=merge, verbose_name="Merge Strategy",
-        help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.", on_delete=models.CASCADE, null=True
+    merge = ShortTextField(verbose_name="Merge Strategy",
+        help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.",null=True,choices=merge_options
         )
     modify = models.ForeignKey(
         to=modify, verbose_name="Modifications",
@@ -100,3 +85,6 @@ class profile(BasicModel):
         help_text="Provides a collection of identified resource objects that can be referenced by a link with a rel value of 'reference' and an href value that is a fragment '#' followed by a reference to a reference identifier. Other specialized link 'rel' values also use this pattern when indicated in that context of use.",
         on_delete=models.CASCADE, null=True
         )
+
+    def __str__(self):
+        return self.metadata.title

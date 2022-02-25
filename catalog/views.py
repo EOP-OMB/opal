@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 import urllib.request
 import json
 from catalog.models import *
+from control_profile.models import profile, imports
 
 
 # Create your views here.
@@ -43,6 +44,14 @@ def import_catalog_view(request, catalog_link):
         new_catalog = catalogs()
         new_catalog.import_oscal(catalog_dict)
         new_catalog.save()
+
+        #create a new profile for the imported catalog
+        new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
+        new_profile = profile.objects.create(
+            metadata=new_metadata)
+        new_profile.save()
+        new_profile.imports.add(imports.objects.create(href=new_catalog.get_absolute_url(),import_type="catalog"))
+        new_profile.save()
         context = {'msg' : new_catalog.metadata.title + " imported from " + catalog_url}
         return render(request, "index.html", context)
     else:
