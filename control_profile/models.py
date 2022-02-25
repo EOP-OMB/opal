@@ -19,6 +19,7 @@ class imports(BasicModel):
     href = ShortTextField(
         verbose_name="Link to catalog or profile", help_text="URI to access the catalog or profile to be imported"
         )
+    import_type = ShortTextField(verbose_name="Type of Import",choices=[("catalog","Catalog"),("profile","Profile")],help_text="Select if this import is for a catalog or a profile")
     include_all = models.BooleanField(
         verbose_name="Include all controls",
         help_text="Select this option to include all controls from the imported catalog or profile", default=True
