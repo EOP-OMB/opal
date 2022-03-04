@@ -1,6 +1,0 @@
-{% extends "base.html" %}
-{% load static %}
-{% load markdown_extras %}
-{% block content %}
-{{ profile.to_html | markdown | safe}}
-{% endblock %}

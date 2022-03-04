@@ -1,4 +1,3 @@
-from django.db import models
 from common.models import *
 from catalog.models import controls, params
 
@@ -88,3 +87,7 @@ class profile(BasicModel):
 
     def __str__(self):
         return self.metadata.title
+
+    def get_absolute_url(self):
+        # TODO - this function should return some kind of permalink using the uuid
+        return reverse('control_profile:profile_detail_view', kwargs={'pk': self.pk})

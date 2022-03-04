@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.apps import apps
 from django.db import models
+from .models import *
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -19,11 +20,11 @@ class BaseAdmin(admin.ModelAdmin):
 # Register your models here.
 
 
-# all other models
-models = apps.get_models()
-
-for model in models:
-    try:
-        admin.site.register(model,BaseAdmin)
-    except admin.sites.AlreadyRegistered:
-        pass
+# # all other models
+# models = apps.get_models('common')
+#
+# for model in models:
+#     try:
+#         admin.site.register(model,BaseAdmin)
+#     except admin.sites.AlreadyRegistered:
+#         pass
