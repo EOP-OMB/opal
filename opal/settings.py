@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'common',
     'catalog',
     'control_profile',
+    'component_definition',
     'ssp',
     ]
 

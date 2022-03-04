@@ -5,6 +5,9 @@ from itertools import chain
 from django.utils.timezone import now
 from common.functions import *
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
+# Imports currently used in catalog models
+from markdownx.models import MarkdownxField
+from django.urls import reverse
 
 
 class ShortTextField(models.CharField):
@@ -49,6 +52,24 @@ class propertiesField(CustomManyToManyField):
         return name, path, args, kwargs
 
 
+system_status_state_choices = [
+    ("operational", "Operational: The system or component is currently operating in production."),
+    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"),
+    ("under-major-modification",
+     "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
+    ("disposition", "Disposition: The system or component is no longer operational."),
+    ("other", "Other: Some other state, a remark must be included to describe the current state.")
+    ]
+
+implementation_status_choices = [
+        ("Implemented: The control is fully implemented.", "implemented"),
+        ("Partial: The control is partially implemented.", "partial"),
+        ("Planned: There is a plan for implementing the control as explained in the remarks.", "planned"),
+        ("Alternative: There is an alternative implementation for this control as explained in the remarks.",
+         "alternative"),
+        ("Not-Applicable: This control does not apply to this system as justified in the remarks.", "not-applicable")
+        ]
+
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -78,7 +99,7 @@ class PrimitiveModel(models.Model):
             data[f.name] = [i.to_dict() for i in f.value_from_object(self)]
         return data
 
-    def to_html(self):
+    def to_html_fancy(self):
         opts = self._meta
         # list of some excluded fields
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
@@ -108,6 +129,40 @@ class PrimitiveModel(models.Model):
                 for i in f.value_from_object(self):
                     html_str += i.to_html()
         html_str += "</div>"
+        if html_str is None:
+            html_str = "None"
+        return html_str
+
+    def to_html(self):
+        opts = self._meta
+        # list of some excluded fields
+        excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
+
+        html_str = "\n"
+        html_str += "<ul>\n"
+        # getting all fields that available in `Client` model,
+        # but not in `excluded_fields`
+        for f in opts.concrete_fields:
+            if f.name not in excluded_fields:
+                if f.get_internal_type() == 'ForeignKey':
+                    child = self.__getattribute__(f.name)
+                    if child is not None:
+                        value = child.to_html()
+                    else:
+                        value = None
+                else:
+                    if f.value_to_string(self) != "":
+                        value = f.value_to_string(self)
+                    else:
+                        value = None
+                if value is not None:
+                    html_str += "<li>" + f.verbose_name + ": " + value + "</li>\n"
+        for f in opts.many_to_many:
+            if len(f.value_from_object(self)) > 0:
+                html_str += "<li>" + f.verbose_name + ":</li>\n"
+                for i in f.value_from_object(self):
+                    html_str += i.to_html()
+        html_str += "</ul>\n"
         if html_str is None:
             html_str = "None"
         return html_str

@@ -21,4 +21,7 @@ app_name = 'ssp'
 urlpatterns = [
     path('', ssp_list_view.as_view(), name='ssp_list_view'),
     path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'),
+    path('', component_list_view.as_view(), name='component_list_view'),
+    path('component/<int:pk>', component_detail_view.as_view(), name='component_detail_view'),
+    path('component/new', createComponentView.as_view(), name='create_component_view'),
 ]

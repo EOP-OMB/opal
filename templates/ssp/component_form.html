@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<form method="post" novalidate>
+  {% csrf_token %}
+
+  {{ form.non_field_errors }}
+
+  {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field.errors }}
+    {{ hidden_field }}
+  {% endfor %}
+<h2>Component Metadata</h2>
+  <table border="1">
+    {% for field in form.visible_fields %}
+      <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>
+          {{ field.errors }}
+          {{ field }}<br>
+          {{ field.help_text }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+<h2>Responsible Roles:</h2>
+<p>Define all roles that have some responsibility related to the component:</p>
+Select Existing Roles:
+    <
+    <a>Add new Role</a>
+<h2>Protocols:</h2>
+<p>List any ports on which the component provides a service. This information can be used by system owners to configure firewall rules and to help produce data flow diagrams</p>
+<h2>Control Implementations</h2>
+<p>List each control that is implemented by the component and describe how the control requirements are met</p>
+<h2>Links</h2>
+<p>Links to more information or resources regarding this component</p>
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

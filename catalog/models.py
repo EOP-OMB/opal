@@ -1,5 +1,3 @@
-from markdownx.models import MarkdownxField
-from django.urls import reverse
 from common.models import *
 
 

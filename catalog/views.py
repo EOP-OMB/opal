@@ -11,19 +11,20 @@ from control_profile.models import profile, imports
 
 class catalog_list_view(ListView):
     model = catalogs
-    context_object_name = "catalog_list"
+    context_object_name = "context_list"
+    template_name = "generic_list.html"
 
 
 class catalog_detail_view(DetailView):
     model = catalogs
-    context_object_name = "catalog"
-    template_name = "catalog/catalog_detail.html"
+    context_object_name = "context"
+    template_name = "generic_detail.html"
 
 
 class control_detail_view(DetailView):
     model = controls
-    context_object_name = "control"
-    template_name = "catalog/control_detail.html"
+    context_object_name = "context"
+    template_name = "generic_detail.html"
 
 
 def import_catalog_view(request, catalog_link):
