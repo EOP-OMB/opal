@@ -113,6 +113,17 @@ class params(BasicModel):
         d = {"id": "param_id"}
         return d
 
+    def to_html(self):
+        html_str = "<td>" + self.param_id + "</td>"
+        html_str += "<td>" + coalesce(self.depends_on) + "</td>"
+        html_str += "<td>" + self.label + "</td>"
+        html_str += "<td>" + coalesce(self.usage) + "</td>"
+        html_str += "<td>" + coalesce(self.values) + "</td>"
+        html_str += "<td>" + coalesce(self.select) + "</td>"
+        html_str += "<td>" + coalesce(self.how_many) + "</td>"
+        html_str += "<td>" + coalesce(self.choice) + "</td>"
+        return html_str
+
 
 class parts(PrimitiveModel):
     """
@@ -155,11 +166,19 @@ class parts(PrimitiveModel):
         )
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def to_html(self):
-        html_str = self.prose + "<br>"
+    def to_html(self,indent=0):
+        html_str = ""
+        if self.name in ["item","statement"]:
+            if len(self.props.filter(name="label")) > 0:
+                html_str += self.props.get(name="label").value + " "
+            html_str += self.prose + "<br>\n"
+        if self.name == "guidance":
+            html_str = "<h5>Guidance</h5>"
+            html_str += "<p>" + self.prose + "</p>"
         if len(self.sub_parts.all()) > 0:
+            indent += 2
             for p in self.sub_parts.all():
-                html_str += p.to_html()
+                html_str += "&nbsp;"*indent + p.to_html(indent=indent)
         if len(self.links.all()) > 0:
             html_str += "<hr>"
             for l in self.links.all():
@@ -227,6 +246,49 @@ class controls(PrimitiveModel):
         return d
 
 
+    def to_html(self):
+        html_str = "<h4>"
+        html_str += self.control_id.upper() + " - "
+        html_str += self.title
+        html_str += " (" + self.control_class + ")"
+        html_str += "</h4>"
+        if self.parts is not None:
+            for i in self.parts.all():
+                html_str += i.to_html()
+        if self.params is not None:
+            for i in self.params.all():
+                str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
+                html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select,i.label,i.param_id) + '</i>)')
+            # html_str += "<h5>Parameters:</h5>"
+            # html_str += "<p><table border=1><tr align='center'>"
+            # html_str += "<th>param_id</th><th>depends_on</th><th>label</th><th>usage</th><th>values</th><th>select</th><th>how_many</th><th>choice</th>"
+            # for i in self.params.all():
+            #     html_str += "<tr>"
+            #     html_str += i.to_html()
+            #     html_str += "</tr>"
+            # html_str += "</table></p>"
+        if self.links is not None:
+            related_to_links = []
+            for i in self.links.filter(rel="related"):
+                related_to_links.append("<a href='" + i.href + "'>" + i.href[1:].upper() + "</a>")
+            html_str += "<p><strong>Related Controls:</strong> "
+            html_str += ", ".join(related_to_links)
+            html_str += "</p>"
+
+            reference_links = []
+            for i in self.links.filter(rel="reference"):
+                obj = search_for_uuid(i.href[1:])
+                if obj is not None:
+                    reference_links.append(obj.to_html())
+            html_str += "<p><strong>References:</strong> "
+            html_str += ", ".join(reference_links)
+            html_str += "</p>"
+        if self.control_enhancements is not None:
+            for i in self.control_enhancements.all():
+                html_str += i.to_html()
+        return html_str
+
+
 class groups(PrimitiveModel):
     """
     A Group is an arbitrary collection of controls.  It cna contain other groups and controls
@@ -271,11 +333,38 @@ class groups(PrimitiveModel):
         )
 
     def __str__(self):
-        return self.title
+        return self.group_id.upper() + " - " + self.title
 
     def field_name_changes(self):
         d = {"id": "group_id", "class": "group_class", "groups": "sub_groups"}
         return d
+
+    def to_html(self):
+        html_str = "<h3>"
+        html_str += self.group_id.upper() + " - "
+        html_str += self.title
+        html_str += " (" + self.group_class + ")"
+        html_str += "</h3>"
+        if self.props is not None:
+            for i in self.props.all():
+                html_str += i.to_html()
+        if self.params is not None:
+            for i in self.params.all():
+                html_str += i.to_html()
+        if self.links is not None:
+            for i in self.links.all():
+                html_str += i.to_html()
+        if self.parts is not None:
+            for i in self.parts.all():
+                html_str += i.to_html()
+        if self.sub_groups is not None:
+            for i in self.sub_groups.all():
+                html_str += i.to_html()
+        if self.controls is not None:
+            for i in self.controls.all():
+                html_str += i.to_html()
+
+        return html_str
 
 
 class catalogs(PrimitiveModel):
@@ -307,3 +396,25 @@ class catalogs(PrimitiveModel):
     def get_absolute_url(self):
         # TODO - this function should return some kind of permalink using the uuid
         return reverse('catalog:catalog_detail_view', kwargs={'pk': self.pk})
+
+    def to_html(self):
+        html_str = "<h1>" + self.metadata.title + "</h1>"
+        html_str += "<h2>Metadata</h2>"
+        html_str += self.metadata.to_html()
+        html_str += "<hr>\n"
+        if self.params is not None:
+            html_str += "<h1>Global Paramaters</h1>\n"
+            for i in self.params.all():
+                html_str += i.to_html()
+        if self.groups is not None:
+            html_str += "<h1>Groups</h1>\n"
+            for i in self.groups.all():
+                html_str += i.to_html()
+        if self.controls is not None:
+            html_str += "<h1>Controls not in a Group</h1>\n"
+            for i in self.controls.all():
+                html_str += i.to_html()
+        if self.back_matter is not None:
+            html_str += "<h1>CBack Matter</h1>\n"
+            html_str += self.back_matter.to_html()
+        return html_str

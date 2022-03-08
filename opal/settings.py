@@ -54,6 +54,13 @@ ALLOWED_HOSTS = ("localhost", "127.0.0.1",)
 
 # Application definition
 
+USER_APPS = ['common',
+    'catalog',
+    'control_profile',
+    'component_definition',
+    'ssp',]
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,12 +71,9 @@ INSTALLED_APPS = [
     'coverage',
     'markdownx',
     'django_extensions',
-    'common',
-    'catalog',
-    'control_profile',
-    'component_definition',
-    'ssp',
     ]
+
+INSTALLED_APPS.extend(USER_APPS)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -467,7 +467,21 @@ class links(BasicModel):
 
     def to_html(self):
         # html_str = "<a href='% s' target=_blank>% s</a>" % self.href, self.text
-        html_str = "<a href='" + self.href + "' target=_blank>" + self.text + "</a><br>"
+        if len(self.href) > 0:
+            if self.rel == "reference":
+                obj = search_for_uuid(self.href[1:])
+                if obj is not None:
+                    html_str = obj.to_html
+                else:
+                    html_str = "<!-- Could not find an object matching uuid " + self.href[1:] + " in the database -->"
+            else:
+                if len(self.text) > 0:
+                    href_text = self.text
+                else:
+                    href_text = self.href
+                html_str = "<a href='" + self.href + "' target=_blank>" + href_text + "</a>"
+        else:
+            html_str = ""
         return html_str
 
 
@@ -811,6 +825,20 @@ class responsible_parties(PrimitiveModel):
             }
         return field_name_changes
 
+    def __str__(self):
+        parties = []
+        for item in self.party_uuids.all():
+            parties.append(item.name)
+        if len(parties) > 0:
+            return_str = ", ".join(parties)
+        else:
+            return_str = "N/A"
+        if self.role_id is not None:
+            return_str = self.role_id + ": " + return_str
+        return return_str
+
+
+
 
 class metadata(BasicModel):
     """
@@ -930,6 +958,11 @@ class rlinks(PrimitiveModel):
         help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm."
         )
 
+    def to_html(self):
+        if self.href is not None:
+            return self.href.first().to_html()
+
+
 
 class base64(PrimitiveModel):
     """
@@ -988,6 +1021,13 @@ class resources(BasicModel):
         to=base64, verbose_name="Base64 encoded objects",
         help_text="A string representing arbitrary Base64-encoded binary data."
         )
+
+    def to_html(self):
+        html_str = ""
+        if len(self.rlinks.all()) > 0:
+            for r in self.rlinks.all():
+                html_str += "<a href='" + r.href.first().href + "' target=_blank>" + self.title + "</a>"
+        return html_str
 
 
 class back_matter(PrimitiveModel):

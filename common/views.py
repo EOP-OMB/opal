@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from catalog.models import *
 from ssp.models import *
 from django.apps import apps
+from opal.settings import USER_APPS
 
 
 # Create your views here.
@@ -24,12 +25,14 @@ class DatabaseStatusView(TemplateView):
     context_object_name = "obj"
 
     def get_context_data(self, **kwargs):
-        context = super(DatabaseStatusView,self).get_context_data(**kwargs)
+        context = super(DatabaseStatusView, self).get_context_data(**kwargs)
         model_list = []
-        for m in apps.get_models():
-            if m.objects.count() > 0:
-                s = m.__name__ + ":" + str(m.objects.count())
-                model_list.append(s)
+        for a in USER_APPS:
+            app_models = apps.get_app_config(a).get_models()
+            for m in app_models:
+                if m.objects.count() > 0:
+                    s = m.__name__ + ":" + str(m.objects.count())
+                    model_list.append(s)
         model_list.sort()
         context["model_list"] = model_list
         return context

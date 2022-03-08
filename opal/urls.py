@@ -26,7 +26,6 @@ urlpatterns = [
     path('common/', include('common.urls'), name='common'),
     path('ssp/', include('ssp.urls'), name='ssp'),
     path('profiles/', include('control_profile.urls'), name='control_profile'),
-    #path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
     path('', IndexView.as_view(), name='home_page'),
     path('db_status/', DatabaseStatusView.as_view(), name='db_status'),
     path('markdownx/', include('markdownx.urls')),
