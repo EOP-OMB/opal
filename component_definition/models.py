@@ -68,7 +68,7 @@ class control_implementations(BasicModel):
         )
     implemented_requirements = CustomManyToManyField(
         to="implemented_requirements",
-        verbose_name="Control Based Requirements",
+        verbose_name="Implemented Requirements",
         help_text="Describes how the system satisfies controls."
         )
 
@@ -151,10 +151,9 @@ class implemented_requirements(BasicModel):
         verbose_name = "Implemented Requirement"
         verbose_name_plural = "Implemented Requirements"
 
-    control_id = ShortTextField(
+    control_id = models.ForeignKey(to=controls,
         verbose_name="Control Identifier Reference",
-        help_text="A reference to a control with a corresponding id value."
-        )
+        help_text="A reference to a control with a corresponding id value.",on_delete=models.CASCADE)
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(

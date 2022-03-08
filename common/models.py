@@ -1025,7 +1025,8 @@ class resources(BasicModel):
     def to_html(self):
         html_str = ""
         if len(self.rlinks.all()) > 0:
-            html_str += self.title + " (" + self.rlinks.first().to_html() + ")"
+            for r in self.rlinks.all():
+                html_str += "<a href='" + r.href.first().href + "' target=_blank>" + self.title + "</a>"
         return html_str
 
 

@@ -168,7 +168,7 @@ class parts(PrimitiveModel):
 
     def to_html(self,indent=0):
         html_str = ""
-        if self.name == "item":
+        if self.name in ["item","statement"]:
             if len(self.props.filter(name="label")) > 0:
                 html_str += self.props.get(name="label").value + " "
             html_str += self.prose + "<br>\n"

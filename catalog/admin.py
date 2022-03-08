@@ -1,9 +1,7 @@
 from django.contrib import admin
-from django.apps import apps
-from common.admin import BaseAdmin
-from .models import *
 
 # Register your models here.
+from .models import tests, constraints, guidelines, params, parts, controls, groups, catalogs
 
 @admin.register(tests)
 class testsAdmin(admin.ModelAdmin):
