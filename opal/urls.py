@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls'), name='catalog'),
     path('common/', include('common.urls'), name='common'),
+    path('component/', include('component_definition.urls'), name='component'),
     path('ssp/', include('ssp.urls'), name='ssp'),
     path('profiles/', include('control_profile.urls'), name='control_profile'),
     path('', IndexView.as_view(), name='home_page'),

@@ -8,6 +8,6 @@ django-markdownx==4.0.0b1
 importlib-metadata==4.11.1
 Markdown==3.3.6
 Pillow==9.0.1
-pygraphviz==1.9
+#pygraphviz
 sqlparse==0.4.2
 zipp==3.7.0

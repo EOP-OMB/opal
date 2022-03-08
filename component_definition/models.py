@@ -1,11 +1,8 @@
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import models
-
-from catalog.models import controls
+from catalog.models import controls, parts, params
 from common.models import *
 
+
 # Create your models here.
-from common.models import BasicModel, ShortTextField, propertiesField, CustomManyToManyField, links
 
 
 class responsible_roles(BasicModel):
@@ -29,24 +26,29 @@ class responsible_roles(BasicModel):
         help_text="References a party defined in metadata."
         )
 
+    def __str__(self):
+        return self.role_id.title
+
 
 class parameters(BasicModel):
     """
-    Identifies the parameter that will be set by the enclosed value.
+    Sets the vale of a parameter for a specific implemented requirement.
     """
 
     class Meta:
         verbose_name = "Parameter"
         verbose_name_plural = "Parameters"
 
-    param_id = ShortTextField(
-        verbose_name="Parameter ID",
-        help_text="A reference to a parameter within a control, who's catalog has been imported into the current implementation context."
+    param_id = models.ForeignKey(
+        to=params,
+        verbose_name="Parameter",
+        help_text="A reference to a parameter within a control, who's catalog has been imported into the current implementation context.",
+        on_delete=models.CASCADE
         )
     values = ShortTextField(verbose_name="Parameter Value", help_text="A parameter value or set of values.")
 
     def __str__(self):
-        return self.param_id + ": " + self.values
+        return self.param_id.param_id + ": " + self.values
 
 
 class control_implementations(BasicModel):
@@ -88,22 +90,22 @@ class components(BasicModel):
         verbose_name_plural = "Components"
 
     component_types = [
-        ("this-system", "this-system: The system as a whole."),
+        ("this-system", "This System: The system as a whole."),
         ("system",
-         "system: An external system, which may be a leveraged system or the other side of an interconnection."),
-        ("interconnection", "interconnection: A connection to something outside this system."),
-        ("software", "software: Any software, operating system, or firmware."),
-        ("hardware", "hardware: A physical device."),
-        ("service", "service: A service that may provide APIs."),
-        ("policy", "policy: An enforceable policy."),
-        ("physical", "physical: A tangible asset used to provide physical protections or countermeasures."),
-        ("process-procedure", "process-procedure: A list of steps or actions to take to achieve some end result."),
-        ("plan", "plan: An applicable plan."),
-        ("guidance", "guidance: Any guideline or recommendation."),
-        ("standard", "standard: Any organizational or industry standard."),
+         "Another System: An external system, which may be a leveraged system or the other side of an interconnection."),
+        ("interconnection", "System Interconnectio: A connection to something outside this system."),
+        ("software", "Software: Any software, operating system, or firmware."),
+        ("hardware", "Hardware: A physical device."),
+        ("service", "Service: A service that may provide APIs."),
+        ("policy", "Policy: An enforceable policy."),
+        ("physical", "Physical: A tangible asset used to provide physical protections or countermeasures."),
+        ("process-procedure", "Process or Procedure: A list of steps or actions to take to achieve some end result."),
+        ("plan", "Plan: An applicable plan."),
+        ("guidance", "Guidance: Any guideline or recommendation."),
+        ("standard", "Standard: Any organizational or industry standard."),
         ("validation",
-         "validation: An external assessment performed on some other component, that has been validated by a third-party."),
-        ("network", "network: A physical or virtual network.")
+         "Validation: An external assessment performed on some other component, that has been validated by a third-party."),
+        ("network", "Network: A physical or virtual network.")
         ]
 
     type = ShortTextField(
@@ -111,11 +113,12 @@ class components(BasicModel):
         help_text="A category describing the purpose of the component.", choices=component_types
         )
     title = ShortTextField(verbose_name="Component Title", help_text="A human readable name for the system component.")
-    description = ShortTextField(
+    description = models.TextField(
         verbose_name="Component Description",
         help_text="A description of the component, including information about its function."
         )
     purpose = ShortTextField(
+        max_length=1000,
         verbose_name="Purpose",
         help_text="A summary of the technological or business purpose of the component."
         )
@@ -151,9 +154,11 @@ class implemented_requirements(BasicModel):
         verbose_name = "Implemented Requirement"
         verbose_name_plural = "Implemented Requirements"
 
-    control_id = models.ForeignKey(to=controls,
+    control_id = models.ForeignKey(
+        to=controls,
         verbose_name="Control Identifier Reference",
-        help_text="A reference to a control with a corresponding id value.",on_delete=models.CASCADE)
+        help_text="A reference to a control with a corresponding id value.", on_delete=models.CASCADE
+        )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(
@@ -191,7 +196,8 @@ class statements(BasicModel):
         verbose_name = "Statement"
         verbose_name_plural = "Statements"
 
-    statement_id = ShortTextField(
+    statement_id = CustomManyToManyField(
+        to=parts,
         verbose_name="Control Statement Reference",
         help_text="A reference to a control statement by its identifier"
         )

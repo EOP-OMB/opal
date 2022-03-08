@@ -16,7 +16,8 @@ RUN python3 -m venv /usr/src/venv
 
 # install Python requirements
 COPY requirements.txt /usr/src/app/
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN /usr/src/venv/bin/pip3 install --upgrade pip
+RUN /usr/src/venv/bin/pip3 install --no-cache-dir -r requirements.txt
 
 # fix permisions on binary_database_fiels migration
 RUN chmod -R 777 /usr/local/lib/python3.8/site-packages/binary_database_files/migrations/

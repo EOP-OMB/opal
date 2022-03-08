@@ -13,12 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
-from ssp.views import *
+from django.urls import path
+from .views import *
 
-app_name = 'ssp'
+app_name = 'component'
 urlpatterns = [
-    path('', ssp_list_view.as_view(), name='ssp_list_view'),
-    path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'),
-]
+    path('', component_list_view.as_view(), name='component_list_view'),
+    path('<int:pk>', component_detail_view.as_view(), name='component_detail_view'),
+    path('new', create_component_view.as_view(), name='create_component_view'),
+    ]

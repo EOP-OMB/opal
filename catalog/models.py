@@ -247,7 +247,8 @@ class controls(PrimitiveModel):
 
 
     def to_html(self):
-        html_str = "<h4>"
+        html_str = "<a id=" + self.control_id + ">"
+        html_str += "<h4>"
         html_str += self.control_id.upper() + " - "
         html_str += self.title
         html_str += " (" + self.control_class + ")"
