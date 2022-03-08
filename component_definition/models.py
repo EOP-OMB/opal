@@ -144,6 +144,9 @@ class components(BasicModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('component:component_detail_view', kwargs={'pk': self.pk})
+
 
 class implemented_requirements(BasicModel):
     """
