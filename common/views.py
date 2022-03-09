@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from catalog.models import *
 from ssp.models import *
 from django.apps import apps
 from opal.settings import USER_APPS
+from .functions import search_for_uuid
 
 
 # Create your views here.
@@ -36,3 +37,19 @@ class DatabaseStatusView(TemplateView):
         model_list.sort()
         context["model_list"] = model_list
         return context
+
+
+def permalink(request, uuid):
+    redirect_url = "error_404_view"
+    obj = search_for_uuid(uuid)
+    try:
+        redirect_url = obj.get_absolute_url()
+    except AttributeError as e:
+        err_msg = e
+    return redirect(to=redirect_url)
+
+
+def error_404_view(request, exception):
+    template_name = "404.html"
+    context_object_name = "obj"
+

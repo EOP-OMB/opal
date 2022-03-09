@@ -51,7 +51,8 @@ def import_catalog_view(request, catalog_link):
         new_profile = profile.objects.create(
             metadata=new_metadata)
         new_profile.save()
-        new_profile.imports.add(imports.objects.create(href=new_catalog.get_absolute_url(),import_type="catalog"))
+        url = "https://" + request.get_host() + new_catalog.get_permalink()
+        new_profile.imports.add(imports.objects.create(href=url,import_type="catalog"))
         new_profile.save()
         context = {'msg' : new_catalog.metadata.title + " imported from " + catalog_url}
         return render(request, "index.html", context)

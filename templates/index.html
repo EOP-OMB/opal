@@ -14,14 +14,14 @@
         {{ msg }}
     {% endif %}
 <h1>Step 2: Creating a Profile</h1>
-    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any system using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance
-    You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog.
+    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any system using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance.  You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog.
 <h1>Step 3: Creating Components</h1>
-    Componenets are used to describe individual system parts.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.<br>
-    When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.<br>
-    <a href="{% url 'ssp:create_component_view' %}">Create a new Component</a>
-
-
+    <p>Componenets are used to describe individual system parts.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.</p>
+    <p>When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.</p>
+    <p><a href="{% url 'component:create_component_view' %}">Create a new Component</a></p>
 <h1>Step 4: Control Statements</h1>
-    For every control defined in the profile, a statement must be provided that
+    <p>Now that we have a Component, we can start defining the controls and parameters it will provide to a system. For every control defined in the profile, we will need to define how the control is implemented. We call these definitions Implemented Requirements. Although it is technically possible to simply define these Implemented Requirements for each information system, using components to group Implemented Requirements will amke it much easier to maintain and reference our documentation.</p>
+    <p>OPAL allows us to easily define Implemented Requirements directly from our Profile view and then associated these Implemented Requirements with our Components</p>
+    <p><a href="">View profile to start documenting your Implemented Requirements</a></p>
+
 {% endblock %}

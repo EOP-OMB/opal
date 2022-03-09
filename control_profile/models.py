@@ -1,7 +1,6 @@
 from common.models import *
 from catalog.models import controls, params
 
-
 # Create your models here.
 
 

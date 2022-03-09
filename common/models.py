@@ -83,6 +83,11 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
 
+    def get_permalink(self):
+        url = reverse('common:permalink', kwargs={'uuid' : str(self.uuid)})
+        return url
+
+
     def to_dict(self):
         opts = self._meta
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
