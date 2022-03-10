@@ -87,6 +87,11 @@ class PrimitiveModel(models.Model):
         url = reverse('common:permalink', kwargs={'uuid' : str(self.uuid)})
         return url
 
+    def get_absolute_url(self):
+        admin_str = 'admin:' + "_".join([self._meta.app_label,self._meta.model_name,'change'])
+        change_url = reverse(admin_str, args=(self.id,))
+        return change_url
+
 
     def to_dict(self):
         opts = self._meta
@@ -144,7 +149,7 @@ class PrimitiveModel(models.Model):
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
 
         html_str = "\n"
-        html_str += "<ul>\n"
+        html_str += "<a href='" + self.get_absolute_url() + "'>Edit</a><ul>\n"
         # getting all fields that available in `Client` model,
         # but not in `excluded_fields`
         for f in opts.concrete_fields:

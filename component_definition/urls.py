@@ -21,4 +21,5 @@ urlpatterns = [
     path('', component_list_view.as_view(), name='component_list_view'),
     path('<int:pk>', component_detail_view.as_view(), name='component_detail_view'),
     path('new', create_component_view.as_view(), name='create_component_view'),
+    path('new/parameter/<int:param_id>', create_paramaeter_view.as_view(), name='create_parameter_view'),
     ]

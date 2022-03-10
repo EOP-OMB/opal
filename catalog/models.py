@@ -115,13 +115,18 @@ class params(BasicModel):
 
     def to_html(self):
         html_str = "<td>" + self.param_id + "</td>"
-        html_str += "<td>" + coalesce(self.depends_on) + "</td>"
+        # html_str += "<td>" + coalesce(self.depends_on) + "</td>"
         html_str += "<td>" + self.label + "</td>"
-        html_str += "<td>" + coalesce(self.usage) + "</td>"
-        html_str += "<td>" + coalesce(self.values) + "</td>"
-        html_str += "<td>" + coalesce(self.select) + "</td>"
-        html_str += "<td>" + coalesce(self.how_many) + "</td>"
-        html_str += "<td>" + coalesce(self.choice) + "</td>"
+        html_str += "<td>"
+        if len(self.guidelines.all()) > 0:
+            for g in self.guidelines.all():
+                html_str += g.__str__()
+            html_str += "</td>"
+        # html_str += "<td>" + coalesce(self.usage) + "</td>"
+        # html_str += "<td>" + coalesce(self.values) + "</td>"
+        # html_str += "<td>" + coalesce(self.select) + "</td>"
+        # html_str += "<td>" + coalesce(self.how_many) + "</td>"
+        # html_str += "<td>" + coalesce(self.choice) + "</td>"
         return html_str
 
 
@@ -334,7 +339,7 @@ class groups(PrimitiveModel):
         )
 
     def __str__(self):
-        return self.group_id.upper() + " - " + self.title
+        return self.group_id.upper() + " - " + self.title + " (" + self.group_class + ")"
 
     def field_name_changes(self):
         d = {"id": "group_id", "class": "group_class", "groups": "sub_groups"}
@@ -395,7 +400,6 @@ class catalogs(PrimitiveModel):
         return self.metadata.title
 
     def get_absolute_url(self):
-        # TODO - this function should return some kind of permalink using the uuid
         return reverse('catalog:catalog_detail_view', kwargs={'pk': self.pk})
 
     def to_html(self):

@@ -1,5 +1,6 @@
 from common.models import *
 from catalog.models import controls, params
+import re
 
 # Create your models here.
 
@@ -22,17 +23,34 @@ class imports(BasicModel):
         verbose_name="Include all controls",
         help_text="Select this option to include all controls from the imported catalog or profile", default=True
         )
-    include_controls = CustomManyToManyField(
-        controls, verbose_name="Included Controls",
+    include_controls = CustomManyToManyField(to=controls, verbose_name="Included Controls",
         help_text="Select the controls to be included. Any controls not explicitly selected will be excluded",related_name="include_controls"
         )
-    exclude_controls = CustomManyToManyField(
-        controls, verbose_name="Excluded Controls",
+    exclude_controls = CustomManyToManyField(to=controls, verbose_name="Excluded Controls",
         help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",related_name="exclude_controls"
         )
 
     def __str__(self):
         return self.href
+
+    def to_html(self):
+        html_str = "<a href='" + self.href + "'>"
+        if self.include_all:
+            html_str += "Include all controls from " + self.import_type + " " + self.href
+        elif len(self.include_controls.all()) > 0:
+            ctr_list = []
+            for c in self.include_controls.all():
+                ctr_list.append(c)
+            html_str += "Include only the following controls from " + self.import_type + " "  + self.href + ".<br>"
+            html_str += ", ".join(ctr_list)
+        elif len(self.exclude_controls.all()) > 0:
+            ctr_list = []
+            for c in self.include_controls.all():
+                ctr_list.append(c)
+            html_str += "Include all controls from " + self.import_type + " "  + self.href + " except the following.<br>"
+            html_str += ", ".join(ctr_list)
+        html_str += "</a>"
+        return html_str
 
 class modify(BasicModel):
     """
@@ -88,5 +106,44 @@ class profile(BasicModel):
         return self.metadata.title
 
     def get_absolute_url(self):
-        # TODO - this function should return some kind of permalink using the uuid
         return reverse('control_profile:profile_detail_view', kwargs={'pk': self.pk})
+
+    def to_html(self):
+        html_str = self.metadata.to_html()
+        regexp = re.compile('.*/common/p/')
+        for i in self.imports.all():
+            re.match(regexp, i.href)
+            m = re.match(regexp, i.href)
+            if m is not None:
+                obj = search_for_uuid(i.href[m.end():])
+                if obj is not None:
+                    if obj._meta.model_name == 'catalogs':
+                        html_str = "<h1>" + obj.metadata.title + "</h1>"
+                        html_str += "<h2>Metadata</h2>"
+                        html_str += obj.metadata.to_html()
+                        html_str += "<hr>\n"
+                        if obj.groups is not None:
+                            html_str += "<h2>Groups</h2>\n"
+                            for group in obj.groups.all():
+                                html_str += "<h3>" + group.__str__() + "</h3>"
+                                if group.sub_groups is not None:
+                                    for sub_group in group.sub_groups.all():
+                                        html_str += "<h3>" + sub_group.__str__() + "</h3>"
+                                if group.controls is not None:
+                                    for i in group.controls.all():
+                                        html_str += "<h4>" + i.__str__() + "</h4>"
+                                        if i.parts is not None:
+                                            for part in i.parts.all():
+                                                html_str += part.to_html()
+                                        if len(i.params.all()) > 0:
+                                            html_str += "<p><table border=1>"
+                                            for p in i.params.all():
+                                                html_str += "<tr>" + p.to_html()
+                                                html_str += "<td><a href='" + reverse('component:create_parameter_view', kwargs={'param_id': p.id}) + "' target='_blank'>edit</a></td></tr>"
+                                            html_str += "</table></p>"
+                        if obj.controls is not None:
+                            html_str += "<h1>Controls not in a Group</h1>\n"
+                            for i in obj.controls.all():
+                                html_str += i.to_html()
+        return html_str
+
