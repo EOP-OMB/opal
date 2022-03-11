@@ -1,3 +1,5 @@
+import re
+
 from common.models import *
 
 
@@ -11,8 +13,7 @@ class tests(BasicModel):
         verbose_name_plural = "Tests"
 
     expression = ShortTextField(
-        verbose_name="Constraint test",
-        help_text="A formal (executable) expression of a constraint"
+        verbose_name="Constraint test", help_text="A formal (executable) expression of a constraint"
         )
 
     def __str__(self):
@@ -29,8 +30,7 @@ class constraints(PrimitiveModel):
         verbose_name_plural = "Constraints"
 
     description = models.TextField(
-        verbose_name="Constraint Description",
-        help_text="A textual summary of the constraint to be applied."
+        verbose_name="Constraint Description", help_text="A textual summary of the constraint to be applied."
         )
     tests = CustomManyToManyField(
         to=tests, verbose_name="Constraint Test",
@@ -75,8 +75,8 @@ class params(BasicModel):
         blank=True
         )
     depends_on = models.ForeignKey(
-        to="params", verbose_name="Depends on",
-        help_text=" Another parameter invoking this one", on_delete=models.CASCADE, null=True
+        to="params", verbose_name="Depends on", help_text=" Another parameter invoking this one",
+        on_delete=models.CASCADE, null=True
         )
     props = propertiesField
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -85,12 +85,10 @@ class params(BasicModel):
         help_text="A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned."
         )
     usage = models.TextField(
-        verbose_name="Parameter Usage Description",
-        help_text="Describes the purpose and use of a parameter"
+        verbose_name="Parameter Usage Description", help_text="Describes the purpose and use of a parameter"
         )
     constraints = CustomManyToManyField(
-        to=constraints, verbose_name="Constraints",
-        help_text="A formal or informal expression of a constraint or test"
+        to=constraints, verbose_name="Constraints", help_text="A formal or informal expression of a constraint or test"
         )
     guidelines = CustomManyToManyField(
         to=guidelines, verbose_name="Guidelines",
@@ -101,8 +99,7 @@ class params(BasicModel):
     how_many = ShortTextField(
         verbose_name="Parameter Cardinality",
         help_text="Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.",
-        choices=[("one", "Only one value is permitted."),
-                 ("one-or-more", "One or more values are permitted.")]
+        choices=[("one", "Only one value is permitted."), ("one-or-more", "One or more values are permitted.")]
         )
     choice = models.TextField(verbose_name="Choices", help_text="A list of values. One value per line")
 
@@ -145,8 +142,7 @@ class parts(PrimitiveModel):
         blank=True
         )
     name = ShortTextField(
-        verbose_name="Part Name",
-        help_text=" A textual label that uniquely identifies the part's semantic type."
+        verbose_name="Part Name", help_text=" A textual label that uniquely identifies the part's semantic type."
         )
     ns = ShortTextField(
         verbose_name="Part Namespace",
@@ -160,8 +156,7 @@ class parts(PrimitiveModel):
         )
     title = ShortTextField(
         verbose_name="Part Title",
-        help_text="A name given to the part, which may be used by a tool for display and navigation.",
-        blank=True
+        help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True
         )
     props = propertiesField()
     prose = MarkdownxField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
@@ -171,9 +166,9 @@ class parts(PrimitiveModel):
         )
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def to_html(self,indent=0):
+    def to_html(self, indent=0):
         html_str = ""
-        if self.name in ["item","statement"]:
+        if self.name in ["item", "statement"]:
             if len(self.props.filter(name="label")) > 0:
                 html_str += self.props.get(name="label").value + " "
             html_str += self.prose + "<br>\n"
@@ -183,11 +178,28 @@ class parts(PrimitiveModel):
         if len(self.sub_parts.all()) > 0:
             indent += 2
             for p in self.sub_parts.all():
-                html_str += "&nbsp;"*indent + p.to_html(indent=indent)
+                html_str += "&nbsp;" * indent + p.to_html(indent=indent)
         if len(self.links.all()) > 0:
             html_str += "<hr>"
-            for l in self.links.all():
-                html_str += l.to_html() + "<br>"
+            for link in self.links.all():
+                html_str += link.to_html() + "<br>"
+        return html_str
+
+    def to_html_form(self, indent=0):
+        html_str = ""
+        if self.name in ["item", "statement"] and len(self.prose) > 0:
+            html_str = "<tr><td valign='top'>"
+            if len(self.props.filter(name="label")) > 0:
+                html_str += self.props.get(name="label").value + " "
+            html_str += self.prose + "</td>"
+            html_str += "<td><textarea id='" + self.part_id + "' name='" + self.part_id + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
+        if self.name == "guidance" and len(self.prose) > 0:
+            html_str = "<h5>Guidance</h5>"
+            html_str += "<p>" + self.prose + "</p>"
+        if len(self.sub_parts.all()) > 0:
+            indent += 2
+            for p in self.sub_parts.all():
+                html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
         return html_str
 
     def __str__(self):
@@ -235,12 +247,10 @@ class controls(PrimitiveModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     parts = CustomManyToManyField(
-        to=parts, verbose_name="Parts",
-        help_text="A partition of a control's definition or a child of another part."
+        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part."
         )
     control_enhancements = CustomManyToManyField(
-        to="controls", verbose_name="Control Enhancements",
-        help_text="Additional sub-controls"
+        to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
         )
 
     def __str__(self):
@@ -249,7 +259,6 @@ class controls(PrimitiveModel):
     def field_name_changes(self):
         d = {"id": "control_id", "class": "control_class", "controls": "control_enhancements"}
         return d
-
 
     def to_html(self):
         html_str = "<a id=" + self.control_id + ">"
@@ -264,15 +273,7 @@ class controls(PrimitiveModel):
         if self.params is not None:
             for i in self.params.all():
                 str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
-                html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select,i.label,i.param_id) + '</i>)')
-            # html_str += "<h5>Parameters:</h5>"
-            # html_str += "<p><table border=1><tr align='center'>"
-            # html_str += "<th>param_id</th><th>depends_on</th><th>label</th><th>usage</th><th>values</th><th>select</th><th>how_many</th><th>choice</th>"
-            # for i in self.params.all():
-            #     html_str += "<tr>"
-            #     html_str += i.to_html()
-            #     html_str += "</tr>"
-            # html_str += "</table></p>"
+                html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select, i.label, i.param_id) + '</i>)')
         if self.links is not None:
             related_to_links = []
             for i in self.links.filter(rel="related"):
@@ -292,6 +293,52 @@ class controls(PrimitiveModel):
         if self.control_enhancements is not None:
             for i in self.control_enhancements.all():
                 html_str += i.to_html()
+        return html_str
+
+    def to_html_form(self):
+        html_str = ""
+        html_str += "<h4>"
+        html_str += self.control_id.upper() + " - "
+        html_str += self.title
+        html_str += " (" + self.control_class + ")"
+        html_str += "</h4>"
+        if self.parts is not None:
+            html_str += "<table border=2><tr><th>Control Statement</th><th>Describe how the requirement is implemented</th></tr>"
+            for i in self.parts.all():
+                html_str += i.to_html_form()
+            html_str += "</table>"
+        if self.params is not None:
+            for i in self.params.all():
+                str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
+                if i.select is not None and len(i.select) > 0:
+                    select_form_field = "<select id='" + i.param_id + "' name='" + i.param_id + "'"
+                    import ast
+                    choices_dict = ast.literal_eval(i.select)
+                    if choices_dict['how-many'] == 'one-or-more':
+                        select_form_field += " multiple"
+                    select_form_field += ">"
+                    for choice in choices_dict['choice']:
+                        select_form_field += "<option value='" + choice + "'>" + choice + "</option>"
+                    select_form_field += "</select>"
+                    html_str = html_str.replace(
+                        str_to_replace, select_form_field)
+                else:
+                    text_form_field = "(<input type='text' "
+                    text_form_field += "id='" + i.param_id + "' "
+                    text_form_field += "name='" + i.param_id + "' "
+                    text_form_field += "size='" + str(len(coalesce(i.label, i.param_id))) + "'"
+                    text_form_field += "value='" + coalesce(i.label, i.param_id) + "' >)"
+                    html_str = html_str.replace(str_to_replace, text_form_field)
+        if self.links is not None:
+            related_to_links = []
+            for i in self.links.filter(rel="related"):
+                related_to_links.append("<a href='" + i.href + "'>" + i.href[1:].upper() + "</a>")
+            html_str += "<p><strong>Related Controls:</strong> "
+            html_str += ", ".join(related_to_links)
+            html_str += "</p>"
+        if self.control_enhancements is not None:
+            for i in self.control_enhancements.all():
+                html_str += i.to_html_form()
         return html_str
 
 
@@ -326,12 +373,10 @@ class groups(PrimitiveModel):
         )
     links = CustomManyToManyField(to=links, verbose_name="Links")
     parts = CustomManyToManyField(
-        to=parts, verbose_name="Parts",
-        help_text="A partition of a control's definition or a child of another part."
+        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part."
         )
     sub_groups = CustomManyToManyField(
-        to="groups", verbose_name="Sub Groups",
-        help_text="A group of controls, or of groups of controls."
+        to="groups", verbose_name="Sub Groups", help_text="A group of controls, or of groups of controls."
         )
     controls = CustomManyToManyField(
         to="controls", verbose_name="Controls",
@@ -408,7 +453,7 @@ class catalogs(PrimitiveModel):
         html_str += self.metadata.to_html()
         html_str += "<hr>\n"
         if self.params is not None:
-            html_str += "<h1>Global Paramaters</h1>\n"
+            html_str += "<h1>Global Parameters</h1>\n"
             for i in self.params.all():
                 html_str += i.to_html()
         if self.groups is not None:

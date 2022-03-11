@@ -3,11 +3,11 @@
 {% block content %}
 <form method="post" novalidate>
   {% csrf_token %}
-
-  {{ form.non_field_errors }}
+<h1>{{ form_title }}</h1>
+    <span style="color: red; font-weight: bold">{{ form.non_field_errors }}</span>
 
   {% for hidden_field in form.hidden_fields %}
-    {{ hidden_field.errors }}
+      <span style="color: red; font-weight: bold">{{ hidden_field.errors }}</span>
     {{ hidden_field }}
   {% endfor %}
   <table border="1">
@@ -15,13 +15,15 @@
       <tr>
         <th>{{ field.label_tag }}</th>
         <td>
-          {{ field.errors }}
+          <span style="color: red; font-weight: bold">{{ field.errors }}</span>
           {{ field }}<br>
           {{ field.help_text }}
         </td>
       </tr>
     {% endfor %}
   </table>
-  <button type="submit">Submit</button>
+
+<p style="padding-top: 15px"; align="center"><button type="submit">Submit</button></p>
+
 </form>
 {% endblock %}

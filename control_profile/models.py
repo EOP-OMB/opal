@@ -132,6 +132,7 @@ class profile(BasicModel):
                                 if group.controls is not None:
                                     for i in group.controls.all():
                                         html_str += "<h4>" + i.__str__() + "</h4>"
+                                        html_str += "<a href='" + reverse('component:new_requirement', kwargs={'control_id': i.id}) + "'>Define</a>"
                                         if i.parts is not None:
                                             for part in i.parts.all():
                                                 html_str += part.to_html()
