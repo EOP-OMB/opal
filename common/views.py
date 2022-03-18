@@ -6,19 +6,40 @@ from django.apps import apps
 from opal.settings import USER_APPS
 from .functions import search_for_uuid
 
-
 # Create your views here.
 
-class IndexView(TemplateView):
-    template_name = "index.html"
-    context_object_name = "obj"
+available_catalog_list = [{
+    "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline", "name": "NIST SP-800 53 rev5 HIGH baseline",
+    "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
+    }, {
+    "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline", "name": "NIST SP-800 53 rev5 MODERATE baseline",
+    "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
+    }, {
+    "uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline",
+    "name": "NIST SP-800 53 rev5 LOW baseline",
+    "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
+    }, {
+    "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline", "name": "NIST SP-800 53 rev5 PRIVACY baseline",
+    "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
+    }]
 
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['catalog_list'] = catalogs.objects.all()
-        context['ssp_list'] = system_security_plans.objects.all()
-        # And so on for more models
-        return context
+
+def index_view(request):
+    catalog_list_html_str = ""
+
+    for item in available_catalog_list:
+        catalog_list_html_str += "<li><a href='"
+        catalog_list_html_str += reverse('catalog:import_catalog_view', kwargs={'catalog_link': item['slug']})
+        catalog_list_html_str += "'>" + item['name'] + "</a>"
+        if catalogs.objects.filter(uuid=item['uuid']).exists():
+            catalog_list_html_str += "&#9989;"
+        catalog_list_html_str += "</li>"
+
+    context = {
+        "catalog_list": catalog_list_html_str
+        }
+    # And so on for more models
+    return render(request, "index.html", context)
 
 
 class DatabaseStatusView(TemplateView):
@@ -52,4 +73,3 @@ def permalink(request, uuid):
 def error_404_view(request, exception):
     template_name = "404.html"
     context_object_name = "obj"
-

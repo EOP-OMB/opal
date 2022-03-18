@@ -8,7 +8,8 @@
 {% if success %}
     {{ success }}
     <HR>
-    {{ post_data }}
+    <h2>Implemented Requirement Description</h2>
+    {{ new_implemented_requirement | safe }}
 {% else %}
 <span style="color: red; font-weight: bold">{{ form.non_field_errors }}</span>
 Select the Component that impliments this control: <select id="component_list" name="component">

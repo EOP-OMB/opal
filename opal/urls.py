@@ -18,9 +18,10 @@ from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
+from common.views import index_view
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html'), name='home_page'),
+    path('', index_view, name='home_page'),
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls'), name='catalog'),
     path('common/', include('common.urls'), name='common'),

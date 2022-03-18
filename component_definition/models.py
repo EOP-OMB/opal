@@ -187,7 +187,7 @@ class implemented_requirements(BasicModel):
             r = c.title
         except ObjectDoesNotExist:
             r = self.control_id
-        return r
+        return str(r)
 
 
 class statements(BasicModel):
@@ -215,8 +215,8 @@ class statements(BasicModel):
         help_text="Defines how the referenced component implements a set of controls."
         )
 
-    def __str__(self):
-        return self.statement_id
+    # def __str__(self):
+    #     return self.statement_id.part_id
 
 
 class by_components(BasicModel):

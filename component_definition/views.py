@@ -1,6 +1,4 @@
-import logging
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -73,7 +71,7 @@ class create_implemented_requirements_view(CreateView):
         if 'control_id' in self.kwargs.keys():
             initial["control_id"] = self.kwargs["control_id"]
         if 'by_components' in self.kwargs.keys():
-            initial["by_components"] = self.kwargs("by_components")
+            initial["by_components"] = self.kwargs["by_components"]
         return initial
 
     def get_context_data(self, **kwargs):
@@ -85,26 +83,46 @@ class create_implemented_requirements_view(CreateView):
 
 def implemented_requirements_form_view(request, control_id):
     if request.method == "POST":
+        logger = logging.getLogger('debug')
         component_id = request.POST["component"]
         ctrl = catalog.models.controls.objects.get(pk=control_id)
-        for statement in ctrl.parts:
+        logger.debug("Just trying to see if logging is working")
+        new_implemented_requirement = implemented_requirements.objects.create(control_id=ctrl)
 
-        new_by_component = by_components.objects.create(component_uuid=component_id)
-        new_implimented_requirement = implemented_requirements.objects.create(
-            control_id=control_id,
+        for statement in ctrl.parts.all():
+            if statement.part_id in request.POST:
+                new_statement = statements.objects.create()
+                new_statement.statement_id.add(statement)
+                new_statement.save()
+                new_by_component = by_components.objects.create(
+                    component_uuid=component_id, description=request.POST[statement.part_id]
+                    )
+                new_statement.by_components.add(new_by_component)
+                new_statement.save()
+                new_implemented_requirement.statements.add(new_statement)
+                new_implemented_requirement.save()
+                # Find Parameters in statement and add values to the by_component object, so they are stored at the most granular (statement) level
+                if ctrl.params is not None:
+                    for param in ctrl.params.all():
+                        str_to_find = '{{ insert: param, ' + param.param_id + ' }}'
+                        if statement.prose.find(str_to_find) >= 0:
+                            new_parameter = parameters.objects.create(
+                                param_id=param.param_id, values=request.POST[param.param_id]
+                                )
+                            new_by_component.set_parameters.add(new_parameter)
+                            new_by_component.save()
 
-            )
-
-        request.POST
-        context = {"success": "Object Saved",
-            "post_data": request.POST}
-        return render(request, "component_definition/implemented_requirements_form.html",context)
+        context = {
+            "success": "Object Saved", "post_data": request.POST,
+            "new_implemented_requirement": new_implemented_requirement.to_html()
+            }
+        return render(request, "component_definition/implemented_requirements_form.html", context)
     else:
         ctrl = catalog.models.controls.objects.get(pk=control_id)
         component_list = []
         for component in components.objects.all():
             component_list.append((component.id, component.title))
-        context = {"control": ctrl.to_html_form(),
-            "control_id" : control_id,
-            "component_list" : component_list}
+        context = {
+            "control": ctrl.to_html_form(), "control_id": control_id, "component_list": component_list
+            }
         return render(request, "component_definition/implemented_requirements_form.html", context)

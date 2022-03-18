@@ -441,6 +441,10 @@ class catalogs(PrimitiveModel):
     groups = CustomManyToManyField(to=groups, verbose_name="Groups")
     back_matter = models.ForeignKey(to=back_matter, verbose_name="Back Matter", on_delete=models.CASCADE, null=True)
 
+    @property
+    def title(self):
+        return self.metadata.title
+
     def __str__(self):
         return self.metadata.title
 

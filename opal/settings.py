@@ -177,6 +177,11 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'opal.log')
             },
+        'debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'opal_debug.log')
+            },
         'console': {
             'level': env("LOG_LEVEL"),
             'class': 'logging.StreamHandler',
@@ -189,5 +194,11 @@ LOGGING = {
             'format':'%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s',
             'propagate': True,
             },
+        'debug': {
+            'handlers' : ['console','debug'],
+            'level' : 'DEBUG',
+            'format': '%(pathname)s:%(lineno)d %(levelname)-8s %(message)s',
+            'propagate': True,
+            }
         },
     }

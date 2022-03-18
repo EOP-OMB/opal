@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 import urllib.request
 import json
 from catalog.models import *
 from control_profile.models import profile, imports
+from component_definition.models import components
 
 
 # Create your views here.
@@ -31,30 +32,38 @@ def import_catalog_view(request, catalog_link):
     """
     Imports a pre-defined set of catalogs
     """
-    catalog_dict ={"sp-800-53-r5-high" : "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json",
-     "sp-800-53-r5-moderate": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json",
-     "sp-800-53-r5-low": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json",
-     "sp-800-53-r5-privacy": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json",
-        }
+    from common.views import available_catalog_list
 
-    if catalog_link in catalog_dict.keys():
-        catalog_url = catalog_dict[catalog_link]
-        f = urllib.request.urlopen(catalog_url)
-        catalog_json = json.loads(f.read().decode('utf-8'))
-        catalog_dict = catalog_json["catalog"]
-        new_catalog = catalogs()
-        new_catalog.import_oscal(catalog_dict)
-        new_catalog.save()
+    for item in available_catalog_list:
+        if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
+            catalog_url = item["link"]
+            f = urllib.request.urlopen(catalog_url)
+            catalog_json = json.loads(f.read().decode('utf-8'))
+            catalog_dict = catalog_json["catalog"]
+            new_catalog = catalogs()
+            new_catalog.import_oscal(catalog_dict)
+            new_catalog.save()
 
-        #create a new profile for the imported catalog
-        new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-        new_profile = profile.objects.create(
-            metadata=new_metadata)
-        new_profile.save()
-        url = "https://" + request.get_host() + new_catalog.get_permalink()
-        new_profile.imports.add(imports.objects.create(href=url,import_type="catalog"))
-        new_profile.save()
-        context = {'msg' : new_catalog.metadata.title + " imported from " + catalog_url}
-        return render(request, "index.html", context)
-    else:
-        return "Sorry, we don't know where to get that catalog."
+            # create a new profile for the imported catalog
+            new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
+            new_profile = profile.objects.create(
+                metadata=new_metadata
+                )
+            new_profile.save()
+            url = "https://" + request.get_host() + new_catalog.get_permalink()
+            new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
+            new_profile.save()
+
+            # create components for any groups in the catalog
+            for group in new_catalog.groups.all():
+                new_component = components.objects.get_or_create(
+                    type="policy",
+                    title=group.title + " Policy",
+                    description="This Component Policy was automatically created durring the import of " + new_metadata.title,
+                    purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
+                    status="under-development"
+                    )
+
+            context = {'msg': new_catalog.metadata.title + " imported from " + catalog_url}
+            # return render(request, "index.html", context)
+    return redirect('home_page')
