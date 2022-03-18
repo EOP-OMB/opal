@@ -133,15 +133,15 @@ class profile(BasicModel):
                                     for i in group.controls.all():
                                         html_str += "<h4>" + i.__str__() + "</h4>"
                                         html_str += "<a href='" + reverse('component:new_requirement', kwargs={'control_id': i.id}) + "'>Define</a>"
-                                        if i.parts is not None:
-                                            for part in i.parts.all():
-                                                html_str += part.to_html()
-                                        if len(i.params.all()) > 0:
-                                            html_str += "<p><table border=1>"
-                                            for p in i.params.all():
-                                                html_str += "<tr>" + p.to_html()
-                                                html_str += "<td><a href='" + reverse('component:create_parameter_view', kwargs={'param_id': p.id}) + "' target='_blank'>edit</a></td></tr>"
-                                            html_str += "</table></p>"
+                                        # if i.parts is not None:
+                                        #     for part in i.parts.all():
+                                        #         html_str += part.to_html()
+                                        # if len(i.params.all()) > 0:
+                                        #     html_str += "<p><table border=1>"
+                                        #     for p in i.params.all():
+                                        #         html_str += "<tr>" + p.to_html()
+                                        #         html_str += "<td><a href='" + reverse('component:create_parameter_view', kwargs={'param_id': p.id}) + "' target='_blank'>edit</a></td></tr>"
+                                        #     html_str += "</table></p>"
                         if obj.controls is not None:
                             html_str += "<h1>Controls not in a Group</h1>\n"
                             for i in obj.controls.all():

@@ -1,9 +1,11 @@
+import logging
+logger = logging.getLogger(__name__)
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
 import uuid
 from itertools import chain
 from django.utils.timezone import now
-from common.functions import *
+from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 # Imports currently used in catalog models
 from markdownx.models import MarkdownxField
@@ -207,9 +209,7 @@ class PrimitiveModel(models.Model):
             merged_dict = d
         return merged_dict
 
-    def import_oscal(self, oscal_data, logger=None):
-        if logger is None:
-            logger = start_logging()
+    def import_oscal(self, oscal_data):
         if oscal_data is None or len(oscal_data) == 0:
             logger.error("oscal_data is 0 length dictionary")
         opts = self._meta
@@ -233,7 +233,7 @@ class PrimitiveModel(models.Model):
                         # We need to create a child object here. The oscal_import_save_child method will link it to the current object
                         if f.name in oscal_data.keys():
                             child = f.related_model()
-                            child = child.import_oscal(oscal_data[f.name], logger)
+                            child = child.import_oscal(oscal_data[f.name])
                             self.__setattr__(f.name,child)
                     elif type(oscal_data) is str:
                         # This is the case where the json has just a UUID which should refer to a object defined elsewhere in the document.
@@ -275,17 +275,17 @@ class PrimitiveModel(models.Model):
                     if f.name in oscal_data.keys():
                         if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
                             child = f.related_model()
-                            child = child.import_oscal(oscal_data[f.name], logger)
-                            self.oscal_import_save_m2m(child,f,opts,logger)
+                            child = child.import_oscal(oscal_data[f.name])
+                            self.oscal_import_save_m2m(child,f,opts)
                         elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                             for item in oscal_data[f.name]:
                                 child = f.related_model()
-                                child = child.import_oscal(item, logger)
-                                self.oscal_import_save_m2m(child,f,opts,logger)
+                                child = child.import_oscal(item)
+                                self.oscal_import_save_m2m(child,f,opts)
                         elif type(oscal_data[f.name]) is str:
                             child = f.related_model()
-                            child = child.import_oscal(oscal_data, logger)
-                            self.oscal_import_save_m2m(child, f, opts, logger)
+                            child = child.import_oscal(oscal_data)
+                            self.oscal_import_save_m2m(child, f, opts)
                         else:
                             child = None
                         self.save()
@@ -297,7 +297,7 @@ class PrimitiveModel(models.Model):
         self.save()
         return self
 
-    def oscal_import_save_m2m(self, child, f, opts, logger):
+    def oscal_import_save_m2m(self, child, f, opts):
         if child is not None:
             error = False
             try:
@@ -468,8 +468,6 @@ class links(BasicModel):
         return self.text
 
     def import_oscal(self, oscal_data, logger=None):
-        if logger is None:
-            logger = start_logging()
         for k in oscal_data:
             self.__setattr__(k, oscal_data[k])
         self.save()
@@ -577,9 +575,7 @@ class roles(BasicModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
 
-    def import_oscal(self, oscal_data, logger=None):
-        if logger is None:
-            logger = start_logging()
+    def import_oscal(self, oscal_data):
         if type(oscal_data) is str:
             self.role_id = oscal_data
         elif type(oscal_data) is dict:

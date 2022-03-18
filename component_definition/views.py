@@ -1,3 +1,8 @@
+# import the logging library
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
@@ -83,19 +88,21 @@ class create_implemented_requirements_view(CreateView):
 
 def implemented_requirements_form_view(request, control_id):
     if request.method == "POST":
-        logger = logging.getLogger('debug')
+        logger.debug("Processing POST from implemented_requirements_form_view...")
         component_id = request.POST["component"]
         ctrl = catalog.models.controls.objects.get(pk=control_id)
-        logger.debug("Just trying to see if logging is working")
         new_implemented_requirement = implemented_requirements.objects.create(control_id=ctrl)
+        logger.debug("Created new implemented_control. ID: " + str(new_implemented_requirement.id))
 
-        for statement in ctrl.parts.all():
-            if statement.part_id in request.POST:
+        for part in ctrl.parts.all():
+            if part.part_id in request.POST:
+                logger.debug("Found field in POST for part " + part.part_id)
                 new_statement = statements.objects.create()
-                new_statement.statement_id.add(statement)
+                logger.debug("Created new statement. ID: " + str(new_statement.id))
+                new_statement.statement_id.add(part())
                 new_statement.save()
                 new_by_component = by_components.objects.create(
-                    component_uuid=component_id, description=request.POST[statement.part_id]
+                    component_uuid=component_id, description=request.POST[part.part_id]
                     )
                 new_statement.by_components.add(new_by_component)
                 new_statement.save()
@@ -105,7 +112,7 @@ def implemented_requirements_form_view(request, control_id):
                 if ctrl.params is not None:
                     for param in ctrl.params.all():
                         str_to_find = '{{ insert: param, ' + param.param_id + ' }}'
-                        if statement.prose.find(str_to_find) >= 0:
+                        if part.prose.find(str_to_find) >= 0:
                             new_parameter = parameters.objects.create(
                                 param_id=param.param_id, values=request.POST[param.param_id]
                                 )

@@ -168,6 +168,8 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+log_format = '%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -191,13 +193,13 @@ LOGGING = {
         'django': {
             'handlers': ['file', 'console'],
             'level': env("LOG_LEVEL"),
-            'format':'%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s',
+            'format': log_format,
             'propagate': True,
             },
         'debug': {
             'handlers' : ['console','debug'],
             'level' : 'DEBUG',
-            'format': '%(pathname)s:%(lineno)d %(levelname)-8s %(message)s',
+            'format': log_format,
             'propagate': True,
             }
         },

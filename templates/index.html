@@ -5,10 +5,6 @@
     <p>The OSCAL catalog model represents a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
     <p>Click on any of the following links to import these common catalogs:</p>
     <ul>
-        <!--<li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-high' %}">NIST SP-800 53 rev5 HIGH baseline</a></li>
-        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-moderate' %}">NIST SP-800 53 rev5 MODERATE baseline</a></li>
-        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-low' %}">NIST SP-800 53 rev5 LOW baseline</a></li>
-        <li><a href="{% url 'catalog:import_catalog_view' catalog_link='sp-800-53-r5-privacy' %}">NIST SP-800 53 rev5 PRIVACY baseline</a></li>-->
         {{ catalog_list | safe}}
     </ul>
     {% if context.msg %}
@@ -19,6 +15,7 @@
 <h1>Step 3: Creating Components</h1>
     <p>Components are used to describe individual system parts.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.</p>
     <p>When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.</p>
+    <p>Again, as a convenience, OPAL automaticallt creates a Policy Component for each Control Gorup in your imported Catalog. You can create additional new Components using the link below.</p>
     <p><a href="{% url 'component:create_component_view' %}">Create a new Component</a></p>
 <h1>Step 4: Control Statements</h1>
     <p>Now that we have a Component, we can start defining the controls and parameters it will provide to a system. For every control defined in the profile, we will need to define how the control is implemented. We call these definitions Implemented Requirements. Although it is technically possible to simply define these Implemented Requirements for each information system, using components to group Implemented Requirements will amke it much easier to maintain and reference our documentation.</p>
