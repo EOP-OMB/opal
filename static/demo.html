@@ -10,16 +10,14 @@
 
     <title>SB Admin 2 - Dashboard</title>
 
-    {% load static %}
-
     <!-- Custom fonts for this template-->
-    <link href="{% static 'css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="/static/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -32,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../templates/index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -44,7 +42,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="../templates/index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -115,7 +113,7 @@
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="../templates/404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
@@ -739,22 +737,22 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Core plugin JavaScript-->
-    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+    <script src="/static/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+    <script src="/static/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+    <script src="/static/js/demo/chart-area-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
