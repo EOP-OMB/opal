@@ -122,29 +122,31 @@ class profile(BasicModel):
                         html_str += "<h2>Metadata</h2>"
                         html_str += obj.metadata.to_html()
                         html_str += "<hr>\n"
+                        html_str += "<table class='table table-striped'>\n"
                         if obj.groups is not None:
-                            html_str += "<h2>Groups</h2>\n"
                             for group in obj.groups.all():
-                                html_str += "<h3>" + group.__str__() + "</h3>"
+                                html_str += "<tr><td colspan=3><h3>" + group.__str__() + "</h3></td></tr>"
                                 if group.sub_groups is not None:
                                     for sub_group in group.sub_groups.all():
-                                        html_str += "<h3>" + sub_group.__str__() + "</h3>"
+                                        html_str += "<tr><td colspan=3><h4>" + sub_group.__str__() + "</h4></td></tr>"
                                 if group.controls is not None:
                                     for i in group.controls.all():
-                                        html_str += "<h4>" + i.__str__() + "</h4>"
-                                        html_str += "<a href='" + reverse('component:new_requirement', kwargs={'control_id': i.id}) + "'>Define</a>"
-                                        # if i.parts is not None:
-                                        #     for part in i.parts.all():
-                                        #         html_str += part.to_html()
-                                        # if len(i.params.all()) > 0:
-                                        #     html_str += "<p><table border=1>"
-                                        #     for p in i.params.all():
-                                        #         html_str += "<tr>" + p.to_html()
-                                        #         html_str += "<td><a href='" + reverse('component:create_parameter_view', kwargs={'param_id': p.id}) + "' target='_blank'>edit</a></td></tr>"
-                                        #     html_str += "</table></p>"
+                                        html_str += "<tr>"
+                                        html_str += "<th>" + i.__str__() + "</th>"
+                                        html_str += "<td><a href='" + reverse('component:new_requirement', kwargs={'control_id': i.id}) + "'>Define</a></td>"
+                                        html_str += "<td><a href=''>Modify</a></td>"
+                                        html_str += "</tr>"
+
                         if obj.controls is not None:
-                            html_str += "<h1>Controls not in a Group</h1>\n"
+                            html_str += "<tr><td colspan=3><h3>Controls not in a Group</h3></td></tr>"
                             for i in obj.controls.all():
-                                html_str += i.to_html()
+                                html_str += "<tr>"
+                                html_str += "<th>" + i.__str__() + "</th>"
+                                html_str += "<td><a href='" + reverse(
+                                    'component:new_requirement', kwargs={'control_id': i.id}
+                                    ) + "'>Define</a></td>"
+                                html_str += "<td><a href=''>Modify</a></td>"
+                                html_str += "</tr>"
+                        html_str += "</table>\n"
         return html_str
 

@@ -1,4 +1,5 @@
 import logging
+
 logger = logging.getLogger(__name__)
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
@@ -56,21 +57,18 @@ class propertiesField(CustomManyToManyField):
 
 system_status_state_choices = [
     ("operational", "Operational: The system or component is currently operating in production."),
-    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"),
-    ("under-major-modification",
-     "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
+    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"), (
+    "under-major-modification",
+    "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
     ("disposition", "Disposition: The system or component is no longer operational."),
-    ("other", "Other: Some other state, a remark must be included to describe the current state.")
-    ]
+    ("other", "Other: Some other state, a remark must be included to describe the current state.")]
 
-implementation_status_choices = [
-        ("Implemented: The control is fully implemented.", "implemented"),
-        ("Partial: The control is partially implemented.", "partial"),
-        ("Planned: There is a plan for implementing the control as explained in the remarks.", "planned"),
-        ("Alternative: There is an alternative implementation for this control as explained in the remarks.",
-         "alternative"),
-        ("Not-Applicable: This control does not apply to this system as justified in the remarks.", "not-applicable")
-        ]
+implementation_status_choices = [("Implemented: The control is fully implemented.", "implemented"),
+    ("Partial: The control is partially implemented.", "partial"),
+    ("Planned: There is a plan for implementing the control as explained in the remarks.", "planned"), (
+    "Alternative: There is an alternative implementation for this control as explained in the remarks.", "alternative"),
+    ("Not-Applicable: This control does not apply to this system as justified in the remarks.", "not-applicable")]
+
 
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
@@ -84,16 +82,14 @@ class PrimitiveModel(models.Model):
     def natural_key(self):
         return self.uuid
 
-
     def get_permalink(self):
-        url = reverse('common:permalink', kwargs={'uuid' : str(self.uuid)})
+        url = reverse('common:permalink', kwargs={'uuid': str(self.uuid)})
         return url
 
     def get_absolute_url(self):
-        admin_str = 'admin:' + "_".join([self._meta.app_label,self._meta.model_name,'change'])
+        admin_str = 'admin:' + "_".join([self._meta.app_label, self._meta.model_name, 'change'])
         change_url = reverse(admin_str, args=(self.id,))
         return change_url
-
 
     def to_dict(self):
         opts = self._meta
@@ -111,47 +107,12 @@ class PrimitiveModel(models.Model):
             data[f.name] = [i.to_dict() for i in f.value_from_object(self)]
         return data
 
-    def to_html_fancy(self):
-        opts = self._meta
-        # list of some excluded fields
-        excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
-
-        html_str = ""
-        html_str += "<div class='card' style=''>"
-        # getting all fields that available in `Client` model,
-        # but not in `excluded_fields`
-        for f in opts.concrete_fields:
-            if f.name not in excluded_fields:
-                if f.get_internal_type() == 'ForeignKey':
-                    child = self.__getattribute__(f.name)
-                    if child is not None:
-                        value = child.to_html()
-                    else:
-                        value = None
-                else:
-                    if f.value_to_string(self) != "":
-                        value = f.value_to_string(self)
-                    else:
-                        value = None
-                if value is not None:
-                    html_str += f.verbose_name + ": " + value + "<br>\n"
-        for f in opts.many_to_many:
-            if len(f.value_from_object(self)) > 0:
-                html_str += "<p>" + f.verbose_name + ":<p>"
-                for i in f.value_from_object(self):
-                    html_str += i.to_html()
-        html_str += "</div>"
-        if html_str is None:
-            html_str = "None"
-        return html_str
-
     def to_html(self):
         opts = self._meta
         # list of some excluded fields
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
 
         html_str = "\n"
-        html_str += "<a href='" + self.get_absolute_url() + "'>Edit</a><ul>\n"
         # getting all fields that available in `Client` model,
         # but not in `excluded_fields`
         for f in opts.concrete_fields:
@@ -234,7 +195,7 @@ class PrimitiveModel(models.Model):
                         if f.name in oscal_data.keys():
                             child = f.related_model()
                             child = child.import_oscal(oscal_data[f.name])
-                            self.__setattr__(f.name,child)
+                            self.__setattr__(f.name, child)
                     elif type(oscal_data) is str:
                         # This is the case where the json has just a UUID which should refer to a object defined elsewhere in the document.
                         child = f.related_model
@@ -276,12 +237,12 @@ class PrimitiveModel(models.Model):
                         if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
                             child = f.related_model()
                             child = child.import_oscal(oscal_data[f.name])
-                            self.oscal_import_save_m2m(child,f,opts)
+                            self.oscal_import_save_m2m(child, f, opts)
                         elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                             for item in oscal_data[f.name]:
                                 child = f.related_model()
                                 child = child.import_oscal(item)
-                                self.oscal_import_save_m2m(child,f,opts)
+                                self.oscal_import_save_m2m(child, f, opts)
                         elif type(oscal_data[f.name]) is str:
                             child = f.related_model()
                             child = child.import_oscal(oscal_data)
@@ -367,8 +328,7 @@ class PrimitiveModel(models.Model):
 
 class BasicModel(PrimitiveModel):
     remarks = models.TextField(
-        verbose_name="Remarks", help_text="Additional commentary on the containing object.",
-        blank=True, default=""
+        verbose_name="Remarks", help_text="Additional commentary on the containing object.", blank=True, default=""
         )
 
     class Meta:
@@ -384,9 +344,9 @@ class port_ranges(BasicModel):
         verbose_name = "Port Range"
         verbose_name_plural = "Port Ranges"
 
-    start = models.IntegerField(help_text="Indicates the starting port number in a port range",verbose_name="Start")
-    end = models.IntegerField(help_text="Indicates the ending port number in a port range",verbose_name="End")
-    transport = ShortTextField(max_length=3,verbose_name="Transport",choices=[('tcp','TCP'),('udp','UDP')])
+    start = models.IntegerField(help_text="Indicates the starting port number in a port range", verbose_name="Start")
+    end = models.IntegerField(help_text="Indicates the ending port number in a port range", verbose_name="End")
+    transport = ShortTextField(max_length=3, verbose_name="Transport", choices=[('tcp', 'TCP'), ('udp', 'UDP')])
 
     def __str__(self):
         r = str(self.start) + '-' + str(self.end) + ' ' + self.transport
@@ -402,10 +362,15 @@ class protocols(BasicModel):
         verbose_name = "Protocol"
         verbose_name_plural = "Protocols"
 
-    name = ShortTextField(verbose_name="Protocol Name",help_text='The common name of the protocol, which should be the appropriate service name from the IANA Service Name and Transport Protocol Port Number Registry')
-    title = ShortTextField(verbose_name="Protocol Title",help_text="A human readable name for the protocol (e.g., Transport Layer Security).")
-    port_ranges = CustomManyToManyField(to=port_ranges,verbose_name="Port Ranges")
-
+    name = ShortTextField(
+        verbose_name="Protocol Name",
+        help_text='The common name of the protocol, which should be the appropriate service name from the IANA Service Name and Transport Protocol Port Number Registry'
+        )
+    title = ShortTextField(
+        verbose_name="Protocol Title",
+        help_text="A human readable name for the protocol (e.g., Transport Layer Security)."
+        )
+    port_ranges = CustomManyToManyField(to=port_ranges, verbose_name="Port Ranges")
 
 
 class props(BasicModel):
@@ -427,8 +392,7 @@ class props(BasicModel):
         default="https://csrc.nist.gov/ns/oscal"
         )
     value = ShortTextField(
-        verbose_name="Property Value",
-        help_text="Indicates the value of the attribute, characteristic, or quality."
+        verbose_name="Property Value", help_text="Indicates the value of the attribute, characteristic, or quality."
         )
     property_class = ShortTextField(
         verbose_name="Property Class",
@@ -519,8 +483,7 @@ class revisions(BasicModel):
         help_text="A string used to distinguish the current version of the document from other previous (and future) versions."
         )
     oscal_version = ShortTextField(
-        verbose_name="OSCAL Version",
-        help_text="The OSCAL model version the document was authored against."
+        verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against."
         )
     props = propertiesField()
 
@@ -565,12 +528,12 @@ class roles(BasicModel):
         help_text="A name given to the role, which may be used by a tool for display and navigation."
         )
     short_name = ShortTextField(
-        verbose_name="Role Short Name",
-        help_text="A short common name, abbreviation, or acronym for the role.", blank=True
+        verbose_name="Role Short Name", help_text="A short common name, abbreviation, or acronym for the role.",
+        blank=True
         )
     description = ShortTextField(
-        verbose_name="Role Description",
-        help_text="A summary of the role's purpose and associated responsibilities.", blank=True
+        verbose_name="Role Description", help_text="A summary of the role's purpose and associated responsibilities.",
+        blank=True
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
@@ -611,8 +574,7 @@ class emails(BasicModel):
         verbose_name_plural = "email Addresses"
 
     email_address = models.EmailField(
-        verbose_name="email Address",
-        help_text="An email address as defined by RFC 5322 Section 3.4.1."
+        verbose_name="email Address", help_text="An email address as defined by RFC 5322 Section 3.4.1."
         )
 
     def import_oscal(self, oscal_data, logger=None):
@@ -657,27 +619,22 @@ class addresses(BasicModel):
         choices=[("home", "Home"), ("work", "Work")]
         )
     addr_lines = models.TextField(
-        max_length=1024, verbose_name="Location Address",
-        help_text="All lines of an address.", blank=True
+        max_length=1024, verbose_name="Location Address", help_text="All lines of an address.", blank=True
         )
     city = ShortTextField(
-        verbose_name="City", help_text="City, town or geographical region for the mailing address.",
-        blank=True
+        verbose_name="City", help_text="City, town or geographical region for the mailing address.", blank=True
         )
     state = ShortTextField(
-        verbose_name="State",
-        help_text="State, province or analogous geographical region for mailing address", blank=True
-        )
-    postal_code = ShortTextField(
-        verbose_name="Postal Code", help_text="Postal or ZIP code for mailing address",
+        verbose_name="State", help_text="State, province or analogous geographical region for mailing address",
         blank=True
         )
+    postal_code = ShortTextField(
+        verbose_name="Postal Code", help_text="Postal or ZIP code for mailing address", blank=True
+        )
     country = ShortTextField(
-        verbose_name="Country",
-        help_text="The ISO 3166-1 alpha-2 country code for the mailing address.", blank=True,
+        verbose_name="Country", help_text="The ISO 3166-1 alpha-2 country code for the mailing address.", blank=True,
         max_length=2, validators=[RegexValidator(
-            regex='[A-Z]{2}',
-            message="Must use the ISO 3166-1 alpha-2 country code"
+            regex='[A-Z]{2}', message="Must use the ISO 3166-1 alpha-2 country code"
             )]
         )
 
@@ -696,8 +653,7 @@ class locations(BasicModel):
 
     title = ShortTextField(
         verbose_name="Location Title",
-        help_text="A name given to the location, which may be used by a tool for display and navigation.",
-        blank=True
+        help_text="A name given to the location, which may be used by a tool for display and navigation.", blank=True
         )
     address = models.ForeignKey(
         to=addresses, verbose_name="Location Address",
@@ -705,8 +661,7 @@ class locations(BasicModel):
         blank=True, null=True, on_delete=models.CASCADE
         )
     email_addresses = CustomManyToManyField(
-        to=emails,
-        help_text="This is a contact email associated with the location."
+        to=emails, help_text="This is a contact email associated with the location."
         )
     telephone_numbers = CustomManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
@@ -719,8 +674,7 @@ class locations(BasicModel):
         )
     props = propertiesField()
     links = CustomManyToManyField(
-        to=links, verbose_name="Links",
-        help_text="Links to other sites relevant to the location"
+        to=links, verbose_name="Links", help_text="Links to other sites relevant to the location"
         )
 
 
@@ -734,8 +688,7 @@ class external_ids(models.Model):
         verbose_name_plural = "Party External Identifiers"
 
     scheme = ShortTextField(
-        verbose_name="External Identifier Schema",
-        help_text="Indicates the type of external identifier."
+        verbose_name="External Identifier Schema", help_text="Indicates the type of external identifier."
         )
     external_id = ShortTextField(verbose_name="Party External ID", blank=True)
 
@@ -763,18 +716,16 @@ class parties(BasicModel):
         verbose_name_plural = "Parties"
 
     type = ShortTextField(
-        verbose_name="Party Type",
-        help_text="A category describing the kind of party the object describes.",
+        verbose_name="Party Type", help_text="A category describing the kind of party the object describes.",
         choices=[("person", "Person"), ("organization", "Organization")]
         )
     name = ShortTextField(
         verbose_name="Party Name",
-        help_text="The full name of the party. This is typically the legal name associated with the party.",
-        blank=True
+        help_text="The full name of the party. This is typically the legal name associated with the party.", blank=True
         )
     short_name = ShortTextField(
-        verbose_name="Party Short Name",
-        help_text="A short common name, abbreviation, or acronym for the party.", blank=True
+        verbose_name="Party Short Name", help_text="A short common name, abbreviation, or acronym for the party.",
+        blank=True
         )
     external_ids = CustomManyToManyField(to=external_ids)
     props = propertiesField()
@@ -785,16 +736,14 @@ class parties(BasicModel):
         on_delete=models.CASCADE, null=True
         )
     email_addresses = CustomManyToManyField(
-        to=emails,
-        help_text="This is a contact email associated with the Party."
+        to=emails, help_text="This is a contact email associated with the Party."
         )
     telephone_numbers = CustomManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
         help_text="A phone number used to contact the Party."
         )
     location_uuids = CustomManyToManyField(
-        to=locations, verbose_name="Party Locations",
-        help_text="References a location defined in metadata"
+        to=locations, verbose_name="Party Locations", help_text="References a location defined in metadata"
         )
     member_of_organizations = CustomManyToManyField(
         to=organizations, verbose_name="Organizational Affiliations",
@@ -814,8 +763,7 @@ class responsible_parties(PrimitiveModel):
         verbose_name_plural = "Responsible Parties"
 
     role_id = ShortTextField(
-        verbose_name="Responsible Role",
-        help_text="The role that the party is responsible for."
+        verbose_name="Responsible Role", help_text="The role that the party is responsible for."
         )
     party_uuids = CustomManyToManyField(
         to=parties, verbose_name="Party Reference",
@@ -826,8 +774,7 @@ class responsible_parties(PrimitiveModel):
 
     def field_name_changes(self):
         field_name_changes = {
-            "id": "role_id",
-            "uuid": "party_uuids"
+            "id": "role_id", "uuid": "party_uuids"
             }
         return field_name_changes
 
@@ -842,8 +789,6 @@ class responsible_parties(PrimitiveModel):
         if self.role_id is not None:
             return_str = self.role_id + ": " + return_str
         return return_str
-
-
 
 
 class metadata(BasicModel):
@@ -875,8 +820,7 @@ class metadata(BasicModel):
         default="1.0"
         )
     oscal_version = ShortTextField(
-        verbose_name="OSCAL Version",
-        help_text="The OSCAL model version the document was authored against.",
+        verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against.",
         default="1.0.0"
         )
     revisions = CustomManyToManyField(to=revisions, verbose_name="Previous Revisions")
@@ -956,8 +900,7 @@ class rlinks(PrimitiveModel):
         verbose_name_plural = "Resource links"
 
     href = CustomManyToManyField(
-        to=links, verbose_name="Hypertext Reference",
-        help_text="A resolvable URI reference to a resource."
+        to=links, verbose_name="Hypertext Reference", help_text="A resolvable URI reference to a resource."
         )
     hashes = CustomManyToManyField(
         to=hashes, verbose_name="Hashes",
@@ -967,7 +910,6 @@ class rlinks(PrimitiveModel):
     def to_html(self):
         if self.href is not None:
             return self.href.first().to_html()
-
 
 
 class base64(PrimitiveModel):
@@ -988,8 +930,7 @@ class base64(PrimitiveModel):
         help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry."
         )
     value = models.TextField(
-        verbose_name="base64 encoded file",
-        help_text="A string representing arbitrary Base64-encoded binary data."
+        verbose_name="base64 encoded file", help_text="A string representing arbitrary Base64-encoded binary data."
         )
 
 
@@ -1007,8 +948,7 @@ class resources(BasicModel):
         help_text="A name given to the resource, which may be used by a tool for display and navigation."
         )
     description = models.TextField(
-        verbose_name="Description",
-        help_text="Describes how the system satisfies a set of controls."
+        verbose_name="Description", help_text="Describes how the system satisfies a set of controls."
         )
     props = propertiesField()
     document_ids = CustomManyToManyField(
