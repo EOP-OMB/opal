@@ -1,15 +1,12 @@
 # import the logging library
-import logging
 # Get an instance of a logger
-logger = logging.getLogger(__name__)
 
+from django import forms
 from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django import forms
 
-import catalog.models
 from .models import *
 
 
@@ -87,45 +84,53 @@ class create_implemented_requirements_view(CreateView):
 
 
 def implemented_requirements_form_view(request, control_id):
+    logger = logging.getLogger("debug")
     if request.method == "POST":
         logger.debug("Processing POST from implemented_requirements_form_view...")
-        component_id = request.POST["component"]
-        ctrl = catalog.models.controls.objects.get(pk=control_id)
+        results = request.POST
+        component_id = results.get("component")
+        comp = components.objects.get(pk=component_id)
+        ctrl = controls.objects.get(pk=control_id)
         new_implemented_requirement = implemented_requirements.objects.create(control_id=ctrl)
         logger.debug("Created new implemented_control. ID: " + str(new_implemented_requirement.id))
 
-        for part in ctrl.parts.all():
-            if part.part_id in request.POST:
-                logger.debug("Found field in POST for part " + part.part_id)
-                new_statement = statements.objects.create()
-                logger.debug("Created new statement. ID: " + str(new_statement.id))
-                new_statement.statement_id.add(part())
-                new_statement.save()
-                new_by_component = by_components.objects.create(
-                    component_uuid=component_id, description=request.POST[part.part_id]
-                    )
-                new_statement.by_components.add(new_by_component)
-                new_statement.save()
-                new_implemented_requirement.statements.add(new_statement)
-                new_implemented_requirement.save()
-                # Find Parameters in statement and add values to the by_component object, so they are stored at the most granular (statement) level
-                if ctrl.params is not None:
-                    for param in ctrl.params.all():
-                        str_to_find = '{{ insert: param, ' + param.param_id + ' }}'
-                        if part.prose.find(str_to_find) >= 0:
-                            new_parameter = parameters.objects.create(
-                                param_id=param.param_id, values=request.POST[param.param_id]
-                                )
-                            new_by_component.set_parameters.add(new_parameter)
-                            new_by_component.save()
-
+        for k, v in results.items():
+            if "_" in k:
+                logger.debug("Processing field " + k + " with value " + v)
+                item_lookup = k.split("_")
+                if item_lookup[0] == "part":
+                    f = parts.objects.get(pk=item_lookup[1])
+                    logger.debug(k + " is a prose item. Creating new statement")
+                    new_statement = statements.objects.create()
+                    logger.debug("Created new statement with id " + str(new_statement.id))
+                    new_statement.statement_id.add(f)
+                    logger.debug("Created part to statement relationship")
+                    new_statement.save()
+                    logger.debug("Statement saved")
+                    new_by_component = by_components.objects.create(component_uuid=comp,description=v)
+                    new_by_component.save()
+                    logger.debug("by_component created and saved")
+                    logger.debug("Linked to component")
+                    new_statement.by_components.add(new_by_component)
+                    logger.debug("by_component linked to statement")
+                    new_statement.save()
+                    logger.debug("Statement saved")
+                    new_implemented_requirement.statements.add(new_statement)
+                    logger.debug("Statement linked to implimented_requirement")
+                    new_implemented_requirement.save()
+                elif item_lookup[0] == "param":
+                    f = params.objects.get(pk=item_lookup[1])
+                    # Find Parameters in statement and add values to the by_component object, so they are stored at the most granular (statement) level
+                    new_parameter = parameters.objects.create(param_id=f, values=v)
+                    new_implemented_requirement.set_parameters.add(new_parameter)
+                    new_implemented_requirement.save()
         context = {
             "success": "Object Saved", "post_data": request.POST,
             "new_implemented_requirement": new_implemented_requirement.to_html()
             }
         return render(request, "component_definition/implemented_requirements_form.html", context)
     else:
-        ctrl = catalog.models.controls.objects.get(pk=control_id)
+        ctrl = controls.objects.get(pk=control_id)
         component_list = []
         for component in components.objects.all():
             component_list.append((component.id, component.title))

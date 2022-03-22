@@ -20,5 +20,5 @@ from .views import *
 app_name = 'common'
 urlpatterns = [
     path('p/<str:uuid>', permalink, name='permalink'),
-    path('db_status/', DatabaseStatusView.as_view(), name='db_status'),
+    path('db_status/', DatabaseStatusView, name='db_status'),
 ]

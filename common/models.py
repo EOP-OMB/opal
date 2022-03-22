@@ -1,6 +1,4 @@
 import logging
-
-logger = logging.getLogger(__name__)
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
 import uuid
@@ -8,8 +6,6 @@ from itertools import chain
 from django.utils.timezone import now
 from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-# Imports currently used in catalog models
-from markdownx.models import MarkdownxField
 from django.urls import reverse
 
 
@@ -58,16 +54,19 @@ class propertiesField(CustomManyToManyField):
 system_status_state_choices = [
     ("operational", "Operational: The system or component is currently operating in production."),
     ("under-development", "Under Development: The system or component is being designed, developed, or implemented"), (
-    "under-major-modification",
-    "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
+        "under-major-modification",
+        "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
     ("disposition", "Disposition: The system or component is no longer operational."),
     ("other", "Other: Some other state, a remark must be included to describe the current state.")]
 
 implementation_status_choices = [("Implemented: The control is fully implemented.", "implemented"),
-    ("Partial: The control is partially implemented.", "partial"),
-    ("Planned: There is a plan for implementing the control as explained in the remarks.", "planned"), (
-    "Alternative: There is an alternative implementation for this control as explained in the remarks.", "alternative"),
-    ("Not-Applicable: This control does not apply to this system as justified in the remarks.", "not-applicable")]
+                                 ("Partial: The control is partially implemented.", "partial"), (
+                                 "Planned: There is a plan for implementing the control as explained in the remarks.",
+                                 "planned"), (
+                                     "Alternative: There is an alternative implementation for this control as explained in the remarks.",
+                                     "alternative"), (
+                                 "Not-Applicable: This control does not apply to this system as justified in the remarks.",
+                                 "not-applicable")]
 
 
 class PrimitiveModel(models.Model):
@@ -171,6 +170,7 @@ class PrimitiveModel(models.Model):
         return merged_dict
 
     def import_oscal(self, oscal_data):
+        logger = logging.getLogger("debug")
         if oscal_data is None or len(oscal_data) == 0:
             logger.error("oscal_data is 0 length dictionary")
         opts = self._meta
@@ -197,9 +197,10 @@ class PrimitiveModel(models.Model):
                             child = child.import_oscal(oscal_data[f.name])
                             self.__setattr__(f.name, child)
                     elif type(oscal_data) is str:
-                        # This is the case where the json has just a UUID which should refer to a object defined elsewhere in the document.
+                        # This is the case where the json has just a UUID which should refer to an object defined elsewhere in the document.
                         child = f.related_model
                         child, created = child.objects.get_or_create(uuid=oscal_data)
+                        # TODO need a test here, I don't think this code will work
                         self.save()
                 elif type(oscal_data) is dict and len(oscal_data) > 0:
                     # field is not a Foreign Key but the data is a dictionary.
@@ -259,11 +260,12 @@ class PrimitiveModel(models.Model):
         return self
 
     def oscal_import_save_m2m(self, child, f, opts):
+        logger = logging.getLogger("debug")
         if child is not None:
             error = False
             try:
                 child.save()
-            except IntegrityError as err:
+            except IntegrityError:
                 try:
                     existing_child = child._meta.model.objects.get(uuid=child.uuid)
                     child = existing_child
@@ -787,7 +789,7 @@ class responsible_parties(PrimitiveModel):
         else:
             return_str = "N/A"
         if self.role_id is not None:
-            return_str = self.role_id + ": " + return_str
+            return_str = str(self.role_id) + ": " + return_str
         return return_str
 
 

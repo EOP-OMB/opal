@@ -42,22 +42,18 @@ def index_view(request):
     return render(request, "index.html", context)
 
 
-class DatabaseStatusView(TemplateView):
-    template_name = "db_status.html"
-    context_object_name = "obj"
+def DatabaseStatusView(request):
 
-    def get_context_data(self, **kwargs):
-        context = super(DatabaseStatusView, self).get_context_data(**kwargs)
-        model_list = []
-        for a in USER_APPS:
-            app_models = apps.get_app_config(a).get_models()
-            for m in app_models:
-                if m.objects.count() > 0:
-                    s = m.__name__ + ":" + str(m.objects.count())
-                    model_list.append(s)
-        model_list.sort()
-        context["model_list"] = model_list
-        return context
+    model_list = []
+    for a in USER_APPS:
+        app_models = apps.get_app_config(a).get_models()
+        for m in app_models:
+            if m.objects.count() > 0:
+                s = m.__name__ + ":" + str(m.objects.count())
+                model_list.append(s)
+    model_list.sort()
+    context = {"model_list" : model_list}
+    return render(request, "db_status.html", context)
 
 
 def permalink(request, uuid):

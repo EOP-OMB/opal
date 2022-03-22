@@ -1,40 +1,23 @@
 import logging
-logger = logging.getLogger(__name__)
+from uuid import UUID
 from django.apps import apps
-
+from django.core.exceptions import FieldError
 """
 Some useful common functions
 """
 
-import logging.handlers
-import os
 from opal.settings import USER_APPS
 
 
-# your logging setup
-
-def start_logging():
-    log_filename = "opal_debug.log"
-    # should_roll_over = os.path.isfile(log_filename)
-    # handler = logging.handlers.RotatingFileHandler(log_filename, mode='w', backupCount=5)
-    # if should_roll_over:  # log already exists, roll over!
-    #     handler.doRollover()
-    logging.basicConfig(
-        filename=log_filename, format='%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s',
-        filemode='w'
-        )
-    logger = logging.getLogger()
-    logger.setLevel("DEBUG")
-    return logger
-
 
 def replace_hyphen(s: str):
-    logger = logging.getLogger("file")
+    logger = logging.getLogger("debug")
     logger.debug("replacing hyphen in " + s + " with underscore.")
     return s.replace("-", "_")
 
 
 def reset_db(app_name):
+    logger = logging.getLogger("django")
     app_models = apps.get_app_config(app_name).get_models()
     logger.info("Deleting all records from app " + app_name)
     for model in app_models:
@@ -58,15 +41,29 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def search_for_uuid(uuid_str, app_list=USER_APPS):
-    r = None
-    for a in app_list:
-        app_models = apps.get_app_config(a).get_models()
-        for model in app_models:
-            for field in model._meta.concrete_fields:
-                if field.name == "uuid":
-                    try:
-                        r = model.objects.get(uuid=uuid_str)
-                        return r
-                    except ObjectDoesNotExist:
-                        r = None
-    return r
+    logger = logging.getLogger("debug")
+    try:
+        logger.debug("Searching for uuid: " + uuid_str)
+        uuid_obj = UUID(uuid_str, version=4)
+        # r = None
+        for a in app_list:
+            logger.debug("Looking in app " + a.title())
+            app_models = apps.get_app_config(a).get_models()
+            logger.debug("Got list of models")
+            for model in app_models:
+                logger.debug("Trying " + model._meta.model_name)
+                try:
+                    r = model.objects.get(uuid=uuid_str)
+                    logging.debug("Found matching!")
+                    return r
+                except ObjectDoesNotExist:
+                     r = None
+                except FieldError:
+                    # uuid field does not exist
+                    r = None
+        logger.debug("Could not find an object with uuid: " + uuid_str)
+        return None
+    except ValueError:
+        logger.debug(uuid_str + " is not a valid uuid")
+        return None
+

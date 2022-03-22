@@ -189,6 +189,36 @@ class implemented_requirements(BasicModel):
             r = self.control_id
         return str(r)
 
+    def to_html(self):
+        html_str = "\n"
+        html_str += self.control_id.to_html()
+        html_str += "<h4>Parameters</h4>"
+        html_str += "<table>"
+        html_str += "<tr><th>ID</th><th>Label</th><th>Guidlines</th><th>Value</th></tr>"
+        for param in self.set_parameters.all():
+            html_str += "<tr>"
+            html_str += param.param_id.to_html()
+            html_str += "<td>" + param.values + "</td>"
+            html_str += "</tr>"
+        html_str += "</table>"
+        html_str += "<h4>Statements</h4>"
+        html_str += "<table>"
+        html_str += "<tr><th>Statement</th><th>How is the control implemented?</th></tr>"
+        for stmt in self.statements.all():
+            html_str += "<tr>"
+            html_str += "<td>"
+            for part in stmt.statement_id.all():
+                html_str += part.to_html()
+            html_str += "</td>"
+            html_str += "<td><dl>"
+            for comp in stmt.by_components.all():
+                 html_str += "<dt>" + comp.component_uuid.title + "</dt>"
+                 html_str += "<dd>" + comp.description + "</dd>"
+            html_str += "</dl></td>"
+            html_str += "</tr>"
+        html_str += "</table>"
+        return html_str
+
 
 class statements(BasicModel):
     """
@@ -228,10 +258,11 @@ class by_components(BasicModel):
         verbose_name = "Component Control Implementation"
         verbose_name_plural = "Component Control Implementations"
 
-    component_uuid = CustomManyToManyField(
+    component_uuid = models.ForeignKey(
         to="components",
         verbose_name="Component Universally Unique Identifier Reference",
-        help_text="A reference to the component that is implementing a given control or control statement."
+        help_text="A reference to the component that is implementing a given control or control statement.",
+        on_delete=models.CASCADE
         )
     description = models.TextField(
         verbose_name="Control Implementation Description",

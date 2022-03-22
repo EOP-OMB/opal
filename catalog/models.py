@@ -159,7 +159,7 @@ class parts(PrimitiveModel):
         help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True
         )
     props = propertiesField()
-    prose = MarkdownxField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
+    prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
     sub_parts = CustomManyToManyField(
         to="parts", verbose_name="Sub Parts",
         help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy)."
@@ -192,7 +192,9 @@ class parts(PrimitiveModel):
             if len(self.props.filter(name="label")) > 0:
                 html_str += self.props.get(name="label").value + " "
             html_str += self.prose + "</td>"
-            html_str += "<td><textarea id='" + self.part_id + "' name='" + self.part_id + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
+            html_str += "<td><textarea id='" + self.part_id + "' name='part_" + str(
+                self.pk
+                ) + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
         if self.name == "guidance" and len(self.prose) > 0:
             html_str = "<h5>Guidance</h5>"
             html_str += "<p>" + self.prose + "</p>"
@@ -253,6 +255,14 @@ class controls(PrimitiveModel):
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
         )
 
+    def get_all_parts(self):
+        part_list = []
+        for part in self.parts.all():
+            part_list.append(part)
+            if part.sub_parts.count() > 0:
+                for sub_part in part.sub_parts.all():
+                    part_list.append(sub_part)
+
     def __str__(self):
         return self.control_class + " " + self.control_id + " " + self.title
 
@@ -311,7 +321,7 @@ class controls(PrimitiveModel):
             for i in self.params.all():
                 str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
                 if i.select is not None and len(i.select) > 0:
-                    select_form_field = "<select id='" + i.param_id + "' name='" + i.param_id + "'"
+                    select_form_field = "<select id='" + i.param_id + "' name='param_" + str(i.pk) + "'"
                     import ast
                     choices_dict = ast.literal_eval(i.select)
                     if choices_dict['how-many'] == 'one-or-more':
@@ -321,12 +331,13 @@ class controls(PrimitiveModel):
                         select_form_field += "<option value='" + choice + "'>" + choice + "</option>"
                     select_form_field += "</select>"
                     html_str = html_str.replace(
-                        str_to_replace, select_form_field)
+                        str_to_replace, select_form_field
+                        )
                 else:
                     text_form_field = "(<input type='text' "
                     text_form_field += "id='" + i.param_id + "' "
-                    text_form_field += "name='" + i.param_id + "' "
-                    text_form_field += "size='" + str(len(coalesce(i.label, i.param_id))) + "'"
+                    text_form_field += "name='param_" + str(i.pk) + "' "
+                    text_form_field += "size='" + str(len(coalesce(i.label, i.param_id)) + 10) + "'"
                     text_form_field += "value='" + coalesce(i.label, i.param_id) + "' >)"
                     html_str = html_str.replace(str_to_replace, text_form_field)
         if self.links is not None:
