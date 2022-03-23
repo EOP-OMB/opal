@@ -28,7 +28,6 @@ urlpatterns = [
     path('component/', include('component_definition.urls'), name='component'),
     path('profiles/', include('control_profile.urls'), name='control_profile'),
     path('ssp/', include('ssp.urls'), name='ssp'),
-    path('markdownx/', include('markdownx.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'common.views.error_404_view'

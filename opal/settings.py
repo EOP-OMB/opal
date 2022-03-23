@@ -71,7 +71,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "bootstrap5",
     'coverage',
-    'markdownx',
     'django_extensions',
     ]
 

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: opal
-          image: cs4p/opal
+          image: opal
           ports:
             - containerPort: 8000
           env:
