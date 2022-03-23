@@ -21,18 +21,19 @@ RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir mod-wsgi
 
+# Create Service account
+RUN useradd -r opal
+
 # copy all the files to the container
 COPY . /usr/src/app/
-RUN chown -R www-data:www-data .
+RUN chown -R opal:opal .
 RUN chmod u+x startup.sh
 
 FROM stage1
 # run as an unprivileged user
-USER www-data
+USER opal
 
 # use -p 8000:8000 with `docker run` to access the service
 EXPOSE 8000
-
-ENV log_level DEBUG
 
 CMD ./startup.sh
