@@ -29,9 +29,9 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 1. Clone the repository to your local directory
    `git clone https://gitlab.max.gov/max-security/opal.git`
 3. Build the image\
-    `docker build -t opal:opal .`
+    `docker build -t opal .`
 1. Run the container\
-    `docker run --rm -it --name opal -p 8000:8000 opal:opal`
+    `docker run --rm -it --name opal -p 8000:8000 opal`
     
 Note: A default superuser account is created in the docker container. You should immedietly change the password and create additional secure superuser accounts.
 
