@@ -52,7 +52,7 @@
             <a class="nav-link" href="{% url 'ssp:ssp_list_view' %}">System Security Plans</a>
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
-          <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Utilities
           </a>
@@ -65,7 +65,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+            {% if user.is_authenticated %}
+                Current user: ❴❴ user.email ❵❵
+                <a class="nav-link" href="{% url 'oidc_logout' %}">Logout</a>
+             {% else %}
+                <a class="nav-link" href="{% url 'oidc_authentication_init' %}">Login</a>
+             {% endif %}
         </li>
       </ul>
       <form class="d-flex">

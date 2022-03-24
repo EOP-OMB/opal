@@ -65,6 +65,7 @@ USER_APPS = ['common',
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'mozilla_django_oidc',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -131,6 +132,25 @@ else:
             }
         }
     print("using database " + DATABASES['default']['NAME'])
+
+
+# Adding support for SAML Authentication
+AUTHENTICATION_BACKENDS = (
+    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
+)
+
+OIDC_RP_CLIENT_ID = env('SAML_CLIENT_ID')
+OIDC_RP_CLIENT_SECRET = env('SAML_CLIENT_SECRET')
+
+OIDC_OP_AUTHORIZATION_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/auth"
+OIDC_OP_TOKEN_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/token"
+OIDC_OP_USER_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/me"
+
+OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_OP_JWKS_ENDPOINT = "https://contentlab-dev.onelogin.com/oidc/2/certs"
+
+LOGIN_REDIRECT_URL = "http://localhost:8000/"
+LOGOUT_REDIRECT_URL = "http://localhost:8000/"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
