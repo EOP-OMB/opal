@@ -2,10 +2,12 @@ asgiref==3.5.0
 backports.zoneinfo==0.2.1
 coverage==6.3.1
 Django==4.0.2
+django-bootstrap-v5==1.0.11
 django-environ==0.8.1
 django-extensions==3.1.5
 importlib-metadata==4.11.1
 Markdown==3.3.6
+mozilla-django-oidc==2.0.0
 Pillow==9.0.1
 #pygraphviz
 sqlparse==0.4.2
