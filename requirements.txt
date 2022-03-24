@@ -6,6 +6,7 @@ django-environ==0.8.1
 django-extensions==3.1.5
 importlib-metadata==4.11.1
 Markdown==3.3.6
+mozilla-django-oidc==2.0.0
 Pillow==9.0.1
 #pygraphviz
 sqlparse==0.4.2
