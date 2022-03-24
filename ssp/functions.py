@@ -1,10 +1,11 @@
-from common.functions import *
-from ssp.models import *
 import json
+
+from ssp.models import *
 
 """
 Some useful common functions
 """
+
 
 def import_ssp(ssp_file="sample_data/ssp-example.json"):
     ssp_json = json.load(open(ssp_file))
@@ -13,4 +14,3 @@ def import_ssp(ssp_file="sample_data/ssp-example.json"):
     new_ssp.import_oscal(ssp_dict)
     new_ssp.save()
     return new_ssp
-

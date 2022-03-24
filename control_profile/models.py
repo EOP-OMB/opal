@@ -2,6 +2,7 @@ from common.models import *
 from catalog.models import controls, params
 import re
 
+
 # Create your models here.
 
 
@@ -18,16 +19,23 @@ class imports(BasicModel):
     href = ShortTextField(
         verbose_name="Link to catalog or profile", help_text="URI to access the catalog or profile to be imported"
         )
-    import_type = ShortTextField(verbose_name="Type of Import",choices=[("catalog","Catalog"),("profile","Profile")],help_text="Select if this import is for a catalog or a profile")
+    import_type = ShortTextField(
+        verbose_name="Type of Import", choices=[("catalog", "Catalog"), ("profile", "Profile")],
+        help_text="Select if this import is for a catalog or a profile"
+        )
     include_all = models.BooleanField(
         verbose_name="Include all controls",
         help_text="Select this option to include all controls from the imported catalog or profile", default=True
         )
-    include_controls = CustomManyToManyField(to=controls, verbose_name="Included Controls",
-        help_text="Select the controls to be included. Any controls not explicitly selected will be excluded",related_name="include_controls"
+    include_controls = CustomManyToManyField(
+        to=controls, verbose_name="Included Controls",
+        help_text="Select the controls to be included. Any controls not explicitly selected will be excluded",
+        related_name="include_controls"
         )
-    exclude_controls = CustomManyToManyField(to=controls, verbose_name="Excluded Controls",
-        help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",related_name="exclude_controls"
+    exclude_controls = CustomManyToManyField(
+        to=controls, verbose_name="Excluded Controls",
+        help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",
+        related_name="exclude_controls"
         )
 
     def __str__(self):
@@ -41,16 +49,17 @@ class imports(BasicModel):
             ctr_list = []
             for c in self.include_controls.all():
                 ctr_list.append(c)
-            html_str += "Include only the following controls from " + self.import_type + " "  + self.href + ".<br>"
+            html_str += "Include only the following controls from " + self.import_type + " " + self.href + ".<br>"
             html_str += ", ".join(ctr_list)
         elif len(self.exclude_controls.all()) > 0:
             ctr_list = []
             for c in self.include_controls.all():
                 ctr_list.append(c)
-            html_str += "Include all controls from " + self.import_type + " "  + self.href + " except the following.<br>"
+            html_str += "Include all controls from " + self.import_type + " " + self.href + " except the following.<br>"
             html_str += ", ".join(ctr_list)
         html_str += "</a>"
         return html_str
+
 
 class modify(BasicModel):
     """
@@ -70,8 +79,8 @@ class modify(BasicModel):
 
 
 merge_options = [("use-first",
-                        "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"),
-                       ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
+                  "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"),
+                 ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
 
 
 class profile(BasicModel):
@@ -88,12 +97,15 @@ class profile(BasicModel):
         to=imports, verbose_name="Imports",
         help_text="The import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
         )
-    merge = ShortTextField(verbose_name="Merge Strategy",
-        help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.",null=True,choices=merge_options
+    merge = ShortTextField(
+        verbose_name="Merge Strategy",
+        help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.",
+        null=True, choices=merge_options
         )
     modify = models.ForeignKey(
         to=modify, verbose_name="Modifications",
-        help_text="Define paramaters and controls that are modified by this profile.", on_delete=models.CASCADE, null=True
+        help_text="Define paramaters and controls that are modified by this profile.", on_delete=models.CASCADE,
+        null=True
         )
     # TODO: We need to create a function that will make a copy of existing paramaters/controls selected for modification
     back_matter = models.ForeignKey(
@@ -111,11 +123,11 @@ class profile(BasicModel):
     def to_html(self):
         html_str = self.metadata.to_html()
         regexp = re.compile('.*/common/p/')
-        for i in self.imports.all():
-            re.match(regexp, i.href)
-            m = re.match(regexp, i.href)
+        for ctrl in self.imports.all():
+            re.match(regexp, ctrl.href)
+            m = re.match(regexp, ctrl.href)
             if m is not None:
-                obj = search_for_uuid(i.href[m.end():])
+                obj = search_for_uuid(ctrl.href[m.end():])
                 if obj is not None:
                     if obj._meta.model_name == 'catalogs':
                         html_str = "<h1>" + obj.metadata.title + "</h1>"
@@ -130,23 +142,24 @@ class profile(BasicModel):
                                     for sub_group in group.sub_groups.all():
                                         html_str += "<tr><td colspan=3><h4>" + sub_group.__str__() + "</h4></td></tr>"
                                 if group.controls is not None:
-                                    for i in group.controls.all():
+                                    for ctrl in group.controls.all():
                                         html_str += "<tr>"
-                                        html_str += "<th>" + i.__str__() + "</th>"
-                                        html_str += "<td><a href='" + reverse('component:new_requirement', kwargs={'control_id': i.id}) + "'>Define</a></td>"
+                                        html_str += "<th>" + ctrl.__str__() + "</th>"
+                                        html_str += "<td><a href='" + reverse(
+                                            'component:new_requirement', kwargs={'control_id': ctrl.id}
+                                            ) + "'>Define</a></td>"
                                         html_str += "<td><a href=''>Modify</a></td>"
                                         html_str += "</tr>"
 
                         if obj.controls is not None:
                             html_str += "<tr><td colspan=3><h3>Controls not in a Group</h3></td></tr>"
-                            for i in obj.controls.all():
+                            for ctrl in obj.controls.all():
                                 html_str += "<tr>"
-                                html_str += "<th>" + i.__str__() + "</th>"
+                                html_str += "<th>" + ctrl.__str__() + "</th>"
                                 html_str += "<td><a href='" + reverse(
-                                    'component:new_requirement', kwargs={'control_id': i.id}
+                                    'component:new_requirement', kwargs={'control_id': ctrl.id}
                                     ) + "'>Define</a></td>"
                                 html_str += "<td><a href=''>Modify</a></td>"
                                 html_str += "</tr>"
                         html_str += "</table>\n"
         return html_str
-

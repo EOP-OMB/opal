@@ -3213,7 +3213,7 @@ textarea.form-control-lg {
     }
 
     .card-group > .card {
-        flex: 1 0 0%;
+        flex: 1 0 0;
         margin-bottom: 0
     }
 

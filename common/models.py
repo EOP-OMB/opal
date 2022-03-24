@@ -34,6 +34,9 @@ class CustomManyToManyField(models.ManyToManyField):
         # del kwargs['null']
         return name, path, args, kwargs
 
+    def first(self):
+        pass
+
 
 class propertiesField(CustomManyToManyField):
     def __init__(self, *args, **kwargs):
@@ -61,12 +64,12 @@ system_status_state_choices = [
 
 implementation_status_choices = [("Implemented: The control is fully implemented.", "implemented"),
                                  ("Partial: The control is partially implemented.", "partial"), (
-                                 "Planned: There is a plan for implementing the control as explained in the remarks.",
-                                 "planned"), (
+                                     "Planned: There is a plan for implementing the control as explained in the remarks.",
+                                     "planned"), (
                                      "Alternative: There is an alternative implementation for this control as explained in the remarks.",
                                      "alternative"), (
-                                 "Not-Applicable: This control does not apply to this system as justified in the remarks.",
-                                 "not-applicable")]
+                                     "Not-Applicable: This control does not apply to this system as justified in the remarks.",
+                                     "not-applicable")]
 
 
 class PrimitiveModel(models.Model):
@@ -322,10 +325,10 @@ class PrimitiveModel(models.Model):
 
     def __str__(self):
         if self.uuid is None:
-            uuid = "None"
+            uuid_str = "None"
         else:
-            uuid = str(self.uuid)
-        return str(self._meta.model_name + ": " + uuid)
+            uuid_str = str(self.uuid)
+        return str(self._meta.model_name + ": " + uuid_str)
 
 
 class BasicModel(PrimitiveModel):
@@ -781,11 +784,11 @@ class responsible_parties(PrimitiveModel):
         return field_name_changes
 
     def __str__(self):
-        parties = []
+        parties_list = []
         for item in self.party_uuids.all():
-            parties.append(item.name)
-        if len(parties) > 0:
-            return_str = ", ".join(parties)
+            parties_list.append(item.name)
+        if len(parties_list) > 0:
+            return_str = ", ".join(parties_list)
         else:
             return_str = "N/A"
         if self.role_id is not None:

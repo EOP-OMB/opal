@@ -2,12 +2,12 @@ import logging
 from uuid import UUID
 from django.apps import apps
 from django.core.exceptions import FieldError
+
 """
 Some useful common functions
 """
 
 from opal.settings import USER_APPS
-
 
 
 def replace_hyphen(s: str):
@@ -57,7 +57,7 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
                     logging.debug("Found matching!")
                     return r
                 except ObjectDoesNotExist:
-                     r = None
+                    r = None
                 except FieldError:
                     # uuid field does not exist
                     r = None
@@ -66,4 +66,3 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
     except ValueError:
         logger.debug(uuid_str + " is not a valid uuid")
         return None
-

@@ -1,10 +1,12 @@
 from django.contrib import admin
 from .models import *
 
+
 class implemented_requirements_inline(admin.TabularInline):
     model = control_implementations.implemented_requirements.through
     verbose_name_plural = "Implemented Requirements"
     extra = 1
+
 
 class control_implementations_inline(admin.TabularInline):
     model = components.control_implementations.through

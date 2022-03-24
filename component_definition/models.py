@@ -15,15 +15,13 @@ class responsible_roles(BasicModel):
         verbose_name_plural = "Responsible Roles"
 
     role_id = models.ForeignKey(
-        to=roles, verbose_name="Role",
-        help_text="The role that is responsible for the business function.",
+        to=roles, verbose_name="Role", help_text="The role that is responsible for the business function.",
         on_delete=models.CASCADE
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     party_uuids = CustomManyToManyField(
-        to=parties, verbose_name="Party Reference",
-        help_text="References a party defined in metadata."
+        to=parties, verbose_name="Party Reference", help_text="References a party defined in metadata."
         )
 
     def __str__(self):
@@ -40,8 +38,7 @@ class parameters(BasicModel):
         verbose_name_plural = "Parameters"
 
     param_id = models.ForeignKey(
-        to=params,
-        verbose_name="Parameter",
+        to=params, verbose_name="Parameter",
         help_text="A reference to a parameter within a control, who's catalog has been imported into the current implementation context.",
         on_delete=models.CASCADE
         )
@@ -61,16 +58,14 @@ class control_implementations(BasicModel):
         verbose_name_plural = "Control Implementations"
 
     description = models.TextField(
-        verbose_name="Description",
-        help_text="Describes how the system satisfies a set of controls."
+        verbose_name="Description", help_text="Describes how the system satisfies a set of controls."
         )
     set_parameters = CustomManyToManyField(
         to=parameters, verbose_name="Common Parameters",
         help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value."
         )
     implemented_requirements = CustomManyToManyField(
-        to="implemented_requirements",
-        verbose_name="Implemented Requirements",
+        to="implemented_requirements", verbose_name="Implemented Requirements",
         help_text="Describes how the system satisfies controls."
         )
 
@@ -89,28 +84,25 @@ class components(BasicModel):
         verbose_name = "Component"
         verbose_name_plural = "Components"
 
-    component_types = [
-        ("this-system", "This System: The system as a whole."),
-        ("system",
-         "Another System: An external system, which may be a leveraged system or the other side of an interconnection."),
-        ("interconnection", "System Interconnectio: A connection to something outside this system."),
-        ("software", "Software: Any software, operating system, or firmware."),
-        ("hardware", "Hardware: A physical device."),
-        ("service", "Service: A service that may provide APIs."),
-        ("policy", "Policy: An enforceable policy."),
-        ("physical", "Physical: A tangible asset used to provide physical protections or countermeasures."),
-        ("process-procedure", "Process or Procedure: A list of steps or actions to take to achieve some end result."),
-        ("plan", "Plan: An applicable plan."),
-        ("guidance", "Guidance: Any guideline or recommendation."),
-        ("standard", "Standard: Any organizational or industry standard."),
-        ("validation",
-         "Validation: An external assessment performed on some other component, that has been validated by a third-party."),
-        ("network", "Network: A physical or virtual network.")
-        ]
+    component_types = [("this-system", "This System: The system as a whole."), ("system",
+                                                                                "Another System: An external system, which may be a leveraged system or the other side of an interconnection."),
+                       ("interconnection", "System Interconnectio: A connection to something outside this system."),
+                       ("software", "Software: Any software, operating system, or firmware."),
+                       ("hardware", "Hardware: A physical device."),
+                       ("service", "Service: A service that may provide APIs."),
+                       ("policy", "Policy: An enforceable policy."), ("physical",
+                                                                      "Physical: A tangible asset used to provide physical protections or countermeasures."),
+                       ("process-procedure",
+                        "Process or Procedure: A list of steps or actions to take to achieve some end result."),
+                       ("plan", "Plan: An applicable plan."),
+                       ("guidance", "Guidance: Any guideline or recommendation."),
+                       ("standard", "Standard: Any organizational or industry standard."), ("validation",
+                                                                                            "Validation: An external assessment performed on some other component, that has been validated by a third-party."),
+                       ("network", "Network: A physical or virtual network.")]
 
     type = ShortTextField(
-        verbose_name="Component Type",
-        help_text="A category describing the purpose of the component.", choices=component_types
+        verbose_name="Component Type", help_text="A category describing the purpose of the component.",
+        choices=component_types
         )
     title = ShortTextField(verbose_name="Component Title", help_text="A human readable name for the system component.")
     description = models.TextField(
@@ -118,15 +110,14 @@ class components(BasicModel):
         help_text="A description of the component, including information about its function."
         )
     purpose = ShortTextField(
-        max_length=1000,
-        verbose_name="Purpose",
+        max_length=1000, verbose_name="Purpose",
         help_text="A summary of the technological or business purpose of the component."
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     status = ShortTextField(
-        verbose_name="Status",
-        help_text=" Describes the operational status of the system component.", choices=system_status_state_choices
+        verbose_name="Status", help_text=" Describes the operational status of the system component.",
+        choices=system_status_state_choices
         )
     responsible_roles = CustomManyToManyField(
         to=responsible_roles, verbose_name="Responsible Roles",
@@ -158,8 +149,7 @@ class implemented_requirements(BasicModel):
         verbose_name_plural = "Implemented Requirements"
 
     control_id = models.ForeignKey(
-        to=controls,
-        verbose_name="Control Identifier Reference",
+        to=controls, verbose_name="Control Identifier Reference",
         help_text="A reference to a control with a corresponding id value.", on_delete=models.CASCADE
         )
     props = propertiesField()
@@ -212,8 +202,8 @@ class implemented_requirements(BasicModel):
             html_str += "</td>"
             html_str += "<td><dl>"
             for comp in stmt.by_components.all():
-                 html_str += "<dt>" + comp.component_uuid.title + "</dt>"
-                 html_str += "<dd>" + comp.description + "</dd>"
+                html_str += "<dt>" + comp.component_uuid.title + "</dt>"
+                html_str += "<dd>" + comp.description + "</dd>"
             html_str += "</dl></td>"
             html_str += "</tr>"
         html_str += "</table>"
@@ -230,8 +220,7 @@ class statements(BasicModel):
         verbose_name_plural = "Statements"
 
     statement_id = CustomManyToManyField(
-        to=parts,
-        verbose_name="Control Statement Reference",
+        to=parts, verbose_name="Control Statement Reference",
         help_text="A reference to a control statement by its identifier"
         )
     props = propertiesField()
@@ -245,8 +234,7 @@ class statements(BasicModel):
         help_text="Defines how the referenced component implements a set of controls."
         )
 
-    # def __str__(self):
-    #     return self.statement_id.part_id
+    # def __str__(self):  # return self.statement_id.part_id
 
 
 class by_components(BasicModel):
@@ -259,8 +247,7 @@ class by_components(BasicModel):
         verbose_name_plural = "Component Control Implementations"
 
     component_uuid = models.ForeignKey(
-        to="components",
-        verbose_name="Component Universally Unique Identifier Reference",
+        to="components", verbose_name="Component Universally Unique Identifier Reference",
         help_text="A reference to the component that is implementing a given control or control statement.",
         on_delete=models.CASCADE
         )
@@ -314,8 +301,7 @@ class export(BasicModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     provided = CustomManyToManyField(
-        to="provided_control_implementation",
-        verbose_name="Provided Control Implementations",
+        to="provided_control_implementation", verbose_name="Provided Control Implementations",
         help_text="Describes a capability which may be inherited by a leveraging system"
         )
     responsibilities = CustomManyToManyField(
@@ -334,10 +320,9 @@ class inherited(BasicModel):
         verbose_name_plural = "Inherited Control Implementations"
 
     provided_uuid = models.ForeignKey(
-        to="provided_control_implementation",
-        verbose_name="Provided Control Implementation",
-        help_text=" Identifies a 'provided' assembly associated with this assembly.",
-        blank=True, on_delete=models.CASCADE
+        to="provided_control_implementation", verbose_name="Provided Control Implementation",
+        help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True,
+        on_delete=models.CASCADE
         )
     description = models.TextField(
         verbose_name="Control Implementation Responsibility Description",
@@ -361,10 +346,9 @@ class satisfied(BasicModel):
         verbose_name_plural = "Satisfied Control Implementation Responsibilities"
 
     responsibility_uuid = models.ForeignKey(
-        to="responsibilities",
-        verbose_name="Provided Control Implementation",
-        help_text=" Identifies a 'provided' assembly associated with this assembly.",
-        blank=True, on_delete=models.CASCADE
+        to="responsibilities", verbose_name="Provided Control Implementation",
+        help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True,
+        on_delete=models.CASCADE
         )
     description = models.TextField(
         verbose_name="Control Implementation Responsibility Description",
@@ -388,10 +372,9 @@ class responsibilities(BasicModel):
         verbose_name_plural = "Control Implementation Responsibilities"
 
     provided_uuid = models.ForeignKey(
-        to="provided_control_implementation",
-        verbose_name="Provided Control Implementation",
-        help_text=" Identifies a 'provided' assembly associated with this assembly.",
-        blank=True, on_delete=models.CASCADE
+        to="provided_control_implementation", verbose_name="Provided Control Implementation",
+        help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True,
+        on_delete=models.CASCADE
         )
     description = models.TextField(
         verbose_name="Control Implementation Responsibility Description",

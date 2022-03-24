@@ -2,6 +2,7 @@ from catalog.models import controls
 from component_definition.models import components, responsible_roles, control_implementations, parameters
 from common.models import *
 
+
 class import_profiles(BasicModel):
     """
     Used to import the OSCAL profile representing the system's control baseline.
@@ -79,8 +80,7 @@ class categorizations(PrimitiveModel):
         help_text="Specifies the information type identification system used."
         )
     information_type_ids = CustomManyToManyField(
-        to=information_type_ids,
-        verbose_name="Information Type Systematized Identifier",
+        to=information_type_ids, verbose_name="Information Type Systematized Identifier",
         help_text="An identifier qualified by the given identification system used, such as NIST SP 800-60."
         )
 
@@ -150,11 +150,11 @@ class information_type_impact_level(BasicModel):
                 )
             if "props" in oscal_data.keys():
                 for item in oscal_data["props"]:
-                    p = props.import_oscal(item)
+                    p = props.import_oscal(oscal_data=item)
                     obj.props.add(p)
             if "links" in oscal_data.keys():
                 for item in oscal_data["links"]:
-                    l = props.import_oscal(item)
+                    l = props.import_oscal(oscal_data=item)
                     obj.props.add(l)
             obj.save()
             return obj
@@ -176,14 +176,12 @@ class information_types(PrimitiveModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     confidentiality_impact = models.ForeignKey(
-        to=information_type_impact_level,
-        verbose_name="Confidentiality Impact Level",
+        to=information_type_impact_level, verbose_name="Confidentiality Impact Level",
         help_text="The expected level of impact resulting from the unauthorized disclosure of the described information.",
         on_delete=models.CASCADE, related_name="confidentiality_impact"
         )
     integrity_impact = models.ForeignKey(
-        to=information_type_impact_level,
-        verbose_name="Integrity Impact Level",
+        to=information_type_impact_level, verbose_name="Integrity Impact Level",
         help_text="The expected level of impact resulting from the unauthorized modification of the described information.",
         on_delete=models.CASCADE, related_name="integrity_impact"
         )
@@ -233,11 +231,11 @@ class information_types(PrimitiveModel):
                 obj.description = oscal_data["description"]
                 if "props" in oscal_data.keys():
                     for item in oscal_data["props"]:
-                        p = props.import_oscal(item)
+                        p = props.import_oscal(oscal_data=item)
                         obj.props.add(p)
                 if "links" in oscal_data.keys():
                     for item in oscal_data["links"]:
-                        l = props.import_oscal(item)
+                        l = props.import_oscal(oscal_data=item)
                         obj.props.add(l)
                 impact_types = ["confidentiality_impact", "integrity_impact", "availability_impact"]
                 for i in impact_types:
@@ -317,8 +315,7 @@ class authorization_boundaries(BasicModel):
         verbose_name_plural = "Authorization Boundaries"
 
     description = models.TextField(
-        verbose_name="Authorization Boundary Description",
-        help_text="A summary of the system's authorization boundary."
+        verbose_name="Authorization Boundary Description", help_text="A summary of the system's authorization boundary."
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -338,8 +335,7 @@ class network_architectures(BasicModel):
         verbose_name_plural = "Network Architectures"
 
     description = models.TextField(
-        verbose_name="Network Architecture Description",
-        help_text="A summary of the system's Network Architecture."
+        verbose_name="Network Architecture Description", help_text="A summary of the system's Network Architecture."
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -359,8 +355,7 @@ class data_flows(BasicModel):
         verbose_name_plural = "Data Flows"
 
     description = models.TextField(
-        verbose_name="Data Flow Description",
-        help_text="A summary of the system's Data Flow."
+        verbose_name="Data Flow Description", help_text="A summary of the system's Data Flow."
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -393,8 +388,7 @@ class system_characteristics(BasicModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     date_authorized = models.DateField(
-        verbose_name="System Authorization Date",
-        help_text="The date the system received its authorization.", null=True
+        verbose_name="System Authorization Date", help_text="The date the system received its authorization.", null=True
         )
     security_sensitivity_level = ShortTextField(
         verbose_name="Security Sensitivity Level",
@@ -425,8 +419,8 @@ class system_characteristics(BasicModel):
         null=True
         )
     status = ShortTextField(
-        verbose_name="Status",
-        help_text="Describes the operational status of the system.", null=True, choices=system_status_state_choices
+        verbose_name="Status", help_text="Describes the operational status of the system.", null=True,
+        choices=system_status_state_choices
         )
     authorization_boundary = models.ForeignKey(
         to=authorization_boundaries, verbose_name="Authorization Boundary",
@@ -469,12 +463,10 @@ class leveraged_authorizations(BasicModel):
     links = CustomManyToManyField(to=links, verbose_name="Links")
     party_uuid = models.ForeignKey(
         to=parties, verbose_name="Responsible Party",
-        help_text="A reference to the party that manages the leveraged system.",
-        on_delete=models.CASCADE
+        help_text="A reference to the party that manages the leveraged system.", on_delete=models.CASCADE
         )
     date_authorized = models.DateField(
-        verbose_name="System Authorization Date",
-        help_text="The date the system received its authorization."
+        verbose_name="System Authorization Date", help_text="The date the system received its authorization."
         )
 
     def __str__(self):
@@ -509,8 +501,7 @@ class privileges(BasicModel):
         help_text="A name given to the user, which may be used by a tool for display and navigation."
         )
     description = models.TextField(
-        verbose_name="User Description",
-        help_text=" A summary of the user's purpose within the system."
+        verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
         )
     functions_performed = CustomManyToManyField(
         to=system_functions, verbose_name="Functions Performed",
@@ -535,18 +526,15 @@ class users(BasicModel):
         help_text="A name given to the user, which may be used by a tool for display and navigation."
         )
     short_name = ShortTextField(
-        verbose_name="User Short Name",
-        help_text="A short common name, abbreviation, or acronym for the user."
+        verbose_name="User Short Name", help_text="A short common name, abbreviation, or acronym for the user."
         )
     description = models.TextField(
-        verbose_name="User Description",
-        help_text=" A summary of the user's purpose within the system."
+        verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     role_ids = CustomManyToManyField(
-        to=roles, verbose_name="User Role(s)",
-        help_text="A reference to the roles served by the user."
+        to=roles, verbose_name="User Role(s)", help_text="A reference to the roles served by the user."
         )
     authorized_privileges = CustomManyToManyField(
         to=privileges, verbose_name="Privilege",
@@ -594,8 +582,7 @@ class system_implementations(BasicModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     leveraged_authorizations = CustomManyToManyField(
-        to=leveraged_authorizations,
-        verbose_name="Leveraged Authorizations",
+        to=leveraged_authorizations, verbose_name="Leveraged Authorizations",
         help_text="A description of another authorized system from which this system inherits capabilities that satisfy security requirements. Another term for this concept is a common control provider."
         )
     users = CustomManyToManyField(

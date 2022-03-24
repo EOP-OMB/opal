@@ -2,6 +2,7 @@ from django.test import TestCase
 from ssp.models import *
 import json
 
+
 # Create your tests here.
 
 class ssp_import_test(TestCase):
@@ -16,4 +17,4 @@ class ssp_import_test(TestCase):
         obj = system_security_plans.objects.get(uuid="cff8385f-108e-40a5-8f7a-82f3dc0eaba8")
         self.assertEqual(obj.metadata.version, "1.0")
         self.assertEqual(obj.metadata.oscal_version, "1.0.0")
-        self.assertEqual(obj.metadata.title,"Enterprise Logging and Auditing System Security Plan")
+        self.assertEqual(obj.metadata.title, "Enterprise Logging and Auditing System Security Plan")

@@ -13,21 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include, re_path
-from django.views.generic import TemplateView
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path, re_path
+
 from common.views import index_view
 
 urlpatterns = [path('', index_view, name='home_page'), path('admin/', admin.site.urls),
-                  path('catalog/', include('catalog.urls'), name='catalog'),
-                  path('common/', include('common.urls'), name='common'),
-                  path('component/', include('component_definition.urls'), name='component'),
-                  path('profiles/', include('control_profile.urls'), name='control_profile'),
-                  path('ssp/', include('ssp.urls'), name='ssp'),
-                  re_path(r'^oidc/', include('mozilla_django_oidc.urls')),
-               ] + static(
+               path('catalog/', include('catalog.urls'), name='catalog'),
+               path('common/', include('common.urls'), name='common'),
+               path('component/', include('component_definition.urls'), name='component'),
+               path('profiles/', include('control_profile.urls'), name='control_profile'),
+               path('ssp/', include('ssp.urls'), name='ssp'),
+               re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     ) + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT

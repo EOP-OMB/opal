@@ -1,25 +1,28 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
-from catalog.models import *
-from ssp.models import *
 from django.apps import apps
+from django.shortcuts import redirect, render
+
+from catalog.models import *
 from opal.settings import USER_APPS
+from ssp.models import *
 from .functions import search_for_uuid
 
 # Create your views here.
 
 available_catalog_list = [{
-    "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline", "name": "NIST SP-800 53 rev5 HIGH baseline",
+    "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline",
+    "name": "NIST SP-800 53 rev5 HIGH baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
     }, {
-    "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline", "name": "NIST SP-800 53 rev5 MODERATE baseline",
+    "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline",
+    "name": "NIST SP-800 53 rev5 MODERATE baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
     }, {
     "uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline",
     "name": "NIST SP-800 53 rev5 LOW baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
     }, {
-    "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline", "name": "NIST SP-800 53 rev5 PRIVACY baseline",
+    "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline",
+    "name": "NIST SP-800 53 rev5 PRIVACY baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
     }]
 
@@ -43,7 +46,6 @@ def index_view(request):
 
 
 def DatabaseStatusView(request):
-
     model_list = []
     for a in USER_APPS:
         app_models = apps.get_app_config(a).get_models()
@@ -52,13 +54,13 @@ def DatabaseStatusView(request):
                 s = m.__name__ + ":" + str(m.objects.count())
                 model_list.append(s)
     model_list.sort()
-    context = {"model_list" : model_list}
+    context = {"model_list": model_list}
     return render(request, "db_status.html", context)
 
 
-def permalink(request, uuid):
+def permalink(request, p_uuid):
     redirect_url = "error_404_view"
-    obj = search_for_uuid(uuid)
+    obj = search_for_uuid(p_uuid)
     try:
         redirect_url = obj.get_absolute_url()
     except AttributeError as e:

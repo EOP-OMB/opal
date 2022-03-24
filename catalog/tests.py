@@ -2,6 +2,7 @@ from django.test import TestCase
 import json
 from catalog.models import *
 
+
 # Create your tests here.
 
 class catalog_import_test(TestCase):
@@ -22,6 +23,3 @@ class catalog_import_test(TestCase):
             obj.metadata.remarks,
             "The following is a short excerpt from [ISO/IEC 27002:2013](https://www.iso.org/standard/54533.html), *Information technology — Security techniques — Code of practice for information security controls*. This work is provided here under copyright \"fair use\" for non-profit, educational purposes only. Copyrights for this work are held by the publisher, the International Organization for Standardization (ISO)."
             )
-
-
-

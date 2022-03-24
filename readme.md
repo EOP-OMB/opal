@@ -1,7 +1,7 @@
 The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
 
 # OSCAL Policy Administration Library (opal)
-Provides a simple web application for managing System Security Plans and related documents.  The data model is based on the OSCAL standard and objects can be exported in OSCAL compliant JSON. 
+Provides a simple web application for managing System Security Plans and related documents.  The data model is based on the OSCAL standard and objects can be imported and exported in OSCAL compliant JSON. 
 
 The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
 
@@ -10,7 +10,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 3. postgres client if using a postgres database
 
 # Deployment Instructions
-## Running a local development version using mysql
+## Running a local development version using sqlite
 1. Clone the repository to your local directory\
    `git clone https://github.com/eop-omb/opal.git`
 1. It is recommended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
@@ -25,7 +25,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
    `python manage.py createsuperuser`
 1. Start the Server\
    `python manage.py runserver`
-## Start the app in a docker container using mysql
+## Start the app in a docker container using sqlite
 1. Clone the repository to your local directory
    `git clone https://gitlab.max.gov/max-security/opal.git`
 3. Build the image\
@@ -38,21 +38,18 @@ Note: A default superuser account is created in the docker container. You should
 Username: admin\
 Password: admin
 ## Setting environment variables
-OPAL is designed to run well in a containerized environment. It is recomended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: \
+OPAL is designed to run well in a containerized environment. It is recommended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: \
 
-   "environment", #development or production \
-   "opal_secret_key", #secret key used to create sessions \
-   "debug", #True of False \
-   "allowed_hosts", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all \
-   "database", #sqlite or postgres \
+   "ENVIRONMENT", #development or production \
+   "OPAL_SECRET_KEY", #secret key used to create sessions \
+   "DEBUG", #True of False \
+   "ALLOWED_HOSTS", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all \
+   "DATABASE", #sqlite or postgres \
    "db_password", #can be blank if using sqlite \
-   "db_name", #name of db in postgres, can be blank if using sqlite \
+   "DB_NAME", #name of db in postgres, can be blank if using sqlite \
    "db_user", #can be blank if using sqlite \
-   "db_host", #can be blank if using sqlite \
+   "DB_HOST", #can be blank if using sqlite \
    "db_port", #can be blank if using sqlite \
-   "adfs_enabled", #True or False \
-   "adfs_server", #can be blank if adfs_enabled is False \
-   "adfs_client_id", #can be blank if adfs_enabled is False \
-   "adfs_client_id", #can be blank if adfs_enabled is False \
-   "adfs_relying_party_id", #can be blank if adfs_enabled is False \
-   "adfs_audience" #can be blank if adfs_enabled is False \
+   "LOG_LEVEL", #can be DEBUG, INFO, WARNING, ERROR, or CRITICAL
+   "SAML_CLIENT_ID", #Client ID provided by your SAML IDP
+   "SAML_CLIENT_SECRET", #Secret provided by your SAML IDP

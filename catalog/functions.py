@@ -1,10 +1,11 @@
-from common.functions import *
-from catalog.models import *
 import json
+
+from catalog.models import *
 
 """
 Some useful common functions
 """
+
 
 def import_catalog(catalog_file="sample_data/basic-catalog.json"):
     catalog_json = json.load(open(catalog_file))
@@ -13,4 +14,3 @@ def import_catalog(catalog_file="sample_data/basic-catalog.json"):
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
     return new_catalog
-

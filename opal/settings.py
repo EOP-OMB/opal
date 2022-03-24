@@ -24,9 +24,7 @@ STATIC_URL = 'static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
 
-STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'static')
-     ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 env = environ.Env()
 if str(BASE_DIR) + "/opal/.env":
@@ -56,54 +54,30 @@ ALLOWED_HOSTS = ("localhost", "127.0.0.1",)
 
 # Application definition
 
-USER_APPS = ['common',
-             'catalog',
-             'control_profile',
-             'component_definition',
-             'ssp', ]
+USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'mozilla_django_oidc',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    "bootstrap5",
-    'coverage',
-    'django_extensions',
-    ]
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'mozilla_django_oidc', 'django.contrib.contenttypes',
+                  'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
+                  'coverage', 'django_extensions', ]
 
 INSTALLED_APPS.extend(USER_APPS)
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
+              'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
+              'django.contrib.auth.middleware.AuthenticationMiddleware',
+              'django.contrib.messages.middleware.MessageMiddleware',
+              'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
 
 ROOT_URLCONF = 'opal.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-                ],
-            },
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates', 'DIRS': [BASE_DIR / 'templates'], 'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
+                               'django.contrib.auth.context_processors.auth',
+                               'django.contrib.messages.context_processors.messages', ],
         },
-    ]
+    }, ]
 
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -116,28 +90,20 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 if env("DATABASE") == "postgres":
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env('DB_PORT'),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': env('DB_NAME'), 'USER': env('DB_USER'),
+            'PASSWORD': env('DB_PASSWORD'), 'HOST': env('DB_HOST'), 'PORT': env('DB_PORT'),
             }
         }
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
+            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, env('DB_NAME')),
             }
         }
     print("using database " + DATABASES['default']['NAME'])
 
-
 # Adding support for SAML Authentication
-AUTHENTICATION_BACKENDS = (
-    'mozilla_django_oidc.auth.OIDCAuthenticationBackend',
-)
+AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
 OIDC_RP_CLIENT_ID = env('SAML_CLIENT_ID')
 OIDC_RP_CLIENT_SECRET = env('SAML_CLIENT_SECRET')
@@ -155,20 +121,15 @@ LOGOUT_REDIRECT_URL = "http://localhost:8000/"
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-        },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-        },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-        },
-    ]
+AUTH_PASSWORD_VALIDATORS = [{
+    'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    }, ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -181,8 +142,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -191,36 +150,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 log_format = '%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s'
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
+    'version': 1, 'disable_existing_loggers': False, 'handlers': {
         'file': {
-            'level': env("LOG_LEVEL"),
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'opal.log')
-            },
-        'debug': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'opal_debug.log')
-            },
-        'console': {
-            'level': env("LOG_LEVEL"),
-            'class': 'logging.StreamHandler',
+            'level': env("LOG_LEVEL"), 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal.log')
+            }, 'debug': {
+            'level': 'DEBUG', 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal_debug.log')
+            }, 'console': {
+            'level': env("LOG_LEVEL"), 'class': 'logging.StreamHandler',
             }
-        },
-    'loggers': {
+        }, 'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
-            'level': env("LOG_LEVEL"),
-            'format': log_format,
-            'propagate': True,
-            },
-        'debug': {
-            'handlers' : ['console','debug'],
-            'level' : 'DEBUG',
-            'format': log_format,
-            'propagate': True,
+            'handlers': ['file', 'console'], 'level': env("LOG_LEVEL"), 'format': log_format, 'propagate': True,
+            }, 'debug': {
+            'handlers': ['console', 'debug'], 'level': 'DEBUG', 'format': log_format, 'propagate': True,
             }
         },
     }

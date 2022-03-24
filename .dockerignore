@@ -12,7 +12,6 @@
 /.coverage
 Dockerfile
 Dockerfile.dev
-opal_deployment_config.yaml
 readme.md
 SECURITY.md
 license.md

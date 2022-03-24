@@ -107,7 +107,7 @@ def implemented_requirements_form_view(request, control_id):
                     logger.debug("Created part to statement relationship")
                     new_statement.save()
                     logger.debug("Statement saved")
-                    new_by_component = by_components.objects.create(component_uuid=comp,description=v)
+                    new_by_component = by_components.objects.create(component_uuid=comp, description=v)
                     new_by_component.save()
                     logger.debug("by_component created and saved")
                     logger.debug("Linked to component")

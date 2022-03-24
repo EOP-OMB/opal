@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+import json
+import urllib.request
+
+from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-import urllib.request
-import json
+
 from catalog.models import *
-from control_profile.models import profile, imports
 from component_definition.models import components
+from control_profile.models import imports, profile
 
 
 # Create your views here.
