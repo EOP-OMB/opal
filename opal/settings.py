@@ -45,7 +45,10 @@ if env("ENVIRONMENT") == "production":
     SECURE_SSL_REDIRECT = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("OPAL_SECRET_KEY")
+if env.__contains__("OPAL_SECRET_KEYs"):
+    SECRET_KEY = env("OPAL_SECRET_KEY")
+else:
+    SECRET_KEY = secrets.token_urlsafe()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")

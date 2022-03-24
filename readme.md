@@ -31,7 +31,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 3. Build the image\
     `docker build -t opal .`
 1. Run the container\
-    `docker run --rm -it --name opal -p 8000:8000 opal`
+    `docker run --rm -it --name opal -p 8000:8000 -e ENVIRONMENT=development -e DEBUG=True -e ALLOWED_HOSTS=* -e DATABASE=sqlite -e DB_HOST=localhost -e DB_NAME=db.sqlite3 -e LOG_LEVEL=INFO -e SAML_CLIENT_ID="" -e SAML_CLIENT_SECRET="" opal`
     
 Note: A default superuser account is created in the docker container. You should immedietly change the password and create additional secure superuser accounts.
 
@@ -41,7 +41,7 @@ Password: admin
 OPAL is designed to run well in a containerized environment. It is recommended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: \
 
    "ENVIRONMENT", #development or production \
-   "OPAL_SECRET_KEY", #secret key used to create sessions \
+   "OPAL_SECRET_KEY", #secret key used to create sessions. If excluded a random key will be generated each time the app starts\
    "DEBUG", #True of False \
    "ALLOWED_HOSTS", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all \
    "DATABASE", #sqlite or postgres \
