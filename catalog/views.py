@@ -1,5 +1,6 @@
 import json
-import urllib.request
+import requests
+from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
@@ -36,10 +37,18 @@ def import_catalog_view(request, catalog_link):
     """
     from common.views import available_catalog_list
 
+
+    proxies = {}
+    if HTTP_PROXY:
+        proxies['http'] =  HTTP_PROXY
+    if HTTPS_PROXY:
+        proxies['https'] =  HTTPS_PROXY
+
+
     for item in available_catalog_list:
         if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
             catalog_url = item["link"]
-            f = urllib.request.urlopen(catalog_url)
+            f = requests.get(catalog_url, proxies=proxies)
             catalog_json = json.loads(f.read().decode('utf-8'))
             catalog_dict = catalog_json["catalog"]
             new_catalog = catalogs()

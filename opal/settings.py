@@ -53,7 +53,14 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
-
+if env.__contains__("HTTP_PROXY"):
+    HTTP_PROXY = env("HTTP_PROXY")
+else:
+    HTTP_PROXY = False
+if env.__contains__("HTTPS_PROXY"):
+    HTTPS_PROXY = env("HTTPS_PROXY")
+else:
+    HTTPS_PROXY = False
 
 # Application definition
 
