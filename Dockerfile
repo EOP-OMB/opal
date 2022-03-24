@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir mod-wsgi
 
 # Create Service account
-RUN useradd -r opal
+RUN useradd -r -u 1001 opal
 
 # copy all the files to the container
 COPY . /usr/src/app/
