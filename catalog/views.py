@@ -49,7 +49,7 @@ def import_catalog_view(request, catalog_link):
         if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
             catalog_url = item["link"]
             f = requests.get(catalog_url, proxies=proxies)
-            catalog_json = json.loads(f.read().decode('utf-8'))
+            catalog_json = json.loads(f.text)
             catalog_dict = catalog_json["catalog"]
             new_catalog = catalogs()
             new_catalog.import_oscal(catalog_dict)
