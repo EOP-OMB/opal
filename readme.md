@@ -31,25 +31,26 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 3. Build the image\
     `docker build -t opal .`
 1. Run the container\
-    `docker run --rm -it --name opal -p 8000:8000 -e ENVIRONMENT=development -e DEBUG=True -e ALLOWED_HOSTS=* -e DATABASE=sqlite -e DB_HOST=localhost -e DB_NAME=db.sqlite3 -e LOG_LEVEL=INFO -e SAML_CLIENT_ID="" -e SAML_CLIENT_SECRET="" opal`
+    `docker run --rm -it --name opal -p 8000:8000 -e DB_HOST=localhost -e DB_NAME=db.sqlite3 -e LOG_LEVEL=DEBUG -e opal`
     
-Note: A default superuser account is created in the docker container. You should immedietly change the password and create additional secure superuser accounts.
 
-Username: admin\
-Password: admin
 ## Setting environment variables
-OPAL is designed to run well in a containerized environment. It is recommended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: \
+OPAL is designed to run well in a containerized environment. It is recommended to set any desired environment variables using your chosen container orchestration solution (kubernetes, docker-compose, etc.).  You can also set environment variables in a .env file which should be placed in the opal subdirectory. The available environment variables are: 
 
-   "ENVIRONMENT", #development or production \
-   "OPAL_SECRET_KEY", #secret key used to create sessions. If excluded a random key will be generated each time the app starts\
-   "DEBUG", #True of False \
-   "ALLOWED_HOSTS", #Must be a comma seperated list of acceptable host names to use when accessing the application. Use '*' for all \
-   "DATABASE", #sqlite or postgres \
-   "db_password", #can be blank if using sqlite \
-   "DB_NAME", #name of db in postgres, can be blank if using sqlite \
-   "db_user", #can be blank if using sqlite \
-   "DB_HOST", #can be blank if using sqlite \
-   "db_port", #can be blank if using sqlite \
-   "LOG_LEVEL", #can be DEBUG, INFO, WARNING, ERROR, or CRITICAL
-   "SAML_CLIENT_ID", #Client ID provided by your SAML IDP
-   "SAML_CLIENT_SECRET", #Secret provided by your SAML IDP
+
+| Variable | Values | Description |
+|-------------|--------------------------------|----------------------------|
+| ENVIRONMENT | production| If omitted defaults to "development" |
+| OPAL_SECRET_KEY | a valid 50 character django secret key | secret key used to create sessions. If excluded a random key will be generated each time the app starts |
+| DEBUG | True or False | enables some debugging features. If omitted defaults to True |
+| ALLOWED_HOSTS |  comma seperated list of FQDNs or hostnames | defines the valid FQDNs that the application will respond on.  Can be a list such as "localhost,127.0.0.1", If omitted defaults to * which will respond to any hostname. |
+ | DATABASE | sqlite or postgres | defines the kind of database to use.  Defaults to sqlite |
+| DB_NAME | name of db in postgres or filename if using sqlite | can be blank if using sqlite |
+| DB_PASSWORD | | can be blank or omitted if using sqlite |
+| DB_USER | username the app should use to connect to the database | can be blank if using sqlite |
+| DB_HOST | | can be blank if using sqlite |
+| DB_PORT | | can be blank if using sqlite |
+|LOG_LEVEL | DEBUG, INFO, WARNING, ERROR, or CRITICAL | Defaults to INFO |
+|ENABLE_SAML | True or False | set this to True to enable SAML Authentication. If enabled, the following additional variables are required: |
+| OIDC_RP_CLIENT_ID | | client ID from your SAML Provider |
+| OIDC_RP_CLIENT_SECRET | | Secret provided by your SAML IDP |

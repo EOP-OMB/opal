@@ -57,7 +57,7 @@ def import_catalog_view(request, catalog_link):
             new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
             new_profile = profile.objects.create(
                 metadata=new_metadata
-                )
+            )
             new_profile.save()
             url = "https://" + request.get_host() + new_catalog.get_permalink()
             new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
@@ -70,7 +70,7 @@ def import_catalog_view(request, catalog_link):
                     description="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     status="under-development"
-                    )
+                )
 
             context = {
                 'msg': new_catalog.metadata.title + " imported from " + catalog_url
