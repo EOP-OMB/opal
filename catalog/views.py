@@ -37,13 +37,11 @@ def import_catalog_view(request, catalog_link):
     """
     from common.views import available_catalog_list
 
-
     proxies = {}
     if HTTP_PROXY:
-        proxies['http'] =  HTTP_PROXY
+        proxies['http'] = HTTP_PROXY
     if HTTPS_PROXY:
-        proxies['https'] =  HTTPS_PROXY
-
+        proxies['https'] = HTTPS_PROXY
 
     for item in available_catalog_list:
         if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
@@ -68,13 +66,13 @@ def import_catalog_view(request, catalog_link):
             # create components for any groups in the catalog
             for group in new_catalog.groups.all():
                 new_component = components.objects.get_or_create(
-                    type="policy",
-                    title=group.title + " Policy",
+                    type="policy", title=group.title + " Policy",
                     description="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     status="under-development"
                     )
 
-            context = {'msg': new_catalog.metadata.title + " imported from " + catalog_url}
-            # return render(request, "index.html", context)
+            context = {
+                'msg': new_catalog.metadata.title + " imported from " + catalog_url
+                }  # return render(request, "index.html", context)
     return redirect('home_page')
