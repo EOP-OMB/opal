@@ -323,9 +323,10 @@ class controls(PrimitiveModel):
                     select_form_field = "<select id='" + i.param_id + "' name='param_" + str(i.pk) + "'"
                     import ast
                     choices_dict = ast.literal_eval(i.select)
-                    if choices_dict['how-many'] == 'one-or-more':
-                        select_form_field += " multiple"
-                    select_form_field += ">"
+                    if 'how-many' in choices_dict:
+                        if choices_dict['how-many'] == 'one-or-more':
+                            select_form_field += " multiple"
+                        select_form_field += ">"
                     for choice in choices_dict['choice']:
                         select_form_field += "<option value='" + choice + "'>" + choice + "</option>"
                     select_form_field += "</select>"

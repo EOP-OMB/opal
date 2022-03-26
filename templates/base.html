@@ -66,7 +66,6 @@
 
         <li class="nav-item">
             {% if user.is_authenticated %}
-                Current user: ❴❴ user.email ❵❵
                 <a class="nav-link" href="{% url 'oidc_logout' %}">Logout</a>
              {% else %}
                 <a class="nav-link" href="{% url 'oidc_authentication_init' %}">Login</a>
@@ -80,21 +79,21 @@
     </div>
   </div>
 </nav>
-            <!-- Begin Page Content -->
-            <div style="padding-left: 25px">
-                {% block content %}
+<!-- Begin Page Content -->
+<div style="padding-left: 25px">
+    {% block content %}
 
-                {% endblock %}
-            </div>
-        <!-- /.container-fluid -->
-        <!-- End of Main Content -->
+    {% endblock %}
+</div>
+<!-- /.container-fluid -->
+<!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-            </div>
-        </footer>
-        <!-- End of Footer -->
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+<div class="container my-auto">
+</div>
+</footer>
+<!-- End of Footer -->
 
 
 <!-- Scroll to Top Button-->

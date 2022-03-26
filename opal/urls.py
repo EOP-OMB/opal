@@ -26,10 +26,11 @@ urlpatterns = [path('', index_view, name='home_page'), path('admin/', admin.site
                path('component/', include('component_definition.urls'), name='component'),
                path('profiles/', include('control_profile.urls'), name='control_profile'),
                path('ssp/', include('ssp.urls'), name='ssp'),
-               re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ] + static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    ) + static(
-    settings.STATIC_URL, document_root=settings.STATIC_ROOT
-    )
+               re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ]
+
+from opal.settings import ENVIRONMENT
+if ENVIRONMENT == 'development':
+    urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'common.views.error_404_view'

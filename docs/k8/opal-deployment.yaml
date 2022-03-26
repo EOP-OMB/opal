@@ -1,0 +1,124 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opal-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: opal-db
+  template:
+    metadata:
+      labels:
+        component: opal-db
+    spec:
+      containers:
+        - name: opal-db
+          image: localhost:5000/opal-db
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opal-passwords
+                  key: POSTGRES_PASSWORD
+            - name: DB_USER
+              value: opal
+            - name: POSTGRES_OPAL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opal-passwords
+                  key: POSTGRES_OPAL_PASSWORD
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: opal
+  template:
+    metadata:
+      labels:
+        component: opal
+    spec:
+      containers:
+        - name: opal
+          image: localhost:5000/opal2
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SECRET_KEY
+              value: 20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE
+#            - name: LOG_LEVEL
+#              value: INFO
+#            - name: DEBUG
+#              value: "True"
+#            - name: HTTPS_PROXY
+#              value: "False"
+#            - name: HTTP_PROXY
+#              value: "False"
+            - name: DATABASE
+              value: postgres
+            - name: DB_HOST
+              value: opal-db
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: opal
+            - name: DB_NAME
+              value: opal
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opal-passwords
+                  key: POSTGRES_OPAL_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opal
+spec:
+  type: ClusterIP
+  selector:
+    component: opal
+  ports:
+    - port: 80
+      targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: opal-db
+spec:
+  type: ClusterIP
+  selector:
+    component: opal-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opal-ingress
+#  annotations:
+#    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - backend:
+          service:
+            name: opal
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+#  tls:
+#  - hosts:
+#    - localhost
+#    secretName: opal-ingress-tls

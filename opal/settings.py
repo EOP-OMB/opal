@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import logging
 import secrets
 from pathlib import Path
 import os
@@ -33,52 +33,67 @@ else:
     # print("Warning!!!  No .env file found, using default environment variables")
     environ.Env.read_env("str(BASE_DIR) + opal/defaults.env")
 
-# Other Variables
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
-ROOT_URLCONF = 'opal.urls'
-WSGI_APPLICATION = 'opal.wsgi.application'
+default_secret_key = secrets.token_urlsafe()
 
-if env.__contains__("ENVIRONMENT"):
-    if env("ENVIRONMENT") == "production":
-        SECURE_SSL_REDIRECT = True
-else:
-    os.environ["ENVIRONMENT"] = "development"
-    print("Running in Development mode!")
-
+ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 # SECURITY WARNING: keep the secret key used in production secret!
-if env.__contains__("OPAL_SECRET_KEYs"):
-    SECRET_KEY = env("OPAL_SECRET_KEY")
-else:
-    SECRET_KEY = secrets.token_urlsafe()
-
+SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
-if env.__contains__("DEBUG"):
-    DEBUG = env("DEBUG")
-else:
-    DEBUG = True
+DEBUG = os.getenv("DEBUG", default="False")
+LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
+# Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
+HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
+HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
+# Database settings
+DATABASE = os.getenv("DATABASE", default="sqlite")
+DB_NAME = os.getenv("DB_NAME", default="db.sqlite3")
+# These can be blank if using sqlite
+DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
+DB_USER = os.getenv("DB_USER", default="opal")
+DB_HOST = os.getenv("DB_HOST", default="localhost")
+DB_PORT = os.getenv("DB_PORT", default="5432")
+# SAML settings
+ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
+OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
+OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
+OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", default="")
+OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", default="")
+OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", default="")
+OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", default="")
+OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
+LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
+LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 
+# Handling allowed hosts a little different since we ahve to turn it into a list.
+# If providing a value, you just need to provide a comma sepparated string of hosts
+# You don't need to quote anything or add [] yourself.
 if env.__contains__("ALLOWED_HOSTS"):
     ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
 else:
     ALLOWED_HOSTS = ['*']
 
-if env.__contains__("HTTP_PROXY"):
-    HTTP_PROXY = env("HTTP_PROXY")
+# Other Variables
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
+ROOT_URLCONF = 'opal.urls'
+WSGI_APPLICATION = 'opal.wsgi.application'
+
+if ENVIRONMENT == "production":
+    SECURE_SSL_REDIRECT = True
 else:
-    HTTP_PROXY = False
-if env.__contains__("HTTPS_PROXY"):
-    HTTPS_PROXY = env("HTTPS_PROXY")
-else:
-    HTTPS_PROXY = False
+    print("Running in Development mode!")
 
 # Application definition
 
+# These are the applications defined in opal and map to OSCAL models.
+# We track them seperately here because we use this list for some functions
+# that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'mozilla_django_oidc', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
                   'coverage', 'django_extensions', ]
 
+# Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
@@ -95,8 +110,8 @@ TEMPLATES = [{
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
                                'django.contrib.messages.context_processors.messages', ],
-    },
-}, ]
+        },
+    }, ]
 
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -106,59 +121,38 @@ WSGI_APPLICATION = 'opal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if env.__contains__("DATABASE"):
-    DATABASE = env("DATABASE")
-else:
-    DATABASE = "sqlite"
-
 if DATABASE == "postgres":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': env('DB_NAME'), 'USER': env('DB_USER'),
             'PASSWORD': env('DB_PASSWORD'), 'HOST': env('DB_HOST'), 'PORT': env('DB_PORT'),
+            }
         }
-    }
 else:
-    if env.__contains__("DB_NAME"):
-        DB_FILE = "DB_NAME"
-    else:
-        DB_FILE = "db.sqlite3"
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_FILE),
+            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_NAME),
+            }
         }
-    }
-    print("using database " + DATABASES['default']['NAME'])
+
+print("using database " + DATABASES['default']['NAME'])
 
 # Adding support for SAML Authentication
-if env.__contains__('ENABLE_SAML') and env("ENABLE_SAML"):
+if ENABLE_SAML:
     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
-
-    OIDC_RP_CLIENT_ID = env('SAML_CLIENT_ID')
-    OIDC_RP_CLIENT_SECRET = env('SAML_CLIENT_SECRET')
-
-    OIDC_OP_AUTHORIZATION_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/auth"
-    OIDC_OP_TOKEN_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/token"
-    OIDC_OP_USER_ENDPOINT = "https://cs4p-dev.onelogin.com/oidc/2/me"
-
-    OIDC_RP_SIGN_ALGO = "RS256"
-    OIDC_OP_JWKS_ENDPOINT = "https://contentlab-dev.onelogin.com/oidc/2/certs"
-
-    LOGIN_REDIRECT_URL = "http://localhost:8000/"
-    LOGOUT_REDIRECT_URL = "http://localhost:8000/"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [{
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-}, {
+    }, {
     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-}, {
+    }, {
     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-}, {
+    }, {
     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-}, ]
+    }, ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -176,27 +170,22 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-log_format = '%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s'
-
-if env.__contains__("LOG_LEVEL"):
-    log_level = env("LOG_LEVEL")
-else:
-    log_level = "INFO"
+log_format = logging.Formatter('%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s')
 
 LOGGING = {
     'version': 1, 'disable_existing_loggers': False, 'handlers': {
         'file': {
-            'level': log_level, 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal.log')
-        }, 'debug': {
+            'level': LOG_LEVEL, 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal.log')
+            }, 'debug': {
             'level': 'DEBUG', 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal_debug.log')
-        }, 'console': {
-            'level': log_level, 'class': 'logging.StreamHandler',
-        }
-    }, 'loggers': {
+            }, 'console': {
+            'level': LOG_LEVEL, 'class': 'logging.StreamHandler',
+            }
+        }, 'loggers': {
         'django': {
-            'handlers': ['file', 'console'], 'level': log_level, 'format': log_format, 'propagate': True,
-        }, 'debug': {
+            'handlers': ['file', 'console'], 'level': LOG_LEVEL, 'format': log_format, 'propagate': True,
+            }, 'debug': {
             'handlers': ['console', 'debug'], 'level': 'DEBUG', 'format': log_format, 'propagate': True,
-        }
-    },
-}
+            }
+        },
+    }
