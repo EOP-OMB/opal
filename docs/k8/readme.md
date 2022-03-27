@@ -1,3 +1,7 @@
+The opal_deployment.yaml file will deploy the neccessary services on a kubernetes clister to run OPAL in most circumstances.  
+
+
+
 Create a secrets.yaml file like this:
 
 <pre>
@@ -13,3 +17,4 @@ data:
 
 
 Then run kubectl apply -f . from this directory
+
