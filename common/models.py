@@ -201,10 +201,23 @@ class PrimitiveModel(models.Model):
                             self.__setattr__(f.name, child)
                     elif type(oscal_data) is str:
                         # This is the case where the json has just a UUID which should refer to an object defined elsewhere in the document.
-                        child = f.related_model
-                        child, created = child.objects.get_or_create(uuid=oscal_data)
-                        # TODO need a test here, I don't think this code will work
-                        self.save()
+                        uuid_obj = False
+                        try:
+                            uuid_obj = uuid.UUID(oscal_data, version=4)
+                        except ValueError:
+                            logger.debug(oscal_data + " is not a valid uuid")
+                        if uuid_obj:
+                            child = f.related_model
+                            if child.objects.filter(uuid=oscal_data).exists:
+                                logger.debug("Found " + child._meta.model_name + " with UUID " + oscal_data)
+                                child_item = child.objects.get(uuid=oscal_data)
+                            else:
+                                child_item = child.import_oscal(oscal_data)
+                            self.__setattr__(f.name, child_item)
+                            self.save()
+                        else:
+                            self.__setattr__(f.name, oscal_data)
+                            self.save()
                 elif type(oscal_data) is dict and len(oscal_data) > 0:
                     # field is not a Foreign Key but the data is a dictionary.
                     # In this case the dict value should be a simple string
@@ -213,20 +226,26 @@ class PrimitiveModel(models.Model):
                         value = oscal_data[f.name]
                         self.__setattr__(field, value)
                 elif type(oscal_data) is str:
-                    # Simplest use case
                     if f.name == "uuid":
                         # check to see if the object already exists
                         logger.debug("Checking for an existing " + opts.model_name + " with uuid " + oscal_data)
+                        uuid_obj = False
                         try:
-                            self = opts.model.objects.get(uuid=oscal_data)
-                            break
-                        except ObjectDoesNotExist:
-                            logger.debug(
-                                "Could not find an existing " + opts.model_name + " with uuid " + oscal_data
-                                )
-                            field = f.name
-                            value = oscal_data
-                            self.__setattr__(field, value)
+                            uuid_obj = uuid.UUID(oscal_data, version=4)
+                        except ValueError:
+                            logger.debug(oscal_data + " is not a valid uuid")
+                        if uuid_obj:
+                            if opts.model.objects.filter(uuid=uuid_obj).exists:
+                                logger.debug("Found a " + opts.model_name + " with uuid " + oscal_data)
+                            else:
+                                logger.debug("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
+                        else:
+                            uuid_obj = uuid.uuid4()
+
+                        field = f.name
+                        value = uuid_obj
+                        self.__setattr__(field, value)
+
                     else:
                         field = f.name
                         value = oscal_data

@@ -170,22 +170,55 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-log_format = logging.Formatter('%(asctime)s %(name)-12s %(pathname)s:%(lineno)d %(levelname)-8s %(message)s')
+log_format = '{levelname} {asctime} {module} {process:d} {thread:d} {message}'
+
 
 LOGGING = {
-    'version': 1, 'disable_existing_loggers': False, 'handlers': {
-        'file': {
-            'level': LOG_LEVEL, 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal.log')
-            }, 'debug': {
-            'level': 'DEBUG', 'class': 'logging.FileHandler', 'filename': os.path.join(BASE_DIR, 'opal_debug.log')
-            }, 'console': {
-            'level': LOG_LEVEL, 'class': 'logging.StreamHandler',
-            }
-        }, 'loggers': {
-        'django': {
-            'handlers': ['file', 'console'], 'level': LOG_LEVEL, 'format': log_format, 'propagate': True,
-            }, 'debug': {
-            'handlers': ['console', 'debug'], 'level': 'DEBUG', 'format': log_format, 'propagate': True,
-            }
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} : {asctime} : {module} {filename} line {lineno} in function {funcName} : {message}',
+            'style': '{',
         },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    # 'filters': {
+    #     'require_debug_true': {
+    #         '()': 'django.utils.log.RequireDebugTrue',
+    #     },
+    # },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': LOG_LEVEL,
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'opal.log'),
+            'formatter': 'verbose'
+            },
+        'debug': {
+            'level': 'DEBUG',
+            # 'filters': ['require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'opal_debug.log'),
+            'formatter': 'verbose'
+            }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console','file'],
+            'propagate': True,
+        },
+        'debug': {
+            'handlers': ['debug'],
+        }
     }
+}
