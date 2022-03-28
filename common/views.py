@@ -1,3 +1,5 @@
+import urllib
+
 from django.apps import apps
 from django.shortcuts import redirect, render
 
@@ -38,8 +40,12 @@ def index_view(request):
             catalog_list_html_str += "&#9989;"
         catalog_list_html_str += "</li>"
 
+    ssp_file_str = urllib.parse.quote_plus('ssp-example.json')
+    ssp_sample_import_link = reverse('ssp:import_ssp_view', kwargs={'ssp_file': ssp_file_str})
+
     context = {
-        "catalog_list": catalog_list_html_str
+        "catalog_list": catalog_list_html_str,
+        "ssp_sample_import_link" : ssp_sample_import_link
         }
     # And so on for more models
     return render(request, "index.html", context)

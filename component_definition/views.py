@@ -84,39 +84,39 @@ class create_implemented_requirements_view(CreateView):
 
 
 def implemented_requirements_form_view(request, control_id):
-    logger = logging.getLogger("debug")
+    logger = logging.getLogger("django")
     if request.method == "POST":
-        logger.debug("Processing POST from implemented_requirements_form_view...")
+        logger.info("Processing POST from implemented_requirements_form_view...")
         results = request.POST
         component_id = results.get("component")
         comp = components.objects.get(pk=component_id)
         ctrl = controls.objects.get(pk=control_id)
         new_implemented_requirement = implemented_requirements.objects.create(control_id=ctrl)
-        logger.debug("Created new implemented_control. ID: " + str(new_implemented_requirement.id))
+        logger.info("Created new implemented_control. ID: " + str(new_implemented_requirement.id))
 
         for k, v in results.items():
             if "_" in k:
-                logger.debug("Processing field " + k + " with value " + v)
+                logger.info("Processing field " + k + " with value " + v)
                 item_lookup = k.split("_")
                 if item_lookup[0] == "part":
                     f = parts.objects.get(pk=item_lookup[1])
-                    logger.debug(k + " is a prose item. Creating new statement")
+                    logger.info(k + " is a prose item. Creating new statement")
                     new_statement = statements.objects.create()
-                    logger.debug("Created new statement with id " + str(new_statement.id))
+                    logger.info("Created new statement with id " + str(new_statement.id))
                     new_statement.statement_id.add(f)
-                    logger.debug("Created part to statement relationship")
+                    logger.info("Created part to statement relationship")
                     new_statement.save()
-                    logger.debug("Statement saved")
+                    logger.info("Statement saved")
                     new_by_component = by_components.objects.create(component_uuid=comp, description=v)
                     new_by_component.save()
-                    logger.debug("by_component created and saved")
-                    logger.debug("Linked to component")
+                    logger.info("by_component created and saved")
+                    logger.info("Linked to component")
                     new_statement.by_components.add(new_by_component)
-                    logger.debug("by_component linked to statement")
+                    logger.info("by_component linked to statement")
                     new_statement.save()
-                    logger.debug("Statement saved")
+                    logger.info("Statement saved")
                     new_implemented_requirement.statements.add(new_statement)
-                    logger.debug("Statement linked to implimented_requirement")
+                    logger.info("Statement linked to implimented_requirement")
                     new_implemented_requirement.save()
                 elif item_lookup[0] == "param":
                     f = params.objects.get(pk=item_lookup[1])

@@ -9,7 +9,7 @@ Some useful common functions
 
 
 def import_ssp(ssp_file="sample_data/ssp-example.json"):
-    logger = logging.getLogger("debug")
+    logger = logging.getLogger("django")
     logger.info("Starting SSP import process")
     ssp_json = json.load(open(ssp_file))
     ssp_dict = ssp_json["system-security-plan"]

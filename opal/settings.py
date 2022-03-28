@@ -29,10 +29,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'vendor')]
 env = environ.Env()
 if str(BASE_DIR) + "/opal/.env":
     environ.Env.read_env()
-else:
-    # print("Warning!!!  No .env file found, using default environment variables")
-    environ.Env.read_env("str(BASE_DIR) + opal/defaults.env")
 
+# Load environment variables and set defaults
 default_secret_key = secrets.token_urlsafe()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
@@ -64,8 +62,8 @@ OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
 LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 
-# Handling allowed hosts a little different since we ahve to turn it into a list.
-# If providing a value, you just need to provide a comma sepparated string of hosts
+# Handling allowed hosts a little different since we have to turn it into a list.
+# If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
 if env.__contains__("ALLOWED_HOSTS"):
     ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
@@ -81,11 +79,13 @@ if ENVIRONMENT == "production":
     SECURE_SSL_REDIRECT = True
 else:
     print("Running in Development mode!")
+    for k, v in sorted(os.environ.items()):
+        print(k + ':', v)
 
 # Application definition
 
 # These are the applications defined in opal and map to OSCAL models.
-# We track them seperately here because we use this list for some functions
+# We track them separately here because we use this list for some functions
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
 
@@ -114,13 +114,16 @@ TEMPLATES = [{
     }, ]
 
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 WSGI_APPLICATION = 'opal.wsgi.application'
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 if DATABASE == "postgres":
     DATABASES = {
         'default': {
@@ -158,67 +161,46 @@ AUTH_PASSWORD_VALIDATORS = [{
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-log_format = '{levelname} {asctime} {module} {process:d} {thread:d} {message}'
-
-
+# Logging Information
 LOGGING = {
     'version': 1,
+    # Version of logging
     'disable_existing_loggers': False,
+    # disable logging
+    # Formatters ###########################################################
     'formatters': {
         'verbose': {
-            'format': '{levelname} : {asctime} : {module} {filename} line {lineno} in function {funcName} : {message}',
+            'format': '{levelname} : {asctime} : {filename} line {lineno} in function {funcName} : {message}',
             'style': '{',
-        },
+            },
         'simple': {
             'format': '{levelname} {message}',
             'style': '{',
+            },
         },
-    },
-    # 'filters': {
-    #     'require_debug_true': {
-    #         '()': 'django.utils.log.RequireDebugTrue',
-    #     },
-    # },
+    # Handlers #############################################################
     'handlers': {
-        'console': {
-            'level': 'INFO',
-            # 'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
         'file': {
             'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'opal.log'),
+            'filename': 'opal-debug.log',
             'formatter': 'verbose'
-            },
-        'debug': {
-            'level': 'DEBUG',
-            # 'filters': ['require_debug_true'],
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'opal_debug.log'),
-            'formatter': 'verbose'
-            }
+        },
+    ########################################################################
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
     },
+    # Loggers ####################################################################
     'loggers': {
         'django': {
-            'handlers': ['console','file'],
+            'handlers': ['file', 'console'],
             'propagate': True,
         },
-        'debug': {
-            'handlers': ['debug'],
-        }
-    }
+    },
 }

@@ -173,116 +173,108 @@ class PrimitiveModel(models.Model):
         return merged_dict
 
     def import_oscal(self, oscal_data):
-        logger = logging.getLogger("debug")
-        if oscal_data is None or len(oscal_data) == 0:
-            logger.error("oscal_data is 0 length dictionary")
+        logger = logging.getLogger("django")
         opts = self._meta
+        logger.info("Starting import for " + opts.model_name)
+        if oscal_data is None or len(oscal_data) == 0:
+            logger.error("oscal_data is 0 length")
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
         field_list = list(opts.concrete_fields)
-        logger.debug("model = " + opts.model_name)
+        field_list_str = []
+        logger.info("Removing excluded fields from field_list")
+        for f in field_list:
+            if f.name in excluded_fields:
+                field_list.remove(f)
+            else:
+                field_list_str.append(f.name)
+        logger.info("model = " + opts.model_name)
+        logger.info("field_list = " + ', '.join(field_list_str))
         if type(oscal_data) is dict:
+            logger.info("Handling dictionary...")
             # replace field names to match internal model names
             oscal_data = self.fix_field_names(oscal_data)
             if "uuid" in oscal_data.keys():
                 # check to see if the object already exists
-                logger.debug("Checking for an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-                try:
-                    self = opts.model.objects.get(uuid=oscal_data["uuid"])
-                except ObjectDoesNotExist:
-                    logger.debug("Could not find an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-        for f in field_list:
-            if f.name not in excluded_fields:
-                if f.get_internal_type() == 'ForeignKey':
-                    if type(oscal_data) is dict and len(oscal_data) > 0:
-                        # We need to create a child object here. The oscal_import_save_child method will link it to the current object
-                        if f.name in oscal_data.keys():
-                            child = f.related_model()
-                            child = child.import_oscal(oscal_data[f.name])
-                            self.__setattr__(f.name, child)
-                    elif type(oscal_data) is str:
-                        # This is the case where the json has just a UUID which should refer to an object defined elsewhere in the document.
-                        uuid_obj = False
-                        try:
-                            uuid_obj = uuid.UUID(oscal_data, version=4)
-                        except ValueError:
-                            logger.debug(oscal_data + " is not a valid uuid")
-                        if uuid_obj:
-                            child = f.related_model
-                            if child.objects.filter(uuid=oscal_data).exists:
-                                logger.debug("Found " + child._meta.model_name + " with UUID " + oscal_data)
-                                child_item = child.objects.get(uuid=oscal_data)
-                            else:
-                                child_item = child.import_oscal(oscal_data)
-                            self.__setattr__(f.name, child_item)
-                            self.save()
-                        else:
-                            self.__setattr__(f.name, oscal_data)
-                            self.save()
-                elif type(oscal_data) is dict and len(oscal_data) > 0:
-                    # field is not a Foreign Key but the data is a dictionary.
-                    # In this case the dict value should be a simple string
-                    if f.name in oscal_data.keys():
+                logger.info("Checking for an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+                if opts.model.objects.filter(uuid=oscal_data["uuid"]).exists():
+                    logger.info("Found an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+                    old_obj = opts.model.objects.get(uuid=oscal_data["uuid"])
+                    old_obj.delete()
+                    logger.info("Deleted existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+                else:
+                    logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+            for f in field_list:
+                if f.name in oscal_data.keys():
+                    if f.get_internal_type() == 'ForeignKey':
+                        child = f.related_model()
+                        child = child.import_oscal(oscal_data[f.name])
+                        self.__setattr__(f.name, child)
+                    else:
                         field = f.name
                         value = oscal_data[f.name]
                         self.__setattr__(field, value)
-                elif type(oscal_data) is str:
-                    if f.name == "uuid":
-                        # check to see if the object already exists
-                        logger.debug("Checking for an existing " + opts.model_name + " with uuid " + oscal_data)
-                        uuid_obj = False
-                        try:
-                            uuid_obj = uuid.UUID(oscal_data, version=4)
-                        except ValueError:
-                            logger.debug(oscal_data + " is not a valid uuid")
-                        if uuid_obj:
-                            if opts.model.objects.filter(uuid=uuid_obj).exists:
-                                logger.debug("Found a " + opts.model_name + " with uuid " + oscal_data)
-                            else:
-                                logger.debug("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
-                        else:
-                            uuid_obj = uuid.uuid4()
-
-                        field = f.name
+        elif type(oscal_data) is str:
+            logger.info("Handling string...")
+            # maybe the model has just one field?
+            if 'uuid' in field_list:
+                copy_field_list = field_list.copy()
+                copy_field_list.remove('uuid')
+                if len(copy_field_list) == 1:
+                    field = field_list[0]
+                    value = oscal_data
+                    self.__setattr__(field,value)
+            elif "uuid" in field_list:
+                uuid_obj = False
+                try:
+                    uuid_obj = uuid.UUID(oscal_data, version=4)
+                except ValueError:
+                    logger.info(oscal_data + " is not a valid uuid")
+                if uuid_obj:
+                    if opts.model.objects.filter(uuid=uuid_obj).exists:
+                        logger.info("Found a " + opts.model_name + " with uuid " + oscal_data)
+                    else:
+                        logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
+                        logger.info("Creating a new " + opts.model_name + " with uuid " + oscal_data)
+                        field = 'uuid'
                         value = uuid_obj
                         self.__setattr__(field, value)
-
-                    else:
-                        field = f.name
-                        value = oscal_data
-                        self.__setattr__(field, value)
+            else:
+                logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
+        else:
+            logger.error("oscal_data is not a dictionary, string, or list.  oscal_data:")
+            logger.error(oscal_data)
         self.save()
         # Now we handle the many_to_many fields
         field_list = list(opts.many_to_many)
         if type(oscal_data) is dict:
             for f in field_list:
-                if f not in excluded_fields:
-                    if f.name in oscal_data.keys():
-                        if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
+                if f.name in oscal_data.keys():
+                    if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
+                        child = f.related_model()
+                        child = child.import_oscal(oscal_data[f.name])
+                        self.oscal_import_save_m2m(child, f, opts)
+                    elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
+                        for item in oscal_data[f.name]:
                             child = f.related_model()
-                            child = child.import_oscal(oscal_data[f.name])
+                            child = child.import_oscal(item)
                             self.oscal_import_save_m2m(child, f, opts)
-                        elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
-                            for item in oscal_data[f.name]:
-                                child = f.related_model()
-                                child = child.import_oscal(item)
-                                self.oscal_import_save_m2m(child, f, opts)
-                        elif type(oscal_data[f.name]) is str:
-                            child = f.related_model()
-                            child = child.import_oscal(oscal_data)
-                            self.oscal_import_save_m2m(child, f, opts)
-                        else:
-                            child = None
-                        self.save()
-                    elif type(oscal_data) is str:
-                        field = f.name
-                        value = oscal_data
-                        self.__setattr__(field, value)
-                        self.save()
+                    elif type(oscal_data[f.name]) is str:
+                        child = f.related_model()
+                        child = child.import_oscal(oscal_data)
+                        self.oscal_import_save_m2m(child, f, opts)
+                    else:
+                        child = None
+                    self.save()
+                elif type(oscal_data) is str:
+                    field = f.name
+                    value = oscal_data
+                    self.__setattr__(field, value)
+                    self.save()
         self.save()
         return self
 
     def oscal_import_save_m2m(self, child, f, opts):
-        logger = logging.getLogger("debug")
+        logger = logging.getLogger("django")
         if child is not None:
             error = False
             try:
@@ -295,14 +287,14 @@ class PrimitiveModel(models.Model):
                     logger.error("Integrity error occurred but no matching object found with the same uuid")
                     error = True
             if self.id is None:
-                logger.debug("Parent id is None")
+                logger.info("Parent id is None")
                 try:
                     self.save()
                 except IntegrityError as err:
                     logger.error(err)
                     error = True
             if child.id is None:
-                logger.debug("Child id is none")
+                logger.info("Child id is none")
                 try:
                     child.save()
                 except IntegrityError as err:
@@ -455,7 +447,7 @@ class links(BasicModel):
     def __str__(self):
         return self.text
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         for k in oscal_data:
             self.__setattr__(k, oscal_data[k])
         self.save()
@@ -601,7 +593,7 @@ class emails(BasicModel):
         verbose_name="email Address", help_text="An email address as defined by RFC 5322 Section 3.4.1."
         )
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         self.email_address = oscal_data
         self.save()
         return self
@@ -875,7 +867,7 @@ class citations(PrimitiveModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         if type(oscal_data) is dict:
             if "text" in oscal_data.keys():
                 self.text = oscal_data["text"]

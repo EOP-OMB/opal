@@ -18,5 +18,8 @@ from django.urls import path
 from ssp.views import *
 
 app_name = 'ssp'
-urlpatterns = [path('', ssp_list_view.as_view(), name='ssp_list_view'),
-               path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'), ]
+urlpatterns = [
+    path('', ssp_list_view.as_view(), name='ssp_list_view'),
+    path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'),
+    path('import/<str:ssp_file>', import_ssp_view, name='import_ssp_view'),
+    ]

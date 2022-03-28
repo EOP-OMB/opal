@@ -36,7 +36,7 @@ class system_ids(PrimitiveModel):
     def __str__(self):
         return self.identifier_type + " - " + self.system_id
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         if type(oscal_data) is dict:
             if "identifier_type" in oscal_data.keys():
                 self.identifier_type = oscal_data["identifier_type"]
@@ -60,7 +60,7 @@ class information_type_ids(PrimitiveModel):
         help_text="An identifier qualified by the given identification system used, such as NIST SP 800-60."
         )
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         if type(oscal_data) is str:
             self.information_type_id = oscal_data
         return self
@@ -129,7 +129,7 @@ class information_type_impact_level(BasicModel):
         else:
             return self.selected
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         if type(oscal_data) is str:
             self.base = oscal_data
             self.save()
@@ -218,7 +218,7 @@ class information_types(PrimitiveModel):
         html_str += "</div>\n"
         return html_str
 
-    def import_oscal(self, oscal_data, logger=None):
+    def import_oscal(self, oscal_data):
         oscal_data = self.fix_field_names(oscal_data)
         if "uuid" in oscal_data.keys():
             # check to see if the information_type already exists.  If not, create it
