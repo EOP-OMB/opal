@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% load markdown_extras %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div>{{ content | safe}}</div>
+{% endblock %}

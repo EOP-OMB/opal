@@ -2,7 +2,7 @@ import json
 import requests
 from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
@@ -12,6 +12,22 @@ from control_profile.models import imports, profile
 
 
 # Create your views here.
+
+def catalog_index_view(request):
+    imported_catalogs = catalogs.objects.all()
+    html_str = "<table class='table table-striped'>"
+    html_str += "<tr><th>Name</th><th>Controls</th><th>Enhancements</th><th>Total</th></tr>"
+    for catalog in imported_catalogs:
+        html_str += "<tr>" + catalog.count_controls() + "</tr>"
+    html_str += "</table>"
+    logger = logging.getLogger("django")
+    logger.info(html_str)
+    context = {
+        'title': "Catalogs",
+        'content': html_str
+        }
+    return render(request, "generic_template.html", context)
+
 
 class catalog_list_view(ListView):
     model = catalogs

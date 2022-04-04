@@ -352,6 +352,15 @@ class controls(PrimitiveModel):
                 html_str += i.to_html_form()
         return html_str
 
+    def count_controls(self):
+        control_count = 1
+        control_enhancement_count = 0
+        if self.control_enhancements is not None:
+            for i in self.control_enhancements.all():
+                cc, cec = i.count_controls()
+                control_enhancement_count += cc + cec
+        return control_count, control_enhancement_count
+
 
 class groups(PrimitiveModel):
     """
@@ -428,6 +437,19 @@ class groups(PrimitiveModel):
 
         return html_str
 
+    def count_controls(self):
+        control_count = 0
+        control_enhancement_count = 0
+        if self.sub_groups is not None:
+            for i in self.sub_groups.all():
+                control_count += i.count_controls
+        if self.controls is not None:
+            for i in self.controls.all():
+                cc, cec = i.count_controls()
+                control_count += cc
+                control_enhancement_count += cec
+        return control_count, control_enhancement_count
+
 
 class catalogs(PrimitiveModel):
     """
@@ -482,4 +504,31 @@ class catalogs(PrimitiveModel):
         if self.back_matter is not None:
             html_str += "<h1>CBack Matter</h1>\n"
             html_str += self.back_matter.to_html()
+        return html_str
+
+    def count_controls(self):
+        control_count = 0
+        control_enhancement_count = 0
+        control_count_total = 0
+        html_str = "<th>" + self.metadata.title + "</th>"
+        if self.groups is not None:
+            control_count_total_for_group = 0
+            for i in self.groups.all():
+                cc, cec = i.count_controls()
+                control_count += cc
+                control_enhancement_count += cec
+                control_count_total_for_group += cc + cec
+            control_count_total += control_count_total_for_group
+        if self.controls is not None:
+            control_count_total_for_group = 0
+            for i in self.controls.all():
+                cc, cec = i.count_controls()
+                control_count += cc
+                control_enhancement_count += cec
+                control_count_total_for_group += cc + cec
+            control_count_total += control_count_total_for_group
+        html_str += "<td>%d</td>" % (control_count)
+        html_str += "<td>%d</td>" % (control_enhancement_count)
+        html_str += "<td>%d</td>" % (control_count_total)
+        # html_str += "<tr><th colspan=5>Total for Catalog: %d</th></tr>" % (control_count_total)
         return html_str
