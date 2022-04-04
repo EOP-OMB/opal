@@ -11,7 +11,7 @@ from django.urls import reverse
 
 class ShortTextField(models.CharField):
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 200
+        kwargs['max_length'] = 1024
         kwargs['default'] = ""
         super().__init__(*args, **kwargs)
 
@@ -504,7 +504,7 @@ class revisions(BasicModel):
     props = propertiesField()
 
 
-class document_ids(BasicModel):
+class document_ids(PrimitiveModel):
     """
     A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier for a group of documents that are to be treated as different versions of the same document. If this element does not appear, or if the value of this element is empty, the value of "document-id" is equal to the value of the "uuid" flag of the top-level root element.
     Remarks
