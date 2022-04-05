@@ -51,7 +51,7 @@ DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
 # SAML settings
-ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
+ENABLE_OIDC = os.getenv("ENABLE_OIDC", default=False)
 OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
 OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
 OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", default="")
@@ -141,7 +141,7 @@ else:
 print("using database " + DATABASES['default']['NAME'])
 
 # Adding support for SAML Authentication
-if ENABLE_SAML:
+if ENABLE_OIDC:
     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
 # Password validation

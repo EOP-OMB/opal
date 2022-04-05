@@ -42,26 +42,26 @@ OPAL is designed to run well in a containerized environment. It is recommended t
 The available environment variables are: 
 
 
-| Variable                       | Values                                                 | Description                                                                                                   |
-|--------------------------------|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| ENVIRONMENT                    | production                                             | If omitted defaults to "development"                                                                          |
-| OPAL_SECRET_KEY                | a valid 50 character django secret key                 | secret key used to create sessions. If excluded a random key will be generated each time the app starts       |
-| DEBUG                          | True or False                                          | enables some debugging features. If omitted defaults to True                                                  |
-| ALLOWED_HOSTS                  | comma seperated list of FQDNs or hostnames             | Can be a list such as "localhost,127.0.0.1", If omitted defaults to * which will respond to any hostname.     |
- | DATABASE                       | sqlite or postgres                                     | defines the kind of database to use.  Defaults to sqlite                                                      |
-| DB_NAME                        | name of db in postgres or filename if using sqlite     | can be blank if using sqlite                                                                                  |
-| DB_PASSWORD                    | password the app should use to connect to the database | can be blank or omitted if using sqlite                                                                       |
-| DB_USER                        | username the app should use to connect to the database | can be blank if using sqlite                                                                                  |
-| DB_HOST                        |                                                        | can be blank if using sqlite                                                                                  |
-| DB_PORT                        |                                                        | can be blank if using sqlite                                                                                  |
-| LOG_LEVEL                      | DEBUG, INFO, WARNING, ERROR, or CRITICAL               | Defaults to INFO                                                                                              |
-| ENABLE_SAML                    | True or False                                          | set this to True to enable SAML Authentication. If enabled, the following additional variables are required:  |
-| OIDC_RP_CLIENT_ID              |                                                        | client ID from your SAML Provider                                                                             |
-| OIDC_RP_CLIENT_SECRET          |                                                        | Secret provided by your SAML IDP                                                                              |
-| OIDC_OP_AUTHORIZATION_ENDPOINT |                                                        |                                                                                                               |
-| OIDC_OP_TOKEN_ENDPOINT         |                                                        |                                                                                                               |
-| OIDC_OP_USER_ENDPOINT          |                                                        |                                                                                                               |
-| OIDC_RP_SIGN_ALGO              |                                                        |                                                                                                               |
-| OIDC_OP_JWKS_ENDPOINT          |                                                        |                                                                                                               |
-| LOGIN_REDIRECT_URL             |                                                        |                                                                                                               |
-| LOGOUT_REDIRECT_URL            |                                                        |                                                                                                               |
+| Variable                       | Values                                                 | Description                                                                                                  |
+|--------------------------------|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| ENVIRONMENT                    | production                                             | If omitted defaults to "development"                                                                         |
+| OPAL_SECRET_KEY                | a valid 50 character django secret key                 | secret key used to create sessions. If excluded a random key will be generated each time the app starts      |
+| DEBUG                          | True or False                                          | enables some debugging features. If omitted defaults to True                                                 |
+| ALLOWED_HOSTS                  | comma seperated list of FQDNs or hostnames             | Can be a list such as "localhost,127.0.0.1", If omitted defaults to * which will respond to any hostname.    |
+ | DATABASE                       | sqlite or postgres                                     | defines the kind of database to use.  Defaults to sqlite                                                     |
+| DB_NAME                        | name of db in postgres or filename if using sqlite     | can be blank if using sqlite                                                                                 |
+| DB_PASSWORD                    | password the app should use to connect to the database | can be blank or omitted if using sqlite                                                                      |
+| DB_USER                        | username the app should use to connect to the database | can be blank if using sqlite                                                                                 |
+| DB_HOST                        |                                                        | can be blank if using sqlite                                                                                 |
+| DB_PORT                        |                                                        | can be blank if using sqlite                                                                                 |
+| LOG_LEVEL                      | DEBUG, INFO, WARNING, ERROR, or CRITICAL               | Defaults to INFO                                                                                             |
+| ENABLE_OIDC                    | True or False                                          | set this to True to enable OIDC Authentication. If enabled, the following additional variables are required: |
+| OIDC_RP_CLIENT_ID              |                                                        | client ID from your SAML Provider                                                                            |
+| OIDC_RP_CLIENT_SECRET          |                                                        | Secret provided by your SAML IDP                                                                             |
+| OIDC_OP_AUTHORIZATION_ENDPOINT |                                                        |                                                                                                              |
+| OIDC_OP_TOKEN_ENDPOINT         |                                                        |                                                                                                              |
+| OIDC_OP_USER_ENDPOINT          |                                                        |                                                                                                              |
+| OIDC_RP_SIGN_ALGO              |                                                        |                                                                                                              |
+| OIDC_OP_JWKS_ENDPOINT          |                                                        |                                                                                                              |
+| LOGIN_REDIRECT_URL             |                                                        |                                                                                                              |
+| LOGOUT_REDIRECT_URL            |                                                        |                                                                                                              |
