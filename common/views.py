@@ -1,7 +1,8 @@
 import urllib
 
 from django.apps import apps
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, resolve_url
+from django.views.decorators.csrf import ensure_csrf_cookie, requires_csrf_token
 
 from catalog.models import *
 from opal.settings import USER_APPS
@@ -53,6 +54,7 @@ available_catalog_list = [{
     }, ]
 
 
+@ensure_csrf_cookie
 def index_view(request):
     catalog_list_html_str = ""
 
@@ -72,6 +74,33 @@ def index_view(request):
         }
     # And so on for more models
     return render(request, "index.html", context)
+
+
+@ensure_csrf_cookie
+def authentication_view(request):
+    from opal.settings import ENABLE_OIDC, ENABLE_SAML
+    from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm
+
+    html_str = ""
+    form_list = []
+
+    if request.user.is_authenticated:
+        html_str += "<h2>Welcome %s</h2>" % request.user.get_full_name()
+    else:
+        if ENABLE_OIDC:
+            from opal.settings import LOGIN_REDIRECT_URL
+            html_str += "<h2>OIDC Enabled</h2>"
+            html_str += "<a href='%s'>Login using OIDC</a>" % LOGIN_REDIRECT_URL
+
+        if ENABLE_SAML:
+            html_str += "<h2>SAML Enabled</h2>"
+            html_str += "<a href='%s'>Login using SAML</a>" % reverse('common:saml_authentication')
+
+    context = {
+        "content": html_str, "title": "OPAL Authentication Options"
+        }
+
+    return render(request, "generic_template.html", context)
 
 
 def DatabaseStatusView(request):

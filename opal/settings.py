@@ -50,7 +50,7 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
-# SAML settings
+# OIDC settings
 ENABLE_OIDC = os.getenv("ENABLE_OIDC", default=False)
 OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
 OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
@@ -59,8 +59,20 @@ OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", default="")
 OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", default="")
 OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", default="")
 OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
-LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
-LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
+OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
+OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
+# SAML settings
+ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
+SAML_FOLDER = os.path.join(BASE_DIR, 'saml')
+# SOCIAL_AUTH_SAML_SP_ENTITY_ID = os.getenv("SOCIAL_AUTH_SAML_SP_ENTITY_ID", default="")
+# SOCIAL_AUTH_SAML_SP_PUBLIC_CERT = os.getenv("SOCIAL_AUTH_SAML_SP_PUBLIC_CERT", default="")
+# SOCIAL_AUTH_SAML_SP_PRIVATE_KEY = os.getenv("SOCIAL_AUTH_SAML_SP_PRIVATE_KEY", default="")
+# SOCIAL_AUTH_SAML_ORG_INFO = os.getenv("SOCIAL_AUTH_SAML_ORG_INFO", default="")
+# SOCIAL_AUTH_SAML_TECHNICAL_CONTACT = os.getenv("SOCIAL_AUTH_SAML_TECHNICAL_CONTACT", default="")
+# SOCIAL_AUTH_SAML_SUPPORT_CONTACT = os.getenv("SOCIAL_AUTH_SAML_SUPPORT_CONTACT", default="")
+# SOCIAL_AUTH_SAML_ENABLED_IDPS = os.getenv("SOCIAL_AUTH_SAML_ENABLED_IDPS", default="")
+# SOCIAL_AUTH_SAML_ACS = os.getenv("SOCIAL_AUTH_SAML_ACS",default="")
+
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -89,12 +101,15 @@ else:
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'mozilla_django_oidc', 'django.contrib.contenttypes',
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth',  'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'coverage', 'django_extensions', ]
+                   'django_extensions', ]
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
+
+if ENVIRONMENT == "development":
+    INSTALLED_APPS.extend(['coverage',])
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
@@ -142,7 +157,11 @@ print("using database " + DATABASES['default']['NAME'])
 
 # Adding support for SAML Authentication
 if ENABLE_OIDC:
+    INSTALLED_APPS.extend(['mozilla_django_oidc',])
     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
+
+if ENABLE_SAML:
+    CSRF_TRUSTED_ORIGINS = ['https://cs4p-dev.onelogin.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

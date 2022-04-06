@@ -1,0 +1,78 @@
+{
+  "strict": true,
+  "debug": true,
+  "sp": {
+    "entityId": "http://127.0.0.1:8000/common/saml/metadata/",
+    "assertionConsumerService": {
+      "url": "http://127.0.0.1:8000/common/saml/?acs",
+      "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+    },
+    "singleLogoutService": {
+      "url": "http://127.0.0.1:8000/common/saml/?sls",
+      "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    },
+    "attributeConsumingService": {
+      "serviceName": "OPAL",
+      "serviceDescription": "OPAL",
+      "requestedAttributes": [
+        {
+          "name": "emailAddress",
+          "isRequired": false,
+          "nameFormat": "",
+          "friendlyName": "",
+          "attributeValue": []
+        }
+      ]
+    },
+    "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "x509cert": "",
+    "privateKey": ""
+  },
+  "idp": {
+    "entityId": "https://app.onelogin.com/saml/metadata/86ca7d6c-f923-4e54-ad44-2d4e585368ca",
+    "singleSignOnService": {
+      "url": "https://cs4p-dev.onelogin.com/trust/saml2/http-post/sso/86ca7d6c-f923-4e54-ad44-2d4e585368ca",
+      "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    },
+    "singleLogoutService": {
+      "url": "https://cs4p-dev.onelogin.com/trust/saml2/http-redirect/slo/1722280",
+      "responseUrl": "https://app.onelogin.com/trust/saml2/http-redirect/slo_return/<onelogin_connector_id>",
+      "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    },
+    "x509cert": "MIIDzzCCAregAwIBAgIUUO9epzAtfj0i/yJ9OD3y6/rPtdQwDQYJKoZIhvcNAQEFBQAwQTEMMAoGA1UECgwDT01CMRUwEwYDVQQLDAxPbmVMb2dpbiBJZFAxGjAYBgNVBAMMEU9uZUxvZ2luIEFjY291bnQgMB4XDTIyMDMyNDAxMDUzMVoXDTI3MDMyNDAxMDUzMVowQTEMMAoGA1UECgwDT01CMRUwEwYDVQQLDAxPbmVMb2dpbiBJZFAxGjAYBgNVBAMMEU9uZUxvZ2luIEFjY291bnQgMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtLvnUpHx1yZDUOZ7nIaZgZt/20aW0WV62UWQ3Dbm0xCuOdgE9VFfzXV6rnNA4TDp/qjNG0DcUeDIOrFEZzCQSd0ArP2a0XZJmnm7+aAc45SbQLHmNIUQqowvh6/pA5hdwlOJl2rK7EP7lEpGi3YJnweomisKP3ZHh3aWGxbs3GNCv7MVcUGR1RwR1Z8b4hgvby9KSUN6MOgDm1CR7wy8VAHqGS3q3IlaHGF1AQ6Minq4PPAAF+wGgmG2v1q2sW/wFaH6mnb1svotIEtgOEyNwpWPRfsEIT0LRTKnOszeqPpL8+XEOXac8AUTdseYzaLUubi6Q9/lk77zlrw7pnTKiQIDAQABo4G+MIG7MAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFGHsA4IAIVL2txGWyWbo+Y7aIkGIMHwGA1UdIwR1MHOAFGHsA4IAIVL2txGWyWbo+Y7aIkGIoUWkQzBBMQwwCgYDVQQKDANPTUIxFTATBgNVBAsMDE9uZUxvZ2luIElkUDEaMBgGA1UEAwwRT25lTG9naW4gQWNjb3VudCCCFFDvXqcwLX49Iv8ifTg98uv6z7XUMA4GA1UdDwEB/wQEAwIHgDANBgkqhkiG9w0BAQUFAAOCAQEAKBLiV0afUnjCVlai3b9OsItUKWb9U8tYkqbovkUXkIwaRVUqscO1fuFzpXBlKF3AJeDENbH7pHzT2diEkyI5VkJdTJgRWuOCNqWs4Rum/MJMFhycSq0XvD7IQcUBZ1WjBsriJp+hSebLPT8aSjnTCAMpO58pAaupeyTaWs2F0/uwK0sJIuzeW33DAr8KvCdxIpQ5styFO/htgHUTUeZbWvrXxi+DegV1JZXObBycq63kaibh8uUmZJ08CXtf4KNyE7aTlfUAVWp6vO3ty8zneKqkYVMI0rmmKk9QWFAnKjIYN0pzWH4KbFUkViNdAT+aHbxkbZZ2v6b3DqtYSLv1Yw=="
+  },
+  "security": {
+        "nameIdEncrypted": false,
+        "authnRequestsSigned": false,
+        "logoutRequestSigned": false,
+        "logoutResponseSigned": false,
+        "signMetadata": false,
+        "wantAttributeStatement": false,
+        "wantMessagesSigned": false,
+        "wantAssertionsSigned": false,
+        "wantNameId" : true,
+        "wantNameIdEncrypted": false,
+        "wantAssertionsEncrypted": false,
+        "allowSingleLabelDomains": false,
+        "signatureAlgorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "digestAlgorithm": "http://www.w3.org/2001/04/xmlenc#sha256",
+        "rejectDeprecatedAlgorithm": true
+    },
+    "contactPerson": {
+        "technical": {
+            "givenName": "technical_name",
+            "emailAddress": "technical@example.com"
+        },
+        "support": {
+            "givenName": "support_name",
+            "emailAddress": "support@example.com"
+        }
+    },
+    "organization": {
+        "en-US": {
+            "name": "sp_test",
+            "displayname": "SP test",
+            "url": "http://sp.example.com"
+        }
+    }
+}

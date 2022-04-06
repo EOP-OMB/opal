@@ -13,10 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, re_path
 
 from .views import *
+from saml.views import saml_authentication, attrs, metadata
 
 app_name = 'common'
 urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
-               path('db_status/', DatabaseStatusView, name='db_status'), ]
+               path('db_status/', DatabaseStatusView, name='db_status'),
+               path('auth/', authentication_view, name='authentication_view'),
+               re_path(r'^saml/$', saml_authentication, name='saml_authentication'),
+               re_path(r'^saml/attrs/$', attrs, name='attrs'),
+               re_path(r'^saml/metadata/$', metadata, name='metadata'),
+               ]

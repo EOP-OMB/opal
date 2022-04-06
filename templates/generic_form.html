@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<form method="post" novalidate>
+    <h1>{{ title }}</h1>
+    <div>{{ content | safe }}</div>
+{% for form in form_list %}
+    <div>
+<form method="post" novalidate class="form-floating" action="{{ form.action }}">
   {% csrf_token %}
-<h1>{{ form_title }}</h1>
+<input type="hidden" name="next" value="{{ form.next_page }}">
+<h1>{{ form.form_title }}</h1>
     <span style="color: red; font-weight: bold">{{ form.non_field_errors }}</span>
 
   {% for hidden_field in form.hidden_fields %}
@@ -23,7 +28,9 @@
     {% endfor %}
   </table>
 
-<p style="padding-top: 15px"; align="center"><button type="submit">Submit</button></p>
+<p class="button" style="padding-top: 15px"; ><button type="submit">Submit</button></p>
 
 </form>
+    </div>
+    {% endfor %}
 {% endblock %}

@@ -1,19 +1,16 @@
-asgiref==3.5.0
-backports.zoneinfo==0.2.1
-coverage==6.3.1
-Django==4.0.2
-django-bootstrap-v5==1.0.11
-django-environ==0.8.1
-django-extensions==3.1.5
-importlib-metadata==4.11.1
-Markdown==3.3.6
-mozilla-django-oidc==2.0.0
-Pillow==9.0.1
-sqlparse==0.4.2
-zipp==3.7.0
+Django
+django-environ
+django-bootstrap-v5
+django_extensions
+coverage
+Markdown
+requests
 
-# Not strictly needed and has trouble installing in some environments
-# pygraphviz
+# SAML Support
+python3-saml
 
-# These packages are needed only if you are using postgres
-# psycopg2
+# OIDC Support
+# mozilla-django-oidc
+
+# POSTGRES Support
+psycopg2

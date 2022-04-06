@@ -11,6 +11,8 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends apache2 apache2-dev python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev \
   # To include support for postgres
   && apt-get install -y --no-install-recommends python-pip python-dev libpq-dev postgresql-client postgresql-contrib \
+  # To include support for SAML
+  && apt-get install libxml2-dev libxmlsec1-dev libxmlsec1-openssl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
