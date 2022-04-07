@@ -1,8 +1,15 @@
+import os
+import json
+import os
+import os.path
 import urllib
 
 from django.apps import apps
-from django.shortcuts import redirect, render, resolve_url
-from django.views.decorators.csrf import ensure_csrf_cookie, requires_csrf_token
+from django.conf import settings
+from django.http import (HttpResponse, HttpResponseServerError)
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import ensure_csrf_cookie
+from onelogin.saml2.settings import OneLogin_Saml2_Settings
 
 from catalog.models import *
 from opal.settings import USER_APPS
@@ -79,7 +86,6 @@ def index_view(request):
 @ensure_csrf_cookie
 def authentication_view(request):
     from opal.settings import ENABLE_OIDC, ENABLE_SAML
-    from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, PasswordResetForm
 
     html_str = ""
     form_list = []
@@ -102,6 +108,44 @@ def authentication_view(request):
 
     return render(request, "generic_template.html", context)
 
+
+def metadata(request):
+    # req = prepare_django_request(request)
+    # auth = init_saml_auth(req)
+    # saml_settings = auth.get_settings()
+
+    filename = os.path.join(os.path.join(settings.BASE_DIR, 'saml'), 'saml_settings_template.json')
+    if request.is_secure():
+        host_name = "https://"
+    else:
+        host_name = "http://"
+    host_name += request.get_host() + "/"
+    logging.info("Got host: " + host_name)
+    with open(filename, 'r') as json_data:
+        settings_dict = json.loads(json_data.read())
+
+    settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
+    settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
+    settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson'] = {'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress' : settings.SAML_TECHNICAL_POC_EMAIL}}
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson'] = {
+            'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
+            }
+    settings_dict['organization']['en-US']['url'] = host_name
+
+    saml_settings = OneLogin_Saml2_Settings(
+        settings=settings_dict, sp_validation_only=True
+        )
+    metadata = saml_settings.get_sp_metadata()
+    errors = saml_settings.validate_metadata(metadata)
+
+    if len(errors) == 0:
+        resp = HttpResponse(content=metadata, content_type='text/xml')
+    else:
+        resp = HttpResponseServerError(content=', '.join(errors))
+    return resp
 
 def DatabaseStatusView(request):
     model_list = []

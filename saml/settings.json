@@ -60,19 +60,19 @@
     },
     "contactPerson": {
         "technical": {
-            "givenName": "technical_name",
-            "emailAddress": "technical@example.com"
+            "givenName": "Dan",
+            "emailAddress": "dan@cs4p.net"
         },
         "support": {
-            "givenName": "support_name",
-            "emailAddress": "support@example.com"
+            "givenName": "Dan",
+            "emailAddress": "dan@cs4p.net"
         }
     },
     "organization": {
         "en-US": {
-            "name": "sp_test",
-            "displayname": "SP test",
-            "url": "http://sp.example.com"
+            "name": "opal",
+            "displayname": "OPAL",
+            "url": "http://127.0.0.1:8000/"
         }
     }
 }

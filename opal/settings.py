@@ -63,16 +63,11 @@ OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
 OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
-SAML_FOLDER = os.path.join(BASE_DIR, 'saml')
-# SOCIAL_AUTH_SAML_SP_ENTITY_ID = os.getenv("SOCIAL_AUTH_SAML_SP_ENTITY_ID", default="")
-# SOCIAL_AUTH_SAML_SP_PUBLIC_CERT = os.getenv("SOCIAL_AUTH_SAML_SP_PUBLIC_CERT", default="")
-# SOCIAL_AUTH_SAML_SP_PRIVATE_KEY = os.getenv("SOCIAL_AUTH_SAML_SP_PRIVATE_KEY", default="")
-# SOCIAL_AUTH_SAML_ORG_INFO = os.getenv("SOCIAL_AUTH_SAML_ORG_INFO", default="")
-# SOCIAL_AUTH_SAML_TECHNICAL_CONTACT = os.getenv("SOCIAL_AUTH_SAML_TECHNICAL_CONTACT", default="")
-# SOCIAL_AUTH_SAML_SUPPORT_CONTACT = os.getenv("SOCIAL_AUTH_SAML_SUPPORT_CONTACT", default="")
-# SOCIAL_AUTH_SAML_ENABLED_IDPS = os.getenv("SOCIAL_AUTH_SAML_ENABLED_IDPS", default="")
-# SOCIAL_AUTH_SAML_ACS = os.getenv("SOCIAL_AUTH_SAML_ACS",default="")
-
+SAML_TECHNICAL_POC = os.getenv("SAML_TECHNICAL_POC", default=False)
+SAML_TECHNICAL_POC_EMAIL = os.getenv("SAML_TECHNICAL_POC_EMAIL", default=False)
+SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
+SAML_SUPPORT_POC_EMAIL = os.getenv("SAML_SUPPORT_POC_EMAIL", default=False)
+SAML_CERT = os.getenv("SAML_CERT", default="")
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts

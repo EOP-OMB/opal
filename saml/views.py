@@ -1,9 +1,12 @@
+import json
+import os.path
+
 from django.conf import settings
 from django.urls import reverse
 from django.http import (HttpResponse, HttpResponseRedirect,
                          HttpResponseServerError)
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.settings import OneLogin_Saml2_Settings
@@ -133,6 +136,24 @@ def metadata(request):
     # req = prepare_django_request(request)
     # auth = init_saml_auth(req)
     # saml_settings = auth.get_settings()
+
+    filename = os.path.join(os.path.join(settings.BASE_DIR, 'saml'),'sample_settings.json')
+    host_name = request.url.split('/')[0] + '//' + request.url.split('/')[2]
+    with open(filename, 'r') as json_data:
+        settings_dict = json.loads(json_data.read())
+
+    settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
+    settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
+    settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson']['technical']['givenName'] = settings.SAML_TECHNICAL_POC
+        settings_dict['contactPerson']['technical']['emailAddress'] = settings.SAML_TECHNICAL_POC_EMAIL
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson']['support']['givenName'] = settings.SAML_SUPPORT_POC
+        settings_dict['contactPerson']['support']['emailAddress'] = settings.SAML_SUPPORT_POC_EMAIL
+    settings_dict['en-US']['url'] = host_name
+
+
     saml_settings = OneLogin_Saml2_Settings(settings=None, custom_base_path=settings.SAML_FOLDER, sp_validation_only=True)
     metadata = saml_settings.get_sp_metadata()
     errors = saml_settings.validate_metadata(metadata)

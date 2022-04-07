@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path, re_path
 
 from .views import *
-from saml.views import saml_authentication, attrs, metadata
+from saml.views import saml_authentication, attrs
 
 app_name = 'common'
 urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
