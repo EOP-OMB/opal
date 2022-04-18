@@ -66,3 +66,20 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
     except ValueError:
         logger.info(uuid_str + " is not a valid uuid")
         return None
+
+
+from django.core.handlers.wsgi import WSGIRequest
+from io import StringIO
+from django.contrib.auth.models import AnonymousUser
+
+
+def get_fake_request(path='/', user=None):
+    """ Construct a fake request(WSGIRequest) object"""
+    req = WSGIRequest(
+        {
+            'REQUEST_METHOD': 'GET', 'PATH_INFO': path, 'wsgi.input': StringIO()
+            }
+        )
+
+    req.user = AnonymousUser() if user is None else user
+    return req

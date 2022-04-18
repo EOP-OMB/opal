@@ -16,11 +16,10 @@ Including another URLconf
 from django.urls import path, re_path
 
 from .views import *
-from saml.views import saml_authentication, attrs
 
 app_name = 'common'
 urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
-               path('db_status/', DatabaseStatusView, name='db_status'),
+               path('db_status/', database_status_view, name='db_status'),
                path('auth/', authentication_view, name='authentication_view'),
                re_path(r'^saml/$', saml_authentication, name='saml_authentication'),
                re_path(r'^saml/attrs/$', attrs, name='attrs'),

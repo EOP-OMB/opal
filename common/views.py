@@ -1,4 +1,3 @@
-import os
 import json
 import os
 import os.path
@@ -6,10 +5,12 @@ import urllib
 
 from django.apps import apps
 from django.conf import settings
-from django.http import (HttpResponse, HttpResponseServerError)
+from django.http import (HttpResponse, HttpResponseRedirect, HttpResponseServerError)
 from django.shortcuts import redirect, render
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.settings import OneLogin_Saml2_Settings
+from onelogin.saml2.utils import OneLogin_Saml2_Utils
 
 from catalog.models import *
 from opal.settings import USER_APPS
@@ -94,9 +95,8 @@ def authentication_view(request):
         html_str += "<h2>Welcome %s</h2>" % request.user.get_full_name()
     else:
         if ENABLE_OIDC:
-            from opal.settings import LOGIN_REDIRECT_URL
             html_str += "<h2>OIDC Enabled</h2>"
-            html_str += "<a href='%s'>Login using OIDC</a>" % LOGIN_REDIRECT_URL
+            html_str += "<a href='%s'>Login using OIDC</a>" % settings.OIDC_OP_LOGIN_REDIRECT_URL
 
         if ENABLE_SAML:
             html_str += "<h2>SAML Enabled</h2>"
@@ -109,31 +109,147 @@ def authentication_view(request):
     return render(request, "generic_template.html", context)
 
 
+# def init_saml_auth(request):
+#     settings_dict = get_saml_metadata(request)
+#     saml_settings = OneLogin_Saml2_Settings(settings_dict)
+#     auth = OneLogin_Saml2_Auth(request, old_settings=settings_dict)
+#     return auth
+def init_saml_auth(req):
+    auth = OneLogin_Saml2_Auth(req, custom_base_path=settings.SAML_FOLDER)
+    return auth
+
+
+def prepare_django_request(request):
+    # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
+    if 'HTTP_HOST' in request.META:
+        http_host = request.META['HTTP_HOST']
+    else:
+        http_host = request.get_host()
+    result = {
+        'https': 'on' if request.is_secure() else 'off',
+        'http_host': http_host,
+        'script_name': request.META['PATH_INFO'], 'get_data': request.GET.copy(),
+        # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
+        # 'lowercase_urlencoding': True,
+        'post_data': request.POST.copy()
+        }
+    logging.info(result)
+    return result
+
+
+def attrs(request):
+    paint_logout = False
+    attributes = False
+
+    if 'samlUserdata' in request.session:
+        paint_logout = True
+        if len(request.session['samlUserdata']) > 0:
+            attributes = request.session['samlUserdata'].items()
+    return render(
+        request, 'saml/attrs.html', {
+            'paint_logout': paint_logout, 'attributes': attributes
+            }
+        )
+
+
+@csrf_exempt
+def saml_authentication(request):
+    req = prepare_django_request(request)
+    auth = init_saml_auth(request)
+    errors = []
+    error_reason = None
+    not_auth_warn = False
+    success_slo = False
+    attributes = False
+    paint_logout = False
+
+    if 'sso' in req['get_data']:
+        return HttpResponseRedirect(
+            auth.login()
+            )  # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()  # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
+    elif 'sso2' in req['get_data']:
+        return_to = OneLogin_Saml2_Utils.get_self_url(req) + reverse('common:attrs')
+        return HttpResponseRedirect(auth.login(return_to))
+    elif 'slo' in req['get_data']:
+        name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
+        if 'samlNameId' in request.session:
+            name_id = request.session['samlNameId']
+        if 'samlSessionIndex' in request.session:
+            session_index = request.session['samlSessionIndex']
+        if 'samlNameIdFormat' in request.session:
+            name_id_format = request.session['samlNameIdFormat']
+        if 'samlNameIdNameQualifier' in request.session:
+            name_id_nq = request.session['samlNameIdNameQualifier']
+        if 'samlNameIdSPNameQualifier' in request.session:
+            name_id_spnq = request.session['samlNameIdSPNameQualifier']
+
+        return HttpResponseRedirect(
+            auth.logout(
+                name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format,
+                spnq=name_id_spnq
+                )
+            )  # If LogoutRequest ID need to be stored in order to later validate it, do instead  # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)  # request.session['LogoutRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(slo_built_url)
+    elif 'acs' in req['get_data']:
+        request_id = None
+        if 'AuthNRequestID' in request.session:
+            request_id = request.session['AuthNRequestID']
+
+        auth.process_response(request_id=request_id)
+        errors = auth.get_errors()
+        not_auth_warn = not auth.is_authenticated()
+
+        if not errors:
+            if 'AuthNRequestID' in request.session:
+                del request.session['AuthNRequestID']
+            request.session['samlUserdata'] = auth.get_attributes()
+            request.session['samlNameId'] = auth.get_nameid()
+            request.session['samlNameIdFormat'] = auth.get_nameid_format()
+            request.session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
+            request.session['samlNameIdSPNameQualifier'] = auth.get_nameid_spnq()
+            request.session['samlSessionIndex'] = auth.get_session_index()
+            if 'RelayState' in req['post_data'] and OneLogin_Saml2_Utils.get_self_url(req) != req['post_data'][
+                'RelayState']:
+                # To avoid 'Open Redirect' attacks, before execute the redirection confirm
+                # the value of the req['post_data']['RelayState'] is a trusted URL.
+                return HttpResponseRedirect(auth.redirect_to(req['post_data']['RelayState']))
+        elif auth.get_settings().is_debug_active():
+            error_reason = auth.get_last_error_reason()
+    elif 'sls' in req['get_data']:
+        request_id = None
+        if 'LogoutRequestID' in request.session:
+            request_id = request.session['LogoutRequestID']
+        dscb = lambda: request.session.flush()
+        url = auth.process_slo(request_id=request_id, delete_session_cb=dscb)
+        errors = auth.get_errors()
+        if len(errors) == 0:
+            if url is not None:
+                # To avoid 'Open Redirect' attacks, before execute the redirection confirm
+                # the value of the url is a trusted URL
+                return HttpResponseRedirect(url)
+            else:
+                success_slo = True
+        elif auth.get_settings().is_debug_active():
+            error_reason = auth.get_last_error_reason()
+
+    if 'samlUserdata' in request.session:
+        paint_logout = True
+        if len(request.session['samlUserdata']) > 0:
+            attributes = request.session['samlUserdata'].items()
+
+    return render(
+        request, 'saml/saml_authentication.html', {
+            'errors': errors, 'error_reason': error_reason, 'not_auth_warn': not_auth_warn, 'success_slo': success_slo,
+            'attributes': attributes, 'paint_logout': paint_logout
+            }
+        )
+
+
 def metadata(request):
     # req = prepare_django_request(request)
     # auth = init_saml_auth(req)
     # saml_settings = auth.get_settings()
 
-    filename = os.path.join(os.path.join(settings.BASE_DIR, 'saml'), 'saml_settings_template.json')
-    if request.is_secure():
-        host_name = "https://"
-    else:
-        host_name = "http://"
-    host_name += request.get_host() + "/"
-    logging.info("Got host: " + host_name)
-    with open(filename, 'r') as json_data:
-        settings_dict = json.loads(json_data.read())
-
-    settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
-    settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
-    settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
-    if settings.SAML_TECHNICAL_POC:
-        settings_dict['contactPerson'] = {'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress' : settings.SAML_TECHNICAL_POC_EMAIL}}
-    if settings.SAML_TECHNICAL_POC:
-        settings_dict['contactPerson'] = {
-            'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
-            }
-    settings_dict['organization']['en-US']['url'] = host_name
+    settings_dict = get_saml_metadata(request)
 
     saml_settings = OneLogin_Saml2_Settings(
         settings=settings_dict, sp_validation_only=True
@@ -147,7 +263,33 @@ def metadata(request):
         resp = HttpResponseServerError(content=', '.join(errors))
     return resp
 
-def DatabaseStatusView(request):
+
+def get_saml_metadata(request):
+    filename = os.path.join(settings.BASE_DIR, settings.SAML_SETTINGS_JSON)
+    if request.is_secure():
+        host_name = "https://"
+    else:
+        host_name = "http://"
+    host_name += request.get_host() + "/"
+    logging.info("Got host: " + host_name)
+    with open(filename, 'r') as json_data:
+        settings_dict = json.loads(json_data.read())
+    settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
+    settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
+    settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson'] = {
+            'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress': settings.SAML_TECHNICAL_POC_EMAIL}
+            }
+    if settings.SAML_TECHNICAL_POC:
+        settings_dict['contactPerson'] = {
+            'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
+            }
+    settings_dict['organization']['en-US']['url'] = host_name
+    return settings_dict
+
+
+def database_status_view(request):
     model_list = []
     for a in USER_APPS:
         app_models = apps.get_app_config(a).get_models()

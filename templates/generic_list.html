@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-{% if context_list %}
-    <ul>
-    {% for item in context_list %}
-        <a class="collapse-item" href="{{ item.get_absolute_url }}">{{ item }}</a><br>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No objects of this type are available</p>
-{% endif %}
+<ul>
+{% for item in context_list %}
+    <li><a class="collapse-item" href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+{% empty %}
+    <li>No objects of this type are available</li>
+{% endfor %}
+</ul>
 {% endblock %}

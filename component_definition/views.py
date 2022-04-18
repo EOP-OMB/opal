@@ -31,7 +31,7 @@ class create_component_view(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(create_component_view, self).get_context_data(**kwargs)
-        context['form_title'] = "Create New Component"
+        context['title'] = "Create New Component"
         # And so on for more models
         return context
 

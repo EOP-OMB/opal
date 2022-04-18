@@ -510,7 +510,7 @@ class catalogs(PrimitiveModel):
         control_count = 0
         control_enhancement_count = 0
         control_count_total = 0
-        html_str = "<th>" + self.metadata.title + "</th>"
+        html_str = "<th><a href='" + self.get_absolute_url() + "'>" + self.metadata.title + "</a></th>"
         if self.groups is not None:
             control_count_total_for_group = 0
             for i in self.groups.all():

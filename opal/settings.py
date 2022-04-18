@@ -38,7 +38,7 @@ ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False")
-LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
+LOG_LEVEL = os.getenv("LOG_LEVEL", default="DEBUG")
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
@@ -63,11 +63,16 @@ OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
 OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
+SAML_SETTINGS_JSON = os.getenv("SAML_SETTINGS_JSON", default='saml_settings_template.json')
 SAML_TECHNICAL_POC = os.getenv("SAML_TECHNICAL_POC", default=False)
 SAML_TECHNICAL_POC_EMAIL = os.getenv("SAML_TECHNICAL_POC_EMAIL", default=False)
 SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
 SAML_SUPPORT_POC_EMAIL = os.getenv("SAML_SUPPORT_POC_EMAIL", default=False)
 SAML_CERT = os.getenv("SAML_CERT", default="")
+SAML_KEY = os.getenv("SAML_KEY", default="")
+
+SAML_FOLDER = os.path.join(BASE_DIR,"real_data")
+
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -81,6 +86,13 @@ else:
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
 
 if ENVIRONMENT == "production":
     SECURE_SSL_REDIRECT = True
@@ -110,7 +122,11 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
-              'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
+              'django.middleware.clickjacking.XFrameOptionsMiddleware',]
+# To enable sitewide caching
+# MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
+#               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
+# MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
 
 ROOT_URLCONF = 'opal.urls'
 
@@ -200,7 +216,7 @@ LOGGING = {
     # Handlers #############################################################
     'handlers': {
         'file': {
-            'level': LOG_LEVEL,
+            'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': 'opal-debug.log',
             'formatter': 'verbose'
@@ -208,6 +224,7 @@ LOGGING = {
     ########################################################################
         'console': {
             'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
         },
     },
     # Loggers ####################################################################
