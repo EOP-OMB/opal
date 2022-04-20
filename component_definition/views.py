@@ -141,14 +141,25 @@ def implemented_requirements_form_view(request, control_id):
 
 
 
-from .forms import component_statement_form
+from .forms import component_statement_form, select_control_statements_form
+from django.forms import formset_factory
 
 def create_component_statement(request):
     """
     Create a statement associated with a component that addresses one or more Control requirements
     """
+    control_selection_formset = formset_factory(select_control_statements_form)
+    if request.method == 'POST':
+        formset = control_selection_formset(request.POST, request.FILES)
+        if formset.is_valid():
+            # do something with the formset.cleaned_data
+            pass
+    else:
+        formset = control_selection_formset()
+
     context = {
-        "form": component_statement_form()
+        "form": component_statement_form(),
+        "formset": formset
         }
     return render(request, "component_definition/requirements_by_component.html", context)
 

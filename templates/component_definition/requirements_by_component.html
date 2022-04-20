@@ -2,21 +2,32 @@
 {% load static %}
 {% block content %}
 
-  <h2>Component Details</h2>
+  <h1>Component Details</h1>
     <div>Here we will describe how our component will meet the requirements for a number of controls. Start by selecting one or more controls from the drop down below and then slect the specific statements that you are addressing.
         Then enter text describing how the component meets the selected requirements.</div>
 <hr>
-  <form method="post" id="requirementsForm" data-controls-url="{% url 'catalog:ajax_load_controls' %}" data-stmts-url="{%  url 'catalog:ajax_load_statements' %}" novalidate>
+<form method="post" id="requirementsForm" data-controls-url="{% url 'catalog:ajax_load_controls' %}" data-stmts-url="{%  url 'catalog:ajax_load_statements' %}" novalidate>
     {% csrf_token %}
-    <table>
-      {{ form.as_table }}
+    {{ formset.management_form }}
+    <table class="table-bordered">
+        {% for form in formset %}
+            <tr>
+            {% for field in form.visible_fields %}
+                <td>{{ field }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <table class="table-active">
+        {{ form.as_table }}
     </table>
     <button type="submit">Save</button>
-  </form>
+</form>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
-    $("#id_catalog").change(function () {
+    $("#id_form-0-catalog").change(function () {
       var url = $("#requirementsForm").attr("data-controls-url");  // get the url of the view
       var catalogId = $(this).val();  // get the selected catalog ID from the HTML input
 
@@ -26,13 +37,13 @@
           'catalog': catalogId       // add the catalog id to the GET parameters
         },
         success: function (data) {   // `data` is the return of the `load-controls` view function
-          $("#id_controls").html(data);  // replace the contents of the controls input with the data that came from the server
+          $("#id_form-0-controls").html(data);  // replace the contents of the controls input with the data that came from the server
         }
       });
 
     });
 
-    $("#id_controls").change(function () {
+    $("#id_form-0-controls").change(function () {
       var url = $("#requirementsForm").attr("data-stmts-url");  // get the url of the view
       var controlId = $(this).val();  // get the selected catalog ID from the HTML input
 
@@ -42,7 +53,7 @@
           'control': controlId       // add the catalog id to the GET parameters
         },
         success: function (data) {   // `data` is the return of the `load-controls` view function
-          $("#id_statements").html(data);  // replace the contents of the controls input with the data that came from the server
+          $("#id_form-0-statements").html(data);  // replace the contents of the controls input with the data that came from the server
         }
       });
 
