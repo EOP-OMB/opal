@@ -138,3 +138,18 @@ def implemented_requirements_form_view(request, control_id):
             "control": ctrl.to_html_form(), "control_id": control_id, "component_list": component_list
             }
         return render(request, "component_definition/implemented_requirements_form.html", context)
+
+
+
+from .forms import component_statement_form
+
+def create_component_statement(request):
+    """
+    Create a statement associated with a component that addresses one or more Control requirements
+    """
+    context = {
+        "form": component_statement_form()
+        }
+    return render(request, "component_definition/requirements_by_component.html", context)
+
+

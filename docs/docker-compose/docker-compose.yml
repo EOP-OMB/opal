@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=opal
+      - POSTGRES_USER=opal
+      - POSTGRES_PASSWORD=use_a_secure_password_here
+  web:
+    build: ../../
+    command: ./startup.sh
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../:/usr/src/app
+    environment:
+      - DEBUG=True
+      - LOG_LEVEL=DEBUG
+      - DATABASE=postgres
+      - DB_NAME=opal
+      - DB_USER=opal
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_PASSWORD=use_a_secure_password_here
+    depends_on:
+      - db

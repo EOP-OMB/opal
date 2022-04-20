@@ -1,5 +1,5 @@
 FROM postgres
 
-ENV POSTGRES_PASSWORD=**********************
+ENV POSTGRES_PASSWORD=use_a_secure_password_here
 
 COPY init-user-db.sh /docker-entrypoint-initdb.d/init-user-db.sh

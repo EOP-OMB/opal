@@ -73,7 +73,7 @@ def import_catalog_view(request, catalog_link):
             new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
             new_profile = profile.objects.create(
                 metadata=new_metadata
-            )
+                )
             new_profile.save()
             url = "https://" + request.get_host() + new_catalog.get_permalink()
             new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
@@ -86,9 +86,23 @@ def import_catalog_view(request, catalog_link):
                     description="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
                     status="under-development"
-                )
+                    )
 
             context = {
                 'msg': new_catalog.metadata.title + " imported from " + catalog_url
                 }  # return render(request, "index.html", context)
     return redirect('home_page')
+
+
+def load_controls(request):
+    catalog_id = request.GET.get('catalog')
+    selected_catalog = catalogs.objects.get(pk=catalog_id)
+    available_controls = selected_catalog.list_all_controls()
+    return render(request, 'generic_dropdown_list_options.html', {'options': available_controls})
+
+
+def load_statements(request):
+    control_id = request.GET.get('control')
+    selected_control = controls.objects.get(pk=control_id)
+    statement_list = selected_control.get_all_parts()
+    return render(request, 'generic_dropdown_list_options.html', {'options': statement_list})

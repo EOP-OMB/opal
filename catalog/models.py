@@ -203,6 +203,7 @@ class parts(PrimitiveModel):
                 html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
         return html_str
 
+
     def __str__(self):
         if len(self.part_id) > 0:
             return self.part_id
@@ -261,6 +262,7 @@ class controls(PrimitiveModel):
             if part.sub_parts.count() > 0:
                 for sub_part in part.sub_parts.all():
                     part_list.append(sub_part)
+        return part_list
 
     def __str__(self):
         return self.control_class + " " + self.control_id + " " + self.title
@@ -361,6 +363,13 @@ class controls(PrimitiveModel):
                 control_enhancement_count += cc + cec
         return control_count, control_enhancement_count
 
+    def list_all_controls(self):
+        control_list = [self]
+        if self.control_enhancements is not None:
+            for i in self.control_enhancements.all():
+                control_list.append(i)
+        return control_list
+
 
 class groups(PrimitiveModel):
     """
@@ -450,6 +459,16 @@ class groups(PrimitiveModel):
                 control_enhancement_count += cec
         return control_count, control_enhancement_count
 
+    def list_all_controls(self):
+        control_list = []
+        if self.sub_groups is not None:
+            for i in self.sub_groups.all():
+                control_list.extend(i.list_all_controls())
+        if self.controls is not None:
+            for i in self.controls.all():
+                control_list.extend(i.list_all_controls())
+        return control_list
+
 
 class catalogs(PrimitiveModel):
     """
@@ -532,3 +551,13 @@ class catalogs(PrimitiveModel):
         html_str += "<td>%d</td>" % (control_count_total)
         # html_str += "<tr><th colspan=5>Total for Catalog: %d</th></tr>" % (control_count_total)
         return html_str
+
+    def list_all_controls(self):
+        control_list = []
+        if self.groups is not None:
+            for i in self.groups.all():
+                control_list.extend(i.list_all_controls())
+        if self.controls is not None:
+            for i in self.controls.all():
+                control_list.extend(i.list_all_controls())
+        return control_list
