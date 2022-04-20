@@ -7,7 +7,11 @@ from common.models import links, roles
 class select_control_statements_form(forms.Form):
     catalog = forms.ModelChoiceField(queryset=catalogs.objects.all())
     controls = forms.ModelChoiceField(queryset=controls.objects.none())
-    statements = forms.ModelMultipleChoiceField(queryset=parts.objects.none())
+    statements = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=[],
+    )
 
 
 class component_statement_form(forms.ModelForm):

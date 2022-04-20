@@ -117,4 +117,4 @@ def load_statements(request):
             if len(display_str) > 0:
                 statement_list.append({"value": stmt.id, "display": display_str})
 
-    return render(request, 'generic_dropdown_list_options.html', {'options': statement_list})
+    return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
