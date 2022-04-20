@@ -220,6 +220,12 @@ class parts(PrimitiveModel):
         d = {"id": "part_id", "class": "part_class", "parts": "sub_parts"}
         return d
 
+    def get_all_parts(self):
+        part_list = [self]
+        if self.sub_parts.count() > 0:
+            for part in self.sub_parts.all():
+                part_list.extend(part.get_all_parts())
+        return part_list
 
 class controls(PrimitiveModel):
     """
@@ -258,10 +264,7 @@ class controls(PrimitiveModel):
     def get_all_parts(self):
         part_list = []
         for part in self.parts.all():
-            part_list.append(part)
-            if part.sub_parts.count() > 0:
-                for sub_part in part.sub_parts.all():
-                    part_list.append(sub_part)
+            part_list.extend(part.get_all_parts())
         return part_list
 
     def __str__(self):

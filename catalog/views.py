@@ -97,12 +97,24 @@ def import_catalog_view(request, catalog_link):
 def load_controls(request):
     catalog_id = request.GET.get('catalog')
     selected_catalog = catalogs.objects.get(pk=catalog_id)
-    available_controls = selected_catalog.list_all_controls()
+    available_controls = []
+    for ctrl in selected_catalog.list_all_controls():
+        available_controls.append({"value": ctrl.id, "display": ctrl.__str__})
     return render(request, 'generic_dropdown_list_options.html', {'options': available_controls})
 
 
 def load_statements(request):
+    logger = logging.getLogger('django')
     control_id = request.GET.get('control')
     selected_control = controls.objects.get(pk=control_id)
-    statement_list = selected_control.get_all_parts()
+    statement_list = []
+    for stmt in selected_control.get_all_parts():
+        if stmt.name in ["item", "statement"]:
+            display_str = ""
+            if len(stmt.props.filter(name="label")) > 0:
+                display_str += stmt.props.get(name="label").value + " "
+            display_str += stmt.prose
+            if len(display_str) > 0:
+                statement_list.append({"value": stmt.id, "display": display_str})
+
     return render(request, 'generic_dropdown_list_options.html', {'options': statement_list})
