@@ -73,6 +73,8 @@ SAML_KEY = os.getenv("SAML_KEY", default="")
 SAML_FOLDER = os.path.join(BASE_DIR,os.getenv("SAML_FOLDER", default="saml"))
 
 
+
+
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.

@@ -113,14 +113,9 @@ def authentication_view(request):
 
 def init_saml_auth(request):
     settings_dict = get_saml_metadata(request)
-    saml_settings = OneLogin_Saml2_Settings(settings_dict)
+    # saml_settings = OneLogin_Saml2_Settings(settings_dict)
     auth = OneLogin_Saml2_Auth(request, old_settings=settings_dict)
     return auth
-
-
-# def init_saml_auth(req):
-#     auth = OneLogin_Saml2_Auth(req, custom_base_path=settings.SAML_FOLDER)
-#     return auth
 
 
 def prepare_django_request(request):
@@ -319,21 +314,6 @@ def get_saml_metadata(request):
     for e in root[0].findall("{urn:oasis:names:tc:SAML:2.0:metadata}SingleSignOnService"):
         if e.attrib['Binding'] == 'urn:mace:shibboleth:1.0:profiles:AuthnRequest':
             settings_dict['idp']["singleSignOnService"] = {"binding": e.attrib['Binding'], "url": e.attrib['Location']}
-
-    # idp_dict = xmltodict.parse(max_idp_metadata)['EntityDescriptor']
-    #
-    # settings_dict['idp'] = {
-    #     "entityId": idp_dict['@entityID'],
-    #     "singleSignOnService": {
-    #         "url": "https://app.onelogin.com/trust/saml2/http-post/sso/<onelogin_connector_id>",
-    #         "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-    #     },
-    #     "singleLogoutService": {
-    #         "url": "https://app.onelogin.com/trust/saml2/http-redirect/slo/<onelogin_connector_id>",
-    #         "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-    #     },
-    #     "x509cert": "<onelogin_connector_cert>"
-    # }
 
     return settings_dict
 
