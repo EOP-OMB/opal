@@ -161,6 +161,7 @@ def saml_authentication(request):
     success_slo = False
     attributes = False
     paint_logout = False
+    host_name = get_host_name(req)
 
 
     if 'sso' in req['get_data']:
