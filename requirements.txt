@@ -5,6 +5,7 @@ django_extensions
 coverage
 Markdown
 requests
+xmltodict
 
 # SAML Support
 python3-saml

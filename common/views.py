@@ -1,7 +1,9 @@
+import requests
 import json
 import os
 import os.path
 import urllib
+import xmltodict
 
 from django.apps import apps
 from django.conf import settings
@@ -15,7 +17,7 @@ from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from catalog.models import *
 from opal.settings import USER_APPS
 from ssp.models import *
-from .functions import search_for_uuid
+from .functions import search_for_uuid, convert_xml_to_json
 
 # Create your views here.
 
@@ -23,43 +25,43 @@ available_catalog_list = [{
     "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline",
     "name": "NIST SP-800 53 rev5 HIGH baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline",
     "name": "NIST SP-800 53 rev5 MODERATE baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline",
     "name": "NIST SP-800 53 rev5 LOW baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline",
     "name": "NIST SP-800 53 rev5 PRIVACY baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "61787e85-adaf-4951-8d16-91f6e0b331bb", "slug": "fed_ramp_rev_4_high_baseline_resolved_profile_catalog",
     "name": "FedRAMP Rev 4 HIGH Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "0f9fcab5-995f-412f-8954-49526e1cc80a", "slug": "fed_ramp_rev_4_low_baseline_resolved_profile_catalog_min",
     "name": "FedRAMP Rev 4 LOW Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "8bf9a86c-66e9-4757-830c-87c0df2fb821",
     "slug": "fed_ramp_rev_4_moderate_baseline_resolved_profile_catalog_min", "name": "FedRAMP Rev 4 MODERATE Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "9a740e35-422f-48e2-baca-0b0c515997d1", "slug": "nist_sp_800_53_rev_4_low",
     "name": "Nist SP 800 53 Rev 4 LOW",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "be314319-466e-459b-b736-631bd84e3cd7", "slug": "nist_sp_800_53_rev_4_moderate",
     "name": "Nist SP 800 53 Rev 4 MODERATE",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "8f1b188b-5315-4c4d-a95a-1917f3cd5a62", "slug": "nist_sp_800_53_rev_4_high",
     "name": "Nist SP 800 53 Rev 4 High",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, ]
+}, ]
 
 
 @ensure_csrf_cookie
@@ -79,7 +81,7 @@ def index_view(request):
 
     context = {
         "catalog_list": catalog_list_html_str, "ssp_sample_import_link": ssp_sample_import_link
-        }
+    }
     # And so on for more models
     return render(request, "index.html", context)
 
@@ -104,19 +106,21 @@ def authentication_view(request):
 
     context = {
         "content": html_str, "title": "OPAL Authentication Options"
-        }
+    }
 
     return render(request, "generic_template.html", context)
 
 
-# def init_saml_auth(request):
-#     settings_dict = get_saml_metadata(request)
-#     saml_settings = OneLogin_Saml2_Settings(settings_dict)
-#     auth = OneLogin_Saml2_Auth(request, old_settings=settings_dict)
-#     return auth
-def init_saml_auth(req):
-    auth = OneLogin_Saml2_Auth(req, custom_base_path=settings.SAML_FOLDER)
+def init_saml_auth(request):
+    settings_dict = get_saml_metadata(request)
+    saml_settings = OneLogin_Saml2_Settings(settings_dict)
+    auth = OneLogin_Saml2_Auth(request, old_settings=settings_dict)
     return auth
+
+
+# def init_saml_auth(req):
+#     auth = OneLogin_Saml2_Auth(req, custom_base_path=settings.SAML_FOLDER)
+#     return auth
 
 
 def prepare_django_request(request):
@@ -132,7 +136,7 @@ def prepare_django_request(request):
         # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
         # 'lowercase_urlencoding': True,
         'post_data': request.POST.copy()
-        }
+    }
     logging.info(result)
     return result
 
@@ -148,8 +152,8 @@ def attrs(request):
     return render(
         request, 'saml/attrs.html', {
             'paint_logout': paint_logout, 'attributes': attributes
-            }
-        )
+        }
+    )
 
 
 @csrf_exempt
@@ -166,7 +170,7 @@ def saml_authentication(request):
     if 'sso' in req['get_data']:
         return HttpResponseRedirect(
             auth.login()
-            )  # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()  # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
+        )  # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()  # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
     elif 'sso2' in req['get_data']:
         return_to = OneLogin_Saml2_Utils.get_self_url(req) + reverse('common:attrs')
         return HttpResponseRedirect(auth.login(return_to))
@@ -187,8 +191,8 @@ def saml_authentication(request):
             auth.logout(
                 name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format,
                 spnq=name_id_spnq
-                )
-            )  # If LogoutRequest ID need to be stored in order to later validate it, do instead  # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)  # request.session['LogoutRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(slo_built_url)
+            )
+        )  # If LogoutRequest ID need to be stored in order to later validate it, do instead  # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)  # request.session['LogoutRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(slo_built_url)
     elif 'acs' in req['get_data']:
         request_id = None
         if 'AuthNRequestID' in request.session:
@@ -240,8 +244,8 @@ def saml_authentication(request):
         request, 'saml/saml_authentication.html', {
             'errors': errors, 'error_reason': error_reason, 'not_auth_warn': not_auth_warn, 'success_slo': success_slo,
             'attributes': attributes, 'paint_logout': paint_logout
-            }
-        )
+        }
+    )
 
 
 def metadata(request):
@@ -253,19 +257,19 @@ def metadata(request):
 
     saml_settings = OneLogin_Saml2_Settings(
         settings=settings_dict, sp_validation_only=True
-        )
-    metadata = saml_settings.get_sp_metadata()
-    errors = saml_settings.validate_metadata(metadata)
+    )
+    metadata_xml = saml_settings.get_sp_metadata()
+    errors = saml_settings.validate_metadata(metadata_xml)
 
     if len(errors) == 0:
-        resp = HttpResponse(content=metadata, content_type='text/xml')
+        resp = HttpResponse(content=metadata_xml, content_type='text/xml')
     else:
         resp = HttpResponseServerError(content=', '.join(errors))
     return resp
 
 
 def get_saml_metadata(request):
-    filename = os.path.join(settings.BASE_DIR, settings.SAML_SETTINGS_JSON)
+    filename = os.path.join(settings.SAML_FOLDER, settings.SAML_SETTINGS_JSON)
     if request.is_secure():
         host_name = "https://"
     else:
@@ -280,12 +284,57 @@ def get_saml_metadata(request):
     if settings.SAML_TECHNICAL_POC:
         settings_dict['contactPerson'] = {
             'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress': settings.SAML_TECHNICAL_POC_EMAIL}
-            }
+        }
     if settings.SAML_TECHNICAL_POC:
         settings_dict['contactPerson'] = {
             'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
-            }
+        }
     settings_dict['organization']['en-US']['url'] = host_name
+
+    # Add IDP sections
+    proxies = {}
+    if settings.HTTP_PROXY:
+        proxies['http'] = settings.HTTP_PROXY
+    if settings.HTTPS_PROXY:
+        proxies['https'] = settings.HTTPS_PROXY
+
+    max_idp_metadata = requests.get('https://login.max.gov/idp/shibboleth', proxies=proxies).text
+
+    import xml.etree.ElementTree as ET
+
+    root = ET.fromstring(max_idp_metadata)
+
+    ns = {
+        "": "urn:oasis:names:tc:SAML:2.0:metadata",
+        "ds": "http://www.w3.org/2000/09/xmldsig#",
+        "shibmd": "urn:mace:shibboleth:metadata:1.0",
+        "xsi": "http://www.w3.org/2001/XMLSchema-instance"
+    }
+
+    settings_dict['idp'] = {
+        "entityId": root.attrib['entityID'],
+        "x509cert": root.find(".//ds:X509Certificate", ns).text
+    }
+
+    for e in root[0].findall("{urn:oasis:names:tc:SAML:2.0:metadata}SingleSignOnService"):
+        if e.attrib['Binding'] == 'urn:mace:shibboleth:1.0:profiles:AuthnRequest':
+            settings_dict['idp']["singleSignOnService"] = {"binding": e.attrib['Binding'], "url": e.attrib['Location']}
+
+    # idp_dict = xmltodict.parse(max_idp_metadata)['EntityDescriptor']
+    #
+    # settings_dict['idp'] = {
+    #     "entityId": idp_dict['@entityID'],
+    #     "singleSignOnService": {
+    #         "url": "https://app.onelogin.com/trust/saml2/http-post/sso/<onelogin_connector_id>",
+    #         "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    #     },
+    #     "singleLogoutService": {
+    #         "url": "https://app.onelogin.com/trust/saml2/http-redirect/slo/<onelogin_connector_id>",
+    #         "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    #     },
+    #     "x509cert": "<onelogin_connector_cert>"
+    # }
+
     return settings_dict
 
 

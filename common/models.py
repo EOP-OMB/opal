@@ -926,6 +926,8 @@ class rlinks(PrimitiveModel):
     def to_html(self):
         if self.href is not None:
             return self.href.first().to_html()
+        else:
+            return str(self.uuid)
 
 
 class base64(PrimitiveModel):

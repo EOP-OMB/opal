@@ -2,6 +2,8 @@ import logging
 from uuid import UUID
 from django.apps import apps
 from django.core.exceptions import FieldError
+import json
+import xmltodict
 
 """
 Some useful common functions
@@ -77,9 +79,26 @@ def get_fake_request(path='/', user=None):
     """ Construct a fake request(WSGIRequest) object"""
     req = WSGIRequest(
         {
-            'REQUEST_METHOD': 'GET', 'PATH_INFO': path, 'wsgi.input': StringIO()
-            }
-        )
+            'REQUEST_METHOD': 'GET', 'PATH_INFO': path, 'wsgi.input': StringIO(), 'SERVER_NAME': "localhost", "SERVER_PORT": "8000"
+        }
+    )
 
     req.user = AnonymousUser() if user is None else user
     return req
+
+
+def convert_xml_to_json(file_path):
+    with open(file_path) as xml_file:
+        data_dict = xmltodict.parse(xml_file.read())
+        xml_file.close()
+
+        # generate the object using json.dumps()
+        # corresponding to json data
+
+        json_data = json.dumps(data_dict)
+
+        # Write the json data to output
+        # json file
+        with open("data.json", "w") as json_file:
+            json_file.write(json_data)
+            json_file.close()

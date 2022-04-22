@@ -70,8 +70,7 @@ SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
 SAML_SUPPORT_POC_EMAIL = os.getenv("SAML_SUPPORT_POC_EMAIL", default=False)
 SAML_CERT = os.getenv("SAML_CERT", default="")
 SAML_KEY = os.getenv("SAML_KEY", default="")
-
-SAML_FOLDER = os.path.join(BASE_DIR,"real_data")
+SAML_FOLDER = os.path.join(BASE_DIR,os.getenv("SAML_FOLDER", default="saml"))
 
 
 # Handling allowed hosts a little different since we have to turn it into a list.
@@ -79,8 +78,10 @@ SAML_FOLDER = os.path.join(BASE_DIR,"real_data")
 # You don't need to quote anything or add [] yourself.
 if env.__contains__("ALLOWED_HOSTS"):
     ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
+    CSRF_TRUSTED_ORIGINS = env("ALLOWED_HOSTS").split(',')
 else:
     ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = ['https://*.localhost','https://*.127.0.0.1']
 
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
