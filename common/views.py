@@ -123,7 +123,7 @@ def prepare_django_request(request):
     if 'HTTP_HOST' in request.META:
         http_host = request.META['HTTP_HOST']
     else:
-        http_host = request.get_host()
+        http_host = get_host_name(request)
     result = {
         'https': 'on' if request.is_secure() else 'off',
         'http_host': http_host,
@@ -161,6 +161,7 @@ def saml_authentication(request):
     success_slo = False
     attributes = False
     paint_logout = False
+
 
     if 'sso' in req['get_data']:
         return HttpResponseRedirect(
@@ -265,12 +266,7 @@ def metadata(request):
 
 def get_saml_metadata(request):
     filename = os.path.join(settings.SAML_FOLDER, settings.SAML_SETTINGS_JSON)
-    if request.is_secure():
-        host_name = "https://"
-    else:
-        host_name = "http://"
-    host_name += request.get_host() + "/"
-    logging.info("Got host: " + host_name)
+    host_name = get_host_name(request)
     with open(filename, 'r') as json_data:
         settings_dict = json.loads(json_data.read())
     settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
@@ -316,6 +312,16 @@ def get_saml_metadata(request):
             settings_dict['idp']["singleSignOnService"] = {"binding": e.attrib['Binding'], "url": e.attrib['Location']}
 
     return settings_dict
+
+
+def get_host_name(request):
+    if request.is_secure():
+        host_name = "https://"
+    else:
+        host_name = "http://"
+    host_name += request.get_host() + "/"
+    logging.info("Got host: " + host_name)
+    return host_name
 
 
 def database_status_view(request):
