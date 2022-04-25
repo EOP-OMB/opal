@@ -320,7 +320,7 @@ def get_host_name(request):
         host_name = "https://"
     else:
         host_name = "http://"
-    host_name += request.get_host() + "/"
+    host_name += request.get_host()
     logging.info("Got host: " + host_name)
     return host_name
 
