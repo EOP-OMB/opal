@@ -153,6 +153,7 @@ def attrs(request):
 
 @csrf_exempt
 def saml_authentication(request):
+    host_name = get_host_name(request)
     req = prepare_django_request(request)
     auth = init_saml_auth(request)
     errors = []
@@ -161,11 +162,11 @@ def saml_authentication(request):
     success_slo = False
     attributes = False
     paint_logout = False
-    host_name = get_host_name(req)
+
 
     if 'sso' in req['get_data']:
         return HttpResponseRedirect(
-            auth.login()
+            auth.login(return_to=get_host_name(request))
         )  # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()  # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
     elif 'sso2' in req['get_data']:
         return_to = OneLogin_Saml2_Utils.get_self_url(req) + reverse('common:attrs')
@@ -315,12 +316,13 @@ def get_saml_metadata(request):
 
 
 def get_host_name(request):
+    logger = logging.getLogger('django')
     if request.is_secure():
         host_name = "https://"
     else:
         host_name = "http://"
     host_name += request.get_host() + "/"
-    logging.info("Got host: " + host_name)
+    logger.info("Got host: " + host_name)
     return host_name
 
 

@@ -228,6 +228,7 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'level': 'DEBUG',
+            'formatter': 'verbose'
         },
     },
     # Loggers ####################################################################
