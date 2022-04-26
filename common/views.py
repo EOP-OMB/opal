@@ -153,7 +153,6 @@ def attrs(request):
 
 @csrf_exempt
 def saml_authentication(request):
-    host_name = get_host_name(request)
     req = prepare_django_request(request)
     auth = init_saml_auth(request)
     errors = []
