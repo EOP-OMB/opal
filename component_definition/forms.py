@@ -6,7 +6,7 @@ from common.models import links, roles
 
 class select_control_statements_form(forms.Form):
     catalog = forms.ModelChoiceField(queryset=catalogs.objects.all())
-    controls = forms.ModelChoiceField(queryset=controls.objects.none())
+    controls = forms.ModelChoiceField(queryset=controls.objects.all())
     statements = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,

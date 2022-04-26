@@ -2,6 +2,7 @@
 # Get an instance of a logger
 
 from django import forms
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
@@ -140,27 +141,55 @@ class create_parameter_view(CreateView):
 #         return render(request, "component_definition/implemented_requirements_form.html", context)
 
 
-
 from .forms import component_statement_form, select_control_statements_form
 from django.forms import formset_factory
+from catalog.views import get_statments
+
 
 def create_component_statement(request):
     """
     Create a statement associated with a component that addresses one or more Control requirements
     """
-    control_selection_formset = formset_factory(select_control_statements_form)
+    # control_selection_formset = formset_factory(select_control_statements_form)
     if request.method == 'POST':
-        formset = control_selection_formset(request.POST, request.FILES)
-        if formset.is_valid():
-            # do something with the formset.cleaned_data
+        # create a form instance and populate it with data from the request:
+        comp_form = component_statement_form(request.POST)
+        ctrl_form = select_control_statements_form(request.POST)
+        # check whether it's valid:
+        if ctrl_form.is_valid():
             pass
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+        if comp_form.is_valid():
+            pass
+
+        context = {
+            "comp_form": comp_form,
+            "ctrl_form": ctrl_form
+            }
+
+        return HttpResponseRedirect(reverse('control_profile:profile_detail_view'))
     else:
-        formset = control_selection_formset()
+        ctrl_id = request.GET.get('ctrl_id', default=None)
+        if ctrl_id:
+            statement_list = []
+            statmts = get_statments(ctrl_id)
+            for item in statmts:
+                statement_list.append((item["value"],item["display"]))
+            ctrl_selection_form = select_control_statements_form(initial={'controls': ctrl_id})
+            ctrl_selection_form.fields['statements'].choices = statement_list
+        else:
+            ctrl_selection_form = select_control_statements_form()
+
+        comp_id = request.GET.get('comp_id', default=None)
+        if comp_id:
+            comp_statement_form = component_statement_form(initial={'component_uuid': comp_id})
+        else:
+            comp_statement_form = component_statement_form()
 
     context = {
-        "form": component_statement_form(),
-        "formset": formset
+        "comp_form": comp_statement_form,
+        "ctrl_form": ctrl_selection_form
         }
     return render(request, "component_definition/requirements_by_component.html", context)
-
-

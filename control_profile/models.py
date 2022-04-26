@@ -146,8 +146,7 @@ class profile(BasicModel):
                                         html_str += "<tr>"
                                         html_str += "<th>" + ctrl.__str__() + "</th>"
                                         html_str += "<td><a href='" + reverse(
-                                            'component:new_requirement', kwargs={'control_id': ctrl.id}
-                                            ) + "'>Define</a></td>"
+                                            'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "'>Define</a></td>"
                                         html_str += "<td><a href=''>Modify</a></td>"
                                         html_str += "</tr>"
 

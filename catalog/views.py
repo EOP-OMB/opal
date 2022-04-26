@@ -106,6 +106,12 @@ def load_controls(request):
 def load_statements(request):
     logger = logging.getLogger('django')
     control_id = request.GET.get('control')
+    statement_list = get_statments(control_id)
+
+    return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
+
+
+def get_statments(control_id):
     selected_control = controls.objects.get(pk=control_id)
     statement_list = []
     for stmt in selected_control.get_all_parts():
@@ -116,5 +122,4 @@ def load_statements(request):
             display_str += stmt.prose
             if len(display_str) > 0:
                 statement_list.append({"value": stmt.id, "display": display_str})
-
-    return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
+    return statement_list
