@@ -12,3 +12,5 @@
 /docs/docker-compose/data/db/
 /docs/k8/secrets.yaml
 /opal/.env
+*/~$*
+

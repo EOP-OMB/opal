@@ -63,6 +63,7 @@ class params(BasicModel):
     class Meta:
         verbose_name = "Parameter"
         verbose_name_plural = "Parameters"
+        ordering = ["param_id"]
 
     param_id = ShortTextField(
         verbose_name="Parameter Identifier",
@@ -235,6 +236,7 @@ class controls(PrimitiveModel):
     class Meta:
         verbose_name = "Control"
         verbose_name_plural = "Controls"
+        ordering = "control_id"
 
     control_id = ShortTextField(
         verbose_name="Control Identifier",
@@ -382,6 +384,7 @@ class groups(PrimitiveModel):
     class Meta:
         verbose_name = "Group"
         verbose_name_plural = "Groups"
+        ordering = "group_id"
 
     group_id = ShortTextField(
         verbose_name="Control Identifier",
