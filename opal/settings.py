@@ -70,10 +70,7 @@ SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
 SAML_SUPPORT_POC_EMAIL = os.getenv("SAML_SUPPORT_POC_EMAIL", default=False)
 SAML_CERT = os.getenv("SAML_CERT", default="")
 SAML_KEY = os.getenv("SAML_KEY", default="")
-SAML_FOLDER = os.path.join(BASE_DIR,os.getenv("SAML_FOLDER", default="saml"))
-
-
-
+SAML_FOLDER = os.path.join(BASE_DIR, os.getenv("SAML_FOLDER", default="saml"))
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -83,7 +80,7 @@ if env.__contains__("ALLOWED_HOSTS"):
     CSRF_TRUSTED_ORIGINS = env("ALLOWED_HOSTS").split(',')
 else:
     ALLOWED_HOSTS = ['*']
-    CSRF_TRUSTED_ORIGINS = ['https://*.localhost','https://*.127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = ['https://*.localhost', 'https://*.127.0.0.1']
 
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
@@ -111,21 +108,21 @@ else:
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth',  'django.contrib.contenttypes',
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                   'django_extensions', ]
+                  'django_extensions', ]
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
 
 if ENVIRONMENT == "development":
-    INSTALLED_APPS.extend(['coverage',])
+    INSTALLED_APPS.extend(['coverage', ])
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
-              'django.middleware.clickjacking.XFrameOptionsMiddleware',]
+              'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
 # To enable sitewide caching
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
 #               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
@@ -139,8 +136,8 @@ TEMPLATES = [{
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
                                'django.contrib.messages.context_processors.messages', ],
-        },
-    }, ]
+    },
+}, ]
 
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
 
@@ -158,20 +155,20 @@ if DATABASE == "postgres":
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': env('DB_NAME'), 'USER': env('DB_USER'),
             'PASSWORD': env('DB_PASSWORD'), 'HOST': env('DB_HOST'), 'PORT': env('DB_PORT'),
-            }
         }
+    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_NAME),
-            }
         }
+    }
 
 print("using database " + DATABASES['default']['NAME'])
 
 # Adding support for SAML Authentication
 if ENABLE_OIDC:
-    INSTALLED_APPS.extend(['mozilla_django_oidc',])
+    INSTALLED_APPS.extend(['mozilla_django_oidc', ])
     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
 if ENABLE_SAML:
@@ -182,13 +179,13 @@ if ENABLE_SAML:
 
 AUTH_PASSWORD_VALIDATORS = [{
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    }, {
+}, {
     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    }, {
+}, {
     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    }, {
+}, {
     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    }, ]
+}, ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -197,7 +194,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
 
 # Logging Information
 LOGGING = {
@@ -210,12 +206,12 @@ LOGGING = {
         'verbose': {
             'format': '{levelname} : {asctime} : {filename} line {lineno} in function {funcName} : {message}',
             'style': '{',
-            },
+        },
         'simple': {
             'format': '{levelname} {message}',
             'style': '{',
-            },
         },
+    },
     # Handlers #############################################################
     'handlers': {
         'file': {
@@ -224,12 +220,17 @@ LOGGING = {
             'filename': 'opal-debug.log',
             'formatter': 'verbose'
         },
-    ########################################################################
         'console': {
             'class': 'logging.StreamHandler',
             'level': 'DEBUG',
             'formatter': 'verbose'
         },
+    },
+    # Filters ####################################################################
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
     },
     # Loggers ####################################################################
     'loggers': {

@@ -11,6 +11,7 @@ from django.http import (HttpResponse, HttpResponseRedirect, HttpResponseServerE
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
+from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
 from onelogin.saml2.settings import OneLogin_Saml2_Settings
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 
@@ -124,9 +125,12 @@ class MAXLogin_Saml2_Authn_Request(OneLogin_Saml2_Authn_Request):
         :return: AuthnRequest maybe deflated and base64 encoded
         :rtype: str object
         """
+        logger.info("Checkin to see if compresion is required...")
         if deflate:
+            logger.info("compresion required")
             request = OneLogin_Saml2_Utils.deflate_and_base64_encode(self._authn_request)
         else:
+            logger.info("nope, it isn't")
             request = OneLogin_Saml2_Utils.b64encode(self._authn_request)
         return request
 
@@ -291,19 +295,19 @@ def get_saml_metadata(request):
     filename = os.path.join(settings.SAML_FOLDER, settings.SAML_SETTINGS_JSON)
     host_name = get_host_name(request)
     with open(filename, 'r') as json_data:
-        settings_dict = json.loads(json_data.read())
-    settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
-    settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
-    settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
+        sp_settings_dict = json.loads(json_data.read())
+    sp_settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
+    sp_settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
+    sp_settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
     if settings.SAML_TECHNICAL_POC:
-        settings_dict['contactPerson'] = {
+        sp_settings_dict['contactPerson'] = {
             'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress': settings.SAML_TECHNICAL_POC_EMAIL}
             }
     if settings.SAML_TECHNICAL_POC:
-        settings_dict['contactPerson'] = {
+        sp_settings_dict['contactPerson'] = {
             'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
             }
-    settings_dict['organization']['en-US']['url'] = host_name
+    sp_settings_dict['organization']['en-US']['url'] = host_name
 
     # Add IDP sections
     proxies = {}
@@ -312,27 +316,35 @@ def get_saml_metadata(request):
     if settings.HTTPS_PROXY:
         proxies['https'] = settings.HTTPS_PROXY
 
-    max_idp_metadata = requests.get('https://login.max.gov/idp/shibboleth', proxies=proxies).text
+    # from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
+    metadata_parser = OneLogin_Saml2_IdPMetadataParser()
+    max_idp_metadata_dict = metadata_parser.parse_remote('https://login.max.gov/idp/shibboleth')
+    settings_dict = metadata_parser.merge_settings(sp_settings_dict,max_idp_metadata_dict)
 
-    import xml.etree.ElementTree as ET
 
-    root = ET.fromstring(max_idp_metadata)
-
-    ns = {
-        "": "urn:oasis:names:tc:SAML:2.0:metadata",
-        "ds": "http://www.w3.org/2000/09/xmldsig#",
-        "shibmd": "urn:mace:shibboleth:metadata:1.0",
-        "xsi": "http://www.w3.org/2001/XMLSchema-instance"
-        }
-
-    settings_dict['idp'] = {
-        "entityId": root.attrib['entityID'],
-        "x509cert": root.find(".//ds:X509Certificate", ns).text
-        }
-
-    for e in root[0].findall("{urn:oasis:names:tc:SAML:2.0:metadata}SingleSignOnService"):
-        if e.attrib['Binding'] == 'urn:mace:shibboleth:1.0:profiles:AuthnRequest':
-            settings_dict['idp']["singleSignOnService"] = {"binding": e.attrib['Binding'], "url": e.attrib['Location']}
+    # max_idp_metadata = requests.get('https://login.max.gov/idp/shibboleth', proxies=proxies).text
+    #
+    # import xml.etree.ElementTree as ET
+    #
+    # root = ET.fromstring(max_idp_metadata)
+    #
+    # ns = {
+    #     "": "urn:oasis:names:tc:SAML:2.0:metadata",
+    #     "ds": "http://www.w3.org/2000/09/xmldsig#",
+    #     "shibmd": "urn:mace:shibboleth:metadata:1.0",
+    #     "xsi": "http://www.w3.org/2001/XMLSchema-instance"
+    #     }
+    #
+    # settings_dict['idp'] = {
+    #     "entityId": root.attrib['entityID'],
+    #     "x509cert": root.find(".//ds:X509Certificate", ns).text
+    #     }
+    #
+    # service_list = []
+    # for e in root[0].findall("{urn:oasis:names:tc:SAML:2.0:metadata}SingleSignOnService"):
+    #     # if e.attrib['Binding'] == 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect':
+    #     service_list.append({"binding": e.attrib['Binding'], "url": e.attrib['Location']})
+    # settings_dict['idp']["singleSignOnService"] = service_list
 
     return settings_dict
 
