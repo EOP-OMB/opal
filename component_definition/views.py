@@ -156,13 +156,14 @@ def create_component_statement(request):
         comp_form = component_statement_form(request.POST)
         ctrl_form = select_control_statements_form(request.POST)
         # check whether it's valid:
-        if ctrl_form.is_valid():
-            pass
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
         if comp_form.is_valid():
-            pass
+            comp_form.save()
+        if ctrl_form.is_valid():
+            stmt_list = ctrl_form.statements.to_python()
+            for stmt in stmt_list:
+                #create link between stmt and impliemnted requirement
+                pass
+
 
         context = {
             "comp_form": comp_form,
