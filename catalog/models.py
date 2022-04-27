@@ -236,7 +236,7 @@ class controls(PrimitiveModel):
     class Meta:
         verbose_name = "Control"
         verbose_name_plural = "Controls"
-        ordering = "control_id"
+        ordering = ["control_id"]
 
     control_id = ShortTextField(
         verbose_name="Control Identifier",
@@ -384,7 +384,7 @@ class groups(PrimitiveModel):
     class Meta:
         verbose_name = "Group"
         verbose_name_plural = "Groups"
-        ordering = "group_id"
+        ordering = ["group_id"]
 
     group_id = ShortTextField(
         verbose_name="Control Identifier",

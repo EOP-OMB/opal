@@ -5,3 +5,7 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 mod_wsgi-express start-server opal/wsgi.py
+
+
+
+

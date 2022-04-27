@@ -112,11 +112,32 @@ def authentication_view(request):
 
     return render(request, "generic_template.html", context)
 
+# Override the method in OneLogin_Saml2_Auth to disable compresion
+from onelogin.saml2.authn_request import OneLogin_Saml2_Authn_Request
+
+class MAXLogin_Saml2_Authn_Request(OneLogin_Saml2_Authn_Request):
+    def get_request(self, deflate=False):
+        """
+        Returns unsigned AuthnRequest.
+        :param deflate: It makes the deflate process optional
+        :type: bool
+        :return: AuthnRequest maybe deflated and base64 encoded
+        :rtype: str object
+        """
+        if deflate:
+            request = OneLogin_Saml2_Utils.deflate_and_base64_encode(self._authn_request)
+        else:
+            request = OneLogin_Saml2_Utils.b64encode(self._authn_request)
+        return request
+
+class MaxLogin_SAML2_Auth(OneLogin_Saml2_Auth):
+    authn_request_class = MAXLogin_Saml2_Authn_Request
+
 
 def init_saml_auth(request):
     settings_dict = get_saml_metadata(request)
     # saml_settings = OneLogin_Saml2_Settings(settings_dict)
-    auth = OneLogin_Saml2_Auth(request, old_settings=settings_dict)
+    auth = MaxLogin_SAML2_Auth(request, old_settings=settings_dict)
     return auth
 
 
@@ -129,7 +150,8 @@ def prepare_django_request(request):
     result = {
         'https': 'on' if request.is_secure() else 'off',
         'http_host': http_host,
-        'script_name': request.META['PATH_INFO'], 'get_data': request.GET.copy(),
+        'script_name': request.META['PATH_INFO'],
+        'get_data': request.GET.copy(),
         # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
         # 'lowercase_urlencoding': True,
         'post_data': request.POST.copy()
@@ -320,7 +342,7 @@ def get_host_name(request):
         host_name = "https://"
     else:
         host_name = "http://"
-    host_name += request.get_host() + "/"
+    host_name += request.get_host()
     logger.info("Got host: " + host_name)
     return host_name
 
