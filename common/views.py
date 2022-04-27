@@ -187,7 +187,7 @@ def saml_authentication(request):
     paint_logout = False
 
     if 'sso' in req['get_data']:
-        return HttpResponseRedirect(auth.login(return_to=get_host_name(request)))
+        return HttpResponseRedirect(auth.login(return_to=get_host_name(request)),deflate=False)
         # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()
         # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
     elif 'sso2' in req['get_data']:
