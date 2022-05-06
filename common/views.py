@@ -24,47 +24,114 @@ from .functions import search_for_uuid, convert_xml_to_json
 
 logger = logging.getLogger('django')
 
+# Override the method in OneLogin_Saml2_Auth to disable compresion
+from onelogin.saml2.authn_request import OneLogin_Saml2_Authn_Request
+
+
+class MAXLogin_Saml2_Authn_Request(OneLogin_Saml2_Authn_Request):
+    def get_request(self, deflate=False):
+        """
+        Returns unsigned AuthnRequest.
+        :param deflate: It makes the deflate process optional
+        :type: bool
+        :return: AuthnRequest maybe deflated and base64 encoded
+        :rtype: str object
+        """
+        logger.info("Checkin to see if compresion is required...")
+        if deflate:
+            logger.info("compresion required")
+            request = OneLogin_Saml2_Utils.deflate_and_base64_encode(self._authn_request)
+        else:
+            logger.info("nope, it isn't")
+            request = OneLogin_Saml2_Utils.b64encode(self._authn_request)
+        return request
+
+
+class MaxLogin_SAML2_Auth(OneLogin_Saml2_Auth):
+    authn_request_class = MAXLogin_Saml2_Authn_Request
+
+    def login(self,
+              return_to=None,
+              force_authn=False,
+              is_passive=False,
+              set_nameid_policy=True,
+              name_id_value_req=None):
+        """
+        Initiates the SSO process.
+        :param return_to: Optional argument. The target URL the user should be redirected to after login.
+        :type return_to: string
+        :param force_authn: Optional argument. When true the AuthNRequest will set the ForceAuthn='true'.
+        :type force_authn: bool
+        :param is_passive: Optional argument. When true the AuthNRequest will set the Ispassive='true'.
+        :type is_passive: bool
+        :param set_nameid_policy: Optional argument. When true the AuthNRequest will set a nameIdPolicy element.
+        :type set_nameid_policy: bool
+        :param name_id_value_req: Optional argument. Indicates to the IdP the subject that should be authenticated
+        :type name_id_value_req: string
+        :returns: Redirection URL
+        :rtype: string
+        """
+        authn_request = self.authn_request_class(self._settings, force_authn, is_passive, set_nameid_policy,
+                                                 name_id_value_req)
+        self._last_request = authn_request.get_xml()
+        self._last_request_id = authn_request.get_id()
+
+        saml_request = authn_request.get_request(deflate=False)
+        parameters = {'SAMLRequest': saml_request}
+
+        if return_to is not None:
+            parameters['RelayState'] = return_to
+        else:
+            parameters['RelayState'] = OneLogin_Saml2_Utils.get_self_url_no_query(self._request_data)
+
+        security = self._settings.get_security_data()
+        if security.get('authnRequestsSigned', False):
+            self.add_request_signature(parameters, security['signatureAlgorithm'])
+        requests.post(self.get_sso_url(), data=parameters)
+        return self.redirect_to(self.get_sso_url(), parameters)
+
+
 available_catalog_list = [{
     "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline",
     "name": "NIST SP-800 53 rev5 HIGH baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline",
     "name": "NIST SP-800 53 rev5 MODERATE baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline",
     "name": "NIST SP-800 53 rev5 LOW baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline",
     "name": "NIST SP-800 53 rev5 PRIVACY baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "61787e85-adaf-4951-8d16-91f6e0b331bb", "slug": "fed_ramp_rev_4_high_baseline_resolved_profile_catalog",
     "name": "FedRAMP Rev 4 HIGH Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "0f9fcab5-995f-412f-8954-49526e1cc80a", "slug": "fed_ramp_rev_4_low_baseline_resolved_profile_catalog_min",
     "name": "FedRAMP Rev 4 LOW Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "8bf9a86c-66e9-4757-830c-87c0df2fb821",
     "slug": "fed_ramp_rev_4_moderate_baseline_resolved_profile_catalog_min", "name": "FedRAMP Rev 4 MODERATE Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "9a740e35-422f-48e2-baca-0b0c515997d1", "slug": "nist_sp_800_53_rev_4_low",
     "name": "Nist SP 800 53 Rev 4 LOW",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "be314319-466e-459b-b736-631bd84e3cd7", "slug": "nist_sp_800_53_rev_4_moderate",
     "name": "Nist SP 800 53 Rev 4 MODERATE",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-    }, {
+}, {
     "uuid": "8f1b188b-5315-4c4d-a95a-1917f3cd5a62", "slug": "nist_sp_800_53_rev_4_high",
     "name": "Nist SP 800 53 Rev 4 High",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-    }, ]
+}, ]
 
 
 @ensure_csrf_cookie
@@ -84,7 +151,7 @@ def index_view(request):
 
     context = {
         "catalog_list": catalog_list_html_str, "ssp_sample_import_link": ssp_sample_import_link
-        }
+    }
     # And so on for more models
     return render(request, "index.html", context)
 
@@ -109,33 +176,43 @@ def authentication_view(request):
 
     context = {
         "content": html_str, "title": "OPAL Authentication Options"
-        }
+    }
 
     return render(request, "generic_template.html", context)
 
-# Override the method in OneLogin_Saml2_Auth to disable compresion
-from onelogin.saml2.authn_request import OneLogin_Saml2_Authn_Request
 
-class MAXLogin_Saml2_Authn_Request(OneLogin_Saml2_Authn_Request):
-    def get_request(self, deflate=False):
-        """
-        Returns unsigned AuthnRequest.
-        :param deflate: It makes the deflate process optional
-        :type: bool
-        :return: AuthnRequest maybe deflated and base64 encoded
-        :rtype: str object
-        """
-        logger.info("Checkin to see if compresion is required...")
-        if deflate:
-            logger.info("compresion required")
-            request = OneLogin_Saml2_Utils.deflate_and_base64_encode(self._authn_request)
-        else:
-            logger.info("nope, it isn't")
-            request = OneLogin_Saml2_Utils.b64encode(self._authn_request)
-        return request
+from django import forms
 
-class MaxLogin_SAML2_Auth(OneLogin_Saml2_Auth):
-    authn_request_class = MAXLogin_Saml2_Authn_Request
+
+def saml_login_button(self,
+                      return_to=None,
+                      force_authn=False,
+                      is_passive=False,
+                      set_nameid_policy=True,
+                      name_id_value_req=None):
+    authn_request = self.authn_request_class(self._settings, force_authn, is_passive, set_nameid_policy,
+                                                 name_id_value_req)
+    self._last_request = authn_request.get_xml()
+    self._last_request_id = authn_request.get_id()
+
+    saml_request = authn_request.get_request(deflate=False)
+    parameters = {'SAMLRequest': saml_request}
+
+    if return_to is not None:
+        parameters['RelayState'] = return_to
+    else:
+        parameters['RelayState'] = OneLogin_Saml2_Utils.get_self_url_no_query(self._request_data)
+
+    security = self._settings.get_security_data()
+    if security.get('authnRequestsSigned', False):
+        self.add_request_signature(parameters, security['signatureAlgorithm'])
+
+    f = forms.Form
+    for key, value in parameters:
+        f.fields
+
+
+    return self.redirect_to(self.get_sso_url(), parameters)
 
 
 def init_saml_auth(request):
@@ -159,7 +236,7 @@ def prepare_django_request(request):
         # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
         # 'lowercase_urlencoding': True,
         'post_data': request.POST.copy()
-        }
+    }
     logger.info(result)
     return result
 
@@ -175,8 +252,8 @@ def attrs(request):
     return render(
         request, 'saml/attrs.html', {
             'paint_logout': paint_logout, 'attributes': attributes
-            }
-        )
+        }
+    )
 
 
 @csrf_exempt
@@ -214,8 +291,12 @@ def saml_authentication(request):
             auth.logout(
                 name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format,
                 spnq=name_id_spnq
-                )
-            )  # If LogoutRequest ID need to be stored in order to later validate it, do instead  # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)  # request.session['LogoutRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(slo_built_url)
+            )
+        )
+        # If LogoutRequest ID need to be stored in order to later validate it, do instead
+        # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)
+        # request.session['LogoutRequestID'] = auth.get_last_request_id()
+        # return HttpResponseRedirect(slo_built_url)
     elif 'acs' in req['get_data']:
         request_id = None
         if 'AuthNRequestID' in request.session:
@@ -267,8 +348,8 @@ def saml_authentication(request):
         request, 'saml/saml_authentication.html', {
             'errors': errors, 'error_reason': error_reason, 'not_auth_warn': not_auth_warn, 'success_slo': success_slo,
             'attributes': attributes, 'paint_logout': paint_logout
-            }
-        )
+        }
+    )
 
 
 def metadata(request):
@@ -280,7 +361,7 @@ def metadata(request):
 
     saml_settings = OneLogin_Saml2_Settings(
         settings=settings_dict, sp_validation_only=True
-        )
+    )
     metadata_xml = saml_settings.get_sp_metadata()
     errors = saml_settings.validate_metadata(metadata_xml)
 
@@ -302,11 +383,11 @@ def get_saml_metadata(request):
     if settings.SAML_TECHNICAL_POC:
         sp_settings_dict['contactPerson'] = {
             'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress': settings.SAML_TECHNICAL_POC_EMAIL}
-            }
+        }
     if settings.SAML_TECHNICAL_POC:
         sp_settings_dict['contactPerson'] = {
             'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
-            }
+        }
     sp_settings_dict['organization']['en-US']['url'] = host_name
 
     # Add IDP sections
@@ -319,8 +400,7 @@ def get_saml_metadata(request):
     # from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
     metadata_parser = OneLogin_Saml2_IdPMetadataParser()
     max_idp_metadata_dict = metadata_parser.parse_remote('https://login.max.gov/idp/shibboleth')
-    settings_dict = metadata_parser.merge_settings(sp_settings_dict,max_idp_metadata_dict)
-
+    settings_dict = metadata_parser.merge_settings(sp_settings_dict, max_idp_metadata_dict)
 
     # max_idp_metadata = requests.get('https://login.max.gov/idp/shibboleth', proxies=proxies).text
     #
