@@ -4,19 +4,6 @@ from django.contrib import admin
 
 # Register your models here.
 
-def get_list_display(m, request):
-    excluded_fields = ['created_at', 'updated_at']
-    list_display = ()
-    for field in m.opts.concrete_fields:
-        print("field = " + field.name)
-        if field.name not in excluded_fields:
-            list_display + (field.name,)
-            print(m.list_display)
-    list_display + ('created_at',)
-    list_display + ('updated_at',)
-    return list_display
-
-
 class CustomAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
@@ -31,6 +18,21 @@ class CustomAdmin(admin.ModelAdmin):
         self.filter_horizontal = filter_horizontal_original
         return form_field
 
+    def get_list_display(self, request):
+        """
+        Return a sequence containing the fields to be displayed on the
+        changelist.
+        """
+        excluded_fields = ['created_at', 'updated_at']
+        self.list_display = []
+        for field in self.opts.concrete_fields:
+            print("field = " + field.name)
+            if field.name not in excluded_fields:
+                self.list_display.append(field.name)
+        self.list_display.append('created_at')
+        self.list_display.append('updated_at')
+        print(self.list_display)
+        return self.list_display
 
 # other models
 models = apps.get_app_config('common').get_models()
