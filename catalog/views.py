@@ -95,10 +95,10 @@ def import_catalog_view(request, catalog_link):
 
 
 def load_controls(request):
-    catalog_id = request.GET.get('catalog')
-    selected_catalog = catalogs.objects.get(pk=catalog_id)
+    profile_id = request.GET.get('profile')
+    selected_profile = catalogs.objects.get(pk=profile_id)
     available_controls = []
-    for ctrl in selected_catalog.list_all_controls():
+    for ctrl in selected_profile.list_all_controls():
         available_controls.append({"value": ctrl.id, "display": ctrl.__str__})
     return render(request, 'generic_dropdown_list_options.html', {'options': available_controls})
 

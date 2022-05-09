@@ -62,14 +62,13 @@ system_status_state_choices = [
     ("disposition", "Disposition: The system or component is no longer operational."),
     ("other", "Other: Some other state, a remark must be included to describe the current state.")]
 
-implementation_status_choices = [("Implemented: The control is fully implemented.", "implemented"),
-                                 ("Partial: The control is partially implemented.", "partial"), (
-                                     "Planned: There is a plan for implementing the control as explained in the remarks.",
-                                     "planned"), (
-                                     "Alternative: There is an alternative implementation for this control as explained in the remarks.",
-                                     "alternative"), (
-                                     "Not-Applicable: This control does not apply to this system as justified in the remarks.",
-                                     "not-applicable")]
+implementation_status_choices = [
+    ("implemented", "Implemented: The control is fully implemented."),
+    ("partial", "Partial: The control is partially implemented."),
+    ("planned", "Planned: There is a plan for implementing the control as explained in the remarks."),
+    ("alternative","Alternative: There is an alternative implementation for this control as explained in the remarks.",),
+    ("not-applicable","Not-Applicable: This control does not apply to this system as justified in the remarks.",)
+    ]
 
 
 class PrimitiveModel(models.Model):

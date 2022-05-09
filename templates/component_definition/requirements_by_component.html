@@ -6,7 +6,7 @@
     <div>Here we will describe how our component will meet the requirements for a number of controls. Start by selecting one or more controls from the drop down below and then slect the specific statements that you are addressing.
         Then enter text describing how the component meets the selected requirements.</div>
 <hr>
-<form method="post" id="requirementsForm" data-controls-url="{% url 'catalog:ajax_load_controls' %}" data-stmts-url="{%  url 'catalog:ajax_load_statements' %}" novalidate>
+<form method="post" action="{% url 'component:create_component_statement'  %}" id="requirementsForm" data-controls-url="{% url 'catalog:ajax_load_controls' %}" data-stmts-url="{%  url 'catalog:ajax_load_statements' %}" novalidate>
     {% csrf_token %}
     <table class="table-bordered">
         {{ ctrl_form.as_table }}
@@ -20,19 +20,16 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-$( "button" ).click(function() {
-  $( this ).replaceWith( "<div>" + $( this ).text() + "</div>" );
-});
 </script>
   <script>
-    $("#id_catalog").change(function () {
+    $("#id_profile").change(function () {
       var url = $("#requirementsForm").attr("data-controls-url");  // get the url of the view
-      var catalogId = $(this).val();  // get the selected catalog ID from the HTML input
+      var profileId = $(this).val();  // get the selected profile ID from the HTML input
 
       $.ajax({                       // initialize an AJAX request
         url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-controls/)
         data: {
-          'catalog': catalogId       // add the catalog id to the GET parameters
+          'profile': profileId       // add the profile id to the GET parameters
         },
         success: function (data) {   // `data` is the return of the `load-controls` view function
           $("#id_controls").html(data);  // replace the contents of the controls input with the data that came from the server
