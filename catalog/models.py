@@ -166,20 +166,20 @@ class parts(PrimitiveModel):
         )
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0,guidance=True,links=True):
         html_str = ""
         if self.name in ["item", "statement"]:
             if len(self.props.filter(name="label")) > 0:
                 html_str += self.props.get(name="label").value + " "
             html_str += self.prose + "<br>\n"
-        if self.name == "guidance":
+        if self.name == "guidance" and guidance:
             html_str = "<h5>Guidance</h5>"
             html_str += "<p>" + self.prose + "</p>"
         if len(self.sub_parts.all()) > 0:
             indent += 2
             for p in self.sub_parts.all():
-                html_str += "&nbsp;" * indent + p.to_html(indent=indent)
-        if len(self.links.all()) > 0:
+                html_str += "&nbsp;" * indent + p.to_html(indent=indent,guidance=guidance,links=links)
+        if len(self.links.all()) > 0 and links:
             html_str += "<hr>"
             for link in self.links.all():
                 html_str += link.to_html() + "<br>"
@@ -263,6 +263,14 @@ class controls(PrimitiveModel):
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
         )
 
+    @property
+    def sort_id(self):
+        if self.props.filter(name='sort-id').exists():
+            sort_id = self.props.get(name='sort-id').value
+        else:
+            sort_id = self.control_id.lower()
+        return sort_id
+
     def get_all_parts(self):
         part_list = []
         for part in self.parts.all():
@@ -309,6 +317,22 @@ class controls(PrimitiveModel):
         if self.control_enhancements is not None:
             for i in self.control_enhancements.all():
                 html_str += i.to_html()
+        return html_str
+
+    def to_html_short(self):
+        html_str = "<a id=" + self.control_id + ">"
+        html_str += "<h4>"
+        html_str += self.control_id.upper() + " - "
+        html_str += self.title
+        html_str += " (" + self.control_class + ")"
+        html_str += "</h4>"
+        if self.parts is not None:
+            for i in self.parts.all():
+                html_str += i.to_html(guidance=False,links=False)
+        if self.params is not None:
+            for i in self.params.all():
+                str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
+                html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select, i.label, i.param_id) + '</i>)')
         return html_str
 
     def to_html_form(self):

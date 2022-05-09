@@ -205,13 +205,20 @@ class PrimitiveModel(models.Model):
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
+                        logger.info(f.name + " is a foreign key. Creating child object...")
                         child = f.related_model()
                         child = child.import_oscal(oscal_data[f.name])
                         self.__setattr__(f.name, child)
+                        logger.info("Created new " + f.name + " with id " + str(child.id))
                     else:
                         field = f.name
                         value = oscal_data[f.name]
-                        self.__setattr__(field, value)
+                        if type(value) is str:
+                            logger.info("Setting " + field + " to " + value)
+                            self.__setattr__(field, value)
+                        else:
+                            logger.warning(field + " value is a " + str(type(value)))
+                        logger.info("Done")
         elif type(oscal_data) is str:
             logger.info("Handling string...")
             # maybe the model has just one field?
@@ -222,54 +229,64 @@ class PrimitiveModel(models.Model):
                     field = field_list[0]
                     value = oscal_data
                     self.__setattr__(field,value)
-            elif "uuid" in field_list:
-                uuid_obj = False
-                try:
-                    uuid_obj = uuid.UUID(oscal_data, version=4)
-                except ValueError:
-                    logger.info(oscal_data + " is not a valid uuid")
-                if uuid_obj:
-                    if opts.model.objects.filter(uuid=uuid_obj).exists:
-                        logger.info("Found a " + opts.model_name + " with uuid " + oscal_data)
-                    else:
-                        logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
-                        logger.info("Creating a new " + opts.model_name + " with uuid " + oscal_data)
-                        field = 'uuid'
-                        value = uuid_obj
-                        self.__setattr__(field, value)
+                else:
+                    uuid_obj = False
+                    try:
+                        uuid_obj = uuid.UUID(oscal_data, version=4)
+                    except ValueError:
+                        logger.info(oscal_data + " is not a valid uuid")
+                    if uuid_obj:
+                        if opts.model.objects.filter(uuid=uuid_obj).exists:
+                            logger.info("Found a " + opts.model_name + " with uuid " + oscal_data)
+                        else:
+                            logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
+                            logger.info("Creating a new " + opts.model_name + " with uuid " + oscal_data)
+                            field = 'uuid'
+                            value = uuid_obj
+                            self.__setattr__(field, value)
             else:
                 logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
         else:
             logger.error("oscal_data is not a dictionary, string, or list.  oscal_data:")
             logger.error(oscal_data)
         self.save()
-        # Now we handle the many_to_many fields
+        logger.info('Handling the many_to_many fields')
         field_list = list(opts.many_to_many)
+        logger.info("field_list = " + ', '.join(field_list_str))
         if type(oscal_data) is dict:
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
+                        logger.info("Creating child object for field " + f.name)
                         child = f.related_model()
                         child = child.import_oscal(oscal_data[f.name])
                         self.oscal_import_save_m2m(child, f, opts)
+                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name )
                     elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                         for item in oscal_data[f.name]:
+                            logger.info("Creating child object for field " + f.name)
                             child = f.related_model()
                             child = child.import_oscal(item)
                             self.oscal_import_save_m2m(child, f, opts)
+                            logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     elif type(oscal_data[f.name]) is str:
+                        logger.info("Creating child object for field " + f.name)
                         child = f.related_model()
                         child = child.import_oscal(oscal_data)
                         self.oscal_import_save_m2m(child, f, opts)
+                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     else:
                         child = None
                     self.save()
                 elif type(oscal_data) is str:
+                    logger.info("Creating child object for field " + f.name)
                     field = f.name
                     value = oscal_data
                     self.__setattr__(field, value)
                     self.save()
+                    logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
         self.save()
+        logger.info("Completed import for " + opts.model_name)
         return self
 
     def oscal_import_save_m2m(self, child, f, opts):

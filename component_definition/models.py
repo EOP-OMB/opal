@@ -138,6 +138,19 @@ class components(BasicModel):
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
 
+    def to_html(self):
+        html_str = ""
+        html_str += "<h1>" + self.title + "</h1>"
+        html_str += "<div>%s</div>" % self.description
+        html_str += "<div>Purpose: %s</div>" % self.purpose
+        html_str += "<div>Type: %s</div>" % self.type
+        html_str += "<h2>Implemented Controls</h2>"
+        for imp in self.by_components_set.all():
+            html_str += "<div>%s</div>" % imp.implemented_requirements_set.first().control_id.to_html_short()
+            html_str += "<div><h4>How is the control implemented?</h4></div>"
+            html_str += "<div>%s</div>" % imp.description
+        return html_str
+
 
 class implemented_requirements(BasicModel):
     """
