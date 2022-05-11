@@ -13,4 +13,5 @@
 /docs/k8/secrets.yaml
 /opal/.env
 */~$*
+pytest.ini
 

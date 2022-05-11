@@ -34,6 +34,8 @@ if str(BASE_DIR) + "/opal/.env":
 default_secret_key = secrets.token_urlsafe()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
+# set SSL active to True if you are using https
+SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -77,10 +79,15 @@ SAML_FOLDER = os.path.join(BASE_DIR, os.getenv("SAML_FOLDER", default="saml"))
 # You don't need to quote anything or add [] yourself.
 if env.__contains__("ALLOWED_HOSTS"):
     ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
-    CSRF_TRUSTED_ORIGINS = env("ALLOWED_HOSTS").split(',')
+    CSRF_TRUSTED_ORIGINS = []
+    if SSL_ACTIVE:
+        for host in ALLOWED_HOSTS:
+            CSRF_TRUSTED_ORIGINS.append("https://" + host)
 else:
     ALLOWED_HOSTS = ['*']
     CSRF_TRUSTED_ORIGINS = ['https://*.localhost', 'https://*.127.0.0.1']
+
+
 
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
@@ -243,6 +250,11 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': True,
             'level': 'DEBUG'
+        },
+        'werkzeug': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
         },
     },
 }

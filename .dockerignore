@@ -1,7 +1,6 @@
 **/migrations/*
 *.sqlite3
 *.log
-/opal_deployment_config.yaml
 /.gitignore
 /.idea/
 /opal/.env
@@ -11,7 +10,11 @@
 /htmlcov/
 /.coverage
 Dockerfile
-Dockerfile.dev
 readme.md
 SECURITY.md
 license.md
+pytest.ini
+/venv
+/docs/
+/.github/
+/.pytest_cache/
