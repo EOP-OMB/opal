@@ -1,9 +1,10 @@
-from django.contrib import admin
 from django.apps import apps
+from django.contrib import admin
+
 from common.admin import CustomAdmin
 
 # other models
-models = apps.get_app_config('component_definition').get_models()
+models = apps.get_app_config('profile').get_models()
 
 for model in models:
     try:

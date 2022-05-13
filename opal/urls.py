@@ -20,13 +20,15 @@ from django.urls import include, path, re_path
 
 from common.views import index_view
 
-urlpatterns = [path('', index_view, name='home_page'), path('admin/', admin.site.urls),
+urlpatterns = [path('', index_view, name='home_page'),
+               path('admin/', admin.site.urls),
                path('catalog/', include('catalog.urls'), name='catalog'),
                path('common/', include('common.urls'), name='common'),
-               path('component/', include('component_definition.urls'), name='component'),
-               path('profiles/', include('control_profile.urls'), name='control_profile'),
+               path('component/', include('component.urls'), name='component'),
+               path('profiles/', include('profile.urls'), name='profile'),
                path('ssp/', include('ssp.urls'), name='ssp'),
                path('accounts/', include('django.contrib.auth.urls')),
+               re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
                ]
 
 from opal.settings import ENVIRONMENT, ENABLE_OIDC

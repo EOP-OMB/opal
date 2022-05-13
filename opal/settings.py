@@ -34,6 +34,7 @@ if str(BASE_DIR) + "/opal/.env":
 default_secret_key = secrets.token_urlsafe()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
+ASYNC = os.getenv("ASYNC", default=False)
 # set SSL active to True if you are using https
 SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -118,11 +119,11 @@ else:
 # These are the applications defined in opal and map to OSCAL models.
 # We track them separately here because we use this list for some functions
 # that have to cycle through all apps
-USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
+USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'django_extensions', ]
+                  'django_extensions', 'celery_progress',]
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)

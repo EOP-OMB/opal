@@ -1,7 +1,7 @@
 from django import forms
 from catalog.models import controls, parts
-from control_profile.models import profile
-from component_definition.models import components, implementation_status_choices, by_components
+from profile.models import profile
+from component.models import components, implementation_status_choices, by_components
 from common.models import links, roles
 
 

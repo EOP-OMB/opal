@@ -22,7 +22,7 @@ def import_statements():
     """
     Imports a set of control statements exported from opal_v1
     """
-    from component_definition.models import by_components, statements, implemented_requirements, components
+    from component.models import by_components, statements, implemented_requirements, components
     from catalog.models import controls, catalogs
     from real_data.controls_dict import ctr_list
 

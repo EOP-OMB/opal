@@ -1,14 +1,20 @@
 import json
 import requests
-from opal.settings import HTTP_PROXY, HTTPS_PROXY
+from django.http import HttpResponse, HttpResponseRedirect
+
+from django.conf import settings
+#from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
 from django.shortcuts import redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from celery import shared_task
+from celery_progress.backend import ProgressRecorder
+import time
 
 from catalog.models import *
-from component_definition.models import components
-from control_profile.models import imports, profile
+from component.models import components
+from profile.models import imports, profile
 
 
 # Create your views here.
@@ -47,51 +53,53 @@ class control_detail_view(DetailView):
     template_name = "generic_detail.html"
 
 
+@shared_task(bind=True)
+def import_catalog_task(self, item, host):
+    proxies = {}
+    if settings.HTTP_PROXY:
+        proxies['http'] = settings.HTTP_PROXY
+    if settings.HTTPS_PROXY:
+        proxies['https'] = settings.HTTPS_PROXY
+
+    catalog_url = item["link"]
+    f = requests.get(catalog_url, proxies=proxies)
+    catalog_json = json.loads(f.text)
+    catalog_dict = catalog_json["catalog"]
+    new_catalog = catalogs()
+    new_catalog.import_oscal(catalog_dict)
+    new_catalog.save()
+    # create a new profile for the imported catalog
+    new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
+    new_profile = profile.objects.create(
+        metadata=new_metadata
+        )
+    new_profile.save()
+    url = "https://" + host + new_catalog.get_permalink()
+    new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
+    new_profile.save()
+    # create components for any groups in the catalog
+    for group in new_catalog.groups.all():
+        new_component = components.objects.get_or_create(
+            type="policy", title=group.title + " Policy",
+            description="This Component Policy was automatically created durring the import of " + new_metadata.title,
+            purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
+            status="under-development"
+            )
+    return 'catalog import complete'
+
 def import_catalog_view(request, catalog_link):
     """
     Imports a pre-defined set of catalogs
     """
     from common.views import available_catalog_list
-
-    proxies = {}
-    if HTTP_PROXY:
-        proxies['http'] = HTTP_PROXY
-    if HTTPS_PROXY:
-        proxies['https'] = HTTPS_PROXY
-
+    host = request.get_host()
     for item in available_catalog_list:
         if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
-            catalog_url = item["link"]
-            f = requests.get(catalog_url, proxies=proxies)
-            catalog_json = json.loads(f.text)
-            catalog_dict = catalog_json["catalog"]
-            new_catalog = catalogs()
-            new_catalog.import_oscal(catalog_dict)
-            new_catalog.save()
-
-            # create a new profile for the imported catalog
-            new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-            new_profile = profile.objects.create(
-                metadata=new_metadata
-                )
-            new_profile.save()
-            url = "https://" + request.get_host() + new_catalog.get_permalink()
-            new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
-            new_profile.save()
-
-            # create components for any groups in the catalog
-            for group in new_catalog.groups.all():
-                new_component = components.objects.get_or_create(
-                    type="policy", title=group.title + " Policy",
-                    description="This Component Policy was automatically created durring the import of " + new_metadata.title,
-                    purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
-                    status="under-development"
-                    )
-
-            context = {
-                'msg': new_catalog.metadata.title + " imported from " + catalog_url
-                }  # return render(request, "index.html", context)
-    return redirect('home_page')
+            if settings.ASYNC:
+                import_catalog_task.delay(item, host)
+            else:
+                import_catalog_task(item,host)
+    return HttpResponseRedirect(reverse('home_page'))
 
 
 def load_controls(request):
@@ -106,12 +114,12 @@ def load_controls(request):
 def load_statements(request):
     logger = logging.getLogger('django')
     control_id = request.GET.get('control')
-    statement_list = get_statments(control_id)
+    statement_list = get_statements(control_id)
 
     return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
 
 
-def get_statments(control_id):
+def get_statements(control_id):
     selected_control = controls.objects.get(pk=control_id)
     statement_list = []
     for stmt in selected_control.get_all_parts():

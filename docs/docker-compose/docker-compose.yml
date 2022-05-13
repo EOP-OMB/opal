@@ -14,13 +14,20 @@ services:
   broker:
     image: rabbitmq
     ports:
-      - "5672:5672"
+      - "15672:15672"
   web:
     build: ../../
     user: root
+    restart: always
     command: sh -c "python manage.py makemigrations --noinput && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
+    volumes:
+      - ../../catalog:/usr/src/app/catalog
+      - ../../common:/usr/src/app/common
+      - ../../component:/usr/src/app/component
+      - ../../profile:/usr/src/app/profile
+      - ../../ssp:/usr/src/app/ssp
     environment:
       - OPAL_SECRET_KEY='20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE'
       - DEBUG=True
