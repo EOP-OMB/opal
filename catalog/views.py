@@ -3,12 +3,12 @@ import requests
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.conf import settings
-#from opal.settings import HTTP_PROXY, HTTPS_PROXY
+# from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
 from django.shortcuts import redirect, render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from celery import shared_task
+from celery import shared_task, Celery
 from celery_progress.backend import ProgressRecorder
 import time
 
@@ -53,7 +53,10 @@ class control_detail_view(DetailView):
     template_name = "generic_detail.html"
 
 
-@shared_task(bind=True)
+app = Celery('tasks', broker=settings.BROKER)
+
+
+@app.task(bind=True)
 def import_catalog_task(self, item, host):
     proxies = {}
     if settings.HTTP_PROXY:
@@ -87,6 +90,7 @@ def import_catalog_task(self, item, host):
             )
     return 'catalog import complete'
 
+
 def import_catalog_view(request, catalog_link):
     """
     Imports a pre-defined set of catalogs
@@ -98,7 +102,7 @@ def import_catalog_view(request, catalog_link):
             if settings.ASYNC:
                 import_catalog_task.delay(item, host)
             else:
-                import_catalog_task(item,host)
+                import_catalog_task(item, host)
     return HttpResponseRedirect(reverse('home_page'))
 
 

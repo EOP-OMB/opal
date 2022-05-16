@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    image: postgres
+    build: ../postgres
     ports:
       - "5432:5432"
     volumes:
@@ -14,7 +14,7 @@ services:
   broker:
     image: rabbitmq
     ports:
-      - "15672:15672"
+      - "5672:5672"
   web:
     build: ../../
     user: root
@@ -23,6 +23,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
+      - ../../opal:/usr/src/app/opal
       - ../../catalog:/usr/src/app/catalog
       - ../../common:/usr/src/app/common
       - ../../component:/usr/src/app/component
@@ -31,7 +32,7 @@ services:
     environment:
       - OPAL_SECRET_KEY='20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE'
       - DEBUG=True
-      - LOG_LEVEL=DEBUG
+      - LOG_LEVEL=INFO
       - DATABASE=postgres
       - DB_NAME=opal
       - DB_USER=opal
@@ -39,5 +40,7 @@ services:
       - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
       - ALLOWED_HOSTS=127.0.0.1,localhost
+      - ASYNC=True
+      - BROKER=pyamqp://broker:5672//
     depends_on:
       - db

@@ -35,6 +35,7 @@ default_secret_key = secrets.token_urlsafe()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 ASYNC = os.getenv("ASYNC", default=False)
+BROKER = os.getenv("BROKER", default='')
 # set SSL active to True if you are using https
 SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -232,14 +233,14 @@ LOGGING = {
     # Handlers #############################################################
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
             'filename': 'opal-debug.log',
             'formatter': 'verbose'
         },
         'console': {
             'class': 'logging.StreamHandler',
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'formatter': 'verbose'
         },
     },
