@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 psql -U postgres <<-EOSQL
     CREATE USER opal;
