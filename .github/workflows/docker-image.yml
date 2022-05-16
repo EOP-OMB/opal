@@ -24,7 +24,7 @@ jobs:
         # Your secrets.GITHUB_TOKEN
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # Image name, e.g. my-user-name/my-repo
-        image_name: eop-omb/opal
+        image_name: eop-omb/opal:$(date +%s)
         # A path to the Dockerfile (if it's not in the repository's root directory)
         # dockerfile: # optional, default is ./Dockerfile
         # A path to the context in which the build will happen, see https://docs.docker.com/engine/reference/commandline/build/
