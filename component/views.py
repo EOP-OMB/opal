@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from .models import *
-from control_profile.models import profile
+from profile.models import profile
 
 
 # Create your views here.
@@ -130,7 +130,7 @@ class create_parameter_view(CreateView):
 #             "success": "Object Saved", "post_data": request.POST,
 #             "new_implemented_requirement": new_implemented_requirement.to_html()
 #             }
-#         return render(request, "component_definition/implemented_requirements_form.html", context)
+#         return render(request, "component/implemented_requirements_form.html", context)
 #     else:
 #         ctrl = controls.objects.get(pk=control_id)
 #         component_list = []
@@ -139,12 +139,12 @@ class create_parameter_view(CreateView):
 #         context = {
 #             "control": ctrl.to_html_form(), "control_id": control_id, "component_list": component_list
 #             }
-#         return render(request, "component_definition/implemented_requirements_form.html", context)
+#         return render(request, "component/implemented_requirements_form.html", context)
 
 
 from .forms import component_statement_form, select_control_statements_form
 from django.forms import formset_factory
-from catalog.views import get_statments
+from catalog.views import get_statements
 
 
 def create_component_statement(request):
@@ -179,7 +179,7 @@ def create_component_statement(request):
             initial_dict['controls'] = selected_profile.list_all_controls()
         if ctrl_id:
             initial_dict['controls'] = ctrl_id
-            statmts = get_statments(ctrl_id)
+            statmts = get_statements(ctrl_id)
             for item in statmts:
                 statement_list.append((item["value"],item["display"]))
         if initial_dict != {}:
@@ -200,4 +200,4 @@ def create_component_statement(request):
         "comp_form": comp_statement_form,
         "ctrl_form": ctrl_selection_form
         }
-    return render(request, "component_definition/requirements_by_component.html", context)
+    return render(request, "component/requirements_by_component.html", context)

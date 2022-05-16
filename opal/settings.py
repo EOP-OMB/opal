@@ -34,6 +34,8 @@ if str(BASE_DIR) + "/opal/.env":
 default_secret_key = secrets.token_urlsafe()
 
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
+ASYNC = os.getenv("ASYNC", default=False)
+BROKER = os.getenv("BROKER", default='')
 # set SSL active to True if you are using https
 SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -66,6 +68,7 @@ OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
 SAML_SETTINGS_JSON = os.getenv("SAML_SETTINGS_JSON", default='saml_settings_template.json')
+SAML_CSRF_TRUSTED_ORIGINS = os.getenv("SAML_CSRF_TRUSTED_ORIGINS", default="")
 SAML_TECHNICAL_POC = os.getenv("SAML_TECHNICAL_POC", default=False)
 SAML_TECHNICAL_POC_EMAIL = os.getenv("SAML_TECHNICAL_POC_EMAIL", default=False)
 SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
@@ -77,15 +80,19 @@ SAML_FOLDER = os.path.join(BASE_DIR, os.getenv("SAML_FOLDER", default="saml"))
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
+if SSL_ACTIVE:
+    protocol = "https://"
+else:
+    protocol = "http://"
+
 if env.__contains__("ALLOWED_HOSTS"):
     ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
     CSRF_TRUSTED_ORIGINS = []
-    if SSL_ACTIVE:
-        for host in ALLOWED_HOSTS:
-            CSRF_TRUSTED_ORIGINS.append("https://" + host)
+    for host in ALLOWED_HOSTS:
+        CSRF_TRUSTED_ORIGINS.append(protocol + host)
 else:
     ALLOWED_HOSTS = ['*']
-    CSRF_TRUSTED_ORIGINS = ['https://*.localhost', 'https://*.127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = [protocol + '*.localhost', protocol + '*.127.0.0.1']
 
 
 
@@ -113,11 +120,11 @@ else:
 # These are the applications defined in opal and map to OSCAL models.
 # We track them separately here because we use this list for some functions
 # that have to cycle through all apps
-USER_APPS = ['common', 'catalog', 'control_profile', 'component_definition', 'ssp', ]
+USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'django_extensions', ]
+                  'django_extensions', 'celery_progress',]
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
@@ -138,7 +145,9 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
 ROOT_URLCONF = 'opal.urls'
 
 TEMPLATES = [{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates', 'DIRS': [BASE_DIR / 'templates'], 'APP_DIRS': True,
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [BASE_DIR / 'templates'],
+    'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
@@ -179,7 +188,9 @@ if ENABLE_OIDC:
     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
 if ENABLE_SAML:
-    CSRF_TRUSTED_ORIGINS = ['https://cs4p-dev.onelogin.com']
+    saml_csrf_trusted_origins_list = SAML_CSRF_TRUSTED_ORIGINS.split(',')
+    for site in saml_csrf_trusted_origins_list:
+        CSRF_TRUSTED_ORIGINS.append(protocol + site)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -222,14 +233,14 @@ LOGGING = {
     # Handlers #############################################################
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
             'filename': 'opal-debug.log',
             'formatter': 'verbose'
         },
         'console': {
             'class': 'logging.StreamHandler',
-            'level': 'DEBUG',
+            'level': LOG_LEVEL,
             'formatter': 'verbose'
         },
     },

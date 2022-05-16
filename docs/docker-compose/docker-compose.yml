@@ -2,25 +2,37 @@ version: "3.9"
 
 services:
   db:
-    image: postgres
+    build: ../postgres
+    ports:
+      - "5432:5432"
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=opal
       - POSTGRES_USER=opal
       - POSTGRES_PASSWORD=use_a_secure_password_here
+  broker:
+    image: rabbitmq
+    ports:
+      - "5672:5672"
   web:
     build: ../../
     user: root
-    command: sh -c "python manage.py makemigrations --noinput && python manage.py migrate --noinput && python manage.py runserver_plus 127.0.0.1:8888"
+    restart: always
+    command: sh -c "python manage.py makemigrations --noinput && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     ports:
-      - "8888:8888"
-#    volumes:
-#      - ../../:/usr/src/app
+      - "8000:8000"
+    volumes:
+      - ../../opal:/usr/src/app/opal
+      - ../../catalog:/usr/src/app/catalog
+      - ../../common:/usr/src/app/common
+      - ../../component:/usr/src/app/component
+      - ../../profile:/usr/src/app/profile
+      - ../../ssp:/usr/src/app/ssp
     environment:
       - OPAL_SECRET_KEY='20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE'
       - DEBUG=True
-      - LOG_LEVEL=DEBUG
+      - LOG_LEVEL=INFO
       - DATABASE=postgres
       - DB_NAME=opal
       - DB_USER=opal
@@ -28,5 +40,7 @@ services:
       - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
       - ALLOWED_HOSTS=127.0.0.1,localhost
+      - ASYNC=True
+      - BROKER=pyamqp://broker:5672//
     depends_on:
       - db

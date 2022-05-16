@@ -5,8 +5,6 @@ Provides a simple web application for managing System Security Plans and related
 
 The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
 
-The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
-
 1. Python >=3.8
 2. apache
 3. postgres client if using a postgres database

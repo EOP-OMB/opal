@@ -16,24 +16,30 @@ RUN apt-get update && apt-get upgrade -y\
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# Create Service account
+RUN useradd -r -u 1001 opal
+# copy all the files to the container
+COPY . /usr/src/app/
+# set ownership to service account and execute bit for statup script
+RUN chown -R opal:opal .
+RUN chmod u+x startup.sh
+
+FROM stage1 as stage2
+# run as an unprivileged user
+USER opal
+
+# create virtual environment
+RUN python -m venv venv
+ENV PATH="/usr/src/app/venv/bin:$PATH"
 
 # install Python requirements
-COPY requirements.txt /usr/src/app/
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir mod-wsgi
 # To include support for postgres
 RUN pip install --no-cache-dir psycopg2
 
-# Create Service account
-RUN useradd -r -u 1001 opal
-
-# copy all the files to the container
-COPY . /usr/src/app/
-RUN chown -R opal:opal .
-RUN chmod u+x startup.sh
-
-FROM stage1
+FROM stage2
 # run as an unprivileged user
 USER opal
 

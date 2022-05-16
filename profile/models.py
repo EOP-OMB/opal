@@ -118,7 +118,7 @@ class profile(BasicModel):
         return self.metadata.title
 
     def get_absolute_url(self):
-        return reverse('control_profile:profile_detail_view', kwargs={'pk': self.pk})
+        return reverse('profile:profile_detail_view', kwargs={'pk': self.pk})
 
     def list_all_controls(self):
         control_list = []

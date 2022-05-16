@@ -1,5 +1,5 @@
 from catalog.models import controls
-from component_definition.models import components, responsible_roles, control_implementations, parameters
+from component.models import components, responsible_roles, control_implementations, parameters
 from common.models import *
 
 
