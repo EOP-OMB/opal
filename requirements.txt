@@ -6,6 +6,9 @@ coverage
 Markdown==3.3.7
 requests
 xmltodict==0.13.0
+celery
+celery_progress
+pyrabbit
 
 # SAML Support
 python3-saml

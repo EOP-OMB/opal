@@ -2,7 +2,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 
-from control_profile.models import *
+from profile.models import *
 
 
 # Create your views here.

@@ -109,6 +109,7 @@ class PrimitiveModel(models.Model):
         return data
 
     def to_html(self):
+        logger = logging.getLogger('django')
         opts = self._meta
         # list of some excluded fields
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
@@ -475,7 +476,7 @@ class links(BasicModel):
             if self.rel == "reference":
                 obj = search_for_uuid(self.href[1:])
                 if obj is not None:
-                    html_str = obj.to_html
+                    html_str = obj.to_html()
                 else:
                     html_str = "<!-- Could not find an object matching uuid " + self.href[1:] + " in the database -->"
             else:
