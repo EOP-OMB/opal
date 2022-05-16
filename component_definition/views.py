@@ -9,6 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from .models import *
+from control_profile.models import profile
 
 
 # Create your views here.
@@ -150,38 +151,44 @@ def create_component_statement(request):
     """
     Create a statement associated with a component that addresses one or more Control requirements
     """
-    # control_selection_formset = formset_factory(select_control_statements_form)
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        comp_form = component_statement_form(request.POST)
-        ctrl_form = select_control_statements_form(request.POST)
-        # check whether it's valid:
-        if comp_form.is_valid():
-            comp_form.save()
-        if ctrl_form.is_valid():
-            stmt_list = ctrl_form.statements.to_python()
-            for stmt in stmt_list:
-                #create link between stmt and impliemnted requirement
-                pass
+        profile_id = request.POST['profile']
+        new_by_comp = by_components(component_uuid_id=request.POST['component_uuid'],description=request.POST['description'],implementation_status=request.POST['implementation_status'],control_uuid_id=request.POST['control'])
+        new_by_comp.save()
+        if type(request.POST['statements']) is list:
+            for stmt in request.POST['statements']:
+                new_stmt = statements()
+                new_stmt.save()
+                new_stmt.statement_id.add(stmt)
+                new_stmt.by_components.add(new_by_comp.id)
+        else:
+            new_stmt = statements()
+            new_stmt.save()
+            new_stmt.statement_id.add(request.POST['statements'])
+            new_stmt.by_components.add(new_by_comp.id)
 
-
-        context = {
-            "comp_form": comp_form,
-            "ctrl_form": ctrl_form
-            }
-
-        return HttpResponseRedirect(reverse('control_profile:profile_detail_view'))
+        return HttpResponseRedirect(reverse('control_profile:profile_detail_view', kwargs={'pk': profile_id}))
     else:
+        profile_id = request.GET.get('profile_id',default=None)
         ctrl_id = request.GET.get('ctrl_id', default=None)
+        initial_dict = {}
+        statement_list = []
+        if profile_id:
+            initial_dict['profile'] = profile_id
+            selected_profile = profile.objects.get(pk=profile_id)
+            initial_dict['controls'] = selected_profile.list_all_controls()
         if ctrl_id:
-            statement_list = []
+            initial_dict['controls'] = ctrl_id
             statmts = get_statments(ctrl_id)
             for item in statmts:
                 statement_list.append((item["value"],item["display"]))
-            ctrl_selection_form = select_control_statements_form(initial={'controls': ctrl_id})
-            ctrl_selection_form.fields['statements'].choices = statement_list
+        if initial_dict != {}:
+            ctrl_selection_form = select_control_statements_form(initial=initial_dict)
+            if statement_list:
+                ctrl_selection_form.fields['statements'].choices = statement_list
         else:
             ctrl_selection_form = select_control_statements_form()
+
 
         comp_id = request.GET.get('comp_id', default=None)
         if comp_id:

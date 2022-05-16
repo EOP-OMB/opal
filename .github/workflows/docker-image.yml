@@ -16,3 +16,20 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag opal:$(date +%s)
+    - name: push-to-ghcr
+      # You may pin to the exact commit or the version.
+      # uses: macbre/push-to-ghcr@d45c4b8f5a72d7fe21f6b832c42d05c29356c840
+      uses: macbre/push-to-ghcr@v8
+      with:
+        # Your secrets.GITHUB_TOKEN
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Image name, e.g. my-user-name/my-repo
+        image_name: eop-omb/opal
+        # A path to the Dockerfile (if it's not in the repository's root directory)
+        # dockerfile: # optional, default is ./Dockerfile
+        # A path to the context in which the build will happen, see https://docs.docker.com/engine/reference/commandline/build/
+        # context: # optional, default is .
+        # Docker repository to push an image to, defaults to ghcr.io
+        # repository: ghcr.io
+        # Your docker.io token created via https://hub.docker.com/settings/security
+        # docker_io_token: # optional

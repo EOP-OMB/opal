@@ -120,6 +120,19 @@ class profile(BasicModel):
     def get_absolute_url(self):
         return reverse('control_profile:profile_detail_view', kwargs={'pk': self.pk})
 
+    def list_all_controls(self):
+        control_list = []
+        regexp = re.compile('.*/common/p/')
+        for ctrl in self.imports.all():
+            re.match(regexp, ctrl.href)
+            m = re.match(regexp, ctrl.href)
+            if m is not None:
+                obj = search_for_uuid(ctrl.href[m.end():])
+                if obj is not None:
+                    control_list.extend(obj.list_all_controls())
+        return control_list
+
+
     def to_html(self):
         html_str = self.metadata.to_html()
         regexp = re.compile('.*/common/p/')
@@ -146,7 +159,7 @@ class profile(BasicModel):
                                         html_str += "<tr>"
                                         html_str += "<th>" + ctrl.__str__() + "</th>"
                                         html_str += "<td><a href='" + reverse(
-                                            'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "'>Define</a></td>"
+                                            'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "&profile_id=" + str(self.id) + "'>Define</a></td>"
                                         html_str += "<td><a href=''>Modify</a></td>"
                                         html_str += "</tr>"
 

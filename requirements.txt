@@ -1,11 +1,11 @@
-Django
+Django==4.0.4
 django-environ
 django-bootstrap-v5
 django_extensions
 coverage
-Markdown
+Markdown==3.3.7
 requests
-xmltodict
+xmltodict==0.13.0
 
 # SAML Support
 python3-saml
@@ -16,7 +16,8 @@ python3-saml
 # POSTGRES Support
 psycopg2
 
-# test tools
+# test/debugging tools
 pytest-django
 factory_boy
 django-test-plus
+Werkzeug
