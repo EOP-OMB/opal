@@ -481,7 +481,8 @@ class groups(PrimitiveModel):
         control_enhancement_count = 0
         if self.sub_groups is not None:
             for i in self.sub_groups.all():
-                control_count += i.count_controls
+                cc, cec = i.count_controls()
+                control_count += cc
         if self.controls is not None:
             for i in self.controls.all():
                 cc, cec = i.count_controls()

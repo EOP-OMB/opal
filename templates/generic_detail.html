@@ -2,5 +2,5 @@
 {% load static %}
 {% load markdown_extras %}
 {% block content %}
-{{ context.to_html() | markdown | safe}}
+{{ context.to_html | markdown | safe}}
 {% endblock %}

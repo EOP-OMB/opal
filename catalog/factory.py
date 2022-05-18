@@ -1,68 +1,69 @@
-import factory
+from factory.django import DjangoModelFactory
+from factory import Faker
 from .models import *
 
 
-class testsFactory(factory.Factory):
+class testsFactory(DjangoModelFactory):
   class Meta:
     model = tests
 
-  expression = factory.Faker('text')
+  expression = Faker('text')
 
 
-class constraintsFactory(factory.Factory):
+class constraintsFactory(DjangoModelFactory):
   class Meta:
     model = constraints
 
 
 
-class guidelinesFactory(factory.Factory):
+class guidelinesFactory(DjangoModelFactory):
   class Meta:
     model = guidelines
 
 
 
-class paramsFactory(factory.Factory):
+class paramsFactory(DjangoModelFactory):
   class Meta:
     model = params
 
-  param_id = factory.Faker('text')
-  param_class = factory.Faker('text')
-  label = factory.Faker('text')
-  values = factory.Faker('text')
-  select = factory.Faker('text')
-  how_many = factory.Faker('text')
+  param_id = Faker('text')
+  param_class = Faker('text')
+  label = Faker('text')
+  values = Faker('text')
+  select = Faker('text')
+  how_many = Faker('text')
 
 
-class partsFactory(factory.Factory):
+class partsFactory(DjangoModelFactory):
   class Meta:
     model = parts
 
-  part_id = factory.Faker('text')
-  name = factory.Faker('text')
-  ns = factory.Faker('text')
-  part_class = factory.Faker('text')
-  title = factory.Faker('text')
+  part_id = Faker('text')
+  name = Faker('text')
+  ns = Faker('text')
+  part_class = Faker('text')
+  title = Faker('text')
 
 
-class controlsFactory(factory.Factory):
+class controlsFactory(DjangoModelFactory):
   class Meta:
     model = controls
 
-  control_id = factory.Faker('text')
-  control_class = factory.Faker('text')
-  title = factory.Faker('text')
+  control_id = Faker('text')
+  control_class = Faker('text')
+  title = Faker('text')
 
 
-class groupsFactory(factory.Factory):
+class groupsFactory(DjangoModelFactory):
   class Meta:
     model = groups
 
-  group_id = factory.Faker('text')
-  group_class = factory.Faker('text')
-  title = factory.Faker('text')
+  group_id = Faker('text')
+  group_class = Faker('text')
+  title = Faker('text')
 
 
-class catalogsFactory(factory.Factory):
+class catalogsFactory(DjangoModelFactory):
   class Meta:
     model = catalogs
 

@@ -21,6 +21,7 @@ psycopg2
 
 # test/debugging tools
 pytest-django
+pytest-cov
 factory_boy
 django-test-plus
 Werkzeug
