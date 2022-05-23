@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y\
   # To include support for postgres
   && apt-get install -y --no-install-recommends python-pip python-dev libpq-dev postgresql-client postgresql-contrib \
   # To include support for SAML
-  && apt-get install -y libxml2-dev libxmlsec1-dev libxmlsec1-openssl \
+  && apt-get install -y libxmlsec1-dev libxmlsec1-openssl \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
