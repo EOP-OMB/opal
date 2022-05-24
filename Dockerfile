@@ -33,7 +33,7 @@ RUN python -m venv venv
 ENV PATH="/usr/src/app/venv/bin:$PATH"
 
 # install Python requirements
-RUN pip install --upgrade pip
+# RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir mod-wsgi
 # To include support for postgres
@@ -47,3 +47,4 @@ USER opal
 EXPOSE 8000
 
 CMD ./startup.sh
+

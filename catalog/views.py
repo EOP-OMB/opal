@@ -1,20 +1,19 @@
 import json
+
 import requests
-from django.http import HttpResponse, HttpResponseRedirect
-
+from celery import Celery
 from django.conf import settings
-# from opal.settings import HTTP_PROXY, HTTPS_PROXY
-
-from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from celery import shared_task, Celery
-from celery_progress.backend import ProgressRecorder
-import time
 
 from catalog.models import *
 from component.models import components
 from profile.models import imports, profile
+
+
+# from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
 
 # Create your views here.

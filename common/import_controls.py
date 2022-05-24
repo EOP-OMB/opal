@@ -1,5 +1,13 @@
-from datetime import datetime
 import logging
+from datetime import datetime
+from os import path
+
+from django.conf import settings
+
+from catalog.models import controls
+from component.models import by_components, implemented_requirements, components
+from real_data.controls_dict import ctr_list
+
 # create logger
 logger = logging.getLogger('console_log')
 logger.setLevel(logging.DEBUG)
@@ -22,10 +30,6 @@ def import_statements():
     """
     Imports a set of control statements exported from opal_v1
     """
-    from component.models import by_components, statements, implemented_requirements, components
-    from catalog.models import controls, catalogs
-    from real_data.controls_dict import ctr_list
-
     skip_list = []
 
     new_component = components.objects.create(type="this-system",title="Imported Control Set " + datetime.now().isoformat(),purpose="Import",status="other")
@@ -34,8 +38,8 @@ def import_statements():
     for ctrl in ctr_list:
         # profile_id = ctrl['profile']
         logger.info("Looking for control with sort-id " + ctrl['control_sort_id'])
-        if controls.objects.filter(props__value=ctrl['control_sort_id'], props__name='sort-id').filter(groups__catalogs__metadata__title='FedRAMP Rev 4 Moderate Baseline').exists():
-            control_uuid = controls.objects.filter(props__value=ctrl['control_sort_id'],props__name='sort-id').get(groups__catalogs__metadata__title='FedRAMP Rev 4 Moderate Baseline')
+        if controls.objects.filter(props__value=ctrl['control_sort_id'], props__name='sort-id').exists():
+            control_uuid = controls.objects.get(props__value=ctrl['control_sort_id'],props__name='sort-id')
             logger.info("Found control, id: " + str(control_uuid.id))
             desc = ""
             logger.info("Building description...")
@@ -57,4 +61,11 @@ def import_statements():
         else:
             skip_list.append(ctrl)
             logger.info("Could not find control with sort-id " + ctrl['control_sort_id'] + '. Skipping...')
+    #output_file_name = path.join(settings.BASE_DIR,"real_data","skipped_ctrls.py")
+    #output_file = open(output_file_name,'w')
+    #output_file.write("ctrl_list=" + str(skip_list))
+    #output_file.close()
     return skip_list
+
+
+

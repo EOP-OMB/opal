@@ -3,23 +3,20 @@ from .models import *
 
 
 class importsFactory(factory.Factory):
-  class Meta:
-    model = imports
+    class Meta:
+        model = imports
 
-  href = factory.Faker('text')
-  import_type = factory.Faker('text')
+    href = factory.Faker('text')
+    import_type = factory.Faker('text')
 
 
 class modifyFactory(factory.Factory):
-  class Meta:
-    model = modify
-
+    class Meta:
+        model = modify
 
 
 class profileFactory(factory.Factory):
-  class Meta:
-    model = profile
+    class Meta:
+        model = profile
 
-  merge = factory.Faker('text')
-
-
+    merge = factory.Faker('text')
