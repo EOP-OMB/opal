@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9]
+        python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v3
@@ -23,6 +23,12 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get upgrade
+        sudo apt-get install -y --no-install-recommends apache2 apache2-dev python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev
+        sudo apt-get install -y --no-install-recommends python-pip python-dev libpq-dev postgresql-client postgresql-contrib
+        sudo apt-get install -y libxmlsec1-dev libxmlsec1-openssl
+        sudo apt-get install -y --no-install-recommends apache2 apache2-dev python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev libxmlsec1-dev libxmlsec1-openssl
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Tests
