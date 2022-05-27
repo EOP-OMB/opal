@@ -1,27 +1,19 @@
-Django==4.0.4
+Django
 django-environ
 django-bootstrap-v5
-django_extensions
-coverage
-Markdown==3.3.7
-requests
-xmltodict==0.13.0
+# django_extensions
+# coverage
+# Markdown==3.3.7
+# requests
+xmltodict
 celery
 celery_progress
-pyrabbit
-
-# SAML Support
-python3-saml
-
-# OIDC Support
-# mozilla-django-oidc
-
 # POSTGRES Support
 psycopg2
-
-# test/debugging tools
-pytest-django
-pytest-cov
-factory_boy
-django-test-plus
-Werkzeug
+pyrabbit
+#
+# # SAML Support
+# python3-saml
+#
+# # OIDC Support
+# # mozilla-django-oidc

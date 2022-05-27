@@ -124,13 +124,16 @@ USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'django_extensions', 'celery_progress',]
+                  'celery_progress',]
+
+DEV_APPS = ['django_extensions',]
+# coverage
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
 
 if ENVIRONMENT == "development":
-    INSTALLED_APPS.extend(['coverage', ])
+    INSTALLED_APPS.extend(DEV_APPS)
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',

@@ -1,8 +1,8 @@
 import json
-
-import requests
+import urllib.request
 from celery import Celery
 from django.conf import settings
+from django.contrib.sites import requests
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
@@ -64,8 +64,9 @@ def import_catalog_task(self, item, host):
         proxies['https'] = settings.HTTPS_PROXY
 
     catalog_url = item["link"]
-    f = requests.get(catalog_url, proxies=proxies)
-    catalog_json = json.loads(f.text)
+    urllib.request.ProxyHandler()
+    f = urllib.request.urlopen(catalog_url)
+    catalog_json = json.loads(f.read())
     catalog_dict = catalog_json["catalog"]
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)

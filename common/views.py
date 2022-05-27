@@ -1,20 +1,12 @@
-import requests
 import json
 import os
 import os.path
 import urllib
-import xmltodict
 
 from django.apps import apps
 from django.conf import settings
-from django.http import (HttpResponse, HttpResponseRedirect, HttpResponseServerError)
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from onelogin.saml2.auth import OneLogin_Saml2_Auth
-from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
-from onelogin.saml2.settings import OneLogin_Saml2_Settings
-from onelogin.saml2.utils import OneLogin_Saml2_Utils
-
 from catalog.models import *
 from opal.settings import USER_APPS
 from ssp.models import *
@@ -23,72 +15,6 @@ from .functions import search_for_uuid, convert_xml_to_json
 # Create your views here.
 
 logger = logging.getLogger('django')
-
-# Override the method in OneLogin_Saml2_Auth to disable compresion
-from onelogin.saml2.authn_request import OneLogin_Saml2_Authn_Request
-
-
-class MAXLogin_Saml2_Authn_Request(OneLogin_Saml2_Authn_Request):
-    def get_request(self, deflate=False):
-        """
-        Returns unsigned AuthnRequest.
-        :param deflate: It makes the deflate process optional
-        :type: bool
-        :return: AuthnRequest maybe deflated and base64 encoded
-        :rtype: str object
-        """
-        logger.info("Checkin to see if compresion is required...")
-        if deflate:
-            logger.info("compresion required")
-            request = OneLogin_Saml2_Utils.deflate_and_base64_encode(self._authn_request)
-        else:
-            logger.info("nope, it isn't")
-            request = OneLogin_Saml2_Utils.b64encode(self._authn_request)
-        return request
-
-
-class MaxLogin_SAML2_Auth(OneLogin_Saml2_Auth):
-    authn_request_class = MAXLogin_Saml2_Authn_Request
-
-    def login(self,
-              return_to=None,
-              force_authn=False,
-              is_passive=False,
-              set_nameid_policy=True,
-              name_id_value_req=None):
-        """
-        Initiates the SSO process.
-        :param return_to: Optional argument. The target URL the user should be redirected to after login.
-        :type return_to: string
-        :param force_authn: Optional argument. When true the AuthNRequest will set the ForceAuthn='true'.
-        :type force_authn: bool
-        :param is_passive: Optional argument. When true the AuthNRequest will set the Ispassive='true'.
-        :type is_passive: bool
-        :param set_nameid_policy: Optional argument. When true the AuthNRequest will set a nameIdPolicy element.
-        :type set_nameid_policy: bool
-        :param name_id_value_req: Optional argument. Indicates to the IdP the subject that should be authenticated
-        :type name_id_value_req: string
-        :returns: Redirection URL
-        :rtype: string
-        """
-        authn_request = self.authn_request_class(self._settings, force_authn, is_passive, set_nameid_policy,
-                                                 name_id_value_req)
-        self._last_request = authn_request.get_xml()
-        self._last_request_id = authn_request.get_id()
-
-        saml_request = authn_request.get_request(deflate=False)
-        parameters = {'SAMLRequest': saml_request}
-
-        if return_to is not None:
-            parameters['RelayState'] = return_to
-        else:
-            parameters['RelayState'] = OneLogin_Saml2_Utils.get_self_url_no_query(self._request_data)
-
-        security = self._settings.get_security_data()
-        if security.get('authnRequestsSigned', False):
-            self.add_request_signature(parameters, security['signatureAlgorithm'])
-        requests.post(self.get_sso_url(), data=parameters)
-        return self.redirect_to(self.get_sso_url(), parameters)
 
 
 available_catalog_list = [{
@@ -134,7 +60,6 @@ available_catalog_list = [{
 }, ]
 
 
-@ensure_csrf_cookie
 def index_view(request):
     catalog_list_html_str = ""
 
@@ -154,73 +79,6 @@ def index_view(request):
     }
     # And so on for more models
     return render(request, "index.html", context)
-
-
-@ensure_csrf_cookie
-def authentication_view(request):
-    from opal.settings import ENABLE_OIDC, ENABLE_SAML
-
-    html_str = ""
-    form_list = []
-
-    if request.user.is_authenticated:
-        html_str += "<h2>Welcome %s</h2>" % request.user.get_full_name()
-    else:
-        if ENABLE_OIDC:
-            html_str += "<h2>OIDC Enabled</h2>"
-            html_str += "<a href='%s'>Login using OIDC</a>" % settings.OIDC_OP_LOGIN_REDIRECT_URL
-
-        if ENABLE_SAML:
-            html_str += "<h2>SAML Enabled</h2>"
-            html_str += "<a href='%s'>Login using SAML</a>" % reverse('common:saml_authentication')
-
-    context = {
-        "content": html_str, "title": "OPAL Authentication Options"
-    }
-
-    return render(request, "generic_template.html", context)
-
-
-from django import forms
-
-
-def saml_login_button(self,
-                      return_to=None,
-                      force_authn=False,
-                      is_passive=False,
-                      set_nameid_policy=True,
-                      name_id_value_req=None):
-    authn_request = self.authn_request_class(self._settings, force_authn, is_passive, set_nameid_policy,
-                                                 name_id_value_req)
-    self._last_request = authn_request.get_xml()
-    self._last_request_id = authn_request.get_id()
-
-    saml_request = authn_request.get_request(deflate=False)
-    parameters = {'SAMLRequest': saml_request}
-
-    if return_to is not None:
-        parameters['RelayState'] = return_to
-    else:
-        parameters['RelayState'] = OneLogin_Saml2_Utils.get_self_url_no_query(self._request_data)
-
-    security = self._settings.get_security_data()
-    if security.get('authnRequestsSigned', False):
-        self.add_request_signature(parameters, security['signatureAlgorithm'])
-
-    f = forms.Form
-    for key, value in parameters:
-        f.fields
-
-
-    return self.redirect_to(self.get_sso_url(), parameters)
-
-
-def init_saml_auth(request):
-    settings_dict = get_saml_metadata(request)
-    # saml_settings = OneLogin_Saml2_Settings(settings_dict)
-    auth = MaxLogin_SAML2_Auth(request, old_settings=settings_dict)
-    return auth
-
 
 def prepare_django_request(request):
     # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
@@ -254,179 +112,6 @@ def attrs(request):
             'paint_logout': paint_logout, 'attributes': attributes
         }
     )
-
-
-@csrf_exempt
-def saml_authentication(request):
-    req = prepare_django_request(request)
-    auth = init_saml_auth(request)
-    errors = []
-    error_reason = None
-    not_auth_warn = False
-    success_slo = False
-    attributes = False
-    paint_logout = False
-
-    if 'sso' in req['get_data']:
-        return HttpResponseRedirect(auth.login(return_to=get_host_name(request)))
-        # If AuthNRequest ID need to be stored in order to later validate it, do instead  # sso_built_url = auth.login()
-        # request.session['AuthNRequestID'] = auth.get_last_request_id()  # return HttpResponseRedirect(sso_built_url)
-    elif 'sso2' in req['get_data']:
-        return_to = OneLogin_Saml2_Utils.get_self_url(req) + reverse('common:attrs')
-        return HttpResponseRedirect(auth.login(return_to))
-    elif 'slo' in req['get_data']:
-        name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
-        if 'samlNameId' in request.session:
-            name_id = request.session['samlNameId']
-        if 'samlSessionIndex' in request.session:
-            session_index = request.session['samlSessionIndex']
-        if 'samlNameIdFormat' in request.session:
-            name_id_format = request.session['samlNameIdFormat']
-        if 'samlNameIdNameQualifier' in request.session:
-            name_id_nq = request.session['samlNameIdNameQualifier']
-        if 'samlNameIdSPNameQualifier' in request.session:
-            name_id_spnq = request.session['samlNameIdSPNameQualifier']
-
-        return HttpResponseRedirect(
-            auth.logout(
-                name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format,
-                spnq=name_id_spnq
-            )
-        )
-        # If LogoutRequest ID need to be stored in order to later validate it, do instead
-        # slo_built_url = auth.logout(name_id=name_id, session_index=session_index)
-        # request.session['LogoutRequestID'] = auth.get_last_request_id()
-        # return HttpResponseRedirect(slo_built_url)
-    elif 'acs' in req['get_data']:
-        request_id = None
-        if 'AuthNRequestID' in request.session:
-            request_id = request.session['AuthNRequestID']
-
-        auth.process_response(request_id=request_id)
-        errors = auth.get_errors()
-        not_auth_warn = not auth.is_authenticated()
-
-        if not errors:
-            if 'AuthNRequestID' in request.session:
-                del request.session['AuthNRequestID']
-            request.session['samlUserdata'] = auth.get_attributes()
-            request.session['samlNameId'] = auth.get_nameid()
-            request.session['samlNameIdFormat'] = auth.get_nameid_format()
-            request.session['samlNameIdNameQualifier'] = auth.get_nameid_nq()
-            request.session['samlNameIdSPNameQualifier'] = auth.get_nameid_spnq()
-            request.session['samlSessionIndex'] = auth.get_session_index()
-            if 'RelayState' in req['post_data'] and OneLogin_Saml2_Utils.get_self_url(req) != req['post_data'][
-                'RelayState']:
-                # To avoid 'Open Redirect' attacks, before execute the redirection confirm
-                # the value of the req['post_data']['RelayState'] is a trusted URL.
-                return HttpResponseRedirect(auth.redirect_to(req['post_data']['RelayState']))
-        elif auth.get_settings().is_debug_active():
-            error_reason = auth.get_last_error_reason()
-    elif 'sls' in req['get_data']:
-        request_id = None
-        if 'LogoutRequestID' in request.session:
-            request_id = request.session['LogoutRequestID']
-        dscb = lambda: request.session.flush()
-        url = auth.process_slo(request_id=request_id, delete_session_cb=dscb)
-        errors = auth.get_errors()
-        if len(errors) == 0:
-            if url is not None:
-                # To avoid 'Open Redirect' attacks, before execute the redirection confirm
-                # the value of the url is a trusted URL
-                return HttpResponseRedirect(url)
-            else:
-                success_slo = True
-        elif auth.get_settings().is_debug_active():
-            error_reason = auth.get_last_error_reason()
-
-    if 'samlUserdata' in request.session:
-        paint_logout = True
-        if len(request.session['samlUserdata']) > 0:
-            attributes = request.session['samlUserdata'].items()
-
-    return render(
-        request, 'saml/saml_authentication.html', {
-            'errors': errors, 'error_reason': error_reason, 'not_auth_warn': not_auth_warn, 'success_slo': success_slo,
-            'attributes': attributes, 'paint_logout': paint_logout
-        }
-    )
-
-
-def metadata(request):
-    # req = prepare_django_request(request)
-    # auth = init_saml_auth(req)
-    # saml_settings = auth.get_settings()
-
-    settings_dict = get_saml_metadata(request)
-
-    saml_settings = OneLogin_Saml2_Settings(
-        settings=settings_dict, sp_validation_only=True
-    )
-    metadata_xml = saml_settings.get_sp_metadata()
-    errors = saml_settings.validate_metadata(metadata_xml)
-
-    if len(errors) == 0:
-        resp = HttpResponse(content=metadata_xml, content_type='text/xml')
-    else:
-        resp = HttpResponseServerError(content=', '.join(errors))
-    return resp
-
-
-def get_saml_metadata(request):
-    filename = os.path.join(settings.SAML_FOLDER, settings.SAML_SETTINGS_JSON)
-    host_name = get_host_name(request)
-    with open(filename, 'r') as json_data:
-        sp_settings_dict = json.loads(json_data.read())
-    sp_settings_dict['sp']['entityId'] = host_name + '/common/saml/metadata'
-    sp_settings_dict['sp']['assertionConsumerService']['url'] = host_name + '/common/saml/?acs'
-    sp_settings_dict['sp']['singleLogoutService']['url'] = host_name + '/common/saml/?sls'
-    if settings.SAML_TECHNICAL_POC:
-        sp_settings_dict['contactPerson'] = {
-            'technical': {'givenName': settings.SAML_TECHNICAL_POC, 'emailAddress': settings.SAML_TECHNICAL_POC_EMAIL}
-        }
-    if settings.SAML_TECHNICAL_POC:
-        sp_settings_dict['contactPerson'] = {
-            'support': {'givenName': settings.SAML_SUPPORT_POC, 'emailAddress': settings.SAML_SUPPORT_POC_EMAIL}
-        }
-    sp_settings_dict['organization']['en-US']['url'] = host_name
-
-    # Add IDP sections
-    proxies = {}
-    if settings.HTTP_PROXY:
-        proxies['http'] = settings.HTTP_PROXY
-    if settings.HTTPS_PROXY:
-        proxies['https'] = settings.HTTPS_PROXY
-
-    # from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
-    metadata_parser = OneLogin_Saml2_IdPMetadataParser()
-    max_idp_metadata_dict = metadata_parser.parse_remote('https://login.max.gov/idp/shibboleth')
-    settings_dict = metadata_parser.merge_settings(sp_settings_dict, max_idp_metadata_dict)
-
-    # max_idp_metadata = requests.get('https://login.max.gov/idp/shibboleth', proxies=proxies).text
-    #
-    # import xml.etree.ElementTree as ET
-    #
-    # root = ET.fromstring(max_idp_metadata)
-    #
-    # ns = {
-    #     "": "urn:oasis:names:tc:SAML:2.0:metadata",
-    #     "ds": "http://www.w3.org/2000/09/xmldsig#",
-    #     "shibmd": "urn:mace:shibboleth:metadata:1.0",
-    #     "xsi": "http://www.w3.org/2001/XMLSchema-instance"
-    #     }
-    #
-    # settings_dict['idp'] = {
-    #     "entityId": root.attrib['entityID'],
-    #     "x509cert": root.find(".//ds:X509Certificate", ns).text
-    #     }
-    #
-    # service_list = []
-    # for e in root[0].findall("{urn:oasis:names:tc:SAML:2.0:metadata}SingleSignOnService"):
-    #     # if e.attrib['Binding'] == 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect':
-    #     service_list.append({"binding": e.attrib['Binding'], "url": e.attrib['Location']})
-    # settings_dict['idp']["singleSignOnService"] = service_list
-
-    return settings_dict
 
 
 def get_host_name(request):
@@ -465,3 +150,4 @@ def permalink(request, p_uuid):
 def error_404_view(request, exception):
     template_name = "404.html"
     context_object_name = "obj"
+    return render(request,"404.html",exception)

@@ -1,0 +1,17 @@
+#test/debuggingtools
+#django-test-plus
+#Werkzeug
+attrs
+coverage
+factory-boy
+Faker
+iniconfig
+packaging
+pluggy
+py
+pyparsing
+pytest
+pytest-cov
+pytest-django
+python-dateutil
+tomli

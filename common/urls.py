@@ -20,8 +20,4 @@ from .views import *
 app_name = 'common'
 urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
                path('db_status/', database_status_view, name='db_status'),
-               path('auth/', authentication_view, name='authentication_view'),
-               re_path(r'^saml/$', saml_authentication, name='saml_authentication'),
-               re_path(r'^saml/attrs/$', attrs, name='attrs'),
-               re_path(r'^saml/metadata/$', metadata, name='metadata'),
                ]

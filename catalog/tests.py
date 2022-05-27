@@ -11,19 +11,13 @@ from component.models import components
 from django.test import Client
 from django.urls import reverse
 
-def test_model(new_obj):
-    saved_obj = common.functions.search_for_uuid(str(new_obj.uuid), app_list=['catalog'])
-    assert saved_obj == new_obj
-    assert saved_obj.__str__() == new_obj.__str__()
-
 
 # Create your tests here.
 def test_model_tests(db):
     new_test = testsFactory()
-    test_model(new_test)
-    # saved_test = tests.objects.get(id=new_test.id)
-    # assert saved_test == new_test
-    # assert saved_test.__str__() == new_test.expression
+    saved_test = tests.objects.get(id=new_test.id)
+    assert saved_test == new_test
+    assert saved_test.__str__() == new_test.expression
 
 
 @pytest.fixture(scope='module')
@@ -88,7 +82,6 @@ def test_control_detail_view(db, load_sample_catalog):
     assert response.status_code == 200
 
 
-@pytest.mark.skip
 def test_import_catalog_view(db):
     c = Client()
     url = reverse('catalog:import_catalog_view', kwargs={'catalog_link': 'nist_sp_800_53_rev_5_moderate_baseline'})
