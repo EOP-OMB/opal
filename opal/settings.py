@@ -54,17 +54,20 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
-# OIDC settings
-ENABLE_OIDC = os.getenv("ENABLE_OIDC", default=False)
-OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
-OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
-OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", default="")
-OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", default="")
-OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", default="")
-OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", default="")
-OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
-OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
-OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
+# OIDC settings <- disabled until we re-implement OIDC
+# ENABLE_OIDC = os.getenv("ENABLE_OIDC", default=False)
+# OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
+# OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
+# OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", default="")
+# OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", default="")
+# OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", default="")
+# OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", default="")
+# OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
+# OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
+# OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
+LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="login")
+LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="logout")
+ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
 SAML_SETTINGS_JSON = os.getenv("SAML_SETTINGS_JSON", default='saml_settings_template.json')
@@ -100,6 +103,20 @@ else:
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
+ROOT_URLCONF = 'opal.urls'
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [BASE_DIR / 'templates'],
+    'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
+                               'django.contrib.auth.context_processors.auth',
+                               'django.contrib.messages.context_processors.messages', ],
+    },
+}, ]
+# DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
+# TODO: add binary_database_file storage
+
 
 CACHES = {
     'default': {
@@ -122,7 +139,7 @@ else:
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
                   'celery_progress',]
 
@@ -145,22 +162,35 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
 #               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
 # MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
 
-ROOT_URLCONF = 'opal.urls'
+# Adding support for SAML Authentication
+if ENABLE_DJANGO_AUTH:
+    INSTALLED_APPS.append('django.contrib.auth')
+    LOGIN_REDIRECT_URL='basic_auth_home'
+    LOGOUT_REDIRECT_URL='basic_auth_home'
 
-TEMPLATES = [{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [BASE_DIR / 'templates'],
-    'APP_DIRS': True,
-    'OPTIONS': {
-        'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
-                               'django.contrib.auth.context_processors.auth',
-                               'django.contrib.messages.context_processors.messages', ],
-    },
-}, ]
+# if ENABLE_OIDC: <- DIsabled untill we re-implement OIDC
+#     INSTALLED_APPS.extend(['mozilla_django_oidc', ])
+#     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
-# DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
+if ENABLE_SAML:
+    saml_csrf_trusted_origins_list = SAML_CSRF_TRUSTED_ORIGINS.split(',')
+    for site in saml_csrf_trusted_origins_list:
+        CSRF_TRUSTED_ORIGINS.append(protocol + site)
 
-WSGI_APPLICATION = 'opal.wsgi.application'
+# Password validation
+# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [{
+    'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    }, {
+    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    }, ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -185,28 +215,7 @@ else:
 
 print("using database " + DATABASES['default']['NAME'])
 
-# Adding support for SAML Authentication
-if ENABLE_OIDC:
-    INSTALLED_APPS.extend(['mozilla_django_oidc', ])
-    AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
 
-if ENABLE_SAML:
-    saml_csrf_trusted_origins_list = SAML_CSRF_TRUSTED_ORIGINS.split(',')
-    for site in saml_csrf_trusted_origins_list:
-        CSRF_TRUSTED_ORIGINS.append(protocol + site)
-
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [{
-    'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-}, {
-    'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-}, {
-    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-}, {
-    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-}, ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

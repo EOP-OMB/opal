@@ -6,7 +6,7 @@
     <div>
     {% if form_list %}
         {% for form in form_list %}
-            {% include "generic_form_helper.html" with context=form %}
+            {% include "generic_form_helper.html" with form=form %}
         {% endfor %}
     {% else %}
         {% include "generic_form_helper.html" with form=form %}

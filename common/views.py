@@ -1,12 +1,14 @@
-import json
-import os
-import os.path
+# import json
+# import os
+# import os.path
 import urllib
 
 from django.apps import apps
 from django.conf import settings
 from django.shortcuts import redirect, render
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView, LogoutView
+# from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from catalog.models import *
 from opal.settings import USER_APPS
 from ssp.models import *
@@ -16,48 +18,47 @@ from .functions import search_for_uuid, convert_xml_to_json
 
 logger = logging.getLogger('django')
 
-
 available_catalog_list = [{
     "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline",
     "name": "NIST SP-800 53 rev5 HIGH baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "36ade4b6-3e50-4899-b955-9d4a95407c38", "slug": "nist_sp_800_53_rev_5_moderate_baseline",
     "name": "NIST SP-800 53 rev5 MODERATE baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline",
     "name": "NIST SP-800 53 rev5 LOW baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline",
     "name": "NIST SP-800 53 rev5 PRIVACY baseline",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "61787e85-adaf-4951-8d16-91f6e0b331bb", "slug": "fed_ramp_rev_4_high_baseline_resolved_profile_catalog",
     "name": "FedRAMP Rev 4 HIGH Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "0f9fcab5-995f-412f-8954-49526e1cc80a", "slug": "fed_ramp_rev_4_low_baseline_resolved_profile_catalog_min",
     "name": "FedRAMP Rev 4 LOW Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "8bf9a86c-66e9-4757-830c-87c0df2fb821",
     "slug": "fed_ramp_rev_4_moderate_baseline_resolved_profile_catalog_min", "name": "FedRAMP Rev 4 MODERATE Baseline",
     "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "9a740e35-422f-48e2-baca-0b0c515997d1", "slug": "nist_sp_800_53_rev_4_low",
     "name": "Nist SP 800 53 Rev 4 LOW",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "be314319-466e-459b-b736-631bd84e3cd7", "slug": "nist_sp_800_53_rev_4_moderate",
     "name": "Nist SP 800 53 Rev 4 MODERATE",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-}, {
+    }, {
     "uuid": "8f1b188b-5315-4c4d-a95a-1917f3cd5a62", "slug": "nist_sp_800_53_rev_4_high",
     "name": "Nist SP 800 53 Rev 4 High",
     "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-}, ]
+    }, ]
 
 
 def index_view(request):
@@ -76,9 +77,11 @@ def index_view(request):
 
     context = {
         "catalog_list": catalog_list_html_str, "ssp_sample_import_link": ssp_sample_import_link
-    }
+        }
     # And so on for more models
     return render(request, "index.html", context)
+
+
 
 def prepare_django_request(request):
     # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
@@ -94,7 +97,7 @@ def prepare_django_request(request):
         # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
         # 'lowercase_urlencoding': True,
         'post_data': request.POST.copy()
-    }
+        }
     logger.info(result)
     return result
 
@@ -110,8 +113,8 @@ def attrs(request):
     return render(
         request, 'saml/attrs.html', {
             'paint_logout': paint_logout, 'attributes': attributes
-        }
-    )
+            }
+        )
 
 
 def get_host_name(request):
@@ -150,4 +153,4 @@ def permalink(request, p_uuid):
 def error_404_view(request, exception):
     template_name = "404.html"
     context_object_name = "obj"
-    return render(request,"404.html",exception)
+    return render(request, "404.html", exception)

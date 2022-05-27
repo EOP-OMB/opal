@@ -74,7 +74,7 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
 
 from django.core.handlers.wsgi import WSGIRequest
 from io import StringIO
-from django.contrib.auth.models import AnonymousUser
+# from django.contrib.auth.models import AnonymousUser
 
 
 def get_fake_request(path='/', user=None):
@@ -85,7 +85,7 @@ def get_fake_request(path='/', user=None):
             }
         )
 
-    req.user = AnonymousUser() if user is None else user
+    # req.user = AnonymousUser() if user is None else user
     return req
 
 
