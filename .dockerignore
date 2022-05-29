@@ -13,8 +13,9 @@ Dockerfile
 readme.md
 SECURITY.md
 license.md
-pytest.ini
+pytest*
 /venv
-/docs/
-/.github/
-/.pytest_cache/
+/docs
+/.github
+/.pytest_cache
+/requirements_test.txt
