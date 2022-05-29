@@ -1,12 +1,11 @@
 from django import forms
-from catalog.models import controls, parts
-from profile.models import profile
-from component.models import components, implementation_status_choices, by_components
-from common.models import links, roles
+
+from catalog.models import catalogs, controls
+from component.models import by_components
 
 
 class select_control_statements_form(forms.Form):
-    profile = forms.ModelChoiceField(queryset=profile.objects.all())
+    catalog = forms.ModelChoiceField(queryset=catalogs.objects.all())
     controls = forms.ModelChoiceField(queryset=controls.objects.all())
     statements = forms.MultipleChoiceField(
         required=False,
