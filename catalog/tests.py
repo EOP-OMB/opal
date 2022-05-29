@@ -82,27 +82,42 @@ def test_control_detail_view(db, load_sample_catalog):
     assert response.status_code == 200
 
 
+def test_load_controls_view(db, load_sample_catalog):
+    c = Client()
+    url = reverse('catalog:ajax_load_controls') + '?catalog=' + str(load_sample_catalog)
+    response = c.get(url)
+    assert response.status_code == 200
+
+def test_load_statements_view(db, load_sample_catalog):
+    c = Client()
+    cat = catalogs.objects.get(pk=load_sample_catalog)
+    ctrl_list = cat.list_all_controls()
+    ctrl = ctrl_list[0]
+    url = reverse('catalog:ajax_load_controls') + '?control=' + str(ctrl.id)
+    response = c.get(url)
+    assert response.status_code == 200
+
+# @pytest.mark.skip
 def test_import_catalog_view(db):
     c = Client()
     url = reverse('catalog:import_catalog_view', kwargs={'catalog_link': 'nist_sp_800_53_rev_5_moderate_baseline'})
     response = c.get(url)
     assert response.status_code == 302
-
-
-#     assert response.body.find()
+    assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
+    assert profile.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
 
 
 def test_load_controls(db, load_sample_catalog):
     c = Client()
-    prfl = profile.objects.first()
-    url = reverse('catalog:ajax_load_controls') + '?profile=' + str(prfl.id)
+    cat = catalogs.objects.first()
+    url = reverse('catalog:ajax_load_controls') + '?catalog=' + str(cat.id)
     response = c.get(url)
     assert response.status_code == 200
 
 
 def test_load_statements(db, load_sample_catalog):
     c = Client()
-    cat = catalogs.objects.get(pk=load_sample_catalog)
+    cat = catalogs.objects.first()
     ctrl_list = cat.list_all_controls()
     ctrl = ctrl_list[0]
     url = reverse('catalog:ajax_load_statements') + '?control=' + str(ctrl.id)
