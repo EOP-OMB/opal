@@ -1,22 +1,12 @@
-# import json
-# import os
-# import os.path
 import urllib
-
-from django.apps import apps
 from django.conf import settings
+from django.apps import apps
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView, LogoutView
-# from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from catalog.models import *
-from opal.settings import USER_APPS
 from ssp.models import *
-from .functions import search_for_uuid, convert_xml_to_json
+from .functions import search_for_uuid
 
 # Create your views here.
-
-logger = logging.getLogger('django')
 
 available_catalog_list = [{
     "uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline",
@@ -82,54 +72,9 @@ def index_view(request):
     return render(request, "index.html", context)
 
 
-
-def prepare_django_request(request):
-    # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
-    if 'HTTP_HOST' in request.META:
-        http_host = request.META['HTTP_HOST']
-    else:
-        http_host = get_host_name(request)
-    result = {
-        'https': 'on' if request.is_secure() else 'off',
-        'http_host': http_host,
-        'script_name': request.META['PATH_INFO'],
-        'get_data': request.GET.copy(),
-        # Uncomment if using ADFS as IdP, https://github.com/onelogin/python-saml/pull/144
-        # 'lowercase_urlencoding': True,
-        'post_data': request.POST.copy()
-        }
-    logger.info(result)
-    return result
-
-
-def attrs(request):
-    paint_logout = False
-    attributes = False
-
-    if 'samlUserdata' in request.session:
-        paint_logout = True
-        if len(request.session['samlUserdata']) > 0:
-            attributes = request.session['samlUserdata'].items()
-    return render(
-        request, 'saml/attrs.html', {
-            'paint_logout': paint_logout, 'attributes': attributes
-            }
-        )
-
-
-def get_host_name(request):
-    if request.is_secure():
-        host_name = "https://"
-    else:
-        host_name = "http://"
-    host_name += request.get_host()
-    logger.info("Got host: " + host_name)
-    return host_name
-
-
 def database_status_view(request):
     model_list = []
-    for a in USER_APPS:
+    for a in settings.USER_APPS:
         app_models = apps.get_app_config(a).get_models()
         for m in app_models:
             if m.objects.count() > 0:
