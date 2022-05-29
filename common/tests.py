@@ -1,11 +1,21 @@
 from django.test import TestCase
 import json
-
+from django.test import Client
+from django.urls import reverse
 from catalog.models import catalogs
 from .models import *
 from .functions import search_for_uuid
 
 # Create your tests here.
+
+def test_index_view(db):
+    c = Client()
+    url = reverse('home_page')
+    response = c.get(url)
+    assert response.status_code == 200
+
+
+
 class modelTests(TestCase):
     def setUp(self):
         self.catalog_file = "sample_data/basic-catalog.json"
