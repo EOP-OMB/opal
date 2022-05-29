@@ -18,8 +18,3 @@ class component_statement_form(forms.ModelForm):
     class Meta:
         model = by_components
         fields = ['component_uuid', 'description', 'implementation_status', 'responsible_roles']
-    # by_component = forms.ModelChoiceField(queryset=components.objects.all(), empty_label=None)
-    # description =
-    # # links = forms.ModelMultipleChoiceField(queryset=links.objects.all())
-    # status = forms.Select(choices=implementation_status_choices)
-    # responsible_roles = forms.ModelMultipleChoiceField(queryset=roles.objects.all())
