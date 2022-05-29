@@ -22,14 +22,14 @@
     <script>
 </script>
   <script>
-    $("#id_profile").change(function () {
+    $("#id_catalog").change(function () {
       var url = $("#requirementsForm").attr("data-controls-url");  // get the url of the view
-      var profileId = $(this).val();  // get the selected profile ID from the HTML input
+      var catalogId = $(this).val();  // get the selected catalog ID from the HTML input
 
       $.ajax({                       // initialize an AJAX request
         url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-controls/)
         data: {
-          'profile': profileId       // add the profile id to the GET parameters
+          'catalog': catalogId       // add the profile id to the GET parameters
         },
         success: function (data) {   // `data` is the return of the `load-controls` view function
           $("#id_controls").html(data);  // replace the contents of the controls input with the data that came from the server
