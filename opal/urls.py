@@ -39,6 +39,9 @@ if settings.ENABLE_DJANGO_AUTH:
     urlpatterns.append(path("accounts/", include("django.contrib.auth.urls")))
     urlpatterns.append(path('login', TemplateView.as_view(template_name='registration/home.html'), name='basic_auth_home'))
 
+if settings.ENABLE_SAML:
+    urlpatterns.append(path("sso/", include("sp.urls")))
+
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])
 

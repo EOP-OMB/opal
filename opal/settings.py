@@ -36,13 +36,14 @@ default_secret_key = secrets.token_urlsafe()
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 ASYNC = os.getenv("ASYNC", default=False)
 BROKER = os.getenv("BROKER", default='')
+HOST_NAME = os.getenv("HOST_NAME", default="http://localhost:8000")
 # set SSL active to True if you are using https
 SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False")
-LOG_LEVEL = os.getenv("LOG_LEVEL", default="DEBUG")
+LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
@@ -54,31 +55,12 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
-# OIDC settings <- disabled until we re-implement OIDC
-# ENABLE_OIDC = os.getenv("ENABLE_OIDC", default=False)
-# OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID", default="")
-# OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET", default="")
-# OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT", default="")
-# OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT", default="")
-# OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT", default="")
-# OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO", default="")
-# OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT", default="")
-# OIDC_OP_LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="")
-# OIDC_OP_LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="")
 LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="login")
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="logout")
 ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
-SAML_SETTINGS_JSON = os.getenv("SAML_SETTINGS_JSON", default='saml_settings_template.json')
-SAML_CSRF_TRUSTED_ORIGINS = os.getenv("SAML_CSRF_TRUSTED_ORIGINS", default="")
-SAML_TECHNICAL_POC = os.getenv("SAML_TECHNICAL_POC", default=False)
-SAML_TECHNICAL_POC_EMAIL = os.getenv("SAML_TECHNICAL_POC_EMAIL", default=False)
-SAML_SUPPORT_POC = os.getenv("SAML_SUPPORT_POC", default=False)
-SAML_SUPPORT_POC_EMAIL = os.getenv("SAML_SUPPORT_POC_EMAIL", default=False)
-SAML_CERT = os.getenv("SAML_CERT", default="")
-SAML_KEY = os.getenv("SAML_KEY", default="")
-SAML_FOLDER = os.path.join(BASE_DIR, os.getenv("SAML_FOLDER", default="saml"))
+
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -104,6 +86,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
 ROOT_URLCONF = 'opal.urls'
+
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'DIRS': [BASE_DIR / 'templates'],
@@ -157,6 +140,7 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
               'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
+
 # To enable sitewide caching
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
 #               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
@@ -168,14 +152,12 @@ if ENABLE_DJANGO_AUTH:
     LOGIN_REDIRECT_URL='basic_auth_home'
     LOGOUT_REDIRECT_URL='basic_auth_home'
 
-# if ENABLE_OIDC: <- DIsabled untill we re-implement OIDC
-#     INSTALLED_APPS.extend(['mozilla_django_oidc', ])
-#     AUTHENTICATION_BACKENDS = ('mozilla_django_oidc.auth.OIDCAuthenticationBackend',)
-
 if ENABLE_SAML:
-    saml_csrf_trusted_origins_list = SAML_CSRF_TRUSTED_ORIGINS.split(',')
-    for site in saml_csrf_trusted_origins_list:
-        CSRF_TRUSTED_ORIGINS.append(protocol + site)
+    INSTALLED_APPS.append('sp')
+    AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend']
+    if ENABLE_DJANGO_AUTH:
+        AUTHENTICATION_BACKENDS.append( 'django.contrib.auth.backends.ModelBackend')
+    LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -189,8 +171,6 @@ AUTH_PASSWORD_VALIDATORS = [{
     }, {
     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     }, ]
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -224,6 +204,8 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+from logging.handlers import RotatingFileHandler
 
 # Logging Information
 LOGGING = {
@@ -260,7 +242,7 @@ LOGGING = {
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
-        }
+        },
     },
     # Loggers ####################################################################
     'loggers': {

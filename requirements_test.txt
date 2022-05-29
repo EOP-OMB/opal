@@ -1,6 +1,7 @@
 #test/debuggingtools
 #django-test-plus
 #Werkzeug
+django_extensions
 attrs
 coverage
 factory-boy
