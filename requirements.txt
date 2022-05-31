@@ -9,7 +9,16 @@ psycopg2
 pyrabbit
 #
 # SAML Support
-django-saml-sp
+####################################################################################################
+# the django-saml-sp project is awesome.  By far the best SAML solution I ahve seen.  However,
+# the project has a few issues and may not be actively maintained. I have submitted a pull request
+# to address the most significant issues, but am simply importing the code for now.
+# check the repo from time to time for new updates and replace this code with the module when we can
+# https://github.com/imsweb/django-saml-sp
+####################################################################################################
+# django-saml-sp
+python3-saml
+cryptography
 #
 # # OIDC Support
 # # mozilla-django-oidc
