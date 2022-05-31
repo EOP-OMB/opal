@@ -1,3 +1,4 @@
+import os.path
 import urllib.parse
 
 from django.shortcuts import redirect
@@ -22,9 +23,16 @@ class ssp_detail_view(DetailView):
 
 
 def import_ssp_view(request, ssp_file):
+    logger = logging.getLogger("django")
     if ssp_file == 'ssp-example.json':
         ssp_file = 'sample_data/ssp-example.json'
-    logger = logging.getLogger("django")
+    else:
+        if not os.path.exists(ssp_file):
+            logger.error(ssp_file + " does not exist.")
+            context = {
+                'msg': ssp_file + " does not exist."
+                }
+            return redirect('common.views.error_404_view')
     logger.info("Starting SSP import process")
     ssp_json = json.load(open(ssp_file))
     ssp_dict = ssp_json["system-security-plan"]
