@@ -64,12 +64,21 @@
           </ul>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item dropdown">
             {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Logout</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="collapse-item" href="/accounts/logout">django - Logout</a></li>
+                    <li><a class="collapse-item" href="/sso/logout">saml - Logout</a></li>
+                </ul>
              {% else %}
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="collapse-item" href="/accounts/login">django - Login</a></li>
+                    <li><a class="collapse-item" href="/sso/login">saml - Login</a></li>
+                </ul>
              {% endif %}
+
         </li>
       </ul>
       <form class="d-flex">

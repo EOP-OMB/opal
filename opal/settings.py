@@ -55,12 +55,11 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
-LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="login")
-LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="logout")
+LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="/")
+LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="/")
 ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
-
 
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -79,8 +78,6 @@ else:
     ALLOWED_HOSTS = ['*']
     CSRF_TRUSTED_ORIGINS = [protocol + '*.localhost', protocol + '*.127.0.0.1']
 
-
-
 # Other Variables
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 2048
 ROOT_URLCONF = 'opal.urls'
@@ -95,8 +92,8 @@ TEMPLATES = [{
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
                                'django.contrib.auth.context_processors.auth',
                                'django.contrib.messages.context_processors.messages', ],
-    },
-}, ]
+        },
+    }, ]
 # DEFAULT_FILE_STORAGE = 'binary_database_files.storage.DatabaseStorage'
 # TODO: add binary_database_file storage
 
@@ -105,8 +102,8 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
         'LOCATION': 'unique-snowflake',
+        }
     }
-}
 
 if ENVIRONMENT == "production":
     SECURE_SSL_REDIRECT = True
@@ -124,10 +121,15 @@ USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'celery_progress',]
+                  'celery_progress', ]
 
-DEV_APPS = ['django_extensions',]
-# coverage
+# Auth apps defined separately so they can be selectively disabled in the future
+AUTH_APPS = ['django.contrib.auth', 'sp']
+INSTALLED_APPS.extend(AUTH_APPS)
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
+
+DEV_APPS = ['django_extensions', ]
 
 # Add the user defined applications to INSTALLED_APPS
 INSTALLED_APPS.extend(USER_APPS)
@@ -145,19 +147,6 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
 #               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
 # MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
-
-# Adding support for SAML Authentication
-if ENABLE_DJANGO_AUTH:
-    INSTALLED_APPS.append('django.contrib.auth')
-    LOGIN_REDIRECT_URL='basic_auth_home'
-    LOGOUT_REDIRECT_URL='basic_auth_home'
-
-if ENABLE_SAML:
-    INSTALLED_APPS.append('sp')
-    AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend']
-    if ENABLE_DJANGO_AUTH:
-        AUTHENTICATION_BACKENDS.append( 'django.contrib.auth.backends.ModelBackend')
-    LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -184,18 +173,16 @@ if DATABASE == "postgres":
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': env('DB_NAME'), 'USER': env('DB_USER'),
             'PASSWORD': env('DB_PASSWORD'), 'HOST': env('DB_HOST'), 'PORT': env('DB_PORT'),
+            }
         }
-    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_NAME),
+            }
         }
-    }
 
 print("using database " + DATABASES['default']['NAME'])
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -206,6 +193,18 @@ USE_I18N = True
 USE_TZ = True
 
 from logging.handlers import RotatingFileHandler
+
+
+class autoreloadFilter(logging.Filter):
+    """
+    This is a filter which removes autoreload.py messages
+    """
+    def filter(self, record):
+        if record.filename == 'autoreload.py':
+            return False
+        else:
+            return True
+
 
 # Logging Information
 LOGGING = {
@@ -218,48 +217,50 @@ LOGGING = {
         'verbose': {
             'format': '{levelname} : {asctime} : {filename} line {lineno} in function {funcName} : {message}',
             'style': '{',
-        },
+            },
         'simple': {
             'format': '{levelname} {message}',
             'style': '{',
+            },
         },
-    },
+    # Filters ####################################################################
+    'filters': {
+        'autoreload': {
+            '()': autoreloadFilter,
+            },
+        },
     # Handlers #############################################################
     'handlers': {
         'file': {
             'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
             'filename': 'opal-debug.log',
-            'formatter': 'verbose'
-        },
+            'formatter': 'verbose',
+            'filters': ['autoreload']
+            },
         'console': {
             'class': 'logging.StreamHandler',
             'level': LOG_LEVEL,
-            'formatter': 'verbose'
+            'formatter': 'verbose',
+            'filters': ['autoreload']
+            },
         },
-    },
-    # Filters ####################################################################
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
     # Loggers ####################################################################
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
             'propagate': True,
             'level': LOG_LEVEL
-        },
+            },
         'debug': {
             'handlers': ['console'],
             'propagate': True,
             'level': 'DEBUG'
-        },
+            },
         'werkzeug': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+            },
         },
-    },
-}
+    }

@@ -66,10 +66,22 @@ def index_view(request):
     ssp_sample_import_link = reverse('ssp:import_ssp_view', kwargs={'ssp_file': ssp_file_str})
 
     context = {
-        "catalog_list": catalog_list_html_str, "ssp_sample_import_link": ssp_sample_import_link
+        "catalog_list": catalog_list_html_str,
+        "ssp_sample_import_link": ssp_sample_import_link
         }
     # And so on for more models
     return render(request, "index.html", context)
+
+
+def login(request):
+    auth_list_html_str = "<ul>"
+
+    auth_list_html_str += "</ul>"
+
+    context = {
+        "title": 'OPAL Authentication Options',
+        "content": auth_list_html_str
+        }
 
 
 def database_status_view(request):

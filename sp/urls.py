@@ -10,4 +10,5 @@ urlpatterns = [
     path("test/", views.login, {"test": True}, name="sp-idp-test"),
     path("verify/", views.login, {"verify": True}, name="sp-idp-verify"),
     path("logout/", views.logout, name="sp-idp-logout"),
+    path("bootstrap/", views.bootstrap, name="sp_bootstrap" )
 ]

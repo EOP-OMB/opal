@@ -45,7 +45,13 @@ def get_request_idp(request, **kwargs):
     if custom_loader:
         return import_string(custom_loader)(request, **kwargs)
     else:
-        return get_object_or_404(IdP, url_params=kwargs, is_active=True)
+        if IdP.objects.count == 0:
+            return "No IDP is defined"
+        elif IdP.objects.filter(url_params=kwargs, is_active=True).exists():
+            idp =  IdP.objects.get(url_params=kwargs, is_active=True)
+        else:
+            idp = IdP.objects.first()
+        return idp
 
 
 def get_session_idp(request):

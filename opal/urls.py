@@ -29,18 +29,13 @@ urlpatterns = [path('', index_view, name='home_page'),
                path('profiles/', include('profile.urls'), name='profile'),
                path('ssp/', include('ssp.urls'), name='ssp'),
                re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
+               path("accounts/", include("django.contrib.auth.urls")),
+               path("sso/", include("sp.urls")),
                ]
 
 if settings.ENVIRONMENT == 'development':
     urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-if settings.ENABLE_DJANGO_AUTH:
-    urlpatterns.append(path("accounts/", include("django.contrib.auth.urls")))
-    urlpatterns.append(path('login', TemplateView.as_view(template_name='registration/home.html'), name='basic_auth_home'))
-
-if settings.ENABLE_SAML:
-    urlpatterns.append(path("sso/", include("sp.urls")))
 
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])
