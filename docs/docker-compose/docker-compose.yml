@@ -15,6 +15,22 @@ services:
     image: rabbitmq
     ports:
       - "5672:5672"
+  saml_idp:
+    # image: silintl/ssp-base
+    image: kristophjunge/test-saml-idp
+    ports:
+      - "8888:8080"
+#    volumes:
+#      - /Users/dan/Projects/eop-omb/opal/docs/other_scripts/authsources.php:/var/www/simplesamlphp/config/authsources.php
+    environment:
+#      - ADMIN_EMAIL=admin@cs4p.net
+#      - ADMIN_PASS=letmein
+#      - IDP_NAME=SIMPLESAMLIDP
+#      - SECRET_SALT=something_random
+#      - SECURE_COOKIE=False
+      - SIMPLESAMLPHP_SP_ENTITY_ID=http://web:8000/sso/local/
+      - SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE=http://web:8000/sso/local/acs/
+      - SIMPLESAMLPHP_SP_SINGLE_LOGOUT_SERVICE=http://web:8000/sso/local/slo/
   web:
     build: ../../
     user: root
@@ -29,10 +45,12 @@ services:
       - ../../component:/usr/src/app/component
       - ../../profile:/usr/src/app/profile
       - ../../ssp:/usr/src/app/ssp
+      - ../../sp:/usr/src/app/sp
+      - ../../templates:/usr/src/app/templates
     environment:
       - OPAL_SECRET_KEY='20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE'
       - DEBUG=True
-      - LOG_LEVEL=INFO
+      - LOG_LEVEL=DEBUG
       - DATABASE=postgres
       - DB_NAME=opal
       - DB_USER=opal
@@ -42,5 +60,7 @@ services:
       - ALLOWED_HOSTS=127.0.0.1,localhost
       - ASYNC=True
       - BROKER=pyamqp://broker:5672//
+      - HOST_NAME=localhost:8000
+      - ENABLE_SAML=True
     depends_on:
       - db
