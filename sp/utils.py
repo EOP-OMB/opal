@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from django.conf import settings
 from django.contrib import auth
@@ -41,15 +42,21 @@ def logout(request, idp):
 
 
 def get_request_idp(request, **kwargs):
+    logger = logging.getLogger('django')
+    if kwargs:
+        logger.info("kwargs = %s" % str(kwargs))
     custom_loader = getattr(settings, "SP_IDP_LOADER", None)
     if custom_loader:
         return import_string(custom_loader)(request, **kwargs)
     else:
         if IdP.objects.count == 0:
+            logger.warning("No IDP is defined")
             return "No IDP is defined"
         elif IdP.objects.filter(url_params=kwargs, is_active=True).exists():
+            logger.info("Found idp matching kwargs")
             idp =  IdP.objects.get(url_params=kwargs, is_active=True)
         else:
+            logger.info("Could not find matching IdP. Using first available.")
             idp = IdP.objects.first()
         return idp
 

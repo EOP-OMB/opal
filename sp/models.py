@@ -207,6 +207,8 @@ class IdP(models.Model):
 
     @property
     def settings(self):
+        if self.saml_settings == '' or self.saml_settings is None:
+            self.import_metadata()
         settings_dict = json.loads(self.saml_settings)
         settings_dict.update(self.sp_settings)
         return settings_dict

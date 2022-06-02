@@ -57,7 +57,7 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
-      - ALLOWED_HOSTS=127.0.0.1,localhost
+      - ALLOWED_HOSTS=127.0.0.1,localhost,web
       - ASYNC=True
       - BROKER=pyamqp://broker:5672//
       - HOST_NAME=localhost:8000

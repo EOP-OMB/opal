@@ -132,20 +132,26 @@ def slo(request, **kwargs):
 
 def login(request, test=False, verify=False, **kwargs):
     idp = get_request_idp(request, **kwargs)
-    saml = OneLogin_Saml2_Auth(idp.prepare_request(request), old_settings=idp.settings)
-    reauth = verify or "reauth" in request.GET
-    state = signing.dumps(
-        {
-            "test": test,
-            "verify": verify,
-            "redir": request.GET.get(REDIRECT_FIELD_NAME, ""),
-        }
-    )
-    # When verifying, we want to pass the (unmapped) SAML nameid, stored in the session.
-    # TODO: do we actually want UPN here, or some other specified mapped field? At least
-    # Auth0 is pre-populating the email field with nameid, which is not what we want.
-    nameid = get_session_nameid(request) if verify else None
-    return redirect(saml.login(state, force_authn=reauth, name_id_value_req=nameid))
+    if idp == "No IDP is defined":
+        context = {
+            'err_msg': "No IDP is defined"
+            }
+        return render(request, "error.html", context=context)
+    else:
+        saml = OneLogin_Saml2_Auth(idp.prepare_request(request), old_settings=idp.settings)
+        reauth = verify or "reauth" in request.GET
+        state = signing.dumps(
+            {
+                "test": test,
+                "verify": verify,
+                "redir": request.GET.get(REDIRECT_FIELD_NAME, ""),
+            }
+        )
+        # When verifying, we want to pass the (unmapped) SAML nameid, stored in the session.
+        # TODO: do we actually want UPN here, or some other specified mapped field? At least
+        # Auth0 is pre-populating the email field with nameid, which is not what we want.
+        nameid = get_session_nameid(request) if verify else None
+        return redirect(saml.login(state, force_authn=reauth, name_id_value_req=nameid))
 
 
 def logout(request, **kwargs):

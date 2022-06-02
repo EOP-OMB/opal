@@ -8,6 +8,7 @@ celery_progress
 psycopg2
 pyrabbit
 #
+django_extensions
 # SAML Support
 ####################################################################################################
 # the django-saml-sp project is awesome.  By far the best SAML solution I ahve seen.  However,

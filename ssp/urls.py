@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from ssp.views import *
+from ssp.views import ssp_list_view, ssp_detail_view, import_ssp_view
 
 app_name = 'ssp'
 urlpatterns = [

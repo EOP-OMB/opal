@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>One or more errors occurred..</h1>
+<h5>This is definitely not Dan's fault.</h5>
+    <ul>
+    {% if err_msg %}
+        <h3>{{ err_msg }}</h3>
+    {% else %}
+        <li>Dude, even I'm not sure what happened.</li>
+    {% endif %}
+    </ul>
+<!-- /.container-fluid -->
+{% endblock %}

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import *
+from common.views import permalink, database_status_view
 
 app_name = 'common'
 urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
