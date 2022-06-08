@@ -17,15 +17,17 @@ RUN apt install -y --no-install-recommends postgresql-client postgresql-contrib 
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
 
-# Create Service account
-RUN useradd -r -u 1001 opal
-# copy all the files to the container
-COPY . /usr/src/app/
-
+COPY ./requirements.txt /usr/src/app
 # install Python requirements
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir mod-wsgi
+
+# Create Service account
+RUN useradd -r -u 1001 opal
+
+# copy all the files to the container
+COPY . /usr/src/app/
 
 # set ownership to service account and execute bit for statup script
 RUN chown -R opal:opal .
