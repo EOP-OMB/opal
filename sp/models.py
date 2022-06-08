@@ -182,7 +182,7 @@ class IdP(models.Model):
     @property
     def sp_settings(self):
         return {
-            "strict": True,
+            "strict": False,
             "sp": {
                 "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
                 "entityId": self.get_entity_id(),
