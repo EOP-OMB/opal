@@ -25,7 +25,7 @@ urlpatterns = [path('', index_view, name='home_page'),
                path('catalog/', include('catalog.urls'), name='catalog'),
                path('common/', include('common.urls'), name='common'),
                path('component/', include('component.urls'), name='component'),
-               path('profiles/', include('profile.urls'), name='profile'),
+               path('profiles/', include('ctrl_profile.urls'), name='profiles'),
                path('ssp/', include('ssp.urls'), name='ssp'),
                re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
                path("accounts/", include("django.contrib.auth.urls")),

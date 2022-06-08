@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.urls import path
 
-from profile.views import profile_list_view, profile_detail_view, createProfileView
+from ctrl_profile.views import profile_list_view, profile_detail_view, createProfileView
 
-app_name = 'profile'
+app_name = 'ctrl_profile'
 urlpatterns = [path('', profile_list_view.as_view(), name='profile_list_view'),
                path('<int:pk>', profile_detail_view.as_view(), name='profile_detail_view'),
                path('new', createProfileView.as_view(), name='create_profile_view')]

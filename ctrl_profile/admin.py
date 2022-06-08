@@ -4,7 +4,7 @@ from django.contrib import admin
 from common.admin import CustomAdmin
 
 # other models
-models = apps.get_app_config('profile').get_models()
+models = apps.get_app_config('ctrl_profile').get_models()
 
 for model in models:
     try:

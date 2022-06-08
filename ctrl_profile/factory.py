@@ -17,6 +17,6 @@ class modifyFactory(factory.Factory):
 
 class profileFactory(factory.Factory):
     class Meta:
-        model = profile
+        model = profiles
 
     merge = factory.Faker('text')

@@ -10,7 +10,7 @@ from django.views.generic.list import ListView
 
 from catalog.models import *
 from component.models import components
-from profile.models import imports, profile
+from ctrl_profile.models import imports, profiles
 
 
 # from opal.settings import HTTP_PROXY, HTTPS_PROXY
@@ -71,9 +71,9 @@ def import_catalog_task(self, item, host):
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
-    # create a new profile for the imported catalog
+    # create a new profiles for the imported catalog
     new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-    new_profile = profile.objects.create(
+    new_profile = profiles.objects.create(
         metadata=new_metadata
         )
     new_profile.save()

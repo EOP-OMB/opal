@@ -6,7 +6,7 @@ import json
 
 from common.models import metadata
 from catalog.models import catalogs
-from profile.models import profile, imports
+from ctrl_profile.models import profiles, imports
 from component.models import components
 from django.test import Client
 from django.urls import reverse
@@ -29,9 +29,9 @@ def load_sample_catalog(django_db_blocker):
         new_catalog = catalogs()
         new_catalog.import_oscal(catalog_dict)
         new_catalog.save()
-        # create a new profile for the imported catalog
+        # create a new profiles for the imported catalog
         new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-        new_profile = profile.objects.create(
+        new_profile = profiles.objects.create(
             metadata=new_metadata
             )
         new_profile.save()
@@ -104,7 +104,7 @@ def test_import_catalog_view(db):
     response = c.get(url)
     assert response.status_code == 302
     assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
-    assert profile.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
+    assert profiles.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
 
 
 def test_load_controls(db, load_sample_catalog):

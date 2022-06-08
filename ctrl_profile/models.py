@@ -8,7 +8,7 @@ import re
 
 class imports(BasicModel):
     """
-    the import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
+    the import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
     Note that the OSCAL model allows including or excluding controls by pattern. This is not supported in OPAL.
     """
 
@@ -17,15 +17,15 @@ class imports(BasicModel):
         verbose_name_plural = "Imports"
 
     href = ShortTextField(
-        verbose_name="Link to catalog or profile", help_text="URI to access the catalog or profile to be imported"
+        verbose_name="Link to catalog or profiles", help_text="URI to access the catalog or profiles to be imported"
         )
     import_type = ShortTextField(
-        verbose_name="Type of Import", choices=[("catalog", "Catalog"), ("profile", "Profile")],
-        help_text="Select if this import is for a catalog or a profile"
+        verbose_name="Type of Import", choices=[("catalog", "Catalog"), ("profiles", "Profile")],
+        help_text="Select if this import is for a catalog or a profiles"
         )
     include_all = models.BooleanField(
         verbose_name="Include all controls",
-        help_text="Select this option to include all controls from the imported catalog or profile", default=True
+        help_text="Select this option to include all controls from the imported catalog or profiles", default=True
         )
     include_controls = CustomManyToManyField(
         to=controls, verbose_name="Included Controls",
@@ -83,7 +83,7 @@ merge_options = [("use-first",
                  ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
 
 
-class profile(BasicModel):
+class profiles(BasicModel):
     """
     An OSCAL document that describes a tailoring of controls from one or more catalogs, with possible modification of multiple controls.
     """
@@ -95,7 +95,7 @@ class profile(BasicModel):
     metadata = models.ForeignKey(to=metadata, on_delete=models.CASCADE)
     imports = CustomManyToManyField(
         to=imports, verbose_name="Imports",
-        help_text="The import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
+        help_text="The import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
         )
     merge = ShortTextField(
         verbose_name="Merge Strategy",
@@ -104,7 +104,7 @@ class profile(BasicModel):
         )
     modify = models.ForeignKey(
         to=modify, verbose_name="Modifications",
-        help_text="Define paramaters and controls that are modified by this profile.", on_delete=models.CASCADE,
+        help_text="Define paramaters and controls that are modified by this profiles.", on_delete=models.CASCADE,
         null=True
         )
     # TODO: We need to create a function that will make a copy of existing paramaters/controls selected for modification
@@ -118,7 +118,7 @@ class profile(BasicModel):
         return self.metadata.title
 
     def get_absolute_url(self):
-        return reverse('profile:profile_detail_view', kwargs={'pk': self.pk})
+        return reverse('ctrl_profile:profile_detail_view', kwargs={'pk': self.pk})
 
     def list_all_controls(self):
         control_list = []

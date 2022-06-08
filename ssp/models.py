@@ -5,7 +5,7 @@ from common.models import *
 
 class import_profiles(BasicModel):
     """
-    Used to import the OSCAL profile representing the system's control baseline.
+    Used to import the OSCAL profiles representing the system's control baseline.
     """
 
     class Meta:
@@ -14,7 +14,7 @@ class import_profiles(BasicModel):
 
     href = ShortTextField(
         verbose_name="Profile Reference",
-        help_text="A resolvable URL reference to the profile to use as the system's control baseline."
+        help_text="A resolvable URL reference to the profiles to use as the system's control baseline."
         )
 
 

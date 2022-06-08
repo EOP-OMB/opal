@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from .forms import component_statement_form, select_control_statements_form
 from catalog.views import get_statements
 from .models import *
-from profile.models import profile
+from ctrl_profile.models import profiles
 
 
 # Create your views here.
@@ -64,7 +64,7 @@ def create_component_statement(request):
     Create a statement associated with a component that addresses one or more Control requirements
     """
     if request.method == 'POST':
-        profile_id = request.POST['profile']
+        profile_id = request.POST['profiles']
         new_by_comp = by_components(component_uuid_id=request.POST['component_uuid'], description=request.POST['description'], implementation_status=request.POST['implementation_status'], control_uuid_id=request.POST['control'])
         new_by_comp.save()
         if type(request.POST['statements']) is list:
@@ -86,8 +86,8 @@ def create_component_statement(request):
         initial_dict = {}
         statement_list = []
         if profile_id:
-            initial_dict['profile'] = profile_id
-            selected_profile = profile.objects.get(pk=profile_id)
+            initial_dict['profiles'] = profile_id
+            selected_profile = profiles.objects.get(pk=profile_id)
             initial_dict['controls'] = selected_profile.list_all_controls()
         if ctrl_id:
             initial_dict['controls'] = ctrl_id

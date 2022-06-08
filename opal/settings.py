@@ -117,7 +117,7 @@ else:
 # These are the applications defined in opal and map to OSCAL models.
 # We track them separately here because we use this list for some functions
 # that have to cycle through all apps
-USER_APPS = ['common', 'catalog', 'profile', 'component', 'ssp', ]
+USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
