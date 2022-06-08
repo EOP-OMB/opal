@@ -6,12 +6,55 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django_extensions import logging
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.settings import OneLogin_Saml2_Settings
+from onelogin.saml2.utils import OneLogin_Saml2_Utils
 
 from sp.models import IdP
 from sp.utils import get_request_idp, get_session_nameid
 
+class OneLogin_Saml2_Auth(OneLogin_Saml2_Auth):
+    def login(self, return_to=None, force_authn=False, is_passive=False, set_nameid_policy=True, name_id_value_req=None):
+        """
+        Initiates the SSO process.
+
+        :param return_to: Optional argument. The target URL the user should be redirected to after login.
+        :type return_to: string
+
+        :param force_authn: Optional argument. When true the AuthNRequest will set the ForceAuthn='true'.
+        :type force_authn: bool
+
+        :param is_passive: Optional argument. When true the AuthNRequest will set the Ispassive='true'.
+        :type is_passive: bool
+
+        :param set_nameid_policy: Optional argument. When true the AuthNRequest will set a nameIdPolicy element.
+        :type set_nameid_policy: bool
+
+        :param name_id_value_req: Optional argument. Indicates to the IdP the subject that should be authenticated
+        :type name_id_value_req: string
+
+        :returns: Redirection URL
+        :rtype: string
+        """
+        authn_request = self.authn_request_class(self._settings, force_authn, is_passive, set_nameid_policy, name_id_value_req)
+        self._last_request = authn_request.get_xml()
+        self._last_request_id = authn_request.get_id()
+
+        saml_request = authn_request.get_request()
+        parameters = {'SAMLRequest': saml_request}
+
+        if return_to is not None:
+            parameters['RelayState'] = return_to
+        else:
+            parameters['RelayState'] = OneLogin_Saml2_Utils.get_self_url_no_query(self._request_data)
+
+        security = self._settings.get_security_data()
+        if security.get('authnRequestsSigned', False):
+            self.add_request_signature(parameters, security['signatureAlgorithm'])
+        logger = logging.getLogger('django')
+        logger.critical("SAML Parms:" & str(parameters))
+        return self.redirect_to(self.get_sso_url(), parameters)
 
 def metadata(request, **kwargs):
     idp = get_request_idp(request, **kwargs)
