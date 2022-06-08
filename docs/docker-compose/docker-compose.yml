@@ -43,7 +43,7 @@ services:
       - ../../catalog:/usr/src/app/catalog
       - ../../common:/usr/src/app/common
       - ../../component:/usr/src/app/component
-      - ../../profile:/usr/src/app/profile
+      - ../../profiles:/usr/src/app/profiles
       - ../../ssp:/usr/src/app/ssp
       - ../../sp:/usr/src/app/sp
       - ../../templates:/usr/src/app/templates
@@ -57,7 +57,7 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
-      - ALLOWED_HOSTS=127.0.0.1,localhost,web
+      - ALLOWED_HOSTS=127.0.0.1,localhost,web,192.168.42.105
       - ASYNC=True
       - BROKER=pyamqp://broker:5672//
       - HOST_NAME=localhost:8000

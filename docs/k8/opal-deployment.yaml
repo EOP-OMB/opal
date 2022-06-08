@@ -16,7 +16,7 @@ spec:
       containers:
         - name: opal
           # Change this value to reflect your repository and image name
-          image: localhost:5000/opal2
+          image:  opal2
           ports:
             - containerPort: 8000
           env:

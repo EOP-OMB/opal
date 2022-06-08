@@ -36,7 +36,7 @@ def import_statements():
 
     logger.info("Starting import process...")
     for ctrl in ctr_list:
-        # profile_id = ctrl['profile']
+        # profile_id = ctrl['profiles']
         logger.info("Looking for control with sort-id " + ctrl['control_sort_id'])
         if controls.objects.filter(props__value=ctrl['control_sort_id'], props__name='sort-id').exists():
             control_uuid = controls.objects.get(props__value=ctrl['control_sort_id'],props__name='sort-id')
