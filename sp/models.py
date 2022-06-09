@@ -197,6 +197,17 @@ class IdP(models.Model):
                 "x509cert": self.x509_certificate,
                 "privateKey": self.private_key,
             },
+            "security": {
+                'requestedAuthnContext': [
+                    'http://idmanagement.gov/icam/2009/12/saml_2.0_profile/assurancelevel2',
+                    'http://idmanagement.gov/icam/2009/12/saml_2.0_profile/assurancelevel3',
+                    'https://max.gov/icam/2015/10/securityLevels/standard',
+                    'https://max.gov/icam/2015/10/securityLevels/securePlus2',
+                    'https://max.gov/icam/2015/10/securityLevels/securePlus3',
+                    'https://max.gov/icam/2015/10/securityLevels/piv'
+                    ],
+                'requestedAuthnContextComparison': 'exact',
+                'failOnAuthnContextMismatch': False},
             "contactPerson": {
                 "technical": {
                     "givenName": self.contact_name,
