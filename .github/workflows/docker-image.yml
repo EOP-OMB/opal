@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag opal:$(date +%s)
+      run: docker build . --file Dockerfile --tag opal:latest
     - name: push-to-ghcr
       # You may pin to the exact commit or the version.
       # uses: macbre/push-to-ghcr@d45c4b8f5a72d7fe21f6b832c42d05c29356c840
