@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+app_name = 'sp'
 urlpatterns = [
     path("", views.metadata, name="sp-idp-metadata"),
     path("acs/", views.acs, name="sp-idp-acs"),

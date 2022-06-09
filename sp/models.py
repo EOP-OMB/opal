@@ -18,6 +18,19 @@ from django.utils.module_loading import import_string
 from django.utils.translation import gettext_lazy as _
 from onelogin.saml2.idp_metadata_parser import OneLogin_Saml2_IdPMetadataParser
 
+max_idp = {
+    'name': 'max.gov',
+    'url_params': '{"slug":"max.gov"}',
+    'base_url': 'http://127.0.0.1:8000',
+    'entity_id': '',
+    'contact_name': 'Dan',
+    'contact_email': 'dan@cs4p.net',
+    'metadata_url': 'https://login.max.gov/idp/shibboleth',
+    'verify_metadata_cert': True,
+    'lowercase_encoding': False
+    }
+
+
 
 class IdP(models.Model):
     name = models.CharField(max_length=200)
@@ -144,29 +157,29 @@ class IdP(models.Model):
     get_entity_id.short_description = _("Entity ID")
 
     def get_acs(self):
-        return self.base_url + self.get_url("sp-idp-acs")
+        return self.base_url + self.get_url("sp:sp-idp-acs")
 
     get_acs.short_description = _("ACS")
 
     def get_slo(self):
-        return self.base_url + self.get_url("sp-idp-slo")
+        return self.base_url + self.get_url("sp:sp-idp-slo")
 
     get_slo.short_description = _("SLO")
 
     def get_absolute_url(self):
-        return self.get_url("sp-idp-metadata")
+        return self.get_url("sp:sp-idp-metadata")
 
     def get_login_url(self):
-        return self.get_url("sp-idp-login")
+        return self.get_url("sp:sp-idp-login")
 
     def get_test_url(self):
-        return self.get_url("sp-idp-test")
+        return self.get_url("sp:sp-idp-test")
 
     def get_verify_url(self):
-        return self.get_url("sp-idp-verify")
+        return self.get_url("sp:sp-idp-verify")
 
     def get_logout_url(self):
-        return self.get_url("sp-idp-logout")
+        return self.get_url("sp:sp-idp-logout")
 
     def prepare_request(self, request):
         return {
