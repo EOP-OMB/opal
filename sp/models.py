@@ -156,12 +156,14 @@ class IdP(models.Model):
     get_entity_id.short_description = _("Entity ID")
 
     def get_acs(self):
-        return self.base_url + self.get_url("sp:sp-idp-acs")
+        #return self.base_url + self.get_url("sp:sp-idp-acs")
+        return self.base_url + "/sso/acs/"
 
     get_acs.short_description = _("ACS")
 
     def get_slo(self):
-        return self.base_url + self.get_url("sp:sp-idp-slo")
+        #return self.base_url + self.get_url("sp:sp-idp-slo")
+        return self.base_url + "/sso/slo/"
 
     get_slo.short_description = _("SLO")
 
