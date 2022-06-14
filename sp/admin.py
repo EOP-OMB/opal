@@ -24,7 +24,7 @@ class IdPAdmin(admin.ModelAdmin):
         "get_entity_id",
         "is_active",
         "last_login",
-    )
+        )
     list_filter = ("is_active",)
     actions = ("import_metadata", "generate_certificates")
     inlines = (IdPUserDefaultValueInline, IdPAttributeInline)
@@ -39,9 +39,9 @@ class IdPAdmin(admin.ModelAdmin):
                     "entity_id",
                     "notes",
                     "is_active",
-                )
-            },
-        ),
+                    )
+                },
+            ),
         (
             "SP Settings",
             {
@@ -51,9 +51,9 @@ class IdPAdmin(admin.ModelAdmin):
                     "x509_certificate",
                     "private_key",
                     "certificate_expires",
-                )
-            },
-        ),
+                    )
+                },
+            ),
         (
             "IdP Metadata",
             {
@@ -63,9 +63,9 @@ class IdPAdmin(admin.ModelAdmin):
                     "metadata_xml",
                     "lowercase_encoding",
                     "last_import",
-                )
-            },
-        ),
+                    )
+                },
+            ),
         (
             "Logins",
             {
@@ -78,9 +78,9 @@ class IdPAdmin(admin.ModelAdmin):
                     "login_redirect",
                     "logout_redirect",
                     "last_login",
-                )
-            },
-        ),
+                    )
+                },
+            ),
         (
             "Advanced",
             {
@@ -92,10 +92,10 @@ class IdPAdmin(admin.ModelAdmin):
                     "authenticate_method",
                     "login_method",
                     "logout_method",
-                ),
-            },
-        ),
-    )
+                    ),
+                },
+            ),
+        )
     readonly_fields = ("last_import", "last_login")
 
     def get_changeform_initial_data(self, request):
@@ -104,8 +104,8 @@ class IdPAdmin(admin.ModelAdmin):
                 request.scheme,
                 request.get_host(),
                 request.META["SCRIPT_NAME"].rstrip("/"),
-            )
-        }
+                )
+            }
 
     def generate_certificates(self, request, queryset):
         for idp in queryset:
