@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<html>
+<head>
+    <title>{% trans "IdP Test" %} - {{ idp }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="pb-1 mt-4 mb-4 border-bottom">
+            <h1>{{ idp }}</h1>
+        </div>
+
+        <dl class="mb-4">
+            <dt>{% trans "Name ID Format" %}</dt>
+            <dd>{{ nameid_format }}</dd>
+
+            <dt>{% trans "Name ID" %}</dt>
+            <dd>{{ nameid }}</dd>
+        </dl>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{% trans "SAML Attribute" %}</th>
+                        <th>{% trans "Mapped Name" %}</th>
+                        <th>{% trans "NameID" %}</th>
+                        <th>{% trans "Value" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attr, value in attrs %}
+                        <tr>
+                            <td>{{ attr.saml_attribute }}</td>
+                            <td>{{ attr.mapped_name }}</td>
+                            <td>{% if attr.is_nameid %}&#10004;{% endif %}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

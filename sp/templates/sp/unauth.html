@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<html>
+<head>
+    <title>{% trans "Authentication Error" %} - {{ idp }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-2 mb-4 pb-2 border-bottom">{% if verify %}{% trans "Verification Error" %}{% else %}{% trans "Authentication Error" %}{% endif %}</h1>
+        <p>{% blocktrans with nameid=nameid %}Could not authenticate user "{{ nameid }}".{% endblocktrans %}</p>
+        {% if verify %}<p>{% blocktrans with user=user %}Expected verification credentials for "{{ user }}".{% endblocktrans %}</p>{% endif %}
+    </div>
+</body>
+</html>
