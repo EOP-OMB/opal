@@ -28,12 +28,16 @@ RUN useradd -r -u 1001 opal
 
 # copy all the files to the container
 COPY . /usr/src/app/
+RUN python /usr/src/app/django-saml-sp/setup.py install
 
 # set ownership to service account and execute bit for statup script
 RUN chown -R opal:opal .
 RUN chmod u+x startup.sh
 
 FROM stage1 as stage2
+
+WORKDIR /usr/src/app/
+
 # run as an unprivileged user
 USER opal
 
