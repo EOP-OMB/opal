@@ -26,8 +26,10 @@ def metadata(request, **kwargs):
 @csrf_exempt
 @require_POST
 def acs(request, **kwargs):
+    logger = logging.getLogger('django')
     idp = get_request_idp(request, **kwargs)
     if request.POST.get("RelayState"):
+        logger.info("Found RelayState in POST data")
         try:
             # Login with state relayed from our application.
             state = signing.loads(request.POST["RelayState"], max_age=idp.state_timeout)
@@ -44,12 +46,16 @@ def acs(request, **kwargs):
                 status=500,
             )
     else:
-        # IdP-initiated login.
+        logger.info("IdP-initiated login.")
         state = {"test": False, "verify": False, "redir": ""}
+
+    logger.info("Processing the saml response...")
     saml = OneLogin_Saml2_Auth(idp.prepare_request(request), old_settings=idp.settings)
+    logger.info("saml.post_data = %s" % request.POST )
     saml.process_response()
     errors = saml.get_errors()
     if errors:
+        logger.info("Error processing saml request")
         return render(
             request,
             "sp/error.html",
@@ -63,6 +69,7 @@ def acs(request, **kwargs):
         )
     else:
         if state.get("test", False):
+            logger.info("This is a test...")
             attrs = []
             for saml_attr, value in saml.get_attributes().items():
                 attr, created = idp.attributes.get_or_create(saml_attribute=saml_attr)
@@ -78,10 +85,13 @@ def acs(request, **kwargs):
                 },
             )
         elif state.get("verify", False):
+            logger.info("state.verify == true")
             user = idp.authenticate(request, saml)
             if user == request.user:
+                logger.info("user == request.user")
                 return redirect(idp.get_login_redirect(state.get("redir")))
             else:
+                logger.info("user != request.user")
                 return render(
                     request,
                     "sp/unauth.html",
@@ -90,6 +100,7 @@ def acs(request, **kwargs):
                 )
         else:
             user = idp.authenticate(request, saml)
+            logger.info("user = %s" % user)
             if user:
                 if isinstance(user, HttpResponseBase):
                     return user

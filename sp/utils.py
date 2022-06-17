@@ -14,6 +14,8 @@ NAMEID_SESSION_KEY = "_nameid"
 
 
 def authenticate(request, idp, saml):
+    logger = logging.getLogger('django')
+    logger.info("Running auth process...")
     return auth.authenticate(request, idp=idp, saml=saml)
 
 

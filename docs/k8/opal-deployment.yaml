@@ -79,11 +79,27 @@ spec:
 #    - localhost
 #    secretName: opal-ingress-tls
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim # Create PVC
+metadata:
+  name: opal-db-postgres-volume-claim # Sets PVC's name
+  labels:
+    app: opal-db # Defines app to create PVC for
+spec:
+  #storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi # Sets PVC's size
+---
 # The following sections deploy a postgres server container
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opal-db
+  labels:
+    app: opal-db
 spec:
   replicas: 1
   selector:
@@ -113,6 +129,13 @@ spec:
                 secretKeyRef:
                   name: opal-passwords
                   key: POSTGRES_OPAL_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdata
+      volumes:
+        - name: postgresdata
+          persistentVolumeClaim:
+            claimName: opal-db-postgres-volume-claim
 ---
 apiVersion: v1
 kind: Service
