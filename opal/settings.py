@@ -60,7 +60,6 @@ LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="/")
 ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
-
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.

@@ -1,6 +1,7 @@
 import collections
 import datetime
 import json
+import logging
 from urllib.parse import urlparse
 
 from cryptography import x509
@@ -303,9 +304,12 @@ class IdP(models.Model):
         return redir or self.logout_redirect or settings.LOGOUT_REDIRECT_URL
 
     def authenticate(self, request, saml):
+        logger = logging.getLogger('django')
+        logger.info("Welcome to the authenticate method!")
         method = self.authenticate_method or getattr(
             settings, "SP_AUTHENTICATE", "sp.utils.authenticate"
             )
+        logger.info("method = %s" % method )
         return import_string(method)(request, self, saml)
 
     def login(self, request, user, saml):
