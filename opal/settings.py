@@ -136,7 +136,7 @@ INSTALLED_APPS.extend(USER_APPS)
 if ENVIRONMENT == "development":
     INSTALLED_APPS.extend(DEV_APPS)
 
-AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend',]
+AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend','django.contrib.auth.backends.ModelBackend',]
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
