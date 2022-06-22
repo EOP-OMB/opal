@@ -27,7 +27,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
    `python manage.py runserver`
 ## Start the app in a docker container using sqlite
 1. Clone the repository to your local directory
-   `git clone https://gitlab.max.gov/max-security/opal.git`
+   `git clone https://github.com/eop-omb/opal.git`
 2. Build the image\
     `docker build -t opal .`
 3. Run the container\
