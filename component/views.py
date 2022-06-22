@@ -64,22 +64,47 @@ def create_component_statement(request):
     Create a statement associated with a component that addresses one or more Control requirements
     """
     if request.method == 'POST':
-        profile_id = request.POST['profiles']
-        new_by_comp = by_components(component_uuid_id=request.POST['component_uuid'], description=request.POST['description'], implementation_status=request.POST['implementation_status'], control_uuid_id=request.POST['control'])
+        comp_id = components.objects.get(pk=request.POST['component_uuid'])
+        impl_description = request.POST['description']
+        impl_status = request.POST['implementation_status']
+        ctrl_id = controls.objects.get(pk=request.POST['controls'])
+
+        new_by_comp, created = by_components.objects.get_or_create(component_uuid=comp_id, description=impl_description, implementation_status=impl_status)
         new_by_comp.save()
-        if type(request.POST['statements']) is list:
-            for stmt in request.POST['statements']:
-                new_stmt = statements()
-                new_stmt.save()
-                new_stmt.statement_id.add(stmt)
-                new_stmt.by_components.add(new_by_comp.id)
-        else:
+        logger = logging.getLogger('django')
+        logger.info("Created new by_component model? %s.  by_component_id = %s" % (created, new_by_comp.id))
+        for stmt in request.POST['statements']:
             new_stmt = statements()
             new_stmt.save()
-            new_stmt.statement_id.add(request.POST['statements'])
+            logger.info("New statement, statement_id = %s" % new_stmt.id)
+            new_stmt.statement_id.add(stmt)
             new_stmt.by_components.add(new_by_comp.id)
+            logger.info("Added new statement to new by_component")
+            new_implemented_requirement, created = implemented_requirements.objects.get_or_create(control_id=ctrl_id)
+            new_implemented_requirement.save()
+            logger.info("New implemented_requirement? %s -- implemented_requirement_id = %s" % (created, new_implemented_requirement.id))
+            new_implemented_requirement.statements.add(new_stmt.id)
+            new_implemented_requirement.by_components.add(new_by_comp.id)
+            if comp_id.control_implementations.count() == 0:
+                logger.info("Looks like this is teh first control implimented by this component.  Adding control_implimentation object")
+                comp_control_implementation = control_implementations()
+                comp_control_implementation.save()
+                comp_id.control_implementations.add(comp_control_implementation.id)
+                logger.info("Added new control_implementation for component")
+            comp_id.control_implementations.first().implemented_requirements.add(new_implemented_requirement.id)
+            comp_id.save()
+            logger.info("Added new control_implementation to component %s." % comp_id.title)
 
-        return HttpResponseRedirect(reverse('control_profile:profile_detail_view', kwargs={'pk': profile_id}))
+        # else:
+        #     new_stmt = statements()
+        #     new_stmt.save()
+        #     new_stmt.statement_id.add(request.POST['statements'])
+        #     new_stmt.by_components.add(new_by_comp.id)
+        #     new_implemented_requirement = implemented_requirements.objects.get_or_create(control_id=ctrl_id, statements=new_stmt, by_components=new_by_comp)
+
+
+
+        return HttpResponseRedirect(comp_id.get_absolute_url())
     else:
         profile_id = request.GET.get('profile_id', default=None)
         ctrl_id = request.GET.get('ctrl_id', default=None)

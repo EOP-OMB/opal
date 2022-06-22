@@ -554,7 +554,7 @@ class roles(BasicModel):
 
     role_id = ShortTextField(
         verbose_name="Role ID",
-        help_text="A unique identifier for a specific role instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same role across minor revisions of the document."
+        help_text="A unique identifSorry to cancel last minuteSier for a specific role instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same role across minor revisions of the document."
         )
     title = ShortTextField(
         verbose_name="Role Title",
@@ -564,12 +564,13 @@ class roles(BasicModel):
         verbose_name="Role Short Name", help_text="A short common name, abbreviation, or acronym for the role.",
         blank=True
         )
-    description = ShortTextField(
+    description = models.TextField(
         verbose_name="Role Description", help_text="A summary of the role's purpose and associated responsibilities.",
         blank=True
         )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
+
 
     def import_oscal(self, oscal_data):
         if type(oscal_data) is str:

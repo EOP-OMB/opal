@@ -10,7 +10,7 @@ class select_control_statements_form(forms.Form):
     statements = forms.MultipleChoiceField(
         required=False,
         widget=forms.CheckboxSelectMultiple,
-        choices=[],
+        choices=[]
     )
 
 

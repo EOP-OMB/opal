@@ -1,4 +1,4 @@
 {% for item in options %}
-<input type="checkbox" id="{{ item.value }}" name="{{ item.value }}" value="{{ item.value }}">
+<input type="checkbox" id="{{ item.value }}" name="{{ item.name }}" value="{{ item.value }}">
 <label for="{{ item.value }}"> {{ item.display }}</label><br>
 {% endfor %}

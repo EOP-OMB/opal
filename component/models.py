@@ -138,6 +138,18 @@ class components(BasicModel):
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
 
+    def controls_implemented_by_component(self):
+        control_list=[]
+        if statements.objects.filter(by_components=self.id).exists():
+            stmts = statements.objects.get(by_components=self)
+            for stmt in stmts:
+                ctrl = stmt.get_control()
+                if ctrl not in control_list:
+                    control_list.append(ctrl)
+        return control_list
+
+
+
     def to_html(self):
         html_str = ""
         html_str += "<h1>" + self.title + "</h1>"
@@ -145,10 +157,11 @@ class components(BasicModel):
         html_str += "<div>Purpose: %s</div>" % self.purpose
         html_str += "<div>Type: %s</div>" % self.type
         html_str += "<h2>Implemented Controls</h2>"
-        for imp in self.by_components_set.all():
-            html_str += "<div>%s</div>" % imp.implemented_requirements_set.first().control_id.to_html_short()
-            html_str += "<div><h4>How is the control implemented?</h4></div>"
-            html_str += "<div>%s</div>" % imp.description
+        html_str += "<h4><a href='%s?comp_id=%s'>Add a control</a></h4>" % (reverse('component:create_component_statement'), self.id)
+        for imp in self.control_implementations.all():
+            html_str += "<div>%s</div>" % imp.to_html()
+            # html_str += "<div><h4>How is the control implemented?</h4></div>"
+            # html_str += "<div>%s</div>" % imp.description
         return html_str
 
 

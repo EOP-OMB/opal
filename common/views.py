@@ -73,17 +73,6 @@ def index_view(request):
     return render(request, "index.html", context)
 
 
-def login(request):
-    auth_list_html_str = "<ul>"
-
-    auth_list_html_str += "</ul>"
-
-    context = {
-        "title": 'OPAL Authentication Options',
-        "content": auth_list_html_str
-        }
-
-
 def database_status_view(request):
     model_list = []
     for a in settings.USER_APPS:
@@ -111,3 +100,23 @@ def error_404_view(request, exception):
     template_name = "404.html"
     context_object_name = "obj"
     return render(request, "404.html", exception)
+
+
+def app_init(request):
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
+    if User.objects.count() == 0:
+        print(
+            'Creating default "admin" account with password "letmein" '
+            "-- change this immediately!"
+            )
+        User.objects.create_superuser(
+            "admin",
+            "",
+            "letmein",
+            first_name="Admin",
+            last_name="User",
+            )
+    admin = User.objects.filter(is_superuser=True).first()
+    return redirect('home_page')

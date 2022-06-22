@@ -204,6 +204,21 @@ class parts(PrimitiveModel):
                 html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
         return html_str
 
+    def get_root_part(self):
+        if self.parts_set.first() is not None:
+            parent_part = self.parts_set.first()
+            root_prt = parent_part.get_root_part()
+        else:
+            root_prt = self
+        return root_prt
+
+    @property
+    def get_control(self):
+        root_prt = self.get_root_part()
+        ctrl = root_prt.controls_set.first()
+        return ctrl
+
+
 
     def __str__(self):
         if len(self.part_id) > 0:

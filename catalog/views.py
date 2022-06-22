@@ -136,7 +136,7 @@ def get_statements(control_id):
                     display_str += stmt.props.get(name="label").value + " "
                 display_str += stmt.prose
                 if len(display_str) > 0:
-                    statement_list.append({"value": stmt.id, "display": display_str})
+                    statement_list.append({"value": stmt.id, "display": display_str, "name": "statements"})
         return statement_list
     else:
         return ["Invalid control selected, Try again"]
