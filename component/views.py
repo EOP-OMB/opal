@@ -86,7 +86,7 @@ def create_component_statement(request):
             new_implemented_requirement.statements.add(new_stmt.id)
             new_implemented_requirement.by_components.add(new_by_comp.id)
             if comp_id.control_implementations.count() == 0:
-                logger.info("Looks like this is teh first control implimented by this component.  Adding control_implimentation object")
+                logger.info("Looks like this is the first control implemented by this component.  Adding control_implementation object")
                 comp_control_implementation = control_implementations()
                 comp_control_implementation.save()
                 comp_id.control_implementations.add(comp_control_implementation.id)
@@ -94,16 +94,13 @@ def create_component_statement(request):
             comp_id.control_implementations.first().implemented_requirements.add(new_implemented_requirement.id)
             comp_id.save()
             logger.info("Added new control_implementation to component %s." % comp_id.title)
-
-        # else:
-        #     new_stmt = statements()
-        #     new_stmt.save()
-        #     new_stmt.statement_id.add(request.POST['statements'])
-        #     new_stmt.by_components.add(new_by_comp.id)
-        #     new_implemented_requirement = implemented_requirements.objects.get_or_create(control_id=ctrl_id, statements=new_stmt, by_components=new_by_comp)
-
-
-
+        logger.info("Looking for parameters")
+        param_list = ctrl_id.params.all()
+        for p in param_list:
+            param_value = request.POST[p.param_id]
+            if param_value != '':
+                new_param_id, created = parameters.objects.get_or_create(param_id=p,values=param_value)
+                comp_id.control_implementations.first().set_parameters.add(new_param_id)
         return HttpResponseRedirect(comp_id.get_absolute_url())
     else:
         profile_id = request.GET.get('profile_id', default=None)
@@ -116,8 +113,8 @@ def create_component_statement(request):
             initial_dict['controls'] = selected_profile.list_all_controls()
         if ctrl_id:
             initial_dict['controls'] = ctrl_id
-            statmts = get_statements(ctrl_id)
-            for item in statmts:
+            ctrl_statements = get_statements(ctrl_id)
+            for item in ctrl_statements:
                 statement_list.append((item["value"], item["display"]))
         if initial_dict != {}:
             ctrl_selection_form = select_control_statements_form(initial=initial_dict)

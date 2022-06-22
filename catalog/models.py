@@ -103,6 +103,27 @@ class params(BasicModel):
         )
     choice = models.TextField(verbose_name="Choices", help_text="A list of values. One value per line")
 
+    def get_form(self):
+        html_str = "<tr><td>"
+        if self.guidelines.count() > 0:
+            for guideline in self.guidelines.all():
+                html_str += guideline.prose
+        html_str += "</td><td>%s</td><td>" % self.param_id
+        if self.select != '':
+            # This should be a drop down
+            if self.how_many == "one-or-more":
+                html_str += "<select multiple name='%s'>" % self.param_id
+            else:
+                html_str += "<select name='%s'>" % self.param_id
+            choices = self.choice.split("\n")
+            for option in choices:
+                html_str += "<option>%s</option>" % option
+            html_str += "</select>"
+        else:
+            html_str += "<input type=text value='%s' name='%s'>" % (self.values, self.param_id)
+        html_str += "</td></tr>"
+        return html_str
+
     def __str__(self):
         return self.param_id
 

@@ -125,6 +125,17 @@ def load_statements(request):
     return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
 
 
+def load_params(request):
+    control_id = request.GET.get('control')
+    param_list = get_parameters(control_id)
+    html_str = "<table class='table-bordered'>"
+    html_str += "<tr><th>Guidance</th><th>Param ID</th><th>Value</th></tr>"
+    for p in param_list:
+        html_str += p.get_form()
+    html_str += "</table>"
+    return render(request, 'generic_html_helper.html', {'content': html_str})
+
+
 def get_statements(control_id):
     if controls.objects.filter(pk=control_id).exists():
         selected_control = controls.objects.get(pk=control_id)
@@ -140,3 +151,12 @@ def get_statements(control_id):
         return statement_list
     else:
         return ["Invalid control selected, Try again"]
+
+
+def get_parameters(control_id):
+    if controls.objects.filter(pk=control_id).exists():
+        selected_control = controls.objects.get(pk=control_id)
+        parameter_list = selected_control.params.all()
+        return parameter_list
+    else:
+        return []
