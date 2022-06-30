@@ -9,11 +9,6 @@ WORKDIR /usr/src/app
 # install dependencies
 RUN apt update && apt-get upgrade -y
 RUN apt install -y --no-install-recommends postgresql-client postgresql-contrib libpq-dev build-essential pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl apache2 apache2-dev
-# RUN apt install -y --no-install-recommends apache2 apache2-dev python3-venv libxslt1-dev libxml2-dev python-libxml2 python3-dev python-setuptools unixodbc-dev
-# To include support for postgres
-# RUN apt install -y --no-install-recommends python-pip python-dev libpq-dev postgresql-client postgresql-contrib
-# To include support for SAML
-# RUN apt install -y python3-pip xmlsec libssl-dev libsasl2-dev
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -41,4 +36,3 @@ USER opal
 EXPOSE 8000
 
 CMD ./startup.sh
-

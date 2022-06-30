@@ -1,20 +1,8 @@
-The opal_deployment.yaml file will deploy the neccessary services on a kubernetes clister to run OPAL in most circumstances.  
+The recommendation for deploying OPAL in a kubernetes cluster is to use the included helm chart. Once you have cloned the repo you can deploy using helm by following these steps:
 
+1. in the docs/k8/helm directory, update the values.yaml file. Particularly you will want to update the hostname to be the url you will access the application at. And of course you should update the passwords
+2. Assuming you have helm installed and working, run the following command from the docs/k8/helm subdirectory:
+`helm install opal opal`
 
-
-Create a secrets.yaml file like this:
-
-<pre>
-apiVersion: v1
-kind: Secret
-metadata:
-  name: opal-passwords
-type: Opaque
-data:
-  POSTGRES_OPAL_PASSWORD: ***************
-  POSTGRES_PASSWORD: ****************
-</pre>
-
-
-Then run kubectl apply -f . from this directory
+If you cannot or do not wish to use helm, you can find the necesary YAML files in the docs/k8/helm/opal/templates directory. Modify these files as needed and then run kubectl apply -f . from this directory
 

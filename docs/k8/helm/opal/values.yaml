@@ -1,0 +1,14 @@
+namespace: opal
+env: test
+hostname: opal.cs4p.net
+tls_secret: opal-tls-secret
+repo:
+    webapp: cs4p
+    db: cs4p
+secret:
+  postgres_opal_password: V1hEX2BCbDooej9XL1M1KF17MD5aWygzVlNZa0pLd2Y8ZjdXRTkuQHJBPy9LOEdKMz44NW9sPFBYVH
+  postgres_password: JCdjcDVvSmMsfDdCekNsKGJhS3RkdGwqIkM6OEtkTGJcQldyWDtmbyg0V2B8UUolXE1Mbn49QiYzMWtbPUZ
+proxy:
+  use_proxy: "False"
+  http_proxy: ""
+  https_proxy: ""
