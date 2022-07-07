@@ -1,6 +1,20 @@
 from common.functions import coalesce
 from common.models import *
 
+class available_catalog_list(BasicModel):
+    """
+    List of catalogs available for import on the homepage
+    """
+
+    class Meta:
+        verbose_name = "Catalog Source"
+        verbose_name_plural = "Catalog Sources"
+
+        uuid = models.UUIDField(editable=True, default=uuid.uuid4, unique=True)
+        slug = ShortTextField(verbose_name="Catalog Slug", help_text="A short name used to identify the catalog in functions or queries. Lowercase, no spaces.")
+        link = models.URLField(verbose_name="Link to Catalog",help_text="A complete URL which returns valid OSCAL json text")
+        name = ShortTextField(verbose_name="Catalog Title", help_text="Human readable name of the catalog.")
+
 
 class tests(BasicModel):
     """
