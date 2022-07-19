@@ -1,7 +1,5 @@
 /.idea/
 /.pytest_cache/
-/*/migrations/*.py
-!/*/migrations/__init__.py
 /htmlcov/
 /real_data/
 /venv/

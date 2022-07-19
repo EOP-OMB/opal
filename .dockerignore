@@ -1,10 +1,8 @@
-**/migrations/*
 *.sqlite3
 *.log
 /.gitignore
 /.idea/
 /opal/.env
-!**/migrations/__init__.py
 /real_data/
 .DS_Store
 /htmlcov/
