@@ -39,4 +39,4 @@ if settings.ENVIRONMENT != 'production':
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])
 
-handler404 = 'common.views.error_404_view'
+# handler404 = 'common.views.error_404_view'
