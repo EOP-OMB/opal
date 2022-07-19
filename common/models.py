@@ -572,6 +572,10 @@ class roles(BasicModel):
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
 
 
+    def __str__(self):
+        return self.title
+
+
     def import_oscal(self, oscal_data):
         if type(oscal_data) is str:
             self.role_id = oscal_data

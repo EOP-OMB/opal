@@ -95,14 +95,13 @@ def import_catalog_view(request, catalog_link):
     """
     Imports a pre-defined set of catalogs
     """
-    from common.views import available_catalog_list
     host = request.get_host()
-    for item in available_catalog_list:
-        if catalog_link == item["slug"] and not catalogs.objects.filter(uuid=item['uuid']).exists():
+    for item in available_catalog_list.objects.all():
+        if catalog_link == item.slug and not catalogs.objects.filter(uuid=item.uuid).exists():
             if settings.ASYNC:
-                import_catalog_task.delay(item, host)
+                import_catalog_task.delay(item.__dict__, host)
             else:
-                import_catalog_task(item, host)
+                import_catalog_task(item.__dict__, host)
     return HttpResponseRedirect(reverse('home_page'))
 
 
@@ -127,13 +126,8 @@ def load_statements(request):
 
 def load_params(request):
     control_id = request.GET.get('control')
-    param_list = get_parameters(control_id)
-    html_str = "<table class='table-bordered'>"
-    html_str += "<tr><th>Guidance</th><th>Param ID</th><th>Value</th></tr>"
-    for p in param_list:
-        html_str += p.get_form()
-    html_str += "</table>"
-    return render(request, 'generic_html_helper.html', {'content': html_str})
+    param_table = get_parameters(control_id)
+    return render(request, 'generic_html_helper.html', {'content': param_table})
 
 
 def get_statements(control_id):
@@ -157,6 +151,11 @@ def get_parameters(control_id):
     if controls.objects.filter(pk=control_id).exists():
         selected_control = controls.objects.get(pk=control_id)
         parameter_list = selected_control.params.all()
-        return parameter_list
+        html_str = "<table class='table-bordered'>"
+        html_str += "<tr><th>Guidance</th><th>Param ID</th><th>Value</th></tr>"
+        for p in parameter_list:
+            html_str += p.get_form()
+        html_str += "</table>"
+        return html_str
     else:
         return []

@@ -42,23 +42,24 @@ def load_sample_catalog(django_db_blocker):
                 )
     return new_catalog.id
 
+
 def test_create_component_statement(db, load_sample_catalog):
     c = Client()
     url = reverse('component:create_component_statement')
     response = c.get(url)
     assert response.status_code == 200
 
-    test_profile = profiles.objects.first()
+    test_catalog = catalogs.objects.first()
     c = Client()
-    url = reverse('component:create_component_statement', kwargs={'profile_id': test_profile})
+    url = reverse('component:create_component_statement')
+    url += '?catalog_id=%s' % test_catalog.id
     response = c.get(url)
     assert response.status_code == 200
-    assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
-    assert profiles.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
+    # assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
+    # assert profiles.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
 
     test_ctrl = controls.objects.first()
-    url = reverse('component:create_component_statement', kwargs={'ctrl_id': test_ctrl})
+    url = reverse('component:create_component_statement')
+    url += '?ctrl_id=%s' % test_ctrl.id
     response = c.get(url)
     assert response.status_code == 200
-
-    assert False

@@ -1,5 +1,5 @@
 from common.models import *
-from catalog.models import controls, params
+from catalog.models import controls, params, catalogs
 import re
 
 
@@ -135,43 +135,43 @@ class profiles(BasicModel):
 
     def to_html(self):
         html_str = self.metadata.to_html()
+        # Checking to see if the import is local
         regexp = re.compile('.*/common/p/')
         for ctrl in self.imports.all():
             re.match(regexp, ctrl.href)
             m = re.match(regexp, ctrl.href)
             if m is not None:
-                obj = search_for_uuid(ctrl.href[m.end():])
-                if obj is not None:
-                    if obj._meta.model_name == 'catalogs':
-                        html_str = "<h1>" + obj.metadata.title + "</h1>"
-                        html_str += "<h2>Metadata</h2>"
-                        html_str += obj.metadata.to_html()
-                        html_str += "<hr>\n"
-                        html_str += "<table class='table table-striped'>\n"
-                        if obj.groups is not None:
-                            for group in obj.groups.all():
-                                html_str += "<tr><td colspan=3><h3>" + group.__str__() + "</h3></td></tr>"
-                                if group.sub_groups is not None:
-                                    for sub_group in group.sub_groups.all():
-                                        html_str += "<tr><td colspan=3><h4>" + sub_group.__str__() + "</h4></td></tr>"
-                                if group.controls is not None:
-                                    for ctrl in group.controls.all():
-                                        html_str += "<tr>"
-                                        html_str += "<th>" + ctrl.__str__() + "</th>"
-                                        html_str += "<td><a href='" + reverse(
-                                            'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "&profile_id=" + str(self.id) + "'>Define</a></td>"
-                                        html_str += "<td><a href=''>Modify</a></td>"
-                                        html_str += "</tr>"
-
-                        if obj.controls is not None:
-                            html_str += "<tr><td colspan=3><h3>Controls not in a Group</h3></td></tr>"
-                            for ctrl in obj.controls.all():
-                                html_str += "<tr>"
-                                html_str += "<th>" + ctrl.__str__() + "</th>"
-                                html_str += "<td><a href='" + reverse(
-                                    'component:new_requirement', kwargs={'control_id': ctrl.id}
-                                    ) + "'>Define</a></td>"
-                                html_str += "<td><a href=''>Modify</a></td>"
-                                html_str += "</tr>"
-                        html_str += "</table>\n"
+                obj_uuid = ctrl.href[m.end():]
+                if obj_uuid is not None and catalogs.objects.filter(uuid=obj_uuid).exists():
+                    obj = catalogs.objects.get(uuid=obj_uuid)
+                    html_str = "<h1>" + obj.metadata.title + "</h1>"
+                    html_str += "<h2>Metadata</h2>"
+                    html_str += obj.metadata.to_html()
+                    html_str += "<hr>\n"
+                    html_str += "<table class='table table-striped'>\n"
+                    if obj.groups is not None:
+                        for group in obj.groups.all():
+                            html_str += "<tr><td colspan=3><h3>" + group.__str__() + "</h3></td></tr>"
+                            if group.sub_groups is not None:
+                                for sub_group in group.sub_groups.all():
+                                    html_str += "<tr><td colspan=3><h4>" + sub_group.__str__() + "</h4></td></tr>"
+                            if group.controls is not None:
+                                for ctrl in group.controls.all():
+                                    html_str += "<tr>"
+                                    html_str += "<th>" + ctrl.__str__() + "</th>"
+                                    html_str += "<td><a href='" + reverse(
+                                        'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "&catalog_id=" + str(self.id) + "'>Define</a></td>"
+                                    html_str += "<td><a href=''>Modify</a></td>"
+                                    html_str += "</tr>"
+                    if obj.controls is not None:
+                        html_str += "<tr><td colspan=3><h3>Controls not in a Group</h3></td></tr>"
+                        for ctrl in obj.controls.all():
+                            html_str += "<tr>"
+                            html_str += "<th>" + ctrl.__str__() + "</th>"
+                            html_str += "<td><a href='" + reverse(
+                                'component:new_requirement', kwargs={'control_id': ctrl.id}
+                                ) + "'>Define</a></td>"
+                            html_str += "<td><a href=''>Modify</a></td>"
+                            html_str += "</tr>"
+                    html_str += "</table>\n"
         return html_str

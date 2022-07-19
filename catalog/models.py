@@ -1,6 +1,7 @@
 from common.functions import coalesce
 from common.models import *
 
+
 class available_catalog_list(BasicModel):
     """
     List of catalogs available for import on the homepage
@@ -10,10 +11,18 @@ class available_catalog_list(BasicModel):
         verbose_name = "Catalog Source"
         verbose_name_plural = "Catalog Sources"
 
-        uuid = models.UUIDField(editable=True, default=uuid.uuid4, unique=True)
-        slug = ShortTextField(verbose_name="Catalog Slug", help_text="A short name used to identify the catalog in functions or queries. Lowercase, no spaces.")
-        link = models.URLField(verbose_name="Link to Catalog",help_text="A complete URL which returns valid OSCAL json text")
-        name = ShortTextField(verbose_name="Catalog Title", help_text="Human readable name of the catalog.")
+    catalog_uuid = models.UUIDField(editable=True, default=uuid.uuid4, unique=True)
+    slug = ShortTextField(verbose_name="Catalog Slug", help_text="A short name used to identify the catalog in functions or queries. Lowercase, no spaces.")
+    link = models.URLField(verbose_name="Link to Catalog", help_text="A complete URL which returns valid OSCAL json text")
+    name = ShortTextField(verbose_name="Catalog Title", help_text="Human readable name of the catalog.")
+
+    def get_link(self):
+        catalog_import_url = reverse('catalog:import_catalog_view', kwargs={'catalog_link': self.slug})
+        if catalogs.objects.filter(uuid=self.catalog_uuid).exists():
+            r = ["<li><a href='", (catalog_import_url), "'>", self.name, "</a> &#9989;</li>"]
+        else:
+            r = ["<li><a href='", (catalog_import_url), "'>", self.name, "</a></li>"]
+        return "".join(r)
 
 
 class tests(BasicModel):
@@ -201,7 +210,7 @@ class parts(PrimitiveModel):
         )
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def to_html(self, indent=0,guidance=True,links=True):
+    def to_html(self, indent=0, guidance=True, links=True):
         html_str = ""
         if self.name in ["item", "statement"]:
             if len(self.props.filter(name="label")) > 0:
@@ -213,7 +222,7 @@ class parts(PrimitiveModel):
         if len(self.sub_parts.all()) > 0:
             indent += 2
             for p in self.sub_parts.all():
-                html_str += "&nbsp;" * indent + p.to_html(indent=indent,guidance=guidance,links=links)
+                html_str += "&nbsp;" * indent + p.to_html(indent=indent, guidance=guidance, links=links)
         if len(self.links.all()) > 0 and links:
             html_str += "<hr>"
             for link in self.links.all():
@@ -253,8 +262,6 @@ class parts(PrimitiveModel):
         ctrl = root_prt.controls_set.first()
         return ctrl
 
-
-
     def __str__(self):
         if len(self.part_id) > 0:
             return self.part_id
@@ -277,6 +284,7 @@ class parts(PrimitiveModel):
             for part in self.sub_parts.all():
                 part_list.extend(part.get_all_parts())
         return part_list
+
 
 class controls(PrimitiveModel):
     """
@@ -378,7 +386,7 @@ class controls(PrimitiveModel):
         html_str += "</h4>"
         if self.parts is not None:
             for i in self.parts.all():
-                html_str += i.to_html(guidance=False,links=False)
+                html_str += i.to_html(guidance=False, links=False)
         if self.params is not None:
             for i in self.params.all():
                 str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'

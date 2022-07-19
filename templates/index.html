@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% if not app_initialized %}
+    <a href="{% url 'common:app_init' %}">Initialize the Application</a>
+    <hr>
+{% endif %}
 <h1>Step 1: Import Catalogs</h1>
     <p>The OSCAL catalog model represents a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
     <p>Click on any of the following links to import these common catalogs:</p>

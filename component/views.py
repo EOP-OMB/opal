@@ -5,9 +5,10 @@ from django.views.generic import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from .forms import component_statement_form, select_control_statements_form
-from catalog.views import get_statements
-from .models import *
-from ctrl_profile.models import profiles
+from catalog.views import get_statements, get_parameters
+from .models import components, parameters, controls, by_components, implemented_requirements, statements, control_implementations
+from catalog.models import catalogs
+import logging
 
 
 # Create your views here.
@@ -99,23 +100,25 @@ def create_component_statement(request):
         for p in param_list:
             param_value = request.POST[p.param_id]
             if param_value != '':
-                new_param_id, created = parameters.objects.get_or_create(param_id=p,values=param_value)
+                new_param_id, created = parameters.objects.get_or_create(param_id=p, values=param_value)
                 comp_id.control_implementations.first().set_parameters.add(new_param_id)
         return HttpResponseRedirect(comp_id.get_absolute_url())
     else:
-        profile_id = request.GET.get('profile_id', default=None)
+        catalog_id = request.GET.get('catalog_id', default=None)
         ctrl_id = request.GET.get('ctrl_id', default=None)
         initial_dict = {}
         statement_list = []
-        if profile_id:
-            initial_dict['profiles'] = profile_id
-            selected_profile = profiles.objects.get(pk=profile_id)
-            initial_dict['controls'] = selected_profile.list_all_controls()
+        param_form = ""
+        if catalog_id:
+            initial_dict['catalogs'] = catalog_id
+            selected_catalog = catalogs.objects.get(pk=catalog_id)
+            initial_dict['controls'] = selected_catalog.list_all_controls()
         if ctrl_id:
             initial_dict['controls'] = ctrl_id
             ctrl_statements = get_statements(ctrl_id)
             for item in ctrl_statements:
                 statement_list.append((item["value"], item["display"]))
+            param_form = get_parameters(ctrl_id)
         if initial_dict != {}:
             ctrl_selection_form = select_control_statements_form(initial=initial_dict)
             if statement_list:
@@ -131,6 +134,7 @@ def create_component_statement(request):
 
     context = {
         "comp_form": comp_statement_form,
+        "param_form": param_form,
         "ctrl_form": ctrl_selection_form
         }
     return render(request, "component/requirements_by_component.html", context)
