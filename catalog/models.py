@@ -12,12 +12,11 @@ class available_catalog_list(BasicModel):
         verbose_name_plural = "Catalog Sources"
 
     catalog_uuid = models.UUIDField(editable=True, default=uuid.uuid4, unique=True)
-    slug = ShortTextField(verbose_name="Catalog Slug", help_text="A short name used to identify the catalog in functions or queries. Lowercase, no spaces.")
     link = models.URLField(verbose_name="Link to Catalog", help_text="A complete URL which returns valid OSCAL json text")
     name = ShortTextField(verbose_name="Catalog Title", help_text="Human readable name of the catalog.")
 
     def get_link(self):
-        catalog_import_url = reverse('catalog:import_catalog_view', kwargs={'catalog_link': self.slug})
+        catalog_import_url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': self.id})
         if catalogs.objects.filter(uuid=self.catalog_uuid).exists():
             r = ["<li><a href='", (catalog_import_url), "'>", self.name, "</a> &#9989;</li>"]
         else:

@@ -57,17 +57,7 @@ app = Celery('tasks', broker=settings.BROKER)
 
 @app.task(bind=True)
 def import_catalog_task(self, item, host):
-    proxies = {}
-    if settings.HTTP_PROXY:
-        proxies['http'] = settings.HTTP_PROXY
-    if settings.HTTPS_PROXY:
-        proxies['https'] = settings.HTTPS_PROXY
-
-    catalog_url = item["link"]
-    urllib.request.ProxyHandler()
-    f = urllib.request.urlopen(catalog_url)
-    catalog_json = json.loads(f.read())
-    catalog_dict = catalog_json["catalog"]
+    catalog_dict = download_catalog(item['link'])
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
@@ -91,17 +81,34 @@ def import_catalog_task(self, item, host):
     return 'catalog import complete'
 
 
-def import_catalog_view(request, catalog_link):
+def download_catalog(link):
+    proxies = {}
+    if settings.HTTP_PROXY:
+        proxies['http'] = settings.HTTP_PROXY
+    if settings.HTTPS_PROXY:
+        proxies['https'] = settings.HTTPS_PROXY
+    urllib.request.ProxyHandler()
+    f = urllib.request.urlopen(link)
+    catalog_json = json.loads(f.read())
+    catalog_dict = catalog_json["catalog"]
+    return catalog_dict
+
+
+def import_catalog_view(request, catalog_id):
     """
     Imports a pre-defined set of catalogs
     """
+    logger = logging.getLogger('django')
     host = request.get_host()
-    for item in available_catalog_list.objects.all():
-        if catalog_link == item.slug and not catalogs.objects.filter(uuid=item.uuid).exists():
+    if available_catalog_list.objects.filter(id=catalog_id).exists:
+        import_catalog_target = available_catalog_list.objects.get(id=catalog_id)
+        if catalogs.objects.filter(uuid=import_catalog_target.catalog_uuid).exists():
+            logger.info("Catalog with UUID %s already exists" % import_catalog_target.catalog_uuid)
+        else:
             if settings.ASYNC:
-                import_catalog_task.delay(item.__dict__, host)
+                import_catalog_task.delay(import_catalog_target.__dict__, host)
             else:
-                import_catalog_task(item.__dict__, host)
+                import_catalog_task(import_catalog_target.__dict__, host)
     return HttpResponseRedirect(reverse('home_page'))
 
 

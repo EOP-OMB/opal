@@ -106,7 +106,8 @@ def test_load_statements_view(db, load_sample_catalog):
 # @pytest.mark.skip
 def test_import_catalog_view(db):
     c = Client()
-    url = reverse('catalog:import_catalog_view', kwargs={'catalog_link': 'nist_sp_800_53_rev_5_moderate_baseline'})
+    response_app_init = c.get(reverse('common:app_init'))
+    url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': catalogs.objects.first().id})
     response = c.get(url)
     assert response.status_code == 302
     # assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
