@@ -1,6 +1,4 @@
-from django.test import TestCase
 from ssp.models import *
-import json
 from django.test import Client
 from django.urls import reverse
 
@@ -25,6 +23,7 @@ def test_import_ssp_view_with_existing_ssp(db):
     response = c.get(url)
     assert response.status_code == 302
     assert system_security_plans.objects.filter(metadata__title='Enterprise Logging and Auditing System Security Plan').exists()
+
 
 # @pytest.mark.skip
 def test_import_ssp_view_file_not_found(db):

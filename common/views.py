@@ -1,5 +1,6 @@
 from ntpath import join
 import urllib
+from django.http import HttpResponseNotFound
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.apps import apps
@@ -53,15 +54,10 @@ def permalink(request, p_uuid):
     obj = search_for_uuid(p_uuid)
     try:
         redirect_url = obj.get_absolute_url()
+        return redirect(redirect_url)
     except AttributeError as e:
-        err_msg = e
-    return redirect(to=redirect_url)
-
-
-def error_404_view(request, exception):
-    template_name = "404.html"
-    context_object_name = "obj"
-    return render(request, "404.html", exception)
+        err_msg = "No object with that UUID was found"
+        return HttpResponseNotFound(err_msg)
 
 
 def app_init(request):

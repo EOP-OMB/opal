@@ -1,24 +1,22 @@
 import pytest
-
-import common.functions
-from .factory import *
 import json
 
 from common.models import metadata
 from catalog.models import catalogs
 from ctrl_profile.models import profiles, imports
 from component.models import components
-from django.test import Client
+from django.test import Client, TestCase
 from django.urls import reverse
+from model_mommy import mommy
+from model_mommy.recipe import Recipe, foreign_key
 from common.views import load_catalog_import_list
 
 
 # Create your tests here.
-def test_model_tests(db):
-    new_test = testsFactory()
-    saved_test = tests.objects.get(id=new_test.id)
-    assert saved_test == new_test
-    assert saved_test.__str__() == new_test.expression
+class catalog_model_tests(TestCase):
+    def testCatalogModel(self):
+        self.catalog = mommy.make(catalogs, _fill_optional=True)
+        assert self.catalog == catalogs.objects.get(id=self.catalog.id)
 
 
 @pytest.fixture(scope='module')
@@ -103,7 +101,7 @@ def test_load_statements_view(db, load_sample_catalog):
     assert response.status_code == 200
 
 
-# @pytest.mark.skip
+@pytest.mark.skip
 def test_import_catalog_view(db):
     c = Client()
     response_app_init = c.get(reverse('common:app_init'))

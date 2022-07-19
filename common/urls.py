@@ -18,7 +18,7 @@ from django.urls import path
 from common.views import permalink, database_status_view, app_init
 
 app_name = 'common'
-urlpatterns = [path('p/<str:uuid>', permalink, name='permalink'),
+urlpatterns = [path('p/<str:p_uuid>', permalink, name='permalink'),
                path('db_status/', database_status_view, name='db_status'),
                path('app_init/', app_init, name='app_init'),
                ]

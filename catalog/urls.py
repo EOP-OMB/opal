@@ -27,5 +27,5 @@ urlpatterns = [path('', catalog_index_view, name='catalog_index_view'),
                path('control/<int:pk>', control_detail_view.as_view(), name='control_detail_view'),
                path('ajax/load-controls/', load_controls, name='ajax_load_controls'),
                path('ajax/load_statements/', load_statements, name='ajax_load_statements'),
-                path('ajax/load_params/', load_params, name='ajax_load_params'),
+               path('ajax/load_params/', load_params, name='ajax_load_params'),
                ]

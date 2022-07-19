@@ -2,10 +2,11 @@
 #django-test-plus
 #Werkzeug
 django_extensions
-attrs
-coverage
-factory-boy
-Faker
+# attrs
+# coverage
+model_mommy
+# factory-boy
+# Faker
 # iniconfig
 # packaging
 # pluggy
@@ -16,4 +17,4 @@ pytest-cov
 pytest-django
 # python-dateutil
 # tomli
-mixer
+# mixer

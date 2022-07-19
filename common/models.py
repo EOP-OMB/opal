@@ -84,7 +84,7 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
     def get_permalink(self):
-        url = reverse('common:permalink', kwargs={'uuid': str(self.uuid)})
+        url = reverse('common:permalink', kwargs={'p_uuid': str(self.uuid)})
         return url
 
     def get_absolute_url(self):

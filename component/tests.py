@@ -1,11 +1,9 @@
 import pytest
 
-import common.functions
-from .factory import *
 import json
 
 from common.models import metadata
-from catalog.models import catalogs
+from catalog.models import catalogs, controls
 from ctrl_profile.models import profiles, imports
 from component.models import components
 from django.test import Client
