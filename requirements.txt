@@ -2,22 +2,23 @@ Django
 django-environ
 django-bootstrap-v5
 xmltodict
-celery
-celery_progress
+django-nested-inline
+django_extensions
 # POSTGRES Support
 psycopg2
+#async process support
 pyrabbit
-#
-django_extensions
+celery
+celery_progress
 # SAML Support
 ####################################################################################################
-# the django-saml-sp project is awesome.  By far the best SAML solution I ahve seen.  However,
+# the django-saml-sp project is awesome.  By far the best SAML solution I have seen.  However,
 # the project has a few issues and may not be actively maintained. I have submitted a pull request
 # to address the most significant issues, but am simply importing the code for now.
 # check the repo from time to time for new updates and replace this code with the module when we can
 # https://github.com/imsweb/django-saml-sp
 ####################################################################################################
-# django-saml-sp
+django-saml-sp
 python3-saml
 cryptography
 #

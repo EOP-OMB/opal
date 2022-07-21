@@ -228,24 +228,24 @@ class parts(PrimitiveModel):
                 html_str += link.to_html() + "<br>"
         return html_str
 
-    def to_html_form(self, indent=0):
-        html_str = ""
-        if self.name in ["item", "statement"] and len(self.prose) > 0:
-            html_str = "<tr><td valign='top'>"
-            if len(self.props.filter(name="label")) > 0:
-                html_str += self.props.get(name="label").value + " "
-            html_str += self.prose + "</td>"
-            html_str += "<td><textarea id='" + self.part_id + "' name='part_" + str(
-                self.pk
-                ) + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
-        if self.name == "guidance" and len(self.prose) > 0:
-            html_str = "<h5>Guidance</h5>"
-            html_str += "<p>" + self.prose + "</p>"
-        if len(self.sub_parts.all()) > 0:
-            indent += 2
-            for p in self.sub_parts.all():
-                html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
-        return html_str
+    # def to_html_form(self, indent=0):
+    #     html_str = ""
+    #     if self.name in ["item", "statement"] and len(self.prose) > 0:
+    #         html_str = "<tr><td valign='top'>"
+    #         if len(self.props.filter(name="label")) > 0:
+    #             html_str += self.props.get(name="label").value + " "
+    #         html_str += self.prose + "</td>"
+    #         html_str += "<td><textarea id='" + self.part_id + "' name='part_" + str(
+    #             self.pk
+    #             ) + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
+    #     if self.name == "guidance" and len(self.prose) > 0:
+    #         html_str = "<h5>Guidance</h5>"
+    #         html_str += "<p>" + self.prose + "</p>"
+    #     if len(self.sub_parts.all()) > 0:
+    #         indent += 2
+    #         for p in self.sub_parts.all():
+    #             html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
+    #     return html_str
 
     def get_root_part(self):
         if self.parts_set.first() is not None:

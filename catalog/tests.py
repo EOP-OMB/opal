@@ -101,7 +101,7 @@ def test_load_statements_view(db, load_sample_catalog):
     assert response.status_code == 200
 
 
-@pytest.mark.skip
+@pytest.mark.slow
 def test_import_catalog_view(db):
     c = Client()
     response_app_init = c.get(reverse('common:app_init'))
@@ -126,5 +126,15 @@ def test_load_statements(db, load_sample_catalog):
     ctrl_list = cat.list_all_controls()
     ctrl = ctrl_list[0]
     url = reverse('catalog:ajax_load_statements') + '?control=' + str(ctrl.id)
+    response = c.get(url)
+    assert response.status_code == 200
+
+
+def test_load_params(db, load_sample_catalog):
+    c = Client()
+    cat = catalogs.objects.first()
+    ctrl_list = cat.list_all_controls()
+    ctrl = ctrl_list[0]
+    url = reverse('catalog:ajax_load_params') + '?control=' + str(ctrl.id)
     response = c.get(url)
     assert response.status_code == 200
