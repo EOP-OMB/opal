@@ -159,9 +159,8 @@ class profiles(BasicModel):
                                 for ctrl in group.controls.all():
                                     html_str += "<tr>"
                                     html_str += "<th>" + ctrl.__str__() + "</th>"
-                                    html_str += "<td><a href='" + reverse(
-                                        'component:create_component_statement') + '?ctrl_id=' + str(ctrl.id) + "&catalog_id=" + str(self.id) + "'>Define</a></td>"
-                                    html_str += "<td><a href=''>Modify</a></td>"
+                                    html_str += "<td>Implemented By: %s</td>" % ctrl.get_all_components()
+                                    html_str += "<td></td>"
                                     html_str += "</tr>"
                     if obj.controls is not None:
                         html_str += "<tr><td colspan=3><h3>Controls not in a Group</h3></td></tr>"

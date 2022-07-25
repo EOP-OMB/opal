@@ -1,5 +1,6 @@
 from common.functions import coalesce
 from common.models import *
+# from component.models import implemented_requirements
 
 
 class available_catalog_list(BasicModel):
@@ -314,6 +315,17 @@ class controls(PrimitiveModel):
             part_list.extend(part.get_all_parts())
         return part_list
 
+    def get_all_components(self):
+        if self.implemented_requirements_set.count() > 0:
+            comp_list = self.implemented_requirements_set.all()
+            html_str = "<ul>"
+            for comp in comp_list:
+                html_str += "<li>%s</li>" % comp.control_implementation.component.title
+            html_str += "</ul>"
+        else:
+            html_str = "Control is not implemented."
+        return html_str
+
     def __str__(self):
         return self.control_class + " " + self.control_id + " " + self.title
 
@@ -474,10 +486,7 @@ class groups(PrimitiveModel):
     sub_groups = CustomManyToManyField(
         to="groups", verbose_name="Sub Groups", help_text="A group of controls, or of groups of controls."
         )
-    controls = CustomManyToManyField(
-        to="controls", verbose_name="Controls",
-        help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
-        )
+    controls = CustomManyToManyField(to="controls", verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance.")
 
     def __str__(self):
         return self.group_id.upper() + " - " + self.title + " (" + self.group_class + ")"

@@ -1,5 +1,10 @@
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
+from django.urls import reverse
+from common.models import BasicModel, CustomManyToManyField, implementation_status_choices, parties, propertiesField, links, roles, ShortTextField, system_status_state_choices, protocols
 from catalog.models import controls, parts, params
-from common.models import *
+
+import logging
 
 logger = logging.getLogger('django')
 
@@ -15,7 +20,10 @@ class satisfied(BasicModel):
         verbose_name_plural = "Satisfied Control Implementation Responsibilities"
 
     responsibility_uuid = models.ForeignKey(to="responsibilities", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(verbose_name="Control Implementation Responsibility Description", help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system.")
+    description = models.TextField(
+        verbose_name="Control Implementation Responsibility Description",
+        help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
+        )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
@@ -31,7 +39,10 @@ class responsibilities(BasicModel):
         verbose_name_plural = "Control Implementation Responsibilities"
 
     provided_uuid = models.ForeignKey(to="provided_control_implementation", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(verbose_name="Control Implementation Responsibility Description", help_text="An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system.")
+    description = models.TextField(
+        verbose_name="Control Implementation Responsibility Description",
+        help_text="An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system."
+        )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
@@ -66,7 +77,10 @@ class inherited(BasicModel):
         verbose_name_plural = "Inherited Control Implementations"
 
     provided_uuid = models.ForeignKey(to="provided_control_implementation", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(verbose_name="Control Implementation Responsibility Description", help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system.")
+    description = models.TextField(
+        verbose_name="Control Implementation Responsibility Description",
+        help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
+        )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
@@ -163,7 +177,9 @@ class provided_control_implementation(BasicModel):
         verbose_name = "Provided Control Implementation"
         verbose_name_plural = "Provided Control Implementations"
 
-    description = models.TextField(verbose_name="Provided Control Implementation Description", help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system.")
+    description = models.TextField(
+        verbose_name="Provided Control Implementation Description", help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system."
+        )
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
@@ -278,7 +294,6 @@ class components(BasicModel):
     status = ShortTextField(verbose_name="Status", help_text=" Describes the operational status of the system component.", choices=system_status_state_choices)
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     protocols = CustomManyToManyField(to=protocols, verbose_name="Service Protocol Information", help_text="Information about the protocol used to provide a service.")
-
 
     def __str__(self):
         return self.title
