@@ -1,11 +1,10 @@
-from django.contrib import admin
 from django.apps import apps
+from django.contrib import admin
+from nested_inline.admin import NestedModelAdmin, NestedStackedInline
+
 from common.admin import CustomAdmin
+from component.models import by_components, components, control_implementations, implemented_requirements
 
-from component.models import components, control_implementations, implemented_requirements, statements, by_components
-from catalog.models import controls
-
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 # Not using this, implementation is strictly at the control level now. It was just much simpler
 # class statementsTabularInline(NestedStackedInline):
@@ -20,7 +19,7 @@ class by_componentTabularInline(NestedStackedInline):
     model = by_components
     extra = 0
     fk_name = 'implemented_requirement'
-    fields = ('component_uuid','implementation_status','description','responsible_roles')
+    fields = ('component_uuid', 'implementation_status', 'description', 'responsible_roles')
     filter_horizontal = ('responsible_roles',)
 
 
@@ -53,7 +52,7 @@ class componentsAdmin(NestedModelAdmin):
     raw_id_fields = ('props', 'links', 'responsible_roles', 'protocols')
     date_hierarchy = 'created_at'
     inlines = [control_implementationsTabularInline]
-    fields = ('title','type','description','purpose','status')
+    fields = ('title', 'type', 'description', 'purpose', 'status')
 
 
 # other models
