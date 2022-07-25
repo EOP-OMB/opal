@@ -2,12 +2,9 @@ from django.test import Client
 from django.contrib.auth import get_user_model
 from common.functions import reset_all_db, search_for_uuid, replace_hyphen, coalesce
 import uuid
-from model_mommy import mommy
+from model_bakery import baker
 from common.models import links, roles
 from catalog.models import available_catalog_list, controls
-
-
-# Create your tests here.
 from django.urls import reverse
 
 
@@ -31,7 +28,7 @@ def test_reset_all_db_function(db):
 
 
 def test_permalink(db):
-    test_ctrl = mommy.make(controls, _fill_optional=True)
+    test_ctrl = baker.make(controls, _fill_optional=True)
     test_ctrl.uuid = str(uuid.uuid4())
     test_ctrl.save()
     c = Client()
@@ -46,8 +43,8 @@ def test_permalink(db):
 
 def test_search_for_uuid_function(db):
     uuid_str = str(uuid.uuid4())
-    assert search_for_uuid(uuid_str) == None
-    new_link = mommy.make(links)
+    assert search_for_uuid(uuid_str) is None
+    new_link = baker.make(links)
     assert search_for_uuid(str(new_link.uuid)) == new_link
 
 
@@ -57,8 +54,8 @@ def test_replace_hyphen_function():
 
 
 def test_coalesce_function():
-    assert coalesce(None,"",'Something','SomethingElse') == 'Something'
-    assert coalesce(None,"",None) == "N/A"
+    assert coalesce(None, "", 'Something', 'SomethingElse') == 'Something'
+    assert coalesce(None, "", None) == "N/A"
 
 
 def test_app_init(db):

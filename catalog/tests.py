@@ -7,15 +7,15 @@ from ctrl_profile.models import profiles, imports
 from component.models import components
 from django.test import Client, TestCase
 from django.urls import reverse
-from model_mommy import mommy
-from model_mommy.recipe import Recipe, foreign_key
+from model_bakery import baker
+from model_bakery.recipe import Recipe, foreign_key
 from common.views import load_catalog_import_list
 
 
 # Create your tests here.
 class catalog_model_tests(TestCase):
     def testCatalogModel(self):
-        self.catalog = mommy.make(catalogs, _fill_optional=True)
+        self.catalog = baker.make(catalogs, _fill_optional=True)
         assert self.catalog == catalogs.objects.get(id=self.catalog.id)
 
 
