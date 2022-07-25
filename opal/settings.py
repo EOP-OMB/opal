@@ -14,6 +14,8 @@ import secrets
 from pathlib import Path
 import os
 import environ
+import subprocess
+import opal
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -83,11 +85,7 @@ ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
 ROOT_URLCONF = 'opal.urls'
 
-# Version Nnumbering
-import os
-import subprocess
-import opal
-
+# Version Numbering
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 try:

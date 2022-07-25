@@ -31,11 +31,11 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 2. Build the image\
     `docker build -t opal .`
 3. Run the container\
-    `docker run --rm -it --name opal -p 8000:8000 -e DB_HOST=localhost -e DB_NAME=db.sqlite3 -e LOG_LEVEL=DEBUG -e opal`
+    `docker run --rm -it --name opal -p 8000:8000 -e LOG_LEVEL=DEBUG`
 ## Run OPAL with a Postgres database including persistent storage using docker-compose
 1. Clone the repository to your local directory
    `git clone https://gitlab.max.gov/max-security/opal.git`
-3. Run the the docker-compose. YAML file in the docs/docker-compose/ folder\
+3. Run the docker-compose. YAML file in the docs/docker-compose/ folder\
     `cd docs/docker-compose`
     `docker-compose up`
 
@@ -44,4 +44,4 @@ OPAL is designed to run well in a containerized environment. It is recommended t
 
 **NOTE: defaults will be applied if the environment variable is NOT provided, but if you provide an empty string or something similar the application will not overwrite that with the default value.**
 
-You can find a list of all environment variables and thier defaults in the opal/settings.py file.
+You can find a list of all environment variables and their defaults in the opal/settings.py file.
