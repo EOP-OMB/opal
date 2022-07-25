@@ -7,18 +7,18 @@ from catalog.models import controls
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-
-class statementsTabularInline(NestedStackedInline):
-    model = statements
-    extra = 1
-    fk_name = 'implemented_requirement'
-    fields = ('statement_id')
-    filter_horizontal = ('statement_id',)
+# Not using this, implementation is strictly at the control level now. It was just much simpler
+# class statementsTabularInline(NestedStackedInline):
+#     model = statements
+#     extra = 0
+#     fk_name = 'implemented_requirement'
+#     fields = ('statement_id',)
+#     filter_horizontal = ('statement_id',)
 
 
 class by_componentTabularInline(NestedStackedInline):
     model = by_components
-    extra = 1
+    extra = 0
     fk_name = 'implemented_requirement'
     fields = ('component_uuid','implementation_status','description','responsible_roles')
     filter_horizontal = ('responsible_roles',)
@@ -26,15 +26,15 @@ class by_componentTabularInline(NestedStackedInline):
 
 class implemented_requirementsTabularInline(NestedStackedInline):
     model = implemented_requirements
-    extra = 1
+    extra = 0
     fk_name = 'control_implementation'
-    inlines = [by_componentTabularInline, statementsTabularInline]
+    inlines = [by_componentTabularInline]
     fields = ('control_id',)
 
 
 class control_implementationsTabularInline(NestedStackedInline):
     model = control_implementations
-    extra = 1
+    extra = 0
     fk_name = 'component'
     fields = ('description',)
     inlines = [implemented_requirementsTabularInline]

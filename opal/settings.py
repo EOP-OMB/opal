@@ -83,9 +83,21 @@ ROOT_URLCONF = 'opal.urls'
 WSGI_APPLICATION = 'opal.wsgi.application'
 ROOT_URLCONF = 'opal.urls'
 
+# Version Nnumbering
+import os
+import subprocess
+import opal
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    opal.__build__ = subprocess.check_output(["git", "describe", "--tags", "--always"], cwd=BASE_DIR).decode('utf-8').strip()
+except:
+    opal.__build__ = opal.__version__ + " ?"
+
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [BASE_DIR / 'templates'],
+    'DIRS': [BASE_DIR + '/templates'],
     'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
@@ -136,7 +148,7 @@ INSTALLED_APPS.extend(USER_APPS)
 if ENVIRONMENT == "development":
     INSTALLED_APPS.extend(DEV_APPS)
 
-AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend','django.contrib.auth.backends.ModelBackend',]
+AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend', 'django.contrib.auth.backends.ModelBackend', ]
 
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
@@ -200,6 +212,7 @@ class autoreloadFilter(logging.Filter):
     """
     This is a filter which removes autoreload.py messages
     """
+
     def filter(self, record):
         if record.filename == 'autoreload.py':
             return False

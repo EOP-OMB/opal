@@ -4,3 +4,13 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.control_implementation {
+    padding-left: 25px;
+    padding-bottom: 15px;
+}
+
+.implemented_requirement {
+    padding-left: 25px;
+    padding-bottom: 15px;
+}

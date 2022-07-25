@@ -1,6 +1,6 @@
 from catalog.models import controls, parts, params
 from common.models import *
-
+logger = logging.getLogger('django')
 
 # Create your models here.
 class satisfied(BasicModel):
@@ -154,6 +154,12 @@ class by_components(BasicModel):
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     implemented_requirement = models.ForeignKey(to='implemented_requirements', on_delete=models.CASCADE)
 
+    def to_html(self):
+        html_str = "<div class='component_control_implementation'>"
+        html_str += self.description
+        html_str += "</div>"
+        return html_str
+
 
 class provided_control_implementation(BasicModel):
     """
@@ -205,33 +211,28 @@ class implemented_requirements(BasicModel):
         return str(r)
 
     def to_html(self):
-        html_str = "\n"
+        html_str = "<div class='implemented_requirement'>"
         html_str += self.control_id.to_html()
-        html_str += "<h4>Parameters</h4>"
-        html_str += "<table>"
-        html_str += "<tr><th>ID</th><th>Label</th><th>Guidlines</th><th>Value</th></tr>"
-        for param in self.set_parameters.all():
-            html_str += "<tr>"
-            html_str += param.param_id.to_html()
-            html_str += "<td>" + param.values + "</td>"
-            html_str += "</tr>"
-        html_str += "</table>"
-        html_str += "<h4>Statements</h4>"
-        html_str += "<table>"
-        html_str += "<tr><th>Statement</th><th>How is the control implemented?</th></tr>"
-        for stmt in self.statements.all():
-            html_str += "<tr>"
-            html_str += "<td>"
-            for part in stmt.statement_id.all():
-                html_str += part.to_html()
-            html_str += "</td>"
-            html_str += "<td><dl>"
-            for comp in stmt.by_components.all():
-                html_str += "<dt>" + comp.component_uuid.title + "</dt>"
-                html_str += "<dd>" + comp.description + "</dd>"
-            html_str += "</dl></td>"
-            html_str += "</tr>"
-        html_str += "</table>"
+        if self.set_parameters.count() > 0:
+            html_str += "<h4>Parameters</h4>"
+            html_str += "<table>"
+            html_str += "<tr><th>ID</th><th>Label</th><th>Guidlines</th><th>Value</th></tr>"
+            for param in self.set_parameters.all():
+                html_str += "<tr>"
+                html_str += param.param_id.to_html()
+                html_str += "<td>" + param.values + "</td>"
+                html_str += "</tr>"
+            html_str += "</table>"
+        # if self.statements_set.count() > 0:
+        #     html_str += "<h4>Statements</h4>"
+        #     for stmt in self.statements_set.all():
+        #         for part in stmt.statement_id.all():
+        #             html_str += part.to_html()
+        if self.by_components_set.count() > 0:
+            html_str += "<h4>How is the control implemented?</h4>"
+            for comp in self.by_components_set.all():
+                html_str += comp.to_html()
+        html_str += "</div>"
         return html_str
 
 
@@ -253,10 +254,27 @@ class control_implementations(BasicModel):
     #     to="implemented_requirements", verbose_name="Implemented Requirements",
     #     help_text="Describes how the system satisfies controls."
     #     )
-    component = models.ForeignKey(to='components', on_delete=models.CASCADE)
+    component = models.ForeignKey(to='components', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.description
+
+    def to_html(self):
+        html_str = "<div class='control_implementation'>"
+        if len(self.description) > 0:
+            html_str += "<h3>%s</h3>" % self.description
+        if self.set_parameters.count() > 0:
+            html_str += "Parameters defined by this Control Implementation:"
+            html_str += "<table><tr><th>Parameter</th<th>Value</th></tr>"
+            for param in self.set_parameters:
+                html_str += "<tr><th>%s</th<th>%s</th></tr>" % (param.param_id, param.values)
+            html_str += "</table>"
+        if self.implemented_requirements_set.count() > 0:
+            logger.info("getting implemented_requirements...")
+            for imp_req in self.implemented_requirements_set.all():
+                html_str += imp_req.to_html()
+        html_str += "</div>"
+        return html_str
 
 
 class components(BasicModel):
@@ -292,15 +310,15 @@ class components(BasicModel):
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
 
-    def controls_implemented_by_component(self):
-        control_list = []
-        if statements.objects.filter(by_components=self.id).exists():
-            stmts = statements.objects.get(by_components=self)
-            for stmt in stmts:
-                ctrl = stmt.get_control()
-                if ctrl not in control_list:
-                    control_list.append(ctrl)
-        return control_list
+    # def controls_implemented_by_component(self):
+    #     control_list = []
+    #     if statements.objects.filter(by_components=self.id).exists():
+    #         stmts = statements.objects.get(by_components=self)
+    #         for stmt in stmts:
+    #             ctrl = stmt.get_control()
+    #             if ctrl not in control_list:
+    #                 control_list.append(ctrl)
+    #     return control_list
 
     def to_html(self):
         html_str = ""
@@ -308,10 +326,12 @@ class components(BasicModel):
         html_str += "<div>%s</div>" % self.description
         html_str += "<div>Purpose: %s</div>" % self.purpose
         html_str += "<div>Type: %s</div>" % self.type
-        html_str += "<h2>Implemented Controls</h2>"
-        html_str += "<h4><a href='%s?comp_id=%s'>Add a control</a></h4>" % (reverse('component:create_component_statement'), self.id)
-        for imp in self.control_implementations.all():
-            html_str += "<div>%s</div>" % imp.to_html()
+        html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
+        html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
+        html_str += "<div class='col-sm-2' style='text-align: end;'><h4><a href='%s?comp_id=%s'>Add a control</a></h4></div>" % (reverse('component:create_component_statement'), self.id)
+        html_str += "</div></div>"
+        for imp in self.control_implementations_set.all():
+            html_str += str(imp.to_html())
             # html_str += "<div><h4>How is the control implemented?</h4></div>"
             # html_str += "<div>%s</div>" % imp.description
         return html_str

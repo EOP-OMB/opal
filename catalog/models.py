@@ -179,34 +179,14 @@ class parts(PrimitiveModel):
         verbose_name = "Part"
         verbose_name_plural = "Parts"
 
-    part_id = ShortTextField(
-        verbose_name="Part Identifier",
-        help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.",
-        blank=True
-        )
-    name = ShortTextField(
-        verbose_name="Part Name", help_text=" A textual label that uniquely identifies the part's semantic type."
-        )
-    ns = ShortTextField(
-        verbose_name="Part Namespace",
-        help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.",
-        blank=True
-        )
-    part_class = ShortTextField(
-        verbose_name="Part Class",
-        help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.",
-        blank=True
-        )
-    title = ShortTextField(
-        verbose_name="Part Title",
-        help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True
-        )
+    part_id = ShortTextField(verbose_name="Part Identifier", help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.", blank=True)
+    name = ShortTextField(verbose_name="Part Name", help_text=" A textual label that uniquely identifies the part's semantic type.")
+    ns = ShortTextField(verbose_name="Part Namespace", help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.", blank=True)
+    part_class = ShortTextField(verbose_name="Part Class", help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.", blank=True)
+    title = ShortTextField(verbose_name="Part Title", help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True)
     props = propertiesField()
     prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
-    sub_parts = CustomManyToManyField(
-        to="parts", verbose_name="Sub Parts",
-        help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy)."
-        )
+    sub_parts = CustomManyToManyField(to="parts", verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
     def to_html(self, indent=0, guidance=True, links=True):
