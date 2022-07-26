@@ -42,8 +42,8 @@ class control_implementationsTabularInline(NestedStackedInline):
 @admin.register(components)
 class componentsAdmin(NestedModelAdmin):
     list_display = (
-        'type',
         'title',
+        'type',
         'status',
         'created_at',
         'updated_at',

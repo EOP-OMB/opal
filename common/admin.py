@@ -1,5 +1,6 @@
 from django.apps import apps
 from django.contrib import admin
+from common.models import metadata
 
 
 # Register your models here.
@@ -33,6 +34,35 @@ class CustomAdmin(admin.ModelAdmin):
         self.list_display.append('updated_at')
         print(self.list_display)
         return self.list_display
+
+
+@admin.register(metadata)
+class metadataAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'published',
+        'last_modified',
+        'version',
+        'oscal_version',
+        'created_at',
+        'updated_at'
+        )
+    list_filter = ('created_at', 'updated_at', 'published', 'last_modified')
+    # raw_id_fields = (
+    #     'revisions',
+    #     'document_ids',
+    #     'props',
+    #     'links',
+    #     'locations',
+    #     'parties',
+    #     'responsible_parties',
+    # )
+    date_hierarchy = 'updated_at'
+
+
+class metadataAdminTabularInline(admin.TabularInline):
+    model = metadata
+
 
 # other models
 models = apps.get_app_config('common').get_models()

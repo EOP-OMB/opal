@@ -1,25 +1,57 @@
+import json
+import logging
 import os.path
-import urllib.parse
 
-from django.shortcuts import redirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-import json
-from ssp.models import *
+
+from common.models import metadata
+from ssp.forms import sspForm
+from ssp.models import control_implementations, system_characteristics, system_implementations, system_security_plans
 
 
 # Create your views here.
 
-class ssp_list_view(ListView):
-    model = system_security_plans
-    context_object_name = "context_list"
-    template_name = "generic_list.html"
-
-
-class ssp_detail_view(DetailView):
-    model = system_security_plans
-    context_object_name = "context"
-    template_name = "generic_detail.html"
+def add_new_ssp_view(request):
+    if request.POST:
+        try:
+            selected_metadata = metadata.objects.get(pk=request.POST['metadata'])
+            selected_system_characteristics = system_characteristics.objects.get(pk=request.POST['system_characteristics'])
+            selected_system_implementation = system_implementations.objects.get(pk=request.POST['system_implementation'])
+            selected_control_implementations = control_implementations.objects.get(pk=request.POST["control_implementation"])
+        except (KeyError, ObjectDoesNotExist):
+            # Redisplay the question voting form.
+            return render(
+                request, 'generic_form.html', {
+                    'title': 'Add a new System Security Plan',
+                    'content': "You didn't select a choice.",
+                    'form': sspForm
+                    }
+                )
+        else:
+            new_ssp, created = system_security_plans.objects.get_or_create(
+                metadata=selected_metadata,
+                system_characteristics=selected_system_characteristics,
+                system_implementation=selected_system_implementation,
+                system_control_implementations=selected_control_implementations
+                )
+            new_ssp.save()
+            # Always return an HttpResponseRedirect after successfully dealing
+            # with POST data. This prevents data from being posted twice if a
+            # user hits the Back button.
+            return HttpResponseRedirect(reverse('ssp:ssp_detail_view', args=(new_ssp.id,)))
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'title': 'Add a new System Security Plan',
+                'content': "Select options below",
+                'form': sspForm()
+                }
+            )
 
 
 def import_ssp_view(request, ssp_file):
@@ -47,3 +79,21 @@ def import_ssp_view(request, ssp_file):
         'msg': new_ssp.metadata.title + " imported from " + ssp_file
         }
     return redirect('home_page')
+
+
+class ssp_list_view(ListView):
+    model = system_security_plans
+    context_object_name = "context_list"
+    add_new_url = reverse_lazy('ssp:add_new_ssp_view')
+    extra_context = {
+        'title': 'System Security Plans',
+        'add_url': add_new_url,
+        'model_name': model._meta.verbose_name
+        }
+    template_name = "generic_list.html"
+
+
+class ssp_detail_view(DetailView):
+    model = system_security_plans
+    context_object_name = "context"
+    template_name = "generic_detail.html"

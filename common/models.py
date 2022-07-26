@@ -875,6 +875,8 @@ class metadata(BasicModel):
         help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
         )
 
+    def __str__(self):
+        return self.title
 
 class citations(PrimitiveModel):
     """

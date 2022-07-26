@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<ul>
+    <h1>{{ title }}</h1>
+    <a href="{{ add_url }}">Add New {{ model_name }}</a>
+    <ul>
 {% for item in context_list %}
     <li><a class="collapse-item" href="{{ item.get_absolute_url }}">{{ item }}</a></li>
 {% empty %}

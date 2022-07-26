@@ -309,7 +309,7 @@ class components(BasicModel):
         html_str += "<div>Type: %s</div>" % self.type
         html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
         html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
-        html_str += "<div class='col-sm-2' style='text-align: end;'><h4><a href='%s?comp_id=%s'>Add a control</a></h4></div>" % (reverse('component:create_component_statement'), self.id)
+        html_str += "<div class='col-sm-2' style='text-align: end;'><h4><a href='%s'>Edit</a></h4></div>" % reverse('admin:component_components_change', args=(self.id,))
         html_str += "</div></div>"
         for imp in self.control_implementations_set.all():
             html_str += str(imp.to_html())

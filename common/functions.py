@@ -106,4 +106,3 @@ def convert_xml_to_json(file_path):
             json_file.close()
 
 
-
