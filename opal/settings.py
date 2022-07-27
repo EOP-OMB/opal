@@ -130,7 +130,7 @@ USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'celery_progress', 'nested_inline']
+                  'celery_progress', 'nested_inline', 'extra_views',]
 
 # Auth apps defined separately so they can be selectively disabled in the future
 AUTH_APPS = ['django.contrib.auth', 'sp']

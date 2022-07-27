@@ -878,6 +878,7 @@ class metadata(BasicModel):
     def __str__(self):
         return self.title
 
+
 class citations(PrimitiveModel):
     """
     A citation consisting of end note text and optional structured bibliographic data.

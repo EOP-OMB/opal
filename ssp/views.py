@@ -8,13 +8,10 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-
 from common.models import metadata
 from ssp.forms import sspForm
 from ssp.models import control_implementations, system_characteristics, system_implementations, system_security_plans
 
-
-# Create your views here.
 
 def add_new_ssp_view(request):
     if request.POST:
