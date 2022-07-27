@@ -66,8 +66,8 @@ implementation_status_choices = [
     ("implemented", "Implemented: The control is fully implemented."),
     ("partial", "Partial: The control is partially implemented."),
     ("planned", "Planned: There is a plan for implementing the control as explained in the remarks."),
-    ("alternative","Alternative: There is an alternative implementation for this control as explained in the remarks.",),
-    ("not-applicable","Not-Applicable: This control does not apply to this system as justified in the remarks.",)
+    ("alternative", "Alternative: There is an alternative implementation for this control as explained in the remarks.",),
+    ("not-applicable", "Not-Applicable: This control does not apply to this system as justified in the remarks.",)
     ]
 
 
@@ -177,7 +177,7 @@ class PrimitiveModel(models.Model):
         opts = self._meta
         logger.info("Starting import for " + opts.model_name)
         if oscal_data is None or len(oscal_data) == 0:
-            logger.error("oscal_data is 0 length")
+            logger.warning("oscal_data is 0 length")
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
         field_list = list(opts.concrete_fields)
         field_list_str = []
@@ -195,14 +195,7 @@ class PrimitiveModel(models.Model):
             oscal_data = self.fix_field_names(oscal_data)
             if "uuid" in oscal_data.keys():
                 # check to see if the object already exists
-                logger.info("Checking for an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-                if opts.model.objects.filter(uuid=oscal_data["uuid"]).exists():
-                    logger.info("Found an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-                    old_obj = opts.model.objects.get(uuid=oscal_data["uuid"])
-                    old_obj.delete()
-                    logger.info("Deleted existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-                else:
-                    logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+                self = self.check_for_existing_object(opts, oscal_data)
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
@@ -229,7 +222,7 @@ class PrimitiveModel(models.Model):
                 if len(copy_field_list) == 1:
                     field = field_list[0]
                     value = oscal_data
-                    self.__setattr__(field,value)
+                    self.__setattr__(field, value)
                 else:
                     uuid_obj = False
                     try:
@@ -238,7 +231,7 @@ class PrimitiveModel(models.Model):
                         logger.info(oscal_data + " is not a valid uuid")
                     if uuid_obj:
                         if opts.model.objects.filter(uuid=uuid_obj).exists:
-                            logger.info("Found a " + opts.model_name + " with uuid " + oscal_data)
+                            self = self.check_for_existing_object(opts, oscal_data)
                         else:
                             logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
                             logger.info("Creating a new " + opts.model_name + " with uuid " + oscal_data)
@@ -262,7 +255,7 @@ class PrimitiveModel(models.Model):
                         child = f.related_model()
                         child = child.import_oscal(oscal_data[f.name])
                         self.oscal_import_save_m2m(child, f, opts)
-                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name )
+                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                         for item in oscal_data[f.name]:
                             logger.info("Creating child object for field " + f.name)
@@ -289,6 +282,19 @@ class PrimitiveModel(models.Model):
         self.save()
         logger.info("Completed import for " + opts.model_name)
         return self
+
+    def check_for_existing_object(self, opts, oscal_data):
+        logger = logging.getLogger('django')
+        logger.info("Checking for an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+        if opts.model.objects.filter(uuid=oscal_data["uuid"]).exists():
+            logger.info("Found an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+            old_obj = opts.model.objects.get(uuid=oscal_data["uuid"])
+            # old_obj.delete()
+            logger.info("Deleted existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+            return old_obj
+        else:
+            logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+            return self
 
     def oscal_import_save_m2m(self, child, f, opts):
         logger = logging.getLogger("django")
@@ -571,10 +577,8 @@ class roles(BasicModel):
     props = propertiesField()
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
 
-
     def __str__(self):
         return self.title
-
 
     def import_oscal(self, oscal_data):
         if type(oscal_data) is str:
