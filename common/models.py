@@ -1,8 +1,11 @@
 import logging
+import os.path
+
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
 import uuid
 from itertools import chain
+from django.conf import settings
 from django.utils.timezone import now
 from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
@@ -172,6 +175,21 @@ class PrimitiveModel(models.Model):
             merged_dict = d
         return merged_dict
 
+    def unique_field_list(self):
+        field_list = []
+        for f in self._meta.concrete_fields:
+            if f.name not in ['created_at', 'updated_at', 'id', 'uuid']:
+                if not f.null and not f.is_relation:
+                    field_list.append(f.name)
+        if len(field_list) == 0:
+            field_list.append('uuid')
+
+        log_file = open(os.path.join(settings.BASE_DIR,'field_lists.log'), 'a')
+        log_file.write("%s: %s\n" % (self._meta.model_name, field_list))
+        log_file.close()
+
+        return field_list
+
     def import_oscal(self, oscal_data):
         logger = logging.getLogger("django")
         opts = self._meta
@@ -193,9 +211,13 @@ class PrimitiveModel(models.Model):
             logger.info("Handling dictionary...")
             # replace field names to match internal model names
             oscal_data = self.fix_field_names(oscal_data)
-            if "uuid" in oscal_data.keys():
-                # check to see if the object already exists
-                self = self.check_for_existing_object(opts, oscal_data)
+            # check to see if the object already exists
+            unique_field_dict = {}
+            for f in self.unique_field_list():
+                if f in oscal_data.keys():
+                    unique_field_dict[f] = oscal_data[f]
+                if len(unique_field_dict) > 0:
+                    self = self.check_for_existing_object(unique_field_dict)
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
@@ -230,14 +252,10 @@ class PrimitiveModel(models.Model):
                     except ValueError:
                         logger.info(oscal_data + " is not a valid uuid")
                     if uuid_obj:
-                        if opts.model.objects.filter(uuid=uuid_obj).exists:
-                            self = self.check_for_existing_object(opts, oscal_data)
-                        else:
-                            logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data)
-                            logger.info("Creating a new " + opts.model_name + " with uuid " + oscal_data)
-                            field = 'uuid'
-                            value = uuid_obj
-                            self.__setattr__(field, value)
+                        self = self.check_for_existing_object({'uuid': uuid_obj})
+                        field = 'uuid'
+                        value = uuid_obj
+                        self.__setattr__(field, value)
             else:
                 logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
         else:
@@ -255,20 +273,17 @@ class PrimitiveModel(models.Model):
                         child = f.related_model()
                         child = child.import_oscal(oscal_data[f.name])
                         self.oscal_import_save_m2m(child, f, opts)
-                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                         for item in oscal_data[f.name]:
                             logger.info("Creating child object for field " + f.name)
                             child = f.related_model()
                             child = child.import_oscal(item)
                             self.oscal_import_save_m2m(child, f, opts)
-                            logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     elif type(oscal_data[f.name]) is str:
                         logger.info("Creating child object for field " + f.name)
                         child = f.related_model()
                         child = child.import_oscal(oscal_data)
                         self.oscal_import_save_m2m(child, f, opts)
-                        logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
                     else:
                         child = None
                     self.save()
@@ -278,22 +293,22 @@ class PrimitiveModel(models.Model):
                     value = oscal_data
                     self.__setattr__(field, value)
                     self.save()
-                    logger.info("Created new " + child._meta.model_name + " with id " + str(child.id) + " and linked it to " + f.name)
         self.save()
         logger.info("Completed import for " + opts.model_name)
         return self
 
-    def check_for_existing_object(self, opts, oscal_data):
+    def check_for_existing_object(self, value_dict):
+        """
+        Checks for an existing object. values_dict is a key:value list of fields to check.
+        """
         logger = logging.getLogger('django')
-        logger.info("Checking for an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-        if opts.model.objects.filter(uuid=oscal_data["uuid"]).exists():
-            logger.info("Found an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
-            old_obj = opts.model.objects.get(uuid=oscal_data["uuid"])
-            # old_obj.delete()
-            logger.info("Deleted existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+        logger.info("Checking for an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
+        if self._meta.model.objects.filter(**value_dict).exists():
+            logger.info("Found an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
+            old_obj = self._meta.model.objects.filter(**value_dict).first()
             return old_obj
         else:
-            logger.info("Could not find an existing " + opts.model_name + " with uuid " + oscal_data["uuid"])
+            logger.info("Could not find an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
             return self
 
     def oscal_import_save_m2m(self, child, f, opts):

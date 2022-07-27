@@ -1,11 +1,11 @@
-import logging
-import os.path
-from uuid import UUID
-from django.apps import apps
-from django.core.exceptions import FieldError
 import json
+import logging
+from uuid import UUID
+
 import xmltodict
+from django.apps import apps
 from django.conf import settings
+from django.core.exceptions import FieldError, ObjectDoesNotExist
 
 """
 Some useful common functions
@@ -41,9 +41,6 @@ def coalesce(*values):
     return next((v for v in values if v is not None and v != ""), "N/A")
 
 
-from django.core.exceptions import ObjectDoesNotExist
-
-
 def search_for_uuid(uuid_str, app_list=USER_APPS):
     logger = logging.getLogger("django")
     try:
@@ -74,6 +71,8 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
 
 from django.core.handlers.wsgi import WSGIRequest
 from io import StringIO
+
+
 # from django.contrib.auth.models import AnonymousUser
 
 
@@ -104,5 +103,3 @@ def convert_xml_to_json(file_path):
         with open("data.json", "w") as json_file:
             json_file.write(json_data)
             json_file.close()
-
-

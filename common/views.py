@@ -199,54 +199,6 @@ def load_default_role_list():
     return default_role_list
 
 
-# def load_catalog_import_list():
-#     catalog_list = [
-#         {
-#             "catalog_uuid": "6643738e-4b28-436d-899f-704d88c91f5e", "slug": "nist_sp_800_53_rev_5_high_baseline", "name": "NIST SP-800 53 rev5 HIGH baseline",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "ae9447f0-67ba-4916-b3b6-75da8ffc411e", "slug": "nist_sp_800_53_rev_5_moderate_baseline", "name": "NIST SP-800 53 rev5 MODERATE baseline",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "0186ce03-126b-49dd-959f-2fa94059ddd2", "slug": "nist_sp_800_53_rev_5_low_baseline", "name": "NIST SP-800 53 rev5 LOW baseline",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "7401e6d3-dec9-4a5b-86dc-309df4519e36", "slug": "nist_sp_800_53_rev_5_privacy_baseline", "name": "NIST SP-800 53 rev5 PRIVACY baseline",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "61787e85-adaf-4951-8d16-91f6e0b331bb", "slug": "fed_ramp_rev_4_high_baseline_resolved_profile_catalog", "name": "FedRAMP Rev 4 HIGH Baseline",
-#             "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "0f9fcab5-995f-412f-8954-49526e1cc80a", "slug": "fed_ramp_rev_4_low_baseline_resolved_profile_catalog_min", "name": "FedRAMP Rev 4 LOW Baseline",
-#             "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "8bf9a86c-66e9-4757-830c-87c0df2fb821", "slug": "fed_ramp_rev_4_moderate_baseline_resolved_profile_catalog_min", "name": "FedRAMP Rev 4 MODERATE Baseline",
-#             "link": "https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "9a740e35-422f-48e2-baca-0b0c515997d1", "slug": "nist_sp_800_53_rev_4_low", "name": "Nist SP 800 53 Rev 4 LOW",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_LOW-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "be314319-466e-459b-b736-631bd84e3cd7", "slug": "nist_sp_800_53_rev_4_moderate", "name": "Nist SP 800 53 Rev 4 MODERATE",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_MODERATE-baseline-resolved-profile_catalog-min.json"
-#             },
-#         {
-#             "catalog_uuid": "8f1b188b-5315-4c4d-a95a-1917f3cd5a62", "slug": "nist_sp_800_53_rev_4_high", "name": "Nist SP 800 53 Rev 4 High",
-#             "link": "https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_HIGH-baseline-resolved-profile_catalog-min.json"
-#             },
-#         ]
-#     for catalog in catalog_list:
-#         available_catalog_list.objects.get_or_create(**catalog)
-#     return catalog_list
-
-
 def load_catalog_import_list():
     catalog_list = ['https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json',
                     'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json',
