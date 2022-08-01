@@ -7,10 +7,14 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /usr/src/app
 
 # install dependencies
-RUN apt update && apt-get upgrade -y
+RUN apt update
+RUN apt-get upgrade -y
 RUN apt install -y --no-install-recommends postgresql-client postgresql-contrib libpq-dev build-essential pkg-config libxml2-dev libxmlsec1-dev libxmlsec1-openssl apache2 apache2-dev
 RUN apt clean
 RUN rm -rf /var/lib/apt/lists/*
+
+RUN python -m venv venv
+RUN PATH=/usr/src/app/venv/bin/python:$PATH
 
 COPY ./requirements.txt /usr/src/app
 # install Python requirements
