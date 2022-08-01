@@ -16,6 +16,7 @@ COPY ./requirements.txt /usr/src/app
 # install Python requirements
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+# RUN python -m pip install git+https://github.com/cs4p/django-saml-sp.git
 RUN pip install --no-cache-dir mod-wsgi
 
 # Create Service account
