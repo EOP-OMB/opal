@@ -16,6 +16,7 @@ import os
 import environ
 import subprocess
 import opal
+from logging.handlers import RotatingFileHandler
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -61,7 +62,7 @@ LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="/")
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="/")
 ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
-ENABLE_SAML = os.getenv("ENABLE_SAML", default=False)
+ENABLE_SAML = os.getenv("ENABLE_SAML", default=True)
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
@@ -130,13 +131,16 @@ USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'celery_progress', 'nested_inline', 'extra_views',]
+                  'celery_progress', 'nested_inline', 'extra_views', ]
 
 # Auth apps defined separately so they can be selectively disabled in the future
-AUTH_APPS = ['django.contrib.auth', 'sp']
+AUTH_APPS = []
+if ENABLE_SAML:
+    AUTH_APPS.append('sp')
+if ENABLE_DJANGO_AUTH:
+    AUTH_APPS('django.contrib.auth')
+
 INSTALLED_APPS.extend(AUTH_APPS)
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'
 
 DEV_APPS = ['django_extensions', ]
 
@@ -193,8 +197,6 @@ else:
             }
         }
 
-print("using database " + DATABASES['default']['NAME'])
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -202,8 +204,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
-from logging.handlers import RotatingFileHandler
 
 
 class autoreloadFilter(logging.Filter):
