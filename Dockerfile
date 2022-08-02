@@ -15,9 +15,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # Create Service account
 RUN useradd -u 1001 opal
-RUN mkdir /home/opal
 RUN chown -R opal:opal .
-RUN chown -R opal:opal /home/opal
 
 FROM base_os as package_installer
 
