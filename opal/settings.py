@@ -50,6 +50,7 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
+USE_X_FORWARDED_HOST = os.getenv("USE_X_FORWARDED_HOST", default=True)
 # Database settings
 DATABASE = os.getenv("DATABASE", default="sqlite")
 DB_NAME = os.getenv("DB_NAME", default="db.sqlite3")
@@ -138,7 +139,7 @@ AUTH_APPS = []
 if ENABLE_SAML:
     AUTH_APPS.append('sp')
 if ENABLE_DJANGO_AUTH:
-    AUTH_APPS('django.contrib.auth')
+    AUTH_APPS.append('django.contrib.auth')
 
 INSTALLED_APPS.extend(AUTH_APPS)
 
