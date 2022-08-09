@@ -29,7 +29,7 @@ urlpatterns = [path('', index_view, name='home_page'),
                path('ssp/', include('ssp.urls'), name='ssp'),
                re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
                path("accounts/", include("django.contrib.auth.urls")),
-               path("sso/", include("sp.urls")),
+               path("sso/<idp_slug>/", include("sp.urls")),
                ]
 
 if settings.ENVIRONMENT != 'production':
