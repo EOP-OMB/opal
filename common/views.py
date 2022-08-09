@@ -6,6 +6,9 @@ from django.conf import settings
 from django.apps import apps
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from sp.models import IdP
+from sp.utils import get_session_idp
+
 from catalog.models import available_catalog_list, catalogs
 from common.models import roles
 from catalog.views import download_catalog
@@ -34,6 +37,12 @@ def index_view(request):
         }
     # And so on for more models
     return render(request, "index.html", context)
+
+
+def auth_view(request):
+    context = {"idp": get_session_idp(request), "idps": IdP.objects.filter(is_active=True)}
+    return render (request, "auth.html", context)
+
 
 
 def database_status_view(request):
