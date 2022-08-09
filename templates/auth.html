@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <h1 class="mt-2 mb-4 pb-2 border-bottom">OPAL Authentication</h1>
+        {% if user.is_authenticated %}
+            <p><strong>{% with user=user idp=idp|default:"Django" %}You are logged in as {{ user }} via {{ idp }}.</strong></p>
+            <p>
+                {% if idp %}
+                    <a class="btn btn-sm btn-secondary" href="{{ idp.get_test_url }}">Test</a>
+                    <a class="btn btn-sm btn-secondary" href="{{ idp.get_verify_url }}">Verify</a>
+                    <a class="btn btn-sm btn-secondary" href="{{ idp.get_logout_url }}">Log Out</a>
+                {% else %}
+                    <a class="btn btn-sm btn-secondary" href="{% url 'admin:logout' %}?next=/">Log Out</a>
+                {% endif %}
+            </p>
+            {% endwith %}
+        {% else %}
+            <p><strong>You are not logged in.</strong></p>
+            <ul class="list-group">
+                {% for idp in idps %}
+                    <li class="list-group-item">
+                        {{ idp }}
+                        <span class="float-right">
+                            <a href="{{ idp.get_login_url }}">Login</a> or
+                            <a href="{{ idp.get_test_url }}">Test</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{%  endblock %}
