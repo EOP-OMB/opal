@@ -1,9 +1,0 @@
-{% extends "admin/change_form.html" %}
-
-{% load i18n %}
-
-{% block object-tools-items %}
-    <li><a target="_blank" href="{{ original.get_absolute_url }}">{% trans "View Metadata" %}</a></li>
-    <li><a target="_blank" href="{{ original.get_test_url }}">{% trans "Test IdP" %}</a></li>
-    {{ block.super }}
-{% endblock object-tools-items %}
