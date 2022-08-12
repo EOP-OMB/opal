@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.urls import path
 
-from common.views import permalink, database_status_view, app_init, auth_view
+from common.views import permalink, database_status_view, auth_view
 
 app_name = 'common'
 urlpatterns = [path('p/<str:p_uuid>', permalink, name='permalink'),
                path('db_status/', database_status_view, name='db_status'),
-               path('app_init/', app_init, name='app_init'),
                path('auth/', auth_view, name='auth_view'),
                ]
