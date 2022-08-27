@@ -1,6 +1,10 @@
-from common.functions import coalesce
-from common.models import *
-# from component.models import implemented_requirements
+import uuid
+
+from django.db import models
+from django.urls import reverse
+
+from common.functions import coalesce, search_for_uuid
+from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, propertiesField, ShortTextField, links, metadata, back_matter
 
 
 class available_catalog_list(BasicModel):
@@ -19,9 +23,9 @@ class available_catalog_list(BasicModel):
     def get_link(self):
         catalog_import_url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': self.id})
         if catalogs.objects.filter(uuid=self.catalog_uuid).exists():
-            r = ["<li><a href='", (catalog_import_url), "'>", self.name, "</a> &#9989;</li>"]
+            r = ["<li><a href='", catalog_import_url, "'>", self.name, "</a> &#9989;</li>"]
         else:
-            r = ["<li><a href='", (catalog_import_url), "'>", self.name, "</a></li>"]
+            r = ["<li><a href='", catalog_import_url, "'>", self.name, "</a></li>"]
         return "".join(r)
 
 
@@ -623,9 +627,9 @@ class catalogs(PrimitiveModel):
                 control_enhancement_count += cec
                 control_count_total_for_group += cc + cec
             control_count_total += control_count_total_for_group
-        html_str += "<td>%d</td>" % (control_count)
-        html_str += "<td>%d</td>" % (control_enhancement_count)
-        html_str += "<td>%d</td>" % (control_count_total)
+        html_str += "<td>%d</td>" % control_count
+        html_str += "<td>%d</td>" % control_enhancement_count
+        html_str += "<td>%d</td>" % control_count_total
         # html_str += "<tr><th colspan=5>Total for Catalog: %d</th></tr>" % (control_count_total)
         return html_str
 

@@ -10,7 +10,6 @@ from django.urls import reverse
 
 def test_index_view(db):
     c = Client()
-    c.get(reverse("common:app_init"))
     url = reverse('home_page')
     response = c.get(url)
     assert response.status_code == 200
@@ -56,13 +55,3 @@ def test_replace_hyphen_function():
 def test_coalesce_function():
     assert coalesce(None, "", 'Something', 'SomethingElse') == 'Something'
     assert coalesce(None, "", None) == "N/A"
-
-
-def test_app_init(db):
-    c = Client()
-    resp = c.get(reverse("common:app_init"))
-    assert resp.status_code == 200
-    user = get_user_model()
-    assert user.objects.filter(is_superuser=True).exists()
-    assert available_catalog_list.objects.count() == 10
-    assert roles.objects.count() == 18

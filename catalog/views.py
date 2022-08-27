@@ -56,8 +56,14 @@ app = Celery('tasks', broker=settings.BROKER)
 
 
 @app.task(bind=True)
-def import_catalog_task(self, item, host):
-    catalog_dict = download_catalog(item['link'])
+def import_catalog_task(self, item, host, test=False):
+    if test:
+        catalog_file = "sample_data/basic-catalog.json"
+        catalog_json = json.load(open(catalog_file))
+        catalog_dict = catalog_json["catalog"]
+    else:
+        catalog_dict = download_catalog(item['link'])
+
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
@@ -80,7 +86,7 @@ def import_catalog_task(self, item, host):
             )
         if created:
             new_component.save()
-    return 'catalog import complete'
+    return new_catalog
 
 
 def download_catalog(link):
