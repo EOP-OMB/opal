@@ -149,7 +149,7 @@ AUTHENTICATION_BACKENDS = []
 if ENABLE_SAML:
     INSTALLED_APPS.append('sp')
     AUTHENTICATION_BACKENDS.append('sp.backends.SAMLAuthenticationBackend')
-    REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,)
+    REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,'admin:login')
     REQUIRE_LOGIN_PUBLIC_URLS = ('/sso/stub/', '/sso/stub/login/', '/sso/stub/test/', '/sso/stub/verify/', '/sso/stub/acs/')
 if ENABLE_DJANGO_AUTH:
     INSTALLED_APPS.append('django.contrib.auth')

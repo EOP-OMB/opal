@@ -30,5 +30,8 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        {% if enable_django_auth %}
+            <a href="{% url 'admin:login' %}">Login</a> using Django built in authentication
+        {% endif %}
     </div>
 {%  endblock %}
