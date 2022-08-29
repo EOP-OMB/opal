@@ -17,10 +17,11 @@
             {% endwith %}
         {% else %}
             <p><strong>You are not logged in.</strong></p>
+            <p><strong>Available Authentication Services are:</strong></p>
             <ul class="list-group">
                 {% for idp in idps %}
                     <li class="list-group-item">
-                        {{ idp }}
+                        <strong>{{ idp }}</strong>:
                         <span class="float-right">
                             <a href="{{ idp.get_login_url }}">Login</a> or
                             <a href="{{ idp.get_test_url }}">Test</a>

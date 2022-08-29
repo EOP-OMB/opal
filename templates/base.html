@@ -98,15 +98,15 @@
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-<div class="container my-auto">
-    {% if user.is_authenticated %}
-        {% with user=user idp=idp|default:"Django" %}
-        <p><strong>You are logged in as {{ user }} via {{ idp }}.</strong></p>
-        {% endwith %}
-    {% else %}
-        <p><strong>You are not logged in.</strong></p>
-    {% endif %}
-</div>
+{#<div class="container my-auto">#}
+{#    {% if user.is_authenticated %}#}
+{#        {% with user=user idp=idp|default:"Django" %}#}
+{#        <p><strong>You are logged in as {{ user }} via {{ idp }}.</strong></p>#}
+{#        {% endwith %}#}
+{#    {% else %}#}
+{#        <p><strong>You are not logged in.</strong></p>#}
+{#    {% endif %}#}
+{#</div>#}
 </footer>
 <!-- End of Footer -->
 

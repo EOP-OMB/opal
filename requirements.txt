@@ -18,3 +18,5 @@ cryptography
 # # OIDC Support
 # # mozilla-django-oidc
 django-extra-views
+django-require-login
+django-treenode

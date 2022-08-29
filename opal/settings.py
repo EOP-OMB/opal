@@ -15,6 +15,9 @@ from pathlib import Path
 import os
 import environ
 import subprocess
+
+from django.urls import reverse
+
 import opal
 from logging.handlers import RotatingFileHandler
 
@@ -59,14 +62,17 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
 DB_HOST = os.getenv("DB_HOST", default="localhost")
 DB_PORT = os.getenv("DB_PORT", default="5432")
+# The next 2 variables are used with the django-require-login module
+LOGIN_URL = os.getenv("LOGIN_URL", default="common:auth_view")
+LOGOUT_URL = os.getenv("LOGOUT_URL", default="common:auth_view")
 LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="/")
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="/")
 ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
 # SAML settings
 ENABLE_SAML = os.getenv("ENABLE_SAML", default=True)
-SAML_HTTPS = os.getenv("SAML_HTTPS", default=False) # Acceptable values are "on" of "off"
+SAML_HTTPS = os.getenv("SAML_HTTPS", default=False)  # Acceptable values are "on" of "off"
 SAML_HTTP_HOST = os.getenv("SAML_HTTP_HOST", default=False)
-SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False) # should be the path to the acs function
+SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False)  # should be the path to the acs function
 SAML_SERVER_PORT = os.getenv("SAML_SERVER_PORT", default=False)
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
@@ -138,14 +144,16 @@ INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
                   'celery_progress', 'nested_inline', 'extra_views', 'treenode']
 
-# Auth apps defined separately so they can be selectively disabled in the future
-AUTH_APPS = []
+# Auth apps defined separately so that they can be selectively disabled in the future
+AUTHENTICATION_BACKENDS = []
 if ENABLE_SAML:
-    AUTH_APPS.append('sp')
+    INSTALLED_APPS.append('sp')
+    AUTHENTICATION_BACKENDS.append('sp.backends.SAMLAuthenticationBackend')
+    REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,)
+    REQUIRE_LOGIN_PUBLIC_URLS = ('/sso/stub/', '/sso/stub/login/', '/sso/stub/test/', '/sso/stub/verify/', '/sso/stub/acs/')
 if ENABLE_DJANGO_AUTH:
-    AUTH_APPS.append('django.contrib.auth')
-
-INSTALLED_APPS.extend(AUTH_APPS)
+    INSTALLED_APPS.append('django.contrib.auth')
+    AUTHENTICATION_BACKENDS.append('django.contrib.auth.backends.ModelBackend')
 
 DEV_APPS = ['django_extensions', ]
 
@@ -155,13 +163,14 @@ INSTALLED_APPS.extend(USER_APPS)
 if ENVIRONMENT == "development":
     INSTALLED_APPS.extend(DEV_APPS)
 
-AUTHENTICATION_BACKENDS = ['sp.backends.SAMLAuthenticationBackend', 'django.contrib.auth.backends.ModelBackend', ]
-
-MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
-              'django.middleware.common.CommonMiddleware', 'django.middleware.csrf.CsrfViewMiddleware',
+MIDDLEWARE = ['django.middleware.security.SecurityMiddleware',
+              'django.contrib.sessions.middleware.SessionMiddleware',
+              'django.middleware.common.CommonMiddleware',
+              'django.middleware.csrf.CsrfViewMiddleware',
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
-              'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
+              'django.middleware.clickjacking.XFrameOptionsMiddleware',
+              "django_require_login.middleware.LoginRequiredMiddleware", ]
 
 # To enable sitewide caching
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
@@ -170,6 +179,7 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.s
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [{
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
