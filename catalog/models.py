@@ -4,7 +4,7 @@ from django.db import models
 from django.urls import reverse
 
 from common.functions import coalesce, search_for_uuid
-from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, propertiesField, ShortTextField, links, metadata, back_matter
+from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
 
 
 class available_catalog_list(BasicModel):
@@ -105,7 +105,7 @@ class params(BasicModel):
         to="params", verbose_name="Depends on", help_text=" Another parameter invoking this one",
         on_delete=models.CASCADE, null=True
         )
-    props = propertiesField
+    props = properties_field
     links = CustomManyToManyField(to=links, verbose_name="Links")
     label = ShortTextField(
         verbose_name="Parameter Label",
@@ -189,7 +189,7 @@ class parts(PrimitiveModel):
     ns = ShortTextField(verbose_name="Part Namespace", help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.", blank=True)
     part_class = ShortTextField(verbose_name="Part Class", help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.", blank=True)
     title = ShortTextField(verbose_name="Part Title", help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True)
-    props = propertiesField()
+    props = properties_field()
     prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
     sub_parts = CustomManyToManyField(to="parts", verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -296,7 +296,7 @@ class controls(PrimitiveModel):
         to=params, verbose_name="Control Parameters",
         help_text="Parameters provide a mechanism for the dynamic assignment of value(s) in a control."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     parts = CustomManyToManyField(
         to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part."
@@ -479,7 +479,7 @@ class groups(PrimitiveModel):
         to=params, verbose_name="Global Group Parameters",
         help_text="Parameters that should be applied to all Controls in the Group"
         )
-    props = propertiesField(
+    props = properties_field(
         verbose_name="Global Group Properties",
         help_text="Properties that should be applied to all Controls in the Group"
         )

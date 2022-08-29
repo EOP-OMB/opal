@@ -94,7 +94,7 @@ class information_type_impact_level(BasicModel):
         verbose_name = "Information Type Impact Level"
         verbose_name_plural = "Information Type Impact Levels"
 
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     base = ShortTextField(
         verbose_name="Base Level (Confidentiality, Integrity, or Availability)",
@@ -173,7 +173,7 @@ class information_types(PrimitiveModel):
         to=categorizations, verbose_name="Information Type Categorization",
         help_text="A set of information type identifiers qualified by the given identification system used, such as NIST SP 800-60."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     confidentiality_impact = models.ForeignKey(
         to=information_type_impact_level, verbose_name="Confidentiality Impact Level",
@@ -256,7 +256,7 @@ class systems_information(PrimitiveModel):
         verbose_name = "System Information"
         verbose_name_plural = "Systems Information"
 
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     information_types = CustomManyToManyField(
         to=information_types, verbose_name="Information Type",
@@ -300,7 +300,7 @@ class diagrams(BasicModel):
         help_text="A summary of the diagram. This description is intended to be used as alternate text to support compliance with requirements from Section 508 of the United States Workforce Rehabilitation Act of 1973.",
         blank=True
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     caption = ShortTextField(verbose_name="Caption", help_text="A brief caption to annotate the diagram.")
 
@@ -317,7 +317,7 @@ class authorization_boundaries(BasicModel):
     description = models.TextField(
         verbose_name="Authorization Boundary Description", help_text="A summary of the system's authorization boundary."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     diagrams = CustomManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
@@ -337,7 +337,7 @@ class network_architectures(BasicModel):
     description = models.TextField(
         verbose_name="Network Architecture Description", help_text="A summary of the system's Network Architecture."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     diagrams = CustomManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
@@ -357,7 +357,7 @@ class data_flows(BasicModel):
     description = models.TextField(
         verbose_name="Data Flow Description", help_text="A summary of the system's Data Flow."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     diagrams = CustomManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
@@ -385,7 +385,7 @@ class system_characteristics(BasicModel):
         null=True
         )
     description = models.TextField(verbose_name="System Description", help_text="A summary of the system.", null=True)
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     date_authorized = models.DateField(
         verbose_name="System Authorization Date", help_text="The date the system received its authorization.", null=True
@@ -459,7 +459,7 @@ class leveraged_authorizations(BasicModel):
         verbose_name="Title",
         help_text="A human readable name for the leveraged authorization in the context of the system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     party_uuid = models.ForeignKey(
         to=parties, verbose_name="Responsible Party",
@@ -531,7 +531,7 @@ class users(BasicModel):
     description = models.TextField(
         verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     role_ids = CustomManyToManyField(
         to=roles, verbose_name="User Role(s)", help_text="A reference to the roles served by the user."
@@ -558,7 +558,7 @@ class inventory_items(BasicModel):
         verbose_name="Inventory Item Description",
         help_text="A summary of the inventory item stating its purpose within the system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_parties = CustomManyToManyField(
         to=responsible_parties, verbose_name="Responsible Parties",
@@ -579,7 +579,7 @@ class system_implementations(BasicModel):
         verbose_name = "System Implementation"
         verbose_name_plural = "System Implementations"
 
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     leveraged_authorizations = CustomManyToManyField(
         to=leveraged_authorizations, verbose_name="Leveraged Authorizations",

@@ -260,7 +260,7 @@ class Migration(migrations.Migration):
                 ('short_name', common.models.ShortTextField(blank=True, help_text='A short common name, abbreviation, or acronym for the role.', verbose_name='Role Short Name')),
                 ('description', models.TextField(blank=True, help_text="A summary of the role's purpose and associated responsibilities.", verbose_name='Role Description')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Role Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'System Role',
@@ -295,7 +295,7 @@ class Migration(migrations.Migration):
                 ('last_modified', models.DateTimeField(help_text='The date and time the document was last modified. The date-time value must be formatted according to RFC 3339 with full time and time zone included.', verbose_name='Last Modified Timestamp')),
                 ('version', common.models.ShortTextField(help_text='A string used to distinguish the current version of the document from other previous (and future) versions.', verbose_name='Document Version')),
                 ('oscal_version', common.models.ShortTextField(help_text='The OSCAL model version the document was authored against.', verbose_name='OSCAL Version')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Revision',
@@ -312,7 +312,7 @@ class Migration(migrations.Migration):
                 ('role_id', common.models.ShortTextField(help_text='The role that the party is responsible for.', verbose_name='Responsible Role')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
                 ('party_uuids', common.models.CustomManyToManyField(help_text='Specifies one or more parties that are responsible for performing the associated role.', to='common.parties', verbose_name='Party Reference')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Responsible Party',
@@ -332,7 +332,7 @@ class Migration(migrations.Migration):
                 ('base64', common.models.CustomManyToManyField(help_text='A string representing arbitrary Base64-encoded binary data.', to='common.base64', verbose_name='Base64 encoded objects')),
                 ('citation', common.models.CustomManyToManyField(help_text='A citation consisting of end note text and optional structured bibliographic data.', to='common.citations', verbose_name='Citations')),
                 ('document_ids', common.models.CustomManyToManyField(help_text='A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier for a group of documents that are to be treated as different versions of the same document.', to='common.document_ids', verbose_name='Document Identifiers')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('rlinks', common.models.CustomManyToManyField(help_text='A pointer to an external resource with an optional hash for verification and change detection. This construct is different from link, which makes no provision for a hash or formal title.', to='common.rlinks', verbose_name='Resource link')),
             ],
             options={
@@ -360,7 +360,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='parties',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
         migrations.AddField(
             model_name='parties',
@@ -384,7 +384,7 @@ class Migration(migrations.Migration):
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
                 ('locations', common.models.CustomManyToManyField(to='common.locations', verbose_name='Locations')),
                 ('parties', common.models.CustomManyToManyField(help_text='A responsible entity which is either a person or an organization.', to='common.parties', verbose_name='Parties (organizations or persons)')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('responsible_parties', common.models.CustomManyToManyField(help_text=' A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object.', to='common.responsible_parties', verbose_name='Responsible Parties')),
                 ('revisions', common.models.CustomManyToManyField(to='common.revisions', verbose_name='Previous Revisions')),
             ],
@@ -396,7 +396,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='locations',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
         migrations.AddField(
             model_name='locations',
@@ -416,7 +416,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='citations',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
         migrations.CreateModel(
             name='back_matter',

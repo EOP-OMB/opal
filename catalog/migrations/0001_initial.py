@@ -91,7 +91,7 @@ class Migration(migrations.Migration):
                 ('title', common.models.ShortTextField(blank=True, help_text='A name given to the part, which may be used by a tool for display and navigation.', verbose_name='Part Title')),
                 ('prose', models.TextField(help_text='Permits multiple paragraphs, lists, tables etc.', verbose_name='Part Text')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('sub_parts', common.models.CustomManyToManyField(help_text='A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).', to='catalog.parts', verbose_name='Sub Parts')),
             ],
             options={
@@ -140,7 +140,7 @@ class Migration(migrations.Migration):
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
                 ('params', common.models.CustomManyToManyField(help_text='Parameters that should be applied to all Controls in the Group', to='catalog.params', verbose_name='Global Group Parameters')),
                 ('parts', common.models.CustomManyToManyField(help_text="A partition of a control's definition or a child of another part.", to='catalog.parts', verbose_name='Parts')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('sub_groups', common.models.CustomManyToManyField(help_text='A group of controls, or of groups of controls.', to='catalog.groups', verbose_name='Sub Groups')),
             ],
             options={
@@ -162,7 +162,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='controls',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
         migrations.AddField(
             model_name='constraints',
