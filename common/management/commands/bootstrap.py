@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
 from catalog.models import available_catalog_list
-from catalog.views import download_catalog
+from catalog.views import download_catalog, import_catalog_task
 from common.models import roles
 from sp.models import IdP
 
@@ -21,8 +21,8 @@ def create_admin_user(user):
 
 def load_default_role_list():
     import json
-    f = open("role_list.json", "r")
-    default_role_list = json.loads(f)
+    f = open("common/management/commands/role_list.json", "r")
+    default_role_list = json.load(f)
     for role in default_role_list:
         roles.objects.get_or_create(**role)
     return default_role_list
@@ -90,3 +90,6 @@ class Command(BaseCommand):
         # Add some default roles
         default_role_list = load_default_role_list()
         print("Added %s default roles" % len(default_role_list))
+
+        # import sample Catalog
+        import_catalog_task(test=True)

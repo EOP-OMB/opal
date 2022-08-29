@@ -22,8 +22,8 @@ def test_db_status_view(db):
     assert response.status_code == 200
 
 
-def test_reset_all_db_function(db):
-    reset_all_db()
+# def test_reset_all_db_function(db):
+#     reset_all_db()
 
 
 def test_permalink(db):

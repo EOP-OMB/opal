@@ -56,13 +56,16 @@ app = Celery('tasks', broker=settings.BROKER)
 
 
 @app.task(bind=True)
-def import_catalog_task(self, item, host, test=False):
+def import_catalog_task(self, item=False, host=False, test=False):
     if test:
         catalog_file = "sample_data/basic-catalog.json"
         catalog_json = json.load(open(catalog_file))
         catalog_dict = catalog_json["catalog"]
     else:
-        catalog_dict = download_catalog(item['link'])
+        if item:
+            catalog_dict = download_catalog(item['link'])
+        else:
+            raise TypeError("You must provide a catalog to import")
 
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
@@ -73,6 +76,8 @@ def import_catalog_task(self, item, host, test=False):
         metadata=new_metadata
         )
     new_profile.save()
+    if not host:
+        host = settings.HOST_NAME
     url = "https://" + host + new_catalog.get_permalink()
     new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
     new_profile.save()

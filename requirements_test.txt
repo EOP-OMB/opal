@@ -18,3 +18,4 @@ pytest-django
 # python-dateutil
 # tomli
 # mixer
+pytest-xdist

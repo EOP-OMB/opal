@@ -1,26 +1,26 @@
 import pytest
 from django.conf import settings
-from django.test import Client, TestCase
+from django.test import Client
 from django.urls import reverse
 from model_bakery import baker
 
-from catalog.models import catalogs
+from catalog.models import catalogs, available_catalog_list
 from catalog.views import import_catalog_task
-from common.management.commands.bootstrap import load_catalog_import_list
 
+pytestmark = pytest.mark.django_db
 
 # Create your tests here.
-@pytest.fixture(scope='module')
-def init_database(django_db_blocker):
-    load_catalog_import_list()
+# @pytest.fixture(scope='function', autouse=True)
+# def get_sample_catalog_id(db):
+#     host = settings.HOST_NAME
+#     item = {}
+#     new_catalog = import_catalog_task(item, host, test=True)
+#     return new_catalog.id
 
 
-@pytest.fixture(scope='module', autouse=True)
-def load_sample_catalog(django_db_blocker):
-    host = settings.HOST_NAME
-    item = {}
-    new_catalog = import_catalog_task(item, host, test=True)
-    return new_catalog.id
+def get_sample_catalog_id():
+    sample_catalog = catalogs.objects.first()
+    return sample_catalog.id
 
 
 def test_catalog_index_view(db):
@@ -39,14 +39,14 @@ def test_catalog_list_view(db):
 
 def test_catalog_detail_view(db):
     c = Client()
-    url = reverse('catalog:catalog_detail_view', kwargs={'pk': load_sample_catalog})
+    url = reverse('catalog:catalog_detail_view', kwargs={'pk': get_sample_catalog_id()})
     response = c.get(url)
     assert response.status_code == 200
 
 
 def test_control_detail_view(db):
     c = Client()
-    cat = catalogs.objects.get(pk=load_sample_catalog)
+    cat = catalogs.objects.get(pk=get_sample_catalog_id())
     ctrl_list = cat.list_all_controls()
     ctrl = ctrl_list[0]
     url = reverse('catalog:control_detail_view', kwargs={'pk': ctrl.id})
@@ -56,14 +56,14 @@ def test_control_detail_view(db):
 
 def test_load_controls_view(db):
     c = Client()
-    url = reverse('catalog:ajax_load_controls') + '?catalog=' + str(load_sample_catalog)
+    url = reverse('catalog:ajax_load_controls') + '?catalog=' + str(get_sample_catalog_id())
     response = c.get(url)
     assert response.status_code == 200
 
 
 def test_load_statements_view(db):
     c = Client()
-    cat = catalogs.objects.get(pk=load_sample_catalog)
+    cat = catalogs.objects.get(pk=get_sample_catalog_id())
     ctrl_list = cat.list_all_controls()
     ctrl = ctrl_list[0]
     url = reverse('catalog:ajax_load_controls') + '?control=' + str(ctrl.id)
@@ -74,7 +74,7 @@ def test_load_statements_view(db):
 @pytest.mark.slow
 def test_import_catalog_view(db):
     c = Client()
-    url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': catalogs.objects.first().id})
+    url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': available_catalog_list.objects.first().id})
     response = c.get(url)
     assert response.status_code == 302
     # assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
