@@ -1,8 +1,6 @@
 import uuid
-
 from django.db import models
 from django.urls import reverse
-
 from common.functions import coalesce, search_for_uuid
 from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
 
@@ -158,20 +156,14 @@ class params(BasicModel):
         d = {"id": "param_id"}
         return d
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<td>" + self.param_id + "</td>"
-        # html_str += "<td>" + coalesce(self.depends_on) + "</td>"
         html_str += "<td>" + self.label + "</td>"
         html_str += "<td>"
         if len(self.guidelines.all()) > 0:
             for g in self.guidelines.all():
                 html_str += g.__str__()
             html_str += "</td>"
-        # html_str += "<td>" + coalesce(self.usage) + "</td>"
-        # html_str += "<td>" + coalesce(self.values) + "</td>"
-        # html_str += "<td>" + coalesce(self.select) + "</td>"
-        # html_str += "<td>" + coalesce(self.how_many) + "</td>"
-        # html_str += "<td>" + coalesce(self.choice) + "</td>"
         return html_str
 
 
@@ -184,10 +176,17 @@ class parts(PrimitiveModel):
         verbose_name = "Part"
         verbose_name_plural = "Parts"
 
-    part_id = ShortTextField(verbose_name="Part Identifier", help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.", blank=True)
+    part_id = ShortTextField(
+        verbose_name="Part Identifier", help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.",
+        blank=True
+        )
     name = ShortTextField(verbose_name="Part Name", help_text=" A textual label that uniquely identifies the part's semantic type.")
     ns = ShortTextField(verbose_name="Part Namespace", help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.", blank=True)
-    part_class = ShortTextField(verbose_name="Part Class", help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.", blank=True)
+    part_class = ShortTextField(
+        verbose_name="Part Class",
+        help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.",
+        blank=True
+        )
     title = ShortTextField(verbose_name="Part Title", help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True)
     props = properties_field()
     prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
@@ -213,24 +212,6 @@ class parts(PrimitiveModel):
                 html_str += link.to_html() + "<br>"
         return html_str
 
-    # def to_html_form(self, indent=0):
-    #     html_str = ""
-    #     if self.name in ["item", "statement"] and len(self.prose) > 0:
-    #         html_str = "<tr><td valign='top'>"
-    #         if len(self.props.filter(name="label")) > 0:
-    #             html_str += self.props.get(name="label").value + " "
-    #         html_str += self.prose + "</td>"
-    #         html_str += "<td><textarea id='" + self.part_id + "' name='part_" + str(
-    #             self.pk
-    #             ) + "' cols=50 rows=8>" + self.part_id + "</textarea></td></tr>"
-    #     if self.name == "guidance" and len(self.prose) > 0:
-    #         html_str = "<h5>Guidance</h5>"
-    #         html_str += "<p>" + self.prose + "</p>"
-    #     if len(self.sub_parts.all()) > 0:
-    #         indent += 2
-    #         for p in self.sub_parts.all():
-    #             html_str += "&nbsp;" * indent + p.to_html_form(indent=indent)
-    #     return html_str
 
     def get_root_part(self):
         if self.parts_set.first() is not None:
@@ -337,7 +318,7 @@ class controls(PrimitiveModel):
         d = {"id": "control_id", "class": "control_class", "controls": "control_enhancements"}
         return d
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<a id=" + self.control_id + ">"
         html_str += "<h4>"
         html_str += self.control_id.upper() + " - "
@@ -490,7 +471,9 @@ class groups(PrimitiveModel):
     sub_groups = CustomManyToManyField(
         to="groups", verbose_name="Sub Groups", help_text="A group of controls, or of groups of controls."
         )
-    controls = CustomManyToManyField(to="controls", verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance.")
+    controls = CustomManyToManyField(
+        to="controls", verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
+        )
 
     def __str__(self):
         return self.group_id.upper() + " - " + self.title + " (" + self.group_class + ")"
@@ -499,7 +482,7 @@ class groups(PrimitiveModel):
         d = {"id": "group_id", "class": "group_class", "groups": "sub_groups"}
         return d
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<h3>"
         html_str += self.group_id.upper() + " - "
         html_str += self.title
@@ -584,7 +567,7 @@ class catalogs(PrimitiveModel):
     def get_absolute_url(self):
         return reverse('catalog:catalog_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<h1>" + self.metadata.title + "</h1>"
         html_str += "<h2>Metadata</h2>"
         html_str += self.metadata.to_html()
@@ -630,7 +613,6 @@ class catalogs(PrimitiveModel):
         html_str += "<td>%d</td>" % control_count
         html_str += "<td>%d</td>" % control_enhancement_count
         html_str += "<td>%d</td>" % control_count_total
-        # html_str += "<tr><th colspan=5>Total for Catalog: %d</th></tr>" % (control_count_total)
         return html_str
 
     def list_all_controls(self):

@@ -1,6 +1,10 @@
+from ckeditor.fields import RichTextField
+from django.db import models
+from django.urls import reverse
+
 from catalog.models import controls
 from component.models import components, responsible_roles, control_implementations, parameters
-from common.models import *
+from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, properties_field, props, ShortTextField, links, system_status_state_choices, responsible_parties, parties, roles, metadata, back_matter
 
 
 class import_profiles(BasicModel):
@@ -104,7 +108,7 @@ class information_type_impact_level(BasicModel):
         verbose_name="Selected Level (Confidentiality, Integrity, or Availability)",
         help_text="The selected (Confidentiality, Integrity, or Availability) security impact level.", null=True
         )
-    adjustment_justification = models.TextField(
+    adjustment_justification = RichTextField(
         verbose_name="Adjustment Justification",
         help_text="If the selected security level is different from the base security level, this contains the justification for the change.",
         null=True
@@ -194,7 +198,7 @@ class information_types(PrimitiveModel):
     def __str__(self):
         return self.title
 
-    def to_html(self):
+    def to_html(self, indent=0):
 
         html_str = "<div class='card shadow mb-4'>\n"
         html_str += "<!-- Card Header - Accordion -->\n"
@@ -264,27 +268,6 @@ class systems_information(PrimitiveModel):
         )
 
 
-# class system_status(BasicModel):
-#     """
-#     Describes the operational status of the system. If 'other' is selected, a remark must be included to describe the current state.
-#     """
-#
-#     state_choices = [
-#         ("operational", "Operational: The system is currently operating in production."),
-#         ("under-development", "Under Development: The system is being designed, developed, or implemented"),
-#         ("under-major-modification",
-#          "Under Major Modification: The system is undergoing a major change, development, or transition."),
-#         ("disposition", "Disposition: The system is no longer operational."),
-#         ("other", "Other: Some other state, a remark must be included to describe the current state.")
-#         ]
-#
-#     class Meta:
-#         verbose_name = "System Status"
-#         verbose_name_plural = "System Statuses"
-#
-#     state = ShortTextField(verbose_name="State", help_text="The current operating status.", choices=state_choices)
-
-
 class diagrams(BasicModel):
     """
     A graphic that provides a visual representation the system, or some aspect of it.
@@ -295,7 +278,7 @@ class diagrams(BasicModel):
         verbose_name = "Diagram"
         verbose_name_plural = "Diagrams"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Diagram Description",
         help_text="A summary of the diagram. This description is intended to be used as alternate text to support compliance with requirements from Section 508 of the United States Workforce Rehabilitation Act of 1973.",
         blank=True
@@ -314,7 +297,7 @@ class authorization_boundaries(BasicModel):
         verbose_name = "Authorization Boundary"
         verbose_name_plural = "Authorization Boundaries"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Authorization Boundary Description", help_text="A summary of the system's authorization boundary."
         )
     props = properties_field()
@@ -334,7 +317,7 @@ class network_architectures(BasicModel):
         verbose_name = "Network Architecture"
         verbose_name_plural = "Network Architectures"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Network Architecture Description", help_text="A summary of the system's Network Architecture."
         )
     props = properties_field()
@@ -354,7 +337,7 @@ class data_flows(BasicModel):
         verbose_name = "Data Flow"
         verbose_name_plural = "Data Flows"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Data Flow Description", help_text="A summary of the system's Data Flow."
         )
     props = properties_field()
@@ -384,7 +367,7 @@ class system_characteristics(BasicModel):
         help_text="A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.",
         null=True
         )
-    description = models.TextField(verbose_name="System Description", help_text="A summary of the system.", null=True)
+    description = RichTextField(verbose_name="System Description", help_text="A summary of the system.", null=True)
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     date_authorized = models.DateField(
@@ -500,7 +483,7 @@ class privileges(BasicModel):
         verbose_name="User Title",
         help_text="A name given to the user, which may be used by a tool for display and navigation."
         )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
         )
     functions_performed = CustomManyToManyField(
@@ -528,7 +511,7 @@ class users(BasicModel):
     short_name = ShortTextField(
         verbose_name="User Short Name", help_text="A short common name, abbreviation, or acronym for the user."
         )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
         )
     props = properties_field()
@@ -554,7 +537,7 @@ class inventory_items(BasicModel):
         verbose_name = "Inventory Item"
         verbose_name_plural = "Inventory Items"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Inventory Item Description",
         help_text="A summary of the inventory item stating its purpose within the system."
         )
@@ -623,10 +606,9 @@ class system_security_plans(BasicModel):
         return self.metadata.title
 
     def get_absolute_url(self):
-        # TODO - this function should return some kind of permalink using the uuid
         return reverse('ssp:ssp_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<h1>" + self.metadata.title + "</h1>"
         html_str += "<h2>Metadata</h2>"
         html_str += "<div class='card'  style=''>"

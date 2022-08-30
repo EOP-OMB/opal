@@ -11,6 +11,7 @@ from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.urls import reverse
 from treenode.models import TreeNodeModel
+from ckeditor.fields import RichTextField
 
 
 class ShortTextField(models.CharField):
@@ -380,7 +381,7 @@ class PrimitiveModel(TreeNodeModel):
 
 
 class BasicModel(PrimitiveModel):
-    remarks = models.TextField(
+    remarks = RichTextField(
         verbose_name="Remarks", help_text="Additional commentary on the containing object.", blank=True, default=""
         )
 
@@ -583,7 +584,7 @@ class roles(BasicModel):
         verbose_name="Role Short Name", help_text="A short common name, abbreviation, or acronym for the role.",
         blank=True
         )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Role Description", help_text="A summary of the role's purpose and associated responsibilities.",
         blank=True
         )
@@ -1007,7 +1008,7 @@ class resources(BasicModel):
         verbose_name="Resource Title",
         help_text="A name given to the resource, which may be used by a tool for display and navigation."
         )
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Description", help_text="Describes how the system satisfies a set of controls."
         )
     props = properties_field()
