@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.urls import reverse
-from common.models import BasicModel, CustomManyToManyField, implementation_status_choices, parties, propertiesField, links, roles, ShortTextField, system_status_state_choices, protocols
+from common.models import BasicModel, CustomManyToManyField, implementation_status_choices, parties, properties_field, links, roles, ShortTextField, system_status_state_choices, protocols
 from catalog.models import controls, parts, params
 
 import logging
@@ -24,7 +24,7 @@ class satisfied(BasicModel):
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
@@ -43,7 +43,7 @@ class responsibilities(BasicModel):
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
@@ -61,7 +61,7 @@ class export(BasicModel):
         verbose_name="Control Implementation Export Description",
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be available to another system leveraging this system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     provided = CustomManyToManyField(to="provided_control_implementation", verbose_name="Provided Control Implementations", help_text="Describes a capability which may be inherited by a leveraging system")
     responsibilities = CustomManyToManyField(to="responsibilities", verbose_name="Control Implementation Responsibility", help_text="Describes a control implementation responsibility imposed on a leveraging system.")
@@ -81,7 +81,7 @@ class inherited(BasicModel):
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
@@ -96,7 +96,7 @@ class responsible_roles(BasicModel):
         verbose_name_plural = "Responsible Roles"
 
     role_id = models.ForeignKey(to=roles, verbose_name="Role", help_text="The role that is responsible for the business function.", on_delete=models.CASCADE)
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     party_uuids = CustomManyToManyField(to=parties, verbose_name="Party Reference", help_text="References a party defined in metadata.")
 
@@ -131,7 +131,7 @@ class statements(BasicModel):
         verbose_name_plural = "Statements"
 
     statement_id = CustomManyToManyField(to=parts, verbose_name="Control Statement Reference", help_text="A reference to a control statement by its identifier")
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Role", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     by_components = CustomManyToManyField(to="by_components", verbose_name="Component Control Implementation", help_text="Defines how the referenced component implements a set of controls.")
@@ -151,7 +151,7 @@ class by_components(BasicModel):
 
     component_uuid = models.ForeignKey(to="components", verbose_name="Component Universally Unique Identifier Reference", help_text="A reference to the component that is implementing a given control or control statement.", on_delete=models.CASCADE)
     description = models.TextField(verbose_name="Control Implementation Description", help_text="An implementation statement that describes how a control or a control statement is implemented within the referenced system component.")
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value", help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     implementation_status = ShortTextField(verbose_name="Implementation Status", help_text="Indicates the degree to which the a given control is implemented.", choices=implementation_status_choices)
@@ -180,7 +180,7 @@ class provided_control_implementation(BasicModel):
     description = models.TextField(
         verbose_name="Provided Control Implementation Description", help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system."
         )
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
@@ -195,7 +195,7 @@ class implemented_requirements(BasicModel):
         verbose_name_plural = "Implemented Requirements"
 
     control_id = models.ForeignKey(to=controls, verbose_name="Control Identifier Reference", help_text="A reference to a control with a corresponding id value.", on_delete=models.CASCADE)
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value", help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Role", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
@@ -289,7 +289,7 @@ class components(BasicModel):
     title = ShortTextField(verbose_name="Component Title", help_text="A human readable name for the system component.")
     description = models.TextField(verbose_name="Component Description", help_text="A description of the component, including information about its function.")
     purpose = ShortTextField(max_length=1000, verbose_name="Purpose", help_text="A summary of the technological or business purpose of the component.")
-    props = propertiesField()
+    props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     status = ShortTextField(verbose_name="Status", help_text=" Describes the operational status of the system component.", choices=system_status_state_choices)
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")

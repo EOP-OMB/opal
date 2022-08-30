@@ -1,19 +1,19 @@
 import json
 import urllib.request
+import logging
+
 from celery import Celery
 from django.conf import settings
-from django.contrib.sites import requests
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from catalog.models import *
+from catalog.models import available_catalog_list, catalogs, controls
+from common.models import metadata
 from component.models import components
 from ctrl_profile.models import imports, profiles
-
-
-# from opal.settings import HTTP_PROXY, HTTPS_PROXY
 
 
 # Create your views here.
@@ -56,8 +56,17 @@ app = Celery('tasks', broker=settings.BROKER)
 
 
 @app.task(bind=True)
-def import_catalog_task(self, item, host):
-    catalog_dict = download_catalog(item['link'])
+def import_catalog_task(self, item=False, host=False, test=False):
+    if test:
+        catalog_file = "sample_data/basic-catalog.json"
+        catalog_json = json.load(open(catalog_file))
+        catalog_dict = catalog_json["catalog"]
+    else:
+        if item:
+            catalog_dict = download_catalog(item['link'])
+        else:
+            raise TypeError("You must provide a catalog to import")
+
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
@@ -67,18 +76,22 @@ def import_catalog_task(self, item, host):
         metadata=new_metadata
         )
     new_profile.save()
+    if not host:
+        host = settings.HOST_NAME
     url = "https://" + host + new_catalog.get_permalink()
     new_profile.imports.add(imports.objects.create(href=url, import_type="catalog"))
     new_profile.save()
     # create components for any groups in the catalog
     for group in new_catalog.groups.all():
-        new_component = components.objects.get_or_create(
+        new_component, created = components.objects.get_or_create(
             type="policy", title=group.title + " Policy",
-            description="This Component Policy was automatically created durring the import of " + new_metadata.title,
-            purpose="This Component Policy was automatically created durring the import of " + new_metadata.title,
+            description="This Component Policy was automatically created during the import of " + new_metadata.title,
+            purpose="This Component Policy was automatically created during the import of " + new_metadata.title,
             status="under-development"
             )
-    return 'catalog import complete'
+        if created:
+            new_component.save()
+    return new_catalog
 
 
 def download_catalog(link):
@@ -88,7 +101,10 @@ def download_catalog(link):
     if settings.HTTPS_PROXY:
         proxies['https'] = settings.HTTPS_PROXY
     urllib.request.ProxyHandler()
-    f = urllib.request.urlopen(link)
+    try:
+        f = urllib.request.urlopen(link)
+    except Exception:
+        raise ConnectionError("Unable to download catalog from %s. Check that the site is accessible and your proxies are properly configured." % link)
     catalog_json = json.loads(f.read())
     catalog_dict = catalog_json["catalog"]
     return catalog_dict

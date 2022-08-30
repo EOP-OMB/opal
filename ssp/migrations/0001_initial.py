@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, help_text='A summary of the diagram. This description is intended to be used as alternate text to support compliance with requirements from Section 508 of the United States Workforce Rehabilitation Act of 1973.', verbose_name='Diagram Description')),
                 ('caption', common.models.ShortTextField(help_text='A brief caption to annotate the diagram.', verbose_name='Caption')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Diagram',
@@ -119,7 +119,7 @@ class Migration(migrations.Migration):
                 ('selected', common.models.ShortTextField(help_text='The selected (Confidentiality, Integrity, or Availability) security impact level.', null=True, verbose_name='Selected Level (Confidentiality, Integrity, or Availability)')),
                 ('adjustment_justification', models.TextField(help_text='If the selected security level is different from the base security level, this contains the justification for the change.', null=True, verbose_name='Adjustment Justification')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Information Type Impact Level',
@@ -140,7 +140,7 @@ class Migration(migrations.Migration):
                 ('confidentiality_impact', models.ForeignKey(help_text='The expected level of impact resulting from the unauthorized disclosure of the described information.', on_delete=django.db.models.deletion.CASCADE, related_name='confidentiality_impact', to='ssp.information_type_impact_level', verbose_name='Confidentiality Impact Level')),
                 ('integrity_impact', models.ForeignKey(help_text='The expected level of impact resulting from the unauthorized modification of the described information.', on_delete=django.db.models.deletion.CASCADE, related_name='integrity_impact', to='ssp.information_type_impact_level', verbose_name='Integrity Impact Level')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'get_latest_by': 'updated_at',
@@ -158,7 +158,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(help_text='A summary of the inventory item stating its purpose within the system.', verbose_name='Inventory Item Description')),
                 ('implemented_components', common.models.CustomManyToManyField(help_text='The set of components that are implemented in a given system inventory item.', to='component.components', verbose_name='Implemented Components')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('responsible_parties', common.models.CustomManyToManyField(help_text='A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object.', to='common.responsible_parties', verbose_name='Responsible Parties')),
             ],
             options={
@@ -178,7 +178,7 @@ class Migration(migrations.Migration):
                 ('date_authorized', models.DateField(help_text='The date the system received its authorization.', verbose_name='System Authorization Date')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
                 ('party_uuid', models.ForeignKey(help_text='A reference to the party that manages the leveraged system.', on_delete=django.db.models.deletion.CASCADE, to='common.parties', verbose_name='Responsible Party')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Authorization',
@@ -196,7 +196,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(help_text="A summary of the system's Network Architecture.", verbose_name='Network Architecture Description')),
                 ('diagrams', common.models.CustomManyToManyField(help_text='A graphic that provides a visual representation the Network Architecture, or some aspect of it.', to='ssp.diagrams', verbose_name='Diagram(s)')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'Network Architecture',
@@ -241,7 +241,7 @@ class Migration(migrations.Migration):
                 ('data_flow', models.ForeignKey(help_text="A description of the system's data flow, optionally supplemented by diagrams that illustrate the data flow.", null=True, on_delete=django.db.models.deletion.CASCADE, to='ssp.data_flows', verbose_name='Data Flow')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
                 ('network_architecture', models.ForeignKey(help_text="A description of the system's network architecture, optionally supplemented by diagrams that illustrate the network architecture.", null=True, on_delete=django.db.models.deletion.CASCADE, to='ssp.network_architectures', verbose_name='Network Architecture')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('responsible_parties', common.models.CustomManyToManyField(help_text='A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object.', to='common.responsible_parties', verbose_name='Responsible Parties')),
             ],
             options={
@@ -290,7 +290,7 @@ class Migration(migrations.Migration):
                 ('inventory_items', common.models.CustomManyToManyField(help_text='A set of inventory-item entries that represent the managed inventory instances of the system.', to='ssp.inventory_items', verbose_name='Inventory Items')),
                 ('leveraged_authorizations', common.models.CustomManyToManyField(help_text='A description of another authorized system from which this system inherits capabilities that satisfy security requirements. Another term for this concept is a common control provider.', to='ssp.leveraged_authorizations', verbose_name='Leveraged Authorizations')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'System Implementation',
@@ -310,7 +310,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(help_text=" A summary of the user's purpose within the system.", verbose_name='User Description')),
                 ('authorized_privileges', common.models.CustomManyToManyField(help_text='Identifies a specific system privilege held by the user, along with an associated description and/or rationale for the privilege.', to='ssp.privileges', verbose_name='Privilege')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
                 ('role_ids', common.models.CustomManyToManyField(help_text='A reference to the roles served by the user.', to='common.roles', verbose_name='User Role(s)')),
             ],
             options={
@@ -327,7 +327,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True, null=True)),
                 ('information_types', common.models.CustomManyToManyField(help_text='Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60.', to='ssp.information_types', verbose_name='Information Type')),
                 ('links', common.models.CustomManyToManyField(to='common.links', verbose_name='Links')),
-                ('props', common.models.propertiesField(to='common.props')),
+                ('props', common.models.properties_field(to='common.props')),
             ],
             options={
                 'verbose_name': 'System Information',
@@ -387,7 +387,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='data_flows',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
         migrations.AddField(
             model_name='categorizations',
@@ -407,6 +407,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='authorization_boundaries',
             name='props',
-            field=common.models.propertiesField(to='common.props'),
+            field=common.models.properties_field(to='common.props'),
         ),
     ]

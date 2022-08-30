@@ -1,19 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-{% if not app_initialized %}
-    <a href="{% url 'common:app_init' %}">Initialize the Application</a>
-    <hr>
-{% endif %}
 <h1>Step 1: Import Catalogs</h1>
     <p>The OSCAL catalog model represents a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
     <p>Click on any of the following links to import these common catalogs:</p>
     <ul>
         {{ catalog_list | safe}}
     </ul>
-    {% if msg %}
-        {{ msg }}
-    {% endif %}
 <h1>Step 2: Creating a Profile</h1>
     A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any system using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance.  You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog.
 <h1>Step 3: Creating Components</h1>

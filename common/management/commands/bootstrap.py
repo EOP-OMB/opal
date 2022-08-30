@@ -1,64 +1,78 @@
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
+from catalog.models import available_catalog_list
+from catalog.views import download_catalog, import_catalog_task
+from common.models import roles
 from sp.models import IdP
 
 
+def create_admin_user(user):
+    password = user.objects.make_random_password()
+    user.objects.create_superuser(
+        "admin",
+        "",
+        password,
+        first_name="Admin",
+        last_name="User",
+        )
+    return password
+
+
+def load_default_role_list():
+    import json
+    f = open("common/management/commands/role_list.json", "r")
+    default_role_list = json.load(f)
+    for role in default_role_list:
+        roles.objects.get_or_create(**role)
+    return default_role_list
+
+
+def load_catalog_import_list():
+    catalog_list = ['https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_HIGH-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_MODERATE-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_PRIVACY-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_HIGH-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_LOW-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/baselines/rev4/json/FedRAMP_rev4_MODERATE-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_LOW-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_MODERATE-baseline-resolved-profile_catalog-min.json',
+                    'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev4/json/NIST_SP-800-53_rev4_HIGH-baseline-resolved-profile_catalog-min.json']
+    for c in catalog_list:
+        catalog_dict = download_catalog(c)
+        available_catalog_list_item = {
+            'catalog_uuid': catalog_dict['uuid'],
+            'name': catalog_dict['metadata']['title'],
+            'link': c,
+            }
+        available_catalog_list.objects.get_or_create(**available_catalog_list_item)
+    return catalog_list
+
+
 class Command(BaseCommand):
-    help = 'Bootstraps the SP with a default "admin" user and a local test IdP.'
+    help = 'Bootstraps the app with a default "admin" user, a test IdP, default roles, and a default catalog list.'
 
     def handle(self, *args, **options):
-        User = get_user_model()
-        if User.objects.count() == 0:
-            print(
-                'Creating default "admin" account with password "letmein" '
-                "-- change this immediately!"
-            )
-            User.objects.create_superuser(
-                "admin",
-                "admin@example.com",
-                "letmein",
-                first_name="Admin",
-                last_name="User",
-            )
-        admin = User.objects.filter(is_superuser=True).first()
-        if IdP.objects.count() == 0:
-            print('Creating "local" IdP for http://localhost:8000')
-            idp = IdP.objects.create(
-                name="Local SimpleSAML Provider",
-                url_params={"idp_slug": "local"},
-                base_url="http://localhost:8000",
-                contact_name=admin.get_full_name(),
-                contact_email=admin.email,
-                metadata_url="http://localhost:8080/simplesaml/saml2/idp/metadata.php",
-                respect_expiration=True,
-                logout_triggers_slo=True,
-            )
-            idp.generate_certificate()
-            # The local IdP sends an email address, but it isn't the nameid. Override it
-            # to be our nameid, AND set the email field on User.
-            idp.attributes.create(
-                saml_attribute="email", mapped_name="email", is_nameid=True
-            )
-            try:
-                idp.import_metadata()
-            except Exception:
-                print(
-                    "Could not import IdP metadata; "
-                    "make sure your local IdP exposes {}".format(idp.metadata_url)
-                )
+        # If no admin user exists, create an admin account
+        user = get_user_model()
+        if not user.objects.filter(is_superuser=True).exists():
+            password = create_admin_user(user)
+            print("Created account 'admin' with password '%s'. This password will not be displayed again." % password)
 
+        # create a sample idp if none exists
+        if IdP.objects.count() == 0:
             print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
             idp = IdP.objects.create(
                 name="Sustainsys Stub",
                 url_params={"idp_slug": "stub"},
                 base_url="http://localhost:8000",
-                contact_name=admin.get_full_name(),
-                contact_email=admin.email,
+                contact_name="admin",
+                contact_email="admin@example.com",
                 metadata_url="https://stubidp.sustainsys.com/Metadata",
                 logout_triggers_slo=True,
                 require_attributes=False,
-            )
+                )
             idp.generate_certificate()
             try:
                 idp.import_metadata()
@@ -66,4 +80,16 @@ class Command(BaseCommand):
                 print(
                     "Could not import IdP metadata; "
                     "make sure {} is available to download".format(idp.metadata_url)
-                )
+                    )
+
+        # Populate the Catalog import list
+        catalog_list = load_catalog_import_list()
+
+        print("Added %s entries to the available catalog list" % len(catalog_list))
+
+        # Add some default roles
+        default_role_list = load_default_role_list()
+        print("Added %s default roles" % len(default_role_list))
+
+        # import sample Catalog
+        import_catalog_task(test=True)

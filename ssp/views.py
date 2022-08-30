@@ -63,6 +63,15 @@ def import_ssp_view(request, ssp_file):
                 }
             return redirect('common.views.error_404_view')
     logger.info("Starting SSP import process")
+    new_ssp = import_ssp(ssp_file)
+    context = {
+        'msg': new_ssp.metadata.title + " imported from " + ssp_file
+        }
+    return redirect('home_page')
+
+
+def import_ssp(ssp_file):
+    logger = logging.getLogger("django")
     ssp_json = json.load(open(ssp_file))
     ssp_dict = ssp_json["system-security-plan"]
     if system_security_plans.objects.filter(uuid=ssp_dict["uuid"]).exists():
@@ -72,10 +81,7 @@ def import_ssp_view(request, ssp_file):
     new_ssp = system_security_plans()
     new_ssp.import_oscal(ssp_dict)
     new_ssp.save()
-    context = {
-        'msg': new_ssp.metadata.title + " imported from " + ssp_file
-        }
-    return redirect('home_page')
+    return new_ssp
 
 
 class ssp_list_view(ListView):
