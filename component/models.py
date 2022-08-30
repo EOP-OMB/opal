@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.urls import reverse
@@ -20,7 +21,7 @@ class satisfied(BasicModel):
         verbose_name_plural = "Satisfied Control Implementation Responsibilities"
 
     responsibility_uuid = models.ForeignKey(to="responsibilities", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
         )
@@ -39,7 +40,7 @@ class responsibilities(BasicModel):
         verbose_name_plural = "Control Implementation Responsibilities"
 
     provided_uuid = models.ForeignKey(to="provided_control_implementation", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system."
         )
@@ -57,7 +58,7 @@ class export(BasicModel):
         verbose_name = "Export"
         verbose_name_plural = "Exports"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Control Implementation Export Description",
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be available to another system leveraging this system."
         )
@@ -77,7 +78,7 @@ class inherited(BasicModel):
         verbose_name_plural = "Inherited Control Implementations"
 
     provided_uuid = models.ForeignKey(to="provided_control_implementation", verbose_name="Provided Control Implementation", help_text=" Identifies a 'provided' assembly associated with this assembly.", blank=True, on_delete=models.CASCADE)
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Control Implementation Responsibility Description",
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
         )
@@ -150,7 +151,7 @@ class by_components(BasicModel):
         verbose_name_plural = "Component Control Implementations"
 
     component_uuid = models.ForeignKey(to="components", verbose_name="Component Universally Unique Identifier Reference", help_text="A reference to the component that is implementing a given control or control statement.", on_delete=models.CASCADE)
-    description = models.TextField(verbose_name="Control Implementation Description", help_text="An implementation statement that describes how a control or a control statement is implemented within the referenced system component.")
+    description = RichTextField(verbose_name="Control Implementation Description", help_text="An implementation statement that describes how a control or a control statement is implemented within the referenced system component.")
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value", help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
@@ -161,7 +162,7 @@ class by_components(BasicModel):
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     implemented_requirement = models.ForeignKey(to='implemented_requirements', on_delete=models.CASCADE)
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<div class='component_control_implementation'>"
         html_str += self.description
         html_str += "</div>"
@@ -177,7 +178,7 @@ class provided_control_implementation(BasicModel):
         verbose_name = "Provided Control Implementation"
         verbose_name_plural = "Provided Control Implementations"
 
-    description = models.TextField(
+    description = RichTextField(
         verbose_name="Provided Control Implementation Description", help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system."
         )
     props = properties_field()
@@ -209,7 +210,7 @@ class implemented_requirements(BasicModel):
             r = self.control_id
         return str(r)
 
-    def to_html(self):
+    def to_html(self, indent=0):
         html_str = "<div class='implemented_requirement'>"
         html_str += self.control_id.to_html()
         if self.set_parameters.count() > 0:
@@ -239,7 +240,7 @@ class control_implementations(BasicModel):
         verbose_name = "Control Implementation"
         verbose_name_plural = "Control Implementations"
 
-    description = models.TextField(verbose_name="Description", help_text="Describes how the system satisfies a set of controls.")
+    description = RichTextField(verbose_name="Description", help_text="Describes how the system satisfies a set of controls.")
     set_parameters = CustomManyToManyField(
         to=parameters, verbose_name="Common Parameters",
         help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value."
@@ -249,7 +250,7 @@ class control_implementations(BasicModel):
     def __str__(self):
         return self.description
 
-    def to_html(self):
+    def to_html(self,indent=0):
         html_str = "<div class='control_implementation'>"
         if len(self.description) > 0:
             html_str += "<h3>%s</h3>" % self.description
@@ -287,7 +288,7 @@ class components(BasicModel):
 
     type = ShortTextField(verbose_name="Component Type", help_text="A category describing the purpose of the component.", choices=component_types)
     title = ShortTextField(verbose_name="Component Title", help_text="A human readable name for the system component.")
-    description = models.TextField(verbose_name="Component Description", help_text="A description of the component, including information about its function.")
+    description = RichTextField(verbose_name="Component Description", help_text="A description of the component, including information about its function.")
     purpose = ShortTextField(max_length=1000, verbose_name="Purpose", help_text="A summary of the technological or business purpose of the component.")
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -301,7 +302,7 @@ class components(BasicModel):
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self):
+    def to_html(self,indent=0):
         html_str = ""
         html_str += "<h1>" + self.title + "</h1>"
         html_str += "<div>%s</div>" % self.description

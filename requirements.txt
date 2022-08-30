@@ -20,3 +20,5 @@ cryptography
 django-extra-views
 django-require-login
 django-treenode
+django-ckeditor
+
