@@ -74,7 +74,8 @@ SAML_HTTPS = os.getenv("SAML_HTTPS", default=False)  # Acceptable values are "on
 SAML_HTTP_HOST = os.getenv("SAML_HTTP_HOST", default=False)
 SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False)  # should be the path to the acs function
 SAML_SERVER_PORT = os.getenv("SAML_SERVER_PORT", default=False)
-SAML_PROVIDERS = os.getenv("SAML_PROVIDERS", default=["stub"])
+# SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
+SAML_PROVIDERS = os.getenv("SAML_PROVIDERS", default="stub")
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
@@ -152,8 +153,9 @@ if ENABLE_SAML:
     AUTHENTICATION_BACKENDS.append('sp.backends.SAMLAuthenticationBackend')
     REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,'admin:login')
     REQUIRE_LOGIN_PUBLIC_URLS = ()
-    for idp in SAML_PROVIDERS:
-        # SAML_PROVIDERS must be a list of idp stubs that will be used in the application
+    # SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
+    saml_provider_list = SAML_PROVIDERS.split(",")
+    for idp in saml_provider_list:
         saml_urls = ['/sso/idp/', '/sso/idp/login/', '/sso/idp/test/', '/sso/idp/verify/', '/sso/idp/acs/']
         for url in saml_urls:
             REQUIRE_LOGIN_PUBLIC_URLS += (url.replace('idp',idp),)
