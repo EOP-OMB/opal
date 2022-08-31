@@ -10,7 +10,6 @@ from django.utils.timezone import now
 from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.urls import reverse
-from treenode.models import TreeNodeModel
 from ckeditor.fields import RichTextField
 
 
@@ -73,7 +72,7 @@ implementation_status_choices = [
     ]
 
 
-class PrimitiveModel(TreeNodeModel):
+class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
