@@ -142,7 +142,7 @@ USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
 INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
                   'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'celery_progress', 'nested_inline', 'extra_views', 'treenode', 'ckeditor']
+                  'celery_progress', 'nested_inline', 'extra_views', 'ckeditor']
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []

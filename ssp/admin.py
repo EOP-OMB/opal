@@ -1,9 +1,6 @@
 from django.contrib import admin
 from django.apps import apps
-from nested_inline.admin import NestedModelAdmin, NestedStackedInline
-
-from common.admin import CustomAdmin, metadataAdminTabularInline
-
+from common.admin import CustomAdmin
 from ssp.models import system_security_plans
 
 
