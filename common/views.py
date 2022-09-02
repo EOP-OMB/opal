@@ -1,29 +1,29 @@
-from ntpath import join
 import urllib
-from django.http import HttpResponseNotFound
-from django.contrib.auth import get_user_model
-from django.conf import settings
+from io import StringIO
+from django import forms
 from django.apps import apps
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
 from django_require_login.decorators import public
 from sp.models import IdP
 from sp.utils import get_session_idp
+import base64 as base64_encoder
 
-from catalog.models import available_catalog_list, catalogs
-from common.models import roles
-from catalog.views import download_catalog
-from .functions import search_for_uuid
+from catalog.models import available_catalog_list
+from common.functions import search_for_uuid
+from common.models import base64
 
 
 # Create your views here.
 
 
 def index_view(request):
-    User = get_user_model()
-
     catalog_list_html_str = ""
-    catalog_imported = ""
 
     for item in available_catalog_list.objects.all():
         catalog_list_html_str += item.get_link()
@@ -37,6 +37,7 @@ def index_view(request):
         }
     # And so on for more models
     return render(request, "index.html", context)
+
 
 @public
 def auth_view(request):
@@ -63,6 +64,80 @@ def permalink(request, p_uuid):
     try:
         redirect_url = obj.get_absolute_url()
         return redirect(redirect_url)
-    except AttributeError as e:
+    except AttributeError:
         err_msg = "No object with that UUID was found"
         return HttpResponseNotFound(err_msg)
+
+
+class attachment_form(forms.ModelForm):
+
+    filename = forms.CharField(max_length=1000, required=True)
+    media_type = forms.CharField(max_length=1000, required=True)
+    value = forms.FileField()
+
+    class Meta:
+        model = base64
+        fields = 'filename', 'media_type', 'value'
+
+
+def add_base64_attachment_view(request):
+    add_new_url = reverse_lazy('common:add_base64_attachment_view')
+    if request.POST:
+        try:
+            form_filename = request.POST['filename']
+            form_media_type = request.POST['media_type']
+            form_file_binary = request.POST['value']
+        except (KeyError, ObjectDoesNotExist):
+            # Redisplay the question voting form.
+            return render(
+                request, 'generic_form.html', {
+                    'add_url': add_new_url,
+                    'title': 'Upload a new file',
+                    'content': "Something went wrong",
+                    'form': attachment_form
+                    }
+                )
+        else:
+            file_base64 = StringIO(form_file_binary)
+            new_attachment, created = base64.objects.get_or_create(
+                filename=form_filename,
+                media_type=form_media_type,
+                value=file_base64
+                )
+            new_attachment.save()
+            # Always return an HttpResponseRedirect after successfully dealing
+            # with POST data. This prevents data from being posted twice if a
+            # user hits the Back button.
+            return HttpResponseRedirect(reverse('common:base64_detail', args=(new_attachment.pk,)))
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'add_url': add_new_url,
+                'title': 'Add a new Document',
+                'content': "All fields are required",
+                'form': attachment_form()
+                }
+            )
+
+
+class base64_list_view(ListView):
+    model = base64
+    context_object_name = "context_list"
+    template_name = "generic_list.html"
+    add_new_url = reverse_lazy('common:create_base64')
+    extra_context = {
+        'add_url': add_new_url,
+        'title': 'Files',
+        }
+
+
+class base64_detail_view(DetailView):
+    model = base64
+    context_object_name = "context"
+    template_name = "common/base64_detail.html"
+
+
+def base64_render_view(request, pk):
+    file = base64.objects.get(pk=pk)
+    return file.render_file()
+

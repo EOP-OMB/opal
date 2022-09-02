@@ -1,6 +1,6 @@
 import logging
 import os.path
-
+import base64 as base64_encoder
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
 import uuid
@@ -992,6 +992,16 @@ class base64(PrimitiveModel):
     value = models.TextField(
         verbose_name="base64 encoded file", help_text="A string representing arbitrary Base64-encoded binary data."
         )
+
+    def render_file(self):
+        binary_file = bytes(self.value, encoding='utf-8')
+        return base64_encoder.decodebytes(binary_file)
+
+    def get_absolute_url(self):
+        return reverse('common:base64_detail', args=(self.pk,))
+
+    def __str__(self):
+        return "%s (%s)" % (self.filename, self.media_type,)
 
 
 class resources(BasicModel):
