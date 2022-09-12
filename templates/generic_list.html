@@ -5,7 +5,7 @@
     <a href="{{ add_url }}">Add New {{ model_name }}</a>
     <ul>
 {% for item in context_list %}
-    <li><a class="collapse-item" href="{{ item.get_absolute_url }}">{{ item }}</a></li>
+    <li><a class="collapse-item" href="{{ item.get_permalink }}">{{ item }}</a></li>
 {% empty %}
     <li>No objects of this type are available</li>
 {% endfor %}
