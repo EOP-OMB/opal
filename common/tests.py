@@ -8,35 +8,28 @@ from catalog.models import available_catalog_list, controls
 from django.urls import reverse
 
 
-def test_index_view(db):
-    c = Client()
+def test_index_view(admin_client):
     url = reverse('home_page')
-    response = c.get(url)
+    response = admin_client.get(url)
     assert response.status_code == 200
 
 
-def test_db_status_view(db):
-    c = Client()
+def test_db_status_view(admin_client):
     url = reverse('common:db_status')
-    response = c.get(url)
+    response = admin_client.get(url)
     assert response.status_code == 200
 
 
-# def test_reset_all_db_function(db):
-#     reset_all_db()
-
-
-def test_permalink(db):
+def test_permalink(admin_client):
     test_ctrl = baker.make(controls, _fill_optional=True)
     test_ctrl.uuid = str(uuid.uuid4())
     test_ctrl.save()
-    c = Client()
     url = reverse('common:permalink', kwargs={'p_uuid': str(test_ctrl.uuid)})
-    resp = c.get(url)
+    resp = admin_client.get(url)
     assert resp.status_code == 302
     uuid_str = str(uuid.uuid4())
     url = reverse('common:permalink', kwargs={'p_uuid': uuid_str})
-    resp = c.get(url)
+    resp = admin_client.get(url)
     assert resp.status_code == 404
 
 
