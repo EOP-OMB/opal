@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from common.models import BasicModel, CustomManyToManyField, implementation_status_choices, parties, properties_field, links, roles, ShortTextField, system_status_state_choices, protocols
 from catalog.models import controls, parts, params
+from django.contrib.auth.models import Permission, User
+
 
 import logging
 
@@ -305,13 +307,15 @@ class components(BasicModel):
     def to_html(self,indent=0):
         html_str = ""
         html_str += "<h1>" + self.title + "</h1>"
+        if User.is_staff:
+            html_str += "<a href='%s'>Edit</a>" % reverse('admin:component_components_change', args=(self.id,))
         html_str += "<div>%s</div>" % self.description
         html_str += "<div>Purpose: %s</div>" % self.purpose
         html_str += "<div>Type: %s</div>" % self.type
-        html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
-        html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
-        html_str += "<div class='col-sm-2' style='text-align: end;'><h4><a href='%s'>Edit</a></h4></div>" % reverse('admin:component_components_change', args=(self.id,))
-        html_str += "</div></div>"
-        for imp in self.control_implementations_set.all():
-            html_str += str(imp.to_html())
+        if self.control_implementations_set.count() > 0:
+            html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
+            html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
+            html_str += "</div></div>"
+            for imp in self.control_implementations_set.all():
+                html_str += str(imp.to_html())
         return html_str

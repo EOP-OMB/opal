@@ -5,6 +5,7 @@ from uuid import UUID
 import xmltodict
 from django.apps import apps
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.exceptions import FieldError, ObjectDoesNotExist
 
 """
@@ -103,3 +104,10 @@ def convert_xml_to_json(file_path):
         with open("data.json", "w") as json_file:
             json_file.write(json_data)
             json_file.close()
+
+
+def check_auth(action):
+    user = get_user_model()
+    if not user.objects.filter(is_superuser=True).exists():
+        return True
+    return False

@@ -17,26 +17,30 @@ import base64 as base64_encoder
 from catalog.models import available_catalog_list
 from common.functions import search_for_uuid
 from common.models import base64
+from django.contrib.auth.models import User
 
 
 # Create your views here.
 
 
 def index_view(request):
-    catalog_list_html_str = ""
+    if User.is_staff:
+        catalog_list_html_str = ""
 
-    for item in available_catalog_list.objects.all():
-        catalog_list_html_str += item.get_link()
+        for item in available_catalog_list.objects.all():
+            catalog_list_html_str += item.get_link()
 
-    ssp_file_str = urllib.parse.quote_plus('ssp-example.json')
-    ssp_sample_import_link = reverse('ssp:import_ssp_view', kwargs={'ssp_file': ssp_file_str})
+        ssp_file_str = urllib.parse.quote_plus('ssp-example.json')
+        ssp_sample_import_link = reverse('ssp:import_ssp_view', kwargs={'ssp_file': ssp_file_str})
 
-    context = {
-        "catalog_list": catalog_list_html_str,
-        "ssp_sample_import_link": ssp_sample_import_link
-        }
-    # And so on for more models
-    return render(request, "index.html", context)
+        context = {
+            "catalog_list": catalog_list_html_str,
+            "ssp_sample_import_link": ssp_sample_import_link
+            }
+        # And so on for more models
+        return render(request, "index.html", context)
+    else:
+        return render(request, "base.html")
 
 
 @public
