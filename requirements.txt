@@ -2,7 +2,7 @@ Django
 django-environ
 django-bootstrap-v5
 xmltodict
-django-nested-inline
+# django-nested-inline
 django_extensions
 # POSTGRES Support
 psycopg2
@@ -11,7 +11,8 @@ pyrabbit
 celery
 celery_progress
 # SAML Support
-git+https://github.com/cs4p/django-saml-sp.git
+# git+https://github.com/cs4p/django-saml-sp.git
+django-saml-sp
 python3-saml
 cryptography
 #
