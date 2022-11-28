@@ -39,7 +39,7 @@ COPY . /usr/src/app/
 
 # set ownership to service account and execute bit for statup script
 RUN chmod -R 705 .
-RUN chown -R opal:opal ./static
+# RUN chown -R opal:opal ./static
 #RUN chmod +x startup.sh
 
 FROM app_installer as final_stage
