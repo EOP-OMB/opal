@@ -12,7 +12,7 @@ from django.views.generic.list import ListView
 
 from catalog.models import available_catalog_list, catalogs, controls
 from common.models import metadata
-from component.models import components
+from component.models import components, control_implementations
 from ctrl_profile.models import imports, profiles
 
 
@@ -70,7 +70,7 @@ def import_catalog_task(self, item=False, host=False, test=False):
     new_catalog = catalogs()
     new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
-    # create a new profiles for the imported catalog
+    # create a new profile for the imported catalog
     new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
     new_profile = profiles.objects.create(
         metadata=new_metadata
@@ -91,6 +91,10 @@ def import_catalog_task(self, item=False, host=False, test=False):
             )
         if created:
             new_component.save()
+    # Create implemented_requirement objects for all controls in the import
+    ctrl_list = new_catalog.list_all_controls()
+    for ctrl in ctrl_list:
+        control_implementations.objects.create(control_id=ctrl)
     return new_catalog
 
 
