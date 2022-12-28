@@ -267,7 +267,7 @@ LOGGING = {
         'file': {
             'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
-            'filename': 'opal-debug.log',
+            'filename': os.path.join(BASE_DIR,'opal-debug.log'),
             'formatter': 'verbose',
             'filters': ['autoreload']
             },
