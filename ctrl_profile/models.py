@@ -8,7 +8,7 @@ import re
 
 class imports(BasicModel):
     """
-    the import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
+    the import designates a catalog, profile, or other resource to be included (referenced and potentially modified) by this profile. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.
     Note that the OSCAL model allows including or excluding controls by pattern. This is not supported in OPAL.
     """
 
