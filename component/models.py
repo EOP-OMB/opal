@@ -202,7 +202,7 @@ class implemented_requirements(BasicModel):
     links = CustomManyToManyField(to=links, verbose_name="Links")
     set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value", help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Role", help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
-    control_implementation = models.ForeignKey(to='control_implementations', on_delete=models.CASCADE)
+    # control_implementation = models.ForeignKey(to='control_implementations', on_delete=models.CASCADE)
 
     def __str__(self):
         try:
@@ -248,6 +248,7 @@ class control_implementations(BasicModel):
         help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value."
         )
     component = models.ForeignKey(to='components', on_delete=models.CASCADE, null=True)
+    implemented_requirements = CustomManyToManyField(to=implemented_requirements, verbose_name="Implimented Requirements", help_text="Set of controls implemented by this component")
 
     def __str__(self):
         return self.description
@@ -309,9 +310,9 @@ class components(BasicModel):
         html_str += "<h1>" + self.title + "</h1>"
         if User.is_staff:
             html_str += "<a href='%s'>Edit</a>" % reverse('admin:component_components_change', args=(self.id,))
-        html_str += "<div>%s</div>" % self.description
         html_str += "<div>Purpose: %s</div>" % self.purpose
         html_str += "<div>Type: %s</div>" % self.type
+        html_str += "<div>%s</div>" % self.description
         if self.control_implementations_set.count() > 0:
             html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
             html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
