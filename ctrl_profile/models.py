@@ -158,7 +158,7 @@ class profiles(BasicModel):
                             if group.controls is not None:
                                 for ctrl in group.controls.all():
                                     html_str += "<tr>"
-                                    html_str += "<th>" + ctrl.__str__() + "</th>"
+                                    html_str += "<th><a href='%s' target='_blank'>%s</a></th>" % (ctrl.get_absolute_url(), ctrl.__str__())
                                     html_str += "<td>Implemented By: %s</td>" % ctrl.get_all_components()
                                     html_str += "<td></td>"
                                     html_str += "</tr>"

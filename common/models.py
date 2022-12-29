@@ -1,12 +1,16 @@
 import logging
 import os.path
 import base64 as base64_encoder
+from urllib.parse import urlencode
+
 from django.db import models, IntegrityError, connection, OperationalError
 from django.core.validators import RegexValidator
 import uuid
 from itertools import chain
 from django.conf import settings
 from django.utils.timezone import now
+
+import catalog
 from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.urls import reverse
@@ -591,6 +595,17 @@ class props(BasicModel):
         return self.name + " : " + self.value
 
 
+link_rel_options = [
+    ("related", "related"),
+    ("moved-to", "moved-to"),
+    ("canonical", "canonical"),
+    ("incorporated-into", "incorporated-into"),
+    ("required", "required"),
+    ("reference", "reference"),
+    ("alternate", "alternate"),
+]
+
+
 class links(BasicModel):
     """
     A reference to a local or remote resource
@@ -604,7 +619,7 @@ class links(BasicModel):
     rel = ShortTextField(
         verbose_name="Relation",
         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
-        blank=True
+        blank=True,choices=link_rel_options
     )
     media_type = ShortTextField(
         verbose_name="Media Type",
@@ -625,21 +640,27 @@ class links(BasicModel):
         return self
 
     def to_html(self, indent=0):
+        href=''
+        href_text=''
         if len(self.href) > 0:
-            if self.rel == "reference":
-                obj = search_for_uuid(self.href[1:])
-                if obj is not None:
-                    html_str = obj.to_html()
+            if self.rel in ['related','moved-to','incorporated-into','required']:
+                # link should be to another control in the same catalog
+                if catalog.models.controls.objects.filter(control_id=self.href[1:]).count() == 1:
+                    href = catalog.models.controls.objects.get(control_id=self.href[1:]).get_absolute_url()
+                    href_text = catalog.models.controls.objects.get(control_id=self.href[1:]).__str__()
+                    html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
+                else:
+                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id,self.href[1:])
+            if self.rel in ['canonical','reference','alternate']:
+                if resources.objects.filter(uuid=self.href[1:]).count() == 1:
+                    # href = "https://www.google.com/search?q=%s" % urlencode(resources.objects.get(uuid=self.href[1:]).title)
+                    href = ""
+                    href_text = resources.objects.get(uuid=self.href[1:]).title
+                    html_str = href_text + "<br>"
                 else:
                     html_str = "<!-- Could not find an object matching uuid " + self.href[1:] + " in the database -->"
-            else:
-                if len(self.text) > 0:
-                    href_text = self.text
-                else:
-                    href_text = self.href
-                html_str = "<a href='" + self.href + "' target=_blank>" + href_text + "</a>"
         else:
-            html_str = ""
+            html_str = "<--There is a broken link in the database. Link id %s has no href value-->" % self.id
         return html_str
 
 

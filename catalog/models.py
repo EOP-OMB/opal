@@ -295,6 +295,10 @@ class controls(PrimitiveModel):
             sort_id = self.control_id.lower()
         return sort_id
 
+    def get_absolute_url(self):
+        url = reverse('catalog:control_detail_view', args=[self.id])
+        return url
+
     def get_all_parts(self):
         part_list = []
         for part in self.parts.all():
@@ -342,12 +346,10 @@ class controls(PrimitiveModel):
                 str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
                 html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select, i.label, i.param_id) + '</i>)')
         if self.links is not None:
-            related_to_links = []
+            html_str += "<div><strong>Related Controls:</strong><br>"
             for i in self.links.filter(rel="related"):
-                related_to_links.append("<a href='" + i.href + "'>" + i.href[1:].upper() + "</a>")
-            html_str += "<p><strong>Related Controls:</strong> "
-            html_str += ", ".join(related_to_links)
-            html_str += "</p>"
+                html_str += i.to_html() + '<br>'
+            html_str += "</div>"
 
             reference_links = []
             for i in self.links.filter(rel="reference"):
