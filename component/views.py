@@ -1,7 +1,9 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from component.models import components
+from .forms import components_form
 
 
 class component_list_view(ListView):
@@ -13,10 +15,29 @@ class component_list_view(ListView):
         'title': 'Component List',
         'add_url': add_new_url,
         'model_name': model._meta.verbose_name
-        }
+    }
 
 
 class component_detail_view(DetailView):
     model = components
     context_object_name = "context"
     template_name = "generic_detail.html"
+
+
+def component_workflow_view():
+    html_str = "<h1>Steps to create a Component</h1>"
+    html_str += "<ol><li>Create the component</li>"
+    html_str += "<li>Create a control_implementations</li>"
+    html_str += "<li>Add the controls</li></ol>"
+    return html_str
+
+
+def components_form_view(request):
+    context = {}
+    form = components_form(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        form.save()
+
+    context['form'] = form
+    return render(request, "generic_form.html", context)
