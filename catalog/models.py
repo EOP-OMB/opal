@@ -259,7 +259,7 @@ class controls(PrimitiveModel):
     class Meta:
         verbose_name = "Control"
         verbose_name_plural = "Controls"
-        ordering = ["control_id"]
+        ordering = ['sort_id']
 
     control_id = ShortTextField(
         verbose_name="Control Identifier",
@@ -285,9 +285,10 @@ class controls(PrimitiveModel):
     control_enhancements = CustomManyToManyField(
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
         )
+    sort_id = models.TextField(max_length=25,verbose_name="Sort ID",help_text="normalized value to sort controls in the correct order",null=True)
 
     @property
-    def sort_id(self):
+    def _get_sort_id(self):
         if self.props.filter(name='sort-id').exists():
             sort_id = self.props.get(name='sort-id').value
         else:
@@ -301,11 +302,19 @@ class controls(PrimitiveModel):
         return part_list
 
     def get_all_components(self):
+        component_list = []
         if self.implemented_requirements_set.count() > 0:
-            comp_list = self.implemented_requirements_set.all()
+            implemented_requirements_list = self.implemented_requirements_set.all()
+            for i in implemented_requirements_list:
+                if i.control_implementations_set.count() > 0:
+                    control_implementations_list = i.control_implementations_set.all()
+                    for control_implementation in control_implementations_list:
+                        if control_implementation.component.title not in component_list:
+                            component_list.append(control_implementation.component.title)
+            component_list.sort()
             html_str = "<ul>"
-            for comp in comp_list:
-                html_str += "<li>%s</li>" % comp.control_implementation.component.title
+            for comp in component_list:
+                html_str += "<li>%s</li>" % comp
             html_str += "</ul>"
         else:
             html_str = "Control is not implemented."

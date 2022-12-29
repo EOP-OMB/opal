@@ -67,9 +67,10 @@ implementation_status_choices = [
     ("implemented", "Implemented: The control is fully implemented."),
     ("partial", "Partial: The control is partially implemented."),
     ("planned", "Planned: There is a plan for implementing the control as explained in the remarks."),
-    ("alternative", "Alternative: There is an alternative implementation for this control as explained in the remarks.",),
+    ("alternative",
+     "Alternative: There is an alternative implementation for this control as explained in the remarks.",),
     ("not-applicable", "Not-Applicable: This control does not apply to this system as justified in the remarks.",)
-    ]
+]
 
 
 class PrimitiveModel(models.Model):
@@ -189,18 +190,129 @@ class PrimitiveModel(models.Model):
             field_list.append('uuid')
         return field_list
 
+    # def import_oscal(self, oscal_data):
+    #     logger = logging.getLogger("django")
+    #     opts = self._meta
+    #     self = self.check_for_existing_object()
+    #     logger.info("Starting import for " + opts.model_name)
+    #     if oscal_data is None or len(oscal_data) == 0:
+    #         logger.warning("oscal_data is 0 length")
+    #     excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
+    #     field_list = list(opts.concrete_fields)
+    #     field_list_str = []
+    #     logger.debug("Removing excluded fields from field_list")
+    #     for f in field_list:
+    #         if f.name in excluded_fields:
+    #             field_list.remove(f)
+    #         else:
+    #             field_list_str.append(f.name)
+    #     logger.debug("model = " + opts.model_name)
+    #     logger.debug("field_list = " + ', '.join(field_list_str))
+    #     if type(oscal_data) is dict:
+    #         logger.debug("Handling dictionary...")
+    #         # replace field names to match internal model names
+    #         oscal_data = self.fix_field_names(oscal_data)
+    #         for f in field_list:
+    #             if f.name in oscal_data.keys():
+    #                 if f.get_internal_type() == 'ForeignKey':
+    #                     logger.debug(f.name + " is a foreign key. Creating child object...")
+    #                     child = f.related_model()
+    #                     child = child.import_oscal(oscal_data[f.name])
+    #                     self.__setattr__(f.name, child)
+    #                     logger.debug("Created new " + f.name + " with id " + str(child.id))
+    #                 else:
+    #                     field = f.name
+    #                     value = oscal_data[f.name]
+    #                     if type(value) is str:
+    #                         logger.debug("Setting " + field + " to " + value)
+    #                         self.__setattr__(field, value)
+    #                     else:
+    #                         logger.warning(field + " value is a " + str(type(value)))
+    #                     logger.debug("Done")
+    #     elif type(oscal_data) is str:
+    #         logger.debug("Handling string...")
+    #         # maybe the model has just one field?
+    #         if 'uuid' in field_list:
+    #             copy_field_list = field_list.copy()
+    #             copy_field_list.remove('uuid')
+    #             if len(copy_field_list) == 1:
+    #                 field = field_list[0]
+    #                 value = oscal_data
+    #                 self.__setattr__(field, value)
+    #             else:
+    #                 uuid_obj = False
+    #                 try:
+    #                     uuid_obj = uuid.UUID(oscal_data, version=4)
+    #                 except ValueError:
+    #                     logger.error(oscal_data + " is not a valid uuid")
+    #                 if uuid_obj:
+    #                     self = self.check_for_existing_object({'uuid': uuid_obj})
+    #                     field = 'uuid'
+    #                     value = uuid_obj
+    #                     self.__setattr__(field, value)
+    #         else:
+    #             logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
+    #     else:
+    #         logger.error("oscal_data is not a dictionary, string, or list.  oscal_data:")
+    #         logger.error(oscal_data)
+    #     self.save()
+    #     logger.debug('Handling the many_to_many fields')
+    #     field_list = list(opts.many_to_many)
+    #     logger.debug("field_list = " + ', '.join(field_list_str))
+    #     if type(oscal_data) is dict:
+    #         for f in field_list:
+    #             if f.name in oscal_data.keys():
+    #                 if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
+    #                     logger.debug("Creating child object for field " + f.name)
+    #                     child = f.related_model()
+    #                     child = child.import_oscal(oscal_data[f.name])
+    #                     self.oscal_import_save_m2m(child, f, opts)
+    #                 elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
+    #                     for item in oscal_data[f.name]:
+    #                         logger.debug("Creating child object for field " + f.name)
+    #                         child = f.related_model()
+    #                         child = child.import_oscal(item)
+    #                         self.oscal_import_save_m2m(child, f, opts)
+    #                 elif type(oscal_data[f.name]) is str:
+    #                     logger.debug("Creating child object for field " + f.name)
+    #                     child = f.related_model()
+    #                     child = child.import_oscal(oscal_data)
+    #                     self.oscal_import_save_m2m(child, f, opts)
+    #                 else:
+    #                     child = None
+    #                 self.save()
+    #             elif type(oscal_data) is str:
+    #                 logger.debug("Creating child object for field " + f.name)
+    #                 field = f.name
+    #                 value = oscal_data
+    #                 self.__setattr__(field, value)
+    #                 self.save()
+    #     self.save()
+    #     logger.info("Completed import for " + opts.model_name)
+    #     return self
+
+    def excluded_fields(self):
+        """returns a list of fields to ignore durring import and other functions"""
+        return ['id', 'pk', 'created_at', 'updated_at']
+
     def import_oscal(self, oscal_data):
         logger = logging.getLogger("django")
         opts = self._meta
         logger.info("Starting import for " + opts.model_name)
         if oscal_data is None or len(oscal_data) == 0:
             logger.warning("oscal_data is 0 length")
-        excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
+            return None
+        # replace field names to match internal model names
+        oscal_data = self.fix_field_names(oscal_data)
+        existing_object = self.check_for_existing_object(oscal_data)
+        if existing_object != self:
+            return existing_object
+        excluded_fields = self.excluded_fields
         field_list = list(opts.concrete_fields)
         field_list_str = []
         logger.debug("Removing excluded fields from field_list")
         for f in field_list:
-            if f.name in excluded_fields:
+            if f.name in excluded_fields():
                 field_list.remove(f)
             else:
                 field_list_str.append(f.name)
@@ -208,15 +320,6 @@ class PrimitiveModel(models.Model):
         logger.debug("field_list = " + ', '.join(field_list_str))
         if type(oscal_data) is dict:
             logger.debug("Handling dictionary...")
-            # replace field names to match internal model names
-            oscal_data = self.fix_field_names(oscal_data)
-            # check to see if the object already exists
-            unique_field_dict = {}
-            for f in self.unique_field_list():
-                if f in oscal_data.keys():
-                    unique_field_dict[f] = oscal_data[f]
-                if len(unique_field_dict) > 0:
-                    self = self.check_for_existing_object(unique_field_dict)
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
@@ -256,7 +359,8 @@ class PrimitiveModel(models.Model):
                         value = uuid_obj
                         self.__setattr__(field, value)
             else:
-                logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
+                logger.error(
+                    "oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
         else:
             logger.error("oscal_data is not a dictionary, string, or list.  oscal_data:")
             logger.error(oscal_data)
@@ -271,18 +375,21 @@ class PrimitiveModel(models.Model):
                         logger.debug("Creating child object for field " + f.name)
                         child = f.related_model()
                         child = child.import_oscal(oscal_data[f.name])
-                        self.oscal_import_save_m2m(child, f, opts)
+                        self.add_m2m(child, f, opts)
+                        self.save()
                     elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
                         for item in oscal_data[f.name]:
                             logger.debug("Creating child object for field " + f.name)
                             child = f.related_model()
                             child = child.import_oscal(item)
-                            self.oscal_import_save_m2m(child, f, opts)
+                            self.add_m2m(child, f, opts)
+                            self.save()
                     elif type(oscal_data[f.name]) is str:
                         logger.debug("Creating child object for field " + f.name)
                         child = f.related_model()
                         child = child.import_oscal(oscal_data)
-                        self.oscal_import_save_m2m(child, f, opts)
+                        self.add_m2m(child, f, opts)
+                        self.save()
                     else:
                         child = None
                     self.save()
@@ -296,68 +403,95 @@ class PrimitiveModel(models.Model):
         logger.info("Completed import for " + opts.model_name)
         return self
 
-    def check_for_existing_object(self, value_dict):
+    def check_for_existing_object(self, oscal_data):
         """
         Checks for an existing object. values_dict is a key:value list of fields to check.
         """
         logger = logging.getLogger('django')
-        logger.info("Checking for an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
-        if self._meta.model.objects.filter(**value_dict).exists():
-            logger.info("Found an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
-            old_obj = self._meta.model.objects.filter(**value_dict).first()
-            return old_obj
+        unique_field_dict = {}
+        for f in self.unique_field_list():
+            if f in oscal_data.keys():
+                unique_field_dict[f] = oscal_data[f]
+        logger.info("Checking for an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
+        if self._meta.model.objects.filter(**unique_field_dict).exists():
+            logger.info("Found an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
+            existing_object = self._meta.model.objects.filter(**unique_field_dict).first()
+            return existing_object
         else:
-            logger.info("Could not find an existing %s with fields matching %s" % (self._meta.model_name, value_dict))
+            logger.info(
+                "Could not find an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
             return self
 
-    def oscal_import_save_m2m(self, child, f, opts):
+    def add_m2m(self, child, f, opts):
         logger = logging.getLogger("django")
-        if child is not None:
-            error = False
+        parent_id = self.id
+        parent_field_name = opts.model_name + "_id"
+        child_id = child.id
+        child_field_name = child._meta.model_name + "_id"
+        if parent_field_name == child_field_name:
+            child_field_name = "to_" + child_field_name
+            parent_field_name = "from_" + parent_field_name
+        table_name = f.m2m_db_table()
+        sql = "INSERT INTO " + table_name + " (" + parent_field_name + "," + child_field_name + ") VALUES(" + str(
+            parent_id
+        ) + "," + str(child_id) + ")"
+        with connection.cursor() as cursor:
             try:
-                child.save()
+                cursor.execute(sql)
             except IntegrityError:
-                try:
-                    existing_child = child._meta.model.objects.get(uuid=child.uuid)
-                    child = existing_child
-                except ObjectDoesNotExist:
-                    logger.error("Integrity error occurred but no matching object found with the same uuid")
-                    error = True
-            if self.id is None:
-                logger.error("Parent id is None")
-                try:
-                    self.save()
-                except IntegrityError as err:
-                    logger.error(err)
-                    error = True
-            if child.id is None:
-                logger.error("Child id is none")
-                try:
-                    child.save()
-                except IntegrityError as err:
-                    logger.error(err)
-                    error = True
-            if not error:
-                parent_id = self.id
-                parent_field_name = opts.model_name + "_id"
-                child_id = child.id
-                child_field_name = child._meta.model_name + "_id"
-                if parent_field_name == child_field_name:
-                    child_field_name = "to_" + child_field_name
-                    parent_field_name = "from_" + parent_field_name
-                table_name = f.m2m_db_table()
-                sql = "INSERT INTO " + table_name + " (" + parent_field_name + "," + child_field_name + ") VALUES(" + str(
-                    parent_id
-                    ) + "," + str(child_id) + ")"
-                with connection.cursor() as cursor:
-                    try:
-                        cursor.execute(sql)
-                    except IntegrityError:
-                        logger.error("Relationship already exists. sql = " + sql)
-                    except OperationalError as err:
-                        logger.error("An error occurred")
-                        logger.error(err)
-        return child
+                logger.error("Relationship already exists. sql = " + sql)
+            except OperationalError as err:
+                logger.error("An error occurred")
+                logger.error(err)
+
+    # def oscal_import_save_m2m(self, child, f, opts):
+    #     logger = logging.getLogger("django")
+    #     if child is not None:
+    #         error = False
+    #         try:
+    #             child.save()
+    #         except IntegrityError:
+    #             try:
+    #                 existing_child = child._meta.model.objects.get(uuid=child.uuid)
+    #                 child = existing_child
+    #             except ObjectDoesNotExist:
+    #                 logger.error("Integrity error occurred but no matching object found with the same uuid")
+    #                 error = True
+    #         if self.id is None:
+    #             logger.error("Parent id is None")
+    #             try:
+    #                 self.save()
+    #             except IntegrityError as err:
+    #                 logger.error(err)
+    #                 error = True
+    #         if child.id is None:
+    #             logger.error("Child id is none")
+    #             try:
+    #                 child.save()
+    #             except IntegrityError as err:
+    #                 logger.error(err)
+    #                 error = True
+    #         if not error:
+    #             parent_id = self.id
+    #             parent_field_name = opts.model_name + "_id"
+    #             child_id = child.id
+    #             child_field_name = child._meta.model_name + "_id"
+    #             if parent_field_name == child_field_name:
+    #                 child_field_name = "to_" + child_field_name
+    #                 parent_field_name = "from_" + parent_field_name
+    #             table_name = f.m2m_db_table()
+    #             sql = "INSERT INTO " + table_name + " (" + parent_field_name + "," + child_field_name + ") VALUES(" + str(
+    #                 parent_id
+    #                 ) + "," + str(child_id) + ")"
+    #             with connection.cursor() as cursor:
+    #                 try:
+    #                     cursor.execute(sql)
+    #                 except IntegrityError:
+    #                     logger.error("Relationship already exists. sql = " + sql)
+    #                 except OperationalError as err:
+    #                     logger.error("An error occurred")
+    #                     logger.error(err)
+    #     return child
 
     def update(self, d):
         """
@@ -382,7 +516,7 @@ class PrimitiveModel(models.Model):
 class BasicModel(PrimitiveModel):
     remarks = RichTextField(
         verbose_name="Remarks", help_text="Additional commentary on the containing object.", blank=True, default=""
-        )
+    )
 
     class Meta:
         abstract = True
@@ -418,11 +552,11 @@ class protocols(BasicModel):
     name = ShortTextField(
         verbose_name="Protocol Name",
         help_text='The common name of the protocol, which should be the appropriate service name from the IANA Service Name and Transport Protocol Port Number Registry'
-        )
+    )
     title = ShortTextField(
         verbose_name="Protocol Title",
         help_text="A human readable name for the protocol (e.g., Transport Layer Security)."
-        )
+    )
     port_ranges = CustomManyToManyField(to=port_ranges, verbose_name="Port Ranges")
 
 
@@ -438,20 +572,20 @@ class props(BasicModel):
     name = ShortTextField(
         verbose_name="Property Name",
         help_text="A textual label that uniquely identifies a specific attribute, characteristic, or quality of the property's containing object."
-        )
+    )
     ns = ShortTextField(
         verbose_name="Property Namespace",
         help_text="A namespace qualifying the property's name. This allows different organizations to associate distinct semantics with the same name.",
         default="https://csrc.nist.gov/ns/oscal"
-        )
+    )
     value = ShortTextField(
         verbose_name="Property Value", help_text="Indicates the value of the attribute, characteristic, or quality."
-        )
+    )
     property_class = ShortTextField(
         verbose_name="Property Class",
         help_text="A textual label that provides a sub-type or characterization of the property's name. This can be used to further distinguish or discriminate between the semantics of multiple properties of the same object with the same name and ns.",
         blank=True
-        )
+    )
 
     def __str__(self):
         return self.name + " : " + self.value
@@ -471,15 +605,15 @@ class links(BasicModel):
         verbose_name="Relation",
         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
         blank=True
-        )
+    )
     media_type = ShortTextField(
         verbose_name="Media Type",
         help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text)."
-        )
+    )
     text = ShortTextField(
         verbose_name="Link Text",
         help_text="A textual label to associate with the link, which may be used for presentation in a tool."
-        )
+    )
 
     def __str__(self):
         return self.text
@@ -490,7 +624,7 @@ class links(BasicModel):
         self.save()
         return self
 
-    def to_html(self,indent=0):
+    def to_html(self, indent=0):
         if len(self.href) > 0:
             if self.rel == "reference":
                 obj = search_for_uuid(self.href[1:])
@@ -521,22 +655,22 @@ class revisions(BasicModel):
     title = ShortTextField(
         verbose_name="Document Title",
         help_text="A name given to the document, which may be used by a tool for display and navigation."
-        )
+    )
     published = models.DateTimeField(
         verbose_name="Publication Timestamp",
         help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included."
-        )
+    )
     last_modified = models.DateTimeField(
         verbose_name="Last Modified Timestamp",
         help_text="The date and time the document was last modified. The date-time value must be formatted according to RFC 3339 with full time and time zone included."
-        )
+    )
     version = ShortTextField(
         verbose_name="Document Version",
         help_text="A string used to distinguish the current version of the document from other previous (and future) versions."
-        )
+    )
     oscal_version = ShortTextField(
         verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against."
-        )
+    )
     props = properties_field()
 
 
@@ -555,7 +689,7 @@ class document_ids(PrimitiveModel):
         verbose_name="Document ID Scheme",
         help_text="Qualifies the kind of document identifier using a URI. If the scheme is not provided the value of the element will be interpreted as a string of characters.",
         blank=True
-        )
+    )
     identifier = ShortTextField(verbose_name="Document ID", help_text="", blank=True)
 
     def __str__(self):
@@ -574,19 +708,19 @@ class roles(BasicModel):
     role_id = ShortTextField(
         verbose_name="Role ID",
         help_text="A unique identifSorry to cancel last minuteSier for a specific role instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same role across minor revisions of the document."
-        )
+    )
     title = ShortTextField(
         verbose_name="Role Title",
         help_text="A name given to the role, which may be used by a tool for display and navigation."
-        )
+    )
     short_name = ShortTextField(
         verbose_name="Role Short Name", help_text="A short common name, abbreviation, or acronym for the role.",
         blank=True
-        )
+    )
     description = RichTextField(
         verbose_name="Role Description", help_text="A summary of the role's purpose and associated responsibilities.",
         blank=True
-        )
+    )
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Role Links")
 
@@ -630,7 +764,7 @@ class emails(BasicModel):
 
     email_address = models.EmailField(
         verbose_name="email Address", help_text="An email address as defined by RFC 5322 Section 3.4.1."
-        )
+    )
 
     def import_oscal(self, oscal_data):
         self.email_address = oscal_data
@@ -653,7 +787,7 @@ class telephone_numbers(BasicModel):
     type = ShortTextField(
         verbose_name="Phone Number Type", help_text="Indicates the type of phone number.",
         choices=[("home", "Home"), ("work", "Work"), ("mobile", "Mobile")]
-        )
+    )
     number = ShortTextField(verbose_name="Phone Number", help_text="Phone Number")
 
     def __str__(self):
@@ -672,26 +806,26 @@ class addresses(BasicModel):
     type = ShortTextField(
         verbose_name="Location Type", help_text="Indicates the type of address.",
         choices=[("home", "Home"), ("work", "Work")]
-        )
+    )
     addr_lines = models.TextField(
         max_length=1024, verbose_name="Location Address", help_text="All lines of an address.", blank=True
-        )
+    )
     city = ShortTextField(
         verbose_name="City", help_text="City, town or geographical region for the mailing address.", blank=True
-        )
+    )
     state = ShortTextField(
         verbose_name="State", help_text="State, province or analogous geographical region for mailing address",
         blank=True
-        )
+    )
     postal_code = ShortTextField(
         verbose_name="Postal Code", help_text="Postal or ZIP code for mailing address", blank=True
-        )
+    )
     country = ShortTextField(
         verbose_name="Country", help_text="The ISO 3166-1 alpha-2 country code for the mailing address.", blank=True,
         max_length=2, validators=[RegexValidator(
             regex='[A-Z]{2}', message="Must use the ISO 3166-1 alpha-2 country code"
-            )]
-        )
+        )]
+    )
 
     def __str__(self):
         return ", ".join([self.addr_lines, self.city, self.state])
@@ -709,28 +843,28 @@ class locations(BasicModel):
     title = ShortTextField(
         verbose_name="Location Title",
         help_text="A name given to the location, which may be used by a tool for display and navigation.", blank=True
-        )
+    )
     address = models.ForeignKey(
         to=addresses, verbose_name="Location Address",
         help_text="Typically, the physical address of the location will be used here. If this information is sensitive, then a mailing address can be used instead.",
         blank=True, null=True, on_delete=models.CASCADE
-        )
+    )
     email_addresses = CustomManyToManyField(
         to=emails, help_text="This is a contact email associated with the location."
-        )
+    )
     telephone_numbers = CustomManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
         help_text="A phone number used to contact the location."
-        )
+    )
     urls = CustomManyToManyField(
         to=links, verbose_name="Location URLs",
         help_text="The uniform resource locator (URL) for a web site or Internet presence associated with the location.",
         related_name="location_urls"
-        )
+    )
     props = properties_field()
     links = CustomManyToManyField(
         to=links, verbose_name="Links", help_text="Links to other sites relevant to the location"
-        )
+    )
 
 
 class external_ids(models.Model):
@@ -744,7 +878,7 @@ class external_ids(models.Model):
 
     scheme = ShortTextField(
         verbose_name="External Identifier Schema", help_text="Indicates the type of external identifier."
-        )
+    )
     external_id = ShortTextField(verbose_name="Party External ID", blank=True)
 
     def __str__(self):
@@ -773,15 +907,15 @@ class parties(BasicModel):
     type = ShortTextField(
         verbose_name="Party Type", help_text="A category describing the kind of party the object describes.",
         choices=[("person", "Person"), ("organization", "Organization")]
-        )
+    )
     name = ShortTextField(
         verbose_name="Party Name",
         help_text="The full name of the party. This is typically the legal name associated with the party.", blank=True
-        )
+    )
     short_name = ShortTextField(
         verbose_name="Party Short Name", help_text="A short common name, abbreviation, or acronym for the party.",
         blank=True
-        )
+    )
     external_ids = CustomManyToManyField(to=external_ids)
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
@@ -789,17 +923,17 @@ class parties(BasicModel):
         to=addresses, verbose_name="Location Address",
         help_text="Typically, the physical address of the Party will be used here. If this information is sensitive, then a mailing address can be used instead.",
         on_delete=models.CASCADE, null=True
-        )
+    )
     email_addresses = CustomManyToManyField(
         to=emails, help_text="This is a contact email associated with the Party."
-        )
+    )
     telephone_numbers = CustomManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
         help_text="A phone number used to contact the Party."
-        )
+    )
     location_uuids = CustomManyToManyField(
         to=locations, verbose_name="Party Locations", help_text="References a location defined in metadata"
-        )
+    )
     member_of_organizations = CustomManyToManyField(
         to=organizations, verbose_name="Organizational Affiliations",
         help_text="Identifies that the party object is a member of the organization associated with the provided UUID.", )
@@ -819,18 +953,18 @@ class responsible_parties(PrimitiveModel):
 
     role_id = ShortTextField(
         verbose_name="Responsible Role", help_text="The role that the party is responsible for."
-        )
+    )
     party_uuids = CustomManyToManyField(
         to=parties, verbose_name="Party Reference",
         help_text="Specifies one or more parties that are responsible for performing the associated role."
-        )
+    )
     props = properties_field()
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
     def field_name_changes(self):
         field_name_changes = {
             "id": "role_id", "uuid": "party_uuids"
-            }
+        }
         return field_name_changes
 
     def __str__(self):
@@ -858,26 +992,26 @@ class metadata(BasicModel):
     title = ShortTextField(
         verbose_name="Document Title",
         help_text="A name given to the document, which may be used by a tool for display and navigation."
-        )
+    )
     published = models.DateTimeField(
         verbose_name="Publication Timestamp",
         help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included.",
         null=True
-        )
+    )
     last_modified = models.DateTimeField(
         verbose_name="Last Modified Timestamp",
         help_text="The date and time the document was last modified. The date-time value must be formatted according to RFC 3339 with full time and time zone included.",
         default=now
-        )
+    )
     version = ShortTextField(
         verbose_name="Document Version",
         help_text="A string used to distinguish the current version of the document from other previous (and future) versions.",
         default="1.0"
-        )
+    )
     oscal_version = ShortTextField(
         verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against.",
         default="1.0.0"
-        )
+    )
     revisions = CustomManyToManyField(to=revisions, verbose_name="Previous Revisions")
     document_ids = CustomManyToManyField(to=document_ids, verbose_name="Other Document IDs")
     props = properties_field()
@@ -886,11 +1020,11 @@ class metadata(BasicModel):
     parties = CustomManyToManyField(
         to=parties, verbose_name="Parties (organizations or persons)",
         help_text="A responsible entity which is either a person or an organization."
-        )
+    )
     responsible_parties = CustomManyToManyField(
         to=responsible_parties, verbose_name="Responsible Parties",
         help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
-        )
+    )
 
     def __str__(self):
         return self.title
@@ -959,11 +1093,11 @@ class rlinks(PrimitiveModel):
 
     href = CustomManyToManyField(
         to=links, verbose_name="Hypertext Reference", help_text="A resolvable URI reference to a resource."
-        )
+    )
     hashes = CustomManyToManyField(
         to=hashes, verbose_name="Hashes",
         help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm."
-        )
+    )
 
     def to_html(self, indent=0):
         if self.href is not None:
@@ -984,14 +1118,14 @@ class base64(PrimitiveModel):
     filename = ShortTextField(
         verbose_name="File Name",
         help_text="Name of the file before it was encoded as Base64 to be embedded in a resource. This is the name that will be assigned to the file when the file is decoded."
-        )
+    )
     media_type = ShortTextField(
         verbose_name="Media Type",
         help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry."
-        )
+    )
     value = models.TextField(
         verbose_name="base64 encoded file", help_text="A string representing arbitrary Base64-encoded binary data."
-        )
+    )
 
     def render_file(self):
         binary_file = bytes(self.value, encoding='utf-8')
@@ -1016,29 +1150,29 @@ class resources(BasicModel):
     title = ShortTextField(
         verbose_name="Resource Title",
         help_text="A name given to the resource, which may be used by a tool for display and navigation."
-        )
+    )
     description = RichTextField(
         verbose_name="Description", help_text="Describes how the system satisfies a set of controls."
-        )
+    )
     props = properties_field()
     document_ids = CustomManyToManyField(
         to=document_ids, verbose_name="Document Identifiers",
         help_text="A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier for a group of documents that are to be treated as different versions of the same document."
-        )
+    )
     citation = CustomManyToManyField(
         to=citations, verbose_name="Citations",
         help_text="A citation consisting of end note text and optional structured bibliographic data."
-        )
+    )
     rlinks = CustomManyToManyField(
         to=rlinks, verbose_name="Resource link",
         help_text="A pointer to an external resource with an optional hash for verification and change detection. This construct is different from link, which makes no provision for a hash or formal title."
-        )
+    )
     base64 = CustomManyToManyField(
         to=base64, verbose_name="Base64 encoded objects",
         help_text="A string representing arbitrary Base64-encoded binary data."
-        )
+    )
 
-    def to_html(self,indent=0):
+    def to_html(self, indent=0):
         html_str = ""
         if len(self.rlinks.all()) > 0:
             for r in self.rlinks.all():
@@ -1058,4 +1192,4 @@ class back_matter(PrimitiveModel):
     resources = CustomManyToManyField(
         to=resources, verbose_name="Resources",
         help_text="A resource associated with content in the containing document. A resource may be directly included in the document base64 encoded or may point to one or more equivalent internet resources."
-        )
+    )

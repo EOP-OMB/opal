@@ -248,7 +248,7 @@ class control_implementations(BasicModel):
         help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value."
         )
     component = models.ForeignKey(to='components', on_delete=models.CASCADE, null=True)
-    implemented_requirements = CustomManyToManyField(to=implemented_requirements, verbose_name="Implimented Requirements", help_text="Set of controls implemented by this component")
+    implemented_requirements = CustomManyToManyField(to=implemented_requirements, verbose_name="Implemented Requirements", help_text="Set of controls implemented by this component")
 
     def __str__(self):
         return self.description
@@ -263,9 +263,9 @@ class control_implementations(BasicModel):
             for param in self.set_parameters:
                 html_str += "<tr><th>%s</th<th>%s</th></tr>" % (param.param_id, param.values)
             html_str += "</table>"
-        if self.implemented_requirements_set.count() > 0:
+        if self.implemented_requirements.count() > 0:
             logger.info("getting implemented_requirements...")
-            for imp_req in self.implemented_requirements_set.all():
+            for imp_req in self.implemented_requirements.all():
                 html_str += imp_req.to_html()
         html_str += "</div>"
         return html_str

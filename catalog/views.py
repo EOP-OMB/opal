@@ -12,7 +12,7 @@ from django.views.generic.list import ListView
 
 from catalog.models import available_catalog_list, catalogs, controls
 from common.models import metadata
-from component.models import components, control_implementations
+from component.models import components, control_implementations, implemented_requirements
 from ctrl_profile.models import imports, profiles
 
 
@@ -57,6 +57,7 @@ app = Celery('tasks', broker=settings.BROKER)
 
 @app.task(bind=True)
 def import_catalog_task(self, item=False, host=False, test=False):
+    logger = logging.getLogger('django')
     if test:
         catalog_file = "sample_data/basic-catalog.json"
         catalog_json = json.load(open(catalog_file))
@@ -68,7 +69,7 @@ def import_catalog_task(self, item=False, host=False, test=False):
             raise TypeError("You must provide a catalog to import")
 
     new_catalog = catalogs()
-    new_catalog.import_oscal(catalog_dict)
+    new_catalog = new_catalog.import_oscal(catalog_dict)
     new_catalog.save()
     # create a new profile for the imported catalog
     new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
@@ -92,9 +93,12 @@ def import_catalog_task(self, item=False, host=False, test=False):
         if created:
             new_component.save()
     # Create implemented_requirement objects for all controls in the import
+    logger.info("Creating implemented_requirement objects for all controls in the import")
     ctrl_list = new_catalog.list_all_controls()
     for ctrl in ctrl_list:
-        control_implementations.objects.create(control_id=ctrl)
+        implemented_requirements.objects.get_or_create(control_id=ctrl)
+        ctrl.sort_id = ctrl._get_sort_id()
+        ctrl.save()
     return new_catalog
 
 

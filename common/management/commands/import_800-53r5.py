@@ -1,9 +1,12 @@
+import logging
+
 from django.conf import settings
 from django.core.management import BaseCommand
 
 from catalog.models import catalogs
 from catalog.views import download_catalog
 from common.models import props, metadata
+from component.models import implemented_requirements
 from ctrl_profile.models import profiles, imports
 
 low = ['AC-01-00', 'AC-02-00', 'AC-03-00', 'AC-07-00', 'AC-08-00', 'AC-14-00', 'AC-17-00', 'AC-18-00', 'AC-19-00',
@@ -97,27 +100,46 @@ high = ['AC-01-00', 'AC-02-00', 'AC-02-01', 'AC-02-02', 'AC-02-03', 'AC-02-04', 
         'SI-08-02', 'SI-10-00', 'SI-11-00', 'SI-12-00', 'SI-16-00', 'SR-01-00', 'SR-02-00', 'SR-02-01', 'SR-03-00',
         'SR-05-00', 'SR-06-00', 'SR-08-00', 'SR-09-00', 'SR-09-01', 'SR-10-00', 'SR-11-00', 'SR-11-01', 'SR-11-02',
         'SR-12-00']
-privacy = ['AC-01-00','AC-03-14','AT-01-00','AT-02-00','AT-03-00','AT-03-05','AT-04-00','AU-01-00','AU-02-00','AU-03-03','AU-11-00','CA-01-00','CA-02-00','CA-05-00','CA-06-00','CA-07-00','CA-07-04','CM-01-00','CM-04-00','IR-01-00','IR-02-00','IR-02-03','IR-03-00','IR-04-00','IR-05-00','IR-06-00','IR-07-00','IR-08-00','IR-08-01','MP-01-00','MP-06-00','PE-08-03','PL-01-00','PL-02-00','PL-04-00','PL-04-01','PL-08-00','PL-09-00','PM-03-00','PM-04-00','PM-05-01','PM-06-00','PM-07-00','PM-08-00','PM-09-00','PM-10-00','PM-11-00','PM-13-00','PM-14-00','PM-17-00','PM-18-00','PM-19-00','PM-20-00','PM-20-01','PM-21-00','PM-22-00','PM-24-00','PM-25-00','PM-26-00','PM-27-00','PM-28-00','PM-31-00','PS-06-00','PT-01-00','PT-02-00','PT-03-00','PT-04-00','PT-05-00','PT-05-02','PT-06-00','PT-06-01','PT-06-02','PT-07-00','PT-07-01','PT-07-02','PT-08-00','RA-01-00','RA-03-00','RA-07-00','RA-08-00','SA-01-00','SA-02-00','SA-03-00','SA-04-00','SA-08-33','SA-09-00','SA-11-00','SC-07-24','SI-01-00','SI-12-00','SI-12-01','SI-12-02','SI-12-03','SI-18-00','SI-18-04','SI-19-00']
+privacy = ['AC-01-00', 'AC-03-14', 'AT-01-00', 'AT-02-00', 'AT-03-00', 'AT-03-05', 'AT-04-00', 'AU-01-00', 'AU-02-00',
+           'AU-03-03', 'AU-11-00', 'CA-01-00', 'CA-02-00', 'CA-05-00', 'CA-06-00', 'CA-07-00', 'CA-07-04', 'CM-01-00',
+           'CM-04-00', 'IR-01-00', 'IR-02-00', 'IR-02-03', 'IR-03-00', 'IR-04-00', 'IR-05-00', 'IR-06-00', 'IR-07-00',
+           'IR-08-00', 'IR-08-01', 'MP-01-00', 'MP-06-00', 'PE-08-03', 'PL-01-00', 'PL-02-00', 'PL-04-00', 'PL-04-01',
+           'PL-08-00', 'PL-09-00', 'PM-03-00', 'PM-04-00', 'PM-05-01', 'PM-06-00', 'PM-07-00', 'PM-08-00', 'PM-09-00',
+           'PM-10-00', 'PM-11-00', 'PM-13-00', 'PM-14-00', 'PM-17-00', 'PM-18-00', 'PM-19-00', 'PM-20-00', 'PM-20-01',
+           'PM-21-00', 'PM-22-00', 'PM-24-00', 'PM-25-00', 'PM-26-00', 'PM-27-00', 'PM-28-00', 'PM-31-00', 'PS-06-00',
+           'PT-01-00', 'PT-02-00', 'PT-03-00', 'PT-04-00', 'PT-05-00', 'PT-05-02', 'PT-06-00', 'PT-06-01', 'PT-06-02',
+           'PT-07-00', 'PT-07-01', 'PT-07-02', 'PT-08-00', 'RA-01-00', 'RA-03-00', 'RA-07-00', 'RA-08-00', 'SA-01-00',
+           'SA-02-00', 'SA-03-00', 'SA-04-00', 'SA-08-33', 'SA-09-00', 'SA-11-00', 'SC-07-24', 'SI-01-00', 'SI-12-00',
+           'SI-12-01', 'SI-12-02', 'SI-12-03', 'SI-18-00', 'SI-18-04', 'SI-19-00']
+
 
 def import_800_53():
+    logger = logging.getLogger('django')
     link = 'https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json'
     catalog_dict = download_catalog(link)
     new_catalog = catalogs()
     oscal_data = catalog_dict
-    new_catalog.import_oscal(oscal_data)
+    new_catalog = new_catalog.import_oscal(oscal_data)
+    logger.info('Creating implemented_requirement objects for all controls in the import')
+    ctrl_list = new_catalog.list_all_controls()
+    for ctrl in ctrl_list:
+        implemented_requirements.objects.get_or_create(control_id=ctrl)
+        ctrl.sort_id = ctrl._get_sort_id
+    logger.info('Creating profiles for FISMA baselines')
     create_profile(new_catalog, 'Low', low)
     create_profile(new_catalog, 'Moderate', moderate)
     create_profile(new_catalog, 'High', high)
-    create_profile(new_catalog, 'Privacy',privacy)
+    create_profile(new_catalog, 'Privacy', privacy)
 
 
 def create_profile(new_catalog, fips_level, ctrl_list):
-    new_metadata = metadata.objects.create(title='SP 800-53 rev 5 FISMA %s Controls' % fips_level)
-    new_profile = profiles.objects.create(metadata=new_metadata)
+    logger = logging.getLogger('django')
+    new_metadata, created = metadata.objects.get_or_create(title='SP 800-53 rev 5 FISMA %s Controls' % fips_level)
+    new_profile, created = profiles.objects.get_or_create(metadata=new_metadata)
     new_profile.save()
     host = settings.HOST_NAME
     url = "https://" + host + new_catalog.get_permalink()
-    new_import = imports.objects.create(href=url, import_type="catalog")
+    new_import, created = imports.objects.get_or_create(href=url, import_type="catalog")
     new_profile.imports.add(new_import)
     new_profile.save()
     for ctrl in ctrl_list:
@@ -126,14 +148,21 @@ def create_profile(new_catalog, fips_level, ctrl_list):
             i = i[:5]
         else:
             i = i[:5] + '.' + i[6:8]
-        p = props.objects.filter(name='sort-id', value=i).get()
+        if props.objects.filter(name='sort-id', value=i).count() > 0:
+            p = props.objects.filter(name='sort-id', value=i).get()
+        else:
+            logger.warning("No matching property found for sort-id %s" % i)
         if p.controls_set.count() == 1:
             c = p.controls_set.first()
             new_import.include_controls.add(c)
+        elif p.controls_set.count() == 0:
+            logger.warning("sort-id %s is not assigned to any controls!" % i)
         else:
-            print("sort_id %s is assigned to more than one control!" % i)
+            logger.warning("sort-id %s is assigned to more than one control!" % i)
 
 
 class Command(BaseCommand):
     help = 'Import all 800-53 Rev 5 controls and create profiles for FISMA Low, Moderate, High and for the privacy controls'
-    import_800_53()
+
+    def handle(self, *args, **options):
+        import_800_53()
