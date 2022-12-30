@@ -285,7 +285,7 @@ class controls(PrimitiveModel):
     control_enhancements = CustomManyToManyField(
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
         )
-    sort_id = models.TextField(max_length=25,verbose_name="Sort ID",help_text="normalized value to sort controls in the correct order",null=True)
+    sort_id = ShortTextField(max_length=25,verbose_name="Sort ID",help_text="normalized value to sort controls in the correct order",null=True)
 
     @property
     def _get_sort_id(self):
