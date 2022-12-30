@@ -150,13 +150,13 @@ def create_profile(new_catalog, fips_level, ctrl_list):
             i = i[:5] + '.' + i[6:8]
         if props.objects.filter(name='sort-id', value=i).count() > 0:
             p = props.objects.filter(name='sort-id', value=i).get()
-        else:
-            logger.warning("No matching property found for sort-id %s" % i)
-        if p.controls_set.count() == 1:
-            c = p.controls_set.first()
-            new_import.include_controls.add(c)
-        elif p.controls_set.count() == 0:
-            logger.warning("sort-id %s is not assigned to any controls!" % i)
+            if p.controls_set.count() == 1:
+                c = p.controls_set.first()
+                new_import.include_controls.add(c)
+            elif p.controls_set.count() == 0:
+                logger.warning("sort-id %s is not assigned to any controls!" % i)
+            else:
+                logger.warning("No matching property found for sort-id %s" % i)
         else:
             logger.warning("sort-id %s is assigned to more than one control!" % i)
 
