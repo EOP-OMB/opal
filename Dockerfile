@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster as base_os
+FROM python:3-slim as base_os
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -26,7 +26,7 @@ WORKDIR /usr/src/app
 COPY ./requirements.txt /usr/src/app
 # install Python requirements
 RUN python -m pip install --upgrade pip
-RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt --upgrade
 RUN python -m pip install --no-cache-dir mod-wsgi
 
 FROM package_installer as app_installer

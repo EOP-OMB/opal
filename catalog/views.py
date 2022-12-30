@@ -97,7 +97,7 @@ def import_catalog_task(self, item=False, host=False, test=False):
     ctrl_list = new_catalog.list_all_controls()
     for ctrl in ctrl_list:
         implemented_requirements.objects.get_or_create(control_id=ctrl)
-        ctrl.sort_id = ctrl._get_sort_id()
+        ctrl.sort_id = ctrl._get_sort_id
         ctrl.save()
     return new_catalog
 

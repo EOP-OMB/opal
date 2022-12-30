@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opal-db
+  namespace: {{ .Values.namespace | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: opal-db
+  template:
+    metadata:
+      labels:
+        component: opal-db
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
+      containers:
+      - image: postgres
+        imagePullPolicy: Always
+        name: opal-db
+        ports:
+        - containerPort: 5432
+          name: 5432tcp
+          protocol: TCP
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: POSTGRES_OPAL_PASSWORD
+              name: opal-passwords
+        - name: POSTGRES_USER
+          value: opal
+        - name: PGDATA
+          value: /var/lib/postgresql/data/opal
+        - name: POSTGRES_DB
+          value: opal
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          runAsNonRoot: true
+          seccompProfile:
+            type: "RuntimeDefault"
+          runAsUser: 999
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgresdata
+        resources:
+          -
+      volumes:
+      - name: postgresdata
+        persistentVolumeClaim:
+          claimName: opal-db-postgres-volume-claim
