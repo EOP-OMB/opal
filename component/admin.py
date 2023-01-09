@@ -6,17 +6,16 @@ from django.contrib import admin
 from common.admin import CustomAdmin
 from component.models import by_components, components, control_implementations, implemented_requirements
 
+
 @admin.register(control_implementations)
 class control_implementations_admin(CustomAdmin):
-    model=control_implementations
-
+    model = control_implementations
 
 
 class control_implementations_inline(admin.StackedInline):
-    model=control_implementations
+    model = control_implementations
     extra = 0
     fields = ['description', 'implemented_requirements']
-
 
 
 @admin.register(components)
@@ -27,7 +26,7 @@ class componentsAdmin(CustomAdmin):
         'status',
         'created_at',
         'updated_at',
-        )
+    )
     list_filter = ('created_at', 'updated_at', 'status', 'type')
     # raw_id_fields = ('props', 'links', 'responsible_roles', 'protocols')
     date_hierarchy = 'created_at'
@@ -35,7 +34,7 @@ class componentsAdmin(CustomAdmin):
         (None, {'fields': ('title', 'type', 'description', 'purpose', 'status')}),
         ('Other Fields', {
             'classes': ('collapse',),
-            'fields':('props', 'links', 'responsible_roles', 'protocols')}),
+            'fields': ('props', 'links', 'responsible_roles', 'protocols')}),
     )
     inlines = [control_implementations_inline]
 
