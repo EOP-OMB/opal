@@ -1,4 +1,4 @@
-FROM python:3-slim as base_os
+FROM python:3.12.0a3-slim as base_os
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1

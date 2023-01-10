@@ -15,6 +15,7 @@ from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+import json
 
 
 class ShortTextField(models.CharField):
@@ -118,6 +119,10 @@ class PrimitiveModel(models.Model):
         for f in opts.many_to_many:
             data[f.name] = [i.to_dict() for i in f.value_from_object(self)]
         return data
+
+    def to_json(self):
+        data = self.to_dict()
+        return json.dumps(data, indent=2)
 
     def to_html(self, indent=0):
         opts = self._meta
