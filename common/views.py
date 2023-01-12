@@ -1,23 +1,25 @@
+import os
 import urllib
+import uuid
 from io import StringIO
+
 from django import forms
 from django.apps import apps
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import FileResponse
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import DetailView, ListView
 from django_require_login.decorators import public
 from sp.models import IdP
 from sp.utils import get_session_idp
-import base64 as base64_encoder
 
 from catalog.models import available_catalog_list
 from common.functions import search_for_uuid
 from common.models import base64
-from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -36,7 +38,7 @@ def index_view(request):
         context = {
             "catalog_list": catalog_list_html_str,
             "ssp_sample_import_link": ssp_sample_import_link
-            }
+        }
         # And so on for more models
         return render(request, "index.html", context)
     else:
@@ -45,7 +47,8 @@ def index_view(request):
 
 @public
 def auth_view(request):
-    context = {"idp": get_session_idp(request), "idps": IdP.objects.filter(is_active=True), "enable_django_auth": settings.ENABLE_DJANGO_AUTH}
+    context = {"idp": get_session_idp(request), "idps": IdP.objects.filter(is_active=True),
+               "enable_django_auth": settings.ENABLE_DJANGO_AUTH}
     return render(request, "auth.html", context)
 
 
@@ -74,7 +77,6 @@ def permalink(request, p_uuid):
 
 
 class attachment_form(forms.ModelForm):
-
     filename = forms.CharField(max_length=1000, required=True)
     media_type = forms.CharField(max_length=1000, required=True)
     value = forms.FileField()
@@ -99,15 +101,15 @@ def add_base64_attachment_view(request):
                     'title': 'Upload a new file',
                     'content': "Something went wrong",
                     'form': attachment_form
-                    }
-                )
+                }
+            )
         else:
             file_base64 = StringIO(form_file_binary)
             new_attachment, created = base64.objects.get_or_create(
                 filename=form_filename,
                 media_type=form_media_type,
                 value=file_base64
-                )
+            )
             new_attachment.save()
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
@@ -120,8 +122,8 @@ def add_base64_attachment_view(request):
                 'title': 'Add a new Document',
                 'content': "All fields are required",
                 'form': attachment_form()
-                }
-            )
+            }
+        )
 
 
 class base64_list_view(ListView):
@@ -132,7 +134,7 @@ class base64_list_view(ListView):
     extra_context = {
         'add_url': add_new_url,
         'title': 'Files',
-        }
+    }
 
 
 class base64_detail_view(DetailView):
@@ -145,3 +147,13 @@ def base64_render_view(request, pk):
     file = base64.objects.get(pk=pk)
     return file.render_file()
 
+
+def download_oscal_json(request, j):
+
+    file = open(uuid.uuid4()+'.json', 'x')
+    file.write(j)
+    path_to_file = os.path.realpath(file)
+    response = FileResponse(open(path_to_file, 'rb'))
+    file_name = file[5:]
+    response['Content-Disposition'] = 'inline; filename=' + file_name
+    return response

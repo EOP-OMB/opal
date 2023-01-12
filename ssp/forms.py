@@ -13,3 +13,6 @@ class sspForm(forms.ModelForm):
     class Meta:
         model = system_security_plans
         fields = 'metadata', 'system_characteristics', 'system_implementation', 'control_implementation'
+
+
+class

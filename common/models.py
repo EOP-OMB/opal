@@ -106,7 +106,7 @@ class PrimitiveModel(models.Model):
 
     def to_dict(self):
         opts = self._meta
-        excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
+        excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
         data = {}
         for f in chain(opts.concrete_fields, opts.private_fields):
             if f.name not in excluded_fields:
@@ -118,11 +118,13 @@ class PrimitiveModel(models.Model):
                     data[f.name] = f.value_to_string(self)
         for f in opts.many_to_many:
             data[f.name] = [i.to_dict() for i in f.value_from_object(self)]
+        data = self.convert_field_names_from_db_to_oscal(data)
         return data
 
     def to_json(self):
         data = self.to_dict()
         return json.dumps(data, indent=2)
+
 
     def to_html(self, indent=0):
         opts = self._meta
@@ -160,9 +162,40 @@ class PrimitiveModel(models.Model):
         return html_str
 
     def field_name_changes(self):
+        """returns a dictionary of fileds that are named differntly in the model than in OSCAL JSON. The format is {oscal_filed_name: database_field_name}"""
         return {}
 
-    def fix_field_names(self, d):
+    def convert_field_names_from_db_to_oscal(self, d):
+        new_dict = {}
+        del_keys = set()
+        if type(d) is dict:
+            if len(self.field_name_changes()) == 0:
+                # No specific field list, just fix the hyphens
+                for k in d:
+                    if "_" in k:
+                        new_key = k.replace("_", "-")
+                        new_dict[new_key] = d[k]
+                        del_keys.add(k)
+            else:
+                # if object has a custom list it will include any hyphens
+                name_change_list: dict = self.field_name_changes()
+                reverse_name_change_list = {}
+                for k in name_change_list:
+                    reverse_name_change_list[name_change_list[k]] = k
+                if type(name_change_list) is dict:
+                    for k in d:
+                        if k in reverse_name_change_list:
+                            new_key = reverse_name_change_list[k]
+                            new_dict[new_key] = d[k]
+                            del_keys.add(k)
+            for k in del_keys:
+                d.pop(k)
+            merged_dict = {**new_dict, **d}
+        else:
+            merged_dict = d
+        return merged_dict
+
+    def convert_field_names_from_oscal_to_db(self, d):
         new_dict = {}
         del_keys = set()
         if type(d) is dict:
@@ -220,7 +253,7 @@ class PrimitiveModel(models.Model):
     #     if type(oscal_data) is dict:
     #         logger.debug("Handling dictionary...")
     #         # replace field names to match internal model names
-    #         oscal_data = self.fix_field_names(oscal_data)
+    #         oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
     #         for f in field_list:
     #             if f.name in oscal_data.keys():
     #                 if f.get_internal_type() == 'ForeignKey':
@@ -312,7 +345,7 @@ class PrimitiveModel(models.Model):
             logger.warning("oscal_data is 0 length")
             return None
         # replace field names to match internal model names
-        oscal_data = self.fix_field_names(oscal_data)
+        oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
         existing_object = self.check_for_existing_object(oscal_data)
         if existing_object != self:
             return existing_object
@@ -624,7 +657,7 @@ class links(BasicModel):
     rel = ShortTextField(
         verbose_name="Relation",
         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
-        blank=True,choices=link_rel_options
+        blank=True, choices=link_rel_options
     )
     media_type = ShortTextField(
         verbose_name="Media Type",
@@ -645,18 +678,19 @@ class links(BasicModel):
         return self
 
     def to_html(self, indent=0):
-        href=''
-        href_text=''
+        href = ''
+        href_text = ''
         if len(self.href) > 0:
-            if self.rel in ['related','moved-to','incorporated-into','required']:
+            if self.rel in ['related', 'moved-to', 'incorporated-into', 'required']:
                 # link should be to another control in the same catalog
                 if catalog.models.controls.objects.filter(control_id=self.href[1:]).count() == 1:
                     href = catalog.models.controls.objects.get(control_id=self.href[1:]).get_absolute_url()
                     href_text = catalog.models.controls.objects.get(control_id=self.href[1:]).__str__()
                     html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
                 else:
-                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id,self.href[1:])
-            if self.rel in ['canonical','reference','alternate']:
+                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (
+                    self.id, self.href[1:])
+            if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
                     # href = "https://www.google.com/search?q=%s" % urlencode(resources.objects.get(uuid=self.href[1:]).title)
                     href = ""
@@ -1051,6 +1085,7 @@ class metadata(BasicModel):
         to=responsible_parties, verbose_name="Responsible Parties",
         help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
     )
+
 
     def __str__(self):
         return self.title
