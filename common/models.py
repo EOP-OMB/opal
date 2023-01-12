@@ -346,9 +346,6 @@ class PrimitiveModel(models.Model):
             return None
         # replace field names to match internal model names
         oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
-        existing_object = self.check_for_existing_object(oscal_data)
-        if existing_object != self:
-            return existing_object
         excluded_fields = self.excluded_fields
         field_list = list(opts.concrete_fields)
         field_list_str = []
@@ -362,6 +359,9 @@ class PrimitiveModel(models.Model):
         logger.debug("field_list = " + ', '.join(field_list_str))
         if type(oscal_data) is dict:
             logger.debug("Handling dictionary...")
+            existing_object = self.check_for_existing_object(oscal_data)
+            if existing_object != self:
+                return existing_object
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
