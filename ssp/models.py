@@ -267,6 +267,12 @@ class systems_information(PrimitiveModel):
         help_text="Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60."
         )
 
+    def __str__(self):
+        info_type_list = []
+        for i in self.information_types.all():
+            info_type_list.append(i.__str__())
+        return ', '.join(info_type_list)
+
 
 class diagrams(BasicModel):
     """

@@ -176,7 +176,11 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware',
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
               'django.middleware.clickjacking.XFrameOptionsMiddleware',
-              "django_require_login.middleware.LoginRequiredMiddleware", ]
+              ]
+
+if ENVIRONMENT != 'development':
+    MIDDLEWARE.append("django_require_login.middleware.LoginRequiredMiddleware")
+
 
 # To enable sitewide caching
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',

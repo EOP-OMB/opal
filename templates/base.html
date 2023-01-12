@@ -17,6 +17,10 @@
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
     {% load static %}
+    <!--Begin Form media -->
+    {{ form.media }}
+    {{ wizard.form.media }}
+    <!--End Form media -->
 
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
 

@@ -100,3 +100,15 @@ class ssp_detail_view(DetailView):
     model = system_security_plans
     context_object_name = "context"
     template_name = "generic_detail.html"
+
+
+from formtools.wizard.views import CookieWizardView
+from .forms import metadata_form, system_characteristics_form, back_matter_form
+
+
+class ssp_wizard(CookieWizardView):
+    form_list = [system_characteristics_form, back_matter_form]
+    def done(self, form_list, **kwargs):
+        return render(self.request, reverse(ssp_detail_view),{
+            'form_data': [form.cleaned_data for form in form_list],
+        })

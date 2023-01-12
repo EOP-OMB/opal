@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from ssp.views import ssp_list_view, ssp_detail_view, import_ssp_view, add_new_ssp_view
+from ssp.views import ssp_list_view, ssp_detail_view, import_ssp_view, add_new_ssp_view, ssp_wizard
 
 app_name = 'ssp'
 urlpatterns = [
@@ -23,4 +23,5 @@ urlpatterns = [
     path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'),
     path('import/<str:ssp_file>', import_ssp_view, name='import_ssp_view'),
     path('add/', add_new_ssp_view, name='add_new_ssp_view'),
+    path('wizard', ssp_wizard.as_view(), name='ssp_wizard'),
     ]
