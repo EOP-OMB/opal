@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: opal
+  namespace: {{ .Values.namespace | quote }}
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    component: opal
+  sessionAffinity: None
+  type: ClusterIP
