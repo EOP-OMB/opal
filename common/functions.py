@@ -17,7 +17,7 @@ USER_APPS = settings.USER_APPS
 
 def replace_hyphen(s: str):
     logger = logging.getLogger("django")
-    logger.info("replacing hyphen in " + s + " with underscore.")
+    logger.debug("replacing hyphen in " + s + " with underscore.")
     return s.replace("-", "_")
 
 

@@ -21,4 +21,5 @@ cryptography
 django-extra-views
 django-require-login
 django-ckeditor
+django-formtools
 

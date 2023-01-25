@@ -18,6 +18,8 @@ from sp.models import IdP
 from sp.utils import get_session_idp
 
 from catalog.models import available_catalog_list
+from common.forms import \
+    resource_form
 from common.functions import search_for_uuid
 from common.models import base64
 
@@ -146,6 +148,14 @@ class base64_detail_view(DetailView):
 def base64_render_view(request, pk):
     file = base64.objects.get(pk=pk)
     return file.render_file()
+
+def add_resource_view(request):
+    return render(
+            request, 'generic_form.html', {
+                'title': 'Add a new Document',
+                'content': "All fields are required",
+                'form': resource_form
+            })
 
 
 def download_oscal_json(request, j):

@@ -22,6 +22,6 @@ urlpatterns = [
     path('', ssp_list_view.as_view(), name='ssp_list_view'),
     path('<int:pk>', ssp_detail_view.as_view(), name='ssp_detail_view'),
     path('import/<str:ssp_file>', import_ssp_view, name='import_ssp_view'),
-    path('add/', add_new_ssp_view, name='add_new_ssp_view'),
-    path('wizard', ssp_wizard.as_view(), name='ssp_wizard'),
+    # path('add/', add_new_ssp_view, name='add_new_ssp_view'),
+    path('add', ssp_wizard.as_view(), name='add_new_ssp_view'),
     ]
