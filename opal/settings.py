@@ -50,6 +50,7 @@ SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False")
 LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
+LOG_FILE = os.getenv("LOG_FILE", default=os.path.join(BASE_DIR,"debug.log"))
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
@@ -271,7 +272,7 @@ LOGGING = {
         'file': {
             'level': LOG_LEVEL,
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR,'opal-debug.log'),
+            'filename': LOG_FILE,
             'formatter': 'verbose',
             'filters': ['autoreload']
             },

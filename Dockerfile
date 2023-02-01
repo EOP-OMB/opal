@@ -46,10 +46,15 @@ WORKDIR /usr/src/app
 # copy all the files to the container
 COPY . /usr/src/app/
 
-# set ownership to service account and execute bit for statup script
-RUN chmod -R 705 .
-# RUN chown -R opal:opal ./static
-#RUN chmod +x startup.sh
+# set permisions and execute bit for statup script
+RUN chmod -R o+r .
+RUN chmod +x startup.sh
+RUN mkdir -p /usr/src/logs
+RUN mkdir -p /usr/src/app/static
+RUN chmod 777 /usr/src/logs
+RUN chown -R opal:opal ./static
+RUN chown -R opal:opal /usr/src/logs
+
 
 FROM app_installer as final_stage
 # run as an unprivileged user
