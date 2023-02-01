@@ -62,9 +62,9 @@ class properties_field(CustomManyToManyField):
 
 system_status_state_choices = [
     ("operational", "Operational: The system or component is currently operating in production."),
-    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"), (
-        "under-major-modification",
-        "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
+    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"),
+    ("under-major-modification",
+     "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
     ("disposition", "Disposition: The system or component is no longer operational."),
     ("other", "Other: Some other state, a remark must be included to describe the current state.")]
 
@@ -124,7 +124,6 @@ class PrimitiveModel(models.Model):
     def to_json(self):
         data = self.to_dict()
         return json.dumps(data, indent=2)
-
 
     def to_html(self, indent=0):
         opts = self._meta
@@ -541,7 +540,7 @@ class links(BasicModel):
                     html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
                 else:
                     html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (
-                    self.id, self.href[1:])
+                        self.id, self.href[1:])
             if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
                     # href = "https://www.google.com/search?q=%s" % urlencode(resources.objects.get(uuid=self.href[1:]).title)
@@ -937,7 +936,6 @@ class metadata(BasicModel):
         to=responsible_parties, verbose_name="Responsible Parties",
         help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
     )
-
 
     def __str__(self):
         return self.title
