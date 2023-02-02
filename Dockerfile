@@ -52,6 +52,7 @@ RUN chmod +x startup.sh
 RUN mkdir -p /usr/src/logs
 RUN mkdir -p /usr/src/app/static
 RUN chmod 777 /usr/src/logs
+RUN chmod 777 /usr/src/app/static
 RUN chown -R opal:opal ./static
 RUN chown -R opal:opal /usr/src/logs
 
