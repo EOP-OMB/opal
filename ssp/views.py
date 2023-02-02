@@ -103,7 +103,8 @@ class ssp_detail_view(DetailView):
 
 
 from formtools.wizard.views import CookieWizardView
-from .forms import metadata_form, system_characteristics_form, back_matter_form
+from common.forms import metadata_form, back_matter_form
+from .forms import system_characteristics_form
 
 
 class ssp_wizard(CookieWizardView):
