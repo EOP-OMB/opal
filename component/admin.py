@@ -16,6 +16,7 @@ class control_implementations_inline(admin.StackedInline):
     model = control_implementations
     extra = 0
     fields = ['description', 'implemented_requirements']
+    filter_horizontal = ['implemented_requirements']
 
 
 @admin.register(components)
