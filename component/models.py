@@ -241,6 +241,7 @@ class control_implementations(BasicModel):
     class Meta:
         verbose_name = "Control Implementation"
         verbose_name_plural = "Control Implementations"
+        order_with_respect_to = "implemented_requirements"
 
     description = RichTextField(verbose_name="Description", help_text="Describes how the system satisfies a set of controls.")
     set_parameters = CustomManyToManyField(
@@ -281,6 +282,7 @@ class components(BasicModel):
     class Meta:
         verbose_name = "Component"
         verbose_name_plural = "Components"
+        ordering = ("title",)
 
     component_types = [("this-system", "This System: The system as a whole."), ("system", "Another System: An external system, which may be a leveraged system or the other side of an interconnection."),
                        ("interconnection", "System Interconnection: A connection to something outside this system."), ("software", "Software: Any software, operating system, or firmware."), ("hardware", "Hardware: A physical device."),
@@ -300,7 +302,7 @@ class components(BasicModel):
     protocols = CustomManyToManyField(to=protocols, verbose_name="Service Protocol Information", help_text="Information about the protocol used to provide a service.")
 
     def __str__(self):
-        return self.title
+        return "%s (%s)" % (self.title, self.status)
 
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
