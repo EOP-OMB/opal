@@ -1,25 +1,12 @@
-from django.contrib.admin.widgets import \
-    AdminSplitDateTime
-from django.shortcuts import \
-    reverse
-from django.utils.safestring import \
-    mark_safe
-from django.forms import \
-    widgets
-from django import \
-    forms
-from django.conf import \
-    settings
-
-from common.models import \
-    resources, \
-    base64, \
-    metadata, \
-    back_matter
+from django.contrib.admin.widgets import AdminSplitDateTime
+from django.shortcuts import reverse
+from django.utils.safestring import mark_safe
+from django.forms import widgets
+from django import forms
+from common.models import resources, base64, metadata, back_matter
 
 
-class RelatedFieldWidgetCanAdd(
-    widgets.Select):
+class RelatedFieldWidgetCanAdd(widgets.Select):
 
     def __init__(
             self,
