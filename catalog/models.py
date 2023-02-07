@@ -295,6 +295,12 @@ class controls(PrimitiveModel):
             sort_id = self.control_id.lower()
         return sort_id
 
+    def set_sort_id(self):
+        if self.sort_id is None:
+            self.sort_id = self._get_sort_id()
+            return True
+        return False
+
     def get_absolute_url(self):
         url = reverse('catalog:control_detail_view', args=[self.id])
         return url
@@ -332,6 +338,7 @@ class controls(PrimitiveModel):
         return d
 
     def to_html(self, indent=0):
+        self.set_sort_id()
         html_str = "<a id=" + self.control_id + ">"
         html_str += "<h4>"
         html_str += self.control_id.upper() + " - "
