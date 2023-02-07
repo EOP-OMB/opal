@@ -254,6 +254,15 @@ class control_implementations(BasicModel):
     def __str__(self):
         return self.description
 
+
+    def list_implemented_controls(self):
+        implemented_requirements_list = []
+        if self.implemented_requirements.count() > 0:
+            for imp_req in self.implemented_requirements.all():
+                implemented_requirements_list.append(imp_req.control_id)
+        return implemented_requirements_list
+
+
     def to_html(self,indent=0):
         html_str = "<div class='control_implementation'>"
         if len(self.description) > 0:
@@ -303,6 +312,13 @@ class components(BasicModel):
 
     def __str__(self):
         return "%s (%s)" % (self.title, self.status)
+
+    def list_implemented_controls(self):
+        implemented_controls_list = []
+        for imp in self.control_implementations_set.all():
+            implemented_controls_list.extend(imp.list_implemented_controls())
+        return implemented_controls_list
+
 
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
