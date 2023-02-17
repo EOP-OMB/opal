@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: opal-db
+  name: opal-postgres-db
   namespace: {{ .Values.namespace | quote }}
 spec:
   replicas: 1
