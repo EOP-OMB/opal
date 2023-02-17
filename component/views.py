@@ -22,9 +22,10 @@ def component_list_view(request):
     component_list = components.objects.all()
     html_str = "<table><tr><th>Title</th><th>Status</th><th>controls</th></tr>"
     for comp in component_list:
-        ctrl_list = []
-        for ctrl in comp.implemented_controls_list():
-            ctrl_list.append(ctrl.control_id)
+        ctrl_list = comp.list_implemented_controls()
+        html_ctrl_list = []
+        for ctrl in ctrl_list:
+            html_ctrl_list.append("<a href=%s target=_blank>%s</a>" % ctrl.)
         html_str += "<tr><td>%s<td><td>%s<td><td>%s<td>" % (comp.title, comp.status, ', '.join(ctrl_list))
     context = {
         'content': html_str,
