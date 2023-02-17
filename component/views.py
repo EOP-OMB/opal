@@ -33,7 +33,6 @@ def component_list_view(request):
     return render(request, "generic_template.html", context)
 
 
-
 class component_detail_view(DetailView):
     model = components
     context_object_name = "context"
