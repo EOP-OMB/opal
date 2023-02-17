@@ -272,13 +272,13 @@ LOGGING = {
         },
     # Handlers #############################################################
     'handlers': {
-        'file': {
-            'level': LOG_LEVEL,
-            'class': 'logging.FileHandler',
-            'filename': LOG_FILE,
-            'formatter': 'verbose',
-            'filters': ['autoreload']
-            },
+        # 'file': {
+        #     'level': LOG_LEVEL,
+        #     'class': 'logging.FileHandler',
+        #     'filename': LOG_FILE,
+        #     'formatter': 'verbose',
+        #     'filters': ['autoreload']
+        #     },
         'console': {
             'class': 'logging.StreamHandler',
             'level': LOG_LEVEL,
@@ -289,7 +289,7 @@ LOGGING = {
     # Loggers ####################################################################
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['console'],
             'propagate': True,
             'level': LOG_LEVEL
             },
