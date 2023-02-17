@@ -14,7 +14,8 @@ celery_progress
 # git+https://github.com/cs4p/django-saml-sp.git
 django-saml-sp
 python3-saml
-cryptography
+# pinned cryptography version to support SHA1. This is a temporary requirement until the django-saml-sp package is updated
+cryptography==38.0.4
 #
 # # OIDC Support
 # # mozilla-django-oidc
