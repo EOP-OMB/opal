@@ -241,7 +241,6 @@ class control_implementations(BasicModel):
     class Meta:
         verbose_name = "Control Implementation"
         verbose_name_plural = "Control Implementations"
-        order_with_respect_to = "implemented_requirements"
 
     description = RichTextField(verbose_name="Description", help_text="Describes how the system satisfies a set of controls.")
     set_parameters = CustomManyToManyField(
