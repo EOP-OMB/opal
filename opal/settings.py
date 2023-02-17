@@ -293,15 +293,15 @@ LOGGING = {
             'propagate': True,
             'level': LOG_LEVEL
             },
-        'debug': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG'
-            },
-        'werkzeug': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-            },
+        # 'debug': {
+        #     'handlers': ['console'],
+        #     'propagate': True,
+        #     'level': 'DEBUG'
+        #     },
+        # 'werkzeug': {
+        #     'handlers': ['console'],
+        #     'level': 'DEBUG',
+        #     'propagate': True,
+        #     },
         },
     }
