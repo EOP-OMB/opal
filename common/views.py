@@ -18,8 +18,7 @@ from sp.models import IdP
 from sp.utils import get_session_idp
 
 from catalog.models import available_catalog_list
-from common.forms import \
-    resource_form
+from common.forms import resource_form
 from common.functions import search_for_uuid
 from common.models import base64
 
@@ -67,7 +66,7 @@ def database_status_view(request):
     return render(request, "db_status.html", context)
 
 
-def permalink(request, p_uuid):
+def permalink_view(request, p_uuid):
     redirect_url = "error_404_view"
     obj = search_for_uuid(p_uuid)
     try:
@@ -149,6 +148,7 @@ def base64_render_view(request, pk):
     file = base64.objects.get(pk=pk)
     return file.render_file()
 
+
 def add_resource_view(request):
     return render(
             request, 'generic_form.html', {
@@ -160,7 +160,7 @@ def add_resource_view(request):
 
 def download_oscal_json(request, j):
 
-    file = open(uuid.uuid4()+'.json', 'x')
+    file = open('%s.json' % uuid.uuid4(), 'x')
     file.write(j)
     path_to_file = os.path.realpath(file)
     response = FileResponse(open(path_to_file, 'rb'))
