@@ -21,7 +21,7 @@ for l in basic_urls:
 # /celery-progress/<task_id>/	celery_progress.views.get_progress	celery_progress:task_status
 # /common/f/detail/<int:pk>	common.views.base64_detail_view	common:base64_detail
 # /common/f/render/<int:pk>	common.views.base64_render_view	common:base64_render
-# /common/p/<str:p_uuid>	common.views.permalink	common:permalink
+# /common/p/<str:p_uuid>	common.views.permalink_view	common:permalink_view
 # /component/<int:pk>	component.views.component_detail_view	component:component_detail_view
 # /profiles/<int:pk>	ctrl_profile.views.profile_detail_view	ctrl_profile:profile_detail_view
 # /ssp/<int:pk>	ssp.views.ssp_detail_view	ssp:ssp_detail_view

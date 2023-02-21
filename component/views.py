@@ -25,7 +25,7 @@ def component_list_view(request):
         ctrl_list = comp.list_implemented_controls()
         html_ctrl_list = []
         for ctrl in ctrl_list:
-            html_ctrl_list.append("<a href=%s target=_blank>%s</a>" % ctrl.)
+            html_ctrl_list.append("<a href=%s target=_blank>%s</a>" % (ctrl.get_absolute_url, ctrl.__str__))
         html_str += "<tr><td>%s<td><td>%s<td><td>%s<td>" % (comp.title, comp.status, ', '.join(ctrl_list))
     context = {
         'content': html_str,
