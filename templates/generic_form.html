@@ -6,10 +6,16 @@
     <div>
     {% if form_list %}
         {% for form in form_list %}
+            <form method="post" novalidate class="form-floating" action="{{ form.action }}">
             {% include "generic_form_helper.html" with form=form %}
+            <p class="button" style="padding-top: 15px"; ><button type="submit">Submit</button></p>
+            </form>
+
         {% endfor %}
     {% else %}
+        <form method="post" novalidate class="form-floating" action="{{ form.action }}">
         {% include "generic_form_helper.html" with form=form %}
+        <p class="button" style="padding-top: 15px"; ><button type="submit">Submit</button></p>
     {% endif %}
     </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.apps import apps
 from common.admin import CustomAdmin
-from ssp.models import system_security_plans
+from ssp.models import system_security_plans, system_characteristics
 
 
 @admin.register(system_security_plans)
@@ -22,7 +22,7 @@ class system_security_plansAdmin(admin.ModelAdmin):
         'back_matter',
     )
     date_hierarchy = 'updated_at'
-    # inlines = [ssp_metadata_Inline]
+
 
 
 # other models

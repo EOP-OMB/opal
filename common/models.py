@@ -62,9 +62,9 @@ class properties_field(CustomManyToManyField):
 
 system_status_state_choices = [
     ("operational", "Operational: The system or component is currently operating in production."),
-    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"), (
-        "under-major-modification",
-        "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
+    ("under-development", "Under Development: The system or component is being designed, developed, or implemented"),
+    ("under-major-modification",
+     "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
     ("disposition", "Disposition: The system or component is no longer operational."),
     ("other", "Other: Some other state, a remark must be included to describe the current state.")]
 
@@ -106,7 +106,7 @@ class PrimitiveModel(models.Model):
 
     def to_dict(self):
         opts = self._meta
-        excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
+        excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
         data = {}
         for f in chain(opts.concrete_fields, opts.private_fields):
             if f.name not in excluded_fields:
@@ -118,6 +118,7 @@ class PrimitiveModel(models.Model):
                     data[f.name] = f.value_to_string(self)
         for f in opts.many_to_many:
             data[f.name] = [i.to_dict() for i in f.value_from_object(self)]
+        data = self.convert_field_names_from_db_to_oscal(data)
         return data
 
     def to_json(self):
@@ -160,9 +161,40 @@ class PrimitiveModel(models.Model):
         return html_str
 
     def field_name_changes(self):
+        """returns a dictionary of fileds that are named differntly in the model than in OSCAL JSON. The format is {oscal_filed_name: database_field_name}"""
         return {}
 
-    def fix_field_names(self, d):
+    def convert_field_names_from_db_to_oscal(self, d):
+        new_dict = {}
+        del_keys = set()
+        if type(d) is dict:
+            if len(self.field_name_changes()) == 0:
+                # No specific field list, just fix the hyphens
+                for k in d:
+                    if "_" in k:
+                        new_key = k.replace("_", "-")
+                        new_dict[new_key] = d[k]
+                        del_keys.add(k)
+            else:
+                # if object has a custom list it will include any hyphens
+                name_change_list: dict = self.field_name_changes()
+                reverse_name_change_list = {}
+                for k in name_change_list:
+                    reverse_name_change_list[name_change_list[k]] = k
+                if type(name_change_list) is dict:
+                    for k in d:
+                        if k in reverse_name_change_list:
+                            new_key = reverse_name_change_list[k]
+                            new_dict[new_key] = d[k]
+                            del_keys.add(k)
+            for k in del_keys:
+                d.pop(k)
+            merged_dict = {**new_dict, **d}
+        else:
+            merged_dict = d
+        return merged_dict
+
+    def convert_field_names_from_oscal_to_db(self, d):
         new_dict = {}
         del_keys = set()
         if type(d) is dict:
@@ -199,106 +231,6 @@ class PrimitiveModel(models.Model):
             field_list.append('uuid')
         return field_list
 
-    # def import_oscal(self, oscal_data):
-    #     logger = logging.getLogger("django")
-    #     opts = self._meta
-    #     self = self.check_for_existing_object()
-    #     logger.info("Starting import for " + opts.model_name)
-    #     if oscal_data is None or len(oscal_data) == 0:
-    #         logger.warning("oscal_data is 0 length")
-    #     excluded_fields = ['id', 'pk', 'created_at', 'updated_at']
-    #     field_list = list(opts.concrete_fields)
-    #     field_list_str = []
-    #     logger.debug("Removing excluded fields from field_list")
-    #     for f in field_list:
-    #         if f.name in excluded_fields:
-    #             field_list.remove(f)
-    #         else:
-    #             field_list_str.append(f.name)
-    #     logger.debug("model = " + opts.model_name)
-    #     logger.debug("field_list = " + ', '.join(field_list_str))
-    #     if type(oscal_data) is dict:
-    #         logger.debug("Handling dictionary...")
-    #         # replace field names to match internal model names
-    #         oscal_data = self.fix_field_names(oscal_data)
-    #         for f in field_list:
-    #             if f.name in oscal_data.keys():
-    #                 if f.get_internal_type() == 'ForeignKey':
-    #                     logger.debug(f.name + " is a foreign key. Creating child object...")
-    #                     child = f.related_model()
-    #                     child = child.import_oscal(oscal_data[f.name])
-    #                     self.__setattr__(f.name, child)
-    #                     logger.debug("Created new " + f.name + " with id " + str(child.id))
-    #                 else:
-    #                     field = f.name
-    #                     value = oscal_data[f.name]
-    #                     if type(value) is str:
-    #                         logger.debug("Setting " + field + " to " + value)
-    #                         self.__setattr__(field, value)
-    #                     else:
-    #                         logger.warning(field + " value is a " + str(type(value)))
-    #                     logger.debug("Done")
-    #     elif type(oscal_data) is str:
-    #         logger.debug("Handling string...")
-    #         # maybe the model has just one field?
-    #         if 'uuid' in field_list:
-    #             copy_field_list = field_list.copy()
-    #             copy_field_list.remove('uuid')
-    #             if len(copy_field_list) == 1:
-    #                 field = field_list[0]
-    #                 value = oscal_data
-    #                 self.__setattr__(field, value)
-    #             else:
-    #                 uuid_obj = False
-    #                 try:
-    #                     uuid_obj = uuid.UUID(oscal_data, version=4)
-    #                 except ValueError:
-    #                     logger.error(oscal_data + " is not a valid uuid")
-    #                 if uuid_obj:
-    #                     self = self.check_for_existing_object({'uuid': uuid_obj})
-    #                     field = 'uuid'
-    #                     value = uuid_obj
-    #                     self.__setattr__(field, value)
-    #         else:
-    #             logger.error("oscal_data does not provide a field name. " + opts.model_name + " with oscal_data " + oscal_data)
-    #     else:
-    #         logger.error("oscal_data is not a dictionary, string, or list.  oscal_data:")
-    #         logger.error(oscal_data)
-    #     self.save()
-    #     logger.debug('Handling the many_to_many fields')
-    #     field_list = list(opts.many_to_many)
-    #     logger.debug("field_list = " + ', '.join(field_list_str))
-    #     if type(oscal_data) is dict:
-    #         for f in field_list:
-    #             if f.name in oscal_data.keys():
-    #                 if type(oscal_data[f.name]) is dict and len(oscal_data) > 0:
-    #                     logger.debug("Creating child object for field " + f.name)
-    #                     child = f.related_model()
-    #                     child = child.import_oscal(oscal_data[f.name])
-    #                     self.oscal_import_save_m2m(child, f, opts)
-    #                 elif type(oscal_data[f.name]) is list and len(oscal_data[f.name]) > 0:
-    #                     for item in oscal_data[f.name]:
-    #                         logger.debug("Creating child object for field " + f.name)
-    #                         child = f.related_model()
-    #                         child = child.import_oscal(item)
-    #                         self.oscal_import_save_m2m(child, f, opts)
-    #                 elif type(oscal_data[f.name]) is str:
-    #                     logger.debug("Creating child object for field " + f.name)
-    #                     child = f.related_model()
-    #                     child = child.import_oscal(oscal_data)
-    #                     self.oscal_import_save_m2m(child, f, opts)
-    #                 else:
-    #                     child = None
-    #                 self.save()
-    #             elif type(oscal_data) is str:
-    #                 logger.debug("Creating child object for field " + f.name)
-    #                 field = f.name
-    #                 value = oscal_data
-    #                 self.__setattr__(field, value)
-    #                 self.save()
-    #     self.save()
-    #     logger.info("Completed import for " + opts.model_name)
-    #     return self
 
     def excluded_fields(self):
         """returns a list of fields to ignore durring import and other functions"""
@@ -307,15 +239,12 @@ class PrimitiveModel(models.Model):
     def import_oscal(self, oscal_data):
         logger = logging.getLogger("django")
         opts = self._meta
-        logger.info("Starting import for " + opts.model_name)
+        logger.debug("Starting import for " + opts.model_name)
         if oscal_data is None or len(oscal_data) == 0:
             logger.warning("oscal_data is 0 length")
             return None
         # replace field names to match internal model names
-        oscal_data = self.fix_field_names(oscal_data)
-        existing_object = self.check_for_existing_object(oscal_data)
-        if existing_object != self:
-            return existing_object
+        oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
         excluded_fields = self.excluded_fields
         field_list = list(opts.concrete_fields)
         field_list_str = []
@@ -329,6 +258,9 @@ class PrimitiveModel(models.Model):
         logger.debug("field_list = " + ', '.join(field_list_str))
         if type(oscal_data) is dict:
             logger.debug("Handling dictionary...")
+            existing_object = self.check_for_existing_object(oscal_data)
+            if existing_object != self:
+                return existing_object
             for f in field_list:
                 if f.name in oscal_data.keys():
                     if f.get_internal_type() == 'ForeignKey':
@@ -409,7 +341,7 @@ class PrimitiveModel(models.Model):
                     self.__setattr__(field, value)
                     self.save()
         self.save()
-        logger.info("Completed import for " + opts.model_name)
+        logger.debug("Completed import for " + opts.model_name)
         return self
 
     def check_for_existing_object(self, oscal_data):
@@ -421,13 +353,13 @@ class PrimitiveModel(models.Model):
         for f in self.unique_field_list():
             if f in oscal_data.keys():
                 unique_field_dict[f] = oscal_data[f]
-        logger.info("Checking for an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
+        logger.debug("Checking for an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
         if self._meta.model.objects.filter(**unique_field_dict).exists():
-            logger.info("Found an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
+            logger.debug("Found an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
             existing_object = self._meta.model.objects.filter(**unique_field_dict).first()
             return existing_object
         else:
-            logger.info(
+            logger.debug(
                 "Could not find an existing %s with fields matching %s" % (self._meta.model_name, unique_field_dict))
             return self
 
@@ -453,54 +385,6 @@ class PrimitiveModel(models.Model):
                 logger.error("An error occurred")
                 logger.error(err)
 
-    # def oscal_import_save_m2m(self, child, f, opts):
-    #     logger = logging.getLogger("django")
-    #     if child is not None:
-    #         error = False
-    #         try:
-    #             child.save()
-    #         except IntegrityError:
-    #             try:
-    #                 existing_child = child._meta.model.objects.get(uuid=child.uuid)
-    #                 child = existing_child
-    #             except ObjectDoesNotExist:
-    #                 logger.error("Integrity error occurred but no matching object found with the same uuid")
-    #                 error = True
-    #         if self.id is None:
-    #             logger.error("Parent id is None")
-    #             try:
-    #                 self.save()
-    #             except IntegrityError as err:
-    #                 logger.error(err)
-    #                 error = True
-    #         if child.id is None:
-    #             logger.error("Child id is none")
-    #             try:
-    #                 child.save()
-    #             except IntegrityError as err:
-    #                 logger.error(err)
-    #                 error = True
-    #         if not error:
-    #             parent_id = self.id
-    #             parent_field_name = opts.model_name + "_id"
-    #             child_id = child.id
-    #             child_field_name = child._meta.model_name + "_id"
-    #             if parent_field_name == child_field_name:
-    #                 child_field_name = "to_" + child_field_name
-    #                 parent_field_name = "from_" + parent_field_name
-    #             table_name = f.m2m_db_table()
-    #             sql = "INSERT INTO " + table_name + " (" + parent_field_name + "," + child_field_name + ") VALUES(" + str(
-    #                 parent_id
-    #                 ) + "," + str(child_id) + ")"
-    #             with connection.cursor() as cursor:
-    #                 try:
-    #                     cursor.execute(sql)
-    #                 except IntegrityError:
-    #                     logger.error("Relationship already exists. sql = " + sql)
-    #                 except OperationalError as err:
-    #                     logger.error("An error occurred")
-    #                     logger.error(err)
-    #     return child
 
     def update(self, d):
         """
@@ -624,7 +508,7 @@ class links(BasicModel):
     rel = ShortTextField(
         verbose_name="Relation",
         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
-        blank=True,choices=link_rel_options
+        blank=True, choices=link_rel_options
     )
     media_type = ShortTextField(
         verbose_name="Media Type",
@@ -645,18 +529,19 @@ class links(BasicModel):
         return self
 
     def to_html(self, indent=0):
-        href=''
-        href_text=''
+        href = ''
+        href_text = ''
         if len(self.href) > 0:
-            if self.rel in ['related','moved-to','incorporated-into','required']:
+            if self.rel in ['related', 'moved-to', 'incorporated-into', 'required']:
                 # link should be to another control in the same catalog
                 if catalog.models.controls.objects.filter(control_id=self.href[1:]).count() == 1:
                     href = catalog.models.controls.objects.get(control_id=self.href[1:]).get_absolute_url()
                     href_text = catalog.models.controls.objects.get(control_id=self.href[1:]).__str__()
                     html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
                 else:
-                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id,self.href[1:])
-            if self.rel in ['canonical','reference','alternate']:
+                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (
+                        self.id, self.href[1:])
+            if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
                     # href = "https://www.google.com/search?q=%s" % urlencode(resources.objects.get(uuid=self.href[1:]).title)
                     href = ""

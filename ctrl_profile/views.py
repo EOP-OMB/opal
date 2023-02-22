@@ -22,3 +22,4 @@ class profile_detail_view(DetailView):
 class createProfileView(CreateView):
     model = profiles
     fields = ['metadata', 'imports', 'merge', 'modify', 'back_matter']
+    template_name = "generic_form.html"

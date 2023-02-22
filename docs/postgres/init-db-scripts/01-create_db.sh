@@ -1,0 +1,7 @@
+#!/bin/sh
+
+psql -U postgres <<-EOSQL
+    CREATE USER opal;
+    CREATE DATABASE opal;
+    ALTER ROLE opal WITH PASSWORD '$POSTGRES_OPAL_PASSWORD';
+EOSQL

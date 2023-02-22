@@ -24,6 +24,8 @@ from logging.handlers import RotatingFileHandler
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
@@ -50,6 +52,7 @@ SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False")
 LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
+LOG_FILE = os.getenv("LOG_FILE", default=os.path.join(BASE_DIR,"debug.log"))
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
@@ -76,6 +79,7 @@ SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False)  # should be the
 SAML_SERVER_PORT = os.getenv("SAML_SERVER_PORT", default=False)
 # SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
 SAML_PROVIDERS = os.getenv("SAML_PROVIDERS", default="stub")
+SP_PREPARE_REQUEST = "common.auth_functions.prepare_request"
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
@@ -176,7 +180,11 @@ MIDDLEWARE = ['django.middleware.security.SecurityMiddleware',
               'django.contrib.auth.middleware.AuthenticationMiddleware',
               'django.contrib.messages.middleware.MessageMiddleware',
               'django.middleware.clickjacking.XFrameOptionsMiddleware',
-              "django_require_login.middleware.LoginRequiredMiddleware", ]
+              ]
+
+if ENVIRONMENT != 'development':
+    MIDDLEWARE.append("django_require_login.middleware.LoginRequiredMiddleware")
+
 
 # To enable sitewide caching
 # MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
@@ -264,13 +272,13 @@ LOGGING = {
         },
     # Handlers #############################################################
     'handlers': {
-        'file': {
-            'level': LOG_LEVEL,
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR,'opal-debug.log'),
-            'formatter': 'verbose',
-            'filters': ['autoreload']
-            },
+        # 'file': {
+        #     'level': LOG_LEVEL,
+        #     'class': 'logging.FileHandler',
+        #     'filename': LOG_FILE,
+        #     'formatter': 'verbose',
+        #     'filters': ['autoreload']
+        #     },
         'console': {
             'class': 'logging.StreamHandler',
             'level': LOG_LEVEL,
@@ -281,19 +289,19 @@ LOGGING = {
     # Loggers ####################################################################
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['console'],
             'propagate': True,
             'level': LOG_LEVEL
             },
-        'debug': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG'
-            },
-        'werkzeug': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-            },
+        # 'debug': {
+        #     'handlers': ['console'],
+        #     'propagate': True,
+        #     'level': 'DEBUG'
+        #     },
+        # 'werkzeug': {
+        #     'handlers': ['console'],
+        #     'level': 'DEBUG',
+        #     'propagate': True,
+        #     },
         },
     }

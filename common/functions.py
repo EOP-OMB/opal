@@ -17,7 +17,7 @@ USER_APPS = settings.USER_APPS
 
 def replace_hyphen(s: str):
     logger = logging.getLogger("django")
-    logger.info("replacing hyphen in " + s + " with underscore.")
+    logger.debug("replacing hyphen in " + s + " with underscore.")
     return s.replace("-", "_")
 
 
@@ -55,13 +55,11 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
             for model in app_models:
                 logger.info("Trying " + model._meta.model_name)
                 try:
-                    r = model.objects.get(uuid=uuid_str)
-                    logging.debug("Found matching!")
-                    return r
-                except ObjectDoesNotExist:
-                    r = None
+                    if model.objects.filter(uuid=uuid_str).count() > 0:
+                        logging.debug("Found matching!")
+                        return model.objects.get(uuid=uuid_str)
                 except FieldError:
-                    # uuid field does not exist
+                    logging.warning("%s uuid field does not exist!!" % model._meta.model_name)
                     r = None
         logger.info("Could not find an object with uuid: " + uuid_str)
         return None

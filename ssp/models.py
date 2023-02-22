@@ -139,7 +139,7 @@ class information_type_impact_level(BasicModel):
             self.save()
             return self
         else:
-            oscal_data = self.fix_field_names(oscal_data)
+            oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
             base = oscal_data["base"]
             if "selected" in oscal_data.keys():
                 selected = oscal_data["selected"]
@@ -223,7 +223,7 @@ class information_types(PrimitiveModel):
         return html_str
 
     def import_oscal(self, oscal_data):
-        oscal_data = self.fix_field_names(oscal_data)
+        oscal_data = self.convert_field_names_from_oscal_to_db(oscal_data)
         if "uuid" in oscal_data.keys():
             # check to see if the information_type already exists.  If not, create it
             try:
@@ -266,6 +266,12 @@ class systems_information(PrimitiveModel):
         to=information_types, verbose_name="Information Type",
         help_text="Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60."
         )
+
+    def __str__(self):
+        info_type_list = []
+        for i in self.information_types.all():
+            info_type_list.append(i.__str__())
+        return ', '.join(info_type_list)
 
 
 class diagrams(BasicModel):
@@ -348,6 +354,8 @@ class data_flows(BasicModel):
         )
 
 
+security_sensitivity_level_choices = (('HIGH','HIGH'),('MODERATE','MODERATE'),('LOW','LOW'))
+
 class system_characteristics(BasicModel):
     """
     Contains the characteristics of the system, such as its name, purpose, and security impact level.
@@ -375,7 +383,7 @@ class system_characteristics(BasicModel):
         )
     security_sensitivity_level = ShortTextField(
         verbose_name="Security Sensitivity Level",
-        help_text="The overall information system sensitivity categorization, such as defined by FIPS-199.", null=True
+        help_text="The overall information system sensitivity categorization, such as defined by FIPS-199.", null=True, choices=security_sensitivity_level_choices
         )
     system_information = CustomManyToManyField(
         to=systems_information, verbose_name="System Information",
@@ -384,22 +392,22 @@ class system_characteristics(BasicModel):
     security_impact_level = ShortTextField(
         verbose_name="Security Impact Level",
         help_text="The overall level of expected impact resulting from unauthorized disclosure, modification, or loss of access to information.",
-        null=True
+        null=True, choices=security_sensitivity_level_choices
         )
     security_objective_confidentiality = ShortTextField(
         verbose_name="Security Objective: Confidentiality",
         help_text="A target-level of confidentiality for the system, based on the sensitivity of information within the system.",
-        null=True
+        null=True, choices=security_sensitivity_level_choices
         )
     security_objective_integrity = ShortTextField(
         verbose_name="Security Objective: Integrity",
         help_text="A target-level of integrity for the system, based on the sensitivity of information within the system.",
-        null=True
+        null=True, choices=security_sensitivity_level_choices
         )
     security_objective_availability = ShortTextField(
         verbose_name="Security Objective: Availability",
         help_text="A target-level of availability for the system, based on the sensitivity of information within the system.",
-        null=True
+        null=True, choices=security_sensitivity_level_choices
         )
     status = ShortTextField(
         verbose_name="Status", help_text="Describes the operational status of the system.", null=True,

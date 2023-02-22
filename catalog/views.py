@@ -93,7 +93,7 @@ def import_catalog_task(self, item=False, host=False, test=False):
         if created:
             new_component.save()
     # Create implemented_requirement objects for all controls in the import
-    logger.info("Creating implemented_requirement objects for all controls in the import")
+    logger.debug("Creating implemented_requirement objects for all controls in the import")
     ctrl_list = new_catalog.list_all_controls()
     for ctrl in ctrl_list:
         implemented_requirements.objects.get_or_create(control_id=ctrl)
