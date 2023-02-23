@@ -17,3 +17,4 @@ pytest*
 /.github
 /.pytest_cache
 /requirements_test.txt
+/requirements_omb.txt
