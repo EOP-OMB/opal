@@ -21,13 +21,13 @@ import json
 class ShortTextField(models.CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 1024
-        kwargs['default'] = ""
+        # kwargs['default'] = ""
         super().__init__(*args, **kwargs)
 
     def deconstruct(self):
         name, path, args, kwargs = super().deconstruct()
         del kwargs['max_length']
-        del kwargs['default']
+        # del kwargs['default']
         return name, path, args, kwargs
 
 
@@ -921,7 +921,7 @@ class metadata(BasicModel):
     )
     oscal_version = ShortTextField(
         verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against.",
-        default="1.0.0"
+        default="v1.0.3"
     )
     revisions = CustomManyToManyField(to=revisions, verbose_name="Previous Revisions")
     document_ids = CustomManyToManyField(to=document_ids, verbose_name="Other Document IDs")
@@ -1089,6 +1089,9 @@ class resources(BasicModel):
             for r in self.rlinks.all():
                 html_str += "<a href='" + r.href.first().href + "' target=_blank>" + self.title + "</a>"
         return html_str
+
+    def __str__(self):
+        return self.title
 
 
 class back_matter(PrimitiveModel):

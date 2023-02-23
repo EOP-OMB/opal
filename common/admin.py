@@ -50,6 +50,10 @@ class metadataAdmin(CustomAdmin):
         )
     list_filter = ('created_at', 'updated_at', 'published', 'last_modified')
     date_hierarchy = 'updated_at'
+    fieldsets = (
+     (None, {'fields': ['title','published','last_modified','version']}),
+     ('Advanced', {'classes': ('collapse',),'fields': ['oscal_version','revisions','document_ids','props','links','locations','parties','responsible_parties']}),
+    )
 
 
 class metadataAdminTabularInline(admin.TabularInline):
