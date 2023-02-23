@@ -1,8 +1,7 @@
 from common.models import *
 from catalog.models import controls, params, catalogs
-from django.urls import reverse
-import \
-    re
+# from django.urls import reverse
+import re
 
 
 # Create your models here.
@@ -47,13 +46,13 @@ class imports(BasicModel):
         elif len(self.include_controls.all()) > 0:
             ctr_list = []
             for c in self.include_controls.all():
-                ctr_list.append(c)
+                ctr_list.append(c.__str__())
             html_str += "Include only the following controls from " + self.import_type + " " + self.href + ".<br>"
             html_str += ", ".join(ctr_list)
         elif len(self.exclude_controls.all()) > 0:
             ctr_list = []
             for c in self.include_controls.all():
-                ctr_list.append(c)
+                ctr_list.append(c.__str__())
             html_str += "Include all controls from " + self.import_type + " " + self.href + " except the following.<br>"
             html_str += ", ".join(ctr_list)
         html_str += "</a>"

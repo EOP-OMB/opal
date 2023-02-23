@@ -1,5 +1,8 @@
+import os.path
+
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
+from django.conf import settings
 
 from catalog.models import available_catalog_list
 from catalog.views import download_catalog, import_catalog_task
@@ -21,7 +24,7 @@ def create_admin_user(user):
 
 def load_default_role_list():
     import json
-    f = open("common/management/commands/role_list.json", "r")
+    f = open(os.path.join(settings.BASE_DIR,"common/management/commands/role_list.json"), "r")
     default_role_list = json.load(f)
     for role in default_role_list:
         roles.objects.get_or_create(**role)

@@ -13,7 +13,7 @@ from django.utils.timezone import now
 import catalog
 from common.functions import replace_hyphen, search_for_uuid
 from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from ckeditor.fields import RichTextField
 import json
 
@@ -49,8 +49,7 @@ class properties_field(CustomManyToManyField):
     def __init__(self, *args, **kwargs):
         kwargs['to'] = "common.props"
         kwargs['verbose_name'] = "Properties"
-        kwargs[
-            'help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
+        kwargs['help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
         super().__init__(*args, **kwargs)
 
     def deconstruct(self):
@@ -91,7 +90,8 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
     def get_permalink(self):
-        url = reverse('common:permalink', kwargs={'p_uuid': str(self.uuid)})
+        url= ''
+        url = reverse_lazy('common:permalink', kwargs={'p_uuid': str(self.uuid)})
         return url
 
     def get_absolute_url(self):

@@ -229,15 +229,16 @@ class parts(PrimitiveModel):
 
     def __str__(self):
         if len(self.part_id) > 0:
-            return self.part_id
-        if len(self.title) > 0:
-            return self.title
+            s = self.part_id
+        elif len(self.title) > 0:
+            s = self.title
         elif len(self.name) > 0:
-            return self.name
+            s = self.name
         elif len(self.prose) > 0:
-            return self.prose[0:100]
+            s = self.prose[0:100]
         else:
-            return "Part: " + str(self.uuid)
+            s = "Part: %s" % str(self.uuid)
+        return s
 
     def field_name_changes(self):
         d = {"id": "part_id", "class": "part_class", "parts": "sub_parts"}
@@ -260,7 +261,6 @@ class controls(PrimitiveModel):
         verbose_name = "Control"
         verbose_name_plural = "Controls"
         ordering = ['sort_id']
-
     control_id = ShortTextField(
         verbose_name="Control Identifier",
         help_text="A unique identifier for a specific control instance that can be used to reference the control in other OSCAL documents. This identifier's uniqueness is document scoped and is intended to be consistent for the same control across minor revisions of the document."
@@ -387,53 +387,53 @@ class controls(PrimitiveModel):
                 html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select, i.label, i.param_id) + '</i>)')
         return html_str
 
-    def to_html_form(self):
-        html_str = ""
-        html_str += "<h4>"
-        html_str += self.control_id.upper() + " - "
-        html_str += self.title
-        html_str += " (" + self.control_class + ")"
-        html_str += "</h4>"
-        if self.parts is not None:
-            html_str += "<table border=2><tr><th>Control Statement</th><th>Describe how the requirement is implemented</th></tr>"
-            for i in self.parts.all():
-                html_str += i.to_html_form()
-            html_str += "</table>"
-        if self.params is not None:
-            for i in self.params.all():
-                str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
-                if i.select is not None and len(i.select) > 0:
-                    select_form_field = "<select id='" + i.param_id + "' name='param_" + str(i.pk) + "'"
-                    import ast
-                    choices_dict = ast.literal_eval(i.select)
-                    if 'how-many' in choices_dict:
-                        if choices_dict['how-many'] == 'one-or-more':
-                            select_form_field += " multiple"
-                        select_form_field += ">"
-                    for choice in choices_dict['choice']:
-                        select_form_field += "<option value='" + choice + "'>" + choice + "</option>"
-                    select_form_field += "</select>"
-                    html_str = html_str.replace(
-                        str_to_replace, select_form_field
-                        )
-                else:
-                    text_form_field = "(<input type='text' "
-                    text_form_field += "id='" + i.param_id + "' "
-                    text_form_field += "name='param_" + str(i.pk) + "' "
-                    text_form_field += "size='" + str(len(coalesce(i.label, i.param_id)) + 10) + "'"
-                    text_form_field += "value='" + coalesce(i.label, i.param_id) + "' >)"
-                    html_str = html_str.replace(str_to_replace, text_form_field)
-        if self.links is not None:
-            related_to_links = []
-            for i in self.links.filter(rel="related"):
-                related_to_links.append("<a href='" + i.href + "'>" + i.href[1:].upper() + "</a>")
-            html_str += "<p><strong>Related Controls:</strong> "
-            html_str += ", ".join(related_to_links)
-            html_str += "</p>"
-        if self.control_enhancements is not None:
-            for i in self.control_enhancements.all():
-                html_str += i.to_html_form()
-        return html_str
+    # def to_html_form(self):
+    #     html_str = ""
+    #     html_str += "<h4>"
+    #     html_str += self.control_id.upper() + " - "
+    #     html_str += self.title
+    #     html_str += " (" + self.control_class + ")"
+    #     html_str += "</h4>"
+    #     if self.parts is not None:
+    #         html_str += "<table border=2><tr><th>Control Statement</th><th>Describe how the requirement is implemented</th></tr>"
+    #         for i in self.parts.all():
+    #             html_str += i.to_html_form()
+    #         html_str += "</table>"
+    #     if self.params is not None:
+    #         for i in self.params.all():
+    #             str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
+    #             if i.select is not None and len(i.select) > 0:
+    #                 select_form_field = "<select id='" + i.param_id + "' name='param_" + str(i.pk) + "'"
+    #                 import ast
+    #                 choices_dict = ast.literal_eval(i.select)
+    #                 if 'how-many' in choices_dict:
+    #                     if choices_dict['how-many'] == 'one-or-more':
+    #                         select_form_field += " multiple"
+    #                     select_form_field += ">"
+    #                 for choice in choices_dict['choice']:
+    #                     select_form_field += "<option value='" + choice + "'>" + choice + "</option>"
+    #                 select_form_field += "</select>"
+    #                 html_str = html_str.replace(
+    #                     str_to_replace, select_form_field
+    #                     )
+    #             else:
+    #                 text_form_field = "(<input type='text' "
+    #                 text_form_field += "id='" + i.param_id + "' "
+    #                 text_form_field += "name='param_" + str(i.pk) + "' "
+    #                 text_form_field += "size='" + str(len(coalesce(i.label, i.param_id)) + 10) + "'"
+    #                 text_form_field += "value='" + coalesce(i.label, i.param_id) + "' >)"
+    #                 html_str = html_str.replace(str_to_replace, text_form_field)
+    #     if self.links is not None:
+    #         related_to_links = []
+    #         for i in self.links.filter(rel="related"):
+    #             related_to_links.append("<a href='" + i.href + "'>" + i.href[1:].upper() + "</a>")
+    #         html_str += "<p><strong>Related Controls:</strong> "
+    #         html_str += ", ".join(related_to_links)
+    #         html_str += "</p>"
+    #     if self.control_enhancements is not None:
+    #         for i in self.control_enhancements.all():
+    #             html_str += i.to_html_form()
+    #     return html_str
 
     def count_controls(self):
         control_count = 1

@@ -12,43 +12,9 @@ from common.models import metadata
 # from ssp.forms import sspForm
 from ssp.models import control_implementations, system_characteristics, system_implementations, system_security_plans
 
-
-# def add_new_ssp_view(request):
-#     if request.POST:
-#         try:
-#             selected_metadata = metadata.objects.get(pk=request.POST['metadata'])
-#             selected_system_characteristics = system_characteristics.objects.get(pk=request.POST['system_characteristics'])
-#             selected_system_implementation = system_implementations.objects.get(pk=request.POST['system_implementation'])
-#             selected_control_implementations = control_implementations.objects.get(pk=request.POST["control_implementation"])
-#         except (KeyError, ObjectDoesNotExist):
-#             # Redisplay the question voting form.
-#             return render(
-#                 request, 'generic_form.html', {
-#                     'title': 'Add a new System Security Plan',
-#                     'content': "You didn't select a choice.",
-#                     'form': sspForm
-#                     }
-#                 )
-#         else:
-#             new_ssp, created = system_security_plans.objects.get_or_create(
-#                 metadata=selected_metadata,
-#                 system_characteristics=selected_system_characteristics,
-#                 system_implementation=selected_system_implementation,
-#                 system_control_implementations=selected_control_implementations
-#                 )
-#             new_ssp.save()
-#             # Always return an HttpResponseRedirect after successfully dealing
-#             # with POST data. This prevents data from being posted twice if a
-#             # user hits the Back button.
-#             return HttpResponseRedirect(reverse('ssp:ssp_detail_view', args=(new_ssp.id,)))
-#     else:
-#         return render(
-#             request, 'generic_form.html', {
-#                 'title': 'Add a new System Security Plan',
-#                 'content': "Select options below",
-#                 'form': sspForm()
-#                 }
-#             )
+from formtools.wizard.views import CookieWizardView
+from common.forms import back_matter_form
+from .forms import system_characteristics_form
 
 
 def import_ssp_view(request, ssp_file):
@@ -100,11 +66,6 @@ class ssp_detail_view(DetailView):
     model = system_security_plans
     context_object_name = "context"
     template_name = "generic_detail.html"
-
-
-from formtools.wizard.views import CookieWizardView
-from common.forms import metadata_form, back_matter_form
-from .forms import system_characteristics_form
 
 
 class ssp_wizard(CookieWizardView):

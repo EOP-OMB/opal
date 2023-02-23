@@ -356,6 +356,7 @@ class data_flows(BasicModel):
 
 security_sensitivity_level_choices = (('HIGH','HIGH'),('MODERATE','MODERATE'),('LOW','LOW'))
 
+
 class system_characteristics(BasicModel):
     """
     Contains the characteristics of the system, such as its name, purpose, and security impact level.
