@@ -39,7 +39,7 @@ class imports(BasicModel):
     def __str__(self):
         return self.href
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<a href='" + self.href + "'>"
         if self.include_all:
             html_str += "Include all controls from " + self.import_type + " " + self.href
@@ -129,7 +129,7 @@ class profiles(BasicModel):
                     control_list.extend(obj.list_all_controls())
         return control_list
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = self.metadata.to_html()
         # Checking to see if the import is local
         regexp = re.compile('.*/common/p/')

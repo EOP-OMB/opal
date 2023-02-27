@@ -156,7 +156,7 @@ class params(BasicModel):
         d = {"id": "param_id"}
         return d
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<td>" + self.param_id + "</td>"
         html_str += "<td>" + self.label + "</td>"
         html_str += "<td>"
@@ -193,7 +193,7 @@ class parts(PrimitiveModel):
     sub_parts = CustomManyToManyField(to="parts", verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
     links = CustomManyToManyField(to=links, verbose_name="Links")
 
-    def to_html(self, indent=0, guidance=True, links=True):
+    def to_html(self, indent=0, guidance=True, links=True, lazy=False):
         html_str = ""
         if self.name in ["item", "statement"]:
             if len(self.props.filter(name="label")) > 0:
@@ -337,7 +337,7 @@ class controls(PrimitiveModel):
         d = {"id": "control_id", "class": "control_class", "controls": "control_enhancements"}
         return d
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         self.set_sort_id()
         html_str = "<a id=" + self.control_id + ">"
         html_str += "<h4>"
@@ -500,7 +500,7 @@ class groups(PrimitiveModel):
         d = {"id": "group_id", "class": "group_class", "groups": "sub_groups"}
         return d
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<h3>"
         html_str += self.group_id.upper() + " - "
         html_str += self.title
@@ -585,7 +585,7 @@ class catalogs(PrimitiveModel):
     def get_absolute_url(self):
         return reverse('catalog:catalog_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<h1>" + self.metadata.title + "</h1>"
         html_str += "<h2>Metadata</h2>"
         html_str += self.metadata.to_html()

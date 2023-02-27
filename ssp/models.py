@@ -218,7 +218,7 @@ class information_types(PrimitiveModel):
     def __str__(self):
         return self.title
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
 
         html_str = "<div class='card shadow mb-4'>\n"
         html_str += "<!-- Card Header - Accordion -->\n"
@@ -632,6 +632,28 @@ class system_implementations(BasicModel):
         help_text="A set of inventory-item entries that represent the managed inventory instances of the system."
     )
 
+    def to_html(self, indent=0, lazy=True):
+        lazy=True
+        html_str = "<div>"
+        html_str += "<h2>Components</h2>\n<ul>"
+        for cmp in self.components.all():
+            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        else:
+            html_str += "<li>None</li>\n"
+        html_str += "</ul>\n<h2>Inventory</h2>\n<ul>"
+        for cmp in self.inventory_items.all():
+            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        else:
+            html_str += "<li>None</li>\n"
+        html_str += "</ul>\n<h2>Users</h2>\n<ul>"
+        for cmp in self.users.all():
+            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        else:
+            html_str += "<li>None</li>\n"
+        html_str += "</ul></div>"
+        return html_str
+
+
     def __str__(self):
         return self.remarks
 
@@ -662,7 +684,7 @@ class system_security_plans(BasicModel):
     def get_absolute_url(self):
         return reverse('ssp:ssp_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<h1>" + self.metadata.title + "</h1>"
         html_str += "<h2>Metadata</h2>"
         html_str += "<div class='card'  style=''>"

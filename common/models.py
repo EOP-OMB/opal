@@ -125,7 +125,7 @@ class PrimitiveModel(models.Model):
         data = self.to_dict()
         return json.dumps(data, indent=2)
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         opts = self._meta
         # list of some excluded fields
         excluded_fields = ['id', 'pk', 'created_at', 'updated_at', 'uuid']
@@ -138,7 +138,10 @@ class PrimitiveModel(models.Model):
                 if f.get_internal_type() == 'ForeignKey':
                     child = self.__getattribute__(f.name)
                     if child is not None:
-                        value = child.to_html(indent=indent + 1)
+                        if lazy:
+                            value = "<a href='%s' target='_blank'>%s</a>" % (child.get_absolute_url(), child.__str__())
+                        else:
+                            value = child.to_html(indent=indent + 1,lazy=lazy)
                     else:
                         value = None
                 else:
@@ -154,7 +157,10 @@ class PrimitiveModel(models.Model):
                 html_str += "<li>" + f.verbose_name + " <a href='" + self.get_create_url() + "'>(Add)</a>:</li>\n"
                 new_indent = indent + 1
                 for i in f.value_from_object(self):
-                    html_str += i.to_html(indent=new_indent)
+                    if lazy:
+                        value = "<a href='%s' target='_blank'>%s</a>" % (i.get_absolute_url(), i.__str__())
+                    else:
+                        html_str += i.to_html(indent=new_indent,lazy=lazy)
         html_str += "</ul>\n</div>"
         if html_str is None:
             html_str = "None"
@@ -528,7 +534,7 @@ class links(BasicModel):
         self.save()
         return self
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         href = ''
         href_text = ''
         if len(self.href) > 0:
@@ -1010,7 +1016,7 @@ class rlinks(PrimitiveModel):
         help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm."
     )
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         if self.href is not None:
             return self.href.first().to_html()
         else:
@@ -1083,7 +1089,7 @@ class resources(BasicModel):
         help_text="A string representing arbitrary Base64-encoded binary data."
     )
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = ""
         if len(self.rlinks.all()) > 0:
             for r in self.rlinks.all():
