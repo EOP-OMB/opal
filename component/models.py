@@ -244,8 +244,6 @@ class implemented_requirements(BasicModel):
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Role",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
-    # control_implementation = models.ForeignKey(to='control_implementations', on_delete=models.CASCADE)
-
     def __str__(self):
         try:
             c = controls.objects.get(control_id=self.control_id)

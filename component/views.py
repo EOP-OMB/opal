@@ -6,18 +6,6 @@ from component.models import components
 from .forms import components_form
 
 
-# class component_list_view(ListView):
-#     model = components
-#     context_object_name = "context_list"
-#     template_name = "generic_list.html"
-#     add_new_url = reverse_lazy('admin:component_components_add')
-#     extra_context = {
-#         'title': 'Component List',
-#         'add_url': add_new_url,
-#         'model_name': model._meta.verbose_name
-#     }
-
-
 def component_list_view(request):
     component_list = components.objects.all()
     html_str = "<table><tr><th>Title</th><th>Status</th><th>controls</th></tr>"
@@ -26,7 +14,7 @@ def component_list_view(request):
         html_ctrl_list = []
         for ctrl in ctrl_list:
             html_ctrl_list.append("<a href='%s' target='_blank'>%s</a>" % (ctrl.get_absolute_url(), ctrl.control_id))
-        html_str += "<tr><td>%s<td><td>%s<td><td>%s<td>" % (comp.title, comp.status, ', '.join(html_ctrl_list))
+        html_str += "<tr><td><a href='%s'>%s</a><td><td>%s<td><td>%s<td>" % (comp.get_absolute_url(),comp.title, comp.status, ', '.join(html_ctrl_list))
     context = {
         'content': html_str,
         'title': 'Component List'
