@@ -9,12 +9,10 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('catalog', '0001_initial'), ('catalog', '0002_available_catalog_list_tn_ancestors_count_and_more'), ('catalog', '0003_alter_available_catalog_list_remarks_and_more'), ('catalog', '0004_remove_available_catalog_list_tn_ancestors_count_and_more'), ('catalog', '0005_alter_controls_options_controls_sort_id'), ('catalog', '0006_alter_controls_options')]
-
     initial = True
 
     dependencies = [
-        ('common', '0001_initial'),
+        ('common', '0001_squashed_0005_alter_links_rel'),
     ]
 
     operations = [

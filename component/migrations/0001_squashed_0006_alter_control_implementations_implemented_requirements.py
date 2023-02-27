@@ -9,13 +9,11 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('component', '0001_initial'), ('component', '0002_by_components_tn_ancestors_count_and_more'), ('component', '0003_alter_by_components_description_and_more'), ('component', '0004_remove_by_components_tn_ancestors_count_and_more'), ('component', '0005_remove_implemented_requirements_control_implementation_and_more'), ('component', '0006_alter_control_implementations_implemented_requirements')]
-
     initial = True
 
     dependencies = [
-        ('common', '0001_initial'),
-        ('catalog', '0001_initial'),
+        ('common', '0001_squashed_0005_alter_links_rel'),
+        ('catalog', '0001_squashed_0006_alter_controls_options'),
     ]
 
     operations = [

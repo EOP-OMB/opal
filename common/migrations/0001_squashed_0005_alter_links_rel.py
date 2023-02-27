@@ -11,8 +11,6 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('common', '0001_initial'), ('common', '0002_addresses_tn_ancestors_count_and_more'), ('common', '0003_alter_addresses_remarks_alter_emails_remarks_and_more'), ('common', '0004_remove_addresses_tn_ancestors_count_and_more'), ('common', '0005_alter_links_rel')]
-
     initial = True
 
     dependencies = [

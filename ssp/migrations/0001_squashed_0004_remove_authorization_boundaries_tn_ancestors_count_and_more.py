@@ -9,13 +9,11 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('ssp', '0001_initial'), ('ssp', '0002_authorization_boundaries_tn_ancestors_count_and_more'), ('ssp', '0003_alter_authorization_boundaries_description_and_more'), ('ssp', '0004_remove_authorization_boundaries_tn_ancestors_count_and_more')]
-
     initial = True
 
     dependencies = [
-        ('component', '0001_initial'),
-        ('common', '0001_initial'),
+        ('component', '0001_squashed_0006_alter_control_implementations_implemented_requirements'),
+        ('common', '0001_squashed_0005_alter_links_rel'),
     ]
 
     operations = [
