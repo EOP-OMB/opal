@@ -199,7 +199,7 @@ class by_components(BasicModel):
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     implemented_requirement = models.ForeignKey(to='implemented_requirements', on_delete=models.CASCADE)
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<div class='component_control_implementation'>"
         html_str += self.description
         html_str += "</div>"
@@ -252,7 +252,7 @@ class implemented_requirements(BasicModel):
             r = self.control_id
         return str(r)
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<div class='implemented_requirement'>"
         html_str += self.control_id.to_html()
         if self.set_parameters.count() > 0:
@@ -303,7 +303,7 @@ class control_implementations(BasicModel):
                 implemented_requirements_list.append(imp_req.control_id)
         return implemented_requirements_list
 
-    def to_html(self, indent=0):
+    def to_html(self, indent=0, lazy=False):
         html_str = "<div class='control_implementation'>"
         if len(self.description) > 0:
             html_str += "<h3>%s</h3>" % self.description
@@ -378,18 +378,21 @@ class components(BasicModel):
     def get_absolute_url(self):
         return reverse('component:component_detail_view', kwargs={'pk': self.pk})
 
-    def to_html(self, indent=0):
-        html_str = ""
-        html_str += "<h1>" + self.title + "</h1>"
-        if User.is_staff:
-            html_str += "<a href='%s'>Edit</a>" % reverse('admin:component_components_change', args=(self.id,))
-        html_str += "<div>Purpose: %s</div>" % self.purpose
-        html_str += "<div>Type: %s</div>" % self.type
-        html_str += "<div>%s</div>" % self.description
-        if self.control_implementations_set.count() > 0:
-            html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
-            html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
-            html_str += "</div></div>"
-            for imp in self.control_implementations_set.all():
-                html_str += str(imp.to_html())
+    def to_html(self, indent=0, lazy=False):
+        if lazy:
+            html_str = "<a href='%s'>%s</a> Implements: %s" % (self.get_absolute_url(), self.__str__(), self.list_implemented_controls())
+        else:
+            html_str = ""
+            html_str += "<h1>" + self.title + "</h1>"
+            if User.is_staff:
+                html_str += "<a href='%s'>Edit</a>" % reverse('admin:component_components_change', args=(self.id,))
+            html_str += "<div>Purpose: %s</div>" % self.purpose
+            html_str += "<div>Type: %s</div>" % self.type
+            html_str += "<div>%s</div>" % self.description
+            if self.control_implementations_set.count() > 0:
+                html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
+                html_str += "<div class='col-sm-10' style='text-align: start;'><h2>Implemented Controls</h2></div>"
+                html_str += "</div></div>"
+                for imp in self.control_implementations_set.all():
+                    html_str += str(imp.to_html())
         return html_str

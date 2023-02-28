@@ -7,6 +7,11 @@ from common.models import links, roles
 from catalog.models import available_catalog_list, controls
 from django.urls import reverse
 
+# Add generators for custom field types
+from model_bakery.random_gen import gen_string, gen_text
+baker.generators.add('common.models.ShortTextField', gen_string)
+baker.generators.add('ckeditor.fields.RichTextField', gen_text)
+
 
 def test_index_view(admin_client):
     url = reverse('home_page')

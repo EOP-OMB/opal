@@ -53,12 +53,6 @@ class Command(BaseCommand):
     help = 'Bootstraps the app with a default "admin" user, a test IdP, default roles, and a default catalog list.'
 
     def handle(self, *args, **options):
-        # If no admin user exists, create an admin account
-        user = get_user_model()
-        if not user.objects.filter(is_superuser=True).exists():
-            password = create_admin_user(user)
-            print("Created account 'admin' with password '%s'. This password will not be displayed again." % password)
-
         # create a sample idp if none exists
         if IdP.objects.count() == 0:
             print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
@@ -92,3 +86,9 @@ class Command(BaseCommand):
 
         # import sample Catalog
         import_catalog_task(test=True)
+
+        # If no admin user exists, create an admin account
+        user = get_user_model()
+        if not user.objects.filter(is_superuser=True).exists():
+            password = create_admin_user(user)
+            print("Created account 'admin' with password '%s'. This password will not be displayed again." % password)

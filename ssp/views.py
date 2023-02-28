@@ -2,19 +2,15 @@ import json
 import logging
 import os.path
 
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from common.models import metadata
-# from ssp.forms import sspForm
-from ssp.models import control_implementations, system_characteristics, system_implementations, system_security_plans
-
 from formtools.wizard.views import CookieWizardView
+
 from common.forms import back_matter_form
-from .forms import system_characteristics_form
+from ssp.models import system_security_plans
+# from ssp.forms import system_characteristics_form
 
 
 def import_ssp_view(request, ssp_file):
@@ -53,7 +49,7 @@ def import_ssp(ssp_file):
 class ssp_list_view(ListView):
     model = system_security_plans
     context_object_name = "context_list"
-    add_new_url = reverse_lazy('ssp:add_new_ssp_view')
+    add_new_url = reverse_lazy('admin:ssp_system_security_plans_add')
     extra_context = {
         'title': 'System Security Plans',
         'add_url': add_new_url,
@@ -68,10 +64,10 @@ class ssp_detail_view(DetailView):
     template_name = "generic_detail.html"
 
 
-class ssp_wizard(CookieWizardView):
-    form_list = [system_characteristics_form, back_matter_form]
-
-    def done(self, form_list, **kwargs):
-        return render(self.request, reverse(ssp_detail_view),{
-            'form_data': [form.cleaned_data for form in form_list],
-        })
+# class ssp_wizard(CookieWizardView):
+#     form_list = [system_characteristics_form, back_matter_form]
+#
+#     def done(self, form_list, **kwargs):
+#         return render(self.request, reverse(ssp_detail_view),{
+#             'form_data': [form.cleaned_data for form in form_list],
+#         })
