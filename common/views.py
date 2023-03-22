@@ -48,8 +48,11 @@ def index_view(request):
 
 @public
 def auth_view(request):
-    context = {"idp": get_session_idp(request), "idps": IdP.objects.filter(is_active=True),
-               "enable_django_auth": settings.ENABLE_DJANGO_AUTH}
+    context = {"idp": get_session_idp(request),
+               "idps": IdP.objects.filter(is_active=True),
+               # "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
+               "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
+               }
     return render(request, "auth.html", context)
 
 
