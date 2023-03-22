@@ -22,7 +22,7 @@
                     <li class="list-group-item">
                         <strong>{{ idp }}</strong>:
                         <span class="float-right">
-                            <a class="btn btn-sm btn-secondary" href="{{ idp.get_login_url }}">Login</a>
+                            <a class="btn btn-sm btn-secondary" href="{{ idp.get_login_url }}?next={{ next }}">Login</a>
                         </span>
                     </li>
                 {% endfor %}

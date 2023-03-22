@@ -48,10 +48,15 @@ def index_view(request):
 
 @public
 def auth_view(request):
+    if request.headers.get('Referer'):
+        next = request.headers.get('Referer')
+    else:
+        next = '/'
     context = {"idp": get_session_idp(request),
                "idps": IdP.objects.filter(is_active=True),
                # "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
-               "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
+               "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH),
+               "next": next
                }
     return render(request, "auth.html", context)
 
