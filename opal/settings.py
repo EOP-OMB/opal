@@ -144,9 +144,7 @@ else:
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes',
-                  'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5",
-                  'celery_progress', 'extra_views', 'ckeditor']
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor']
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []
@@ -162,7 +160,6 @@ if ENABLE_SAML:
         for url in saml_urls:
             REQUIRE_LOGIN_PUBLIC_URLS += (url.replace('idp',idp),)
 if ENABLE_DJANGO_AUTH:
-    INSTALLED_APPS.append('django.contrib.auth')
     AUTHENTICATION_BACKENDS.append('django.contrib.auth.backends.ModelBackend')
 
 DEV_APPS = ['django_extensions', ]
@@ -187,8 +184,7 @@ if ENVIRONMENT != 'development':
 
 
 # To enable sitewide caching
-# MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware',
-#               'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
+# MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware', 'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
 # MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
 
 # Password validation

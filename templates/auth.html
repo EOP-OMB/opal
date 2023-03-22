@@ -7,7 +7,6 @@
             <p><strong>{% with user=user idp=idp|default:"Django" %}You are logged in as {{ user }} via {{ idp }}.</strong></p>
             <p>
                 {% if idp %}
-                    <a class="btn btn-sm btn-secondary" href="{{ idp.get_test_url }}">Test</a>
                     <a class="btn btn-sm btn-secondary" href="{{ idp.get_verify_url }}">Verify</a>
                     <a class="btn btn-sm btn-secondary" href="{{ idp.get_logout_url }}">Log Out</a>
                 {% else %}
@@ -23,14 +22,13 @@
                     <li class="list-group-item">
                         <strong>{{ idp }}</strong>:
                         <span class="float-right">
-                            <a href="{{ idp.get_login_url }}">Login</a> or
-                            <a href="{{ idp.get_test_url }}">Test</a>
+                            <a class="btn btn-sm btn-secondary" href="{{ idp.get_login_url }}">Login</a>
                         </span>
                     </li>
                 {% endfor %}
             </ul>
         {% endif %}
-        {% if enable_django_auth %}
+        {% if enable_django_auth == 'True' %}
             <a href="{% url 'admin:login' %}">Login</a> using Django built in authentication
         {% endif %}
     </div>
