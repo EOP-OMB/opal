@@ -67,7 +67,7 @@ def test_load_statements_view(admin_client):
     response = admin_client.get(url)
     assert response.status_code == 200
 
-
+@pytest.mark.slow
 def test_import_catalog_view(admin_client):
     url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': available_catalog_list.objects.first().id})
     response = admin_client.get(url)
