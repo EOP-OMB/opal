@@ -97,9 +97,10 @@ class propsAdmin(CustomAdmin):
         'created_at',
         'updated_at',
         )
-    list_filter = ('created_at', 'updated_at')
+    list_filter = ('created_at', 'updated_at','ns','property_class')
     search_fields = ('name',)
     date_hierarchy = 'updated_at'
+    fields = (('name','value'),'ns','property_class',)
 
 
 @admin.register(links)

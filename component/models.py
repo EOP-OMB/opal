@@ -387,7 +387,12 @@ class components(BasicModel):
             if User.is_staff:
                 html_str += "<a href='%s'>Edit</a>" % reverse('admin:component_components_change', args=(self.id,))
             html_str += "<div>Purpose: %s</div>" % self.purpose
-            html_str += "<div>Type: %s</div>" % self.type
+            html_str += "<div>Type: %s</div>" % self.get_type_display()
+            if self.props.count() > 0:
+                html_str += "<ul>"
+                for p in self.props.all():
+                    html_str += "<li>%s: %s</li>" % (p.name, p.value,)
+                html_str += "</ul>"
             html_str += "<div>%s</div>" % self.description
             if self.control_implementations_set.count() > 0:
                 html_str += "<div class='container' style='margin-left: 0; margin-right: 0; background-color: greenyellow;'><div class='row justify-content-start'>"
