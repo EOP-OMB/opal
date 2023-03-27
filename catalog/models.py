@@ -150,7 +150,7 @@ class params(BasicModel):
         return html_str
 
     def __str__(self):
-        return self.param_id
+        return "%s: %s" % (self.param_id, self.label)
 
     def field_name_changes(self):
         d = {"id": "param_id"}
@@ -297,7 +297,7 @@ class controls(PrimitiveModel):
 
     def set_sort_id(self):
         if self.sort_id is None:
-            self.sort_id = self._get_sort_id()
+            self.sort_id = self._get_sort_id
             return True
         return False
 
