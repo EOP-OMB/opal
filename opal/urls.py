@@ -30,6 +30,7 @@ urlpatterns = [path('', index_view, name='home_page'),
                re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
                path("accounts/", include("django.contrib.auth.urls")),
                path("sso/<idp_slug>/", include("sp.urls")),
+               re_path(r'^_nested_admin/', include('nested_admin.urls')),
                ]
 
 if settings.ENVIRONMENT != 'production':

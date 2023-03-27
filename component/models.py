@@ -138,7 +138,8 @@ class parameters(BasicModel):
                                  help_text="A reference to a parameter within a control, who's catalog has been imported into the current implementation context.",
                                  on_delete=models.CASCADE)
     values = ShortTextField(verbose_name="Parameter Value", help_text="A parameter value or set of values.")
-    by_component = models.ForeignKey(to='by_components', on_delete=models.CASCADE)
+    by_component = models.ForeignKey(to='by_components', on_delete=models.CASCADE, null=True)
+    control_implementations = models.ForeignKey(to='control_implementations', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.param_id.param_id + ": " + self.values
@@ -243,6 +244,7 @@ class implemented_requirements(BasicModel):
                                            help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Role",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
+    # control_implementation = models.ForeignKey(to='control_implementations', verbose_name='control implementation', help_text='The Control Implementation set this implementation is a part of', on_delete=models.CASCADE, null=True, related_name='ci')
 
     def __str__(self):
         try:
@@ -283,11 +285,8 @@ class control_implementations(BasicModel):
         verbose_name_plural = "Control Implementations"
 
     description = RichTextField(verbose_name="Description",
-                                help_text="Describes how the system satisfies a set of controls.")
-    set_parameters = CustomManyToManyField(
-        to=parameters, verbose_name="Common Parameters",
-        help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value."
-    )
+                                help_text="Describes how the system satisfies a set of controls.",null=True)
+    set_parameters = CustomManyToManyField(to=parameters, verbose_name="Common Parameters", help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value.", related_name='set_parameters')
     component = models.ForeignKey(to='components', on_delete=models.CASCADE, null=True)
     implemented_requirements = CustomManyToManyField(to=implemented_requirements,
                                                      verbose_name="Implemented Requirements",

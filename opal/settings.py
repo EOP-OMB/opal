@@ -144,7 +144,7 @@ else:
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor']
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor', 'nested_admin']
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []

@@ -23,4 +23,5 @@ django-extra-views
 django-require-login
 django-ckeditor
 django-formtools
+django-nested-admin
 
