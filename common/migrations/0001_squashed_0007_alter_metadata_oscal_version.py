@@ -11,8 +11,6 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('common', '0001_squashed_0005_alter_links_rel'), ('common', '0006_alter_metadata_oscal_version_alter_metadata_version_and_more'), ('common', '0007_alter_metadata_oscal_version')]
-
     initial = True
 
     dependencies = [

@@ -9,13 +9,12 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('component', '0001_squashed_0006_alter_control_implementations_implemented_requirements'), ('component', '0007_alter_components_options')]
 
     initial = True
 
     dependencies = [
-        ('catalog', '0001_squashed_0006_alter_controls_options'),
-        ('common', '0001_squashed_0005_alter_links_rel'),
+        ('catalog', '0001_squashed_0007_alter_controls_sort_id'),
+        ('common', '0001_squashed_0007_alter_metadata_oscal_version'),
     ]
 
     operations = [

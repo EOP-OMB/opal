@@ -9,15 +9,12 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('ssp', '0001_squashed_0004_remove_authorization_boundaries_tn_ancestors_count_and_more'), ('ssp', '0005_alter_system_characteristics_security_impact_level_and_more'), ('ssp', '0006_import_profiles_local_profile'), ('ssp', '0007_alter_import_profiles_href'), ('ssp', '0008_alter_system_security_plans_control_implementation')]
-
     initial = True
 
     dependencies = [
-        ('ctrl_profile', '0005_alter_imports_include_all_and_more'),
-        ('component', '0001_squashed_0006_alter_control_implementations_implemented_requirements'),
-        ('common', '0001_squashed_0005_alter_links_rel'),
-        ('component', '0007_alter_components_options'),
+        ('ctrl_profile', '0001_squashed_0005_alter_imports_include_all_and_more'),
+        ('component', '0001_squashed_0007_alter_components_options'),
+        ('common', '0001_squashed_0007_alter_metadata_oscal_version'),
     ]
 
     operations = [
