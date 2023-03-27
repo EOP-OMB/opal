@@ -9,8 +9,6 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('component', '0001_squashed_0007_alter_components_options'), ('component', '0008_implemented_requirements_control_implementation'), ('component', '0009_parameters_implemented_requirement'), ('component', '0010_remove_implemented_requirements_control_implementation_and_more'), ('component', '0011_alter_parameters_by_component')]
-
     initial = True
 
     dependencies = [

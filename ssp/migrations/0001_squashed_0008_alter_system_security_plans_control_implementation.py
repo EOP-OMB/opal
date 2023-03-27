@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('ctrl_profile', '0001_squashed_0005_alter_imports_include_all_and_more'),
-        ('component', '0001_squashed_0007_alter_components_options'),
+        ('component', '0001_squashed_0011_alter_parameters_by_component'),
         ('common', '0001_squashed_0007_alter_metadata_oscal_version'),
     ]
 
