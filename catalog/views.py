@@ -1,8 +1,7 @@
 import json
-import \
-    os
-import urllib.request
 import logging
+import os
+import urllib.request
 
 from celery import Celery
 from django.conf import settings
@@ -14,7 +13,7 @@ from django.views.generic.list import ListView
 
 from catalog.models import available_catalog_list, catalogs, controls
 from common.models import metadata
-from component.models import components, control_implementations, implemented_requirements
+from component.models import components, implemented_requirements
 from ctrl_profile.models import imports, profiles
 
 
@@ -29,10 +28,7 @@ def catalog_index_view(request):
     html_str += "</table>"
     logger = logging.getLogger("django")
     logger.info(html_str)
-    context = {
-        'title': "Catalogs",
-        'content': html_str
-        }
+    context = {'title': "Catalogs", 'content': html_str}
     return render(request, "generic_template.html", context)
 
 
@@ -58,15 +54,17 @@ app = Celery('tasks', broker=settings.BROKER)
 
 
 @app.task(bind=True)
-def import_catalog_task(self, item=False, host=False, test=False):
+def import_catalog_task(self, item=None, host=None, test=False):
     logger = logging.getLogger('django')
     if test:
-        catalog_file = os.path.join(settings.BASE_DIR,"sample_data/basic-catalog.json")
+        catalog_file = os.path.join(settings.BASE_DIR, "sample_data/basic-catalog.json")
         catalog_json = json.load(open(catalog_file))
         catalog_dict = catalog_json["catalog"]
     else:
         if item:
-            catalog_dict = download_catalog(item['link'])
+            catalog_dict = download_catalog(
+                item[
+                    'link'])
         else:
             raise TypeError("You must provide a catalog to import")
 
@@ -75,9 +73,7 @@ def import_catalog_task(self, item=False, host=False, test=False):
     new_catalog.save()
     # create a new profile for the imported catalog
     new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-    new_profile = profiles.objects.create(
-        metadata=new_metadata
-        )
+    new_profile = profiles.objects.create(metadata=new_metadata)
     new_profile.save()
     if not host:
         host = settings.HOST_NAME
@@ -86,12 +82,10 @@ def import_catalog_task(self, item=False, host=False, test=False):
     new_profile.save()
     # create components for any groups in the catalog
     for group in new_catalog.groups.all():
-        new_component, created = components.objects.get_or_create(
-            type="policy", title=group.title + " Policy",
-            description="This Component Policy was automatically created during the import of " + new_metadata.title,
-            purpose="This Component Policy was automatically created during the import of " + new_metadata.title,
-            status="under-development"
-            )
+        new_component, created = components.objects.get_or_create(type="policy", title=group.title + " Policy",
+                                                                  description="This Component Policy was automatically created during the import of " + new_metadata.title,
+                                                                  purpose="This Component Policy was automatically created during the import of " + new_metadata.title,
+                                                                  status="under-development")
         if created:
             new_component.save()
     # Create implemented_requirement objects for all controls in the import
@@ -107,16 +101,21 @@ def import_catalog_task(self, item=False, host=False, test=False):
 def download_catalog(link):
     proxies = {}
     if settings.HTTP_PROXY:
-        proxies['http'] = settings.HTTP_PROXY
+        proxies[
+            'http'] = settings.HTTP_PROXY
     if settings.HTTPS_PROXY:
-        proxies['https'] = settings.HTTPS_PROXY
+        proxies[
+            'https'] = settings.HTTPS_PROXY
     urllib.request.ProxyHandler()
     try:
         f = urllib.request.urlopen(link)
     except Exception:
-        raise ConnectionError("Unable to download catalog from %s. Check that the site is accessible and your proxies are properly configured." % link)
+        raise ConnectionError(
+            "Unable to download catalog from %s. Check that the site is accessible and your proxies are properly configured." % link)
     catalog_json = json.loads(f.read())
-    catalog_dict = catalog_json["catalog"]
+    catalog_dict = \
+        catalog_json[
+            "catalog"]
     return catalog_dict
 
 
@@ -147,7 +146,8 @@ def load_controls(request):
             available_controls.append({"value": ctrl.id, "display": ctrl.__str__})
         return render(request, 'generic_dropdown_list_options.html', {'options': available_controls})
     else:
-        return render(request, 'generic_dropdown_list_options.html', {'options': ["Invalid catalog selected, try again"]})
+        return render(request, 'generic_dropdown_list_options.html', {'options': [
+            "Invalid catalog selected, try again"]})
 
 
 def load_statements(request):
@@ -168,7 +168,9 @@ def get_statements(control_id):
         selected_control = controls.objects.get(pk=control_id)
         statement_list = []
         for stmt in selected_control.get_all_parts():
-            if stmt.name in ["item", "statement"]:
+            if stmt.name in [
+                "item",
+                "statement"]:
                 display_str = ""
                 if len(stmt.props.filter(name="label")) > 0:
                     display_str += stmt.props.get(name="label").value + " "
@@ -177,7 +179,8 @@ def get_statements(control_id):
                     statement_list.append({"value": stmt.id, "display": display_str, "name": "statements"})
         return statement_list
     else:
-        return ["Invalid control selected, Try again"]
+        return [
+            "Invalid control selected, Try again"]
 
 
 def get_parameters(control_id):
