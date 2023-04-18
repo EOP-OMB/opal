@@ -262,6 +262,7 @@ class controls(PrimitiveModel):
         verbose_name = "Control"
         verbose_name_plural = "Controls"
         ordering = ['sort_id']
+        
     control_id = ShortTextField(
         verbose_name="Control Identifier",
         help_text="A unique identifier for a specific control instance that can be used to reference the control in other OSCAL documents. This identifier's uniqueness is document scoped and is intended to be consistent for the same control across minor revisions of the document."

@@ -30,9 +30,11 @@ def get_test_catalog():
     test_catalog = catalogs.objects.get(uuid='74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724')
     return test_catalog
 
+
 def get_test_control():
     ctrl = controls.objects.get(uuid='c917d796-1b5f-4994-9366-d4eadd05ba72')
     return ctrl
+
 
 def test_catalog_index_view(admin_client):
     url = reverse('catalog:catalog_index_view')
@@ -58,6 +60,7 @@ def test_control_detail_view(admin_client):
     url = reverse('catalog:control_detail_view', kwargs={'pk': ctrl.id})
     response = admin_client.get(url)
     assert response.status_code == 200
+
 
 def test_load_controls_view(admin_client):
     cat = get_test_catalog()
@@ -109,9 +112,11 @@ def test_model_test(admin_client):
     test_obj.save()
     assert test_obj.__str__() == test_obj.expression
 
+
 def get_test_param():
     test_param = params.objects.get(uuid='6b967542-b19b-4d27-bf32-a574611f6151')
     return test_param
+
 
 def test_props_model():
     param_obj = params.objects.create()
