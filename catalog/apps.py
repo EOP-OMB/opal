@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.db.utils import OperationalError
 
 
 class CatalogConfig(AppConfig):
@@ -6,7 +7,11 @@ class CatalogConfig(AppConfig):
     name = 'catalog'
     
     def ready(self):
-        from catalog.models import controls
-        for c in controls.objects.filter(sort_id=None).all():
-            c.set_sort_id()
-            c.save()
+        try:
+            from catalog.models import controls
+            for c in controls.objects.filter(sort_id=None).all():
+                c.set_sort_id()
+                c.save()
+        except OperationalError:
+            # Database migration not yet completed, do nothing
+            pass
