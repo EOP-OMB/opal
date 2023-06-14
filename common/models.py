@@ -1,6 +1,6 @@
 import logging
 import os.path
-import base64 as base64_encoder
+import base64 as b64
 from urllib.parse import urlencode
 
 from django.db import models, IntegrityError, connection, OperationalError
@@ -1045,8 +1045,22 @@ class base64(PrimitiveModel):
     )
 
     def render_file(self):
-        binary_file = bytes(self.value, encoding='utf-8')
-        return base64_encoder.decodebytes(binary_file)
+        base64_string = self.value
+        base64_bytes = base64_string.encode(encoding='ascii')
+        file_bytes = b64.b64decode(base64_bytes)
+        file = file_bytes
+        file_name = str(self.uuid) + ".pdf"
+        file_path = os.path.join(settings.MEDIA_ROOT,file_name)
+        f = open(file_path,'wb')
+        f.write(file)
+        f.close()
+        file_url = settings.MEDIA_URL + file_name
+        # This is to handle larger files, might need someday
+        # with open(file_path, "wb+") as destination:
+        #     for chunk in file.chunks():
+        #         destination.write(chunk)
+        #     destination.close()
+        return file_url
 
     def get_absolute_url(self):
         return reverse('common:base64_detail', args=(self.pk,))

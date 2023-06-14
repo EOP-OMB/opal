@@ -34,8 +34,8 @@ urlpatterns = [path('', index_view, name='home_page'),
                ]
 
 if settings.ENVIRONMENT != 'production':
-    urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])

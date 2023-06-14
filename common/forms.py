@@ -6,6 +6,11 @@ from django import forms
 from common.models import resources, base64, metadata, back_matter
 
 
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50, label="Document Title")
+    file = forms.FileField(required=False)
+    
+        
 class RelatedFieldWidgetCanAdd(widgets.Select):
 
     def __init__(
@@ -65,6 +70,7 @@ class resource_form(
                 base64,
                 related_url='common:create_base64')
         }
+
 
 class metadata_form(forms.ModelForm):
     class Meta:

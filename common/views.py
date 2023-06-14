@@ -16,9 +16,10 @@ from django.views.generic import DetailView, ListView
 from django_require_login.decorators import public
 from sp.models import IdP
 from sp.utils import get_session_idp
+import base64 as b64
 
 from catalog.models import available_catalog_list
-from common.forms import resource_form
+from common.forms import resource_form, UploadFileForm
 from common.functions import search_for_uuid
 from common.models import base64
 
@@ -85,35 +86,36 @@ def permalink_view(request, p_uuid):
         return HttpResponseNotFound(err_msg)
 
 
-class attachment_form(forms.ModelForm):
-    filename = forms.CharField(max_length=1000, required=True)
-    media_type = forms.CharField(max_length=1000, required=True)
-    value = forms.FileField()
+class base64_list_view(ListView):
+    model = base64
+    context_object_name = "context_list"
+    template_name = "generic_list.html"
+    add_new_url = reverse_lazy('common:upload_file')
+    extra_context = {
+        'add_url': add_new_url,
+        'title': 'Files',
+    }
 
-    class Meta:
-        model = base64
-        fields = 'filename', 'media_type', 'value'
+
+def base64_detail_view(request, pk):
+    base64_object = base64.objects.get(pk=pk)
+    file_url = base64_object.render_file()
+    html_str = "<h1>%s</h1>" % base64_object.filename
+    html_str += "<img src='%s'>" % file_url
+    html_str += "<hr>"
+    html_str += "<a href='%s'>Download File</a>" % file_url
+    return render(request, "generic_template.html", {'content': html_str})
 
 
-def add_base64_attachment_view(request):
-    add_new_url = reverse_lazy('common:add_base64_attachment_view')
-    if request.POST:
-        try:
-            form_filename = request.POST['filename']
-            form_media_type = request.POST['media_type']
-            form_file_binary = request.POST['value']
-        except (KeyError, ObjectDoesNotExist):
-            # Redisplay the question voting form.
-            return render(
-                request, 'generic_form.html', {
-                    'add_url': add_new_url,
-                    'title': 'Upload a new file',
-                    'content': "Something went wrong",
-                    'form': attachment_form
-                }
-            )
-        else:
-            file_base64 = StringIO(form_file_binary)
+def upload_file(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form_filename = request.POST['title']
+            form_file_binary = request.FILES["file"]
+            form_media_type = form_file_binary.content_type
+            file_binary = form_file_binary.read()
+            file_base64 = (b64.b64encode(file_binary)).decode('ascii')
             new_attachment, created = base64.objects.get_or_create(
                 filename=form_filename,
                 media_type=form_media_type,
@@ -125,36 +127,8 @@ def add_base64_attachment_view(request):
             # user hits the Back button.
             return HttpResponseRedirect(reverse('common:base64_detail', args=(new_attachment.pk,)))
     else:
-        return render(
-            request, 'generic_form.html', {
-                'add_url': add_new_url,
-                'title': 'Add a new Document',
-                'content': "All fields are required",
-                'form': attachment_form()
-            }
-        )
-
-
-class base64_list_view(ListView):
-    model = base64
-    context_object_name = "context_list"
-    template_name = "generic_list.html"
-    add_new_url = reverse_lazy('common:create_base64')
-    extra_context = {
-        'add_url': add_new_url,
-        'title': 'Files',
-    }
-
-
-class base64_detail_view(DetailView):
-    model = base64
-    context_object_name = "context"
-    template_name = "common/base64_detail.html"
-
-
-def base64_render_view(request, pk):
-    file = base64.objects.get(pk=pk)
-    return file.render_file()
+        form = UploadFileForm()
+    return render(request, "common/upload_file.html", {"form": form})
 
 
 def add_resource_view(request):
