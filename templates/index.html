@@ -2,22 +2,32 @@
 {% load static %}
 {% block content %}
 <h1>Step 1: Import Catalogs</h1>
-    <p>The OSCAL catalog model represents a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
-    <p>Click on any of the following links to import these common catalogs:</p>
+    <p>The OSCAL catalog model is a collection of controls, represented as a control catalog. The OSCAL catalog model was designed to represent security and privacy controls in standardized, machine-readable formats. The OSCAL catalog model standardizes the representation of control definitions from different sources (e.g., SP 800-53, ISO/IEC 27002, COBIT 5) allowing control information to be easily searched, imported, and exported by applications using a common format.</p>
+    {% if user.is_superuser %}
+    <p>OPAL allows an administrator to define which catalogs can be imported. To add a catalog, first add it to <a href="{% url 'admin:catalog_available_catalog_list_changelist' %}">the list of approved catalogs</a></p>
+    {% endif %}
+    {% if catalog_list %}
+    <p>Click on any of the following links to import the catalog:</p>
     <ul>
         {{ catalog_list | safe}}
     </ul>
+    {% endif %}
+    <p>You can click on the <b>Catalogs</b> menu item to see a list of available profiles or create new ones.</p>
 <h1>Step 2: Creating a Profile</h1>
-    A profile is a set of controls approved by the organization. A profile can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  When creating a profile you can also define parameter values that will then be inherited by any system using the profile. You can also tailor your controls here to meet your organizations specific needs and risk tolerance.  You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog.
+    A profile is a set of controls selected by the organization. This can be as simple as a direct import of a catalog. Or you can create more complex profiles that include controls from multiple catalogs.  The profile is also where you will tailor your controls to meet your organizations specific needs and risk tolerance.  You must create a profile to use a set of controls in a system security plan, so OPAL automatically creates a basic profile for you when you import a catalog. You can click on the <b>Profiles</b> menu item to see a list of available profiles or create new ones.
 <h1>Step 3: Creating Components</h1>
-    <p>Components are used to describe individual system parts.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can then be applied to multiple systems.</p>
+    <p>Components are the individual parts that make up a system.  You can define a single component that includes your entire system, but a more valuable approach is to define modular components that can be inherited by multiple systems.  For example, you can create a component for a shared database resource or a server image. Components can also be policies or procedures that can be applied to multiple systems.</p>
     <p>When creating a component you can also define specific controls that are implemented by the component.  The details of the implementation can then be imported into System Security Plans that include the component.</p>
-    <p>Again, as a convenience, OPAL automatically creates a Policy Component for each Control Group in your imported Catalog. You can create additional new Components using the link below.</p>
-    <p><a href="{% url 'admin:component_components_add' %}">Create a new Component</a></p>
-<h1>Step 4: Control Statements</h1>
-    <p>Now that we have a Component, we can start defining the controls and parameters it will provide to a system. For every control defined in the profile, we will need to define how the control is implemented. We call these definitions Implemented Requirements. Although it is technically possible to simply define these Implemented Requirements for each information system, using components to group Implemented Requirements will amke it much easier to maintain and reference our documentation.</p>
-    <p>OPAL allows us to easily define Implemented Requirements directly from our Profile view and then associated these Implemented Requirements with our Components</p>
-    <p><a href="{% url 'ctrl_profile:profile_list_view' %}">View profile to start documenting your Implemented Requirements</a></p>
-<h1>Step 5: Import an SSP</h1>
-    <p><a href="{{ ssp_sample_import_link  }}">Import the sample SSP</a></p>
+    <p>Again, as a convenience, OPAL automatically creates a Policy Component for each Control Group in your imported Catalog.  Click on the <b>Components</b> menu item to see a list of all your components and create new ones.
+<h1>Step 4: Creating the SSP</h1>
+    <p>Finally, you will use OPAL to create a System Security Plan. In this final step you will describe the information system and idnetify the components, users, resources, etc. that make up the system. Click on the <b>System Security Plans</b> menu item to see a list of all your components and create new ones.</p>
+<h1>Files</h1>
+    <p>OPAL can also serve as a file repository for any artifact associated with your organizations security program. Click on the <b>Files</b> menu item to see a list of available files or add new ones.</p>
+<h1>Utilities</h1>
+    <p>The <b>Utilities</b> menu item provides convenient links to a few useful tools.</p>
+    <ul>
+    <li><b>Admin Dashboard</b> - Accessable only to System Administrors, the Admin Dashboard allows you to add/edit/delete any object in OPAL. This is the primary interface for adding and editing components. It is also where you can add catalogs, set up SAML authentication, and many other administrative tasks.</li>
+    <li><b>Database Status Report</b> - This report shows the number of rows in each table in the OPAL database.  It is useful as a sanity check if you are running imports but not seeing any results.</li>
+    </ul>
+
 {% endblock %}
