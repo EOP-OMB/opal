@@ -8,13 +8,13 @@ from .forms import components_form
 
 def component_list_view(request):
     component_list = components.objects.all()
-    html_str = "<table><tr><th>Title</th><th>Status</th><th>controls</th></tr>"
+    html_str = "<table class='table primary'><tr><th>Title</th><th>Status</th><th>Controls</th></tr>"
     for comp in component_list:
         ctrl_list = comp.list_implemented_controls()
         html_ctrl_list = []
         for ctrl in ctrl_list:
             html_ctrl_list.append("<a href='%s' target='_blank'>%s</a>" % (ctrl.get_absolute_url(), ctrl.control_id))
-        html_str += "<tr><td><a href='%s'>%s</a><td><td>%s<td><td>%s<td>" % (comp.get_absolute_url(),comp.title, comp.status, ', '.join(html_ctrl_list))
+        html_str += "<tr><td><a href='%s'>%s</a></td><td>%s</td><td>%s</td></tr>" % (comp.get_absolute_url(),comp.title, comp.status, ', '.join(html_ctrl_list))
     context = {
         'content': html_str,
         'title': 'Component List'
