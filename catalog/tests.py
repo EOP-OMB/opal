@@ -108,7 +108,7 @@ def test_load_params(admin_client):
 
 def test_model_test(admin_client):
     test_obj = baker.make(tests, _fill_optional=True)
-    test_obj.uuid = str(uuid.uuid4())
+    test_obj.catalog_uuid = str(uuid.uuid4())
     test_obj.save()
     assert test_obj.__str__() == test_obj.expression
 

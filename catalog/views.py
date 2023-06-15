@@ -63,8 +63,7 @@ def import_catalog_task(self, item=None, host=None, test=False):
     else:
         if item:
             catalog_dict = download_catalog(
-                item[
-                    'link'])
+                item['link'])
         else:
             raise TypeError("You must provide a catalog to import")
 
@@ -113,9 +112,7 @@ def download_catalog(link):
         raise ConnectionError(
             "Unable to download catalog from %s. Check that the site is accessible and your proxies are properly configured." % link)
     catalog_json = json.loads(f.read())
-    catalog_dict = \
-        catalog_json[
-            "catalog"]
+    catalog_dict = catalog_json["catalog"]
     return catalog_dict
 
 
@@ -127,7 +124,8 @@ def import_catalog_view(request, catalog_id):
     host = request.get_host()
     if available_catalog_list.objects.filter(id=catalog_id).exists:
         import_catalog_target = available_catalog_list.objects.get(id=catalog_id)
-        if catalogs.objects.filter(uuid=import_catalog_target.catalog_uuid).exists():
+        new_catalog_uuid = import_catalog_target.catalog_uuid
+        if catalogs.objects.filter(catalog_uuid=new_catalog_uuid).exists():
             logger.info("Catalog with UUID %s already exists" % import_catalog_target.catalog_uuid)
         else:
             if settings.ASYNC:

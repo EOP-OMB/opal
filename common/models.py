@@ -167,7 +167,7 @@ class PrimitiveModel(models.Model):
         return html_str
 
     def field_name_changes(self):
-        """returns a dictionary of fileds that are named differntly in the model than in OSCAL JSON. The format is {oscal_filed_name: database_field_name}"""
+        """returns a dictionary of fileds that are named differently in the model than in OSCAL JSON. The format is {database_field_name: oscal_filed_name}"""
         return {}
 
     def convert_field_names_from_db_to_oscal(self, d):
@@ -201,6 +201,9 @@ class PrimitiveModel(models.Model):
         return merged_dict
 
     def convert_field_names_from_oscal_to_db(self, d):
+        """
+        Returns a dictionary object that contains the internal field name as the key and the original name as the value
+        """
         new_dict = {}
         del_keys = set()
         if type(d) is dict:

@@ -563,7 +563,7 @@ class catalogs(PrimitiveModel):
         verbose_name = "Control Catalog"
         verbose_name_plural = "Control Catalogs"
 
-    uuid = ShortTextField(verbose_name="Catalog Universally Unique Identifier")
+    catalog_uuid = models.UUIDField(verbose_name="Catalog Universally Unique Identifier",null=True)
     metadata = models.ForeignKey(
         to=metadata, verbose_name="Publication metadata",
         help_text="Provides information about the publication and availability of the containing document.",
@@ -577,6 +577,13 @@ class catalogs(PrimitiveModel):
     groups = CustomManyToManyField(to=groups, verbose_name="Groups")
     back_matter = models.ForeignKey(to=back_matter, verbose_name="Back Matter", on_delete=models.CASCADE, null=True)
 
+    def field_name_changes(self):
+        """
+        Returns a dictionary object that contains the internal field name as the key and the original name as the value
+        """
+        fields_to_rename = {'uuid':'catalog_uuid', 'back-matter':'back_matter'}
+        return fields_to_rename
+    
     @property
     def title(self):
         return self.metadata.title
@@ -599,7 +606,7 @@ class catalogs(PrimitiveModel):
         if self.groups is not None:
             html_str += "<h1>Groups</h1>\n"
             for i in self.groups.all():
-                html_str += i.to_html()
+                html_str += "<a href='%s'>%s</a><br>" % (i.get_permalink, i.__str__)
         if self.controls is not None:
             html_str += "<h1>Controls not in a Group</h1>\n"
             for i in self.controls.all():
