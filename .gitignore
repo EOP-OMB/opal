@@ -16,3 +16,4 @@ pytest.ini
 /saml/certs/private.key
 /saml/certs/public.crt
 /static/
+/media/
