@@ -21,7 +21,7 @@ spec:
                   - key: node-role.kubernetes.io/control-plane
                     operator: DoesNotExist
       containers:
-      - image: postgres
+      - image: {{ .Values.repo.webapp }}/opal-db:{{ .Values.version }}
         imagePullPolicy: Always
         name: opal-db
         ports:
