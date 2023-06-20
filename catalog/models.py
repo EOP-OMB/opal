@@ -3,7 +3,7 @@ import \
 from django.db import models
 from django.urls import reverse
 from common.functions import coalesce, search_for_uuid
-from common.models import BasicModel, CustomManyToManyField, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
+from common.models import BasicModel, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
 
 
 class available_catalog_list(BasicModel):
@@ -57,7 +57,7 @@ class constraints(PrimitiveModel):
     description = models.TextField(
         verbose_name="Constraint Description", help_text="A textual summary of the constraint to be applied."
     )
-    tests = CustomManyToManyField(
+    tests = models.ManyToManyField(
         to=tests, verbose_name="Constraint Test",
         help_text="A test expression which is expected to be evaluated by a tool"
     )
@@ -106,7 +106,7 @@ class params(BasicModel):
         on_delete=models.CASCADE, null=True
     )
     props = properties_field
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
     label = ShortTextField(
         verbose_name="Parameter Label",
         help_text="A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned."
@@ -114,10 +114,10 @@ class params(BasicModel):
     usage = models.TextField(
         verbose_name="Parameter Usage Description", help_text="Describes the purpose and use of a parameter"
     )
-    constraints = CustomManyToManyField(
+    constraints = models.ManyToManyField(
         to=constraints, verbose_name="Constraints", help_text="A formal or informal expression of a constraint or test"
     )
-    guidelines = CustomManyToManyField(
+    guidelines = models.ManyToManyField(
         to=guidelines, verbose_name="Guidelines",
         help_text="A prose statement that provides a recommendation for the use of a parameter."
     )
@@ -192,8 +192,8 @@ class parts(PrimitiveModel):
     title = ShortTextField(verbose_name="Part Title", help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True)
     props = properties_field()
     prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
-    sub_parts = CustomManyToManyField(to="parts", verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    sub_parts = models.ManyToManyField(to="parts", verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
 
     def to_html(self, indent=0, show_guidance=True, show_links=True, lazy=False):
         html_str = ""
@@ -275,16 +275,16 @@ class controls(PrimitiveModel):
         verbose_name="Control Title",
         help_text=" A name given to the control, which may be used by a tool for display and navigation."
     )
-    params = CustomManyToManyField(
+    params = models.ManyToManyField(
         to=params, verbose_name="Control Parameters",
         help_text="Parameters provide a mechanism for the dynamic assignment of value(s) in a control."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    parts = CustomManyToManyField(
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    parts = models.ManyToManyField(
         to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part."
     )
-    control_enhancements = CustomManyToManyField(
+    control_enhancements = models.ManyToManyField(
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls"
     )
     sort_id = ShortTextField(max_length=25, verbose_name="Sort ID", help_text="normalized value to sort controls in the correct order", null=True)
@@ -476,7 +476,7 @@ class groups(PrimitiveModel):
         verbose_name="Control Title",
         help_text=" A name given to the control, which may be used by a tool for display and navigation."
     )
-    params = CustomManyToManyField(
+    params = models.ManyToManyField(
         to=params, verbose_name="Global Group Parameters",
         help_text="Parameters that should be applied to all Controls in the Group"
     )
@@ -484,14 +484,14 @@ class groups(PrimitiveModel):
         verbose_name="Global Group Properties",
         help_text="Properties that should be applied to all Controls in the Group"
     )
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    parts = CustomManyToManyField(
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    parts = models.ManyToManyField(
         to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part."
     )
-    sub_groups = CustomManyToManyField(
+    sub_groups = models.ManyToManyField(
         to="groups", verbose_name="Sub Groups", help_text="A group of controls, or of groups of controls."
     )
-    controls = CustomManyToManyField(
+    controls = models.ManyToManyField(
         to="controls", verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
     )
 
@@ -569,12 +569,12 @@ class catalogs(PrimitiveModel):
         help_text="Provides information about the publication and availability of the containing document.",
         on_delete=models.CASCADE
     )
-    params = CustomManyToManyField(
+    params = models.ManyToManyField(
         to=params, verbose_name="Global Catalog Parameters",
         help_text="Parameters that should be applied to all Controls in the Catalog"
     )
-    controls = CustomManyToManyField(to=controls, verbose_name="Controls")
-    groups = CustomManyToManyField(to=groups, verbose_name="Groups")
+    controls = models.ManyToManyField(to=controls, verbose_name="Controls")
+    groups = models.ManyToManyField(to=groups, verbose_name="Groups")
     back_matter = models.ForeignKey(to=back_matter, verbose_name="Back Matter", on_delete=models.CASCADE, null=True)
 
     def field_name_changes(self):

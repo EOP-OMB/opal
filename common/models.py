@@ -45,17 +45,19 @@ class CustomManyToManyField(models.ManyToManyField):
         pass
 
 
-class properties_field(CustomManyToManyField):
+class properties_field(models.ManyToManyField):
     def __init__(self, *args, **kwargs):
         kwargs['to'] = "common.props"
         kwargs['verbose_name'] = "Properties"
         kwargs['help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
+        kwargs['blank'] = True
         super().__init__(*args, **kwargs)
 
     def deconstruct(self):
         name, path, args, kwargs = super().deconstruct()
         del kwargs['verbose_name']
         del kwargs['help_text']
+        del kwargs['blank']
         return name, path, args, kwargs
 
 
@@ -76,6 +78,35 @@ implementation_status_choices = [
     ("not-applicable", "Not-Applicable: This control does not apply to this system as justified in the remarks.",)
 ]
 
+
+# PrimitiveModel: An abstract Django model with basic fields and methods common to all derived models.
+#
+# Fields:
+#   uuid: Unique universally unique identifier (UUID) of the object (non-editable).
+#   created_at: Timestamp (DateTime) when the object was created (automatically set on creation, non-editable).
+#   updated_at: Timestamp (DateTime) when the object was last updated (automatically set on update, non-editable).
+#
+# Properties:
+#   Meta: It is an abstract class and 'updated_at' is used as the default ordering field.
+#
+# Methods:
+#   natural_key: Returns the UUID of the object.
+#   get_permalink: Returns the URL associated with the object using the reverse_lazy function, using the uuid.
+#   get_absolute_url: Returns the absolute URL for the object by targeting its admin view.
+#   get_create_url: Returns the URL to create a new object using the admin interface.
+#   to_dict: Returns a dictionary representation of the object, excluding some fields (id, pk, created_at, and updated_at).
+#   to_json: Returns the JSON representation of the object.
+#   to_html: Returns the HTML representation of the object, including related objects and UI controls where needed.
+#   field_name_changes: Returns a dictionary with field names that changed between model and OSCAL JSON representation.
+#   convert_field_names_from_db_to_oscal: Converts field names in a given dictionary from the DB format to the OSCAL format.
+#   convert_field_names_from_oscal_to_db: Converts field names in a given dictionary from the OSCAL format to the DB format.
+#   unique_field_list: Returns a list of non-null, non-relation fields (apart from id, uuid, created_at, and updated_at).
+#   excluded_fields: Returns a list of fields to be ignored during import and other operations.
+#   import_oscal: Imports an OSCAL object, checking for existing objects, creating and updating objects as necessary.
+#   check_for_existing_object: Checks for an existing object that matches keys/values from a given dictionary.
+#   add_m2m: Adds a child object (many-to-many relation) using an SQL command, catching errors where necessary.
+#   update: Updates all fields defined in a given dictionary.
+#   __str__: Returns a string representation of the object as `<model_name>: <uuid>`.
 
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
@@ -459,7 +490,7 @@ class protocols(BasicModel):
         verbose_name="Protocol Title",
         help_text="A human readable name for the protocol (e.g., Transport Layer Security)."
     )
-    port_ranges = CustomManyToManyField(to=port_ranges, verbose_name="Port Ranges")
+    port_ranges = models.ManyToManyField(to=port_ranges, verbose_name="Port Ranges")
 
 
 class props(BasicModel):
@@ -642,7 +673,7 @@ class roles(BasicModel):
         blank=True
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Role Links")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Role Links")
 
     def __str__(self):
         return self.title
@@ -769,20 +800,20 @@ class locations(BasicModel):
         help_text="Typically, the physical address of the location will be used here. If this information is sensitive, then a mailing address can be used instead.",
         blank=True, null=True, on_delete=models.CASCADE
     )
-    email_addresses = CustomManyToManyField(
+    email_addresses = models.ManyToManyField(
         to=emails, help_text="This is a contact email associated with the location."
     )
-    telephone_numbers = CustomManyToManyField(
+    telephone_numbers = models.ManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
         help_text="A phone number used to contact the location."
     )
-    urls = CustomManyToManyField(
+    urls = models.ManyToManyField(
         to=links, verbose_name="Location URLs",
         help_text="The uniform resource locator (URL) for a web site or Internet presence associated with the location.",
         related_name="location_urls"
     )
     props = properties_field()
-    links = CustomManyToManyField(
+    links = models.ManyToManyField(
         to=links, verbose_name="Links", help_text="Links to other sites relevant to the location"
     )
 
@@ -836,25 +867,25 @@ class parties(BasicModel):
         verbose_name="Party Short Name", help_text="A short common name, abbreviation, or acronym for the party.",
         blank=True
     )
-    external_ids = CustomManyToManyField(to=external_ids)
+    external_ids = models.ManyToManyField(to=external_ids)
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
     address = models.ForeignKey(
         to=addresses, verbose_name="Location Address",
         help_text="Typically, the physical address of the Party will be used here. If this information is sensitive, then a mailing address can be used instead.",
         on_delete=models.CASCADE, null=True
     )
-    email_addresses = CustomManyToManyField(
+    email_addresses = models.ManyToManyField(
         to=emails, help_text="This is a contact email associated with the Party."
     )
-    telephone_numbers = CustomManyToManyField(
+    telephone_numbers = models.ManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
         help_text="A phone number used to contact the Party."
     )
-    location_uuids = CustomManyToManyField(
+    location_uuids = models.ManyToManyField(
         to=locations, verbose_name="Party Locations", help_text="References a location defined in metadata"
     )
-    member_of_organizations = CustomManyToManyField(
+    member_of_organizations = models.ManyToManyField(
         to=organizations, verbose_name="Organizational Affiliations",
         help_text="Identifies that the party object is a member of the organization associated with the provided UUID.", )
 
@@ -874,12 +905,12 @@ class responsible_parties(PrimitiveModel):
     role_id = ShortTextField(
         verbose_name="Responsible Role", help_text="The role that the party is responsible for."
     )
-    party_uuids = CustomManyToManyField(
+    party_uuids = models.ManyToManyField(
         to=parties, verbose_name="Party Reference",
         help_text="Specifies one or more parties that are responsible for performing the associated role."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
 
     def field_name_changes(self):
         field_name_changes = {
@@ -932,16 +963,16 @@ class metadata(BasicModel):
         verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against.",
         default="v1.0.3"
     )
-    revisions = CustomManyToManyField(to=revisions, verbose_name="Previous Revisions")
-    document_ids = CustomManyToManyField(to=document_ids, verbose_name="Other Document IDs")
+    revisions = models.ManyToManyField(to=revisions, verbose_name="Previous Revisions")
+    document_ids = models.ManyToManyField(to=document_ids, verbose_name="Other Document IDs")
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    locations = CustomManyToManyField(to=locations, verbose_name="Locations")
-    parties = CustomManyToManyField(
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    locations = models.ManyToManyField(to=locations, verbose_name="Locations")
+    parties = models.ManyToManyField(
         to=parties, verbose_name="Parties (organizations or persons)",
         help_text="A responsible entity which is either a person or an organization."
     )
-    responsible_parties = CustomManyToManyField(
+    responsible_parties = models.ManyToManyField(
         to=responsible_parties, verbose_name="Responsible Parties",
         help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
     )
@@ -961,7 +992,7 @@ class citations(PrimitiveModel):
 
     text = ShortTextField(verbose_name="Citation Text", help_text="A line of citation text.")
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
 
     def import_oscal(self, oscal_data):
         if type(oscal_data) is dict:
@@ -1011,10 +1042,10 @@ class rlinks(PrimitiveModel):
         verbose_name = "Resource link"
         verbose_name_plural = "Resource links"
 
-    href = CustomManyToManyField(
+    href = models.ManyToManyField(
         to=links, verbose_name="Hypertext Reference", help_text="A resolvable URI reference to a resource."
     )
-    hashes = CustomManyToManyField(
+    hashes = models.ManyToManyField(
         to=hashes, verbose_name="Hashes",
         help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm."
     )
@@ -1089,19 +1120,19 @@ class resources(BasicModel):
         verbose_name="Description", help_text="Describes how the system satisfies a set of controls."
     )
     props = properties_field()
-    document_ids = CustomManyToManyField(
+    document_ids = models.ManyToManyField(
         to=document_ids, verbose_name="Document Identifiers",
         help_text="A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier for a group of documents that are to be treated as different versions of the same document."
     )
-    citation = CustomManyToManyField(
+    citation = models.ManyToManyField(
         to=citations, verbose_name="Citations",
         help_text="A citation consisting of end note text and optional structured bibliographic data."
     )
-    rlinks = CustomManyToManyField(
+    rlinks = models.ManyToManyField(
         to=rlinks, verbose_name="Resource link",
         help_text="A pointer to an external resource with an optional hash for verification and change detection. This construct is different from link, which makes no provision for a hash or formal title."
     )
-    base64 = CustomManyToManyField(
+    base64 = models.ManyToManyField(
         to=base64, verbose_name="Base64 encoded objects",
         help_text="A string representing arbitrary Base64-encoded binary data."
     )
@@ -1126,7 +1157,7 @@ class back_matter(PrimitiveModel):
         verbose_name = "Back matter"
         verbose_name_plural = "Back matter"
 
-    resources = CustomManyToManyField(
+    resources = models.ManyToManyField(
         to=resources, verbose_name="Resources",
         help_text="A resource associated with content in the containing document. A resource may be directly included in the document base64 encoded or may point to one or more equivalent internet resources."
     )

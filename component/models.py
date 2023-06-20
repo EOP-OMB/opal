@@ -2,8 +2,7 @@ from ckeditor.fields import RichTextField
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.urls import reverse
-from common.models import BasicModel, CustomManyToManyField, implementation_status_choices, parties, properties_field, \
-    links, roles, ShortTextField, system_status_state_choices, protocols
+from common.models import BasicModel, implementation_status_choices, parties, properties_field, links, roles, ShortTextField, system_status_state_choices, protocols
 from catalog.models import controls, parts, params
 from django.contrib.auth.models import Permission, User
 
@@ -30,8 +29,8 @@ class satisfied(BasicModel):
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    responsible_roles = models.ManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
 
@@ -53,8 +52,8 @@ class responsibilities(BasicModel):
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that a leveraging system must implement to satisfy the control provided by a leveraged system."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    responsible_roles = models.ManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
 
@@ -72,11 +71,11 @@ class export(BasicModel):
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be available to another system leveraging this system."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    provided = CustomManyToManyField(to="provided_control_implementation",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    provided = models.ManyToManyField(to="provided_control_implementation",
                                      verbose_name="Provided Control Implementations",
                                      help_text="Describes a capability which may be inherited by a leveraging system")
-    responsibilities = CustomManyToManyField(to="responsibilities",
+    responsibilities = models.ManyToManyField(to="responsibilities",
                                              verbose_name="Control Implementation Responsibility",
                                              help_text="Describes a control implementation responsibility imposed on a leveraging system.")
 
@@ -99,8 +98,8 @@ class inherited(BasicModel):
         help_text="An implementation statement that describes the aspects of a control or control statement implementation that a leveraging system is inheriting from a leveraged system."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    responsible_roles = models.ManyToManyField(to='responsible_roles', verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
 
@@ -117,8 +116,8 @@ class responsible_roles(BasicModel):
                                 help_text="The role that is responsible for the business function.",
                                 on_delete=models.CASCADE)
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    party_uuids = CustomManyToManyField(to=parties, verbose_name="Party Reference",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    party_uuids = models.ManyToManyField(to=parties, verbose_name="Party Reference",
                                         help_text="References a party defined in metadata.")
 
     def __str__(self):
@@ -154,13 +153,13 @@ class statements(BasicModel):
         verbose_name = "Statement"
         verbose_name_plural = "Statements"
 
-    statement_id = CustomManyToManyField(to=parts, verbose_name="Control Statement Reference",
+    statement_id = models.ManyToManyField(to=parts, verbose_name="Control Statement Reference",
                                          help_text="A reference to a control statement by its identifier")
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    responsible_roles = CustomManyToManyField(to='responsible_roles', verbose_name="Responsible Role",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    responsible_roles = models.ManyToManyField(to='responsible_roles', verbose_name="Responsible Role",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
-    by_components = CustomManyToManyField(to="by_components", verbose_name="Component Control Implementation",
+    by_components = models.ManyToManyField(to="by_components", verbose_name="Component Control Implementation",
                                           help_text="Defines how the referenced component implements a set of controls.")
     implemented_requirement = models.ForeignKey(to='implemented_requirements', on_delete=models.CASCADE)
 
@@ -183,8 +182,8 @@ class by_components(BasicModel):
     description = RichTextField(verbose_name="Control Implementation Description",
                                 help_text="An implementation statement that describes how a control or a control statement is implemented within the referenced system component.")
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    set_parameters = models.ManyToManyField(to=parameters, verbose_name="Set Parameter Value",
                                            help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     implementation_status = ShortTextField(verbose_name="Implementation Status",
                                            help_text="Indicates the degree to which the a given control is implemented.",
@@ -192,11 +191,11 @@ class by_components(BasicModel):
     export = models.ForeignKey(to="export", verbose_name="Export",
                                help_text="Identifies content intended for external consumption, such as with leveraged organizations.",
                                on_delete=models.CASCADE, null=True)
-    inherited = CustomManyToManyField(to="inherited", verbose_name="Inherited Control Implementation",
+    inherited = models.ManyToManyField(to="inherited", verbose_name="Inherited Control Implementation",
                                       help_text="Describes a control implementation inherited by a leveraging system.")
-    satisfied = CustomManyToManyField(to="satisfied", verbose_name="Satisfied Control Implementation Responsibility",
+    satisfied = models.ManyToManyField(to="satisfied", verbose_name="Satisfied Control Implementation Responsibility",
                                       help_text="Describes how this system satisfies a responsibility imposed by a leveraged system.")
-    responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
+    responsible_roles = models.ManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     implemented_requirement = models.ForeignKey(to='implemented_requirements', on_delete=models.CASCADE)
 
@@ -221,8 +220,8 @@ class provided_control_implementation(BasicModel):
         help_text="An implementation statement that describes the aspects of the control or control statement implementation that can be provided to another system leveraging this system."
     )
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    responsible_roles = models.ManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
 
 
@@ -239,10 +238,10 @@ class implemented_requirements(BasicModel):
                                    help_text="A reference to a control with a corresponding id value.",
                                    on_delete=models.CASCADE)
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
-    set_parameters = CustomManyToManyField(to=parameters, verbose_name="Set Parameter Value",
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
+    set_parameters = models.ManyToManyField(to=parameters, verbose_name="Set Parameter Value",
                                            help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
-    responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Role",
+    responsible_roles = models.ManyToManyField(to=responsible_roles, verbose_name="Responsible Role",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
     # control_implementation = models.ForeignKey(to='control_implementations', verbose_name='control implementation', help_text='The Control Implementation set this implementation is a part of', on_delete=models.CASCADE, null=True, related_name='ci')
 
@@ -286,9 +285,9 @@ class control_implementations(BasicModel):
 
     description = RichTextField(verbose_name="Description",
                                 help_text="Describes how the system satisfies a set of controls.",null=True)
-    set_parameters = CustomManyToManyField(to=parameters, verbose_name="Common Parameters", help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value.", related_name='set_parameters')
+    set_parameters = models.ManyToManyField(to=parameters, verbose_name="Common Parameters", help_text="Use of set-parameter in this context, sets the parameter for all related controls referenced in an implemented-requirement. If the same parameter is also set in a specific implemented-requirement, then the new value will override this value.", related_name='set_parameters')
     component = models.ForeignKey(to='components', on_delete=models.CASCADE, null=True)
-    implemented_requirements = CustomManyToManyField(to=implemented_requirements,
+    implemented_requirements = models.ManyToManyField(to=implemented_requirements,
                                                      verbose_name="Implemented Requirements",
                                                      help_text="Set of controls implemented by this component")
 
@@ -356,13 +355,13 @@ class components(BasicModel):
     purpose = ShortTextField(max_length=1000, verbose_name="Purpose",
                              help_text="A summary of the technological or business purpose of the component.")
     props = properties_field()
-    links = CustomManyToManyField(to=links, verbose_name="Links")
+    links = models.ManyToManyField(to=links, null=True, blank=True, verbose_name="Links")
     status = ShortTextField(verbose_name="Status",
                             help_text=" Describes the operational status of the system component.",
                             choices=system_status_state_choices)
-    responsible_roles = CustomManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
+    responsible_roles = models.ManyToManyField(to=responsible_roles, verbose_name="Responsible Roles",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
-    protocols = CustomManyToManyField(to=protocols, verbose_name="Service Protocol Information",
+    protocols = models.ManyToManyField(to=protocols, verbose_name="Service Protocol Information",
                                       help_text="Information about the protocol used to provide a service.")
 
     def __str__(self):

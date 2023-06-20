@@ -25,12 +25,12 @@ class imports(BasicModel):
         verbose_name="Include all controls",
         help_text="Choose this option to include all controls from the imported catalog or profiles", default=True
     )
-    include_controls = CustomManyToManyField(
+    include_controls = models.ManyToManyField(
         to=controls, verbose_name="Included Controls",
         help_text="Select the controls to be included. Any controls not explicitly selected will be excluded",
         related_name="include_controls"
     )
-    exclude_controls = CustomManyToManyField(
+    exclude_controls = models.ManyToManyField(
         to=controls, verbose_name="Excluded Controls",
         help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",
         related_name="exclude_controls"
@@ -68,10 +68,10 @@ class modify(BasicModel):
         verbose_name = "Modify Controls"
         verbose_name_plural = "Modify Controls"
 
-    set_parameters = CustomManyToManyField(
+    set_parameters = models.ManyToManyField(
         to=params, verbose_name="Modified Parameters", help_text="Select any parameters you wish to modify"
     )
-    alters = CustomManyToManyField(
+    alters = models.ManyToManyField(
         to=controls, verbose_name="Modified Controls", help_text="Select any controls you wish to modify"
     )
 
@@ -89,7 +89,7 @@ class profiles(BasicModel):
         verbose_name_plural = "Profiles"
 
     metadata = models.ForeignKey(to=metadata, on_delete=models.CASCADE)
-    imports = CustomManyToManyField(
+    imports = models.ManyToManyField(
         to=imports, verbose_name="Imports",
         help_text="The import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
     )
