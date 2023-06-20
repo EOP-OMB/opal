@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+
+from common.models import props
 from component.models import components
-from .forms import components_form
+from component.forms import ComponentForm
 
 
 def component_list_view(request):
@@ -15,6 +17,7 @@ def component_list_view(request):
         for ctrl in ctrl_list:
             html_ctrl_list.append("<a href='%s' target='_blank'>%s</a>" % (ctrl.get_absolute_url(), ctrl.control_id))
         html_str += "<tr><td><a href='%s'>%s</a></td><td>%s</td><td>%s</td></tr>" % (comp.get_absolute_url(),comp.title, comp.status, ', '.join(html_ctrl_list))
+    html_str += "</table><p><a href='%s'>Add new component</a></p>" % reverse_lazy('component:components_form_view')
     context = {
         'content': html_str,
         'title': 'Component List'
@@ -38,10 +41,17 @@ def component_workflow_view():
 
 def components_form_view(request):
     context = {}
-    form = components_form(request.POST or None, request.FILES or None)
+    form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
-        form.save()
+        scope_prop_id, created = props.objects.get_or_create(name='Scope',value=form.data['scope'])
+        policy_owner_prop_id, created = props.objects.get_or_create(name='Policy Owner',value=form.data['policy_owner'])
+        review_interval_prop_id, created = props.objects.get_or_create(name='Review Interval',value=form.data['review_interval'])
+        new_component = form.save()
+        new_component.props.add(scope_prop_id)
+        new_component.props.add(policy_owner_prop_id)
+        new_component.props.add(review_interval_prop_id)
+        new_component.save()
 
     context['form'] = form
     return render(request, "generic_form.html", context)
