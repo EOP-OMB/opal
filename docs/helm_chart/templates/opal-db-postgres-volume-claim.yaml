@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: opal-db
-  name: opal-db-postgres-volume-claim
+  name: {{ .Values.volume_name }}
   namespace: {{ .Values.namespace | quote }}
 spec:
   accessModes:
@@ -11,7 +11,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: longhorn
+  storageClassName: longhorn-static
   volumeMode: Filesystem
-  volumeName: opal-db-postgress-volume
+  volumeName: {{ .Values.volume_name }}
 

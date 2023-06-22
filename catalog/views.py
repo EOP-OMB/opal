@@ -26,8 +26,6 @@ def catalog_index_view(request):
     for catalog in imported_catalogs:
         html_str += "<tr>" + catalog.count_controls() + "</tr>"
     html_str += "</table>"
-    logger = logging.getLogger("django")
-    logger.info(html_str)
     context = {'title': "Catalogs", 'content': html_str}
     return render(request, "generic_template.html", context)
 

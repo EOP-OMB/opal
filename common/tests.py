@@ -1,16 +1,19 @@
-from django.test import Client
-from django.contrib.auth import get_user_model
-from common.functions import reset_all_db, search_for_uuid, replace_hyphen, coalesce
+from common.functions import search_for_uuid, replace_hyphen, coalesce
 import uuid
-from model_bakery import baker
 from common.models import links, roles
-from catalog.models import available_catalog_list, controls
+from catalog.models import controls
 from django.urls import reverse
 
+import pytest
+
+from model_bakery import baker
 # Add generators for custom field types
-from model_bakery.random_gen import gen_string, gen_text
+from model_bakery.random_gen import gen_m2m, gen_string, gen_text
 baker.generators.add('common.models.ShortTextField', gen_string)
 baker.generators.add('ckeditor.fields.RichTextField', gen_text)
+baker.generators.add('common.models.properties_field', gen_m2m)
+
+pytestmark = pytest.mark.django_db
 
 
 def test_index_view(admin_client):

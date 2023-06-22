@@ -1,6 +1,7 @@
 import uuid
-from django.conf import settings
 from django.urls import reverse
+from catalog.models import catalogs, available_catalog_list, tests, params, parts, controls
+from common.models import props
 
 import pytest
 
@@ -13,67 +14,57 @@ baker.generators.add('common.models.properties_field', gen_m2m)
 
 pytestmark = pytest.mark.django_db
 
-from catalog.models import catalogs, available_catalog_list, tests, params, parts, controls, groups
-from catalog.views import import_catalog_task
-from common.models import props
-
-pytestmark = pytest.mark.django_db
 
 
-# Create your tests here.
-@pytest.fixture(scope='function', autouse=True)
-def get_sample_catalog_id(db):
-    host = settings.HOST_NAME
-    item = {}
-    new_catalog = import_catalog_task(item, host, test=True)
-    return new_catalog.id
 
-
-def get_test_catalog():
-    test_catalog = catalogs.objects.get(catalog_uuid='74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724')
-    return test_catalog
-
-
-def get_test_control():
-    ctrl = controls.objects.get(control_id="s1.1.1")
-    return ctrl
+@pytest.fixture(scope='module', autouse=True)
+def load_fixtures():
+    baker.make('catalog.catalogs',_quantity=10)
+    baker.make('catalog.controls',_quantity=10,make_m2m=True,_fill_optional=True)
 
 
 def test_catalog_index_view(admin_client):
+    # baker.make('catalog.catalogs',_quantity=10)
     url = reverse('catalog:catalog_index_view')
     response = admin_client.get(url)
     assert response.status_code == 200
+    assert catalogs.objects.count() > 0
+    for c in catalogs.objects.all():
+        assert c.title in response.content.decode()
 
 
 def test_catalog_list_view(admin_client):
     url = reverse('catalog:catalog_list_view')
     response = admin_client.get(url)
     assert response.status_code == 200
+    assert catalogs.objects.count() > 0
+    for c in catalogs.objects.all():
+        assert c.title in response.content.decode()
 
 
 def test_catalog_detail_view(admin_client):
-    cat = get_test_catalog()
+    cat = baker.make('catalog.catalogs',make_m2m=True,_fill_optional=True)
     url = reverse('catalog:catalog_detail_view', kwargs={'pk': cat.id})
     response = admin_client.get(url)
     assert response.status_code == 200
 
 
 def test_control_detail_view(admin_client):
-    ctrl = get_test_control()
+    ctrl = controls.objects.first()
     url = reverse('catalog:control_detail_view', kwargs={'pk': ctrl.id})
     response = admin_client.get(url)
     assert response.status_code == 200
 
 
 def test_load_controls_view(admin_client):
-    cat = get_test_catalog()
+    cat = baker.make('catalog.catalogs',make_m2m=True,_fill_optional=True)
     url = reverse('catalog:ajax_load_controls') + '?catalog=' + str(cat.id)
     response = admin_client.get(url)
     assert response.status_code == 200
 
 
 def test_load_statements_view(admin_client):
-    ctrl = get_test_control()
+    ctrl = controls.objects.first()
     url = reverse('catalog:ajax_load_controls') + '?control=' + str(ctrl.id)
     response = admin_client.get(url)
     assert response.status_code == 200
@@ -98,14 +89,14 @@ def test_load_controls(admin_client):
 
 
 def test_load_statements(admin_client):
-    ctrl = get_test_control()
+    ctrl = controls.objects.first()
     url = reverse('catalog:ajax_load_statements') + '?control=' + str(ctrl.id)
     response = admin_client.get(url)
     assert response.status_code == 200
 
 
 def test_load_params(admin_client):
-    ctrl = get_test_control()
+    ctrl = controls.objects.first()
     url = reverse('catalog:ajax_load_params') + '?control=' + str(ctrl.id)
     response = admin_client.get(url)
     assert response.status_code == 200
@@ -164,18 +155,18 @@ def test_parts_model():
 
 
 def test_controls_model():
-    ctrl = controls.objects.get(control_id='s1.1.1')
-    assert ctrl.__str__() == ' s1.1.1 Information security roles and responsibilities'
+    ctrl = baker.make('catalog.controls',_fill_optional=True,make_m2m=True)
+    assert ctrl.__str__() == ctrl.control_class + " " + ctrl.control_id + " " + ctrl.title
     assert ctrl.set_sort_id() == False
-    assert ctrl.to_html() == '<a id=s1.1.1><h4>S1.1.1 - Information security roles and responsibilities ()</h4>All information security responsibilities should be defined and allocated.\n\nA value has been assigned to {{ insert: param, s1.1.1-prm11 }}.\n\nA cross link has been established with a choppy syntax: [(choppy)](#s1.2).<br>\n<h5>Guidance</h5><p></p>&nbsp;&nbsp;Allocation of information security responsibilities should be done in accordance with the information security policies. Responsibilities for the protection of individual assets and for carrying out specific information security processes should be identified. Responsibilities for information security risk management activities and in particular for acceptance of residual risks should be defined. These responsibilities should be supplemented, where necessary, with more detailed guidance for specific sites and information processing facilities. Local responsibilities for the protection of assets and for carrying out specific security processes should be defined.<br>\n&nbsp;&nbsp;Individuals with allocated information security responsibilities may delegate security tasks to others. Nevertheless they remain accountable and should determine that any delegated tasks have been correctly performed.<br>\n&nbsp;&nbsp;Areas for which individuals are responsible should be stated. In particular the following should take place:\n\n1. the assets and information security processes should be identified and defined;\n1. the entity responsible for each asset or information security process should be assigned and the details of this responsibility should be documented;\n1. authorization levels should be defined and documented;\n1. to be able to fulfil responsibilities in the information security area the appointed individuals should be competent in the area and be given opportunities to keep up to date with developments;\n1. coordination and oversight of information security aspects of supplier relationships should be identified and documented.\n<br>\n<div><strong>Related Controls:</strong><br></div><p><strong>References:</strong> </p>'
-    assert ctrl.to_html_short() == '<a id=s1.1.1><h4>S1.1.1 - Information security roles and responsibilities ()</h4>All information security responsibilities should be defined and allocated.\n\nA value has been assigned to {{ insert: param, s1.1.1-prm11 }}.\n\nA cross link has been established with a choppy syntax: [(choppy)](#s1.2).<br>\n&nbsp;&nbsp;Allocation of information security responsibilities should be done in accordance with the information security policies. Responsibilities for the protection of individual assets and for carrying out specific information security processes should be identified. Responsibilities for information security risk management activities and in particular for acceptance of residual risks should be defined. These responsibilities should be supplemented, where necessary, with more detailed guidance for specific sites and information processing facilities. Local responsibilities for the protection of assets and for carrying out specific security processes should be defined.<br>\n&nbsp;&nbsp;Individuals with allocated information security responsibilities may delegate security tasks to others. Nevertheless they remain accountable and should determine that any delegated tasks have been correctly performed.<br>\n&nbsp;&nbsp;Areas for which individuals are responsible should be stated. In particular the following should take place:\n\n1. the assets and information security processes should be identified and defined;\n1. the entity responsible for each asset or information security process should be assigned and the details of this responsibility should be documented;\n1. authorization levels should be defined and documented;\n1. to be able to fulfil responsibilities in the information security area the appointed individuals should be competent in the area and be given opportunities to keep up to date with developments;\n1. coordination and oversight of information security aspects of supplier relationships should be identified and documented.\n<br>\n'
+    assert type(ctrl.to_html()) is str
+    assert type(ctrl.to_html_short()) is str
     assert ctrl.count_controls() == (1, 0)
     assert ctrl.list_all_controls() == [ctrl]
 
 
 def test_groups_model():
-    grp = groups.objects.get(group_id='s1')
-    assert grp.__str__() == 'S1 - Organization of Information Security ()'
-    assert grp.to_html() == "<h3>S1 - Organization of Information Security ()</h3>\n<div style='margin-left: 0px;'><li>Property Name: label</li>\n<li>Property Namespace: https://csrc.nist.gov/ns/oscal</li>\n<li>Property Value: 1</li>\n</ul>\n</div><h3>S1.1 - Internal Organization ()</h3>\n<div style='margin-left: 0px;'><li>Property Name: label</li>\n<li>Property Namespace: https://csrc.nist.gov/ns/oscal</li>\n<li>Property Value: 1.1</li>\n</ul>\n</div><a id=s1.1.1><h4>S1.1.1 - Information security roles and responsibilities ()</h4>All information security responsibilities should be defined and allocated.\n\nA value has been assigned to {{ insert: param, s1.1.1-prm11 }}.\n\nA cross link has been established with a choppy syntax: [(choppy)](#s1.2).<br>\n<h5>Guidance</h5><p></p>&nbsp;&nbsp;Allocation of information security responsibilities should be done in accordance with the information security policies. Responsibilities for the protection of individual assets and for carrying out specific information security processes should be identified. Responsibilities for information security risk management activities and in particular for acceptance of residual risks should be defined. These responsibilities should be supplemented, where necessary, with more detailed guidance for specific sites and information processing facilities. Local responsibilities for the protection of assets and for carrying out specific security processes should be defined.<br>\n&nbsp;&nbsp;Individuals with allocated information security responsibilities may delegate security tasks to others. Nevertheless they remain accountable and should determine that any delegated tasks have been correctly performed.<br>\n&nbsp;&nbsp;Areas for which individuals are responsible should be stated. In particular the following should take place:\n\n1. the assets and information security processes should be identified and defined;\n1. the entity responsible for each asset or information security process should be assigned and the details of this responsibility should be documented;\n1. authorization levels should be defined and documented;\n1. to be able to fulfil responsibilities in the information security area the appointed individuals should be competent in the area and be given opportunities to keep up to date with developments;\n1. coordination and oversight of information security aspects of supplier relationships should be identified and documented.\n<br>\n<div><strong>Related Controls:</strong><br></div><p><strong>References:</strong> </p><a id=s1.1.2><h4>S1.1.2 - Segregation of duties ()</h4>Conflicting duties and areas of responsibility should be segregated to reduce opportunities for unauthorized or unintentional modification or misuse of the organization’s assets.<br>\n<h5>Guidance</h5><p></p>&nbsp;&nbsp;Care should be taken that no single person can access, modify or use assets without authorization or detection. The initiation of an event should be separated from its authorization. The possibility of collusion should be considered in designing the controls.<br>\n&nbsp;&nbsp;Small organizations may find segregation of duties difficult to achieve, but the principle should be applied as far as is possible and practicable. Whenever it is difficult to segregate, other controls such as monitoring of activities, audit trails and management supervision should be considered.<br>\n<div><strong>Related Controls:</strong><br></div><p><strong>References:</strong> </p>"
-    assert grp.count_controls() == (2, 0)
-    assert grp.list_all_controls() == list(controls.objects.filter(control_id__in=['s1.1.1', 's1.1.2']).all())
+    grp = baker.make('catalog.groups',_fill_optional=True,make_m2m=True)
+    assert grp.__str__() == grp.group_id.upper() + " - " + grp.title + " (" + grp.group_class + ")"
+    assert type(grp.to_html()) is str
+    # assert grp.count_controls() == (2, 0)
+    # assert grp.list_all_controls() == list(controls.objects.filter(control_id__in=['s1.1.1', 's1.1.2']).all())

@@ -55,6 +55,11 @@ RUN mkdir -p /usr/src/app/static
 RUN chmod 777 /usr/src/app/static
 RUN chown -R opal:opal ./static
 
+# grant write permisions on the static driectory
+RUN mkdir -p /usr/src/app/media
+RUN chmod 777 /usr/src/app/media
+RUN chown -R opal:opal ./media
+
 #Create a logs directory if needed
 #RUN mkdir -p /usr/src/logs
 #RUN chmod 777 /usr/src/logs

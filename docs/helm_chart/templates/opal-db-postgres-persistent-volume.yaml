@@ -1,18 +1,29 @@
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   annotations:
-    longhorn.io/volume-scheduling-error: ""
+    longhorn.io/volume-scheduling-error: ''
+    pv.kubernetes.io/bound-by-controller: 'yes'
     pv.kubernetes.io/provisioned-by: driver.longhorn.io
   finalizers:
-  - kubernetes.io/pv-protection
-  - external-attacher/driver-longhorn-io
-  name: opal-db-postgress-volume
+    - kubernetes.io/pv-protection
+    - external-attacher/driver-longhorn-io
+  name: {{ .Values.volume_name }}
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   capacity:
     storage: 10Gi
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      diskSelector: ''
+      nodeSelector: ''
+      numberOfReplicas: '3'
+      staleReplicaTimeout: '20'
+    volumeHandle: {{ .Values.volume_name }}
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: longhorn
+  storageClassName: longhorn-static
   volumeMode: Filesystem
