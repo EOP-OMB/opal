@@ -303,7 +303,7 @@ class control_implementations(BasicModel):
 
     def to_html(self, indent=0, lazy=False):
         html_str = "<div class='control_implementation'>"
-        if len(self.description) > 0:
+        if self.description is not None:
             html_str += "<h3>%s</h3>" % self.description
         if self.set_parameters.count() > 0:
             html_str += "Parameters defined by this Control Implementation:"

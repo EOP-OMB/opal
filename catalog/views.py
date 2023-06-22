@@ -57,7 +57,7 @@ app = Celery('tasks', broker=settings.BROKER)
 def import_catalog_task(self, item=None, host=None, test=False):
     logger = logging.getLogger('django')
     if test:
-        catalog_file = os.path.join(settings.BASE_DIR, "sample_data/basic-catalog.json")
+        catalog_file = os.path.join(settings.BASE_DIR, "sample_data","basic-catalog.json")
         catalog_json = json.load(open(catalog_file))
         catalog_dict = catalog_json["catalog"]
     else:

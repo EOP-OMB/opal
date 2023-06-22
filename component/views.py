@@ -31,14 +31,6 @@ class component_detail_view(DetailView):
     template_name = "generic_detail.html"
 
 
-def component_workflow_view():
-    html_str = "<h1>Steps to create a Component</h1>"
-    html_str += "<ol><li>Create the component</li>"
-    html_str += "<li>Create a control_implementations</li>"
-    html_str += "<li>Add the controls</li></ol>"
-    return html_str
-
-
 def components_form_view(request):
     context = {}
     form = ComponentForm(request.POST or None, request.FILES or None)

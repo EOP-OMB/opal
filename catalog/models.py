@@ -382,7 +382,7 @@ class controls(PrimitiveModel):
         html_str += "</h4>"
         if self.parts is not None:
             for i in self.parts.all():
-                html_str += i.to_html(guidance=False, links=False)
+                html_str += i.to_html(show_guidance=False, show_links=False)
         if self.params is not None:
             for i in self.params.all():
                 str_to_replace = '{{ insert: param, ' + i.param_id + ' }}'
