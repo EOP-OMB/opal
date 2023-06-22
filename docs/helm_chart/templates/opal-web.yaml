@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       component: opal
+      app: opal
   template:
     metadata:
       labels:
         component: opal
+        app: opal
     spec:
       affinity:
         nodeAffinity:
@@ -37,8 +39,8 @@ spec:
           value: INFO
         - name: HOST_NAME
           value: {{ .Values.hostname }}
-        - name: SECRET_KEY
-          value: 20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE
+#        - name: SECRET_KEY
+#          value: 20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE
         - name: ALLOWED_HOSTS
           value: {{ .Values.hostname }}
         - name: SSL_ACTIVE
@@ -78,8 +80,8 @@ spec:
             drop: ["ALL"]
           runAsNonRoot: true
           runAsUser: 1001
-          # seccompProfile:
-          #   type: "RuntimeDefault"
+          seccompProfile:
+            type: "RuntimeDefault"
         resources:
           requests:
             memory: "64Mi"

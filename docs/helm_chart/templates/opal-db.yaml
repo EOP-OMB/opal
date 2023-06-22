@@ -8,10 +8,12 @@ spec:
   selector:
     matchLabels:
       component: opal-db
+      app: opal
   template:
     metadata:
       labels:
         component: opal-db
+        app: opal
     spec:
       affinity:
         nodeAffinity:
@@ -37,7 +39,7 @@ spec:
         - name: POSTGRES_USER
           value: opal
         - name: PGDATA
-          value: /var/lib/postgresql/data/opal
+          value: /usr/src/app/data
         - name: POSTGRES_DB
           value: opal
         securityContext:
@@ -45,11 +47,11 @@ spec:
           capabilities:
             drop: ["ALL"]
           runAsNonRoot: true
-          # seccompProfile:
-          #   type: "RuntimeDefault"
+          seccompProfile:
+            type: "RuntimeDefault"
           runAsUser: 999
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
+        - mountPath: /usr/src/app
           name: postgresdata
         resources:
           requests:
@@ -61,4 +63,4 @@ spec:
       volumes:
       - name: postgresdata
         persistentVolumeClaim:
-          claimName: opal-db-postgres-15-volume-claim
+          claimName: {{ .Values.volume_name }}
