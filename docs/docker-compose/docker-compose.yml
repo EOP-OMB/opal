@@ -1,12 +1,16 @@
 version: "3.9"
 
+volumes:
+  db_data:
+
 services:
   db:
     build: ../postgres
+    container_name: db
     ports:
       - "65432:5432"
-#    volumes:
-#      - ./data/db:/var/lib/postgresql/data
+    volumes:
+      - db_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=opal
       - POSTGRES_USER=opal

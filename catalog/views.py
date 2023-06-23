@@ -79,10 +79,7 @@ def import_catalog_task(self, item=None, host=None, test=False):
     new_profile.save()
     # create components for any groups in the catalog
     for group in new_catalog.groups.all():
-        new_component, created = components.objects.get_or_create(type="policy", title=group.title + " Policy",
-                                                                  description="This Component Policy was automatically created during the import of " + new_metadata.title,
-                                                                  purpose="This Component Policy was automatically created during the import of " + new_metadata.title,
-                                                                  status="under-development")
+        new_component, created = components.objects.get_or_create(type="policy", title=group.title + " Policy", description="This Component Policy was automatically created during the import of " + new_metadata.title, purpose="This Component Policy was automatically created during the import of " + new_metadata.title, status="under-development")
         if created:
             new_component.save()
     # Create implemented_requirement objects for all controls in the import
@@ -131,52 +128,6 @@ def import_catalog_view(request, catalog_id):
             else:
                 import_catalog_task(import_catalog_target.__dict__, host)
     return HttpResponseRedirect(reverse('home_page'))
-
-
-def load_controls(request):
-    catalog_id = request.GET.get('catalog')
-    if catalogs.objects.filter(pk=catalog_id).exists():
-        selected_catalog = catalogs.objects.get(pk=catalog_id)
-        available_controls = []
-        for ctrl in selected_catalog.list_all_controls():
-            available_controls.append({"value": ctrl.id, "display": ctrl.__str__})
-        return render(request, 'generic_dropdown_list_options.html', {'options': available_controls})
-    else:
-        return render(request, 'generic_dropdown_list_options.html', {'options': [
-            "Invalid catalog selected, try again"]})
-
-
-def load_statements(request):
-    control_id = request.GET.get('control')
-    statement_list = get_statements(control_id)
-
-    return render(request, 'generic_checkbox_list_options.html', {'options': statement_list})
-
-
-def load_params(request):
-    control_id = request.GET.get('control')
-    param_table = get_parameters(control_id)
-    return render(request, 'generic_html_helper.html', {'content': param_table})
-
-
-def get_statements(control_id):
-    if controls.objects.filter(pk=control_id).exists():
-        selected_control = controls.objects.get(pk=control_id)
-        statement_list = []
-        for stmt in selected_control.get_all_parts():
-            if stmt.name in [
-                "item",
-                "statement"]:
-                display_str = ""
-                if len(stmt.props.filter(name="label")) > 0:
-                    display_str += stmt.props.get(name="label").value + " "
-                display_str += stmt.prose
-                if len(display_str) > 0:
-                    statement_list.append({"value": stmt.id, "display": display_str, "name": "statements"})
-        return statement_list
-    else:
-        return [
-            "Invalid control selected, Try again"]
 
 
 def get_parameters(control_id):

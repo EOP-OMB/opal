@@ -43,13 +43,13 @@ class imports(BasicModel):
         html_str = "<a href='" + self.href + "'>"
         if self.include_all:
             html_str += "Include all controls from " + self.import_type + " " + self.href
-        elif len(self.include_controls.all()) > 0:
+        elif self.include_controls.count() > 0:
             ctr_list = []
             for c in self.include_controls.all():
                 ctr_list.append(c.__str__())
             html_str += "Include only the following controls from " + self.import_type + " " + self.href + ".<br>"
             html_str += ", ".join(ctr_list)
-        elif len(self.exclude_controls.all()) > 0:
+        elif self.exclude_controls.count() > 0:
             ctr_list = []
             for c in self.include_controls.all():
                 ctr_list.append(c.__str__())

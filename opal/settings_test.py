@@ -1,9 +1,6 @@
-import uuid
-
 from opal.settings import *
 
-
-DB_NAME = str(uuid.uuid4()) + '.testdb'
+DB_NAME = 'testdb.sqlite'
 
 DATABASES = {
         'default': {
