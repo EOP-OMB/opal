@@ -21,27 +21,16 @@ import json
 class ShortTextField(models.CharField):
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 1024
-        # kwargs['default'] = ""
         super().__init__(*args, **kwargs)
 
     def deconstruct(self):
         name, path, args, kwargs = super().deconstruct()
         del kwargs['max_length']
-        # del kwargs['default']
         return name, path, args, kwargs
 
 
 class CustomManyToManyField(models.ManyToManyField):
-    def __init__(self, *args, **kwargs):
-        kwargs['blank'] = True
-        super().__init__(*args, **kwargs)
-
-    def deconstruct(self):
-        name, path, args, kwargs = super().deconstruct()
-        del kwargs['blank']
-        return name, path, args, kwargs
-
-    def first(self):
+    #Class remains to fix migration errors.  Old migrations still include refernece to this class. This cna be removed once the migrations are squashed.
         pass
 
 
@@ -573,7 +562,6 @@ class links(BasicModel):
                     html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id, self.href[1:])
             if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
-                    # href = "https://www.google.com/search?q=%s" % urlencode(resources.objects.get(uuid=self.href[1:]).title)
                     href_text = resources.objects.get(uuid=self.href[1:]).title
                     html_str = href_text + "<br>"
                 else:
@@ -1071,11 +1059,10 @@ class base64(PrimitiveModel):
         base64_string = self.value
         base64_bytes = base64_string.encode(encoding='ascii')
         file_bytes = b64.b64decode(base64_bytes)
-        file = file_bytes
         file_name = str(self.uuid) + ".pdf"
         file_path = os.path.join(settings.MEDIA_ROOT,file_name)
         f = open(file_path,'wb')
-        f.write(file)
+        f.write(file_bytes)
         f.close()
         file_url = settings.MEDIA_URL + file_name
         # This is to handle larger files, might need someday

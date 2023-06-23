@@ -8,7 +8,7 @@ from component.models import components, control_implementations, parameters, im
 
 
 @admin.register(parameters)
-class parametersAdmin(CustomAdmin):
+class parameters_admin(CustomAdmin):
     list_display = (
     'param_id',
     'values',
@@ -30,30 +30,6 @@ class parameters_inline(NestedStackedInline):
     fields = ['param_id','values']
 
 
-
-# class implemented_requirementsAdmin(InlineModelAdmin):
-#     list_display = (
-#         'control_id',
-#         'created_at',
-#         'updated_at',
-#     )
-#     list_filter = ('created_at', 'updated_at', 'control_id')
-#     date_hierarchy = 'created_at'
-#     fields = ['control_id', 'responsible_roles', 'props', 'links']
-#     inlines = ['set_parameters',]
-
-
-# class implemented_requirements_inline(NestedStackedInline):
-#     model = implemented_requirements
-#     extra = 0
-#     inlines = [parameters_inline]
-
-
-# @admin.register(control_implementations)
-# class control_implementations_admin(CustomAdmin):
-#     model = control_implementations
-
-
 class control_implementations_inline(NestedStackedInline):
     model = control_implementations
     extra = 0
@@ -62,12 +38,11 @@ class control_implementations_inline(NestedStackedInline):
     inlines = [parameters_inline]
 
 @admin.register(components)
-class componentsAdmin(CustomAdmin):
+class components_admin(CustomAdmin):
     def get_list_display(self, request):
         return ['title', 'type', 'status', 'created_at', 'updated_at']
 
     list_filter = ('created_at', 'updated_at', 'status', 'type')
-    # raw_id_fields = ('props', 'links', 'responsible_roles', 'protocols')
     date_hierarchy = 'created_at'
     fieldsets = (
         (None, {'fields': ('title', 'type', 'props', 'description', 'purpose', 'status')}),

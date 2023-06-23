@@ -10,6 +10,13 @@ USER_APPS = settings.USER_APPS
 
 """Useful functions for testing or administration"""
 
+def check_auth(action):
+    user = get_user_model()
+    if not user.objects.filter(is_superuser=True).exists():
+        return True
+    return False
+
+
 def reset_db(app_name):
     logger = logging.getLogger("django")
     app_models = apps.get_app_config(app_name).get_models()

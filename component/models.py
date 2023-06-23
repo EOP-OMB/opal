@@ -243,7 +243,6 @@ class implemented_requirements(BasicModel):
                                            help_text="Identifies the parameter that will be set by the enclosed value. Overrides globally set parameters of the same name")
     responsible_roles = models.ManyToManyField(to=responsible_roles, verbose_name="Responsible Role",
                                               help_text="A reference to one or more roles with responsibility for performing a function relative to the containing object.")
-    # control_implementation = models.ForeignKey(to='control_implementations', verbose_name='control implementation', help_text='The Control Implementation set this implementation is a part of', on_delete=models.CASCADE, null=True, related_name='ci')
 
     def __str__(self):
         try:

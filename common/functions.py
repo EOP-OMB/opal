@@ -1,15 +1,13 @@
 import logging
 from uuid import UUID
-import json
-import xmltodict
 from django.apps import apps
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.core.exceptions import FieldError, ObjectDoesNotExist
 
 """
 Some useful common functions
 """
+
 
 def replace_hyphen(s: str):
     logger = logging.getLogger("django")
@@ -23,12 +21,10 @@ def coalesce(*values):
     return next((v for v in values if v is not None and v != ""), "N/A")
 
 
-def search_for_uuid(uuid_str, app_list=USER_APPS):
+def search_for_uuid(uuid_str, app_list=settings.USER_APPS):
     logger = logging.getLogger("django")
     try:
         logger.info("Searching for uuid: " + uuid_str)
-        uuid_obj = UUID(uuid_str, version=4)
-        # r = None
         for a in app_list:
             logger.info("Looking in app " + a.title())
             app_models = apps.get_app_config(a).get_models()
@@ -41,7 +37,6 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
                         return model.objects.get(uuid=uuid_str)
                 except FieldError:
                     logging.warning("%s uuid field does not exist!!" % model._meta.model_name)
-                    r = None
         logger.info("Could not find an object with uuid: " + uuid_str)
         return None
     except ValueError:
@@ -49,8 +44,4 @@ def search_for_uuid(uuid_str, app_list=USER_APPS):
         return None
 
 
-def check_auth(action):
-    user = get_user_model()
-    if not user.objects.filter(is_superuser=True).exists():
-        return True
-    return False
+

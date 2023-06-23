@@ -14,17 +14,13 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django_require_login.decorators import public
-from sp.models import IdP
-from sp.utils import get_session_idp
+from django.conf import settings
 import base64 as b64
 
 from catalog.models import available_catalog_list
 from common.forms import resource_form, UploadFileForm
 from common.functions import search_for_uuid
 from common.models import base64
-
-
-# Create your views here.
 
 
 def index_view(request):
@@ -47,19 +43,26 @@ def index_view(request):
         return render(request, "base.html")
 
 
-@public
 def auth_view(request):
-    if request.headers.get('Referer'):
-        next = request.headers.get('Referer')
-    else:
-        next = '/'
-    context = {"idp": get_session_idp(request),
-               "idps": IdP.objects.filter(is_active=True),
-               # "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
-               "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH),
-               "next": next
-               }
-    return render(request, "auth.html", context)
+    return render(request, "auth.html")
+
+
+if settings.ENABLE_SAML == 'True':
+    from sp.models import IdP
+    from sp.utils import get_session_idp
+    @public
+    def auth_view(request):
+        if request.headers.get('Referer'):
+            next = request.headers.get('Referer')
+        else:
+            next = '/'
+        context = {"idp": get_session_idp(request),
+                   "idps": IdP.objects.filter(is_active=True),
+                   # "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
+                   "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH),
+                   "next": next
+                   }
+        return render(request, "auth.html", context)
 
 
 def database_status_view(request):

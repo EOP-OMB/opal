@@ -1,0 +1,11 @@
+Django
+django-environ
+django-bootstrap-v5
+celery_progress
+django-extra-views
+django-ckeditor
+django-nested-admin
+django_extensions
+django_require_login
+celery
+django-formtools

@@ -29,13 +29,15 @@ urlpatterns = [path('', index_view, name='home_page'),
                path('ssp/', include('ssp.urls'), name='ssp'),
                re_path(r'^celery-progress/', include('celery_progress.urls')),  # the endpoint is configurable
                path("accounts/", include("django.contrib.auth.urls")),
-               path("sso/<idp_slug>/", include("sp.urls")),
                re_path(r'^_nested_admin/', include('nested_admin.urls')),
                ]
 
 if settings.ENVIRONMENT != 'production':
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.ENABLE_SAML == 'True':
+    urlpatterns.append("sso/<idp_slug>/", include("sp.urls"))
 
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])

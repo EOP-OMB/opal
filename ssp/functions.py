@@ -1,11 +1,7 @@
 import json
 import logging
 
-from ssp.models import *
-
-"""
-Some useful common functions
-"""
+from ssp.models import system_security_plans
 
 
 def import_ssp(ssp_file="sample_data/ssp-example.json"):

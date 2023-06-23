@@ -18,17 +18,6 @@ class system_characteristicsAdmin(CustomAdmin):
     )
 
 
-# class system_characteristics_inline(admin.StackedInline):
-#     model = system_characteristics
-#     extra = 0
-#     fieldsets = (
-#         ('System Name', {'fields':[('system_name','system_name_short')]}),
-#         ('Description', {'fields': [('description')]}),
-#         ('Authorization:', {'fields': ['status','date_authorized']}),
-#         ('Security Impact Level', {'fields': ['security_impact_level','security_objective_confidentiality','security_objective_integrity','security_objective_availability']}),
-#         ('Diagrams', {'fields': ['authorization_boundary','network_architecture','data_flow']}),
-#     )
-
 class system_implementationsAdmin(CustomAdmin):
     fields = ('remarks','leveraged_authorizations','components','inventory_items','users')
 

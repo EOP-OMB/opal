@@ -35,8 +35,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'vendor')]
 
 env = environ.Env()
-if str(BASE_DIR) + "/opal/.env":
-    environ.Env.read_env()
+if os.path.join(BASE_DIR,'opal','.env'):
+    env.read_env()
 
 # Load environment variables and set defaults
 default_secret_key = secrets.token_urlsafe()
@@ -83,7 +83,7 @@ SP_PREPARE_REQUEST = "common.auth_functions.prepare_request"
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
-if SSL_ACTIVE:
+if SSL_ACTIVE != 'False':
     protocol = "https://"
 else:
     protocol = "http://"
@@ -106,14 +106,10 @@ ROOT_URLCONF = 'opal.urls'
 # Version Numbering
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-try:
-    opal.__build__ = subprocess.check_output(["git", "describe", "--tags", "--always"], cwd=BASE_DIR).decode('utf-8').strip()
-except:
-    opal.__build__ = opal.__version__ + " ?"
 
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [BASE_DIR + '/templates'],
+    'DIRS': [os.path.join(BASE_DIR,'templates')],
     'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': ['django.template.context_processors.debug', 'django.template.context_processors.request',
@@ -148,7 +144,7 @@ INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []
-if ENABLE_SAML:
+if ENABLE_SAML == 'True':
     INSTALLED_APPS.append('sp')
     AUTHENTICATION_BACKENDS.append('sp.backends.SAMLAuthenticationBackend')
     REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,'admin:login')
@@ -159,7 +155,7 @@ if ENABLE_SAML:
         saml_urls = ['/sso/idp/', '/sso/idp/login/', '/sso/idp/test/', '/sso/idp/verify/', '/sso/idp/acs/']
         for url in saml_urls:
             REQUIRE_LOGIN_PUBLIC_URLS += (url.replace('idp',idp),)
-if ENABLE_DJANGO_AUTH:
+if ENABLE_DJANGO_AUTH == 'True':
     AUTHENTICATION_BACKENDS.append('django.contrib.auth.backends.ModelBackend')
 
 DEV_APPS = ['django_extensions', ]

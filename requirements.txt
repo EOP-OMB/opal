@@ -11,13 +11,10 @@ pyrabbit
 celery
 celery_progress
 # SAML Support
-# git+https://github.com/cs4p/django-saml-sp.git
 django-saml-sp
 python3-saml
-# pinned cryptography version to support SHA1. This is a temporary requirement until the django-saml-sp package is updated
 cryptography
-#
-# # OIDC Support
+# OIDC Support
 # # mozilla-django-oidc
 django-extra-views
 django-require-login

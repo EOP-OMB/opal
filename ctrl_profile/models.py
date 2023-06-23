@@ -1,10 +1,10 @@
-from common.models import *
+from django.db import models
+from django.urls import reverse
+
+from common.functions import search_for_uuid
+from common.models import BasicModel, ShortTextField, metadata, back_matter
 from catalog.models import controls, params, catalogs
-# from django.urls import reverse
 import re
-
-
-# Create your models here.
 
 
 class imports(BasicModel):
@@ -103,7 +103,6 @@ class profiles(BasicModel):
         help_text="Define parameters and controls that are modified by this profiles.", on_delete=models.CASCADE,
         null=True
     )
-    # TODO: We need to create a function that will make a copy of existing parameters/controls selected for modification
     back_matter = models.ForeignKey(
         to=back_matter, verbose_name="Back matter",
         help_text="Provides a collection of identified resource objects that can be referenced by a link with a rel value of 'reference' and an href value that is a fragment '#' followed by a reference to a reference identifier. Other specialized link 'rel' values also use this pattern when indicated in that context of use.",

@@ -4,7 +4,7 @@ from common.admin import CustomAdmin
 from .models import controls
 
 @admin.register(controls)
-class controlsAdmin(admin.ModelAdmin):
+class controls_admin(admin.ModelAdmin):
     list_filter = ('control_class',)
 
 # other models
