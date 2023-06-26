@@ -53,14 +53,13 @@ if settings.ENABLE_SAML == 'True':
     @public
     def auth_view(request):
         if request.headers.get('Referer'):
-            next = request.headers.get('Referer')
+            next_page = request.headers.get('Referer')
         else:
-            next = '/'
+            next_page = '/'
         context = {"idp": get_session_idp(request),
                    "idps": IdP.objects.filter(is_active=True),
-                   # "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH)
                    "enable_django_auth": bool(settings.ENABLE_DJANGO_AUTH),
-                   "next": next
+                   "next": next_page
                    }
         return render(request, "auth.html", context)
 
@@ -78,7 +77,7 @@ def database_status_view(request):
     return render(request, "db_status.html", context)
 
 
-def permalink_view(request, p_uuid):
+def permalink_view(p_uuid):
     redirect_url = "error_404_view"
     obj = search_for_uuid(p_uuid)
     try:
@@ -119,7 +118,7 @@ def upload_file(request):
             form_media_type = form_file_binary.content_type
             file_binary = form_file_binary.read()
             file_base64 = (b64.b64encode(file_binary)).decode('ascii')
-            new_attachment, created = base64.objects.get_or_create(
+            new_attachment, _ = base64.objects.get_or_create(
                 filename=form_filename,
                 media_type=form_media_type,
                 value=file_base64
@@ -143,12 +142,12 @@ def add_resource_view(request):
             })
 
 
-def download_oscal_json(request, j):
+def download_oscal_json(j):
 
-    file = open('%s.json' % uuid.uuid4(), 'x')
-    file.write(j)
-    path_to_file = os.path.realpath(file)
+    oscal_jason_file = open('%s.json' % uuid.uuid4(), 'x')
+    oscal_jason_file.write(j)
+    path_to_file = os.path.realpath(oscal_jason_file)
     response = FileResponse(open(path_to_file, 'rb'))
-    file_name = file[5:]
+    file_name = oscal_jason_file[5:]
     response['Content-Disposition'] = 'inline; filename=' + file_name
     return response

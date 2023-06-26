@@ -134,12 +134,12 @@ def import_800_53():
 
 def create_profile(new_catalog, fips_level, ctrl_list):
     logger = logging.getLogger('django')
-    new_metadata, created = metadata.objects.get_or_create(title='SP 800-53 rev 5 FISMA %s Controls' % fips_level)
-    new_profile, created = profiles.objects.get_or_create(metadata=new_metadata)
+    new_metadata, _ = metadata.objects.get_or_create(title='SP 800-53 rev 5 FISMA %s Controls' % fips_level)
+    new_profile, _ = profiles.objects.get_or_create(metadata=new_metadata)
     new_profile.save()
     host = settings.HOST_NAME
     url = "https://" + host + new_catalog.get_permalink()
-    new_import, created = imports.objects.get_or_create(href=url, import_type="catalog")
+    new_import, _ = imports.objects.get_or_create(href=url, import_type="catalog")
     new_profile.imports.add(new_import)
     new_profile.save()
     for ctrl in ctrl_list:

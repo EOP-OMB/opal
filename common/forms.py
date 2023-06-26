@@ -72,13 +72,6 @@ class resource_form(
         }
 
 
-class metadata_form(forms.ModelForm):
-    class Meta:
-        model=metadata
-        fields = ('title','published','version')
-        widgets = {'published': AdminSplitDateTime()}
-
-
 class back_matter_form(forms.ModelForm):
     class Meta:
         model = back_matter

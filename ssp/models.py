@@ -165,7 +165,7 @@ class information_type_impact_level(BasicModel):
                     "adjustment_justification"]
             else:
                 adjustment_justification = None
-            obj, created = self._meta.model.objects.get_or_create(
+            obj, _ = self._meta.model.objects.get_or_create(
                 base=base, selected=selected, adjustment_justification=adjustment_justification
             )
             if "props" in oscal_data.keys():
@@ -633,23 +633,28 @@ class system_implementations(BasicModel):
     )
 
     def to_html(self, indent=0, lazy=True):
-        lazy=True
         html_str = "<div>"
+        # components
         html_str += "<h2>Components</h2>\n<ul>"
-        for cmp in self.components.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        if self.components.count() == 0:
+            html_str = "<li>None</li>\n"
         else:
-            html_str += "<li>None</li>\n"
+            for cmp in self.components.all():
+                html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        # Inventory items
         html_str += "</ul>\n<h2>Inventory</h2>\n<ul>"
-        for cmp in self.inventory_items.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
-        else:
+        if self.inventory_items.count() == 0:
             html_str += "<li>None</li>\n"
+        else:
+            for cmp in self.inventory_items.all():
+                html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        # Users
         html_str += "</ul>\n<h2>Users</h2>\n<ul>"
-        for cmp in self.users.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
-        else:
+        if self.users.count() == 0:
             html_str += "<li>None</li>\n"
+        else:
+            for u in self.users.all():
+                html_str += "<li>%s</li>\n" % u.to_html(indent=indent,lazy=lazy)
         html_str += "</ul></div>"
         return html_str
 

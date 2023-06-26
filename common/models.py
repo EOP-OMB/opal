@@ -180,7 +180,8 @@ class PrimitiveModel(models.Model):
                     if lazy:
                         value = "<a href='%s' target='_blank'>%s</a>" % (i.get_absolute_url(), i.__str__())
                     else:
-                        html_str += i.to_html(indent=new_indent,lazy=lazy)
+                        value += i.to_html(indent=new_indent,lazy=lazy)
+                    html_str += "<li>" + f.verbose_name + ": " + value + "</li>\n"
         html_str += "</ul>\n</div>"
         if html_str is None:
             html_str = "None"

@@ -128,17 +128,3 @@ def import_catalog_view(request, catalog_id):
             else:
                 import_catalog_task(import_catalog_target.__dict__, host)
     return HttpResponseRedirect(reverse('home_page'))
-
-
-def get_parameters(control_id):
-    if controls.objects.filter(pk=control_id).exists():
-        selected_control = controls.objects.get(pk=control_id)
-        parameter_list = selected_control.params.all()
-        html_str = "<table class='table-bordered'>"
-        html_str += "<tr><th>Guidance</th><th>Param ID</th><th>Value</th></tr>"
-        for p in parameter_list:
-            html_str += p.get_form()
-        html_str += "</table>"
-        return html_str
-    else:
-        return []

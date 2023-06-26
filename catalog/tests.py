@@ -91,16 +91,12 @@ def test_groups_model():
     grp = baker.make('catalog.groups',_fill_optional=True,make_m2m=True)
     assert grp.__str__() == grp.group_id.upper() + " - " + grp.title + " (" + grp.group_class + ")"
     assert type(grp.to_html()) is str
-    # assert grp.count_controls() == (2, 0)
-    # assert grp.list_all_controls() == list(controls.objects.filter(control_id__in=['s1.1.1', 's1.1.2']).all())
 
 
 @pytest.mark.slow
 def test_import_catalog_view(admin_client):
 
-    cat, created = available_catalog_list.objects.get_or_create(catalog_uuid='74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724', link='https://raw.githubusercontent.com/usnistgov/oscal-content/main/examples/catalog/json/basic-catalog-min.json', name='Sample Security Catalog *for Demonstration* and Testing')
+    cat, _ = available_catalog_list.objects.get_or_create(catalog_uuid='74c8ba1e-5cd4-4ad1-bbfd-d888e2f6c724', link='https://raw.githubusercontent.com/usnistgov/oscal-content/main/examples/catalog/json/basic-catalog-min.json', name='Sample Security Catalog *for Demonstration* and Testing')
     url = reverse('catalog:import_catalog_view', kwargs={'catalog_id': cat.id})
     response = admin_client.get(url)
     assert response.status_code == 302
-    # assert catalogs.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
-    # assert profiles.objects.filter(metadata__title='NIST Special Publication 800-53 Revision 5 MODERATE IMPACT BASELINE').exists()
