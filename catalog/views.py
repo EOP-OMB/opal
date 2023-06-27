@@ -5,6 +5,7 @@ import urllib.request
 
 from celery import Celery
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -26,6 +27,13 @@ def catalog_index_view(request):
     for catalog in imported_catalogs:
         html_str += "<tr>" + catalog.count_controls() + "</tr>"
     html_str += "</table>"
+    html_str += "<hr>"
+    html_str += "<h2>Catalogs available to import</h2>"
+    for item in available_catalog_list.objects.all():
+            html_str += item.get_link()
+    if User.is_superuser:
+        html_str += "<hr>"
+        html_str += "<a href='%s'>Add New Catalog</a>" % reverse('admin:catalog_available_catalog_list_add')
     context = {'title': "Catalogs", 'content': html_str}
     return render(request, "generic_template.html", context)
 

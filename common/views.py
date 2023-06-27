@@ -47,6 +47,11 @@ def auth_view(request):
     return render(request, "auth.html")
 
 
+def error_404_view(request, exception):
+    context = {"exception": exception}
+    return render(request,"404.html", context)
+
+
 if settings.ENABLE_SAML == 'True':
     from sp.models import IdP
     from sp.utils import get_session_idp
@@ -78,7 +83,6 @@ def database_status_view(request):
 
 
 def permalink_view(p_uuid):
-    redirect_url = "error_404_view"
     obj = search_for_uuid(p_uuid)
     try:
         redirect_url = obj.get_absolute_url()
