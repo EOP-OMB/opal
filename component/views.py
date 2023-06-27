@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
+from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 
 from common.models import props
@@ -44,6 +45,7 @@ def components_form_view(request):
         new_component.props.add(policy_owner_prop_id)
         new_component.props.add(review_interval_prop_id)
         new_component.save()
+        return HttpResponseRedirect(reverse("component:component_detail_view", kwargs={'pk': new_component.id}))
 
     context['form'] = form
     return render(request, "generic_form.html", context)

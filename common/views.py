@@ -131,7 +131,7 @@ def upload_file(request):
             return HttpResponseRedirect(reverse('common:base64_detail', args=(new_attachment.pk,)))
     else:
         form = UploadFileForm()
-    return render(request, "common/upload_file.html", {"form": form})
+    return render(request, "generic_form.html", {"form": form})
 
 
 def add_resource_view(request):

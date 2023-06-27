@@ -9,11 +9,11 @@
 <div class="form-floating d-table">
   {% for field in form.visible_fields %}
       <div class="form-row d-table-row">
-          <div class="form-label d-table-cell text-nowrap" style="vertical-align: top" onmouseover="{{ field.help_text }}">
+          <div class="form-label d-table-cell text-nowrap" style="vertical-align: middle" onmouseover="{{ field.help_text }}">
               {{ field.label_tag }}
           </div>
           <div class="row-form-errors text-nowrap" style="vertical-align: top; color: red">{{ field.errors }}</div>
-          <div class="form-control d-table-cell" style="vertical-align: top">{{ field }}</div>
+          <div class="form-control d-table-cell" style="vertical-align: middle">{{ field }}</div>
       </div>
   {% endfor %}
 </div>
