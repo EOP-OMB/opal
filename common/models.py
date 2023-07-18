@@ -533,7 +533,7 @@ class links(BasicModel):
         verbose_name = "Link"
         verbose_name_plural = "Links"
 
-    href = models.URLField(verbose_name="Hypertext Reference", help_text="A resolvable URL reference to a resource.")
+    href = models.URLField(verbose_name="URL", help_text="A resolvable URL reference to a resource.")
     rel = ShortTextField(verbose_name="Relation", help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.", blank=True, choices=link_rel_options)
     media_type = ShortTextField(verbose_name="Media Type", help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text).")
     text = ShortTextField(verbose_name="Link Text", help_text="A textual label to associate with the link, which may be used for presentation in a tool.")

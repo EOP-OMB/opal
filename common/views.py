@@ -18,7 +18,7 @@ from django.conf import settings
 import base64 as b64
 
 from catalog.models import available_catalog_list
-from common.forms import resource_form, UploadFileForm
+from common.forms import resource_form, UploadFileForm, props_form, links_form
 from common.functions import search_for_uuid
 from common.models import base64
 
@@ -135,11 +135,56 @@ def upload_file(request):
 
 
 def add_resource_view(request):
-    return render(
+    if request.method == "POST":
+        form = resource_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Resource added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
             request, 'generic_form.html', {
                 'title': 'Add a new Document',
                 'content': "All fields are required",
                 'form': resource_form
+            })
+
+
+def add_props_view(request):
+    if request.method == "POST":
+        form = props_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Property added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'title': 'Add a Property',
+                'content': "Name and Value are required",
+                'form': props_form
+            })
+
+
+def add_links_view(request):
+    if request.method == "POST":
+        form = links_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Link added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'title': 'Add a Link',
+                'content': ":)",
+                'form': links_form
             })
 
 
