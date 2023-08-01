@@ -528,7 +528,7 @@ class catalogs(PrimitiveModel):
         if self.groups is not None:
             html_str += "<h1>Groups</h1>\n"
             for i in self.groups.all():
-                html_str += "<a href='%s'>%s</a><br>" % (i.get_permalink, i.__str__)
+                html_str += "<a href='%s'>%s</a><br>" % (i.get_permalink(), i.__str__())
         if self.controls is not None:
             html_str += "<h1>Controls not in a Group</h1>\n"
             for i in self.controls.all():

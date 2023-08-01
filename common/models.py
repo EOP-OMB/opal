@@ -1,21 +1,19 @@
+import base64 as b64
+import json
 import logging
 import os.path
-import base64 as b64
-from urllib.parse import urlencode
-
-from django.db import models, IntegrityError, connection, OperationalError
-from django.core.validators import RegexValidator
 import uuid
 from itertools import chain
+
+from ckeditor.fields import RichTextField
 from django.conf import settings
+from django.core.validators import RegexValidator
+from django.db import models, IntegrityError, connection, OperationalError
+from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 
 import catalog
-from common.functions import replace_hyphen, search_for_uuid
-from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-from django.urls import reverse, reverse_lazy
-from ckeditor.fields import RichTextField
-import json
+from common.functions import replace_hyphen
 
 
 class ShortTextField(models.CharField):
@@ -30,15 +28,16 @@ class ShortTextField(models.CharField):
 
 
 class CustomManyToManyField(models.ManyToManyField):
-    #Class remains to fix migration errors.  Old migrations still include refernece to this class. This cna be removed once the migrations are squashed.
-        pass
+    # Class remains to fix migration errors.  Old migrations still include reference to this class. This cna be removed once the migrations are squashed.
+    pass
 
 
 class properties_field(models.ManyToManyField):
     def __init__(self, *args, **kwargs):
         kwargs['to'] = "common.props"
         kwargs['verbose_name'] = "Properties"
-        kwargs['help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
+        kwargs[
+            'help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
         kwargs['blank'] = True
         super().__init__(*args, **kwargs)
 
@@ -110,7 +109,7 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
     def get_permalink(self):
-        url= ''
+        url = ''
         url = reverse_lazy('common:permalink', kwargs={'p_uuid': str(self.uuid)})
         return url
 
@@ -161,7 +160,7 @@ class PrimitiveModel(models.Model):
                         if lazy:
                             value = "<a href='%s' target='_blank'>%s</a>" % (child.get_absolute_url(), child.__str__())
                         else:
-                            value = child.to_html(indent=indent + 1,lazy=lazy)
+                            value = child.to_html(indent=indent + 1, lazy=lazy)
                     else:
                         value = None
                 else:
@@ -180,7 +179,7 @@ class PrimitiveModel(models.Model):
                     if lazy:
                         value = "<a href='%s' target='_blank'>%s</a>" % (i.get_absolute_url(), i.__str__())
                     else:
-                        value += i.to_html(indent=new_indent,lazy=lazy)
+                        value += i.to_html(indent=new_indent, lazy=lazy)
                     html_str += "<li>" + f.verbose_name + ": " + value + "</li>\n"
         html_str += "</ul>\n</div>"
         if html_str is None:
@@ -260,7 +259,6 @@ class PrimitiveModel(models.Model):
         if len(field_list) == 0:
             field_list.append('uuid')
         return field_list
-
 
     def excluded_fields(self):
         """returns a list of fields to ignore during import and other functions"""
@@ -415,7 +413,6 @@ class PrimitiveModel(models.Model):
                 logger.error("An error occurred")
                 logger.error(err)
 
-
     def update(self, d):
         """
         Updates all fields defined in dict d
@@ -535,9 +532,13 @@ class links(BasicModel):
         verbose_name_plural = "Links"
 
     href = models.URLField(verbose_name="URL", help_text="A resolvable URL reference to a resource.")
-    rel = ShortTextField(verbose_name="Relation", help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.", blank=True, choices=link_rel_options)
-    media_type = ShortTextField(verbose_name="Media Type", help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text).")
-    text = ShortTextField(verbose_name="Link Text", help_text="A textual label to associate with the link, which may be used for presentation in a tool.")
+    rel = ShortTextField(verbose_name="Relation",
+                         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
+                         blank=True, choices=link_rel_options)
+    media_type = ShortTextField(verbose_name="Media Type",
+                                help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text).")
+    text = ShortTextField(verbose_name="Link Text",
+                          help_text="A textual label to associate with the link, which may be used for presentation in a tool.")
 
     def __str__(self):
         return self.text
@@ -560,7 +561,8 @@ class links(BasicModel):
                     href_text = catalog.models.controls.objects.get(control_id=self.href[1:]).__str__()
                     html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
                 else:
-                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id, self.href[1:])
+                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (
+                        self.id, self.href[1:])
             if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
                     href_text = resources.objects.get(uuid=self.href[1:]).title
@@ -1061,8 +1063,8 @@ class base64(PrimitiveModel):
         base64_bytes = base64_string.encode(encoding='ascii')
         file_bytes = b64.b64decode(base64_bytes)
         file_name = str(self.uuid) + ".pdf"
-        file_path = os.path.join(settings.MEDIA_ROOT,file_name)
-        f = open(file_path,'wb')
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+        f = open(file_path, 'wb')
         f.write(file_bytes)
         f.close()
         file_url = settings.MEDIA_URL + file_name
