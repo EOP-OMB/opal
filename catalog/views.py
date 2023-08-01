@@ -5,6 +5,7 @@ import urllib.request
 
 from celery import Celery
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -26,6 +27,13 @@ def catalog_index_view(request):
     for catalog in imported_catalogs:
         html_str += "<tr>" + catalog.count_controls() + "</tr>"
     html_str += "</table>"
+    html_str += "<hr>"
+    html_str += "<h2>Catalogs available to import</h2>"
+    for item in available_catalog_list.objects.all():
+            html_str += item.get_link()
+    if User.is_superuser:
+        html_str += "<hr>"
+        html_str += "<a href='%s'>Add New Catalog</a>" % reverse('admin:catalog_available_catalog_list_add')
     context = {'title': "Catalogs", 'content': html_str}
     return render(request, "generic_template.html", context)
 
@@ -128,17 +136,3 @@ def import_catalog_view(request, catalog_id):
             else:
                 import_catalog_task(import_catalog_target.__dict__, host)
     return HttpResponseRedirect(reverse('home_page'))
-
-
-def get_parameters(control_id):
-    if controls.objects.filter(pk=control_id).exists():
-        selected_control = controls.objects.get(pk=control_id)
-        parameter_list = selected_control.params.all()
-        html_str = "<table class='table-bordered'>"
-        html_str += "<tr><th>Guidance</th><th>Param ID</th><th>Value</th></tr>"
-        for p in parameter_list:
-            html_str += p.get_form()
-        html_str += "</table>"
-        return html_str
-    else:
-        return []
