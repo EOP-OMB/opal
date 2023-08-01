@@ -304,7 +304,7 @@ class PrimitiveModel(models.Model):
                             logger.debug("Setting " + field + " to " + value)
                             self.__setattr__(field, value)
                         else:
-                            logger.warning(field + " value is a " + str(type(value)))
+                            logger.debug(field + " value is a " + str(type(value)))
                         logger.debug("Done")
         elif type(oscal_data) is str:
             logger.debug("Handling string...")
