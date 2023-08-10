@@ -12,7 +12,7 @@ from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from catalog.models import available_catalog_list, catalogs, controls
+from catalog.models import available_catalog_list, catalogs, controls, groups
 from common.models import metadata
 from component.models import components, implemented_requirements
 from ctrl_profile.models import imports, profiles
@@ -55,6 +55,11 @@ class control_detail_view(DetailView):
     context_object_name = "context"
     template_name = "generic_detail.html"
 
+
+class group_detail_view(DetailView):
+    model = groups
+    context_object_name = "context"
+    template_name = "generic_detail.html"
 
 app = Celery('tasks', broker=settings.BROKER)
 

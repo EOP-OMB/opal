@@ -67,36 +67,6 @@ implementation_status_choices = [
     ("not-applicable", "Not-Applicable: This control does not apply to this system as justified in the remarks.",)
 ]
 
-
-# PrimitiveModel: An abstract Django model with basic fields and methods common to all derived models.
-#
-# Fields:
-#   uuid: Unique universally unique identifier (UUID) of the object (non-editable).
-#   created_at: Timestamp (DateTime) when the object was created (automatically set on creation, non-editable).
-#   updated_at: Timestamp (DateTime) when the object was last updated (automatically set on update, non-editable).
-#
-# Properties:
-#   Meta: It is an abstract class and 'updated_at' is used as the default ordering field.
-#
-# Methods:
-#   natural_key: Returns the UUID of the object.
-#   get_permalink: Returns the URL associated with the object using the reverse_lazy function, using the uuid.
-#   get_absolute_url: Returns the absolute URL for the object by targeting its admin view.
-#   get_create_url: Returns the URL to create a new object using the admin interface.
-#   to_dict: Returns a dictionary representation of the object, excluding some fields (id, pk, created_at, and updated_at).
-#   to_json: Returns the JSON representation of the object.
-#   to_html: Returns the HTML representation of the object, including related objects and UI controls where needed.
-#   field_name_changes: Returns a dictionary with field names that changed between model and OSCAL JSON representation.
-#   convert_field_names_from_db_to_oscal: Converts field names in a given dictionary from the DB format to the OSCAL format.
-#   convert_field_names_from_oscal_to_db: Converts field names in a given dictionary from the OSCAL format to the DB format.
-#   unique_field_list: Returns a list of non-null, non-relation fields (apart from id, uuid, created_at, and updated_at).
-#   excluded_fields: Returns a list of fields to be ignored during import and other operations.
-#   import_oscal: Imports an OSCAL object, checking for existing objects, creating and updating objects as necessary.
-#   check_for_existing_object: Checks for an existing object that matches keys/values from a given dictionary.
-#   add_m2m: Adds a child object (many-to-many relation) using an SQL command, catching errors where necessary.
-#   update: Updates all fields defined in a given dictionary.
-#   __str__: Returns a string representation of the object as `<model_name>: <uuid>`.
-
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -110,11 +80,11 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
     def get_permalink(self):
-        url= ''
+        url = ''
         url = reverse_lazy('common:permalink', kwargs={'p_uuid': str(self.uuid)})
         return url
 
-    def get_absolute_url(self):
+    def get_admin_url(self):
         admin_str = 'admin:' + "_".join([self._meta.app_label, self._meta.model_name, 'change'])
         change_url = reverse(admin_str, args=(self.id,))
         return change_url
