@@ -34,4 +34,3 @@ def test_components_form_view(admin_client):
     post_data['workflow_action'] = 'submit'
     response = admin_client.post(path=url, data=post_data)
     assert response.status_code == 200
-    # assert component_instance.status == 'submitted'

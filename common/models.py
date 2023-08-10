@@ -180,14 +180,15 @@ class PrimitiveModel(models.Model):
                     if lazy:
                         value = "<a href='%s' target='_blank'>%s</a>" % (i.get_absolute_url(), i.__str__())
                     else:
-                        html_str += i.to_html(indent=new_indent,lazy=lazy)
+                        value += i.to_html(indent=new_indent,lazy=lazy)
+                    html_str += "<li>" + f.verbose_name + ": " + value + "</li>\n"
         html_str += "</ul>\n</div>"
         if html_str is None:
             html_str = "None"
         return html_str
 
     def field_name_changes(self):
-        """returns a dictionary of fileds that are named differently in the model than in OSCAL JSON. The format is {database_field_name: oscal_filed_name}"""
+        """returns a dictionary of fields that are named differently in the model than in OSCAL JSON. The format is {database_field_name: oscal_filed_name}"""
         return {}
 
     def convert_field_names_from_db_to_oscal(self, d):
@@ -262,7 +263,7 @@ class PrimitiveModel(models.Model):
 
 
     def excluded_fields(self):
-        """returns a list of fields to ignore durring import and other functions"""
+        """returns a list of fields to ignore during import and other functions"""
         return ['id', 'pk', 'created_at', 'updated_at']
 
     def import_oscal(self, oscal_data):
@@ -650,7 +651,7 @@ class roles(BasicModel):
         blank=True
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Role Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Role Links")
 
     def __str__(self):
         return self.title
@@ -846,7 +847,7 @@ class parties(BasicModel):
     )
     external_ids = models.ManyToManyField(to=external_ids)
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     address = models.ForeignKey(
         to=addresses, verbose_name="Location Address",
         help_text="Typically, the physical address of the Party will be used here. If this information is sensitive, then a mailing address can be used instead.",
@@ -887,7 +888,7 @@ class responsible_parties(PrimitiveModel):
         help_text="Specifies one or more parties that are responsible for performing the associated role."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
 
     def field_name_changes(self):
         field_name_changes = {
@@ -943,7 +944,7 @@ class metadata(BasicModel):
     revisions = models.ManyToManyField(to=revisions, verbose_name="Previous Revisions")
     document_ids = models.ManyToManyField(to=document_ids, verbose_name="Other Document IDs")
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     locations = models.ManyToManyField(to=locations, verbose_name="Locations")
     parties = models.ManyToManyField(
         to=parties, verbose_name="Parties (organizations or persons)",
@@ -969,7 +970,7 @@ class citations(PrimitiveModel):
 
     text = ShortTextField(verbose_name="Citation Text", help_text="A line of citation text.")
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
 
     def import_oscal(self, oscal_data):
         if type(oscal_data) is dict:

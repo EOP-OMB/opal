@@ -1,7 +1,6 @@
 from common.functions import search_for_uuid, replace_hyphen, coalesce
 import uuid
-from common.models import links, roles
-from catalog.models import controls
+from common.models import links
 from django.urls import reverse
 
 import pytest
@@ -29,15 +28,13 @@ def test_db_status_view(admin_client):
 
 
 def test_permalink(admin_client):
-    test_ctrl = baker.make(controls, _fill_optional=True)
-    test_ctrl.uuid = str(uuid.uuid4())
-    test_ctrl.save()
-    url = reverse('common:permalink', kwargs={'p_uuid': str(test_ctrl.uuid)})
-    resp = admin_client.get(url)
+    test_ctrl = baker.make('catalog.controls', _fill_optional=True)
+    test_url = reverse('common:permalink', kwargs={'p_uuid': str(test_ctrl.uuid)})
+    resp = admin_client.get(test_url)
     assert resp.status_code == 302
     uuid_str = str(uuid.uuid4())
-    url = reverse('common:permalink', kwargs={'p_uuid': uuid_str})
-    resp = admin_client.get(url)
+    test_url = reverse('common:permalink', kwargs={'p_uuid': uuid_str})
+    resp = admin_client.get(test_url)
     assert resp.status_code == 404
 
 

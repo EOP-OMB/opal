@@ -109,7 +109,7 @@ class information_type_impact_level(BasicModel):
         verbose_name_plural = "Information Type Impact Levels"
 
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     base = ShortTextField(
         verbose_name="Base Level (Confidentiality, Integrity, or Availability)",
         help_text="The prescribed base (Confidentiality, Integrity, or Availability) security impact level."
@@ -165,7 +165,7 @@ class information_type_impact_level(BasicModel):
                     "adjustment_justification"]
             else:
                 adjustment_justification = None
-            obj, created = self._meta.model.objects.get_or_create(
+            obj, _ = self._meta.model.objects.get_or_create(
                 base=base, selected=selected, adjustment_justification=adjustment_justification
             )
             if "props" in oscal_data.keys():
@@ -198,7 +198,7 @@ class information_types(PrimitiveModel):
         help_text="A set of information type identifiers qualified by the given identification system used, such as NIST SP 800-60."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     confidentiality_impact = models.ForeignKey(
         to=information_type_impact_level, verbose_name="Confidentiality Impact Level",
         help_text="The expected level of impact resulting from the unauthorized disclosure of the described information.",
@@ -294,7 +294,7 @@ class systems_information(PrimitiveModel):
         verbose_name_plural = "Systems Information"
 
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     information_types = models.ManyToManyField(
         to=information_types, verbose_name="Information Type",
         help_text="Contains details about one information type that is stored, processed, or transmitted by the system, such as privacy information, and those defined in NIST SP 800-60."
@@ -323,7 +323,7 @@ class diagrams(BasicModel):
         blank=True
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     caption = ShortTextField(verbose_name="Caption", help_text="A brief caption to annotate the diagram.")
 
 
@@ -340,7 +340,7 @@ class authorization_boundaries(BasicModel):
         verbose_name="Authorization Boundary Description", help_text="A summary of the system's authorization boundary."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     diagrams = models.ManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
         help_text="A graphic that provides a visual representation the Authorization Boundary, or some aspect of it."
@@ -360,7 +360,7 @@ class network_architectures(BasicModel):
         verbose_name="Network Architecture Description", help_text="A summary of the system's Network Architecture."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     diagrams = models.ManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
         help_text="A graphic that provides a visual representation the Network Architecture, or some aspect of it."
@@ -380,7 +380,7 @@ class data_flows(BasicModel):
         verbose_name="Data Flow Description", help_text="A summary of the system's Data Flow."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     diagrams = models.ManyToManyField(
         to=diagrams, verbose_name="Diagram(s)",
         help_text="A graphic that provides a visual representation the Data Flow, or some aspect of it."
@@ -420,7 +420,7 @@ class system_characteristics(BasicModel):
     )
     description = RichTextField(verbose_name="System Description", help_text="A summary of the system.", null=True)
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     date_authorized = models.DateField(
         verbose_name="System Authorization Date", help_text="The date the system received its authorization.", null=True
     )
@@ -494,7 +494,7 @@ class leveraged_authorizations(BasicModel):
         help_text="A human readable name for the leveraged authorization in the context of the system."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     party_uuid = models.ForeignKey(
         to=parties, verbose_name="Responsible Party",
         help_text="A reference to the party that manages the leveraged system.", on_delete=models.CASCADE
@@ -566,7 +566,7 @@ class users(BasicModel):
         verbose_name="User Description", help_text=" A summary of the user's purpose within the system."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     role_ids = models.ManyToManyField(
         to=roles, verbose_name="User Role(s)", help_text="A reference to the roles served by the user."
     )
@@ -593,7 +593,7 @@ class inventory_items(BasicModel):
         help_text="A summary of the inventory item stating its purpose within the system."
     )
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     responsible_parties = models.ManyToManyField(
         to=responsible_parties, verbose_name="Responsible Parties",
         help_text="A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
@@ -614,7 +614,7 @@ class system_implementations(BasicModel):
         verbose_name_plural = "System Implementations"
 
     props = properties_field()
-    links = models.ManyToManyField(to=links, null=True,verbose_name="Links")
+    links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     leveraged_authorizations = models.ManyToManyField(
         to=leveraged_authorizations, verbose_name="Leveraged Authorizations",
         help_text="A description of another authorized system from which this system inherits capabilities that satisfy security requirements. Another term for this concept is a common control provider."
@@ -633,23 +633,28 @@ class system_implementations(BasicModel):
     )
 
     def to_html(self, indent=0, lazy=True):
-        lazy=True
         html_str = "<div>"
+        # components
         html_str += "<h2>Components</h2>\n<ul>"
-        for cmp in self.components.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        if self.components.count() == 0:
+            html_str = "<li>None</li>\n"
         else:
-            html_str += "<li>None</li>\n"
+            for cmp in self.components.all():
+                html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        # Inventory items
         html_str += "</ul>\n<h2>Inventory</h2>\n<ul>"
-        for cmp in self.inventory_items.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
-        else:
+        if self.inventory_items.count() == 0:
             html_str += "<li>None</li>\n"
+        else:
+            for cmp in self.inventory_items.all():
+                html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
+        # Users
         html_str += "</ul>\n<h2>Users</h2>\n<ul>"
-        for cmp in self.users.all():
-            html_str += "<li>%s</li>\n" % cmp.to_html(indent=indent,lazy=lazy)
-        else:
+        if self.users.count() == 0:
             html_str += "<li>None</li>\n"
+        else:
+            for u in self.users.all():
+                html_str += "<li>%s</li>\n" % u.to_html(indent=indent,lazy=lazy)
         html_str += "</ul></div>"
         return html_str
 

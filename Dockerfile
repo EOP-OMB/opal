@@ -1,4 +1,4 @@
-FROM python:3.11-slim as base_os
+FROM python:3.11-slim AS base_os
 #FROM python:3.12.0a3-slim as base_os
 #FROM registry.access.redhat.com/ubi9/python-39:1-90.1669637098 as base_os
 
@@ -26,7 +26,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN useradd opal
 RUN chown -R opal:opal .
 
-FROM base_os as package_installer
+FROM base_os AS package_installer
 
 #USER opal
 WORKDIR /usr/src/app
@@ -38,7 +38,7 @@ RUN python -m pip install --upgrade pip
 RUN python -m pip install --no-cache-dir -r requirements.txt --upgrade
 RUN python -m pip install --no-cache-dir mod-wsgi
 
-FROM package_installer as app_installer
+FROM package_installer AS app_installer
 
 USER root
 WORKDIR /usr/src/app
@@ -66,7 +66,7 @@ RUN chown -R opal:opal ./media
 #RUN chown -R opal:opal /usr/src/logs
 
 
-FROM app_installer as final_stage
+FROM app_installer AS final_stage
 # run as an unprivileged user
 USER opal
 WORKDIR /usr/src/app

@@ -12,6 +12,7 @@
 /opal/.env
 */~$*
 pytest.ini
+*/__pycache__/*
 
 /saml/certs/private.key
 /saml/certs/public.crt

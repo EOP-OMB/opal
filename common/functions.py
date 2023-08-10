@@ -29,14 +29,14 @@ def search_for_uuid(uuid_str, app_list=settings.USER_APPS):
             logger.info("Looking in app " + a.title())
             app_models = apps.get_app_config(a).get_models()
             logger.info("Got list of models")
-            for model in app_models:
-                logger.info("Trying " + model._meta.model_name)
+            for m in app_models:
+                logger.info("Trying " + m._meta.model_name)
                 try:
-                    if model.objects.filter(uuid=uuid_str).count() > 0:
+                    if m.objects.filter(uuid=uuid_str).count() > 0:
                         logging.debug("Found matching!")
-                        return model.objects.get(uuid=uuid_str)
+                        return m.objects.get(uuid=uuid_str)
                 except FieldError:
-                    logging.warning("%s uuid field does not exist!!" % model._meta.model_name)
+                    logging.warning("%s uuid field does not exist!!" % m._meta.model_name)
         logger.info("Could not find an object with uuid: " + uuid_str)
         return None
     except ValueError:

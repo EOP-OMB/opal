@@ -37,9 +37,9 @@ def components_form_view(request):
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
-        # scope_prop_id, created = props.objects.get_or_create(name='Scope',value=form.data['scope'])
-        # policy_owner_prop_id, created = props.objects.get_or_create(name='Owner',value=form.data['policy_owner'])
-        # review_interval_prop_id, created = props.objects.get_or_create(name='Review Interval',value=form.data['review_interval'])
+        scope_prop_id, _ = props.objects.get_or_create(name='Scope',value=form.data['scope'])
+        policy_owner_prop_id, _ = props.objects.get_or_create(name='Policy Owner',value=form.data['policy_owner'])
+        review_interval_prop_id, _ = props.objects.get_or_create(name='Review Interval',value=form.data['review_interval'])
         new_component = form.save()
         # new_component.props.add(scope_prop_id)
         # new_component.props.add(policy_owner_prop_id)

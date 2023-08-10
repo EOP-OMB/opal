@@ -10,10 +10,11 @@ from formtools.wizard.views import CookieWizardView
 
 from common.forms import back_matter_form
 from ssp.models import system_security_plans
-# from ssp.forms import system_characteristics_form
+from ssp.forms import system_characteristics_form
 
 
-def import_ssp_view(request, ssp_file):
+
+def import_ssp_view(ssp_file):
     logger = logging.getLogger("django")
     if ssp_file == 'ssp-example.json':
         ssp_file = 'sample_data/ssp-example.json'
@@ -29,6 +30,7 @@ def import_ssp_view(request, ssp_file):
     context = {
         'msg': new_ssp.metadata.title + " imported from " + ssp_file
         }
+    # TODO this should redirect to the SSP list and should include the context message
     return redirect('home_page')
 
 
@@ -64,10 +66,10 @@ class ssp_detail_view(DetailView):
     template_name = "generic_detail.html"
 
 
-# class ssp_wizard(CookieWizardView):
-#     form_list = [system_characteristics_form, back_matter_form]
-#
-#     def done(self, form_list, **kwargs):
-#         return render(self.request, reverse(ssp_detail_view),{
-#             'form_data': [form.cleaned_data for form in form_list],
-#         })
+class ssp_wizard(CookieWizardView):
+    form_list = [system_characteristics_form, back_matter_form]
+
+    def done(self, form_list, **kwargs):
+        return render(self.request, reverse(ssp_detail_view),{
+            'form_data': [form.cleaned_data for form in form_list],
+        })

@@ -39,13 +39,6 @@ class resource_form(forms.ModelForm):
         widgets = {'base64': RelatedFieldWidgetCanAdd(base64, related_url='common:create_base64')}
 
 
-class metadata_form(forms.ModelForm):
-    class Meta:
-        model=metadata
-        fields = ('title','published','version')
-        widgets = {'published': AdminSplitDateTime()}
-
-
 class back_matter_form(forms.ModelForm):
     class Meta:
         model = back_matter

@@ -7,7 +7,7 @@ from django.conf import settings
 from catalog.models import available_catalog_list
 from catalog.views import download_catalog, import_catalog_task
 from common.models import roles
-from sp.models import IdP
+
 
 
 def create_admin_user(user):
@@ -49,26 +49,28 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # create a sample idp if none exists
-        if IdP.objects.count() == 0:
-            print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
-            idp = IdP.objects.create(
-                name="Sustainsys Stub",
-                url_params={"idp_slug": "stub"},
-                base_url="http://localhost:8000",
-                contact_name="admin",
-                contact_email="admin@example.com",
-                metadata_url="https://stubidp.sustainsys.com/Metadata",
-                logout_triggers_slo=True,
-                require_attributes=False,
-                )
-            idp.generate_certificate()
-            try:
-                idp.import_metadata()
-            except Exception:
-                print(
-                    "Could not import IdP metadata; "
-                    "make sure {} is available to download".format(idp.metadata_url)
+        if settings.ENABLE_SAML == "True":
+            from sp.models import IdP
+            if IdP.objects.count() == 0:
+                print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
+                idp = IdP.objects.create(
+                    name="Sustainsys Stub",
+                    url_params={"idp_slug": "stub"},
+                    base_url="http://localhost:8000",
+                    contact_name="admin",
+                    contact_email="admin@example.com",
+                    metadata_url="https://stubidp.sustainsys.com/Metadata",
+                    logout_triggers_slo=True,
+                    require_attributes=False,
                     )
+                idp.generate_certificate()
+                try:
+                    idp.import_metadata()
+                except Exception:
+                    print(
+                        "Could not import IdP metadata; "
+                        "make sure {} is available to download".format(idp.metadata_url)
+                        )
 
         # Populate the Catalog import list
         catalog_list = load_catalog_import_list()
