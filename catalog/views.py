@@ -15,7 +15,7 @@ from django.views.generic.list import ListView
 from catalog.models import available_catalog_list, catalogs, controls
 from common.models import metadata
 from component.models import components, implemented_requirements
-from ctrl_profile.models import imports, profiles
+from ctrl_profile.models import imports, ctrl_profiles
 
 
 # Create your views here.
@@ -78,7 +78,7 @@ def import_catalog_task(self, item=None, host=None, test=False):
     new_catalog.save()
     # create a new profile for the imported catalog
     new_metadata = metadata.objects.create(title=new_catalog.metadata.title)
-    new_profile = profiles.objects.create(metadata=new_metadata)
+    new_profile = ctrl_profiles.objects.create(metadata=new_metadata)
     new_profile.save()
     if not host:
         host = settings.HOST_NAME

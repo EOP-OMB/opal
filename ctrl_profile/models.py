@@ -79,7 +79,7 @@ class modify(BasicModel):
 merge_options = [("use-first", "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"), ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
 
 
-class profiles(BasicModel):
+class ctrl_profiles(BasicModel):
     """
     An OSCAL document that describes a tailoring of controls from one or more catalogs, with possible modification of multiple controls.
     """

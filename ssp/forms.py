@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.widgets import SelectDateWidget, Select
 
-from ctrl_profile.models import profiles
+from ctrl_profile.models import ctrl_profiles
 from ssp.models import import_profiles, system_characteristics
 from datetime import datetime
 
@@ -17,7 +17,7 @@ class system_characteristics_form(forms.ModelForm):
 
 class import_profiles_form(forms.ModelForm):
     choices = []
-    for profile in profiles.objects.all():
+    for profile in ctrl_profiles.objects.all():
         choices.append((profile.get_permalink(),profile.__str__()))
 
     class Meta:
