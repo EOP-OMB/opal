@@ -14,3 +14,7 @@
     padding-left: 25px;
     padding-bottom: 15px;
 }
+
+.form-floating {
+    width: fit-content(80%);
+}
