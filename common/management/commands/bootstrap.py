@@ -9,7 +9,6 @@ from catalog.views import download_catalog, import_catalog_task
 from common.models import roles
 
 
-
 def create_admin_user(user):
     password = user.objects.make_random_password()
     user.objects.create_superuser(
@@ -18,13 +17,13 @@ def create_admin_user(user):
         password,
         first_name="Admin",
         last_name="User",
-        )
+    )
     return password
 
 
 def load_default_role_list():
     import json
-    f = open(os.path.join(settings.BASE_DIR,"common/management/commands/role_list.json"), "r")
+    f = open(os.path.join(settings.BASE_DIR, "common/management/commands/role_list.json"), "r")
     default_role_list = json.load(f)
     for role in default_role_list:
         roles.objects.get_or_create(**role)
@@ -32,16 +31,41 @@ def load_default_role_list():
 
 
 def load_catalog_import_list():
-    catalog_list = ['https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json',]
+    catalog_list = ['https://raw.githubusercontent.com/usnistgov/oscal-content/main/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json', ]
     for c in catalog_list:
         catalog_dict = download_catalog(c)
         available_catalog_list_item = {
             'catalog_uuid': catalog_dict['uuid'],
             'name': catalog_dict['metadata']['title'],
             'link': c,
-            }
+        }
         available_catalog_list.objects.get_or_create(**available_catalog_list_item)
     return catalog_list
+
+
+def setup_sample_idp():
+    if settings.ENABLE_SAML == "True":
+        from sp.models import IdP
+        if IdP.objects.count() == 0:
+            print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
+            idp = IdP.objects.create(
+                name="Sustainsys Stub",
+                url_params={"idp_slug": "stub"},
+                base_url="http://localhost:8000",
+                contact_name="admin",
+                contact_email="admin@example.com",
+                metadata_url="https://stubidp.sustainsys.com/Metadata",
+                logout_triggers_slo=True,
+                require_attributes=False,
+            )
+            idp.generate_certificate()
+            try:
+                idp.import_metadata()
+            except Exception:
+                print(
+                    "Could not import IdP metadata; "
+                    "make sure {} is available to download".format(idp.metadata_url)
+                )
 
 
 class Command(BaseCommand):
@@ -49,28 +73,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # create a sample idp if none exists
-        if settings.ENABLE_SAML == "True":
-            from sp.models import IdP
-            if IdP.objects.count() == 0:
-                print('Creating "stub" IdP at https://stubidp.sustainsys.com/Metadata')
-                idp = IdP.objects.create(
-                    name="Sustainsys Stub",
-                    url_params={"idp_slug": "stub"},
-                    base_url="http://localhost:8000",
-                    contact_name="admin",
-                    contact_email="admin@example.com",
-                    metadata_url="https://stubidp.sustainsys.com/Metadata",
-                    logout_triggers_slo=True,
-                    require_attributes=False,
-                    )
-                idp.generate_certificate()
-                try:
-                    idp.import_metadata()
-                except Exception:
-                    print(
-                        "Could not import IdP metadata; "
-                        "make sure {} is available to download".format(idp.metadata_url)
-                        )
+        setup_sample_idp()
 
         # Populate the Catalog import list
         catalog_list = load_catalog_import_list()
