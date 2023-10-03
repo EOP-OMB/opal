@@ -91,9 +91,9 @@ def cloud_service_component_form_view(request):
         return redirect(reverse('component:component_list_view'))
 
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="service")
-    form.fields['url'] = forms.URLField(max_length=1000, widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['title'] = forms.CharField(max_length=1000, label="Name", widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['url'] = forms.URLField(max_length=1000, label="URL", widget=forms.TextInput(attrs={'size': "100"}))
     form.fields['application_owner'] = forms.CharField(initial=request.user, max_length=100)
-    form.fields['description'] = forms.CharField(max_length=1000, widget=forms.TextInput(attrs={'size': "100"}))
 
     form.order_fields(['type', 'title', 'purpose', 'status', 'url', 'application_owner', 'description'])
 
