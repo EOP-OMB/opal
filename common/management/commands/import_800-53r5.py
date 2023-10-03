@@ -7,7 +7,7 @@ from catalog.models import catalogs
 from catalog.views import download_catalog
 from common.models import props, metadata
 from component.models import implemented_requirements
-from ctrl_profile.models import profiles, imports
+from ctrl_profile.models import ctrl_profiles, imports
 
 low = ['AC-01-00', 'AC-02-00', 'AC-03-00', 'AC-07-00', 'AC-08-00', 'AC-14-00', 'AC-17-00', 'AC-18-00', 'AC-19-00',
        'AC-20-00', 'AC-22-00', 'AT-01-00', 'AT-02-00', 'AT-02-02', 'AT-03-00', 'AT-04-00', 'AU-01-00', 'AU-02-00',
@@ -135,7 +135,7 @@ def import_800_53():
 def create_profile(new_catalog, fips_level, ctrl_list):
     logger = logging.getLogger('django')
     new_metadata, _ = metadata.objects.get_or_create(title='SP 800-53 rev 5 FISMA %s Controls' % fips_level)
-    new_profile, _ = profiles.objects.get_or_create(metadata=new_metadata)
+    new_profile, _ = ctrl_profiles.objects.get_or_create(metadata=new_metadata)
     new_profile.save()
     host = settings.HOST_NAME
     url = "https://" + host + new_catalog.get_permalink()

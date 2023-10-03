@@ -40,6 +40,7 @@ if settings.ENABLE_SAML == 'True':
     urlpatterns_saml = [path("sso/<idp_slug>/", include("sp.urls")),]
     urlpatterns.extend(urlpatterns_saml)
 
+
 # if settings.ENABLE_OIDC: <- Disabled until we re-implement OIDC
 #     urlpatterns.extend([re_path(r'^oidc/', include('mozilla_django_oidc.urls')), ])
 

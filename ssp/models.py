@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 from catalog.models import controls
-from ctrl_profile.models import profiles
+from ctrl_profile.models import ctrl_profiles
 from component.models import components, responsible_roles, control_implementations, parameters
 from common.models import BasicModel, PrimitiveModel, properties_field, props, ShortTextField, links, system_status_state_choices, responsible_parties, parties, roles, metadata, back_matter
 
@@ -18,7 +18,7 @@ class import_profiles(BasicModel):
         verbose_name_plural = "Import Profiles"
 
     href = ShortTextField(verbose_name="Profile Reference", help_text="A resolvable URL reference to the profiles to use as the system's control baseline.", blank=True)
-    local_profile = models.ForeignKey(to=profiles, verbose_name="Profile Reference",help_text="A local profile to use as the system's control baseline.", null=True, on_delete=models.CASCADE)
+    local_profile = models.ForeignKey(to=ctrl_profiles, verbose_name="Profile Reference", help_text="A local profile to use as the system's control baseline.", null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         if self.local_profile is not None:

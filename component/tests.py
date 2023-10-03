@@ -24,12 +24,12 @@ def test_component_list_view(admin_client):
 
 
 def test_components_form_view(admin_client):
-    url = reverse('component:components_form_view')
+    url = reverse('component:component_form_view')
     response = admin_client.get(path=url)
     assert response.status_code == 200
 
     component_instance = baker.prepare('component.components')
-    url = reverse('component:components_form_view')
+    url = reverse('component:component_form_view')
     post_data = component_instance.to_dict()
     post_data['workflow_action'] = 'submit'
     response = admin_client.post(path=url, data=post_data)

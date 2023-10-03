@@ -1716,9 +1716,9 @@ def import_data():
 
     # Processing model: ctrl_profile.models.profiles
 
-    from ctrl_profile.models import profiles
+    from ctrl_profile.models import ctrl_profiles
 
-    ctrl_profile_profiles_1 = profiles()
+    ctrl_profile_profiles_1 = ctrl_profiles()
     ctrl_profile_profiles_1.uuid = UUID('9722f354-8c19-48a9-9f3f-65d473fa967d')
     ctrl_profile_profiles_1.created_at = dateutil.parser.parse("2023-02-28T15:40:45.959314+00:00")
     ctrl_profile_profiles_1.updated_at = dateutil.parser.parse("2023-02-28T15:40:45.980886+00:00")

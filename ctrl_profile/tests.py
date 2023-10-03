@@ -32,7 +32,7 @@ def test_imports_model():
 
 
 def test_profiles_model():
-    test_profile = baker.make('ctrl_profile.profiles',make_m2m=True,_fill_optional=True)
+    test_profile = baker.make('ctrl_profile.ctrl_profiles',make_m2m=True,_fill_optional=True)
     assert type(test_profile.list_all_controls()) is list
     assert type(test_profile.to_html()) is str
 

@@ -70,9 +70,9 @@ LOGIN_URL = os.getenv("LOGIN_URL", default="common:auth_view")
 LOGOUT_URL = os.getenv("LOGOUT_URL", default="common:auth_view")
 LOGIN_REDIRECT_URL = os.getenv("LOGIN_REDIRECT_URL", default="/")
 LOGOUT_REDIRECT_URL = os.getenv("LOGOUT_REDIRECT_URL", default="/")
-ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default=True)
+ENABLE_DJANGO_AUTH = os.getenv("ENABLE_DJANGO_AUTH", default='True')
 # SAML settings
-ENABLE_SAML = os.getenv("ENABLE_SAML", default=True)
+ENABLE_SAML = os.getenv("ENABLE_SAML", default='True')
 SAML_HTTPS = os.getenv("SAML_HTTPS", default=False)  # Acceptable values are "True" or "False"
 SAML_HTTP_HOST = os.getenv("SAML_HTTP_HOST", default=False)
 SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False)  # should be the path to the acs function
