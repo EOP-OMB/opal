@@ -1,21 +1,19 @@
+import base64 as b64
+import json
 import logging
 import os.path
-import base64 as b64
-from urllib.parse import urlencode
-
-from django.db import models, IntegrityError, connection, OperationalError
-from django.core.validators import RegexValidator
 import uuid
 from itertools import chain
+
+from ckeditor.fields import RichTextField
 from django.conf import settings
+from django.core.validators import RegexValidator
+from django.db import models, IntegrityError, connection, OperationalError
+from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
 
 import catalog
-from common.functions import replace_hyphen, search_for_uuid
-from django.core.exceptions import ObjectDoesNotExist  # ValidationError
-from django.urls import reverse, reverse_lazy
-from ckeditor.fields import RichTextField
-import json
+from common.functions import replace_hyphen
 
 
 class ShortTextField(models.CharField):
@@ -30,15 +28,16 @@ class ShortTextField(models.CharField):
 
 
 class CustomManyToManyField(models.ManyToManyField):
-    #Class remains to fix migration errors.  Old migrations still include refernece to this class. This cna be removed once the migrations are squashed.
-        pass
+    # Class remains to fix migration errors.  Old migrations still include reference to this class. This cna be removed once the migrations are squashed.
+    pass
 
 
 class properties_field(models.ManyToManyField):
     def __init__(self, *args, **kwargs):
         kwargs['to'] = "common.props"
         kwargs['verbose_name'] = "Properties"
-        kwargs['help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
+        kwargs[
+            'help_text'] = "An attribute, characteristic, or quality of the containing object expressed as a namespace qualified name/value pair. The value of a property is a simple scalar value, which may be expressed as a list of values."
         kwargs['blank'] = True
         super().__init__(*args, **kwargs)
 
@@ -67,36 +66,6 @@ implementation_status_choices = [
     ("not-applicable", "Not-Applicable: This control does not apply to this system as justified in the remarks.",)
 ]
 
-
-# PrimitiveModel: An abstract Django model with basic fields and methods common to all derived models.
-#
-# Fields:
-#   uuid: Unique universally unique identifier (UUID) of the object (non-editable).
-#   created_at: Timestamp (DateTime) when the object was created (automatically set on creation, non-editable).
-#   updated_at: Timestamp (DateTime) when the object was last updated (automatically set on update, non-editable).
-#
-# Properties:
-#   Meta: It is an abstract class and 'updated_at' is used as the default ordering field.
-#
-# Methods:
-#   natural_key: Returns the UUID of the object.
-#   get_permalink: Returns the URL associated with the object using the reverse_lazy function, using the uuid.
-#   get_absolute_url: Returns the absolute URL for the object by targeting its admin view.
-#   get_create_url: Returns the URL to create a new object using the admin interface.
-#   to_dict: Returns a dictionary representation of the object, excluding some fields (id, pk, created_at, and updated_at).
-#   to_json: Returns the JSON representation of the object.
-#   to_html: Returns the HTML representation of the object, including related objects and UI controls where needed.
-#   field_name_changes: Returns a dictionary with field names that changed between model and OSCAL JSON representation.
-#   convert_field_names_from_db_to_oscal: Converts field names in a given dictionary from the DB format to the OSCAL format.
-#   convert_field_names_from_oscal_to_db: Converts field names in a given dictionary from the OSCAL format to the DB format.
-#   unique_field_list: Returns a list of non-null, non-relation fields (apart from id, uuid, created_at, and updated_at).
-#   excluded_fields: Returns a list of fields to be ignored during import and other operations.
-#   import_oscal: Imports an OSCAL object, checking for existing objects, creating and updating objects as necessary.
-#   check_for_existing_object: Checks for an existing object that matches keys/values from a given dictionary.
-#   add_m2m: Adds a child object (many-to-many relation) using an SQL command, catching errors where necessary.
-#   update: Updates all fields defined in a given dictionary.
-#   __str__: Returns a string representation of the object as `<model_name>: <uuid>`.
-
 class PrimitiveModel(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -110,11 +79,11 @@ class PrimitiveModel(models.Model):
         return self.uuid
 
     def get_permalink(self):
-        url= ''
+        url = ''
         url = reverse_lazy('common:permalink', kwargs={'p_uuid': str(self.uuid)})
         return url
 
-    def get_absolute_url(self):
+    def get_admin_url(self):
         admin_str = 'admin:' + "_".join([self._meta.app_label, self._meta.model_name, 'change'])
         change_url = reverse(admin_str, args=(self.id,))
         return change_url
@@ -161,7 +130,7 @@ class PrimitiveModel(models.Model):
                         if lazy:
                             value = "<a href='%s' target='_blank'>%s</a>" % (child.get_absolute_url(), child.__str__())
                         else:
-                            value = child.to_html(indent=indent + 1,lazy=lazy)
+                            value = child.to_html(indent=indent + 1, lazy=lazy)
                     else:
                         value = None
                 else:
@@ -180,7 +149,7 @@ class PrimitiveModel(models.Model):
                     if lazy:
                         value = "<a href='%s' target='_blank'>%s</a>" % (i.get_absolute_url(), i.__str__())
                     else:
-                        value += i.to_html(indent=new_indent,lazy=lazy)
+                        value += i.to_html(indent=new_indent, lazy=lazy)
                     html_str += "<li>" + f.verbose_name + ": " + value + "</li>\n"
         html_str += "</ul>\n</div>"
         if html_str is None:
@@ -261,7 +230,6 @@ class PrimitiveModel(models.Model):
             field_list.append('uuid')
         return field_list
 
-
     def excluded_fields(self):
         """returns a list of fields to ignore during import and other functions"""
         return ['id', 'pk', 'created_at', 'updated_at']
@@ -306,7 +274,7 @@ class PrimitiveModel(models.Model):
                             logger.debug("Setting " + field + " to " + value)
                             self.__setattr__(field, value)
                         else:
-                            logger.warning(field + " value is a " + str(type(value)))
+                            logger.debug(field + " value is a " + str(type(value)))
                         logger.debug("Done")
         elif type(oscal_data) is str:
             logger.debug("Handling string...")
@@ -414,7 +382,6 @@ class PrimitiveModel(models.Model):
             except OperationalError as err:
                 logger.error("An error occurred")
                 logger.error(err)
-
 
     def update(self, d):
         """
@@ -534,10 +501,14 @@ class links(BasicModel):
         verbose_name = "Link"
         verbose_name_plural = "Links"
 
-    href = models.URLField(verbose_name="Hypertext Reference", help_text="A resolvable URL reference to a resource.")
-    rel = ShortTextField(verbose_name="Relation", help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.", blank=True, choices=link_rel_options)
-    media_type = ShortTextField(verbose_name="Media Type", help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text).")
-    text = ShortTextField(verbose_name="Link Text", help_text="A textual label to associate with the link, which may be used for presentation in a tool.")
+    href = models.URLField(verbose_name="URL", help_text="A resolvable URL reference to a resource.")
+    rel = ShortTextField(verbose_name="Relation",
+                         help_text="Describes the type of relationship provided by the link. This can be an indicator of the link's purpose.",
+                         blank=True, choices=link_rel_options)
+    media_type = ShortTextField(verbose_name="Media Type",
+                                help_text="Specifies a media type as defined by the Internet Assigned Numbers Authority (IANA) Media Types Registry (https://www.iana.org/assignments/media-types/media-types.xhtml#text).")
+    text = ShortTextField(verbose_name="Link Text",
+                          help_text="A textual label to associate with the link, which may be used for presentation in a tool.")
 
     def __str__(self):
         return self.text
@@ -560,7 +531,8 @@ class links(BasicModel):
                     href_text = catalog.models.controls.objects.get(control_id=self.href[1:]).__str__()
                     html_str = "<a href='" + href + "' target=_blank>" + href_text + "</a>"
                 else:
-                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (self.id, self.href[1:])
+                    html_str = "<--There is a broken link in the database. Link id %s is a related link but no control with id %s can be found-->" % (
+                        self.id, self.href[1:])
             if self.rel in ['canonical', 'reference', 'alternate']:
                 if resources.objects.filter(uuid=self.href[1:]).count() == 1:
                     href_text = resources.objects.get(uuid=self.href[1:]).title
@@ -1061,8 +1033,8 @@ class base64(PrimitiveModel):
         base64_bytes = base64_string.encode(encoding='ascii')
         file_bytes = b64.b64decode(base64_bytes)
         file_name = str(self.uuid) + ".pdf"
-        file_path = os.path.join(settings.MEDIA_ROOT,file_name)
-        f = open(file_path,'wb')
+        file_path = os.path.join(settings.MEDIA_ROOT, file_name)
+        f = open(file_path, 'wb')
         f.write(file_bytes)
         f.close()
         file_url = settings.MEDIA_URL + file_name

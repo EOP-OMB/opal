@@ -18,7 +18,7 @@ from django.conf import settings
 import base64 as b64
 
 from catalog.models import available_catalog_list
-from common.forms import resource_form, UploadFileForm
+from common.forms import resource_form, UploadFileForm, props_form, links_form
 from common.functions import search_for_uuid
 from common.models import base64
 
@@ -82,7 +82,8 @@ def database_status_view(request):
     return render(request, "db_status.html", context)
 
 
-def permalink_view(p_uuid):
+def permalink_view(request, p_uuid):
+    redirect_url = "error_404_view"
     obj = search_for_uuid(p_uuid)
     try:
         redirect_url = obj.get_absolute_url()
@@ -122,7 +123,7 @@ def upload_file(request):
             form_media_type = form_file_binary.content_type
             file_binary = form_file_binary.read()
             file_base64 = (b64.b64encode(file_binary)).decode('ascii')
-            new_attachment, _ = base64.objects.get_or_create(
+            new_attachment, created = base64.objects.get_or_create(
                 filename=form_filename,
                 media_type=form_media_type,
                 value=file_base64
@@ -134,11 +135,20 @@ def upload_file(request):
             return HttpResponseRedirect(reverse('common:base64_detail', args=(new_attachment.pk,)))
     else:
         form = UploadFileForm()
-    return render(request, "common/upload_file.html", {"form": form})
+    return render(request, "generic_form.html", {"form": form})
 
 
 def add_resource_view(request):
-    return render(
+    if request.method == "POST":
+        form = resource_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Resource added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
             request, 'generic_form.html', {
                 'title': 'Add a new Document',
                 'content': "All fields are required",
@@ -146,12 +156,48 @@ def add_resource_view(request):
             })
 
 
-def download_oscal_json(j):
+def add_props_view(request):
+    if request.method == "POST":
+        form = props_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Property added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'title': 'Add a Property',
+                'content': "Name and Value are required",
+                'form': props_form
+            })
 
-    oscal_jason_file = open('%s.json' % uuid.uuid4(), 'x')
-    oscal_jason_file.write(j)
-    path_to_file = os.path.realpath(oscal_jason_file)
+
+def add_links_view(request):
+    if request.method == "POST":
+        form = links_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'generic_template.html', {
+                'title': "Link added",
+                'content': "You may close this window"
+            })
+    else:
+        return render(
+            request, 'generic_form.html', {
+                'title': 'Add a Link',
+                'content': ":)",
+                'form': links_form
+            })
+
+
+def download_oscal_json(request, j):
+
+    file = open('%s.json' % uuid.uuid4(), 'x')
+    file.write(j)
+    path_to_file = os.path.realpath(file)
     response = FileResponse(open(path_to_file, 'rb'))
-    file_name = oscal_jason_file[5:]
+    file_name = file[5:]
     response['Content-Disposition'] = 'inline; filename=' + file_name
     return response

@@ -3,7 +3,13 @@
 {% block content %}
 <form method="post" enctype="multipart/form-data" action="{{ form.action }}">
     {% csrf_token %}
-{{ form }}
+    <div class="d-table">
+        {% for f in form.fields %}
+            <div>{{ f.label_tag }}</div>
+            <div>{{ f }}<div>
+        {% endfor %}
+    </div>
+
 <p><button type="submit">Submit</button></p>
 </form>
 {% endblock %}
