@@ -15,17 +15,6 @@ class system_characteristics_form(forms.ModelForm):
         initial = {'date_authorized': datetime.now()}
 
 
-class import_profiles_form(forms.ModelForm):
-    choices = []
-    for profile in ctrl_profiles.objects.all():
-        choices.append((profile.get_permalink(),profile.__str__()))
-
-    class Meta:
-        model = import_profiles
-        fields = ('href',)
-        widgets = {'href': Select}
-
-
 
 
 
