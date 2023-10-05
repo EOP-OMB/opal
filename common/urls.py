@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import path
 
-from common.views import permalink_view, database_status_view, auth_view, base64_list_view, base64_detail_view, upload_file, add_resource_view
+from common.views import permalink_view, database_status_view, auth_view, base64_list_view, base64_detail_view, \
+    upload_file, add_resource_view, add_links_view, add_props_view
 
 app_name = 'common'
 urlpatterns = [path('p/<str:p_uuid>', permalink_view, name='permalink'),
@@ -25,5 +26,7 @@ urlpatterns = [path('p/<str:p_uuid>', permalink_view, name='permalink'),
                path('f/detail/<int:pk>', base64_detail_view, name='base64_detail'),
                path('f/add', upload_file, name='upload_file'),
                # path('f/render/<int:pk>', base64_render_view, name='base64_render'),
-               path('r/add', add_resource_view, name='add_resource_view')
+               path('resource/add', add_resource_view, name='add_resource_view'),
+               path('link/add', add_links_view, name='add_links_view'),
+               path('prop/add', add_props_view, name='add_props_view'),
                ]

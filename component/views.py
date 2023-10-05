@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
+from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 
 from common.models import props
@@ -61,7 +62,7 @@ def policy_component_form_view(request):
         new_component.props.add(policy_owner_prop_id)
         new_component.props.add(review_interval_prop_id)
         new_component.save()
-        return redirect(reverse('component:component_list_view'))
+        return HttpResponseRedirect(reverse("component:component_detail_view", kwargs={'pk': new_component.id}))
 
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="policy")
     form.fields['scope'] = forms.CharField(max_length=100)
@@ -90,9 +91,9 @@ def cloud_service_component_form_view(request):
         return redirect(reverse('component:component_list_view'))
 
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="service")
-    form.fields['url'] = forms.URLField(max_length=1000, widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['title'] = forms.CharField(max_length=1000, label="Name", widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['url'] = forms.URLField(max_length=1000, label="URL", widget=forms.TextInput(attrs={'size': "100"}))
     form.fields['application_owner'] = forms.CharField(initial=request.user, max_length=100)
-    form.fields['description'] = forms.CharField(max_length=1000, widget=forms.TextInput(attrs={'size': "100"}))
 
     form.order_fields(['type', 'title', 'purpose', 'status', 'url', 'application_owner', 'description'])
 

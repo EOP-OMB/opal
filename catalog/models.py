@@ -417,6 +417,9 @@ class groups(PrimitiveModel):
         to="controls", verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
     )
 
+    
+    def get_absolute_url(self):
+        return reverse('catalog:group_detail_view', kwargs={'pk': self.pk})
     def __str__(self):
         return self.group_id.upper() + " - " + self.title + " (" + self.group_class + ")"
 
@@ -528,13 +531,13 @@ class catalogs(PrimitiveModel):
         if self.groups is not None:
             html_str += "<h1>Groups</h1>\n"
             for i in self.groups.all():
-                html_str += "<a href='%s'>%s</a><br>" % (i.get_permalink, i.__str__)
+                html_str += "<a href='%s'>%s</a><br>\n" % (i.get_absolute_url(), i.__str__())
         if self.controls is not None:
             html_str += "<h1>Controls not in a Group</h1>\n"
             for i in self.controls.all():
                 html_str += i.to_html()
         if self.back_matter is not None:
-            html_str += "<h1>CBack Matter</h1>\n"
+            html_str += "<h1>Back Matter</h1>\n"
             html_str += self.back_matter.to_html()
         return html_str
 
