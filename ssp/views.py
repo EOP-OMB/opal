@@ -1,7 +1,6 @@
 import json
 import logging
 import os.path
-
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
@@ -9,9 +8,8 @@ from django.views.generic.list import ListView
 from formtools.wizard.views import CookieWizardView
 
 from common.forms import back_matter_form
-from ssp.models import system_security_plans
 from ssp.forms import system_characteristics_form
-
+from ssp.models import system_security_plans
 
 
 def import_ssp_view(ssp_file):

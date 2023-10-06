@@ -1,12 +1,11 @@
 import logging
 from datetime import datetime
-from os import path
-
 from django.conf import settings
+from os import path
+from real_data.controls_dict import ctr_list
 
 from catalog.models import controls
 from component.models import by_components, implemented_requirements, components
-from real_data.controls_dict import ctr_list
 
 # create logger
 logger = logging.getLogger('console_log')

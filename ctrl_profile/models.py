@@ -1,10 +1,10 @@
+import re
 from django.db import models
 from django.urls import reverse
 
+from catalog.models import controls, params, catalogs
 from common.functions import search_for_uuid
 from common.models import BasicModel, ShortTextField, metadata, back_matter
-from catalog.models import controls, params, catalogs
-import re
 
 
 class imports(BasicModel):

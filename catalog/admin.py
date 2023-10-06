@@ -1,5 +1,6 @@
-from django.contrib import admin
 from django.apps import apps
+from django.contrib import admin
+
 from common.admin import CustomAdmin
 from .models import controls, available_catalog_list
 

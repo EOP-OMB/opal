@@ -1,12 +1,13 @@
+import logging
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import Permission, User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.urls import reverse
-from common.models import BasicModel, implementation_status_choices, parties, properties_field, links, roles, ShortTextField, system_status_state_choices, protocols
-from catalog.models import controls, parts, params
-from django.contrib.auth.models import Permission, User
 
-import logging
+from catalog.models import controls, parts, params
+from common.models import BasicModel, implementation_status_choices, parties, properties_field, links, roles, \
+    ShortTextField, system_status_state_choices, protocols
 
 logger = logging.getLogger('django')
 

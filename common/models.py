@@ -3,14 +3,13 @@ import json
 import logging
 import os.path
 import uuid
-from itertools import chain
-
 from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models, IntegrityError, connection, OperationalError
 from django.urls import reverse, reverse_lazy
 from django.utils.timezone import now
+from itertools import chain
 
 import catalog
 from common.functions import replace_hyphen

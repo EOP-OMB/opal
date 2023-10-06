@@ -1,10 +1,10 @@
+import base64 as b64
 import os
 import urllib
 import uuid
-from io import StringIO
-
 from django import forms
 from django.apps import apps
+from django.conf import settings
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,8 +14,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django_require_login.decorators import public
-from django.conf import settings
-import base64 as b64
+from io import StringIO
 
 from catalog.models import available_catalog_list
 from common.forms import resource_form, UploadFileForm, props_form, links_form

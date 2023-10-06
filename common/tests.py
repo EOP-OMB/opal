@@ -1,13 +1,13 @@
-from common.functions import search_for_uuid, replace_hyphen, coalesce
-import uuid
-from common.models import links
-from django.urls import reverse
-
 import pytest
-
+import uuid
+from django.urls import reverse
 from model_bakery import baker
 # Add generators for custom field types
 from model_bakery.random_gen import gen_m2m, gen_string, gen_text
+
+from common.functions import search_for_uuid, replace_hyphen, coalesce
+from common.models import links
+
 baker.generators.add('common.models.ShortTextField', gen_string)
 baker.generators.add('ckeditor.fields.RichTextField', gen_text)
 baker.generators.add('common.models.properties_field', gen_m2m)

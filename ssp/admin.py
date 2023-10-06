@@ -1,7 +1,9 @@
-from django.contrib import admin
 from django.apps import apps
+from django.contrib import admin
+
 from common.admin import CustomAdmin
 from ssp.models import system_security_plans, system_characteristics
+
 
 @admin.register(system_characteristics)
 class system_characteristicsAdmin(CustomAdmin):

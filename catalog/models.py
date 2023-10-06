@@ -2,6 +2,7 @@ import \
     uuid
 from django.db import models
 from django.urls import reverse
+
 from common.functions import coalesce, search_for_uuid
 from common.models import BasicModel, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
 

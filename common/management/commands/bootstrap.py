@@ -1,8 +1,7 @@
 import os.path
-
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
-from django.conf import settings
 
 from catalog.models import available_catalog_list
 from catalog.views import download_catalog, import_catalog_task

@@ -9,17 +9,16 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import logging
-import secrets
-from pathlib import Path
-import os
 import environ
+import logging
+import os
+import secrets
 import subprocess
-
 from django.urls import reverse
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import opal
-from logging.handlers import RotatingFileHandler
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

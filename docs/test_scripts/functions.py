@@ -1,6 +1,6 @@
-from django.conf import settings
-from django.apps import apps
 import os
+from django.apps import apps
+from django.conf import settings
 
 
 def generate_model_factory(model):

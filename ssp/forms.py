@@ -1,9 +1,9 @@
+from datetime import datetime
 from django import forms
 from django.forms.widgets import SelectDateWidget, Select
 
 from ctrl_profile.models import ctrl_profiles
 from ssp.models import import_profiles, system_characteristics
-from datetime import datetime
 
 
 class system_characteristics_form(forms.ModelForm):

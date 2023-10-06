@@ -1,4 +1,5 @@
 from django import template
+
 from opal import __build__
 
 register = template.Library()

@@ -1,7 +1,8 @@
 from django.urls import path
 from django.views.decorators.cache import cache_page
 
-from catalog.views import catalog_index_view, catalog_list_view, catalog_detail_view, group_detail_view, import_catalog_view, control_detail_view
+from catalog.views import catalog_index_view, catalog_list_view, catalog_detail_view, group_detail_view, \
+    import_catalog_view, control_detail_view
 
 app_name = 'catalog'
 urlpatterns = [path('', catalog_index_view, name='catalog_index_view'),

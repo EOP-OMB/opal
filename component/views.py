@@ -1,13 +1,13 @@
 from django import forms
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
-from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 
 from common.models import props
-from component.models import components
 from component.forms import ComponentForm
+from component.models import components
 
 
 def component_list_view(request):

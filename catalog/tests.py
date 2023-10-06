@@ -1,12 +1,12 @@
+import pytest
 import uuid
 from django.urls import reverse
-from catalog.models import catalogs, available_catalog_list, tests, controls
-
-import pytest
-
 from model_bakery import baker
 # Add generators for custom field types
 from model_bakery.random_gen import gen_m2m, gen_string, gen_text
+
+from catalog.models import catalogs, available_catalog_list, tests, controls
+
 baker.generators.add('common.models.ShortTextField', gen_string)
 baker.generators.add('ckeditor.fields.RichTextField', gen_text)
 baker.generators.add('common.models.properties_field', gen_m2m)

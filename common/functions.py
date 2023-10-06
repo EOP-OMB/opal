@@ -1,8 +1,8 @@
 import logging
-from uuid import UUID
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import FieldError, ObjectDoesNotExist
+from uuid import UUID
 
 """
 Some useful common functions

@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import urllib.request
-
 from celery import Celery
 from django.conf import settings
 from django.contrib.auth.models import User

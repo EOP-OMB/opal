@@ -1,6 +1,5 @@
-from django.urls import reverse
 import pytest
-
+from django.urls import reverse
 from model_bakery import baker
 # Add generators for custom field types
 from model_bakery.random_gen import gen_m2m, gen_string, gen_text

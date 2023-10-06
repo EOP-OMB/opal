@@ -3,9 +3,10 @@ from django.db import models
 from django.urls import reverse
 
 from catalog.models import controls
-from ctrl_profile.models import ctrl_profiles
+from common.models import BasicModel, PrimitiveModel, properties_field, props, ShortTextField, links, \
+    system_status_state_choices, responsible_parties, parties, roles, metadata, back_matter
 from component.models import components, responsible_roles, control_implementations, parameters
-from common.models import BasicModel, PrimitiveModel, properties_field, props, ShortTextField, links, system_status_state_choices, responsible_parties, parties, roles, metadata, back_matter
+from ctrl_profile.models import ctrl_profiles
 
 
 class import_profiles(BasicModel):

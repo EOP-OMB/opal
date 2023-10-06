@@ -2,9 +2,10 @@ from django.apps import apps
 from django.contrib import admin
 from nested_admin.nested import NestedModelAdmin
 
-from common.models import metadata, port_ranges, protocols, props, links, revisions, document_ids, roles, emails, telephone_numbers, addresses, locations, external_ids, organizations, parties, responsible_parties, metadata, citations, hashes, rlinks, base64, \
+from common.models import metadata, port_ranges, protocols, props, links, revisions, document_ids, roles, emails, \
+    telephone_numbers, addresses, locations, external_ids, organizations, parties, responsible_parties, metadata, \
+    citations, hashes, rlinks, base64, \
     resources, back_matter
-
 
 
 # Register your models here.
