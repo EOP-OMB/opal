@@ -59,7 +59,7 @@ HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
 USE_X_FORWARDED_HOST = os.getenv("USE_X_FORWARDED_HOST", default=True)
 # Database settings
 DATABASE = os.getenv("DATABASE", default="sqlite")
-DB_NAME = os.getenv("DB_NAME", default="db.sqlite3")
+DB_NAME = os.getenv("DB_NAME", default="data/db.sqlite3")
 # These can be blank if using sqlite
 DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
@@ -212,9 +212,10 @@ if DATABASE == "postgres":
             }
         }
 else:
+    print("***************DB_NAME: %s***************************" % DB_NAME)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_NAME),
+            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, '..', DB_NAME),
             }
         }
 
