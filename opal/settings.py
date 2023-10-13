@@ -212,10 +212,9 @@ if DATABASE == "postgres":
             }
         }
 else:
-    print("***************DB_NAME: %s***************************" % DB_NAME)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, '..', DB_NAME),
+            'ENGINE': 'django.db.backends.sqlite3', 'NAME': os.path.join(BASE_DIR, DB_NAME),
             }
         }
 
