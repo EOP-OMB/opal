@@ -18,3 +18,4 @@ pytest.ini
 /saml/certs/public.crt
 /static/
 /media/
+/opal/env.*
