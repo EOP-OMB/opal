@@ -23,7 +23,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 
 # Create Service account
-RUN useradd opal
+RUN useradd -M -u 1001 opal
 RUN chown -R opal:opal .
 
 FROM base_os AS package_installer
@@ -47,23 +47,29 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app/
 
 # set permisions and execute bit for statup script
-RUN chmod -R o+r .
+RUN chmod -R ugo+rX,ugo-w .
 RUN chmod +x startup.sh
+RUN chown -R opal:opal .
 
 # grant write permisions on the static driectory
 RUN mkdir -p /usr/src/app/static
-RUN chmod 777 /usr/src/app/static
+RUN chmod 744 /usr/src/app/static
 RUN chown -R opal:opal ./static
 
 # grant write permisions on the static driectory
 RUN mkdir -p /usr/src/app/media
-RUN chmod 777 /usr/src/app/media
+RUN chmod 744 /usr/src/app/media
 RUN chown -R opal:opal ./media
 
 #Create a logs directory if needed
-#RUN mkdir -p /usr/src/logs
-#RUN chmod 777 /usr/src/logs
-#RUN chown -R opal:opal /usr/src/logs
+RUN mkdir -p /usr/src/logs
+RUN chmod 740 /usr/src/logs
+RUN chown -R opal:opal /usr/src/logs
+
+#Create a data directory if needed
+RUN mkdir -p /usr/src/data
+RUN chmod 740 /usr/src/data
+RUN chown -R opal:opal /usr/src/data
 
 
 FROM app_installer AS final_stage
