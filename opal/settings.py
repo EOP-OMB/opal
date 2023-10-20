@@ -47,6 +47,8 @@ BROKER = os.getenv("BROKER", default='')
 HOST_NAME = os.getenv("HOST_NAME", default="http://localhost:8000")
 # set SSL active to True if you are using https
 SSL_ACTIVE = os.getenv("SSL_ACTIVE", default=False)
+# SECURE_SSL_REDIRECT forces django to redirect a request to https. This would normally be a good thing but if you are running inside a kubernetes cluster, you are probably not running the application using SSL. So thi can cause an infinite redirection loop.  If you are running behind some kind of proxy that handles the ssl connection you can leave this as False.  Other wise you should set this to True for any production deployment.
+SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", default=False)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -126,9 +128,7 @@ CACHES = {
         }
     }
 
-if ENVIRONMENT == "production":
-    SECURE_SSL_REDIRECT = True
-else:
+if ENVIRONMENT != "production":
     print("Running in Development mode!")
     for k, v in sorted(os.environ.items()):
         print(k + ':', v)
