@@ -12,10 +12,11 @@
 /opal/.env
 */~$*
 pytest.ini
-*/__pycache__/*
 
 /saml/certs/private.key
 /saml/certs/public.crt
 /static/
 /media/
 /opal/env.*
+
+**/__pycache__/
