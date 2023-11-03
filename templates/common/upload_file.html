@@ -4,12 +4,8 @@
 <form method="post" enctype="multipart/form-data" action="{{ form.action }}">
     {% csrf_token %}
     <div class="d-table">
-        {% for f in form.fields %}
-            <div>{{ f.label_tag }}</div>
-            <div>{{ f }}<div>
-        {% endfor %}
+        {% include "generic_form_helper.html" with form=form %}
     </div>
-
-<p><button type="submit">Submit</button></p>
+    <p class="button" style="padding-top: 15px"; ><button type="submit">Submit</button></p>
 </form>
 {% endblock %}

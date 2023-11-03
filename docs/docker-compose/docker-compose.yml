@@ -8,13 +8,12 @@ services:
     build: ../postgres
     container_name: db
     ports:
-      - "65432:5432"
+      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=opal
-      - POSTGRES_USER=opal
       - POSTGRES_PASSWORD=use_a_secure_password_here
+      - POSTGRES_OPAL_PASSWORD=use_a_secure_password_here
   broker:
     image: rabbitmq
     ports:
@@ -33,7 +32,7 @@ services:
       - DB_NAME=opal
       - DB_USER=opal
       - DB_HOST=db
-      - DB_PORT=65432
+      - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
       - ALLOWED_HOSTS=127.0.0.1,localhost,web,192.168.42.105
       - ASYNC=True
