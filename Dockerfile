@@ -46,7 +46,7 @@ WORKDIR /usr/src/app
 # copy all the files to the container
 COPY . /usr/src/app/
 
-# set permisions and execute bit for statup script
+# set permisions and execute bit for startup script
 RUN chmod -R ugo+rX,ugo-w .
 RUN chmod +x startup.sh
 RUN chown -R opal:opal .
