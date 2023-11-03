@@ -108,7 +108,10 @@ def base64_detail_view(request, pk):
     base64_object = base64.objects.get(pk=pk)
     file_url = base64_object.render_file()
     html_str = "<h1>%s</h1>" % base64_object.filename
-    html_str += "<img src='%s'>" % file_url
+    if file_url.split('.')[1] == 'pdf':
+        html_str += '<iframe; src="%s" style="border: none; height: fit-content; width: fit-content;"> </iframe>'
+    else:
+        html_str += "<img src='%s'>" % file_url
     html_str += "<hr>"
     html_str += "<a href='%s'>Download File</a>" % file_url
     return render(request, "generic_template.html", {'content': html_str})
