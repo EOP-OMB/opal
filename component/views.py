@@ -67,7 +67,8 @@ def policy_component_form_view(request):
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="policy")
     form.fields['scope'] = forms.CharField(max_length=100)
     form.fields['review_interval'] = forms.CharField(max_length=100)
-    form.fields['policy_owner'] = forms.CharField(initial=request.user, max_length=1000)
+    user_name_display = "%s %s <%s>" % (request.user.first_name, request.user.last_name, request.user.email)
+    form.fields['policy_owner'] = forms.CharField(initial=user_name_display, max_length=1000)
 
     form.field_order = ['type', 'title', 'purpose', 'status', 'scope', 'policy_owner', 'review_interval', 'description']
 
@@ -77,6 +78,32 @@ def policy_component_form_view(request):
 
 
 def cloud_service_component_form_view(request):
+    context = {}
+    # form = CloudServiceForm(request.POST or None, request.FILES or None)
+    form = ComponentForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        url_prop_id, _ = props.objects.get_or_create(name='URL', value=form.data['url'])
+        application_owner_prop_id, _ = props.objects.get_or_create(name='Application Owner', value=form.data['application_owner'])
+        new_component = form.save()
+        new_component.props.add(url_prop_id)
+        new_component.props.add(application_owner_prop_id)
+        new_component.save()
+        return redirect(reverse('component:component_list_view'))
+
+    form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="service")
+    form.fields['title'] = forms.CharField(max_length=1000, label="Name", widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['url'] = forms.URLField(max_length=1000, label="URL", widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['application_owner'] = forms.CharField(initial=request.user, max_length=100)
+
+    form.order_fields(['type', 'title', 'purpose', 'status', 'url', 'application_owner', 'description'])
+
+    context['form'] = form
+    context['title'] = 'Add New Cloud Service'
+    return render(request, "generic_form.html", context)
+
+
+def social_media_component_form_view(request):
     context = {}
     # form = CloudServiceForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
