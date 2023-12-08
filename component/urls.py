@@ -1,5 +1,5 @@
 from django.urls import path
-from component.views import component_list_view, component_detail_view, policy_component_form_view, cloud_service_component_form_view, component_form_view
+from component.views import component_list_view, component_detail_view, policy_component_form_view, cloud_service_component_form_view, component_form_view, social_media_component_form_view
 
 app_name = 'component'
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('add/', component_form_view, name='component_form_view'),
     path('add/policy/', policy_component_form_view, name='policy_component_form_view'),
     path('add/cloud_service/', cloud_service_component_form_view, name='cloud_service_component_form_view'),
+    path('add/social_media/', social_media_component_form_view, name='social_media_component_form_view')
     ]

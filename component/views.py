@@ -20,10 +20,6 @@ def component_list_view(request):
             html_ctrl_list.append("<a href='%s' target='_blank'>%s</a>" % (ctrl.get_absolute_url(), ctrl.control_id))
         html_str += "<tr><td><a href='%s'>%s</a></td><td>%s</td><td>%s</td></tr>" % (comp.get_absolute_url(), comp.title, comp.status, ', '.join(html_ctrl_list))
     html_str += "</table><p>"
-    html_str += "<h1>Add New Components</h1>"
-    html_str += "<a href='%s'>Add new Policy</a></p>" % reverse_lazy('component:policy_component_form_view')
-    html_str += "<a href='%s'>Add new Cloud Service</a></p>" % reverse_lazy('component:cloud_service_component_form_view')
-    html_str += "<a href='%s'>Add other component</a></p>" % reverse_lazy('component:component_form_view')
     context = {
         'content': html_str,
         'title': 'Component List'
@@ -50,7 +46,6 @@ def component_form_view(request):
 
 def policy_component_form_view(request):
     context = {}
-    # form = PolicyForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
@@ -79,7 +74,6 @@ def policy_component_form_view(request):
 
 def cloud_service_component_form_view(request):
     context = {}
-    # form = CloudServiceForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
@@ -105,25 +99,31 @@ def cloud_service_component_form_view(request):
 
 def social_media_component_form_view(request):
     context = {}
-    # form = CloudServiceForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
         url_prop_id, _ = props.objects.get_or_create(name='URL', value=form.data['url'])
         application_owner_prop_id, _ = props.objects.get_or_create(name='Application Owner', value=form.data['application_owner'])
+
+        account_id, _ = props.objects.get_or_create(name='account_id', value=form.data['account_id'])
+        approval_process, _ = props.objects.get_or_create(name='approval_process', value=form.data['approval_process'])
         new_component = form.save()
         new_component.props.add(url_prop_id)
         new_component.props.add(application_owner_prop_id)
+        new_component.props.add(account_id)
+        new_component.props.add(approval_process)
         new_component.save()
         return redirect(reverse('component:component_list_view'))
 
-    form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="service")
+    form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="social_media")
     form.fields['title'] = forms.CharField(max_length=1000, label="Name", widget=forms.TextInput(attrs={'size': "100"}))
     form.fields['url'] = forms.URLField(max_length=1000, label="URL", widget=forms.TextInput(attrs={'size': "100"}))
+    form.fields['account_id'] = forms.CharField(max_length=1000, label="Social Media Account ID", widget=forms.TextInput(attrs={'size': "100"}))
     form.fields['application_owner'] = forms.CharField(initial=request.user, max_length=100)
+    form.fields['approval_process'] = forms.CharField(widget=forms.TextInput(), label="How are postings approved?")
 
-    form.order_fields(['type', 'title', 'purpose', 'status', 'url', 'application_owner', 'description'])
+    form.order_fields(['type', 'title', 'purpose', 'status', 'url', 'application_owner', 'description', 'approval_process'])
 
     context['form'] = form
-    context['title'] = 'Add New Cloud Service'
+    context['title'] = 'Add New Social Media Account/Service'
     return render(request, "generic_form.html", context)
