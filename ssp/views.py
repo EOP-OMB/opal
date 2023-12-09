@@ -6,12 +6,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from formtools.wizard.views import CookieWizardView
 
-from common.forms import back_matter_form
-from ssp.models import system_security_plans
-from ssp.forms import system_characteristics_form
-
+from ssp.models import system_security_plans, metadata, system_characteristics, system_implementations
+from ssp.forms import system_security_plansForm
 
 
 def import_ssp_view(ssp_file):
@@ -23,13 +20,13 @@ def import_ssp_view(ssp_file):
             logger.error(ssp_file + " does not exist.")
             context = {
                 'msg': ssp_file + " does not exist."
-                }
+            }
             return redirect('common.views.error_404_view')
     logger.info("Starting SSP import process")
     new_ssp = import_ssp(ssp_file)
     context = {
         'msg': new_ssp.metadata.title + " imported from " + ssp_file
-        }
+    }
     # TODO this should redirect to the SSP list and should include the context message
     return redirect('home_page')
 
@@ -48,6 +45,49 @@ def import_ssp(ssp_file):
     return new_ssp
 
 
+def ssp_form_view(request):
+    context = {}
+    form = system_security_plansForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        new_metadata = metadata.objects.create(
+            title=form.data['title'],
+            published=form.data['published'],
+            last_modified=form.data['last_modified'],
+            version=form.data['version'],
+            oscal_version=form.data['oscal_version'],
+            import_profile=form.data['import_profile']
+        )
+        new_metadata.locations.add(form.data['locations'])
+        new_metadata.responsible_parties.add(form.data['responsible_parties'])
+
+        new_system_characteristics = system_characteristics.objects.create(
+            system_name=form.data['system_name'],
+            system_name_short=form.data['system_name_short'],
+            description=form.data['description'],
+            security_sensitivity_level=form.data['security_sensitivity_level'],
+            security_impact_level=form.data['security_impact_level'],
+            security_objective_confidentiality=form.data['security_objective_confidentiality'],
+            security_objective_integrity=form.data['security_objective_integrity'],
+            security_objective_availability=form.data['security_objective_availability'],
+            status=form.data['status'],
+            authorization_boundary=form.data['authorization_boundary'],
+            network_architecture=form.data['network_architecture'],
+            data_flow=form.data['data_flow']
+        )
+
+        new_system_implementation = system_implementations.objects.create()
+        new_system_implementation.leveraged_authorizations.add(form.data['leveraged_authorizations'])
+        new_system_implementation.components.add(form.data['components'])
+        new_system_implementation.inventory_items.add(form.data['inventory_items'])
+
+        new_ssp = system_security_plans.objects.create(metadata=new_metadata, system_characteristics=new_system_characteristics, system_implementation=new_system_implementation)
+        redirect(reverse('ssp:ssp_detail_view', kwargs={'id': new_ssp.id}))
+
+    context['form'] = form
+    return render(request, "generic_form.html", context)
+
+
 class ssp_list_view(ListView):
     model = system_security_plans
     context_object_name = "context_list"
@@ -56,7 +96,7 @@ class ssp_list_view(ListView):
         'title': 'System Security Plans',
         'add_url': add_new_url,
         'model_name': model._meta.verbose_name
-        }
+    }
     template_name = "generic_list.html"
 
 
@@ -64,12 +104,3 @@ class ssp_detail_view(DetailView):
     model = system_security_plans
     context_object_name = "context"
     template_name = "generic_detail.html"
-
-
-class ssp_wizard(CookieWizardView):
-    form_list = [system_characteristics_form, back_matter_form]
-
-    def done(self, form_list, **kwargs):
-        return render(self.request, reverse(ssp_detail_view),{
-            'form_data': [form.cleaned_data for form in form_list],
-        })
