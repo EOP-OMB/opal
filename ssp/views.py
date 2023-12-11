@@ -55,11 +55,13 @@ def ssp_form_view(request):
             published=form.data['published'],
             last_modified=form.data['last_modified'],
             version=form.data['version'],
-            oscal_version=form.data['oscal_version'],
-            import_profile=form.data['import_profile']
+            oscal_version=form.data['oscal_version']
         )
-        new_metadata.locations.add(form.data['locations'])
-        new_metadata.responsible_parties.add(form.data['responsible_parties'])
+        for location in form.data['locations']:
+            new_metadata.locations.add(location)
+        for party in form.data['responsible_parties']:
+            new_metadata.responsible_parties.add(party)
+        new_metadata.save()
 
         new_system_characteristics = system_characteristics.objects.create(
             system_name=form.data['system_name'],
@@ -77,11 +79,15 @@ def ssp_form_view(request):
         )
 
         new_system_implementation = system_implementations.objects.create()
-        new_system_implementation.leveraged_authorizations.add(form.data['leveraged_authorizations'])
-        new_system_implementation.components.add(form.data['components'])
-        new_system_implementation.inventory_items.add(form.data['inventory_items'])
+        for authorization in form.data['leveraged_authorizations']:
+            new_system_implementation.leveraged_authorizations.add(authorization)
+        for component in form.data['components']:
+            new_system_implementation.components.add(component)
+        for item in form.data['inventory_items']:
+            new_system_implementation.inventory_items.add(item)
+        new_system_implementation.save()
 
-        new_ssp = system_security_plans.objects.create(metadata=new_metadata, system_characteristics=new_system_characteristics, system_implementation=new_system_implementation)
+        new_ssp = system_security_plans.objects.create(metadata=new_metadata, system_characteristics=new_system_characteristics, system_implementation=new_system_implementation, import_profile=form.data['import_profile'])
         redirect(reverse('ssp:ssp_detail_view', kwargs={'id': new_ssp.id}))
 
     context['form'] = form

@@ -19,5 +19,24 @@
         </form>
     {% endif %}
     </div>
+    <script>
+        $(document).ready(function() {
+          $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+          });
+
+          $('.timepicker').timepicker({
+            format: 'hh:ii:ss',
+            autoclose: true,
+            showMeridian: false,
+          });
+
+          $('.datetimepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            showClear: true
+          });
+        });
+      </script>
 {% endblock %}
 

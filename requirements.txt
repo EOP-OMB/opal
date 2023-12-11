@@ -21,4 +21,4 @@ django-require-login
 django-ckeditor
 django-formtools
 django-nested-admin
-
+django-bootstrap-datepicker-plus
