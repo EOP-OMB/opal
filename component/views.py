@@ -2,12 +2,14 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic.detail import DetailView
-from django.http import HttpResponseRedirect
-from django.views.generic.list import ListView
 
 from common.models import props
 from component.models import components
 from component.forms import ComponentForm
+
+GENERIC_FORM_HTML = "generic_form.html"
+
+COMPONENT_DETAIL_VIEW = "component:component_detail_view"
 
 
 def component_list_view(request):
@@ -43,14 +45,14 @@ def component_form_view(request):
 
     if form.is_valid():
         new_component = form.save()
+        return redirect(reverse(COMPONENT_DETAIL_VIEW, kwargs={'pk': new_component.id}))
 
     context['form'] = form
-    return render(request, "generic_form.html", context)
+    return render(request, GENERIC_FORM_HTML, context)
 
 
 def policy_component_form_view(request):
     context = {}
-    # form = PolicyForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
@@ -62,7 +64,7 @@ def policy_component_form_view(request):
         new_component.props.add(policy_owner_prop_id)
         new_component.props.add(review_interval_prop_id)
         new_component.save()
-        return HttpResponseRedirect(reverse("component:component_detail_view", kwargs={'pk': new_component.id}))
+        return redirect(reverse(COMPONENT_DETAIL_VIEW, kwargs={'pk': new_component.id}))
 
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="policy")
     form.fields['scope'] = forms.CharField(max_length=100)
@@ -73,12 +75,11 @@ def policy_component_form_view(request):
 
     context['form'] = form
     context['title'] = 'Add New Policy'
-    return render(request, "generic_form.html", context)
+    return render(request, GENERIC_FORM_HTML, context)
 
 
 def cloud_service_component_form_view(request):
     context = {}
-    # form = CloudServiceForm(request.POST or None, request.FILES or None)
     form = ComponentForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
@@ -88,7 +89,7 @@ def cloud_service_component_form_view(request):
         new_component.props.add(url_prop_id)
         new_component.props.add(application_owner_prop_id)
         new_component.save()
-        return redirect(reverse('component:component_list_view'))
+        return redirect(reverse(COMPONENT_DETAIL_VIEW, kwargs={'pk': new_component.id}))
 
     form.fields['type'] = forms.CharField(widget=forms.HiddenInput(), initial="service")
     form.fields['title'] = forms.CharField(max_length=1000, label="Name", widget=forms.TextInput(attrs={'size': "100"}))
