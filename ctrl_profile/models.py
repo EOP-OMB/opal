@@ -17,24 +17,11 @@ class imports(BasicModel):
         verbose_name = "Import"
         verbose_name_plural = "Imports"
 
-    href = ShortTextField(
-        verbose_name="Link to catalog or profiles", help_text="URI to access the catalog or profiles to be imported"
-    )
+    href = ShortTextField(verbose_name="Link to catalog or profiles", help_text="URI to access the catalog or profiles to be imported")
     import_type = ShortTextField(verbose_name="Type of Import", choices=[("catalog", "Catalog"), ("profiles", "Profile")], help_text="Select if this import is for a catalog or a profiles")
-    include_all = models.BooleanField(
-        verbose_name="Include all controls",
-        help_text="Choose this option to include all controls from the imported catalog or profiles", default=True
-    )
-    include_controls = models.ManyToManyField(
-        to=controls, verbose_name="Included Controls",
-        help_text="Select the controls to be included. Any controls not explicitly selected will be excluded",
-        related_name="include_controls"
-    )
-    exclude_controls = models.ManyToManyField(
-        to=controls, verbose_name="Excluded Controls",
-        help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded",
-        related_name="exclude_controls"
-    )
+    include_all = models.BooleanField(verbose_name="Include all controls", help_text="Choose this option to include all controls from the imported catalog or profiles", default=True)
+    include_controls = models.ManyToManyField(to=controls, verbose_name="Included Controls", help_text="Select the controls to be included. Any controls not explicitly selected will be excluded", related_name="include_controls", blank=True)
+    exclude_controls = models.ManyToManyField(to=controls, verbose_name="Excluded Controls", help_text="Select the controls to be excluded. Any controls not explicitly selected will be excluded", related_name="exclude_controls", blank=True)
 
     def __str__(self):
         return self.href
@@ -68,12 +55,8 @@ class modify(BasicModel):
         verbose_name = "Modify Controls"
         verbose_name_plural = "Modify Controls"
 
-    set_parameters = models.ManyToManyField(
-        to=params, verbose_name="Modified Parameters", help_text="Select any parameters you wish to modify"
-    )
-    alters = models.ManyToManyField(
-        to=controls, verbose_name="Modified Controls", help_text="Select any controls you wish to modify"
-    )
+    set_parameters = models.ManyToManyField(to=params, verbose_name="Modified Parameters", help_text="Select any parameters you wish to modify", blank=True)
+    alters = models.ManyToManyField(to=controls, verbose_name="Modified Controls", help_text="Select any controls you wish to modify", blank=True)
 
 
 merge_options = [("use-first", "Use the first definition - the first control with a given ID is used; subsequent ones are discarded"), ("keep", "Keep - controls with the same ID are kept, retaining the clash")]
@@ -89,25 +72,10 @@ class ctrl_profiles(BasicModel):
         verbose_name_plural = "Profiles"
 
     metadata = models.ForeignKey(to=metadata, on_delete=models.CASCADE)
-    imports = models.ManyToManyField(
-        to=imports, verbose_name="Imports",
-        help_text="The import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives."
-    )
-    merge = ShortTextField(
-        verbose_name="Merge Strategy",
-        help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.",
-        null=True, choices=merge_options
-    )
-    modify = models.ForeignKey(
-        to=modify, verbose_name="Modifications",
-        help_text="Define parameters and controls that are modified by this profiles.", on_delete=models.CASCADE,
-        null=True
-    )
-    back_matter = models.ForeignKey(
-        to=back_matter, verbose_name="Back matter",
-        help_text="Provides a collection of identified resource objects that can be referenced by a link with a rel value of 'reference' and an href value that is a fragment '#' followed by a reference to a reference identifier. Other specialized link 'rel' values also use this pattern when indicated in that context of use.",
-        on_delete=models.CASCADE, null=True
-    )
+    imports = models.ManyToManyField(to=imports, verbose_name="Imports", help_text="The import designates a catalog, profiles, or other resource to be included (referenced and potentially modified) by this profiles. The import also identifies which controls to select using the include-all, include-controls, and exclude-controls directives.", blank=True)
+    merge = ShortTextField(verbose_name="Merge Strategy", help_text="A Merge element provides structuring directives that drive how controls are organized after resolution.", null=True, choices=merge_options)
+    modify = models.ForeignKey(to=modify, verbose_name="Modifications", help_text="Define parameters and controls that are modified by this profiles.", on_delete=models.CASCADE, null=True)
+    back_matter = models.ForeignKey(to=back_matter, verbose_name="Back matter", help_text="Provides a collection of identified resource objects that can be referenced by a link with a rel value of 'reference' and an href value that is a fragment '#' followed by a reference to a reference identifier. Other specialized link 'rel' values also use this pattern when indicated in that context of use.", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.metadata.title
@@ -122,8 +90,7 @@ class ctrl_profiles(BasicModel):
             re.match(regexp, ctrl.href)
             m = re.match(regexp, ctrl.href)
             if m is not None:
-                obj = search_for_uuid(ctrl.href[
-                                      m.end():])
+                obj = search_for_uuid(ctrl.href[m.end():])
                 if obj is not None:
                     control_list.extend(obj.list_all_controls())
         return control_list
@@ -136,8 +103,7 @@ class ctrl_profiles(BasicModel):
             re.match(regexp, ctrl.href)
             m = re.match(regexp, ctrl.href)
             if m is not None:
-                obj_uuid = ctrl.href[
-                           m.end():]
+                obj_uuid = ctrl.href[m.end():]
                 if obj_uuid is not None and catalogs.objects.filter(uuid=obj_uuid).exists():
                     obj = catalogs.objects.get(uuid=obj_uuid)
                     html_str = "<h1>" + obj.metadata.title + "</h1>"
@@ -163,9 +129,7 @@ class ctrl_profiles(BasicModel):
                         for ctrl in obj.controls.all():
                             html_str += "<tr>"
                             html_str += "<th>" + ctrl.__str__() + "</th>"
-                            html_str += "<td><a href='" + reverse(
-                                'component:new_requirement', kwargs={'control_id': ctrl.id}
-                            ) + "'>Define</a></td>"
+                            html_str += "<td><a href='" + reverse('component:new_requirement', kwargs={'control_id': ctrl.id}) + "'>Define</a></td>"
                             html_str += "<td><a href=''>Modify</a></td>"
                             html_str += "</tr>"
                     html_str += "</table>\n"

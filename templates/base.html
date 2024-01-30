@@ -44,7 +44,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'catalog:catalog_index_view' %}">Catalogs</a>
@@ -52,19 +52,25 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'ctrl_profile:profile_list_view' %}">Profiles</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'component:component_list_view' %}">Components</a>
-        </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownComponents" role="button" data-bs-toggle="dropdown" aria-expanded="false">Components</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownComponents">
+                  <li><a class="collapse-item" href="{% url 'component:component_list_view' %}">Component List</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="collapse-item" href="{% url 'component:policy_component_form_view' %}">Add New Policy</a></li>
+                  <li><a class="collapse-item" href="{% url 'component:cloud_service_component_form_view' %}">Add New Cloud Service</a></li>
+                  <li><a class="collapse-item" href="{% url 'component:social_media_component_form_view' %}">Add New Social Media Account/Service</a></li>
+                  <li><a class="collapse-item" href="{% url 'component:component_form_view' %}">Add Other Component</a></li>
+              </ul>
+          </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'ssp:ssp_list_view' %}">System Security Plans</a>
         </li>
         <li class="nav-item"><a class="nav-link" href="{% url 'common:base64_list' %}">Files</a></li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Utilities
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUtilities" role="button" data-bs-toggle="dropdown" aria-expanded="false">Utilities</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownUtilities">
             <li><a class="collapse-item" href="/admin/">Admin Dashboard</a></li>
             <li><a class="collapse-item" href="{% url 'common:db_status' %}">Database Status Report</a></li>
           </ul>

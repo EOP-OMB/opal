@@ -28,7 +28,7 @@ class ShortTextField(models.CharField):
 
 
 class CustomManyToManyField(models.ManyToManyField):
-    # Class remains to fix migration errors.  Old migrations still include reference to this class. This cna be removed once the migrations are squashed.
+    # Class remains to fix migration errors.  Old migrations still include reference to this class. This can be removed once the migrations are squashed.
     pass
 
 
@@ -751,20 +751,20 @@ class locations(BasicModel):
         blank=True, null=True, on_delete=models.CASCADE
     )
     email_addresses = models.ManyToManyField(
-        to=emails, help_text="This is a contact email associated with the location."
+        to=emails, help_text="This is a contact email associated with the location.", blank=True
     )
     telephone_numbers = models.ManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
-        help_text="A phone number used to contact the location."
+        help_text="A phone number used to contact the location.", blank=True
     )
     urls = models.ManyToManyField(
         to=links, verbose_name="Location URLs",
         help_text="The uniform resource locator (URL) for a web site or Internet presence associated with the location.",
-        related_name="location_urls"
+        related_name="location_urls", blank=True
     )
     props = properties_field()
     links = models.ManyToManyField(
-        to=links, verbose_name="Links", help_text="Links to other sites relevant to the location"
+        to=links, verbose_name="Links", help_text="Links to other sites relevant to the location", blank=True
     )
 
 
@@ -817,7 +817,7 @@ class parties(BasicModel):
         verbose_name="Party Short Name", help_text="A short common name, abbreviation, or acronym for the party.",
         blank=True
     )
-    external_ids = models.ManyToManyField(to=external_ids)
+    external_ids = models.ManyToManyField(to=external_ids, blank=True)
     props = properties_field()
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     address = models.ForeignKey(
@@ -826,18 +826,18 @@ class parties(BasicModel):
         on_delete=models.CASCADE, null=True
     )
     email_addresses = models.ManyToManyField(
-        to=emails, help_text="This is a contact email associated with the Party."
+        to=emails, help_text="This is a contact email associated with the Party.", blank=True
     )
     telephone_numbers = models.ManyToManyField(
         to=telephone_numbers, verbose_name="Location Phone Numbers",
-        help_text="A phone number used to contact the Party."
+        help_text="A phone number used to contact the Party.", blank=True
     )
     location_uuids = models.ManyToManyField(
-        to=locations, verbose_name="Party Locations", help_text="References a location defined in metadata"
+        to=locations, verbose_name="Party Locations", help_text="References a location defined in metadata", blank=True
     )
     member_of_organizations = models.ManyToManyField(
         to=organizations, verbose_name="Organizational Affiliations",
-        help_text="Identifies that the party object is a member of the organization associated with the provided UUID.", )
+        help_text="Identifies that the party object is a member of the organization associated with the provided UUID.", blank=True )
 
     def __str__(self):
         return self.name
@@ -857,7 +857,7 @@ class responsible_parties(PrimitiveModel):
     )
     party_uuids = models.ManyToManyField(
         to=parties, verbose_name="Party Reference",
-        help_text="Specifies one or more parties that are responsible for performing the associated role."
+        help_text="Specifies one or more parties that are responsible for performing the associated role.", blank=True
     )
     props = properties_field()
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
@@ -913,18 +913,18 @@ class metadata(BasicModel):
         verbose_name="OSCAL Version", help_text="The OSCAL model version the document was authored against.",
         default="v1.0.3"
     )
-    revisions = models.ManyToManyField(to=revisions, verbose_name="Previous Revisions")
-    document_ids = models.ManyToManyField(to=document_ids, verbose_name="Other Document IDs")
+    revisions = models.ManyToManyField(to=revisions, verbose_name="Previous Revisions", blank=True)
+    document_ids = models.ManyToManyField(to=document_ids, verbose_name="Other Document IDs", blank=True)
     props = properties_field()
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
-    locations = models.ManyToManyField(to=locations, verbose_name="Locations")
+    locations = models.ManyToManyField(to=locations, verbose_name="Locations", blank=True)
     parties = models.ManyToManyField(
         to=parties, verbose_name="Parties (organizations or persons)",
-        help_text="A responsible entity which is either a person or an organization."
+        help_text="A responsible entity which is either a person or an organization.", blank=True
     )
     responsible_parties = models.ManyToManyField(
         to=responsible_parties, verbose_name="Responsible Parties",
-        help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object."
+        help_text=" A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object.", blank=True
     )
 
     def __str__(self):
@@ -997,7 +997,7 @@ class rlinks(PrimitiveModel):
     )
     hashes = models.ManyToManyField(
         to=hashes, verbose_name="Hashes",
-        help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm."
+        help_text="A representation of a cryptographic digest generated over a resource using a specified hash algorithm.", blank=True
     )
 
     def to_html(self, indent=0, lazy=False):
@@ -1070,20 +1070,20 @@ class resources(BasicModel):
     )
     props = properties_field()
     document_ids = models.ManyToManyField(
-        to=document_ids, verbose_name="Document Identifiers",
+        to=document_ids, verbose_name="Document Identifiers", blank=True,
         help_text="A document identifier qualified by an identifier scheme. A document identifier provides a globally unique identifier for a group of documents that are to be treated as different versions of the same document."
     )
     citation = models.ManyToManyField(
         to=citations, verbose_name="Citations",
-        help_text="A citation consisting of end note text and optional structured bibliographic data."
+        help_text="A citation consisting of end note text and optional structured bibliographic data.", blank=True
     )
     rlinks = models.ManyToManyField(
         to=rlinks, verbose_name="Resource link",
-        help_text="A pointer to an external resource with an optional hash for verification and change detection. This construct is different from link, which makes no provision for a hash or formal title."
+        help_text="A pointer to an external resource with an optional hash for verification and change detection. This construct is different from link, which makes no provision for a hash or formal title.", blank=True
     )
     base64 = models.ManyToManyField(
         to=base64, verbose_name="Base64 encoded objects",
-        help_text="A string representing arbitrary Base64-encoded binary data."
+        help_text="A string representing arbitrary Base64-encoded binary data.", blank=True
     )
 
     def to_html(self, indent=0, lazy=False):
@@ -1107,6 +1107,6 @@ class back_matter(PrimitiveModel):
         verbose_name_plural = "Back matter"
 
     resources = models.ManyToManyField(
-        to=resources, verbose_name="Resources",
+        to=resources, verbose_name="Resources", blank=True,
         help_text="A resource associated with content in the containing document. A resource may be directly included in the document base64 encoded or may point to one or more equivalent internet resources."
     )
