@@ -672,6 +672,10 @@ class emails(BasicModel):
         self.save()
         return self
 
+    def to_html(self, indent=0, lazy=False):
+        return "<a href='mailto:%s'>%s</a>" % (self.email_address, self.email_address)
+
+
     def __str__(self):
         return self.email_address
 
