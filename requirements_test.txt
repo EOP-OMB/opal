@@ -1,22 +1,7 @@
-#test/debuggingtools
-#django-test-plus
-#Werkzeug
 django_extensions
-# attrs
-# coverage
 model-bakery
-# factory-boy
-# Faker
-# iniconfig
-# packaging
-# pluggy
-# py
-# pyparsing
 pytest
 pytest-cov
 pytest-django
-# python-dateutil
-# tomli
-# mixer
 pytest-xdist
 python-dateutil
