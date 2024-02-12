@@ -559,7 +559,8 @@ class revisions(BasicModel):
     )
     published = models.DateTimeField(
         verbose_name="Publication Timestamp",
-        help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included."
+        help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included.",
+        null=True
     )
     last_modified = models.DateTimeField(
         verbose_name="Last Modified Timestamp",
