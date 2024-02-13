@@ -291,7 +291,7 @@ class components(BasicModel):
 
     def list_implemented_controls(self):
         implemented_controls_list = []
-        for imp in self.control_implementations_set.all():
+        for imp in self.control_implementations_set.all().order_by('implemented_requirements__control_id__sort_id'):
             implemented_controls_list.extend(imp.list_implemented_controls())
         return implemented_controls_list
 
