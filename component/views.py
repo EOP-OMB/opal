@@ -13,9 +13,16 @@ COMPONENT_DETAIL_VIEW = "component:component_detail_view"
 
 
 def component_list_view(request):
-    component_list = components.objects.all()
-    html_str = "<table class='table primary'><tr><th>Title</th><th>Status</th><th>Controls</th></tr>"
+    component_list = components.objects.all().order_by('type','title')
+    table_headers = "<table class='table primary'><tr><th>Title</th><th>Status</th><th>Controls</th></tr>"
+    type = ''
+    html_str = ''
     for comp in component_list:
+        if comp.get_type_display() != type:
+            type = comp.get_type_display()
+            html_str += "</table>"
+            html_str += "<h2>%s</h2>" % type
+            html_str += table_headers
         ctrl_list = comp.list_implemented_controls()
         html_ctrl_list = []
         for ctrl in ctrl_list:

@@ -270,7 +270,7 @@ class components(BasicModel):
     class Meta:
         verbose_name = "Component"
         verbose_name_plural = "Components"
-        ordering = ("title",)
+        ordering = ("type","title",)
 
     component_types = [("this-system", "This System: The system as a whole."), ("system", "Another System: An external system, which may be a leveraged system or the other side of an interconnection."), ("interconnection", "System Interconnection: A connection to something outside this system."), ("software", "Software: Any software, operating system, or firmware."), ("hardware", "Hardware: A physical device."), ("service", "Service: A service that may provide APIs."),
                        ("policy", "Policy: An enforceable policy."), ("physical", "Physical: A tangible asset used to provide physical protections or countermeasures."), ("process-procedure", "Process or Procedure: A list of steps or actions to take to achieve some end result."), ("plan", "Plan: An applicable plan."), ("guidance", "Guidance: Any guideline or recommendation."), ("standard", "Standard: Any organizational or industry standard."),
@@ -291,7 +291,7 @@ class components(BasicModel):
 
     def list_implemented_controls(self):
         implemented_controls_list = []
-        for imp in self.control_implementations_set.all():
+        for imp in self.control_implementations_set.all().order_by('implemented_requirements__control_id__sort_id'):
             implemented_controls_list.extend(imp.list_implemented_controls())
         return implemented_controls_list
 

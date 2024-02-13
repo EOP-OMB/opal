@@ -559,7 +559,8 @@ class revisions(BasicModel):
     )
     published = models.DateTimeField(
         verbose_name="Publication Timestamp",
-        help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included."
+        help_text="The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included.",
+        null=True
     )
     last_modified = models.DateTimeField(
         verbose_name="Last Modified Timestamp",
@@ -671,6 +672,10 @@ class emails(BasicModel):
         self.email_address = oscal_data
         self.save()
         return self
+
+    def to_html(self, indent=0, lazy=False):
+        return "<a href='mailto:%s'>%s</a>" % (self.email_address, self.email_address)
+
 
     def __str__(self):
         return self.email_address

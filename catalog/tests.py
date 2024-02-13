@@ -15,7 +15,10 @@ pytestmark = pytest.mark.django_db
 
 
 def test_catalog_index_view(admin_client):
-    baker.make('catalog.catalogs',_quantity=10)
+    already_imported_catalog = baker.make('catalog.available_catalog_list')
+    not_imported_catalog = baker.make('catalog.available_catalog_list')
+    baker.make('catalog.catalogs',_quantity=3)
+    baker.make('catalog.catalogs',catalog_uuid=already_imported_catalog.uuid)
     url = reverse('catalog:catalog_index_view')
     response = admin_client.get(url)
     assert response.status_code == 200
