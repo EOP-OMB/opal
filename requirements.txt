@@ -8,6 +8,7 @@ django-require-login # This package provides a simple middleware that requires l
 django-ckeditor # CKEditor integration for Django, enabling rich text editing on text fields.
 django-formtools # A Django app with miscellaneous tools for working with forms.
 django-nested-admin # Django supports editing of related collections of objects in the admin interface. This project allows these collections to themselves contain collections, and so forth.
+django-bootstrap-datepicker-plus # Bootstrap3/Bootstrap4/Bootstrap5 DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 # POSTGRES Support
 psycopg2-binary # A PostgreSQL database adapter for Python.
 #async process support
