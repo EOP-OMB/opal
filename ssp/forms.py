@@ -40,24 +40,3 @@ class system_security_plansForm(forms.Form):
     inventory_items = forms.ModelMultipleChoiceField(queryset=inventory_items.objects.all(), help_text='A set of inventory-item entries that represent the managed inventory instances of the system.', label='Inventory Items', required=False)
 
 
-# class system_characteristics_form(forms.ModelForm):
-#
-#     class Meta:
-#         model=system_characteristics
-#         fields = ('system_name', 'system_name_short', 'description', 'date_authorized', 'security_sensitivity_level', 'system_information', 'security_impact_level', 'security_objective_confidentiality', 'security_objective_integrity', 'security_objective_availability', 'status',)
-#         widgets = {'date_authorized': SelectDateWidget}
-#         initial = {'date_authorized': datetime.now()}
-#
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['system_name'].widget.attrs.update(style="width: inherit;")
-#         self.fields['system_name_short'].widget.attrs.update(style="width: inherit;")
-#         self.fields['description'].widget.attrs.update(style="width: inherit;")
-#         self.fields['date_authorized'].widget.attrs.update(style="width: inherit;")
-#         self.fields['security_sensitivity_level'].widget.attrs.update(style="width: inherit;")
-#         self.fields['system_information'].widget.attrs.update(style="width: inherit;")
-#         self.fields['security_impact_level'].widget.attrs.update(style="width: inherit;")
-#         self.fields['security_objective_confidentiality'].widget.attrs.update(style="width: inherit;")
-#         self.fields['security_objective_integrity'].widget.attrs.update(style="width: inherit;")
-#         self.fields['security_objective_availability'].widget.attrs.update(style="width: inherit;")
-#         self.fields['status'].widget.attrs.update(style="width: inherit;")
