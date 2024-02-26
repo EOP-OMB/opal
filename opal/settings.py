@@ -140,7 +140,7 @@ if ENVIRONMENT != "production":
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor', 'nested_admin','bootstrap_datepicker_plus']
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor', 'nested_admin','bootstrap_datepicker_plus','django_db_logger',]
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []
@@ -264,36 +264,45 @@ LOGGING = {
         },
     # Handlers #############################################################
     'handlers': {
-        # 'file': {
-        #     'level': LOG_LEVEL,
-        #     'class': 'logging.FileHandler',
-        #     'filename': LOG_FILE,
-        #     'formatter': 'verbose',
-        #     'filters': ['autoreload']
-        #     },
+        'file': {
+            'level': LOG_LEVEL,
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'verbose',
+            'filters': ['autoreload']
+            },
         'console': {
             'class': 'logging.StreamHandler',
             'level': LOG_LEVEL,
             'formatter': 'verbose',
             'filters': ['autoreload']
             },
+        'db_log': {
+            'level': 'DEBUG',
+            'class': 'django_db_logger.db_log_handler.DatabaseLogHandler'
+            },
         },
     # Loggers ####################################################################
     'loggers': {
         'django': {
+            'handlers': ['db_log'],
+            'propagate': True,
+            'level': LOG_LEVEL
+            },
+        'console': {
             'handlers': ['console'],
             'propagate': True,
             'level': LOG_LEVEL
             },
-        # 'debug': {
-        #     'handlers': ['console'],
-        #     'propagate': True,
-        #     'level': 'DEBUG'
-        #     },
-        # 'werkzeug': {
-        #     'handlers': ['console'],
-        #     'level': 'DEBUG',
-        #     'propagate': True,
-        #     },
+        'db': {
+            'handlers': ['db_log'],
+            'level': 'DEBUG'
+            },
+        'django.request': { # logging 500 errors to database
+            'handlers': ['db_log'],
+            'level': 'ERROR',
+            'propagate': False,
+            }
         },
     }
+

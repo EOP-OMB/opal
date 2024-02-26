@@ -19,3 +19,5 @@ celery_progress # It shows real time progress bars for long running Celery tasks
 django-saml-sp # A package to implement SAML Service Provider in Django.
 python3-saml # A library to build a SAML2 Service Provider, used in conjunction with django-saml-sp.
 cryptography # A library for cryptographic recipes and primitives in Python.
+# db logging
+django-db-logger
