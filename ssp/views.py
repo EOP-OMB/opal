@@ -97,7 +97,7 @@ def ssp_form_view(request):
 class ssp_list_view(ListView):
     model = system_security_plans
     context_object_name = "context_list"
-    add_new_url = reverse_lazy('admin:ssp_system_security_plans_add')
+    add_new_url = reverse_lazy('ssp:add_new_ssp_view')
     extra_context = {
         'title': 'System Security Plans',
         'add_url': add_new_url,

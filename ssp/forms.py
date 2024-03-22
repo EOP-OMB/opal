@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django import forms
-from django.forms.widgets import SelectDateWidget, DateTimeInput
+from ckeditor.widgets import CKEditorWidget
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 from common.models import locations, parties, base64, system_status_state_choices
@@ -13,17 +13,19 @@ from ssp.models import system_security_plans, information_types, inventory_items
 class system_security_plansForm(forms.Form):
     # metadata
     title = forms.CharField(help_text='A name given to the document, which may be used by a tool for display and navigation.', label='Document Title', max_length=1024)
+    system_name = forms.CharField(help_text='The full name of the system.', label='System Name - Full', max_length=1024)
+    system_name_short = forms.CharField(
+        help_text='A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.',
+        label='System Name - Short', max_length=1024)
+    description = forms.CharField(help_text='A summary of the system.', label='System Description', widget=CKEditorWidget())
     published = forms.DateTimeField(help_text='The date and time the document was published. The date-time value must be formatted according to RFC 3339 with full time and time zone included.', label='Publication Timestamp', widget=DateTimePickerInput, initial=datetime.now())
     last_modified = forms.DateTimeField(help_text='The date and time the document was last modified. The date-time value must be formatted according to RFC 3339 with full time and time zone included.', label='Last Modified Timestamp', widget=DateTimePickerInput, initial=datetime.now())
     version = forms.CharField(help_text='A string used to distinguish the current version of the document from other previous (and future) versions.', initial='1.0', label='Document Version', max_length=1024)
-    oscal_version = forms.CharField(help_text='The OSCAL model version the document was authored against.', initial='v1.0.3', label='OSCAL Version', max_length=1024)
+    oscal_version = forms.CharField(help_text='The OSCAL model version the document was authored against.', initial='v1.0.3', label='OSCAL Version', max_length=1024, disabled=True)
     locations = forms.ModelMultipleChoiceField(queryset=locations.objects.all(), label='Locations', required=False)
     responsible_parties = forms.ModelMultipleChoiceField(queryset=parties.objects.all(), help_text='A reference to a set of organizations or persons that have responsibility for performing a referenced role in the context of the containing object.', label='Responsible Parties', required=False)
     import_profile = forms.ModelChoiceField(queryset=ctrl_profiles.objects.all(), label='Import profile', required=False)
     # system_characteristics
-    system_name = forms.CharField(help_text='The full name of the system.', label='System Name - Full', max_length=1024)
-    system_name_short = forms.CharField(help_text='A short name for the system, such as an acronym, that is suitable for display in a data table or summary list.', label='System Name - Short', max_length=1024)
-    description = forms.CharField(help_text='A summary of the system.', label='System Description')
     security_sensitivity_level = forms.TypedChoiceField(help_text='The overall information system sensitivity categorization, such as defined by FIPS-199.', label='Security Sensitivity Level', choices=security_sensitivity_level_choices)
     security_impact_level = forms.TypedChoiceField(help_text='The overall level of expected impact resulting from unauthorized disclosure, modification, or loss of access to information.', label='Security Impact Level', choices=security_sensitivity_level_choices)
     security_objective_confidentiality = forms.TypedChoiceField(help_text='A target-level of confidentiality for the system, based on the sensitivity of information within the system.', label='Security Objective: Confidentiality', choices=security_sensitivity_level_choices)
