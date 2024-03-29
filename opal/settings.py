@@ -81,7 +81,7 @@ SAML_SCRIPT_NAME = os.getenv("SAML_SCRIPT_NAME", default=False)  # should be the
 SAML_SERVER_PORT = os.getenv("SAML_SERVER_PORT", default=False)
 # SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
 SAML_PROVIDERS = os.getenv("SAML_PROVIDERS", default="stub")
-# SP_PREPARE_REQUEST = "common.auth_functions.prepare_request"
+SP_PREPARE_REQUEST = "common.auth_functions.py.prepare_request"
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
