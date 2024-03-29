@@ -16,7 +16,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 1. Change to the new directory \
 `cd opal`
 1. The default environment variables are set to work well in a containerized environment. To run locally you will want to set some environment variables. You cna use the provided defaults.env file to get started.\
-   `cp opal/defaults.env .env`
+   `cp opal/defaults.env opal/.env`
 1. It is recommended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
    `python3 -m venv venv`\
    `source venv/bin/activate`
