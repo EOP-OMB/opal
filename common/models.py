@@ -235,7 +235,7 @@ class PrimitiveModel(models.Model):
         return ['id', 'pk', 'created_at', 'updated_at']
 
     def import_oscal(self, oscal_data):
-        logger = logging.getLogger("django")
+        logger = logging.getLogger("__name__")
         opts = self._meta
         logger.debug("Starting import for " + opts.model_name)
         if oscal_data is None or len(oscal_data) == 0:
@@ -362,7 +362,7 @@ class PrimitiveModel(models.Model):
             return self
 
     def add_m2m(self, child, f, opts):
-        logger = logging.getLogger("django")
+        logger = logging.getLogger("__name__")
         parent_id = self.id
         parent_field_name = opts.model_name + "_id"
         child_id = child.id

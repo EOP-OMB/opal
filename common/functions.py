@@ -10,7 +10,7 @@ Some useful common functions
 
 
 def replace_hyphen(s: str):
-    logger = logging.getLogger("django")
+    logger = logging.getLogger("__name__")
     logger.debug("replacing hyphen in " + s + " with underscore.")
     return s.replace("-", "_")
 
@@ -22,7 +22,7 @@ def coalesce(*values):
 
 
 def search_for_uuid(uuid_str, app_list=settings.USER_APPS):
-    logger = logging.getLogger("django")
+    logger = logging.getLogger("__name__")
     try:
         logger.info("Searching for uuid: " + uuid_str)
         for a in app_list:

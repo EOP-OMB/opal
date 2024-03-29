@@ -1,0 +1,82 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: Manages user
+     become: yes
+     user:
+       name: "{{ item.name }}"
+       system: yes
+     with_items:
+       - { name: 'opal_deploy', group: 'opal'}
+       - { name: 'opal', group: 'opal'}
+
+   - name: Ensure apt cache is up to date
+     become: yes
+     apt:
+       update_cache: yes
+
+   - name: Upgrade all packages to the latest version
+     become: yes
+     apt:
+       upgrade: 'yes'
+       update_cache: 'yes'
+
+   - name: Install required system packages
+     become: yes
+     apt:
+       name: "{{ packages }}"
+     vars:
+       packages:
+        - postgresql-client
+        - postgresql-contrib
+        - libpq-dev
+        - build-essential
+        - pkg-config
+        - libxml2-dev
+        - libxmlsec1-dev
+        - libxmlsec1-openssl
+        - apache2
+        - apache2-dev
+
+   - name: Clean apt cache
+     become: yes
+     apt:
+       autoclean: yes
+
+   - name: Install pip
+     pip:
+       name: pip
+       state: latest
+
+   - name: Install required Python packages
+     pip:
+       requirements: /usr/src/app/requirements.txt
+
+   - name: Install mod-wsgi
+     pip:
+       name: mod-wsgi
+
+   - name: chmod files and directories
+     file:
+       path: /usr/src/app/
+       recurse: yes
+       mode: '0750'
+       owner: opal_deploy
+       group: opal
+
+   - name: Create directories
+     file:
+       path: "{{ item }}"
+       state: directory
+       mode: '0770'
+       owner: opal
+       group: opal
+     loop:
+      - /usr/src/app/static
+      - /usr/src/app/media
+      - /usr/src/logs
+      - /usr/src/data
+
+
+

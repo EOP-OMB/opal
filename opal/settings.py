@@ -53,15 +53,15 @@ SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", default=False)
 SECRET_KEY = os.getenv("OPAL_SECRET_KEY", default=default_secret_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", default="False")
-LOG_LEVEL = os.getenv("LOG_LEVEL", default="INFO")
-LOG_FILE = os.getenv("LOG_FILE", default=os.path.join(BASE_DIR,"debug.log"))
+LOG_LEVEL = os.getenv("LOG_LEVEL", default="DEBUG")
+LOG_FILE = os.getenv("LOG_FILE", default=os.path.join(BASE_DIR,'../logs',"opal.log"))
 # Set proxy servers if needed. This will be used when the app attempts to download catalog files from the internet
 HTTP_PROXY = os.getenv("HTTP_PROXY", default=False)
 HTTPS_PROXY = os.getenv("HTTPS_PROXY", default=False)
 USE_X_FORWARDED_HOST = os.getenv("USE_X_FORWARDED_HOST", default=True)
 # Database settings
 DATABASE = os.getenv("DATABASE", default="sqlite")
-DB_NAME = os.getenv("DB_NAME", default="data/db.sqlite3")
+DB_NAME = os.getenv("DB_NAME", default="../data/opal_db.sqlite3")
 # These can be blank if using sqlite
 DB_PASSWORD = os.getenv("DB_PASSWORD", default="")
 DB_USER = os.getenv("DB_USER", default="opal")
@@ -140,7 +140,7 @@ if ENVIRONMENT != "production":
 # that have to cycle through all apps
 USER_APPS = ['common', 'catalog', 'ctrl_profile', 'component', 'ssp', ]
 
-INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor', 'nested_admin','bootstrap_datepicker_plus']
+INSTALLED_APPS = ['django.contrib.admin', 'django.contrib.contenttypes','django.contrib.auth','django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles', "bootstrap5", 'celery_progress', 'extra_views', 'ckeditor', 'nested_admin','bootstrap_datepicker_plus',]
 
 # Auth apps defined separately so that they can be selectively disabled in the future
 AUTHENTICATION_BACKENDS = []
@@ -239,12 +239,9 @@ class auto_reload_filter(logging.Filter):
             return True
 
 
-# Logging Information
 LOGGING = {
     'version': 1,
-    # Version of logging
     'disable_existing_loggers': False,
-    # disable logging
     # Formatters ###########################################################
     'formatters': {
         'verbose': {
@@ -256,44 +253,94 @@ LOGGING = {
             'style': '{',
             },
         },
-    # Filters ####################################################################
     'filters': {
         'autoreload': {
             '()': auto_reload_filter,
             },
         },
-    # Handlers #############################################################
     'handlers': {
-        # 'file': {
-        #     'level': LOG_LEVEL,
-        #     'class': 'logging.FileHandler',
-        #     'filename': LOG_FILE,
-        #     'formatter': 'verbose',
-        #     'filters': ['autoreload']
-        #     },
         'console': {
             'class': 'logging.StreamHandler',
-            'level': LOG_LEVEL,
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
             'formatter': 'verbose',
             'filters': ['autoreload']
             },
-        },
-    # Loggers ####################################################################
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': LOG_LEVEL
-            },
-        # 'debug': {
-        #     'handlers': ['console'],
-        #     'propagate': True,
-        #     'level': 'DEBUG'
-        #     },
-        # 'werkzeug': {
-        #     'handlers': ['console'],
-        #     'level': 'DEBUG',
-        #     'propagate': True,
-        #     },
-        },
-    }
+    },
+    'root': {
+        'handlers': ['console','file'],
+        'level': LOG_LEVEL,
+    },
+}
+
+# Logging Information
+# LOGGING = {
+#     'version': 1,
+#     # Version of logging
+#     'disable_existing_loggers': False,
+#     # disable logging
+#     # Formatters ###########################################################
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} : {asctime} : {filename} line {lineno} in function {funcName} : {message}',
+#             'style': '{',
+#             },
+#         'simple': {
+#             'format': '{levelname} {message}',
+#             'style': '{',
+#             },
+#         },
+#     # Filters ####################################################################
+#     'filters': {
+#         'autoreload': {
+#             '()': auto_reload_filter,
+#             },
+#         },
+#     # Handlers #############################################################
+#     'handlers': {
+#         # 'file': {
+#         #     'level': LOG_LEVEL,
+#         #     'class': 'logging.FileHandler',
+#         #     'filename': LOG_FILE,
+#         #     'formatter': 'verbose',
+#         #     'filters': ['autoreload']
+#         #     },
+#         # 'console': {
+#         #     'class': 'logging.StreamHandler',
+#         #     'level': LOG_LEVEL,
+#         #     'formatter': 'verbose',
+#         #     'filters': ['autoreload']
+#         #     },
+#         'db_log': {
+#             'level': 'DEBUG',
+#             'class': 'django_db_logger.db_log_handler.DatabaseLogHandler',
+#             'formatter': 'verbose',
+#             'filters': ['autoreload']
+#             },
+#         },
+#     # Loggers ####################################################################
+#     'loggers': {
+#         # 'django': {
+#         #     'handlers': ['db_log'],
+#         #     'propagate': True,
+#         #     'level': LOG_LEVEL
+#         #     },
+#         # 'console': {
+#         #     'handlers': ['console'],
+#         #     'propagate': True,
+#         #     'level': LOG_LEVEL
+#         #     },
+#         'django': {
+#             'handlers': ['db_log'],
+#             'level': 'DEBUG'
+#             },
+#         'django.request': { # logging 500 errors to database
+#             'handlers': ['db_log'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#             }
+#         },
+#     }
+#

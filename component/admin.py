@@ -40,7 +40,7 @@ class control_implementations_inline(NestedStackedInline):
 @admin.register(components)
 class components_admin(CustomAdmin):
     def get_list_display(self, request):
-        return ['title', 'type', 'status', 'created_at', 'updated_at']
+        return ['title', 'type', 'status', 'purpose', 'created_at', 'updated_at']
 
     list_filter = ('created_at', 'updated_at', 'status', 'type')
     date_hierarchy = 'created_at'

@@ -1,7 +1,6 @@
-import \
-    uuid
 from django.db import models
 from django.urls import reverse
+
 from common.functions import coalesce, search_for_uuid
 from common.models import BasicModel, PrimitiveModel, properties_field, ShortTextField, links, metadata, back_matter
 
@@ -15,8 +14,10 @@ class available_catalog_list(BasicModel):
         verbose_name = "Catalog Source"
         verbose_name_plural = "Catalog Sources"
 
-    catalog_uuid = models.UUIDField(editable=True, unique=True, help_text="The UUID for this catalog. All catalogs MUST have a unique UUID which should be the same across multiple systems.")
-    link = models.URLField(verbose_name="Link to Catalog", help_text="A complete URL which returns valid OSCAL json text")
+    catalog_uuid = models.UUIDField(editable=True, unique=True,
+                                    help_text="The UUID for this catalog. All catalogs MUST have a unique UUID which should be the same across multiple systems.")
+    link = models.URLField(verbose_name="Link to Catalog",
+                           help_text="A complete URL which returns valid OSCAL json text")
     name = ShortTextField(verbose_name="Catalog Title", help_text="Human readable name of the catalog.")
 
     def get_link(self):
@@ -37,7 +38,8 @@ class tests(BasicModel):
         verbose_name = "Test"
         verbose_name_plural = "Tests"
 
-    expression = ShortTextField(verbose_name="Constraint test", help_text="A formal (executable) expression of a constraint")
+    expression = ShortTextField(verbose_name="Constraint test",
+                                help_text="A formal (executable) expression of a constraint")
 
     def __str__(self):
         return self.expression
@@ -52,8 +54,11 @@ class constraints(PrimitiveModel):
         verbose_name = "Constraint"
         verbose_name_plural = "Constraints"
 
-    description = models.TextField(verbose_name="Constraint Description", help_text="A textual summary of the constraint to be applied.")
-    tests = models.ManyToManyField(to=tests, verbose_name="Constraint Test", help_text="A test expression which is expected to be evaluated by a tool", blank=True)
+    description = models.TextField(verbose_name="Constraint Description",
+                                   help_text="A textual summary of the constraint to be applied.")
+    tests = models.ManyToManyField(to=tests, verbose_name="Constraint Test",
+                                   help_text="A test expression which is expected to be evaluated by a tool",
+                                   blank=True)
 
     def __str__(self):
         return self.description
@@ -85,18 +90,31 @@ class params(BasicModel):
         ordering = [
             "param_id"]
 
-    param_id = ShortTextField(verbose_name="Parameter Identifier", help_text="A unique identifier for a specific parameter instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same parameter across minor revisions of the document.")
-    param_class = ShortTextField(verbose_name="Parameter Class", help_text="A textual label that provides a characterization of the parameter. A class can be used in validation rules to express extra constraints over named items of a specific class value.", blank=True)
-    depends_on = models.ForeignKey(to="params", verbose_name="Depends on", help_text=" Another parameter invoking this one", on_delete=models.CASCADE, null=True)
+    param_id = ShortTextField(verbose_name="Parameter Identifier",
+                              help_text="A unique identifier for a specific parameter instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same parameter across minor revisions of the document.")
+    param_class = ShortTextField(verbose_name="Parameter Class",
+                                 help_text="A textual label that provides a characterization of the parameter. A class can be used in validation rules to express extra constraints over named items of a specific class value.",
+                                 blank=True)
+    depends_on = models.ForeignKey(to="params", verbose_name="Depends on",
+                                   help_text=" Another parameter invoking this one", on_delete=models.CASCADE,
+                                   null=True)
     props = properties_field
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
-    label = ShortTextField(verbose_name="Parameter Label", help_text="A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.")
-    usage = models.TextField(verbose_name="Parameter Usage Description", help_text="Describes the purpose and use of a parameter")
-    constraints = models.ManyToManyField(to=constraints, verbose_name="Constraints", help_text="A formal or informal expression of a constraint or test", blank=True)
-    guidelines = models.ManyToManyField(to=guidelines, blank=True, verbose_name="Guidelines", help_text="A prose statement that provides a recommendation for the use of a parameter.")
+    label = ShortTextField(verbose_name="Parameter Label",
+                           help_text="A short, placeholder name for the parameter, which can be used as a substitute for a value if no value is assigned.")
+    usage = models.TextField(verbose_name="Parameter Usage Description",
+                             help_text="Describes the purpose and use of a parameter")
+    constraints = models.ManyToManyField(to=constraints, verbose_name="Constraints",
+                                         help_text="A formal or informal expression of a constraint or test",
+                                         blank=True)
+    guidelines = models.ManyToManyField(to=guidelines, blank=True, verbose_name="Guidelines",
+                                        help_text="A prose statement that provides a recommendation for the use of a parameter.")
     values = ShortTextField(verbose_name="Values", help_text="An array of comma seperated value strings", blank=True)
     select = ShortTextField(verbose_name="Selection", help_text="Presenting a choice among alternatives", blank=True)
-    how_many = ShortTextField(verbose_name="Parameter Cardinality", help_text="Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.", choices=[("one", "Only one value is permitted."), ("one-or-more", "One or more values are permitted.")])
+    how_many = ShortTextField(verbose_name="Parameter Cardinality",
+                              help_text="Describes the number of selections that must occur. Without this setting, only one value should be assumed to be permitted.",
+                              choices=[("one", "Only one value is permitted."),
+                                       ("one-or-more", "One or more values are permitted.")])
     choice = models.TextField(verbose_name="Choices", help_text="A list of values. One value per line")
 
     def get_form(self):
@@ -148,20 +166,27 @@ class parts(PrimitiveModel):
         verbose_name_plural = "Parts"
 
     part_id = ShortTextField(
-        verbose_name="Part Identifier", help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.",
+        verbose_name="Part Identifier",
+        help_text="A unique identifier for a specific part instance. This identifier's uniqueness is document scoped and is intended to be consistent for the same part across minor revisions of the document.",
         blank=True
     )
-    name = ShortTextField(verbose_name="Part Name", help_text=" A textual label that uniquely identifies the part's semantic type.")
-    ns = ShortTextField(verbose_name="Part Namespace", help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.", blank=True)
+    name = ShortTextField(verbose_name="Part Name",
+                          help_text=" A textual label that uniquely identifies the part's semantic type.")
+    ns = ShortTextField(verbose_name="Part Namespace",
+                        help_text="A namespace qualifying the part's name. This allows different organizations to associate distinct semantics with the same name.",
+                        blank=True)
     part_class = ShortTextField(
         verbose_name="Part Class",
         help_text="A textual label that provides a sub-type or characterization of the part's name. This can be used to further distinguish or discriminate between the semantics of multiple parts of the same control with the same name and ns.",
         blank=True
     )
-    title = ShortTextField(verbose_name="Part Title", help_text="A name given to the part, which may be used by a tool for display and navigation.", blank=True)
+    title = ShortTextField(verbose_name="Part Title",
+                           help_text="A name given to the part, which may be used by a tool for display and navigation.",
+                           blank=True)
     props = properties_field()
     prose = models.TextField(verbose_name="Part Text", help_text="Permits multiple paragraphs, lists, tables etc.")
-    sub_parts = models.ManyToManyField(to="parts", blank=True, verbose_name="Sub Parts", help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
+    sub_parts = models.ManyToManyField(to="parts", blank=True, verbose_name="Sub Parts",
+                                       help_text="A part can have child parts allowing for arbitrary nesting of prose content (e.g., statement hierarchy).")
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
 
     def to_html(self, indent=0, show_guidance=True, show_links=True, lazy=False):
@@ -176,7 +201,8 @@ class parts(PrimitiveModel):
         if len(self.sub_parts.all()) > 0:
             indent += 2
             for p in self.sub_parts.all():
-                html_str += "&nbsp;" * indent + p.to_html(indent=indent, show_guidance=show_guidance, show_links=show_links)
+                html_str += "&nbsp;" * indent + p.to_html(indent=indent, show_guidance=show_guidance,
+                                                          show_links=show_links)
         if len(self.links.all()) > 0 and show_links:
             html_str += "<hr>"
             for link in self.links.all():
@@ -231,7 +257,7 @@ class controls(PrimitiveModel):
         verbose_name = "Control"
         verbose_name_plural = "Controls"
         ordering = ['sort_id']
-        
+
     control_id = ShortTextField(
         verbose_name="Control Identifier",
         help_text="A unique identifier for a specific control instance that can be used to reference the control in other OSCAL documents. This identifier's uniqueness is document scoped and is intended to be consistent for the same control across minor revisions of the document."
@@ -251,12 +277,14 @@ class controls(PrimitiveModel):
     props = properties_field()
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     parts = models.ManyToManyField(
-        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part.", blank=True
+        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part.",
+        blank=True
     )
     control_enhancements = models.ManyToManyField(
         to="controls", verbose_name="Control Enhancements", help_text="Additional sub-controls", blank=True
     )
-    sort_id = ShortTextField(max_length=25, verbose_name="Sort ID", help_text="normalized value to sort controls in the correct order", null=True)
+    sort_id = ShortTextField(max_length=25, verbose_name="Sort ID",
+                             help_text="normalized value to sort controls in the correct order", null=True)
 
     @property
     def _get_sort_id(self):
@@ -358,7 +386,6 @@ class controls(PrimitiveModel):
                 html_str = html_str.replace(str_to_replace, '(<i>' + coalesce(i.select, i.label, i.param_id) + '</i>)')
         return html_str
 
-
     def count_controls(self):
         control_count = 1
         control_enhancement_count = 0
@@ -408,18 +435,20 @@ class groups(PrimitiveModel):
     )
     links = models.ManyToManyField(to=links, blank=True, verbose_name="Links")
     parts = models.ManyToManyField(
-        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part.", blank=True
+        to=parts, verbose_name="Parts", help_text="A partition of a control's definition or a child of another part.",
+        blank=True
     )
     sub_groups = models.ManyToManyField(
         to="groups", verbose_name="Sub Groups", help_text="A group of controls, or of groups of controls.", blank=True
     )
     controls = models.ManyToManyField(
-        to="controls", blank=True, verbose_name="Controls", help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
+        to="controls", blank=True, verbose_name="Controls",
+        help_text="A structured information object representing a security or privacy control. Each security or privacy control within the Catalog is defined by a distinct control instance."
     )
 
-    
     def get_absolute_url(self):
         return reverse('catalog:group_detail_view', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.group_id.upper() + " - " + self.title + " (" + self.group_class + ")"
 
@@ -488,7 +517,7 @@ class catalogs(PrimitiveModel):
         verbose_name = "Control Catalog"
         verbose_name_plural = "Control Catalogs"
 
-    catalog_uuid = models.UUIDField(verbose_name="Catalog Universally Unique Identifier",null=True)
+    catalog_uuid = models.UUIDField(verbose_name="Catalog Universally Unique Identifier", null=True)
     metadata = models.ForeignKey(
         to=metadata, verbose_name="Publication metadata",
         help_text="Provides information about the publication and availability of the containing document.",
@@ -506,9 +535,9 @@ class catalogs(PrimitiveModel):
         """
         Returns a dictionary object that contains the internal field name as the key and the original name as the value
         """
-        fields_to_rename = {'uuid':'catalog_uuid', 'back-matter':'back_matter'}
+        fields_to_rename = {'uuid': 'catalog_uuid', 'back-matter': 'back_matter'}
         return fields_to_rename
-    
+
     @property
     def title(self):
         return self.metadata.title
