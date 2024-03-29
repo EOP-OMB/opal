@@ -13,29 +13,33 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
 ## Running a local development version using sqlite
 1. Clone the repository to your local directory\
    `git clone https://github.com/eop-omb/opal.git`
-2. It is recommended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
+1. Change to the new directory \
+`cd opal`
+1. The default environment variables are set to work well in a containerized environment. To run locally you will want to set some environment variables. You cna use the provided defaults.env file to get started.\
+   `cp opal/defaults.env .env`
+1. It is recommended to run the application from a virtual environment. To do so navigate to the application directory in a terminal and enter the following commands:\
    `python3 -m venv venv`\
    `source venv/bin/activate`
-3. Install the required python modules by running:\
+1. Install the required python modules by running:\
    `pip install -r requirements.txt`
-4. Run the initial migration to create the database objects:\
+1. Run the initial migration to create the database objects:\
    `python manage.py makemigrations`\
    `python manage.py migrate`
-5. Create a superuser:\
+1. Create a superuser:\
    `python manage.py createsuperuser`
-6. Start the Server\
+1. Start the Server\
    `python manage.py runserver`
 ## Start the app in a docker container using sqlite
 1. Clone the repository to your local directory
    `git clone https://github.com/eop-omb/opal.git`
-2. Build the image\
+1. Build the image\
     `docker build -t opal .`
-3. Run the container\
+1. Run the container\
     `docker run --rm -it --name opal -p 8000:8000 -e LOG_LEVEL=DEBUG opal`
 ## Run OPAL with a Postgres database including persistent storage using docker-compose
 1. Clone the repository to your local directory
    `git clone https://gitlab.max.gov/max-security/opal.git`
-3. Run the docker-compose. YAML file in the docs/docker-compose/ folder\
+1. Run the docker-compose. YAML file in the docs/docker-compose/ folder\
     `cd docs/docker-compose`
     `docker-compose up`
 
