@@ -12,7 +12,7 @@ from ssp.forms import system_security_plansForm
 
 
 def import_ssp_view(ssp_file):
-    logger = logging.getLogger("django")
+    logger = logging.getLogger("__name__")
     if ssp_file == 'ssp-example.json':
         ssp_file = 'sample_data/ssp-example.json'
     else:
@@ -32,7 +32,7 @@ def import_ssp_view(ssp_file):
 
 
 def import_ssp(ssp_file):
-    logger = logging.getLogger("django")
+    logger = logging.getLogger("__name__")
     ssp_json = json.load(open(ssp_file))
     ssp_dict = ssp_json["system-security-plan"]
     if system_security_plans.objects.filter(uuid=ssp_dict["uuid"]).exists():

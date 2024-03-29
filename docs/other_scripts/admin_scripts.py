@@ -18,7 +18,7 @@ def check_auth(action):
 
 
 def reset_db(app_name):
-    logger = logging.getLogger("django")
+    logger = logging.getLogger("__name__")
     app_models = apps.get_app_config(app_name).get_models()
     logger.info("Deleting all records from app " + app_name)
     for model in app_models:
