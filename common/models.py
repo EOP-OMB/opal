@@ -51,6 +51,7 @@ class properties_field(models.ManyToManyField):
 
 system_status_state_choices = [
     ("operational", "Operational: The system or component is currently operating in production."),
+    ("pending-approval", "Pending Approval: The system or component is production ready and is being reviewed."),
     ("under-development", "Under Development: The system or component is being designed, developed, or implemented"),
     ("under-major-modification",
      "Under Major Modification: The system or component is undergoing a major change, development, or transition."),
