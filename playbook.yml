@@ -53,9 +53,9 @@
      pip:
        requirements: /usr/src/app/requirements.txt
 
-   - name: Install mod-wsgi
-     pip:
-       name: mod-wsgi
+#   - name: Install mod-wsgi
+#     pip:
+#       name: mod-wsgi
 
    - name: chmod files and directories
      file:

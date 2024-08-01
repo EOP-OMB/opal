@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: opal-postgres-db
+  namespace: opal
+spec:
+  ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: opal-postgres-db
+  sessionAffinity: None
+  type: ClusterIP

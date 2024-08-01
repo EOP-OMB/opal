@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opal-webapp
+  namespace: opal
+  labels:
+    app: opal-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opal-webapp
+  template:
+    metadata:
+      labels:
+        app: opal-webapp
+    spec:
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: staticfiles-pvc
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: harbor
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+      containers:
+        - name: opal-webapp
+          image: 192.168.42.100:5050/opal-webapp
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          ports:
+            - containerPort: 8000
+              name: 8000tcp
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/data/static"
+              name: staticfiles
+          env:
+            - name: ENVIRONMENT
+              value: prod
+            - name: DEBUG
+              value: "False"
+            - name: LOG_LEVEL
+              value: INFO
+            - name: HOST_NAME
+              value: opal.omb.gov
+            - name: SECRET_KEY
+              value: 20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE
+            - name: ALLOWED_HOSTS
+              value: opal.omb.gov
+            - name: SSL_ACTIVE
+              value: "True"
+            - name: ENABLE_SAML
+              value: "True"
+            - name: SAML_PROVIDERS
+              value: max
+            - name: SAML_HTTPS
+              value: "on"
+            - name: SAML_HTTP_HOST
+              value: opal.omb.gov
+            - name: SAML_SERVER_PORT
+              value: "443"
+            - name: HTTP_PROXY
+              value: proxy.omb.gov:8080
+            - name: HTTPS_PROXY
+              value: proxy.omb.gov:8080
+            - name: DATABASE
+              value: postgres
+            - name: DB_HOST
+              value: opal-postgres-db
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: opal
+            - name: DB_NAME
+              value: opal
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_OPAL_PASSWORD
+                  name: opal-passwords
+            - name: LOG_FILE
+              value: /usr/src/logs/debug.log
+            - name: ENABLE_DJANGO_AUTH
+              value: "False"
+
+
+

@@ -20,3 +20,5 @@ pytest.ini
 /opal/env.*
 
 **/__pycache__/
+/build/yaml/secrets/omb_secrets.yaml
+/build/yaml/secrets/dan_secrets.yaml
