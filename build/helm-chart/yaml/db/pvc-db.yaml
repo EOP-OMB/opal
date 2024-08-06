@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: staticfiles-pvc
-  namespace: opal
+  name: postgres-pvc
+  namespace: {{ .Values.namespace | quote }}
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-  volumeName: staticfiles-pv
+  volumeName: postgres-pv

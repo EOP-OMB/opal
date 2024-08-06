@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-cm
-  namespace: opal
+  namespace: {{ .Values.namespace | quote }}
 data:
   default.conf: |
     server { 

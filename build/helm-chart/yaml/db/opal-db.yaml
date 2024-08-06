@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opal-postgres-db
-  namespace: opal
+  namespace: {{ .Values.namespace | quote }}
   labels:
     app: opal-postgres-db
 spec:
@@ -32,7 +32,7 @@ spec:
                   operator: DoesNotExist
       containers:
         - name: opal-postgres-db
-          image: 192.168.42.100:5050/opal-db
+          image: {{ .Values.repo.db }}
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false

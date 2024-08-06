@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-static
-  namespace: opal
+  namespace: {{ .Values.namespace | quote }}
   labels:
     app: nginx-static
 spec:
@@ -35,7 +35,7 @@ spec:
                     operator: DoesNotExist
       containers:
         - name: nginx-static
-          image: nginx:1.25
+          image: {{ .Values.repo.nginx }}
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
