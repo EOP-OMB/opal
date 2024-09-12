@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-static
-  namespace: {{ .Values.namespace | quote }}
   labels:
     app: nginx-static
 spec:
@@ -26,13 +25,6 @@ spec:
       restartPolicy: Always
       imagePullSecrets:
         - name: harbor
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: node-role.kubernetes.io/control-plane
-                    operator: DoesNotExist
       containers:
         - name: nginx-static
           image: {{ .Values.repo.nginx }}

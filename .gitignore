@@ -19,6 +19,15 @@ pytest.ini
 /media/
 /opal/env.*
 
+
 **/__pycache__/
-/build/yaml/secrets/omb_secrets.yaml
-/build/yaml/secrets/dan_secrets.yaml
+
+/build/env_settings/*
+/build/opal/omb_values.yaml
+/build/opal/values.yaml
+/build/helm_output.yaml
+/build/opal.yaml
+/build/opal-0.2.1.tgz
+/build/opal-0.2.2.tgz
+/build/opal-0.2.3.tgz
+/build/opal-0.2.4.tgz

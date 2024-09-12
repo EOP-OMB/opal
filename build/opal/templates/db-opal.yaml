@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: opal-postgres-db
-  namespace: {{ .Values.namespace | quote }}
   labels:
     app: opal-postgres-db
 spec:
@@ -23,13 +22,6 @@ spec:
       restartPolicy: Always
       imagePullSecrets:
         - name: harbor
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
-                  operator: DoesNotExist
       containers:
         - name: opal-postgres-db
           image: {{ .Values.repo.db }}

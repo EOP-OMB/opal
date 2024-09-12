@@ -68,7 +68,7 @@
    - name: chmod startup script
      file:
        path: /usr/src/app/startup.sh
-       mode: '0550'
+       mode: '0555'
        owner: opal_deploy
        group: opal
 

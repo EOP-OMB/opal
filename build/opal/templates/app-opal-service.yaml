@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: opal-webapp-service
-  namespace: {{ .Values.namespace | quote }}
 spec:
   ports:
     - name: http
