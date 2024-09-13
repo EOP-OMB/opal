@@ -53,15 +53,22 @@
      pip:
        requirements: /usr/src/app/requirements.txt
 
-   - name: Install mod-wsgi
-     pip:
-       name: mod-wsgi
+#   - name: Install mod-wsgi
+#     pip:
+#       name: mod-wsgi
 
    - name: chmod files and directories
      file:
        path: /usr/src/app/
        recurse: yes
        mode: '0750'
+       owner: opal_deploy
+       group: opal
+
+   - name: chmod startup script
+     file:
+       path: /usr/src/app/startup.sh
+       mode: '0555'
        owner: opal_deploy
        group: opal
 

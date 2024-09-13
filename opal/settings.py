@@ -27,10 +27,11 @@ from logging.handlers import RotatingFileHandler
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'vendor')]
 
@@ -41,6 +42,8 @@ if os.path.join(BASE_DIR,'opal','.env'):
 # Load environment variables and set defaults
 default_secret_key = secrets.token_urlsafe()
 
+STATIC_ROOT = os.getenv("STATIC_ROOT",default=os.path.join(BASE_DIR, 'static'))
+MEDIA_ROOT = os.getenv("MEDIA_ROOT",default=os.path.join(BASE_DIR, 'media'))
 ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 ASYNC = os.getenv("ASYNC", default=False)
 BROKER = os.getenv("BROKER", default='')
@@ -275,72 +278,3 @@ LOGGING = {
     },
 }
 
-# Logging Information
-# LOGGING = {
-#     'version': 1,
-#     # Version of logging
-#     'disable_existing_loggers': False,
-#     # disable logging
-#     # Formatters ###########################################################
-#     'formatters': {
-#         'verbose': {
-#             'format': '{levelname} : {asctime} : {filename} line {lineno} in function {funcName} : {message}',
-#             'style': '{',
-#             },
-#         'simple': {
-#             'format': '{levelname} {message}',
-#             'style': '{',
-#             },
-#         },
-#     # Filters ####################################################################
-#     'filters': {
-#         'autoreload': {
-#             '()': auto_reload_filter,
-#             },
-#         },
-#     # Handlers #############################################################
-#     'handlers': {
-#         # 'file': {
-#         #     'level': LOG_LEVEL,
-#         #     'class': 'logging.FileHandler',
-#         #     'filename': LOG_FILE,
-#         #     'formatter': 'verbose',
-#         #     'filters': ['autoreload']
-#         #     },
-#         # 'console': {
-#         #     'class': 'logging.StreamHandler',
-#         #     'level': LOG_LEVEL,
-#         #     'formatter': 'verbose',
-#         #     'filters': ['autoreload']
-#         #     },
-#         'db_log': {
-#             'level': 'DEBUG',
-#             'class': 'django_db_logger.db_log_handler.DatabaseLogHandler',
-#             'formatter': 'verbose',
-#             'filters': ['autoreload']
-#             },
-#         },
-#     # Loggers ####################################################################
-#     'loggers': {
-#         # 'django': {
-#         #     'handlers': ['db_log'],
-#         #     'propagate': True,
-#         #     'level': LOG_LEVEL
-#         #     },
-#         # 'console': {
-#         #     'handlers': ['console'],
-#         #     'propagate': True,
-#         #     'level': LOG_LEVEL
-#         #     },
-#         'django': {
-#             'handlers': ['db_log'],
-#             'level': 'DEBUG'
-#             },
-#         'django.request': { # logging 500 errors to database
-#             'handlers': ['db_log'],
-#             'level': 'ERROR',
-#             'propagate': False,
-#             }
-#         },
-#     }
-#

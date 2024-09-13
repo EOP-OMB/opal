@@ -6,7 +6,7 @@ volumes:
 services:
   db:
     build: ../postgres
-    container_name: db
+    container_name: opal-db
     ports:
       - "5432:5432"
     volumes:
@@ -31,7 +31,7 @@ services:
       - DATABASE=postgres
       - DB_NAME=opal
       - DB_USER=opal
-      - DB_HOST=db
+      - DB_HOST=opal-db
       - DB_PORT=5432
       - DB_PASSWORD=use_a_secure_password_here
       - ALLOWED_HOSTS=127.0.0.1,localhost,web,192.168.42.105
@@ -41,3 +41,4 @@ services:
       - ENABLE_SAML=True
     depends_on:
       - db
+      - broker

@@ -1,0 +1,34 @@
+namespace: opal
+repo:
+    webapp: 192.168.42.100:5050/opal-webapp:latest
+    db: 192.168.42.100:5050/opal-db:latest
+    nginx: nginx:1.25
+data:
+  ENVIRONMENT: prod
+  DEBUG: "False"
+  LOG_LEVEL: INFO
+  HOST_NAME: opal.omb.gov
+  SECRET_KEY: 20mUVZU8a-aVUoEzvWX-b5QWIvpGFQULfFhhsCdwRpE
+  ALLOWED_HOSTS: opal.omb.gov
+  SSL_ACTIVE: "True"
+  ENABLE_SAML: "True"
+  SAML_PROVIDERS: max
+  SAML_HTTPS: "on"
+  SAML_HTTP_HOST: opal.omb.gov
+  SAML_SERVER_PORT: "443"
+  HTTP_PROXY: proxy.omb.gov:8080
+  HTTPS_PROXY: proxy.omb.gov:8080
+  DATABASE: postgres
+  DB_HOST: opal-postgres-db
+  DB_PORT: "5432"
+  DB_USER: opal
+  DB_NAME: opal
+  LOG_FILE: /usr/src/logs/debug.log
+  ENABLE_DJANGO_AUTH: "False"
+secret:
+    db:
+        POSTGRES_PASSWORD: Uk9PVF9EQl9QQVNTV09SRAo= #ROOT_DB_PASSWORD
+        POSTGRES_OPAL_PASSWORD: Uk9PVF9EQl9QQVNTV09SRAo= #OPAL_USER_DB_PASSWORD
+    #tls:
+    #  tls.crt: TLS_CERT
+    #  tls.key: TLS_PRIVATE_KEY

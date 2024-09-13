@@ -19,3 +19,4 @@ pytest*
 /requirements_test.txt
 /requirements_omb.txt
 /opal/env.prod
+/build/
