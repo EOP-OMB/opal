@@ -13,7 +13,7 @@ data:
     }
     
     location / { 
-        proxy_pass http://opal-webapp:8000; # Point to your Django application's host and port
+        proxy_pass https://{{ .Values.data.HOST_NAME }}; # Point to your Django application's host and port
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
       }

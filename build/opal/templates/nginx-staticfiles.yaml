@@ -24,7 +24,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
-        - name: harbor
+        - name: {{ .Values.imagePullSecretsName }}
+      securityContext:
+        fsGroup: 999
       containers:
         - name: nginx-static
           image: {{ .Values.repo.nginx }}

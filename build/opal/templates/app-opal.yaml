@@ -21,7 +21,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
-        - name: harbor
+        - name: {{ .Values.imagePullSecretsName }}
+      securityContext:
+        fsGroup: 998
       containers:
         - name: opal-webapp
           image: {{ .Values.repo.webapp }}
@@ -32,7 +34,7 @@ spec:
               drop:
                 - ALL
             runAsNonRoot: true
-            runAsUser: 1001
+            runAsUser: 998
             seccompProfile:
               type: RuntimeDefault
           terminationMessagePath: /dev/termination-log

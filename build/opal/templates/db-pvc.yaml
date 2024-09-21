@@ -2,11 +2,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
+  labels:
+    app: opal-postgres-db
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  volumeName: postgres-pv
+      storage: 10Gi
+  storageClassName: {{ .Values.storageClassName }}
+  volumeMode: Filesystem

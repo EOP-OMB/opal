@@ -21,7 +21,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       imagePullSecrets:
-        - name: harbor
+        - name: {{ .Values.imagePullSecretsName }}
+      securityContext:
+        fsGroup: 999
       containers:
         - name: opal-postgres-db
           image: {{ .Values.repo.db }}

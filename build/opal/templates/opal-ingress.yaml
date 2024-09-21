@@ -7,7 +7,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: {{ .Values.data.HOST_NAME }}
+      http:
         paths:
           - path: /static
             pathType: Prefix
@@ -16,7 +17,8 @@ spec:
                 name: nginx-service
                 port:
                   number: 80
-    - http:
+    - host: {{ .Values.data.HOST_NAME }}
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -25,3 +27,7 @@ spec:
                 name: opal-webapp-service
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - {{ .Values.data.HOST_NAME }}
+      secretName: {{ .Values.tls_secret_name }}

@@ -8,8 +8,8 @@
        name: "{{ item.name }}"
        system: yes
      with_items:
-       - { name: 'opal_deploy', group: 'opal'}
-       - { name: 'opal', group: 'opal'}
+       - { name: 'opal_deploy', group: 'opal', uid: 999}
+       - { name: 'opal', group: 'opal', uid: 998}
 
    - name: Ensure apt cache is up to date
      become: yes

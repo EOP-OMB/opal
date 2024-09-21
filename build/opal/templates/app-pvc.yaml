@@ -2,11 +2,13 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: staticfiles-pvc
+  labels:
+    app: opal
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
-  volumeName: staticfiles-pv
+      storage: 10Gi
+  storageClassName: {{ .Values.storageClassName }}
+  volumeMode: Filesystem

@@ -1,0 +1,28 @@
+namespace: opal
+storageClassName: standard
+repo:
+    webapp: localhost/opal-webapp:latest
+    db: localhost/opal-db:latest
+    nginx: nginxinc/nginx-unprivileged
+data:
+  ENVIRONMENT: dev
+  DEBUG: "True"
+  LOG_LEVEL: DEBUG
+  HOST_NAME: opal.localhost
+  SECRET_KEY: #Generate a secret key using secrets.token_urlsafe()
+  ALLOWED_HOSTS: opal.localhost
+  SSL_ACTIVE: "False"
+  ENABLE_SAML: "False"
+  HTTP_PROXY: #proxy.domain.gov:8080
+  HTTPS_PROXY: #proxy.domain.gov:8080
+  DATABASE: postgres
+  DB_HOST: opal-postgres-db
+  DB_PORT: "5432"
+  DB_USER: opal
+  DB_NAME: opal
+  LOG_FILE: /usr/src/logs/debug.log
+  ENABLE_DJANGO_AUTH: "True"
+secret:
+    db:
+        POSTGRES_PASSWORD: #ROOT_DB_PASSWORD Base64 encoded
+        POSTGRES_OPAL_PASSWORD: #OPAL_USER_DB_PASSWORD Base64 encoded

@@ -85,6 +85,10 @@ SAML_SERVER_PORT = os.getenv("SAML_SERVER_PORT", default=False)
 # SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
 SAML_PROVIDERS = os.getenv("SAML_PROVIDERS", default="stub")
 SP_PREPARE_REQUEST = "common.auth_functions.prepare_request"
+REQUIRE_LOGIN_PUBLIC_URLS = (
+    r'{}.+$'.format(STATIC_URL),
+    r'{}.+$'.format(MEDIA_URL),
+)
 # Handling allowed hosts a little different since we have to turn it into a list.
 # If providing a value, you just need to provide a comma separated string of hosts
 # You don't need to quote anything or add [] yourself.
@@ -152,7 +156,7 @@ if ENABLE_SAML == 'True':
     AUTHENTICATION_BACKENDS.append('sp.backends.SAMLAuthenticationBackend')
     REQUIRE_LOGIN_PUBLIC_NAMED_URLS = (LOGIN_URL, LOGOUT_URL,'admin:login')
     REQUIRE_LOGIN_PUBLIC_URLS = ()
-    # SAML_PROVIDERS must be a comma seperated list of idp stubs that will be used in the application
+    # SAML_PROVIDERS must be a comma separated list of idp stubs that will be used in the application
     saml_provider_list = SAML_PROVIDERS.split(",")
     for idp in saml_provider_list:
         saml_urls = ['/sso/idp/', '/sso/idp/login/', '/sso/idp/test/', '/sso/idp/verify/', '/sso/idp/acs/']
@@ -183,8 +187,8 @@ if ENVIRONMENT != 'development':
 
 
 # To enable sitewide caching
-# MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware', 'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
-# MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
+MIDDLEWARE_FOR_CACHE = ['django.middleware.cache.UpdateCacheMiddleware', 'django.middleware.common.CommonMiddleware', 'django.middleware.cache.FetchFromCacheMiddleware',]
+MIDDLEWARE.extend(MIDDLEWARE_FOR_CACHE)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
