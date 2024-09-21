@@ -8,13 +8,10 @@
 *.log
 /.github/
 /docs/docker-compose/data/db/
-/docs/k8/secrets.yaml
 /opal/.env
 */~$*
 pytest.ini
 
-/saml/certs/private.key
-/saml/certs/public.crt
 /static/
 /media/
 /opal/env.*
@@ -22,12 +19,8 @@ pytest.ini
 
 **/__pycache__/
 
-/build/env_settings/*
-/build/opal/omb_values.yaml
-/build/opal/values.yaml
 /build/helm_output.yaml
-/build/opal.yaml
-/build/opal-0.2.1.tgz
-/build/opal-0.2.2.tgz
-/build/opal-0.2.3.tgz
-/build/opal-0.2.4.tgz
+/build/opal-*.tgz
+/build/opal/stage_values.yaml
+/build/opal/omb_values.yaml
+/build/opal/dev_values.yaml
