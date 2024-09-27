@@ -44,7 +44,7 @@ spec:
               name: 8000tcp
               protocol: TCP
           volumeMounts:
-            - mountPath: "/data/static"
+            - mountPath: "/usr/src/app/static"
               name: staticfiles
           envFrom:
             - configMapRef:

@@ -10,23 +10,12 @@ spec:
     - host: {{ .Values.data.HOST_NAME }}
       http:
         paths:
-          - path: /static
-            pathType: Prefix
-            backend:
+          - backend:
               service:
                 name: nginx-service
                 port:
                   number: 80
-    - host: {{ .Values.data.HOST_NAME }}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: opal-webapp-service
-                port:
-                  number: 80
+            pathType: ImplementationSpecific
   tls:
     - hosts:
         - {{ .Values.data.HOST_NAME }}
