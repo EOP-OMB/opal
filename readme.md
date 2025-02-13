@@ -1,9 +1,9 @@
-The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
+The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL-Reference/models/
 
 # OSCAL Policy Administration Library (opal)
 Provides a simple web application for managing System Security Plans and related documents.  The data model is based on the OSCAL standard and objects can be imported and exported in OSCAL compliant JSON. 
 
-The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/reference/latest/complete/
+The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL-Reference/models/
 
 1. Python >=3.8
 2. apache
