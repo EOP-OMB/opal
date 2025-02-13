@@ -38,7 +38,7 @@ The OSCAL Model Reference can be found at, https://pages.nist.gov/OSCAL/referenc
     `docker run --rm -it --name opal -p 8000:8000 -e LOG_LEVEL=DEBUG opal`
 ## Run OPAL with a Postgres database including persistent storage using docker-compose
 1. Clone the repository to your local directory
-   `git clone https://gitlab.max.gov/max-security/opal.git`
+   `git clone https://github.com/eop-omb/opal.git`
 1. Run the docker-compose. YAML file in the docs/docker-compose/ folder\
     `cd docs/docker-compose`
     `docker-compose up`
